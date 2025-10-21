@@ -16,7 +16,8 @@ export const metadata = {
   },
   alternates: { canonical: "https://tu-dominio-final.es" },
 };
-
+icons: { icon: "/favicon.ico" },
+  openGraph: { images: ["/og.jpg"] },
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
