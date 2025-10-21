@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* patrón sutil de fondo usado por .bg-grid */
+.bg-grid {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(16,185,129,0.12) 1px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(15,23,42,0.08) 1px, transparent 0);
+  background-size: 24px 24px, 48px 48px;
+  background-position: 0 0, 12px 12px;
+}
