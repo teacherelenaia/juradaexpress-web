@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 220 48">
+  <rect rx="10" ry="10" width="48" height="48" fill="#1c1c28"/>
+  <text x="12" y="32" font-family="DejaVu Sans,Verdana,Arial" font-size="20" fill="white">JE</text>
+  <text x="60" y="32" font-family="DejaVu Sans,Verdana,Arial" font-size="22" fill="#1c1c28">Jurada</text>
+  <text x="126" y="32" font-family="DejaVu Sans,Verdana,Arial" font-size="22" fill="#2563EB">Express</text>
+</svg>
