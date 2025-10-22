@@ -1,70 +1,56 @@
 // app/blog/[slug]/page.js
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import { posts } from "../../../content/posts";
+import { getAllPosts, getPostBySlug } from "../../../content/posts";
 
-// Pre-render estático de todas las rutas /blog/[slug]
 export async function generateStaticParams() {
+  const posts = getAllPosts();
   return posts.map((p) => ({ slug: p.slug }));
 }
 
-export const dynamicParams = false;
-
-// SEO por artículo
-export function generateMetadata({ params }) {
-  const post = posts.find((p) => p.slug === params.slug);
-  if (!post) {
-    return { title: "Artículo no encontrado | Blog JuradaExpress" };
-  }
+export async function generateMetadata({ params }) {
+  const post = getPostBySlug(params.slug);
+  if (!post) return {};
   return {
-    title: `${post.title} | Blog JuradaExpress`,
+    title: `${post.title} | JuradaExpress`,
     description: post.excerpt,
-    alternates: { canonical: `https://juradaexpress.es/blog/${post.slug}` },
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      url: `https://juradaexpress.es/blog/${post.slug}`,
-      type: "article",
-    },
   };
 }
 
-export default function ArticlePage({ params }) {
-  const post = posts.find((p) => p.slug === params.slug);
+export default function BlogPostPage({ params }) {
+  const post = getPostBySlug(params.slug);
   if (!post) notFound();
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
-      <Link href="/blog" className="text-sm text-slate-500 hover:text-slate-700">
-        ← Volver al blog
-      </Link>
+    <main className="mx-auto max-w-3xl px-4 py-10">
+      <div className="text-sm">
+        <Link href="/blog" className="text-indigo-600 hover:underline">
+          ← Volver al blog
+        </Link>
+      </div>
 
-      <h1 className="text-3xl md:text-4xl font-bold mt-4">{post.title}</h1>
-      <p className="text-slate-500 mt-2">
-        {post.date} · {post.readingTime}
-      </p>
+      <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-900">
+        {post.title}
+      </h1>
 
-      {post.image && (
-        <div className="mt-6">
-          <Image
-            src={post.image}
-            alt={post.title}
-            width={1200}
-            height={630}
-            className="rounded-xl w-full h-auto"
-            priority
-          />
-        </div>
+      <div className="mt-2 text-sm text-slate-500">
+        <time dateTime={post.date}>
+          {new Date(post.date).toLocaleDateString("es-ES")}
+        </time>{" "}
+        · {post.readingTime}
+      </div>
+
+      {/* Si el post trae HTML, lo renderizamos como HTML.
+          Si algún post futuro trae "content" en JSX, también lo soportamos. */}
+      {post.html ? (
+        <article
+          className="prose prose-slate mt-8"
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
+      ) : (
+        <article className="prose prose-slate mt-8">{post.content}</article>
       )}
+    </main>
+  );
+}
 
-      {/* Si en content/posts.js guardas JSX en post.content */}
-      {/* CONTENIDO DEL ARTÍCULO */}
-{post.html ? (
-  <article
-    className="prose prose-slate mt-8"
-    dangerouslySetInnerHTML={{ __html: post.html }}
-  />
-) : (
-  <article className="prose prose-slate mt-8">{post.content}</article>
-)}
