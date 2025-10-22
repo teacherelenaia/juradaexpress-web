@@ -18,14 +18,7 @@ export const metadata = {
     siteName: "JuradaExpress",
     locale: "es_ES",
     type: "website",
-    images: [
-      {
-        url: "/og.jpg",
-        width: 1200,
-        height: 630,
-        alt: "JuradaExpress — Traducción Jurada",
-      },
-    ],
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "JuradaExpress — Traducción Jurada" }],
   },
   icons: { icon: "/favicon.ico" },
 };
@@ -41,28 +34,20 @@ export default function RootLayout({ children }) {
               <img src="/logo.svg" alt="JuradaExpress" className="h-8 w-8" />
               <span className="font-semibold">JuradaExpress</span>
             </a>
-
-            {/* Menu desktop */}
             <div className="hidden gap-6 sm:flex">
               <a href="/" className="hover:text-emerald-700">Inicio</a>
-              {/* Enlace a la página /precios */}
               <a href="/precios" className="hover:text-emerald-700">Precios</a>
               <a href="#contacto" className="hover:text-emerald-700">Contacto</a>
             </div>
-
-            {/* Acción rápida móvil */}
             <div className="sm:hidden">
-              <a
-                href="tel:+34685891214"
-                className="rounded-lg bg-emerald-600 px-3 py-2 text-white"
-              >
+              <a href="tel:+34685891214" className="rounded-lg bg-emerald-600 px-3 py-2 text-white">
                 Llamar
               </a>
             </div>
           </nav>
         </header>
 
-        {/* Contenido de cada página */}
+        {/* AQUI ES DONDE SE RENDERIZA CADA PÁGINA */}
         <main>{children}</main>
 
         {/* Footer */}
@@ -74,26 +59,13 @@ export default function RootLayout({ children }) {
                 Traducciones juradas Español ⇆ Inglés · Murcia · Envíos a toda España y extranjero · Entrega 24/48 h*
               </p>
             </div>
-
             <div>
               <h4 className="font-semibold">Contacto</h4>
               <ul className="mt-2 space-y-1 text-sm">
-                <li>
-                  <a className="hover:text-emerald-700" href="tel:+34685891214">
-                    Tel: 685 891 214
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:text-emerald-700"
-                    href="mailto:info@juradaexpress.es"
-                  >
-                    info@juradaexpress.es
-                  </a>
-                </li>
+                <li><a className="hover:text-emerald-700" href="tel:+34685891214">Tel: 685 891 214</a></li>
+                <li><a className="hover:text-emerald-700" href="mailto:info@juradaexpress.es">info@juradaexpress.es</a></li>
               </ul>
             </div>
-
             <div className="text-sm text-slate-600">
               * Plazo orientativo para encargos habituales. Proyectos &gt;20 folios: acordamos calendario específico.
             </div>
