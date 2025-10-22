@@ -50,7 +50,7 @@ export default function Page() {
 
           <div className="flex justify-center">
             <Image
-              src="/hero.jpg"
+              src="/hero.jpg"                // mantiene la Catedral en el hero
               alt="Catedral de Murcia - JuradaExpress"
               width={800}
               height={600}
@@ -67,9 +67,12 @@ export default function Page() {
           <h2 className="text-2xl font-semibold">Documentos más habituales</h2>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {[
+              // 1) certificados → foto de documentos reales
               { t: "Certificados oficiales", d: "Nacimiento, matrimonio, penales, padrón, notaría…", img: "/docs-real.jpg" },
+              // 2) académicos → foto de personas/estudiantes
               { t: "Académicos", d: "Títulos, expedientes, planes de estudio, cartas académicas.", img: "/people.jpg" },
-              { t: "Laborales y mercantiles", d: "Contratos, poderes, escrituras, estatutos.", img: "/hero.jpg" },
+              // 3) laborales/mercantiles → otra catedral (archivo distinto) para evitar duplicado con el hero
+              { t: "Laborales y mercantiles", d: "Contratos, poderes, escrituras, estatutos.", img: "/hero-murcia.jpg" },
             ].map((i) => (
               <article key={i.t} className="rounded-2xl bg-white ring-1 ring-slate-200 hover:shadow">
                 <Image
@@ -111,7 +114,7 @@ export default function Page() {
       <section className="bg-emerald-50">
         <div className="mx-auto max-w-6xl px-4 py-12">
           <h2 className="text-2xl font-semibold">Por qué elegir JuradaExpress</h2>
-        <ul className="mt-6 grid gap-6 md:grid-cols-3">
+          <ul className="mt-6 grid gap-6 md:grid-cols-3">
             {[
               "Traducción jurada válida ante organismos oficiales.",
               "Entrega rápida 24/48 h. Envíos a toda España y extranjero.",
