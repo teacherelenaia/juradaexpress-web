@@ -1,4 +1,6 @@
 // app/page.js
+import Image from "next/image";
+
 export const metadata = {
   title: "Traducción Jurada en Murcia — Español ⇆ Inglés",
   description:
@@ -34,7 +36,8 @@ export default function Page() {
               </a>
               <a
                 href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-xl border border-emerald-200 bg-white px-5 py-3 text-emerald-900 hover:bg-emerald-100"
               >
                 WhatsApp inmediato
@@ -44,8 +47,16 @@ export default function Page() {
               * Proyectos &gt;20 folios: acordamos calendario y faseado.
             </p>
           </div>
+
           <div className="flex justify-center">
-            <img src="/hero.jpg" alt="Traducción jurada" className="max-h-80 rounded-2xl shadow" />
+            <Image
+              src="/hero.jpg"
+              alt="Catedral de Murcia - JuradaExpress"
+              width={800}
+              height={600}
+              priority
+              className="h-80 w-auto rounded-2xl shadow object-cover"
+            />
           </div>
         </div>
       </section>
@@ -56,12 +67,18 @@ export default function Page() {
           <h2 className="text-2xl font-semibold">Documentos más habituales</h2>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {[
-              { t: "Certificados oficiales", d: "Nacimiento, matrimonio, penales, padrón, notaría…", img: "/docs.jpg" },
+              { t: "Certificados oficiales", d: "Nacimiento, matrimonio, penales, padrón, notaría…", img: "/docs-real.jpg" },
               { t: "Académicos", d: "Títulos, expedientes, planes de estudio, cartas académicas.", img: "/people.jpg" },
               { t: "Laborales y mercantiles", d: "Contratos, poderes, escrituras, estatutos.", img: "/hero.jpg" },
             ].map((i) => (
               <article key={i.t} className="rounded-2xl bg-white ring-1 ring-slate-200 hover:shadow">
-                <img src={i.img} alt={i.t} className="h-44 w-full rounded-t-2xl object-cover" />
+                <Image
+                  src={i.img}
+                  alt={i.t}
+                  width={800}
+                  height={400}
+                  className="h-44 w-full rounded-t-2xl object-cover"
+                />
                 <div className="p-5">
                   <h3 className="font-semibold">{i.t}</h3>
                   <p className="mt-2 text-sm text-slate-600">{i.d}</p>
@@ -94,7 +111,7 @@ export default function Page() {
       <section className="bg-emerald-50">
         <div className="mx-auto max-w-6xl px-4 py-12">
           <h2 className="text-2xl font-semibold">Por qué elegir JuradaExpress</h2>
-          <ul className="mt-6 grid gap-6 md:grid-cols-3">
+        <ul className="mt-6 grid gap-6 md:grid-cols-3">
             {[
               "Traducción jurada válida ante organismos oficiales.",
               "Entrega rápida 24/48 h. Envíos a toda España y extranjero.",
@@ -149,7 +166,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* FAQ (ayuda SEO + UX) */}
+      {/* FAQ */}
       <section className="mx-auto max-w-6xl px-4 pb-16">
         <h2 className="text-2xl font-semibold">Preguntas frecuentes</h2>
         <div className="mt-6 divide-y rounded-2xl ring-1 ring-slate-200 bg-white">
@@ -174,7 +191,7 @@ export default function Page() {
           ))}
         </div>
 
-        {/* JSON-LD FAQ para SEO */}
+        {/* JSON-LD FAQ */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -217,4 +234,3 @@ export default function Page() {
     </main>
   );
 }
-
