@@ -59,14 +59,12 @@ export default function ArticlePage({ params }) {
       )}
 
       {/* Si en content/posts.js guardas JSX en post.content */}
-      <article className="prose prose-slate mt-8">{post.content}</article>
-
-      {/* Si en content/posts.js usas HTML en post.html, cambia la línea anterior por:
-      <article
-        className="prose prose-slate mt-8"
-        dangerouslySetInnerHTML={{ __html: post.html }}
-      /> */}
-    </main>
-  );
-}
-
+      {/* CONTENIDO DEL ARTÍCULO */}
+{post.html ? (
+  <article
+    className="prose prose-slate mt-8"
+    dangerouslySetInnerHTML={{ __html: post.html }}
+  />
+) : (
+  <article className="prose prose-slate mt-8">{post.content}</article>
+)}
