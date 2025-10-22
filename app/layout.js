@@ -1,88 +1,104 @@
 // app/layout.js
 import "./globals.css";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "JuradaExpress – Traducciones juradas en Murcia (Español ⇆ Inglés)",
-  description:
-    "Traducciones juradas de Español ⇆ Inglés en Murcia con envíos a toda España y al extranjero. Entrega 24–48 h (orientativa) y presupuesto rápido. Digital o papel.",
   metadataBase: new URL("https://juradaexpress.es"),
+  title: {
+    default: "JuradaExpress — Traducción Jurada en Murcia",
+    template: "%s | JuradaExpress",
+  },
+  description:
+    "Traducciones juradas Español ⇆ Inglés en Murcia. Envíos a toda España y al extranjero. Entrega 24/48 h. Presupuesto inmediato.",
   alternates: { canonical: "https://juradaexpress.es" },
   openGraph: {
-    title: "JuradaExpress – Traducciones juradas en Murcia",
+    title: "JuradaExpress — Traducción Jurada en Murcia",
     description:
-      "Traducciones juradas de Español ⇆ Inglés en Murcia y online. Envíos a toda España y extranjero. Entrega 24–48 h (orientativa).",
-    url: "https://juradaexpress.es",
+      "Traducciones juradas Español ⇆ Inglés en Murcia. Envíos a toda España y al extranjero. Entrega 24/48 h.",
+    url: "https://juradaexpress.es/",
     siteName: "JuradaExpress",
     locale: "es_ES",
     type: "website",
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "JuradaExpress" }],
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "JuradaExpress — Traducción Jurada",
+      },
+    ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "JuradaExpress – Traducciones juradas en Murcia",
-    description:
-      "Español ⇆ Inglés. Envíos a toda España y extranjero. Entrega 24–48 h.",
-    images: ["/og.jpg"],
-  },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es">
-      <body className={`${inter.className} min-h-screen bg-slate-50 text-slate-900 antialiased`}>
-        {/* Fondo con patrón sutil (añade la clase .bg-grid en globals.css) */}
-        <div className="bg-grid">
-          {/* Header */}
-          <header className="mx-auto max-w-6xl px-4 py-5">
-            <div className="flex items-center justify-between gap-4">
-              <a href="/" className="inline-flex items-center gap-3">
-                <img src="/logo.svg" alt="JuradaExpress" className="h-8 w-auto" />
-                <span className="sr-only">JuradaExpress</span>
-              </a>
-              <nav className="hidden gap-6 text-sm text-slate-600 sm:flex">
-                <a href="#servicios" className="hover:text-emerald-700">Servicios</a>
-                <a href="#proceso" className="hover:text-emerald-700">Proceso</a>
-                <a href="#faq" className="hover:text-emerald-700">Preguntas</a>
-                <a href="#precios" className="hover:text-emerald-700">Precios</a>
-              </nav>
+    <html lang="es" className="scroll-smooth">
+      <body className="min-h-screen bg-white text-slate-900 antialiased">
+        {/* Header / Navbar */}
+        <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
+          <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+            <a href="/" className="flex items-center gap-2">
+              <img src="/logo.svg" alt="JuradaExpress" className="h-8 w-8" />
+              <span className="font-semibold">JuradaExpress</span>
+            </a>
+
+            {/* Menu desktop */}
+            <div className="hidden gap-6 sm:flex">
+              <a href="/" className="hover:text-emerald-700">Inicio</a>
+              {/* Enlace a la página /precios */}
+              <a href="/precios" className="hover:text-emerald-700">Precios</a>
+              <a href="#contacto" className="hover:text-emerald-700">Contacto</a>
+            </div>
+
+            {/* Acción rápida móvil */}
+            <div className="sm:hidden">
               <a
-                href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
-                className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-emerald-700"
+                href="tel:+34685891214"
+                className="rounded-lg bg-emerald-600 px-3 py-2 text-white"
               >
-                WhatsApp
+                Llamar
               </a>
             </div>
-          </header>
+          </nav>
+        </header>
 
-          {/* Contenido principal */}
-          <main className="mx-auto max-w-6xl px-4 pb-24">{children}</main>
+        {/* Contenido de cada página */}
+        <main>{children}</main>
 
-          {/* Barra flotante CTA (móvil) */}
-          <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/90 backdrop-blur md:hidden">
-            <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-2">
-              <a href="tel:+34685891214" className="flex-1 rounded-xl border border-slate-200 px-3 py-2 text-center text-sm font-medium text-slate-800">Llamar</a>
-              <a href="mailto:info@juradaexpress.es" className="flex-1 rounded-xl border border-slate-200 px-3 py-2 text-center text-sm font-medium text-slate-800">Email</a>
-              <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress" className="flex-1 rounded-xl bg-emerald-600 px-3 py-2 text-center text-sm font-medium text-white">WhatsApp</a>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <footer className="border-t border-slate-200 bg-white/70 backdrop-blur">
-            <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-slate-600">
-              <p>
-                © {new Date().getFullYear()} JuradaExpress · Murcia ·{" "}
-                <a className="underline" href="mailto:info@juradaexpress.es">info@juradaexpress.es</a>{" "}
-                · <a className="underline" href="tel:+34685891214">685 891 214</a>
+        {/* Footer */}
+        <footer id="contacto" className="mt-20 border-t">
+          <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 sm:grid-cols-3">
+            <div>
+              <h3 className="font-semibold">JuradaExpress</h3>
+              <p className="mt-2 text-sm text-slate-600">
+                Traducciones juradas Español ⇆ Inglés · Murcia · Envíos a toda España y extranjero · Entrega 24/48 h*
               </p>
             </div>
-          </footer>
-        </div>
+
+            <div>
+              <h4 className="font-semibold">Contacto</h4>
+              <ul className="mt-2 space-y-1 text-sm">
+                <li>
+                  <a className="hover:text-emerald-700" href="tel:+34685891214">
+                    Tel: 685 891 214
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="hover:text-emerald-700"
+                    href="mailto:info@juradaexpress.es"
+                  >
+                    info@juradaexpress.es
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="text-sm text-slate-600">
+              * Plazo orientativo para encargos habituales. Proyectos &gt;20 folios: acordamos calendario específico.
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
