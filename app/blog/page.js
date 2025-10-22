@@ -1,52 +1,77 @@
 // app/blog/page.js
 import Link from "next/link";
-import Image from "next/image";
-import { posts } from "./posts";
+import { getAllPosts } from "../../content/posts";
 
 export const metadata = {
-  title: "Blog — JuradaExpress",
-  description: "Artículos útiles sobre traducción jurada, precios, plazos y consejos.",
+  title: "Blog de traducción jurada | JuradaExpress",
+  description:
+    "Guías y consejos prácticos sobre traducción jurada: plazos, formatos, documentación y trámites.",
+  alternates: { canonical: "https://juradaexpress.es/blog" },
 };
 
 export default function BlogPage() {
-  return (
-    <main className="mx-auto max-w-5xl px-4 py-10">
-      <h1 className="text-3xl font-bold">Blog</h1>
-      <p className="mt-2 text-slate-600">
-        Guías rápidas, consejos y novedades sobre traducción jurada.
-      </p>
+  const posts = getAllPosts();
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  return (
+    <main className="mx-auto max-w-6xl px-4 py-12">
+      <header className="max-w-2xl">
+        <h1 className="text-3xl font-bold md:text-4xl">Blog</h1>
+        <p className="mt-3 text-slate-600">
+          Consejos prácticos, dudas frecuentes y guías rápidas para tus trámites con
+          traducción jurada.
+        </p>
+      </header>
+
+      <section className="mt-10 grid gap-6 md:grid-cols-3">
         {posts.map((post) => (
-          <article key={post.slug} className="rounded-2xl border bg-white/60 p-4 shadow-sm hover:shadow-md transition">
-            <Link href={`/blog/${post.slug}`} className="block">
-              {post.cover ? (
-                <Image
-                  src={post.cover}
-                  alt={post.title}
-                  width={800}
-                  height={480}
-                  className="h-40 w-full rounded-xl object-cover"
-                />
-              ) : null}
-              <h2 className="mt-3 line-clamp-2 text-lg font-semibold">{post.title}</h2>
-              <p className="mt-1 line-clamp-3 text-sm text-slate-600">{post.excerpt}</p>
-              <div className="mt-3 flex items-center gap-3 text-xs text-slate-500">
-                <span>{post.date}</span>
-                <span>•</span>
-                <span>{post.readTime} min</span>
-              </div>
-              <div className="mt-3 flex flex-wrap gap-2">
+          <article key={post.slug} className="overflow-hidden rounded-xl border bg-white shadow-sm">
+            {post.cover && (
+              <img
+                src={post.cover}
+                alt={post.title}
+                className="h-40 w-full object-cover"
+                loading="lazy"
+              />
+            )}
+            <div className="p-5">
+              <time className="text-xs text-slate-500">
+                {new Date(post.date).toLocaleDateString("es-ES")}
+              </time>
+              <h2 className="mt-1 line-clamp-2 text-lg font-semibold">
+                <Link href={`/blog/${post.slug}`} className="hover:underline">
+                  {post.title}
+                </Link>
+              </h2>
+              <p className="mt-2 line-clamp-3 text-sm text-slate-600">{post.excerpt}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
                 {post.tags?.map((t) => (
-                  <span key={t} className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-700">
-                    #{t}
+                  <span key={t} className="rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600">
+                    {t}
                   </span>
                 ))}
               </div>
-            </Link>
+              <div className="mt-4">
+                <Link href={`/blog/${post.slug}`} className="text-sm font-medium text-emerald-700 hover:underline">
+                  Leer más
+                </Link>
+              </div>
+            </div>
           </article>
         ))}
-      </div>
+      </section>
+
+      {/* JSON-LD de Blog */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            name: "Blog de JuradaExpress",
+            url: "https://juradaexpress.es/blog",
+          }),
+        }}
+      />
     </main>
   );
 }
