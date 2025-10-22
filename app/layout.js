@@ -28,26 +28,33 @@ export default function RootLayout({ children }) {
     <html lang="es" className="scroll-smooth">
       <body className="min-h-screen bg-white text-slate-900 antialiased">
         {/* Header / Navbar */}
-        <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
+        <header className="sticky top-0 z-50 border-b bg-white/85 backdrop-blur">
           <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
             <a href="/" className="flex items-center gap-2">
               <img src="/logo.svg" alt="JuradaExpress" className="h-8 w-8" />
               <span className="font-semibold">JuradaExpress</span>
             </a>
+
+            {/* Menu desktop */}
             <div className="hidden gap-6 sm:flex">
               <a href="/" className="hover:text-emerald-700">Inicio</a>
               <a href="/precios" className="hover:text-emerald-700">Precios</a>
+              <a href="/blog" className="hover:text-emerald-700">Blog</a>
               <a href="#contacto" className="hover:text-emerald-700">Contacto</a>
             </div>
+
+            {/* Acción rápida móvil */}
             <div className="sm:hidden">
-              <a href="tel:+34685891214" className="rounded-lg bg-emerald-600 px-3 py-2 text-white">
+              <a
+                href="tel:+34685891214"
+                className="rounded-lg bg-emerald-600 px-3 py-2 text-white"
+              >
                 Llamar
               </a>
             </div>
           </nav>
         </header>
 
-        {/* AQUI ES DONDE SE RENDERIZA CADA PÁGINA */}
         <main>{children}</main>
 
         {/* Footer */}
@@ -75,3 +82,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
