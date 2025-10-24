@@ -1,112 +1,92 @@
 // app/layout.js
 import "./globals.css";
 
-// —————————————————————————————————————
-// SEO / METADATA
-// —————————————————————————————————————
 export const metadata = {
   metadataBase: new URL("https://juradaexpress.es"),
   title: {
-    default: "JuradaExpress – Traducción Jurada en Murcia",
+    default: "JuradaExpress — Traducción Jurada en Murcia",
     template: "%s | JuradaExpress",
   },
   description:
-    "Traducciones juradas de Español ↔ Inglés en Murcia, con envíos a toda España y al extranjero. Entrega 24/48 h (orientativo) y presupuesto rápido. Digital o papel.",
-  alternates: { canonical: "https://juradaexpress.es" },
+    "Traductor jurado en Murcia (Español ⇆ Inglés). Envíos a toda España y al extranjero. Entrega 24/48 h. Presupuesto inmediato por email o WhatsApp.",
+  alternates: { canonical: "https://juradaexpress.es/" },
   openGraph: {
-    title: "JuradaExpress – Traducción Jurada en Murcia",
+    title: "JuradaExpress — Traducción Jurada en Murcia",
     description:
-      "Traducciones juradas Español ↔ Inglés en Murcia. Envíos a toda España y extranjero. Entrega 24/48 h (orientativo).",
+      "Traducción jurada válida ante organismos oficiales. Entrega 24/48 h. Envíos a toda España y extranjero.",
     url: "https://juradaexpress.es/",
     siteName: "JuradaExpress",
-    locale: "es_ES",
     type: "website",
+    locale: "es_ES",
     images: [
-      { url: "/og.jpg", width: 1200, height: 630, alt: "JuradaExpress" },
+      {
+        url: "https://juradaexpress.es/hero-murcia.jpg",
+        width: 1200,
+        height: 800,
+        alt: "Catedral de Murcia — JuradaExpress",
+      },
     ],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+  twitter: {
+    card: "summary_large_image",
+    title: "JuradaExpress — Traducción Jurada en Murcia",
+    description:
+      "Traducción jurada (Español ⇆ Inglés). Entrega 24/48 h. Envíos a toda España y extranjero.",
+    images: ["https://juradaexpress.es/hero-murcia.jpg"],
   },
 };
 
-// —————————————————————————————————————
-// LAYOUT
-// —————————————————————————————————————
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <head>
-        {/* JSON-LD para negocio local (ayuda SEO) */}
-        <script
-          type="application/ld+json"
-          // Nota: si cambias datos de contacto, actualiza aquí también
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              name: "JuradaExpress",
-              url: "https://juradaexpress.es",
-              image: "https://juradaexpress.es/og.jpg",
-              description:
-                "Traducciones juradas Español ↔ Inglés en Murcia. Envíos a toda España y extranjero.",
-              email: "info@juradaexpress.es",
-              telephone: "+34 685 891 214",
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Murcia",
-                addressCountry: "ES",
-              },
-              areaServed: "ES",
-              sameAs: [
-                "https://juradaexpress.es",
-                "https://juradaexpress.es/precios",
-                "https://juradaexpress.es/blog",
-              ],
-            }),
-          }}
-        />
-      </head>
-      <body className="min-h-screen bg-slate-50 text-slate-900 antialiased">
-        {/* ====== CABECERA / MENÚ ====== */}
-        <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
-          <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-            <a href="/" className="flex items-center gap-2">
-              <img src="/logo.svg" alt="JuradaExpress" className="h-7 w-7" />
-              <span className="text-lg font-semibold">JuradaExpress</span>
+      <body className="min-h-screen bg-white text-slate-900 antialiased">
+        {/* Header */}
+        <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+            {/* Logo */}
+            <a
+              href="/"
+              className="inline-flex items-center gap-2 font-semibold tracking-tight"
+              aria-label="JuradaExpress — Inicio"
+            >
+              <img
+                src="/logo.svg"
+                alt=""
+                width="26"
+                height="26"
+                className="opacity-90"
+              />
+              <span>JuradaExpress</span>
             </a>
 
-            <nav className="hidden gap-6 md:flex text-sm text-slate-700">
-              <a href="/" className="hover:text-black">Inicio</a>
-              <a href="/precios" className="hover:text-black">Precios</a>
-              <a href="/blog" className="hover:text-black">Blog</a>
-              <a href="#contacto" className="hover:text-black">Contacto</a>
+            {/* Nav */}
+            <nav className="hidden items-center gap-6 md:flex">
+              <a href="/" className="hover:text-emerald-700">
+                Inicio
+              </a>
+              <a href="/precios" className="hover:text-emerald-700">
+                Precios
+              </a>
+              <a href="/blog" className="hover:text-emerald-700">
+                Blog
+              </a>
+              <a href="/contacto" className="hover:text-emerald-700">
+                Contacto
+              </a>
             </nav>
 
-            <div className="hidden md:flex items-center gap-3">
+            {/* Acciones rápidas */}
+            <div className="flex items-center gap-2">
               <a
-                href="https://wa.me/34685891214"
-                className="rounded-full border px-3 py-1.5 text-sm hover:bg-slate-50"
-                aria-label="WhatsApp 685 891 214"
+                href="tel:+34685891214"
+                className="hidden rounded-full border border-emerald-200 px-3 py-1 text-sm text-emerald-900 hover:bg-emerald-50 md:inline-block"
+                aria-label="Llamar 685 891 214"
               >
-                685&nbsp;891&nbsp;214
+                685 891 214
               </a>
               <a
-                href="mailto:info@juradaexpress.es"
-                className="rounded-full bg-black px-4 py-1.5 text-sm font-medium text-white hover:bg-black/90"
+                href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
+                className="rounded-full bg-black px-3 py-1 text-sm text-white hover:bg-slate-800"
               >
                 Pedir presupuesto
               </a>
@@ -114,47 +94,78 @@ export default function RootLayout({ children }) {
           </div>
         </header>
 
-        {/* ====== CONTENIDO DE CADA PÁGINA ====== */}
-        <main>{children}</main>
+        {/* Contenido */}
+        {children}
 
-        {/* ====== PIE DE PÁGINA / CONTACTO ====== */}
-        <footer id="contacto" className="mt-16 border-t bg-white">
-          <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 md:grid-cols-3">
+        {/* Footer */}
+        <footer className="mt-14 border-t bg-white">
+          <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-3">
             <div>
-              <div className="flex items-center gap-2">
-                <img src="/logo.svg" alt="JuradaExpress" className="h-7 w-7" />
-                <span className="text-lg font-semibold">JuradaExpress</span>
+              <div className="mb-2 inline-flex items-center gap-2 font-semibold">
+                <img
+                  src="/logo.svg"
+                  width="24"
+                  height="24"
+                  alt=""
+                  className="opacity-90"
+                />
+                <span>JuradaExpress</span>
               </div>
-              <p className="mt-2 text-sm text-slate-600">
-                Traducciones juradas Español ↔ Inglés en Murcia. Envíos a toda España y extranjero.
+              <p className="max-w-sm text-sm text-slate-600">
+                Traducciones juradas Español ⇆ Inglés en Murcia. Envíos a toda
+                España y al extranjero. Entrega 24/48 h.
               </p>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold">Enlaces</h3>
-              <ul className="mt-2 space-y-1 text-sm text-slate-600">
-                <li><a href="/" className="hover:text-black">Inicio</a></li>
-                <li><a href="/precios" className="hover:text-black">Precios</a></li>
-                <li><a href="/blog" className="hover:text-black">Blog</a></li>
-                <li><a href="#contacto" className="hover:text-black">Contacto</a></li>
+              <h3 className="font-medium">Enlaces</h3>
+              <ul className="mt-2 space-y-1 text-sm">
+                <li>
+                  <a href="/" className="hover:text-emerald-700">
+                    Inicio
+                  </a>
+                </li>
+                <li>
+                  <a href="/precios" className="hover:text-emerald-700">
+                    Precios
+                  </a>
+                </li>
+                <li>
+                  <a href="/blog" className="hover:text-emerald-700">
+                    Blog
+                  </a>
+                </li>
+                <li>
+                  <a href="/contacto" className="hover:text-emerald-700">
+                    Contacto
+                  </a>
+                </li>
               </ul>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold">Contacto</h3>
-              <ul className="mt-2 space-y-1 text-sm text-slate-600">
+              <h3 className="font-medium">Contacto</h3>
+              <ul className="mt-2 space-y-1 text-sm">
                 <li>
-                  <a href="mailto:info@juradaexpress.es" className="hover:text-black">
+                  <a
+                    href="mailto:info@juradaexpress.es"
+                    className="hover:text-emerald-700"
+                  >
                     info@juradaexpress.es
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+34685891214" className="hover:text-black">
+                  <a href="tel:+34685891214" className="hover:text-emerald-700">
                     685 891 214
                   </a>
                 </li>
                 <li>
-                  <a href="https://wa.me/34685891214" className="hover:text-black">
+                  <a
+                    href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-emerald-700"
+                  >
                     WhatsApp directo
                   </a>
                 </li>
@@ -163,10 +174,29 @@ export default function RootLayout({ children }) {
           </div>
 
           <div className="border-t py-4 text-center text-xs text-slate-500">
-            © {new Date().getFullYear()} JuradaExpress. Todos los derechos reservados.
+            © {new Date().getFullYear()} JuradaExpress · Todos los derechos
+            reservados
           </div>
+
+          {/* JSON-LD Organization (SEO) */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "JuradaExpress",
+                url: "https://juradaexpress.es/",
+                email: "info@juradaexpress.es",
+                telephone: "+34 685 891 214",
+                logo: "https://juradaexpress.es/logo.svg",
+                sameAs: ["https://wa.me/34685891214"],
+              }),
+            }}
+          />
         </footer>
       </body>
     </html>
   );
 }
+
