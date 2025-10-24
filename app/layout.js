@@ -1,5 +1,8 @@
 // app/layout.js
 import "./globals.css";
+import Script from "next/script";
+
+const GA4_ID = "G-4Q24BN11PX";
 
 export const metadata = {
   metadataBase: new URL("https://juradaexpress.es"),
@@ -40,6 +43,28 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className="min-h-screen bg-white text-slate-900 antialiased">
+        {/* GA4 */}
+        {GA4_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = window.gtag || gtag;
+                gtag('js', new Date());
+                gtag('config', '${GA4_ID}', {
+                  anonymize_ip: true,
+                  allow_google_signals: false
+                });
+              `}
+            </Script>
+          </>
+        )}
+
         {/* Header */}
         <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
@@ -199,4 +224,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
