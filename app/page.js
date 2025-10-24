@@ -1,6 +1,4 @@
 // app/page.js
-import Image from "next/image";
-
 export const metadata = {
   title: "Traducción Jurada en Murcia — Español ⇆ Inglés",
   description:
@@ -36,8 +34,7 @@ export default function Page() {
               </a>
               <a
                 href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
-                target="_blank"
-                rel="noopener noreferrer"
+                target="_blank" rel="noopener noreferrer"
                 className="rounded-xl border border-emerald-200 bg-white px-5 py-3 text-emerald-900 hover:bg-emerald-100"
               >
                 WhatsApp inmediato
@@ -49,13 +46,10 @@ export default function Page() {
           </div>
 
           <div className="flex justify-center">
-            <Image
-              src="/hero.jpg"                // mantiene la Catedral en el hero
-              alt="Catedral de Murcia - JuradaExpress"
-              width={800}
-              height={600}
-              priority
-              className="h-80 w-auto rounded-2xl shadow object-cover"
+            <img
+              src="/hero-murcia.jpg"
+              alt="Catedral de Murcia"
+              className="max-h-80 rounded-2xl shadow object-cover"
             />
           </div>
         </div>
@@ -67,21 +61,12 @@ export default function Page() {
           <h2 className="text-2xl font-semibold">Documentos más habituales</h2>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {[
-              // 1) certificados → foto de documentos reales
               { t: "Certificados oficiales", d: "Nacimiento, matrimonio, penales, padrón, notaría…", img: "/docs-real.jpg" },
-              // 2) académicos → foto de personas/estudiantes
-              { t: "Académicos", d: "Títulos, expedientes, planes de estudio, cartas académicas.", img: "/people.jpg" },
-              // 3) laborales/mercantiles → otra catedral (archivo distinto) para evitar duplicado con el hero
-              { t: "Laborales y mercantiles", d: "Contratos, poderes, escrituras, estatutos.", img: "/hero-murcia.jpg" },
+              { t: "Académicos", d: "Títulos, expedientes, planes de estudio, cartas académicas.", img: "/academicos.jpg" },
+              { t: "Laborales y mercantiles", d: "Contratos, poderes, escrituras, estatutos.", img: "/mercantiles.jpg" },
             ].map((i) => (
               <article key={i.t} className="rounded-2xl bg-white ring-1 ring-slate-200 hover:shadow">
-                <Image
-                  src={i.img}
-                  alt={i.t}
-                  width={800}
-                  height={400}
-                  className="h-44 w-full rounded-t-2xl object-cover"
-                />
+                <img src={i.img} alt={i.t} className="h-44 w-full rounded-t-2xl object-cover" />
                 <div className="p-5">
                   <h3 className="font-semibold">{i.t}</h3>
                   <p className="mt-2 text-sm text-slate-600">{i.d}</p>
@@ -194,7 +179,7 @@ export default function Page() {
           ))}
         </div>
 
-        {/* JSON-LD FAQ */}
+        {/* JSON-LD FAQ para SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -237,3 +222,4 @@ export default function Page() {
     </main>
   );
 }
+
