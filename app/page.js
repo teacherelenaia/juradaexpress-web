@@ -8,6 +8,23 @@ export const metadata = {
   alternates: { canonical: "https://juradaexpress.es/" },
 };
 
+const Stars = () => (
+  <div className="flex gap-0.5 text-brand-gold" aria-label="Valoración: 5 de 5 estrellas">
+    {Array.from({ length: 5 }).map((_, i) => (
+      <svg
+        key={i}
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z" />
+      </svg>
+    ))}
+  </div>
+);
+
 const Wave = ({ className = "", flip = false }) => (
   <svg
     className={`${className} ${flip ? "rotate-180" : ""}`}
@@ -236,11 +253,23 @@ export default function Page() {
               key={op.n}
               className="rounded-2xl bg-white p-5 ring-1 ring-slate-200"
             >
-              <p>“{op.t}”</p>
+              <Stars />
+              <p className="mt-3">“{op.t}”</p>
               <footer className="mt-3 text-sm text-slate-600">— {op.n}</footer>
             </blockquote>
           ))}
         </div>
+        <p className="mt-6 text-sm text-slate-500">
+          Reseñas verificadas de clientes ·{" "}
+          <a
+            href="https://g.page/r/PLACEHOLDER"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-brand-gold-700"
+          >
+            Ver todas en Google Business
+          </a>
+        </p>
       </section>
 
       {/* CTA FINAL */}
