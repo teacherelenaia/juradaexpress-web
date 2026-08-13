@@ -1,21 +1,12 @@
-"use client";
-
 // app/page.js
+import TrackedLink from "./components/TrackedLink";
+
 export const metadata = {
   title: "Traducción Jurada en Murcia — Español ⇆ Inglés",
   description:
     "Traductor jurado en Murcia. Envíos a toda España y extranjero. Entrega 24/48 h. Presupuesto inmediato por email o WhatsApp.",
   alternates: { canonical: "https://juradaexpress.es/" },
 };
-
-function track(label) {
-  if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("event", "cta_click", {
-      event_category: "engagement",
-      event_label: label,
-    });
-  }
-}
 
 const Wave = ({ className = "", flip = false }) => (
   <svg
@@ -62,29 +53,29 @@ export default function Page() {
             </ul>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                onClick={() => track("hero_presupuesto")}
+              <TrackedLink
+                label="hero_presupuesto"
                 href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
                 className="rounded-xl bg-emerald-600 px-5 py-3 text-white hover:bg-emerald-700"
               >
                 Pedir presupuesto
-              </a>
-              <a
-                onClick={() => track("hero_precios")}
+              </TrackedLink>
+              <TrackedLink
+                label="hero_precios"
                 href="/precios"
                 className="rounded-xl border border-emerald-200 bg-white px-5 py-3 text-emerald-900 hover:bg-emerald-100"
               >
                 Ver precios
-              </a>
-              <a
-                onClick={() => track("hero_whatsapp")}
+              </TrackedLink>
+              <TrackedLink
+                label="hero_whatsapp"
                 href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-xl border border-emerald-200 bg-white px-5 py-3 text-emerald-900 hover:bg-emerald-100"
               >
                 WhatsApp inmediato
-              </a>
+              </TrackedLink>
             </div>
             <p className="mt-3 text-sm text-slate-500">
               * Proyectos &gt;20 folios: acordamos calendario y faseado.
@@ -260,20 +251,20 @@ export default function Page() {
             Envíanos el documento y te respondemos con presupuesto y plazo.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
-            <a
-              onClick={() => track("cta_presupuesto_final")}
+            <TrackedLink
+              label="cta_presupuesto_final"
               href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
               className="rounded-xl bg-white px-5 py-3 text-emerald-700 hover:bg-emerald-50"
             >
               Pedir presupuesto
-            </a>
-            <a
-              onClick={() => track("cta_precios_final")}
+            </TrackedLink>
+            <TrackedLink
+              label="cta_precios_final"
               href="/precios"
               className="rounded-xl border border-white/40 px-5 py-3 text-white hover:bg-white/10"
             >
               Ver precios
-            </a>
+            </TrackedLink>
           </div>
         </div>
       </section>
