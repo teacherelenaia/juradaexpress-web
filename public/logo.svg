@@ -1,6 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 220 48">
-  <rect rx="10" ry="10" width="48" height="48" fill="#1c1c28"/>
-  <text x="12" y="32" font-family="DejaVu Sans,Verdana,Arial" font-size="20" fill="white">JE</text>
-  <text x="60" y="32" font-family="DejaVu Sans,Verdana,Arial" font-size="22" fill="#1c1c28">Jurada</text>
-  <text x="126" y="32" font-family="DejaVu Sans,Verdana,Arial" font-size="22" fill="#2563EB">Express</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0B2545"/>
+  <rect x="14" y="12" width="24" height="32" rx="3" fill="#FFFFFF"/>
+  <rect x="19" y="19" width="14" height="3" rx="1.5" fill="#B8C4D0"/>
+  <rect x="19" y="26" width="10" height="3" rx="1.5" fill="#D9E2EC"/>
+  <rect x="19" y="33" width="14" height="3" rx="1.5" fill="#D9E2EC"/>
+  <circle cx="42" cy="40" r="14" fill="#C9A24B"/>
+  <circle cx="42" cy="40" r="14" fill="none" stroke="#A9822F" stroke-width="1.5"/>
+  <path d="M35.5 40 L40 44.5 L49 34.5" fill="none" stroke="#0B2545" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
