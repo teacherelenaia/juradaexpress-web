@@ -12,7 +12,7 @@
   }
 
   a {
-    @apply text-indigo-600 underline underline-offset-2 hover:no-underline;
+    @apply text-brand-navy underline underline-offset-2 hover:text-brand-gold-700 hover:no-underline;
   }
 
   /* Titulares con espaciado consistente */
@@ -66,7 +66,7 @@
   }
 
   .btn-primary {
-    @apply btn bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500;
+    @apply btn bg-brand-navy text-white hover:bg-brand-navy-700 focus:ring-brand-navy-500;
   }
 
   .btn-ghost {
@@ -102,7 +102,7 @@
   }
 
   .prose a {
-    @apply text-indigo-600 no-underline hover:underline;
+    @apply text-brand-navy no-underline hover:text-brand-gold-700 hover:underline;
   }
 
   .prose ul {
@@ -126,7 +126,7 @@
   }
 
   .prose blockquote {
-    @apply border-l-4 border-indigo-200 bg-indigo-50/50 p-4 my-6 italic text-slate-700 rounded-r;
+    @apply border-l-4 border-brand-gold-200 bg-brand-navy-50/50 p-4 my-6 italic text-slate-700 rounded-r;
   }
 
   .prose code {

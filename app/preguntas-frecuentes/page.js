@@ -48,7 +48,7 @@ export default function Page() {
       <p className="mt-3 max-w-2xl text-slate-600">
         Resolvemos las dudas más habituales sobre traducción jurada en
         Murcia. Si no encuentras respuesta a tu pregunta,{" "}
-        <a href="/contacto" className="underline hover:text-emerald-700">
+        <a href="/contacto" className="underline hover:text-brand-gold-700">
           contacta con nosotros
         </a>
         .

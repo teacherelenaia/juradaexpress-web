@@ -24,7 +24,7 @@ export default function BlogPostPage({ params }) {
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
       <div className="text-sm">
-        <Link href="/blog" className="text-indigo-600 hover:underline">
+        <Link href="/blog" className="text-brand-navy hover:text-brand-gold-700 hover:underline">
           ← Volver al blog
         </Link>
       </div>

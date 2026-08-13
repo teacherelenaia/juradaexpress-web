@@ -38,7 +38,7 @@ export default function BlogPage() {
                 · {post.readingTime}
               </div>
               <p className="mt-2 text-slate-700">{post.excerpt}</p>
-              <span className="mt-3 inline-block text-sm font-medium text-indigo-600">
+              <span className="mt-3 inline-block text-sm font-medium text-brand-navy">
                 Leer artículo →
               </span>
             </Link>

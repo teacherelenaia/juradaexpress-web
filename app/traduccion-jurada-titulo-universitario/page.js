@@ -47,13 +47,13 @@ export default function Page() {
       <div className="mt-8 flex flex-wrap gap-3">
         <a
           href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada%20t%C3%ADtulo%20universitario"
-          className="inline-flex items-center rounded-xl bg-emerald-600 px-5 py-3 text-white hover:bg-emerald-700"
+          className="inline-flex items-center rounded-xl bg-brand-navy px-5 py-3 text-white hover:bg-brand-navy-700"
         >
           Pedir presupuesto por email
         </a>
         <a
           href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20necesito%20traducir%20un%20t%C3%ADtulo%20universitario"
-          className="inline-flex items-center rounded-xl border border-emerald-200 bg-white px-5 py-3 text-emerald-900 hover:bg-emerald-100"
+          className="inline-flex items-center rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -62,7 +62,7 @@ export default function Page() {
       </div>
 
       <p className="mt-8 text-sm text-slate-500">
-        * Consulta también nuestros <a href="/precios" className="underline hover:text-emerald-700">precios orientativos</a>.
+        * Consulta también nuestros <a href="/precios" className="underline hover:text-brand-gold-700">precios orientativos</a>.
       </p>
     </main>
   );
