@@ -123,6 +123,157 @@ export const posts = [
     `,
   },
 
+  {
+    slug: "homologacion-titulo-universitario-extranjero-espana",
+    title: "Homologar un título universitario extranjero en España: qué traducir y cómo",
+    excerpt:
+      "Guía práctica sobre la homologación de títulos extranjeros en España: qué documentos necesitas traducir de forma jurada y en qué orden.",
+    date: "2026-07-22",
+    readingTime: "5 min",
+    html: `
+      <p>Si estudiaste fuera de España y quieres que tu título tenga validez aquí (para trabajar, opositar o seguir estudiando), necesitas pasar por el proceso de <strong>homologación o equivalencia</strong> del Ministerio de Educación. La traducción jurada es un paso obligatorio dentro de ese proceso.</p>
+
+      <h2>¿Qué documentos suelen pedir traducidos?</h2>
+      <ul>
+        <li>Título universitario original</li>
+        <li>Certificado académico oficial con las asignaturas cursadas y calificaciones</li>
+        <li>En algunos casos, el plan de estudios o programa de la titulación</li>
+      </ul>
+      <p>Cada uno debe traducirse de forma jurada, es decir, firmada y sellada por un traductor-intérprete jurado acreditado por el MAEC — no vale una traducción simple ni la que a veces facilita la propia universidad extranjera.</p>
+
+      <h2>¿En qué orden se hacen los trámites?</h2>
+      <ol>
+        <li><strong>Legalización o apostilla</strong> del documento original en el país donde se emitió (salvo excepciones dentro de la UE).</li>
+        <li><strong>Traducción jurada</strong> de cada documento ya apostillado, incluyendo el texto de la apostilla.</li>
+        <li><strong>Presentación</strong> de toda la documentación en la sede electrónica del Ministerio de Educación, Formación Profesional y Deportes, o en registro presencial.</li>
+      </ol>
+
+      <h2>Errores comunes que retrasan el trámite</h2>
+      <ul>
+        <li>Traducir el documento antes de apostillarlo (hay que traducir también el sello de la apostilla, así que si se hace al revés, hay que volver a traducir).</li>
+        <li>Presentar una traducción sin firma ni sello del traductor jurado.</li>
+        <li>Faltar el certificado académico completo y presentar solo el título.</li>
+      </ul>
+
+      <h2>¿Cuánto se tarda en traducir estos documentos?</h2>
+      <p>Con el documento ya apostillado y en buena calidad de escaneo, el plazo habitual es de <strong>24 a 48 horas</strong>. Si el expediente académico es muy extenso (varios cursos con muchas asignaturas), puede llevar algo más.</p>
+
+      <p>
+        ¿Tienes tus documentos listos y quieres presupuesto? Escríbenos por
+        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20necesito%20traducir%20documentos%20para%20homologar%20mi%20t%C3%ADtulo">WhatsApp</a>
+        indicando qué documentos necesitas traducir.
+      </p>
+    `,
+  },
+
+  {
+    slug: "documentos-traducidos-nacionalidad-espanola-residencia",
+    title: "Nacionalidad española por residencia: qué documentos necesitas traducir",
+    excerpt:
+      "Lista de los documentos que suelen requerir traducción jurada al pedir la nacionalidad española por residencia.",
+    date: "2026-08-05",
+    readingTime: "5 min",
+    html: `
+      <p>El expediente de nacionalidad española por residencia exige aportar varios documentos del país de origen, y si no están en español, deben acompañarse de su <strong>traducción jurada</strong>. Esto es lo que normalmente se pide traducido.</p>
+
+      <h2>Documentos que suelen necesitar traducción</h2>
+      <ul>
+        <li>Certificado de nacimiento (literal, actualizado)</li>
+        <li>Certificado de antecedentes penales del país de origen (y de cualquier otro país donde se haya residido en los últimos 5 años)</li>
+        <li>Certificado de matrimonio, si aplica</li>
+        <li>Libro de familia o certificado de estado civil</li>
+        <li>Certificado de empadronamiento histórico, si se emitió en otro idioma</li>
+      </ul>
+
+      <h2>Un detalle importante: la vigencia</h2>
+      <p>Muchos organismos exigen que ciertos certificados (especialmente el de antecedentes penales) tengan una <strong>antigüedad máxima</strong>, normalmente 3 o 6 meses desde su emisión, y a veces también desde la traducción. Si tu documento es antiguo, infórmate antes de traducirlo para no tener que repetir el trámite.</p>
+
+      <h2>¿Hace falta apostilla?</h2>
+      <p>En la mayoría de los casos sí, salvo que el documento venga de un país de la Unión Europea acogido al Reglamento UE 2016/1191, que exime de apostilla para determinados documentos públicos entre países miembros. Si tienes dudas sobre tu país concreto, pregúntanos al enviarnos el documento.</p>
+
+      <h2>Consejo práctico</h2>
+      <p>Reúne y apostilla todos los documentos antes de empezar a traducir, en vez de ir traduciendo uno a uno según te los van pidiendo — así ahorras tiempo y evitas pagar varios envíos sueltos.</p>
+
+      <p>
+        Envíanos tus documentos y te decimos exactamente qué necesita traducción y el precio cerrado:
+        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20estoy%20tramitando%20la%20nacionalidad%20espa%C3%B1ola%20y%20necesito%20traducir%20documentos">escríbenos por WhatsApp</a>.
+      </p>
+    `,
+  },
+
+  {
+    slug: "como-escanear-bien-documentos-con-el-movil",
+    title: "Cómo escanear correctamente tus documentos con el móvil (para que no te los rechacen)",
+    excerpt:
+      "Consejos prácticos para fotografiar o escanear tus documentos con el móvil antes de enviarlos a traducir, y evitar retrasos.",
+    date: "2026-08-12",
+    readingTime: "3 min",
+    html: `
+      <p>Un escaneo o foto de mala calidad es la causa más frecuente de retraso al pedir una traducción jurada: si el traductor no puede leer un dato con total claridad, tiene que pararse a confirmarlo contigo. Con estos consejos lo evitas.</p>
+
+      <h2>1. Usa una app de escaneo, no la cámara normal</h2>
+      <p>Las apps de escaneo (como Adobe Scan, Google Drive o el propio escáner del iPhone en Notas) enderezan la imagen, ajustan el contraste y suelen convertir directamente a PDF. Se nota mucho la diferencia frente a una foto suelta.</p>
+
+      <h2>2. Buena luz, sin sombras ni reflejos</h2>
+      <p>Evita hacer la foto con luz directa que genere reflejos sobre el papel (frecuente en documentos plastificados como el DNI). La luz natural indirecta, de día, suele dar el mejor resultado.</p>
+
+      <h2>3. Documento completo, sin cortar bordes</h2>
+      <p>Asegúrate de que se ve el documento entero, incluyendo sellos, márgenes y cualquier anotación al borde — a veces ahí hay información relevante (números de registro, fechas) que también hay que traducir.</p>
+
+      <h2>4. Un archivo por documento</h2>
+      <p>Si tienes varias páginas de un mismo documento (por ejemplo, un expediente académico), únelas en un solo PDF en el orden correcto, en vez de enviar varias fotos sueltas y desordenadas.</p>
+
+      <h2>5. Revisa que se lea todo antes de enviarlo</h2>
+      <p>Antes de enviarlo, amplía la imagen en tu propio móvil y comprueba que puedes leer perfectamente los nombres propios, fechas y números — si tú no lo lees bien, nosotros tampoco podremos.</p>
+
+      <p>
+        Si tienes dudas sobre si tu escaneo vale, envíanoslo igualmente por
+        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20tengo%20una%20duda%20sobre%20la%20calidad%20de%20mi%20escaneo">WhatsApp</a>
+        y te decimos si hace falta repetirlo antes de seguir.
+      </p>
+    `,
+  },
+
+  {
+    slug: "traduccion-jurada-tramites-extranjeria",
+    title: "Traducción jurada para trámites de extranjería: arraigo, reagrupación y más",
+    excerpt:
+      "Qué documentos necesitas traducir de forma jurada para arraigo, reagrupación familiar y otros trámites de extranjería habituales.",
+    date: "2026-08-13",
+    readingTime: "4 min",
+    html: `
+      <p>Los trámites de extranjería (arraigo, reagrupación familiar, renovaciones, tarjeta comunitaria de familiar) suelen requerir documentación del país de origen, que debe presentarse traducida de forma jurada al español.</p>
+
+      <h2>Arraigo social, laboral o familiar</h2>
+      <p>Dependiendo del tipo de arraigo, es habitual necesitar traducción de:</p>
+      <ul>
+        <li>Certificado de nacimiento</li>
+        <li>Certificado de antecedentes penales del país de origen</li>
+        <li>Título académico o certificados de formación, si se aportan como mérito</li>
+      </ul>
+
+      <h2>Reagrupación familiar</h2>
+      <p>Además de los certificados de nacimiento de los familiares a reagrupar, suele pedirse:</p>
+      <ul>
+        <li>Certificado de matrimonio (si se reagrupa a cónyuge)</li>
+        <li>Libro de familia o documento equivalente que acredite el vínculo</li>
+        <li>Certificados de convivencia previa, si el organismo de destino los exige</li>
+      </ul>
+
+      <h2>Un aviso importante sobre los plazos</h2>
+      <p>Los expedientes de extranjería suelen tener plazos ajustados para subsanar documentación. Si te piden una traducción jurada con poco margen, dínoslo al pedir presupuesto — trabajamos con plazos de 24/48h, y si es realmente urgente, intentamos ajustarnos siempre que sea posible.</p>
+
+      <h2>¿Y si el documento está dañado o es una copia?</h2>
+      <p>Podemos traducir a partir de una fotocopia o escaneo, pero el traductor debe hacer constar en la traducción que se ha trabajado a partir de una copia y no del original. Si el organismo exige expresamente el original, tenlo en cuenta antes de presentar el expediente.</p>
+
+      <p>
+        Cuéntanos tu caso concreto por
+        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20tengo%20un%20tr%C3%A1mite%20de%20extranjer%C3%ADa%20y%20necesito%20traducir%20documentos">WhatsApp</a>
+        y te decimos exactamente qué necesitas y el plazo real.
+      </p>
+    `,
+  },
+
 // Puedes duplicar este objeto para añadir nuevos posts:
   // {
   //   slug: "otro-articulo",
