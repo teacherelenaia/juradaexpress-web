@@ -1,4 +1,6 @@
 // app/documentos/page.js
+import DocumentCatalog from "../components/DocumentCatalog";
+
 export const metadata = {
   title: "Catálogo de Documentos — Traducción Jurada en Murcia",
   description:
@@ -17,6 +19,8 @@ export default function Page() {
         Puedes elegir varios a la vez: al final verás el resumen, el precio
         orientativo y podrás enviarnos tus archivos directamente.
       </p>
+
+      <DocumentCatalog />
     </main>
   );
 }
