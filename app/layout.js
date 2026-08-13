@@ -72,6 +72,9 @@ export default function RootLayout({ children }) {
               <a href="/precios" className="text-slate-200 hover:text-brand-gold-300">
                 Precios
               </a>
+              <a href="/documentos" className="text-slate-200 hover:text-brand-gold-300">
+                Documentos
+              </a>
               <a href="/blog" className="text-slate-200 hover:text-brand-gold-300">
                 Blog
               </a>
@@ -137,6 +140,11 @@ export default function RootLayout({ children }) {
                 <li>
                   <a href="/precios" className="hover:text-brand-gold-700">
                     Precios
+                  </a>
+                </li>
+                <li>
+                  <a href="/documentos" className="hover:text-brand-gold-700">
+                    Documentos
                   </a>
                 </li>
                 <li>

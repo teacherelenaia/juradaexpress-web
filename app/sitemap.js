@@ -7,6 +7,7 @@ export default function sitemap() {
   const staticRoutes = [
     { url: `${BASE_URL}/`, priority: 1.0 },
     { url: `${BASE_URL}/precios`, priority: 0.8 },
+    { url: `${BASE_URL}/documentos`, priority: 0.8 },
     { url: `${BASE_URL}/contacto`, priority: 0.8 },
     { url: `${BASE_URL}/blog`, priority: 0.6 },
     { url: `${BASE_URL}/preguntas-frecuentes`, priority: 0.6 },
