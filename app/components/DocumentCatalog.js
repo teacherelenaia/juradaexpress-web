@@ -32,7 +32,10 @@ function formatPrice(price) {
   return price != null ? `${price} €` : "Pendiente de presupuestar";
 }
 
-const MAX_FILE_BYTES = 5 * 1024 * 1024; // límite del plan gratuito de Web3Forms
+// Los adjuntos por email son función de pago en Web3Forms. Por ahora el
+// archivo solo se muestra como vista previa en la página: no se envía.
+// Ver nota junto al formulario y al dropzone.
+const MAX_FILE_BYTES = 20 * 1024 * 1024;
 const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
 export default function DocumentCatalog() {
@@ -71,16 +74,14 @@ export default function DocumentCatalog() {
     const chosen = incoming[0];
 
     if (chosen.size > MAX_FILE_BYTES) {
-      setFileNotice(
-        "Ese archivo pesa más de 5 MB. Comprímelo o envíanoslo por WhatsApp tras confirmar el presupuesto."
-      );
+      setFileNotice("Ese archivo pesa demasiado. Envíanoslo por WhatsApp o email.");
       return;
     }
 
     setFile(chosen);
     setFileNotice(
       incoming.length > 1
-        ? "Este formulario admite un único archivo. Si tienes más documentos, agrúpalos en un PDF o contáctanos por WhatsApp."
+        ? "Solo se muestra el primer archivo aquí. Puedes enviarnos el resto por WhatsApp o email cuando te contactemos."
         : ""
     );
   }
@@ -100,20 +101,26 @@ export default function DocumentCatalog() {
     e.preventDefault();
     if (selectedDocs.length === 0) return;
 
+    const form = e.currentTarget;
+
+    if (form.botcheck.checked) {
+      // Casilla honeypot: si está marcada, lo rellenó un bot. Ignoramos en silencio.
+      return;
+    }
+
     if (!WEB3FORMS_ACCESS_KEY) {
       setStatus("config-missing");
       return;
     }
 
     setStatus("sending");
-    const form = e.currentTarget;
-    const fd = new FormData();
+    // FormData(form) captura Nombre/Email/Teléfono/botcheck por su atributo name.
+    const fd = new FormData(form);
+    fd.delete("botcheck");
+    if (!fd.get("Teléfono")) fd.set("Teléfono", "No indicado");
     fd.append("access_key", WEB3FORMS_ACCESS_KEY);
     fd.append("subject", "Nueva solicitud — Catálogo de documentos JuradaExpress");
     fd.append("from_name", "Catálogo de documentos — JuradaExpress");
-    fd.append("Nombre", form.nombre.value);
-    fd.append("Email", form.email.value);
-    fd.append("Teléfono", form.telefono.value || "No indicado");
     fd.append(
       "Documentos solicitados",
       selectedDocs.map((d) => `- ${d.name}: ${formatPrice(d.price)}`).join("\n")
@@ -126,7 +133,12 @@ export default function DocumentCatalog() {
         ? `${pricedTotal} € (parcial) + pendiente de presupuestar`
         : "A presupuestar"
     );
-    if (file) fd.append("attachment", file);
+    fd.append(
+      "Archivo preparado por el cliente",
+      file
+        ? `${file.name} (${Math.round(file.size / 1024)} KB) — pendiente de recibir, pedir por WhatsApp/email`
+        : "No adjuntó ningún archivo en la web"
+    );
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -273,7 +285,7 @@ export default function DocumentCatalog() {
                 </label>
                 <input
                   id="nombre"
-                  name="nombre"
+                  name="Nombre"
                   type="text"
                   required
                   className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
@@ -285,7 +297,7 @@ export default function DocumentCatalog() {
                 </label>
                 <input
                   id="email"
-                  name="email"
+                  name="Email"
                   type="email"
                   required
                   className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
@@ -300,7 +312,7 @@ export default function DocumentCatalog() {
               </label>
               <input
                 id="telefono"
-                name="telefono"
+                name="Teléfono"
                 type="tel"
                 className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
               />
@@ -309,7 +321,8 @@ export default function DocumentCatalog() {
             {/* Dropzone */}
             <div>
               <label className="text-sm font-medium text-slate-700">
-                Documento a traducir
+                Documento a traducir{" "}
+                <span className="text-slate-400">(opcional aquí)</span>
               </label>
               <div
                 onDragOver={(e) => {
@@ -331,9 +344,7 @@ export default function DocumentCatalog() {
                 <p className="text-sm text-slate-600">
                   Arrastra tu archivo aquí o haz clic para seleccionarlo
                 </p>
-                <p className="text-xs text-slate-400">
-                  PDF, JPG, PNG o Word · 1 archivo, máx. 5 MB
-                </p>
+                <p className="text-xs text-slate-400">PDF, JPG, PNG o Word</p>
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -367,9 +378,9 @@ export default function DocumentCatalog() {
               )}
 
               <p className="mt-2 text-xs text-slate-500">
-                Si necesitas enviarnos más de un documento, envía el primero
-                aquí y el resto por WhatsApp o email — te confirmaremos todo
-                junto en el mismo presupuesto.
+                De momento este archivo no se envía automáticamente por email:
+                solo nos avisa de que lo tienes listo. Te lo pediremos por
+                WhatsApp o email en cuanto confirmemos tu presupuesto.
               </p>
             </div>
 
