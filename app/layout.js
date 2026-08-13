@@ -1,6 +1,7 @@
 // app/layout.js
 import "./globals.css";
 import CookieConsent from "./components/CookieConsent";
+import MobileNav from "./components/MobileNav";
 
 export const metadata = {
   metadataBase: new URL("https://juradaexpress.es"),
@@ -45,7 +46,7 @@ export default function RootLayout({ children }) {
         <CookieConsent />
 
         {/* Header */}
-        <header className="sticky top-0 z-40 bg-brand-navy text-slate-100 shadow-sm">
+        <header className="sticky top-0 z-40 bg-brand-navy text-slate-100 shadow-sm relative">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
             {/* Logo */}
             <a
@@ -97,6 +98,7 @@ export default function RootLayout({ children }) {
               >
                 Pedir presupuesto
               </a>
+              <MobileNav />
             </div>
           </div>
         </header>
