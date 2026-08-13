@@ -31,7 +31,7 @@ export default function Page() {
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div>
             <h1 className="text-4xl font-bold leading-tight">
-              Traducción <span className="text-emerald-700">Jurada</span> en
+              Traducción <span className="text-brand-navy">Jurada</span> en
               Murcia (Español ⇆ Inglés)
             </h1>
             <p className="mt-4 text-lg text-slate-600">
@@ -41,13 +41,13 @@ export default function Page() {
 
             {/* Badges / Sellos */}
             <ul className="mt-5 flex flex-wrap gap-3 text-sm text-slate-700">
-              <li className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 ring-1 ring-emerald-200">
+              <li className="inline-flex items-center gap-2 rounded-full bg-brand-navy-50 px-3 py-1 ring-1 ring-brand-navy-100">
                 ✅ Válida ante organismos oficiales
               </li>
-              <li className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 ring-1 ring-emerald-200">
+              <li className="inline-flex items-center gap-2 rounded-full bg-brand-navy-50 px-3 py-1 ring-1 ring-brand-navy-100">
                 ⏱️ Entrega 24/48 h
               </li>
-              <li className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 ring-1 ring-emerald-200">
+              <li className="inline-flex items-center gap-2 rounded-full bg-brand-navy-50 px-3 py-1 ring-1 ring-brand-navy-100">
                 ✈️ Envíos a España y extranjero
               </li>
             </ul>
@@ -56,14 +56,14 @@ export default function Page() {
               <TrackedLink
                 label="hero_presupuesto"
                 href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
-                className="rounded-xl bg-emerald-600 px-5 py-3 text-white hover:bg-emerald-700"
+                className="rounded-xl bg-brand-navy px-5 py-3 text-white hover:bg-brand-navy-700"
               >
                 Pedir presupuesto
               </TrackedLink>
               <TrackedLink
                 label="hero_precios"
                 href="/precios"
-                className="rounded-xl border border-emerald-200 bg-white px-5 py-3 text-emerald-900 hover:bg-emerald-100"
+                className="rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
               >
                 Ver precios
               </TrackedLink>
@@ -72,7 +72,7 @@ export default function Page() {
                 href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-xl border border-emerald-200 bg-white px-5 py-3 text-emerald-900 hover:bg-emerald-100"
+                className="rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
               >
                 WhatsApp inmediato
               </TrackedLink>
@@ -170,10 +170,10 @@ export default function Page() {
       </section>
 
       {/* Divider wave */}
-      <Wave className="h-8 w-full text-emerald-50" />
+      <Wave className="h-8 w-full text-brand-navy-50" />
 
       {/* VENTAJAS */}
-      <section className="bg-emerald-50">
+      <section className="bg-brand-navy-50">
         <div className="mx-auto max-w-6xl px-4 py-12">
           <h2 className="text-2xl font-semibold">Por qué elegir JuradaExpress</h2>
           <ul className="mt-6 grid gap-6 md:grid-cols-3">
@@ -184,7 +184,7 @@ export default function Page() {
             ].map((li) => (
               <li
                 key={li}
-                className="rounded-2xl bg-white p-5 ring-1 ring-emerald-100"
+                className="rounded-2xl bg-white p-5 ring-1 ring-brand-navy-100"
               >
                 {li}
               </li>
@@ -194,7 +194,7 @@ export default function Page() {
       </section>
 
       {/* Divider wave (flip) */}
-      <Wave className="h-8 w-full text-emerald-50" flip />
+      <Wave className="h-8 w-full text-brand-navy-50" flip />
 
       {/* PROCESO */}
       <section className="mx-auto max-w-6xl px-4 py-12">
@@ -245,23 +245,23 @@ export default function Page() {
 
       {/* CTA FINAL */}
       <section className="mx-auto max-w-6xl px-4 pb-14">
-        <div className="rounded-2xl bg-emerald-600 p-8 text-white">
+        <div className="rounded-2xl bg-brand-navy p-8 text-white">
           <h2 className="text-2xl font-semibold">¿Empezamos?</h2>
-          <p className="mt-2 text-emerald-100">
+          <p className="mt-2 text-brand-navy-100">
             Envíanos el documento y te respondemos con presupuesto y plazo.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <TrackedLink
               label="cta_presupuesto_final"
               href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
-              className="rounded-xl bg-white px-5 py-3 text-emerald-700 hover:bg-emerald-50"
+              className="rounded-xl bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
             >
               Pedir presupuesto
             </TrackedLink>
             <TrackedLink
               label="cta_precios_final"
               href="/precios"
-              className="rounded-xl border border-white/40 px-5 py-3 text-white hover:bg-white/10"
+              className="rounded-xl border border-brand-gold-300/60 px-5 py-3 text-white hover:bg-white/10"
             >
               Ver precios
             </TrackedLink>

@@ -47,13 +47,13 @@ export default function Page() {
       <div className="mt-6 flex flex-wrap gap-3">
         <a
           href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
-          className="inline-flex items-center rounded-xl bg-emerald-600 px-5 py-3 text-white hover:bg-emerald-700"
+          className="inline-flex items-center rounded-xl bg-brand-navy px-5 py-3 text-white hover:bg-brand-navy-700"
         >
           Pedir presupuesto por email
         </a>
         <a
           href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
-          className="inline-flex items-center rounded-xl border border-emerald-200 bg-white px-5 py-3 text-emerald-900 hover:bg-emerald-100"
+          className="inline-flex items-center rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
           target="_blank" rel="noopener noreferrer"
         >
           WhatsApp inmediato

@@ -45,12 +45,12 @@ export default function RootLayout({ children }) {
         <CookieConsent />
 
         {/* Header */}
-        <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <header className="sticky top-0 z-40 bg-brand-navy text-slate-100 shadow-sm">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
             {/* Logo */}
             <a
               href="/"
-              className="inline-flex items-center gap-2 font-semibold tracking-tight"
+              className="inline-flex items-center gap-2 font-semibold tracking-tight text-white"
               aria-label="JuradaExpress — Inicio"
             >
               <img
@@ -58,23 +58,26 @@ export default function RootLayout({ children }) {
                 alt=""
                 width="26"
                 height="26"
-                className="opacity-90"
+                className="rounded opacity-90"
               />
               <span>JuradaExpress</span>
             </a>
 
             {/* Nav */}
             <nav className="hidden items-center gap-6 md:flex">
-              <a href="/" className="hover:text-emerald-700">
+              <a href="/" className="text-slate-200 hover:text-brand-gold-300">
                 Inicio
               </a>
-              <a href="/precios" className="hover:text-emerald-700">
+              <a href="/precios" className="text-slate-200 hover:text-brand-gold-300">
                 Precios
               </a>
-              <a href="/blog" className="hover:text-emerald-700">
+              <a href="/blog" className="text-slate-200 hover:text-brand-gold-300">
                 Blog
               </a>
-              <a href="/contacto" className="hover:text-emerald-700">
+              <a href="/preguntas-frecuentes" className="text-slate-200 hover:text-brand-gold-300">
+                Preguntas Frecuentes
+              </a>
+              <a href="/contacto" className="text-slate-200 hover:text-brand-gold-300">
                 Contacto
               </a>
             </nav>
@@ -83,14 +86,14 @@ export default function RootLayout({ children }) {
             <div className="flex items-center gap-2">
               <a
                 href="tel:+34685891214"
-                className="hidden rounded-full border border-emerald-200 px-3 py-1 text-sm text-emerald-900 hover:bg-emerald-50 md:inline-block"
+                className="hidden rounded-full border border-white/20 px-3 py-1 text-sm text-slate-100 hover:border-brand-gold-300 hover:text-brand-gold-300 md:inline-block"
                 aria-label="Llamar 685 891 214"
               >
                 685 891 214
               </a>
               <a
                 href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
-                className="rounded-full bg-black px-3 py-1 text-sm text-white hover:bg-slate-800"
+                className="rounded-full bg-brand-gold px-3 py-1 text-sm font-medium text-brand-navy-900 hover:bg-brand-gold-400"
               >
                 Pedir presupuesto
               </a>
@@ -125,22 +128,22 @@ export default function RootLayout({ children }) {
               <h3 className="font-medium">Enlaces</h3>
               <ul className="mt-2 space-y-1 text-sm">
                 <li>
-                  <a href="/" className="hover:text-emerald-700">
+                  <a href="/" className="hover:text-brand-gold-700">
                     Inicio
                   </a>
                 </li>
                 <li>
-                  <a href="/precios" className="hover:text-emerald-700">
+                  <a href="/precios" className="hover:text-brand-gold-700">
                     Precios
                   </a>
                 </li>
                 <li>
-                  <a href="/blog" className="hover:text-emerald-700">
+                  <a href="/blog" className="hover:text-brand-gold-700">
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="/contacto" className="hover:text-emerald-700">
+                  <a href="/contacto" className="hover:text-brand-gold-700">
                     Contacto
                   </a>
                 </li>
@@ -153,13 +156,13 @@ export default function RootLayout({ children }) {
                 <li>
                   <a
                     href="mailto:info@juradaexpress.es"
-                    className="hover:text-emerald-700"
+                    className="hover:text-brand-gold-700"
                   >
                     info@juradaexpress.es
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+34685891214" className="hover:text-emerald-700">
+                  <a href="tel:+34685891214" className="hover:text-brand-gold-700">
                     685 891 214
                   </a>
                 </li>
@@ -168,7 +171,7 @@ export default function RootLayout({ children }) {
                     href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-emerald-700"
+                    className="hover:text-brand-gold-700"
                   >
                     WhatsApp directo
                   </a>
