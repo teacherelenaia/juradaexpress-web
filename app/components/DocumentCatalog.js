@@ -32,11 +32,15 @@ function formatPrice(price) {
   return price != null ? `${price} €` : "Pendiente de presupuestar";
 }
 
+const MAX_FILE_BYTES = 5 * 1024 * 1024; // límite del plan gratuito de Web3Forms
+const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
 export default function DocumentCatalog() {
   const [selectedIds, setSelectedIds] = useState([]);
-  const [files, setFiles] = useState([]);
+  const [file, setFile] = useState(null);
+  const [fileNotice, setFileNotice] = useState("");
   const [dragActive, setDragActive] = useState(false);
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error | config-missing
 
   const formRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -61,27 +65,87 @@ export default function DocumentCatalog() {
     );
   }
 
-  function addFiles(fileList) {
-    setFiles((prev) => [...prev, ...Array.from(fileList)]);
+  function handleFiles(fileList) {
+    const incoming = Array.from(fileList);
+    if (incoming.length === 0) return;
+    const chosen = incoming[0];
+
+    if (chosen.size > MAX_FILE_BYTES) {
+      setFileNotice(
+        "Ese archivo pesa más de 5 MB. Comprímelo o envíanoslo por WhatsApp tras confirmar el presupuesto."
+      );
+      return;
+    }
+
+    setFile(chosen);
+    setFileNotice(
+      incoming.length > 1
+        ? "Este formulario admite un único archivo. Si tienes más documentos, agrúpalos en un PDF o contáctanos por WhatsApp."
+        : ""
+    );
   }
 
-  function removeFile(index) {
-    setFiles((prev) => prev.filter((_, i) => i !== index));
+  function removeFile() {
+    setFile(null);
+    setFileNotice("");
   }
 
   function handleDrop(e) {
     e.preventDefault();
     setDragActive(false);
-    if (e.dataTransfer.files?.length) addFiles(e.dataTransfer.files);
+    if (e.dataTransfer.files?.length) handleFiles(e.dataTransfer.files);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (selectedDocs.length === 0) return;
-    setStatus("sending");
 
-    // TODO: conectar con Web3Forms (paso 5)
-    setTimeout(() => setStatus("idle"), 300);
+    if (!WEB3FORMS_ACCESS_KEY) {
+      setStatus("config-missing");
+      return;
+    }
+
+    setStatus("sending");
+    const form = e.currentTarget;
+    const fd = new FormData();
+    fd.append("access_key", WEB3FORMS_ACCESS_KEY);
+    fd.append("subject", "Nueva solicitud — Catálogo de documentos JuradaExpress");
+    fd.append("from_name", "Catálogo de documentos — JuradaExpress");
+    fd.append("Nombre", form.nombre.value);
+    fd.append("Email", form.email.value);
+    fd.append("Teléfono", form.telefono.value || "No indicado");
+    fd.append(
+      "Documentos solicitados",
+      selectedDocs.map((d) => `- ${d.name}: ${formatPrice(d.price)}`).join("\n")
+    );
+    fd.append(
+      "Total orientativo",
+      allPriced
+        ? `${pricedTotal} €`
+        : hasPending && pricedTotal > 0
+        ? `${pricedTotal} € (parcial) + pendiente de presupuestar`
+        : "A presupuestar"
+    );
+    if (file) fd.append("attachment", file);
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: fd,
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("sent");
+        setSelectedIds([]);
+        setFile(null);
+        setFileNotice("");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      setStatus("error");
+    }
   }
 
   return (
@@ -194,6 +258,14 @@ export default function DocumentCatalog() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+            <input
+              type="checkbox"
+              name="botcheck"
+              className="hidden"
+              style={{ display: "none" }}
+              tabIndex={-1}
+              autoComplete="off"
+            />
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="nombre" className="text-sm font-medium text-slate-700">
@@ -237,7 +309,7 @@ export default function DocumentCatalog() {
             {/* Dropzone */}
             <div>
               <label className="text-sm font-medium text-slate-700">
-                Documentos a traducir
+                Documento a traducir
               </label>
               <div
                 onDragOver={(e) => {
@@ -257,38 +329,48 @@ export default function DocumentCatalog() {
               >
                 <IconUpload className="h-6 w-6 text-brand-navy-300" />
                 <p className="text-sm text-slate-600">
-                  Arrastra tus archivos aquí o haz clic para seleccionarlos
+                  Arrastra tu archivo aquí o haz clic para seleccionarlo
                 </p>
-                <p className="text-xs text-slate-400">PDF, JPG, PNG o Word</p>
+                <p className="text-xs text-slate-400">
+                  PDF, JPG, PNG o Word · 1 archivo, máx. 5 MB
+                </p>
                 <input
                   ref={fileInputRef}
                   type="file"
-                  multiple
                   accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
                   className="hidden"
-                  onChange={(e) => e.target.files && addFiles(e.target.files)}
+                  onChange={(e) => e.target.files && handleFiles(e.target.files)}
                 />
               </div>
-              {files.length > 0 && (
-                <ul className="mt-3 space-y-1">
-                  {files.map((f, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-slate-200"
-                    >
-                      <span className="truncate text-slate-700">{f.name}</span>
-                      <button
-                        type="button"
-                        onClick={() => removeFile(i)}
-                        className="ml-2 shrink-0 text-slate-400 hover:text-brand-gold-700"
-                        aria-label={`Quitar ${f.name}`}
-                      >
-                        ✕
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+
+              {file && (
+                <div className="mt-3 flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-slate-200">
+                  <span className="truncate text-slate-700">
+                    {file.name}{" "}
+                    <span className="text-slate-400">
+                      ({Math.round(file.size / 1024)} KB)
+                    </span>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={removeFile}
+                    className="ml-2 shrink-0 text-slate-400 hover:text-brand-gold-700"
+                    aria-label={`Quitar ${file.name}`}
+                  >
+                    ✕
+                  </button>
+                </div>
               )}
+
+              {fileNotice && (
+                <p className="mt-2 text-xs text-brand-gold-700">{fileNotice}</p>
+              )}
+
+              <p className="mt-2 text-xs text-slate-500">
+                Si necesitas enviarnos más de un documento, envía el primero
+                aquí y el resto por WhatsApp o email — te confirmaremos todo
+                junto en el mismo presupuesto.
+              </p>
             </div>
 
             {/* Nota horario/pago */}
@@ -307,6 +389,13 @@ export default function DocumentCatalog() {
               <p className="text-sm text-red-600">
                 Ha ocurrido un error al enviar. Inténtalo de nuevo o escríbenos
                 por WhatsApp.
+              </p>
+            )}
+
+            {status === "config-missing" && (
+              <p className="text-sm text-red-600">
+                El envío no está configurado todavía en este entorno (falta la
+                clave de Web3Forms). Escríbenos por WhatsApp mientras tanto.
               </p>
             )}
 
