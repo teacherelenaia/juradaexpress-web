@@ -1,8 +1,6 @@
 // app/layout.js
 import "./globals.css";
-import Script from "next/script";
-
-const GA4_ID = "G-4Q24BN11PX";
+import CookieConsent from "./components/CookieConsent";
 
 export const metadata = {
   metadataBase: new URL("https://juradaexpress.es"),
@@ -43,27 +41,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className="min-h-screen bg-white text-slate-900 antialiased">
-        {/* GA4 */}
-        {GA4_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="ga4-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                window.gtag = window.gtag || gtag;
-                gtag('js', new Date());
-                gtag('config', '${GA4_ID}', {
-                  anonymize_ip: true,
-                  allow_google_signals: false
-                });
-              `}
-            </Script>
-          </>
-        )}
+        {/* Cookies + GA4 (GA4 solo se carga tras aceptar) */}
+        <CookieConsent />
 
         {/* Header */}
         <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -199,22 +178,40 @@ export default function RootLayout({ children }) {
           </div>
 
           <div className="border-t py-4 text-center text-xs text-slate-500">
-            © {new Date().getFullYear()} JuradaExpress · Todos los derechos
-            reservados
+            <p>
+              © {new Date().getFullYear()} JuradaExpress · Todos los derechos
+              reservados
+            </p>
+            <p className="mt-1">
+              Elena Peñaranda Ortega · Traductora-Intérprete Jurada de Inglés
+              nombrada por el Ministerio de Asuntos Exteriores, Unión Europea
+              y Cooperación · Nº de acreditación: 7310
+            </p>
           </div>
 
-          {/* JSON-LD Organization (SEO) */}
+          {/* JSON-LD ProfessionalService (SEO) */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
               __html: JSON.stringify({
                 "@context": "https://schema.org",
-                "@type": "Organization",
+                "@type": "ProfessionalService",
                 name: "JuradaExpress",
                 url: "https://juradaexpress.es/",
                 email: "info@juradaexpress.es",
-                telephone: "+34 685 891 214",
+                telephone: "+34685891214",
                 logo: "https://juradaexpress.es/logo.svg",
+                image: "https://juradaexpress.es/logo.svg",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "Carril de los Leales",
+                  postalCode: "30009",
+                  addressLocality: "Murcia",
+                  addressRegion: "Región de Murcia",
+                  addressCountry: "ES",
+                },
+                areaServed: ["Murcia", "España"],
+                priceRange: "€€",
                 sameAs: ["https://wa.me/34685891214"],
               }),
             }}
