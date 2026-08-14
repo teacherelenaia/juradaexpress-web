@@ -2,6 +2,7 @@
 import "./globals.css";
 import CookieConsent from "./components/CookieConsent";
 import MobileNav from "./components/MobileNav";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 
 export const metadata = {
   metadataBase: new URL("https://juradaexpress.es"),
@@ -88,6 +89,7 @@ export default function RootLayout({ children }) {
 
             {/* Acciones rápidas */}
             <div className="flex items-center gap-2">
+              <LanguageSwitcher className="hidden md:inline-flex" />
               <a
                 href="tel:+34685891214"
                 className="hidden rounded-full border border-white/20 px-3 py-1 text-sm text-slate-100 hover:border-brand-gold-300 hover:text-brand-gold-300 md:inline-block"

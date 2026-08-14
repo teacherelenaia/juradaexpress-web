@@ -3,7 +3,14 @@ export const metadata = {
   title: "Preguntas Frecuentes — Traducción Jurada en Murcia",
   description:
     "Resolvemos tus dudas sobre traducción jurada en Murcia: validez, plazos, precios, entrega y documentos aceptados.",
-  alternates: { canonical: "https://juradaexpress.es/preguntas-frecuentes" },
+  alternates: {
+    canonical: "https://juradaexpress.es/preguntas-frecuentes",
+    languages: {
+      es: "https://juradaexpress.es/preguntas-frecuentes",
+      en: "https://juradaexpress.es/en/preguntas-frecuentes",
+      "x-default": "https://juradaexpress.es/preguntas-frecuentes",
+    },
+  },
 };
 
 const faqs = [

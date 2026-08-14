@@ -3,7 +3,14 @@ export const metadata = {
   title: "Contacto — Traductor Jurado en Murcia",
   description:
     "Contacta con tu traductor jurado en Murcia por WhatsApp, email o teléfono. Presupuesto inmediato y entrega en 24/48 h.",
-  alternates: { canonical: "https://juradaexpress.es/contacto" },
+  alternates: {
+    canonical: "https://juradaexpress.es/contacto",
+    languages: {
+      es: "https://juradaexpress.es/contacto",
+      en: "https://juradaexpress.es/en/contacto",
+      "x-default": "https://juradaexpress.es/contacto",
+    },
+  },
 };
 
 export default function Page() {

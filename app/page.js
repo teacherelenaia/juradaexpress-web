@@ -6,7 +6,14 @@ export const metadata = {
   title: "Traducción Jurada en Murcia — Español ⇆ Inglés",
   description:
     "Traductor jurado en Murcia. Envíos a toda España y extranjero. Entrega 24/48 h. Presupuesto inmediato por email o WhatsApp.",
-  alternates: { canonical: "https://juradaexpress.es/" },
+  alternates: {
+    canonical: "https://juradaexpress.es/",
+    languages: {
+      es: "https://juradaexpress.es/",
+      en: "https://juradaexpress.es/en",
+      "x-default": "https://juradaexpress.es/",
+    },
+  },
 };
 
 const Stars = () => (
