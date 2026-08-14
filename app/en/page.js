@@ -1,4 +1,5 @@
 // app/en/page.js
+import Image from "next/image";
 import TrackedLink from "../components/TrackedLink";
 import { IconCheck, IconClock, IconSend } from "../components/Icons";
 
@@ -192,6 +193,55 @@ export default function Page() {
       </section>
 
       <Wave className="h-8 w-full text-slate-50" flip />
+
+      {/* UK / BREXIT */}
+      <Wave className="h-8 w-full text-brand-navy-50" />
+      <section className="bg-brand-navy-50">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <div className="grid items-center gap-8 md:grid-cols-2">
+            <div>
+              <SectionKicker />
+              <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+                British and living in Spain?
+              </h2>
+              <p className="mt-4 max-w-xl text-slate-600">
+                I'll help you get your documents sworn-translated for your
+                NIE, residency card (TIE), padrón registration, buying a
+                property, or any other paperwork since Brexit. Everything
+                done properly and on time, so you can focus on settling in.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <TrackedLink
+                  label="uk_quote_en"
+                  href="mailto:info@juradaexpress.es?subject=Sworn%20translation%20quote%20-%20UK"
+                  className="rounded-xl bg-brand-navy px-5 py-3 text-white hover:bg-brand-navy-700"
+                >
+                  Request a quote
+                </TrackedLink>
+                <TrackedLink
+                  label="uk_whatsapp_en"
+                  href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27m%20British%20and%20need%20a%20sworn%20translation%20for%20a%20procedure%20in%20Spain"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
+                >
+                  WhatsApp
+                </TrackedLink>
+              </div>
+            </div>
+            <div className="relative h-56 w-full overflow-hidden rounded-2xl shadow md:h-72">
+              <Image
+                src="/fotos/foto-bandera-uk.jpg"
+                alt="Union Jack flag — sworn translation for British nationals living in Spain"
+                fill
+                sizes="(min-width: 768px) 480px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <Wave className="h-8 w-full text-brand-navy-50" flip />
 
       {/* ACEPTADO POR */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">

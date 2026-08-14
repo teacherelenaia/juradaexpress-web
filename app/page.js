@@ -1,4 +1,5 @@
 // app/page.js
+import Image from "next/image";
 import TrackedLink from "./components/TrackedLink";
 import { IconCheck, IconClock, IconSend } from "./components/Icons";
 
@@ -178,6 +179,56 @@ export default function Page() {
 
       {/* Divider wave (flip) */}
       <Wave className="h-8 w-full text-slate-50" flip />
+
+      {/* REINO UNIDO */}
+      <Wave className="h-8 w-full text-brand-navy-50" />
+      <section className="bg-brand-navy-50">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <div className="grid items-center gap-8 md:grid-cols-2">
+            <div>
+              <SectionKicker />
+              <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+                ¿Resides en España siendo británico/a?
+              </h2>
+              <p className="mt-4 max-w-xl text-slate-600">
+                Te ayudo con la traducción jurada de tus documentos para el
+                NIE, la tarjeta de residencia, el empadronamiento, la compra
+                de una vivienda o cualquier otro trámite tras el Brexit.
+                Documentos en regla, sin sorpresas, para que puedas
+                centrarte en instalarte.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <TrackedLink
+                  label="uk_presupuesto"
+                  href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada%20-%20Reino%20Unido"
+                  className="rounded-xl bg-brand-navy px-5 py-3 text-white hover:bg-brand-navy-700"
+                >
+                  Pedir presupuesto
+                </TrackedLink>
+                <TrackedLink
+                  label="uk_whatsapp"
+                  href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20soy%20brit%C3%A1nico%2Fa%20y%20necesito%20traducci%C3%B3n%20jurada%20para%20un%20tr%C3%A1mite%20en%20Espa%C3%B1a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
+                >
+                  WhatsApp inmediato
+                </TrackedLink>
+              </div>
+            </div>
+            <div className="relative h-56 w-full overflow-hidden rounded-2xl shadow md:h-72">
+              <Image
+                src="/fotos/foto-bandera-uk.jpg"
+                alt="Bandera de Reino Unido — traducción jurada para británicos residentes en España"
+                fill
+                sizes="(min-width: 768px) 480px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <Wave className="h-8 w-full text-brand-navy-50" flip />
 
       {/* ACEPTADO POR… */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
