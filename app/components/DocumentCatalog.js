@@ -44,6 +44,7 @@ export default function DocumentCatalog() {
   const [fileNotice, setFileNotice] = useState("");
   const [dragActive, setDragActive] = useState(false);
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error | config-missing
+  const [payStatus, setPayStatus] = useState("idle"); // idle | redirecting | error
 
   const formRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -89,6 +90,25 @@ export default function DocumentCatalog() {
   function removeFile() {
     setFile(null);
     setFileNotice("");
+  }
+
+  async function handlePayOnline() {
+    setPayStatus("redirecting");
+    try {
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids: selectedIds }),
+      });
+      const data = await res.json();
+      if (res.ok && data.url) {
+        window.location.href = data.url;
+      } else {
+        setPayStatus("error");
+      }
+    } catch (err) {
+      setPayStatus("error");
+    }
   }
 
   function handleDrop(e) {
@@ -260,6 +280,31 @@ export default function DocumentCatalog() {
                 "Te enviaremos un presupuesto para los documentos seleccionados."
               )}
             </p>
+
+            {allPriced && (
+              <div className="mt-4">
+                <button
+                  type="button"
+                  onClick={handlePayOnline}
+                  disabled={payStatus === "redirecting"}
+                  className="w-full rounded-xl bg-brand-gold px-5 py-3 font-medium text-brand-navy-900 transition hover:bg-brand-gold-400 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+                >
+                  {payStatus === "redirecting"
+                    ? "Redirigiendo a pago…"
+                    : `Pagar online ahora — ${pricedTotal} €`}
+                </button>
+                {payStatus === "error" && (
+                  <p className="mt-2 text-sm text-red-600">
+                    No se ha podido iniciar el pago. Inténtalo de nuevo o usa
+                    el formulario de abajo para pedir presupuesto.
+                  </p>
+                )}
+                <p className="mt-2 text-xs text-slate-500">
+                  O, si prefieres, rellena el formulario de abajo para que te
+                  confirmemos todo antes de pagar.
+                </p>
+              </div>
+            )}
           </>
         )}
 
