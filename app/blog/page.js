@@ -26,21 +26,30 @@ export default function BlogPage() {
           <li key={post.slug} className="group">
             <Link
               href={`/blog/${post.slug}`}
-              className="block rounded-lg border border-slate-200 p-4 hover:border-slate-300 hover:bg-slate-50"
+              className="block overflow-hidden rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50"
             >
-              <h2 className="text-xl font-semibold text-slate-900 group-hover:underline">
-                {post.title}
-              </h2>
-              <div className="mt-1 text-sm text-slate-500">
-                <time dateTime={post.date}>
-                  {new Date(post.date).toLocaleDateString("es-ES")}
-                </time>{" "}
-                · {post.readingTime}
+              {post.image && (
+                <img
+                  src={post.image}
+                  alt=""
+                  className="h-40 w-full object-cover"
+                />
+              )}
+              <div className="p-4">
+                <h2 className="text-xl font-semibold text-slate-900 group-hover:underline">
+                  {post.title}
+                </h2>
+                <div className="mt-1 text-sm text-slate-500">
+                  <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString("es-ES")}
+                  </time>{" "}
+                  · {post.readingTime}
+                </div>
+                <p className="mt-2 text-slate-700">{post.excerpt}</p>
+                <span className="mt-3 inline-block text-sm font-medium text-brand-navy">
+                  Leer artículo →
+                </span>
               </div>
-              <p className="mt-2 text-slate-700">{post.excerpt}</p>
-              <span className="mt-3 inline-block text-sm font-medium text-brand-navy">
-                Leer artículo →
-              </span>
             </Link>
           </li>
         ))}
