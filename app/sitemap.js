@@ -14,6 +14,11 @@ export default function sitemap() {
     { url: `${BASE_URL}/traduccion-jurada-partida-nacimiento`, priority: 0.7 },
     { url: `${BASE_URL}/traduccion-jurada-titulo-universitario`, priority: 0.7 },
     { url: `${BASE_URL}/traduccion-jurada-certificado-penales`, priority: 0.7 },
+    { url: `${BASE_URL}/en`, priority: 0.9 },
+    { url: `${BASE_URL}/en/precios`, priority: 0.7 },
+    { url: `${BASE_URL}/en/documentos`, priority: 0.7 },
+    { url: `${BASE_URL}/en/contacto`, priority: 0.7 },
+    { url: `${BASE_URL}/en/preguntas-frecuentes`, priority: 0.6 },
   ];
 
   const postRoutes = getAllPosts().map((post) => ({
