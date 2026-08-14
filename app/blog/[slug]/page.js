@@ -33,6 +33,14 @@ export default function BlogPostPage({ params }) {
         {post.title}
       </h1>
 
+      {post.image && (
+        <img
+          src={post.image}
+          alt=""
+          className="mt-6 h-64 w-full rounded-2xl object-cover md:h-80"
+        />
+      )}
+
       <div className="mt-2 text-sm text-slate-500">
         <time dateTime={post.date}>
           {new Date(post.date).toLocaleDateString("es-ES")}

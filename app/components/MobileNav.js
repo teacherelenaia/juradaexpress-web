@@ -2,6 +2,7 @@
 
 // app/components/MobileNav.js
 import { useState } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const links = [
   { href: "/", label: "Inicio" },
@@ -75,6 +76,9 @@ export default function MobileNav() {
                 {l.label}
               </a>
             ))}
+            <div className="mt-2 border-t border-white/10 px-3 pt-3">
+              <LanguageSwitcher />
+            </div>
           </nav>
         </div>
       )}

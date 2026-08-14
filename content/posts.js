@@ -7,7 +7,7 @@ export const posts = [
     excerpt: "Qué enviar para recibir un precio cerrado en minutos (documentos, idioma, destino, entrega y plazos).",
     date: "2025-10-22",
     readingTime: "4 min",
-    image: "/docs.jpg", // opcional, si no existe no pasa nada
+    image: "/blog/categoria-consejos.jpg",
     // IMPORTANTE: El contenido en HTML va entre backticks ( ` ... ` )
     html: `
       <p>Para preparar un <strong>presupuesto cerrado</strong>, envíanos:</p>
@@ -39,6 +39,7 @@ export const posts = [
       "Precio real de la traducción jurada de un título universitario o expediente académico: de qué depende, plazos y cómo ahorrar.",
     date: "2026-06-10",
     readingTime: "5 min",
+    image: "/blog/categoria-academico.jpg",
     html: `
       <p>Si necesitas presentar tu título universitario ante una universidad extranjera, un colegio profesional o un organismo de homologación, necesitarás una <strong>traducción jurada</strong>, no una traducción normal. Esto es lo que debes saber antes de pedir presupuesto.</p>
       <h2>¿De qué depende el precio?</h2>
@@ -69,6 +70,7 @@ export const posts = [
       "Explicación sencilla de la apostilla: qué es, cuándo hace falta antes de una traducción jurada y dónde se tramita.",
     date: "2026-06-24",
     readingTime: "4 min",
+    image: "/blog/categoria-apostilla.jpg",
     html: `
       <p>Es una de las dudas más frecuentes antes de encargar una traducción jurada: <em>"¿tengo que apostillar mi documento antes o no?"</em>. Aquí te lo explico de forma sencilla.</p>
       <h2>¿Qué es la apostilla?</h2>
@@ -105,6 +107,7 @@ export const posts = [
       "No son lo mismo. Te explico la diferencia entre traducción jurada, certificada y simple, y cuál necesitas según tu trámite.",
     date: "2026-07-08",
     readingTime: "4 min",
+    image: "/blog/categoria-consejos.jpg",
     html: `
       <p>Es habitual confundir estos términos, y elegir el tipo equivocado puede hacer que un organismo rechace tu documento. Aquí tienes la diferencia clara.</p>
       <h2>Traducción jurada</h2>
@@ -130,6 +133,7 @@ export const posts = [
       "Guía práctica sobre la homologación de títulos extranjeros en España: qué documentos necesitas traducir de forma jurada y en qué orden.",
     date: "2026-07-22",
     readingTime: "5 min",
+    image: "/blog/categoria-academico.jpg",
     html: `
       <p>Si estudiaste fuera de España y quieres que tu título tenga validez aquí (para trabajar, opositar o seguir estudiando), necesitas pasar por el proceso de <strong>homologación o equivalencia</strong> del Ministerio de Educación. La traducción jurada es un paso obligatorio dentro de ese proceso.</p>
 
@@ -173,6 +177,7 @@ export const posts = [
       "Lista de los documentos que suelen requerir traducción jurada al pedir la nacionalidad española por residencia.",
     date: "2026-08-05",
     readingTime: "5 min",
+    image: "/blog/categoria-extranjeria.jpg",
     html: `
       <p>El expediente de nacionalidad española por residencia exige aportar varios documentos del país de origen, y si no están en español, deben acompañarse de su <strong>traducción jurada</strong>. Esto es lo que normalmente se pide traducido.</p>
 
@@ -208,6 +213,7 @@ export const posts = [
       "Consejos prácticos para fotografiar o escanear tus documentos con el móvil antes de enviarlos a traducir, y evitar retrasos.",
     date: "2026-08-12",
     readingTime: "3 min",
+    image: "/blog/categoria-consejos.jpg",
     html: `
       <p>Un escaneo o foto de mala calidad es la causa más frecuente de retraso al pedir una traducción jurada: si el traductor no puede leer un dato con total claridad, tiene que pararse a confirmarlo contigo. Con estos consejos lo evitas.</p>
 
@@ -241,6 +247,7 @@ export const posts = [
       "Qué documentos necesitas traducir de forma jurada para arraigo, reagrupación familiar y otros trámites de extranjería habituales.",
     date: "2026-08-13",
     readingTime: "4 min",
+    image: "/blog/categoria-extranjeria.jpg",
     html: `
       <p>Los trámites de extranjería (arraigo, reagrupación familiar, renovaciones, tarjeta comunitaria de familiar) suelen requerir documentación del país de origen, que debe presentarse traducida de forma jurada al español.</p>
 

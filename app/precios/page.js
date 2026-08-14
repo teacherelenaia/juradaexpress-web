@@ -3,7 +3,14 @@ export const metadata = {
   title: "Precios traducción jurada – JuradaExpress (Murcia)",
   description:
     "Tarifas orientativas de traducción jurada Español ⇆ Inglés. Presupuesto cerrado al ver el documento.",
-  alternates: { canonical: "https://juradaexpress.es/precios" },
+  alternates: {
+    canonical: "https://juradaexpress.es/precios",
+    languages: {
+      es: "https://juradaexpress.es/precios",
+      en: "https://juradaexpress.es/en/precios",
+      "x-default": "https://juradaexpress.es/precios",
+    },
+  },
 };
 
 export default function Page() {

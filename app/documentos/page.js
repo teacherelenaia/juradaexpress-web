@@ -5,7 +5,14 @@ export const metadata = {
   title: "Catálogo de Documentos — Traducción Jurada en Murcia",
   description:
     "Elige tus documentos para traducción jurada en Murcia: partida de nacimiento, título universitario, antecedentes penales y más. Precios claros, presupuesto en menos de 2 horas.",
-  alternates: { canonical: "https://juradaexpress.es/documentos" },
+  alternates: {
+    canonical: "https://juradaexpress.es/documentos",
+    languages: {
+      es: "https://juradaexpress.es/documentos",
+      en: "https://juradaexpress.es/en/documentos",
+      "x-default": "https://juradaexpress.es/documentos",
+    },
+  },
 };
 
 export default function Page() {

@@ -1,23 +1,40 @@
-// app/page.js
-import TrackedLink from "./components/TrackedLink";
-import { IconCheck, IconClock, IconSend } from "./components/Icons";
+// app/en/page.js
+import TrackedLink from "../components/TrackedLink";
+import { IconCheck, IconClock, IconSend } from "../components/Icons";
 
 export const metadata = {
-  title: "Traducción Jurada en Murcia — Español ⇆ Inglés",
+  title: "Sworn Spanish Translator — Certified Translations for Spain",
   description:
-    "Traductor jurado en Murcia. Envíos a toda España y extranjero. Entrega 24/48 h. Presupuesto inmediato por email o WhatsApp.",
+    "Certified sworn translation Spanish ⇆ English for your procedures in Spain: residency, university admissions, property, marriage. 24/48h digital delivery worldwide.",
   alternates: {
-    canonical: "https://juradaexpress.es/",
+    canonical: "https://juradaexpress.es/en",
     languages: {
       es: "https://juradaexpress.es/",
       en: "https://juradaexpress.es/en",
       "x-default": "https://juradaexpress.es/",
     },
   },
+  openGraph: {
+    title: "Sworn Spanish Translator — Certified Translations for Spain",
+    description:
+      "Certified sworn translator for Spanish official procedures. 24/48h delivery. Digital delivery worldwide.",
+    url: "https://juradaexpress.es/en",
+    siteName: "JuradaExpress",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "https://juradaexpress.es/hero-internacional.jpg",
+        width: 1920,
+        height: 1080,
+        alt: "JuradaExpress — Sworn translation Spanish ⇆ English, delivered digitally worldwide",
+      },
+    ],
+  },
 };
 
 const Stars = () => (
-  <div className="flex gap-0.5 text-brand-gold" aria-label="Valoración: 5 de 5 estrellas">
+  <div className="flex gap-0.5 text-brand-gold" aria-label="Rating: 5 out of 5 stars">
     {Array.from({ length: 5 }).map((_, i) => (
       <svg
         key={i}
@@ -60,62 +77,63 @@ export default function Page() {
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div>
             <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-              Traducción <span className="text-brand-navy">Jurada</span> en
-              Murcia (Español ⇆ Inglés)
+              Sworn <span className="text-brand-navy">Spanish</span>{" "}
+              Translation for Your Procedures in Spain
             </h1>
             <p className="mt-5 text-xl text-slate-600">
-              Envíos a toda España y al extranjero · Entrega 24/48 h ·
-              Presupuesto inmediato.
+              Official documents translated and certified for residency,
+              university admissions, property purchases, marriage
+              registration and more — accepted by Spanish authorities.
             </p>
             <p className="mt-3 text-base text-slate-600">
-              Con sede en Murcia, trabajo con clientes de toda España y de
-              cualquier país — todo el proceso es 100% digital, así que no
-              importa dónde estés.
+              Based in Murcia, Spain, I work with clients across the country
+              and around the world — the entire process is 100% digital, so
+              it doesn't matter where you are.
             </p>
 
-            {/* Badges / Sellos */}
+            {/* Badges */}
             <ul className="mt-6 flex flex-wrap gap-3 text-sm text-slate-700">
               <li className="inline-flex items-center gap-2 rounded-full bg-brand-navy-50 px-3 py-1 ring-1 ring-brand-navy-100">
                 <IconCheck className="h-4 w-4 text-brand-gold-600" />
-                Válida ante organismos oficiales
+                Accepted by Spanish official bodies
               </li>
               <li className="inline-flex items-center gap-2 rounded-full bg-brand-navy-50 px-3 py-1 ring-1 ring-brand-navy-100">
                 <IconClock className="h-4 w-4 text-brand-gold-600" />
-                Entrega 24/48 h
+                24/48h delivery
               </li>
               <li className="inline-flex items-center gap-2 rounded-full bg-brand-navy-50 px-3 py-1 ring-1 ring-brand-navy-100">
                 <IconSend className="h-4 w-4 text-brand-gold-600" />
-                Envíos a España y extranjero
+                Digital delivery worldwide
               </li>
             </ul>
 
             <div className="mt-6 flex flex-wrap gap-3">
               <TrackedLink
-                label="hero_presupuesto"
-                href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
+                label="hero_quote_en"
+                href="mailto:info@juradaexpress.es?subject=Sworn%20translation%20quote%20request"
                 className="rounded-xl bg-brand-navy px-5 py-3 text-white hover:bg-brand-navy-700"
               >
-                Pedir presupuesto
+                Request a quote
               </TrackedLink>
               <TrackedLink
-                label="hero_precios"
-                href="/precios"
+                label="hero_pricing_en"
+                href="/en/precios"
                 className="rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
               >
-                Ver precios
+                See pricing
               </TrackedLink>
               <TrackedLink
-                label="hero_whatsapp"
-                href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
+                label="hero_whatsapp_en"
+                href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
               >
-                WhatsApp inmediato
+                WhatsApp
               </TrackedLink>
             </div>
             <p className="mt-3 text-sm text-slate-500">
-              * Proyectos &gt;20 folios: acordamos calendario y faseado.
+              * Projects over 20 pages: we agree on a delivery schedule together.
             </p>
           </div>
 
@@ -123,7 +141,7 @@ export default function Page() {
             <figure>
               <img
                 src="/hero-internacional.jpg"
-                alt="JuradaExpress — Traducción jurada Español ⇆ Inglés, entrega digital en toda España y en el extranjero"
+                alt="JuradaExpress — Sworn translation Spanish ⇆ English, delivered digitally worldwide"
                 className="max-h-80 rounded-2xl shadow object-cover"
               />
             </figure>
@@ -131,29 +149,30 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Divider wave */}
       <Wave className="h-8 w-full text-slate-50" />
 
       {/* SERVICIOS */}
       <section className="bg-slate-50">
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <SectionKicker />
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Documentos más habituales</h2>
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            Most commonly translated documents
+          </h2>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {[
               {
-                t: "Certificados oficiales",
-                d: "Nacimiento, matrimonio, penales, padrón, notaría…",
+                t: "Official certificates",
+                d: "Birth, marriage, criminal record, residency, notarial certificates…",
                 img: "/docs-real.jpg",
               },
               {
-                t: "Académicos",
-                d: "Títulos, expedientes, planes de estudio, cartas académicas.",
+                t: "Academic",
+                d: "Degrees, transcripts, study plans, academic reference letters.",
                 img: "/academicos.jpg",
               },
               {
-                t: "Laborales y mercantiles",
-                d: "Contratos, poderes, escrituras, estatutos.",
+                t: "Business & legal",
+                d: "Contracts, powers of attorney, deeds, company bylaws.",
                 img: "/mercantiles.jpg",
               },
             ].map((i) => (
@@ -161,11 +180,7 @@ export default function Page() {
                 key={i.t}
                 className="overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 hover:shadow"
               >
-                <img
-                  src={i.img}
-                  alt={i.t}
-                  className="h-44 w-full object-cover"
-                />
+                <img src={i.img} alt={i.t} className="h-44 w-full object-cover" />
                 <div className="p-5">
                   <h3 className="font-semibold">{i.t}</h3>
                   <p className="mt-2 text-sm text-slate-600">{i.d}</p>
@@ -176,24 +191,24 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Divider wave (flip) */}
       <Wave className="h-8 w-full text-slate-50" flip />
 
-      {/* ACEPTADO POR… */}
+      {/* ACEPTADO POR */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
         <SectionKicker />
-        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Aceptado por…</h2>
+        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Accepted by…</h2>
         <p className="mt-3 max-w-3xl text-sm text-slate-600">
-          Traducciones juradas firmadas y selladas por traductor jurado
-          válidas ante organismos oficiales (p.ej., Ministerios, Universidades,
-          Consulados, Registros Civiles, Notarías, Ayuntamientos, etc.).
+          Sworn translations signed and stamped by an officially appointed
+          sworn translator, legally valid before Spanish official bodies
+          (e.g. Ministries, Universities, Immigration Offices, Civil
+          Registries, Notaries, Town Halls, Spanish Consulates abroad, etc.).
         </p>
         <ul className="mt-5 flex flex-wrap gap-2 text-sm text-slate-700">
           {[
-            "Ministerios y Ayuntamientos",
-            "Universidades y centros educativos",
-            "Registros civiles y notarías",
-            "Consulados y embajadas",
+            "Ministries and Town Halls",
+            "Universities and academic institutions",
+            "Civil registries and notaries",
+            "Consulates and embassies",
           ].map((txt) => (
             <li
               key={txt}
@@ -206,24 +221,22 @@ export default function Page() {
         </ul>
       </section>
 
-      {/* Divider wave */}
       <Wave className="h-8 w-full text-brand-navy-50" />
 
       {/* VENTAJAS */}
       <section className="bg-brand-navy-50">
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <SectionKicker />
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Por qué elegir JuradaExpress</h2>
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            Why choose JuradaExpress
+          </h2>
           <ul className="mt-8 grid gap-6 md:grid-cols-3">
             {[
-              "Traducción jurada válida ante organismos oficiales.",
-              "Entrega rápida 24/48 h. Envíos a toda España y extranjero.",
-              "Atención directa por email y WhatsApp. Presupuesto inmediato.",
+              "Sworn translation, legally valid before Spanish official bodies.",
+              "Fast 24/48h delivery. Digital delivery anywhere in the world.",
+              "Direct communication by email and WhatsApp. Instant quote.",
             ].map((li) => (
-              <li
-                key={li}
-                className="rounded-2xl bg-white p-5 ring-1 ring-brand-navy-100"
-              >
+              <li key={li} className="rounded-2xl bg-white p-5 ring-1 ring-brand-navy-100">
                 {li}
               </li>
             ))}
@@ -231,24 +244,23 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Divider wave (flip) */}
       <Wave className="h-8 w-full text-brand-navy-50" flip />
 
       {/* PROCESO */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
         <SectionKicker />
-        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">¿Cómo trabajamos?</h2>
+        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">How it works</h2>
         <p className="mt-3 max-w-3xl text-sm text-slate-600">
-          Todo el proceso es 100% digital: da igual si estás en Murcia, en
-          cualquier otro punto de España o en el extranjero — el envío, el
-          presupuesto y la entrega funcionan igual.
+          The whole process is 100% digital: whether you're in Spain or
+          anywhere else in the world, sending your documents, getting your
+          quote and receiving your translation works exactly the same way.
         </p>
         <div className="mt-8 grid gap-6 md:grid-cols-4">
           {[
-            { t: "1. Envío", d: "Envíanos el documento escaneado por email o WhatsApp." },
-            { t: "2. Presupuesto", d: "Te damos precio cerrado y plazo real." },
-            { t: "3. Traducción jurada", d: "Firmada y sellada por traductor jurado." },
-            { t: "4. Entrega 24/48 h", d: "Digital y/o papel, con envío a tu dirección." },
+            { t: "1. Send", d: "Send us a scan or photo of your document by email or WhatsApp." },
+            { t: "2. Quote", d: "We give you a fixed price and a real delivery time." },
+            { t: "3. Sworn translation", d: "Signed and stamped by an officially appointed sworn translator." },
+            { t: "4. 24/48h delivery", d: "Digital and/or paper copy, shipped to your address." },
           ].map((i) => (
             <div key={i.t} className="rounded-2xl bg-white p-5 ring-1 ring-slate-200">
               <h3 className="font-semibold">{i.t}</h3>
@@ -258,7 +270,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Divider wave */}
       <Wave className="h-8 w-full text-slate-50" />
 
       {/* SOBRE MÍ */}
@@ -269,42 +280,38 @@ export default function Page() {
           </div>
           <div>
             <SectionKicker />
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Sobre mí</h2>
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">About me</h2>
             <p className="mt-4 max-w-2xl text-lg text-slate-600">
-              Soy <strong className="text-brand-navy">Elena Peñaranda Ortega</strong>,
-              Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio
-              de Asuntos Exteriores, Unión Europea y Cooperación (Nº de
-              acreditación: 7310). Cada traducción jurada la realizo, firmo y
-              sello personalmente, garantizando su validez ante cualquier
-              organismo oficial.
+              I'm <strong className="text-brand-navy">Elena Peñaranda Ortega</strong>,
+              a Sworn Translator-Interpreter for English appointed by the
+              Spanish Ministry of Foreign Affairs, European Union and
+              Cooperation (Accreditation No. 7310). I personally translate,
+              sign and stamp every sworn translation, guaranteeing its
+              validity before any official body in Spain.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Divider wave (flip) */}
       <Wave className="h-8 w-full text-slate-50" flip />
 
       {/* OPINIONES */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20 bg-slate-50">
         <SectionKicker />
-        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Opiniones</h2>
+        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Reviews</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {[
             {
               n: "María G.",
-              t: "Rápidos y profesionales. Me enviaron versión digital y luego en papel.",
+              t: "Fast and professional. They sent me the digital version and then the paper copy.",
             },
             {
               n: "Javier R.",
-              t: "Muy buena comunicación y precio correcto. Repetiré si lo necesito.",
+              t: "Great communication and fair price. I'll use them again if I need to.",
             },
-            { n: "Elisa P.", t: "Necesitaba urgencia y cumplieron el plazo sin problema." },
+            { n: "Elisa P.", t: "I needed it urgently and they met the deadline without any issue." },
           ].map((op) => (
-            <blockquote
-              key={op.n}
-              className="rounded-2xl bg-white p-5 ring-1 ring-slate-200"
-            >
+            <blockquote key={op.n} className="rounded-2xl bg-white p-5 ring-1 ring-slate-200">
               <Stars />
               <p className="mt-3">“{op.t}”</p>
               <footer className="mt-3 text-sm text-slate-600">— {op.n}</footer>
@@ -312,14 +319,14 @@ export default function Page() {
           ))}
         </div>
         <p className="mt-6 text-sm text-slate-500">
-          Reseñas verificadas de clientes ·{" "}
+          Verified customer reviews ·{" "}
           <a
             href="https://g.page/r/PLACEHOLDER"
             target="_blank"
             rel="noopener noreferrer"
             className="underline hover:text-brand-gold-700"
           >
-            Ver todas en Google Business
+            See all on Google Business
           </a>
         </p>
       </section>
@@ -327,24 +334,24 @@ export default function Page() {
       {/* CTA FINAL */}
       <section className="mx-auto max-w-6xl px-4 pb-16 md:pb-20">
         <div className="rounded-2xl bg-brand-navy p-8 text-white md:p-12">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">¿Empezamos?</h2>
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Shall we get started?</h2>
           <p className="mt-2 text-brand-navy-100">
-            Envíanos el documento y te respondemos con presupuesto y plazo.
+            Send us your document and we'll reply with a quote and delivery time.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <TrackedLink
-              label="cta_presupuesto_final"
-              href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
+              label="cta_quote_final_en"
+              href="mailto:info@juradaexpress.es?subject=Sworn%20translation%20quote%20request"
               className="rounded-xl bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
             >
-              Pedir presupuesto
+              Request a quote
             </TrackedLink>
             <TrackedLink
-              label="cta_precios_final"
-              href="/precios"
+              label="cta_pricing_final_en"
+              href="/en/precios"
               className="rounded-xl border border-brand-gold-300/60 px-5 py-3 text-white hover:bg-white/10"
             >
-              Ver precios
+              See pricing
             </TrackedLink>
           </div>
         </div>
@@ -353,20 +360,20 @@ export default function Page() {
       {/* FAQ + JSON-LD */}
       <section className="mx-auto max-w-6xl px-4 pb-20">
         <SectionKicker />
-        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Preguntas frecuentes</h2>
+        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Frequently asked questions</h2>
         <div className="mt-8 divide-y rounded-2xl ring-1 ring-slate-200 bg-white">
           {[
             {
-              q: "¿La traducción jurada es válida en todo el territorio?",
-              a: "Sí. Las traducciones juradas firmadas y selladas por traductor jurado son válidas ante organismos oficiales.",
+              q: "Is a sworn translation valid throughout Spain?",
+              a: "Yes. Sworn translations signed and stamped by an officially appointed sworn translator are valid before official bodies anywhere in Spain.",
             },
             {
-              q: "¿Entregáis en papel y digital?",
-              a: "Sí. Entregamos PDF firmado digitalmente y, si lo necesitas, envío físico a tu dirección.",
+              q: "Do you deliver on paper and digitally?",
+              a: "Yes. We deliver a digitally signed PDF and, if you need it, a physical copy shipped to your address.",
             },
             {
-              q: "¿Puedo tener la traducción en 24/48 h?",
-              a: "Para documentos habituales, sí. Si son más de 20 folios, acordamos un calendario específico.",
+              q: "Can I get my translation in 24/48h?",
+              a: "For standard documents, yes. For documents over 20 pages, we agree on a specific delivery schedule.",
             },
           ].map((f, idx) => (
             <details key={idx} className="p-5">
@@ -385,29 +392,29 @@ export default function Page() {
               mainEntity: [
                 {
                   "@type": "Question",
-                  name: "¿La traducción jurada es válida en todo el territorio?",
+                  name: "Is a sworn translation valid throughout Spain?",
                   acceptedAnswer: {
                     "@type": "Answer",
                     text:
-                      "Sí. Las traducciones juradas firmadas y selladas por traductor jurado son válidas ante organismos oficiales.",
+                      "Yes. Sworn translations signed and stamped by an officially appointed sworn translator are valid before official bodies anywhere in Spain.",
                   },
                 },
                 {
                   "@type": "Question",
-                  name: "¿Entregáis en papel y digital?",
+                  name: "Do you deliver on paper and digitally?",
                   acceptedAnswer: {
                     "@type": "Answer",
                     text:
-                      "Sí. Entregamos PDF firmado digitalmente y, si lo necesitas, envío físico a tu dirección.",
+                      "Yes. We deliver a digitally signed PDF and, if you need it, a physical copy shipped to your address.",
                   },
                 },
                 {
                   "@type": "Question",
-                  name: "¿Puedo tener la traducción en 24/48 h?",
+                  name: "Can I get my translation in 24/48h?",
                   acceptedAnswer: {
                     "@type": "Answer",
                     text:
-                      "Para documentos habituales, sí. Si son más de 20 folios, acordamos un calendario específico.",
+                      "For standard documents, yes. For documents over 20 pages, we agree on a specific delivery schedule.",
                   },
                 },
               ],
@@ -418,4 +425,3 @@ export default function Page() {
     </main>
   );
 }
-
