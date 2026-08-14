@@ -138,8 +138,25 @@ export default function Page() {
       {/* SERVICIOS */}
       <section className="bg-slate-50">
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <SectionKicker />
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Documentos más habituales</h2>
+          <div className="grid items-center gap-8 md:grid-cols-2">
+            <div>
+              <SectionKicker />
+              <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Documentos más habituales</h2>
+              <p className="mt-3 max-w-md text-sm text-slate-600">
+                Cada documento tiene sus propios requisitos de traducción:
+                estos son los que traducimos con más frecuencia.
+              </p>
+            </div>
+            <div className="relative h-56 w-full overflow-hidden rounded-2xl shadow md:h-64">
+              <Image
+                src="/fotos/foto-documentos.jpg"
+                alt="Pasaporte y documentos de viaje sobre un portátil — traducción jurada de documentos"
+                fill
+                sizes="(min-width: 768px) 480px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {[
               {
@@ -287,13 +304,26 @@ export default function Page() {
 
       {/* PROCESO */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-        <SectionKicker />
-        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">¿Cómo trabajamos?</h2>
-        <p className="mt-3 max-w-3xl text-sm text-slate-600">
-          Todo el proceso es 100% digital: da igual si estás en Murcia, en
-          cualquier otro punto de España o en el extranjero — el envío, el
-          presupuesto y la entrega funcionan igual.
-        </p>
+        <div className="grid items-center gap-8 md:grid-cols-2">
+          <div>
+            <SectionKicker />
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">¿Cómo trabajamos?</h2>
+            <p className="mt-3 max-w-md text-sm text-slate-600">
+              Todo el proceso es 100% digital: da igual si estás en Murcia, en
+              cualquier otro punto de España o en el extranjero — el envío, el
+              presupuesto y la entrega funcionan igual.
+            </p>
+          </div>
+          <div className="relative h-56 w-full overflow-hidden rounded-2xl shadow md:h-64">
+            <Image
+              src="/fotos/foto-online.jpg"
+              alt="Portátil abierto sobre una mesa — todo el proceso se gestiona online"
+              fill
+              sizes="(min-width: 768px) 480px, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
         <div className="mt-8 grid gap-6 md:grid-cols-4">
           {[
             { t: "1. Envío", d: "Envíanos el documento escaneado por email o WhatsApp." },
@@ -378,25 +408,38 @@ export default function Page() {
       {/* CTA FINAL */}
       <section className="mx-auto max-w-6xl px-4 pb-16 md:pb-20">
         <div className="rounded-2xl bg-brand-navy p-8 text-white md:p-12">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">¿Empezamos?</h2>
-          <p className="mt-2 text-brand-navy-100">
-            Envíanos el documento y te respondemos con presupuesto y plazo.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <TrackedLink
-              label="cta_presupuesto_final"
-              href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
-              className="rounded-xl bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
-            >
-              Pedir presupuesto
-            </TrackedLink>
-            <TrackedLink
-              label="cta_precios_final"
-              href="/precios"
-              className="rounded-xl border border-brand-gold-300/60 px-5 py-3 text-white hover:bg-white/10"
-            >
-              Ver precios
-            </TrackedLink>
+          <div className="grid items-center gap-8 md:grid-cols-[1.2fr,0.8fr]">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight md:text-4xl">¿Empezamos?</h2>
+              <p className="mt-2 text-brand-navy-100">
+                Envíanos el documento y te respondemos con presupuesto y plazo.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <TrackedLink
+                  label="cta_presupuesto_final"
+                  href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
+                  className="rounded-xl bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
+                >
+                  Pedir presupuesto
+                </TrackedLink>
+                <TrackedLink
+                  label="cta_precios_final"
+                  href="/precios"
+                  className="rounded-xl border border-brand-gold-300/60 px-5 py-3 text-white hover:bg-white/10"
+                >
+                  Ver precios
+                </TrackedLink>
+              </div>
+            </div>
+            <div className="relative h-48 w-full overflow-hidden rounded-2xl shadow-lg md:h-56">
+              <Image
+                src="/fotos/foto-firma.jpg"
+                alt="Firma de un documento con pluma — traducción jurada firmada y sellada"
+                fill
+                sizes="(min-width: 768px) 360px, 100vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
