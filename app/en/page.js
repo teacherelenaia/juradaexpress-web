@@ -1,4 +1,5 @@
 // app/en/page.js
+import Image from "next/image";
 import TrackedLink from "../components/TrackedLink";
 import { IconCheck, IconClock, IconSend } from "../components/Icons";
 
@@ -154,10 +155,27 @@ export default function Page() {
       {/* SERVICIOS */}
       <section className="bg-slate-50">
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <SectionKicker />
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Most commonly translated documents
-          </h2>
+          <div className="grid items-center gap-8 md:grid-cols-2">
+            <div>
+              <SectionKicker />
+              <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+                Most commonly translated documents
+              </h2>
+              <p className="mt-3 max-w-md text-sm text-slate-600">
+                Every document has its own translation requirements — here
+                are the ones we translate most often.
+              </p>
+            </div>
+            <div className="relative h-56 w-full overflow-hidden rounded-2xl shadow md:h-64">
+              <Image
+                src="/fotos/foto-documentos.jpg"
+                alt="Passport and travel documents on a laptop — sworn document translation"
+                fill
+                sizes="(min-width: 768px) 480px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {[
               {
@@ -192,6 +210,55 @@ export default function Page() {
       </section>
 
       <Wave className="h-8 w-full text-slate-50" flip />
+
+      {/* UK / BREXIT */}
+      <Wave className="h-8 w-full text-brand-navy-50" />
+      <section className="bg-brand-navy-50">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <div className="grid items-center gap-8 md:grid-cols-2">
+            <div>
+              <SectionKicker />
+              <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+                British and living in Spain?
+              </h2>
+              <p className="mt-4 max-w-xl text-slate-600">
+                I'll help you get your documents sworn-translated for your
+                NIE, residency card (TIE), padrón registration, buying a
+                property, or any other paperwork since Brexit. Everything
+                done properly and on time, so you can focus on settling in.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <TrackedLink
+                  label="uk_quote_en"
+                  href="mailto:info@juradaexpress.es?subject=Sworn%20translation%20quote%20-%20UK"
+                  className="rounded-xl bg-brand-navy px-5 py-3 text-white hover:bg-brand-navy-700"
+                >
+                  Request a quote
+                </TrackedLink>
+                <TrackedLink
+                  label="uk_whatsapp_en"
+                  href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27m%20British%20and%20need%20a%20sworn%20translation%20for%20a%20procedure%20in%20Spain"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
+                >
+                  WhatsApp
+                </TrackedLink>
+              </div>
+            </div>
+            <div className="relative h-56 w-full overflow-hidden rounded-2xl shadow md:h-72">
+              <Image
+                src="/fotos/foto-bandera-uk.jpg"
+                alt="Union Jack flag — sworn translation for British nationals living in Spain"
+                fill
+                sizes="(min-width: 768px) 480px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <Wave className="h-8 w-full text-brand-navy-50" flip />
 
       {/* ACEPTADO POR */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
@@ -248,13 +315,27 @@ export default function Page() {
 
       {/* PROCESO */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-        <SectionKicker />
-        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">How it works</h2>
-        <p className="mt-3 max-w-3xl text-sm text-slate-600">
-          The whole process is 100% digital: whether you're in Spain or
-          anywhere else in the world, sending your documents, getting your
-          quote and receiving your translation works exactly the same way.
-        </p>
+        <div className="grid items-center gap-8 md:grid-cols-2">
+          <div>
+            <SectionKicker />
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">How it works</h2>
+            <p className="mt-3 max-w-md text-sm text-slate-600">
+              The whole process is 100% digital: whether you're in Spain or
+              anywhere else in the world, sending your documents, getting
+              your quote and receiving your translation works exactly the
+              same way.
+            </p>
+          </div>
+          <div className="relative h-56 w-full overflow-hidden rounded-2xl shadow md:h-64">
+            <Image
+              src="/fotos/foto-online.jpg"
+              alt="Open laptop on a desk — the entire process is handled online"
+              fill
+              sizes="(min-width: 768px) 480px, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
         <div className="mt-8 grid gap-6 md:grid-cols-4">
           {[
             { t: "1. Send", d: "Send us a scan or photo of your document by email or WhatsApp." },
@@ -334,25 +415,38 @@ export default function Page() {
       {/* CTA FINAL */}
       <section className="mx-auto max-w-6xl px-4 pb-16 md:pb-20">
         <div className="rounded-2xl bg-brand-navy p-8 text-white md:p-12">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Shall we get started?</h2>
-          <p className="mt-2 text-brand-navy-100">
-            Send us your document and we'll reply with a quote and delivery time.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <TrackedLink
-              label="cta_quote_final_en"
-              href="mailto:info@juradaexpress.es?subject=Sworn%20translation%20quote%20request"
-              className="rounded-xl bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
-            >
-              Request a quote
-            </TrackedLink>
-            <TrackedLink
-              label="cta_pricing_final_en"
-              href="/en/precios"
-              className="rounded-xl border border-brand-gold-300/60 px-5 py-3 text-white hover:bg-white/10"
-            >
-              See pricing
-            </TrackedLink>
+          <div className="grid items-center gap-8 md:grid-cols-[1.2fr,0.8fr]">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Shall we get started?</h2>
+              <p className="mt-2 text-brand-navy-100">
+                Send us your document and we'll reply with a quote and delivery time.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <TrackedLink
+                  label="cta_quote_final_en"
+                  href="mailto:info@juradaexpress.es?subject=Sworn%20translation%20quote%20request"
+                  className="rounded-xl bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
+                >
+                  Request a quote
+                </TrackedLink>
+                <TrackedLink
+                  label="cta_pricing_final_en"
+                  href="/en/precios"
+                  className="rounded-xl border border-brand-gold-300/60 px-5 py-3 text-white hover:bg-white/10"
+                >
+                  See pricing
+                </TrackedLink>
+              </div>
+            </div>
+            <div className="relative h-48 w-full overflow-hidden rounded-2xl shadow-lg md:h-56">
+              <Image
+                src="/fotos/foto-firma.jpg"
+                alt="Signing a document with a pen — sworn translation, signed and stamped"
+                fill
+                sizes="(min-width: 768px) 360px, 100vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>

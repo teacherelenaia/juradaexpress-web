@@ -1,8 +1,8 @@
 // app/traduccion-jurada-titulo-universitario/page.js
 export const metadata = {
-  title: "Traducción Jurada de Título Universitario – Murcia",
+  title: "Traducción Jurada de Título Universitario – Español-Inglés",
   description:
-    "Traducción jurada de título universitario y expediente académico en Murcia. Válida para universidades y organismos oficiales. Entrega 24/48 h.",
+    "Traducción jurada de título universitario y expediente académico Español ⇆ Inglés, para trámites en España y Reino Unido. Válida para universidades y organismos oficiales. Entrega 24/48 h.",
   alternates: {
     canonical:
       "https://juradaexpress.es/traduccion-jurada-titulo-universitario",

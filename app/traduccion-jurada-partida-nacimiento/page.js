@@ -1,8 +1,8 @@
 // app/traduccion-jurada-partida-nacimiento/page.js
 export const metadata = {
-  title: "Traducción Jurada de Partida de Nacimiento – Murcia",
+  title: "Traducción Jurada de Partida de Nacimiento – Español-Inglés",
   description:
-    "Traducción jurada de partida/certificado de nacimiento en Murcia. Válida ante organismos oficiales. Entrega 24/48 h. Presupuesto inmediato.",
+    "Traducción jurada de partida/certificado de nacimiento Español ⇆ Inglés, para trámites en España y Reino Unido. Válida ante organismos oficiales. Entrega 24/48 h. Presupuesto inmediato.",
   alternates: {
     canonical: "https://juradaexpress.es/traduccion-jurada-partida-nacimiento",
   },
