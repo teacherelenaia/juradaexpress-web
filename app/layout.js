@@ -7,16 +7,16 @@ import LanguageSwitcher from "./components/LanguageSwitcher";
 export const metadata = {
   metadataBase: new URL("https://juradaexpress.es"),
   title: {
-    default: "JuradaExpress — Traducción Jurada en Murcia",
+    default: "JuradaExpress — Traductor Jurado Español-Inglés | España y Reino Unido",
     template: "%s | JuradaExpress",
   },
   description:
-    "Traductor jurado en Murcia (Español ⇆ Inglés). Envíos a toda España y al extranjero. Entrega 24/48 h. Presupuesto inmediato por email o WhatsApp.",
+    "Traductor jurado Español ⇆ Inglés. Trabajo con clientes de toda España, Reino Unido y el extranjero. Envío 100% digital, entrega 24/48 h. Presupuesto inmediato por email o WhatsApp.",
   alternates: { canonical: "https://juradaexpress.es/" },
   openGraph: {
-    title: "JuradaExpress — Traducción Jurada en Murcia",
+    title: "JuradaExpress — Traductor Jurado Español-Inglés | España y Reino Unido",
     description:
-      "Traducción jurada válida ante organismos oficiales. Entrega 24/48 h. Envíos a toda España y extranjero.",
+      "Traducción jurada válida ante organismos oficiales. Entrega 24/48 h. Trabajo con clientes de toda España, Reino Unido y el extranjero.",
     url: "https://juradaexpress.es/",
     siteName: "JuradaExpress",
     type: "website",
@@ -32,9 +32,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "JuradaExpress — Traducción Jurada en Murcia",
+    title: "JuradaExpress — Traductor Jurado Español-Inglés | España y Reino Unido",
     description:
-      "Traducción jurada (Español ⇆ Inglés). Entrega 24/48 h. Envíos a toda España y extranjero.",
+      "Traducción jurada (Español ⇆ Inglés). Entrega 24/48 h. Trabajo con clientes de toda España, Reino Unido y el extranjero.",
     images: ["https://juradaexpress.es/hero-internacional.jpg"],
   },
 };

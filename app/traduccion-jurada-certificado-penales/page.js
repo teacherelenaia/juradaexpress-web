@@ -1,8 +1,8 @@
 // app/traduccion-jurada-certificado-penales/page.js
 export const metadata = {
-  title: "Traducción Jurada de Certificado de Penales – Murcia",
+  title: "Traducción Jurada de Certificado de Penales – Español-Inglés",
   description:
-    "Traducción jurada de certificado de antecedentes penales en Murcia. Válida ante organismos oficiales y consulados. Entrega 24/48 h.",
+    "Traducción jurada de certificado de antecedentes penales Español ⇆ Inglés, para trámites en España y Reino Unido. Válida ante organismos oficiales y consulados. Entrega 24/48 h.",
   alternates: {
     canonical:
       "https://juradaexpress.es/traduccion-jurada-certificado-penales",
