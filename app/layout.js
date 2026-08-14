@@ -22,10 +22,10 @@ export const metadata = {
     locale: "es_ES",
     images: [
       {
-        url: "https://juradaexpress.es/hero-murcia.jpg",
-        width: 1200,
-        height: 800,
-        alt: "Catedral de Murcia — JuradaExpress",
+        url: "https://juradaexpress.es/hero-internacional.jpg",
+        width: 1920,
+        height: 1080,
+        alt: "JuradaExpress — Traducción jurada Español ⇆ Inglés, envío digital a toda España y al extranjero",
       },
     ],
   },
@@ -34,7 +34,7 @@ export const metadata = {
     title: "JuradaExpress — Traducción Jurada en Murcia",
     description:
       "Traducción jurada (Español ⇆ Inglés). Entrega 24/48 h. Envíos a toda España y extranjero.",
-    images: ["https://juradaexpress.es/hero-murcia.jpg"],
+    images: ["https://juradaexpress.es/hero-internacional.jpg"],
   },
 };
 
@@ -124,8 +124,9 @@ export default function RootLayout({ children }) {
                 <span>JuradaExpress</span>
               </div>
               <p className="max-w-sm text-sm text-slate-600">
-                Traducciones juradas Español ⇆ Inglés en Murcia. Envíos a toda
-                España y al extranjero. Entrega 24/48 h.
+                Traducciones juradas Español ⇆ Inglés. Con sede en Murcia,
+                trabajo con clientes de toda España y de cualquier país —
+                proceso 100% digital. Entrega 24/48 h.
               </p>
             </div>
 

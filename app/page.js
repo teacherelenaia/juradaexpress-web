@@ -60,6 +60,11 @@ export default function Page() {
               Envíos a toda España y al extranjero · Entrega 24/48 h ·
               Presupuesto inmediato.
             </p>
+            <p className="mt-3 text-base text-slate-600">
+              Con sede en Murcia, trabajo con clientes de toda España y de
+              cualquier país — todo el proceso es 100% digital, así que no
+              importa dónde estés.
+            </p>
 
             {/* Badges / Sellos */}
             <ul className="mt-6 flex flex-wrap gap-3 text-sm text-slate-700">
@@ -110,13 +115,10 @@ export default function Page() {
           <div className="flex justify-center">
             <figure>
               <img
-                src="/hero-murcia.jpg"
-                alt="Catedral de Murcia — JuradaExpress"
+                src="/hero-internacional.jpg"
+                alt="JuradaExpress — Traducción jurada Español ⇆ Inglés, entrega digital en toda España y en el extranjero"
                 className="max-h-80 rounded-2xl shadow object-cover"
               />
-              <figcaption className="mt-2 text-center text-xs text-slate-500">
-                Catedral de Murcia · JuradaExpress
-              </figcaption>
             </figure>
           </div>
         </div>
@@ -229,6 +231,11 @@ export default function Page() {
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
         <SectionKicker />
         <h2 className="text-3xl font-bold tracking-tight md:text-4xl">¿Cómo trabajamos?</h2>
+        <p className="mt-3 max-w-3xl text-sm text-slate-600">
+          Todo el proceso es 100% digital: da igual si estás en Murcia, en
+          cualquier otro punto de España o en el extranjero — el envío, el
+          presupuesto y la entrega funcionan igual.
+        </p>
         <div className="mt-8 grid gap-6 md:grid-cols-4">
           {[
             { t: "1. Envío", d: "Envíanos el documento escaneado por email o WhatsApp." },
