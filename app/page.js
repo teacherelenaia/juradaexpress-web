@@ -4,7 +4,7 @@ import TrackedLink from "./components/TrackedLink";
 import { IconCheck, IconClock, IconSend } from "./components/Icons";
 
 export const metadata = {
-  title: "Traductor Jurado en Murcia | Traducción Jurada para toda España",
+  title: "Traducción Jurada en Murcia | Traductor Jurado en Murcia",
   description:
     "¿Busca un traductor jurado en murcia? Ofrecemos la mejor traducción jurada en murcia. Contacte con nuestro traductor jurado para sus documentos oficiales.",
   alternates: {
