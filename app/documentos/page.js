@@ -59,6 +59,11 @@ export default function Page() {
               Validez ante organismos oficiales, universidades y consulados
             </a>
           </li>
+          <li>
+            <a href="/traduccion-jurada-certificado-matrimonio" className="text-brand-navy underline hover:text-brand-gold-700">
+              Traducción jurada de certificado de matrimonio
+            </a>
+          </li>
         </ul>
       </div>
     </main>
