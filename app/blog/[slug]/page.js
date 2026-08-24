@@ -36,7 +36,7 @@ export default function BlogPostPage({ params }) {
       {post.image && (
         <img
           src={post.image}
-          alt=""
+          alt={post.alt || post.title}
           className="mt-6 h-64 w-full rounded-2xl object-cover md:h-80"
         />
       )}

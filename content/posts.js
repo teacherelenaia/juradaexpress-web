@@ -8,6 +8,7 @@ export const posts = [
     date: "2025-10-22",
     readingTime: "4 min",
     image: "/blog/real-consejos.jpg",
+    alt: "Documentos y bolígrafo listos para pedir presupuesto de traducción jurada",
     // IMPORTANTE: El contenido en HTML va entre backticks ( ` ... ` )
     html: `
       <p>Para preparar un <strong>presupuesto cerrado</strong>, envíanos:</p>
@@ -40,6 +41,7 @@ export const posts = [
     date: "2026-06-10",
     readingTime: "5 min",
     image: "/blog/real-academico.jpg",
+    alt: "Título universitario y expediente académico sobre una mesa",
     html: `
       <p>Si necesitas presentar tu título universitario ante una universidad extranjera, un colegio profesional o un organismo de homologación, necesitarás una <strong>traducción jurada</strong>, no una traducción normal. Esto es lo que debes saber antes de pedir presupuesto.</p>
       <h2>¿De qué depende el precio?</h2>
@@ -71,6 +73,7 @@ export const posts = [
     date: "2026-06-24",
     readingTime: "4 min",
     image: "/blog/real-apostilla.jpg",
+    alt: "Sello de apostilla de La Haya sobre un documento oficial",
     html: `
       <p>Es una de las dudas más frecuentes antes de encargar una traducción jurada: <em>"¿tengo que apostillar mi documento antes o no?"</em>. Aquí te lo explico de forma sencilla.</p>
       <h2>¿Qué es la apostilla?</h2>
@@ -108,6 +111,7 @@ export const posts = [
     date: "2026-07-08",
     readingTime: "4 min",
     image: "/blog/real-consejos.jpg",
+    alt: "Documentos legales sobre una mesa de trabajo",
     html: `
       <p>Es habitual confundir estos términos, y elegir el tipo equivocado puede hacer que un organismo rechace tu documento. Aquí tienes la diferencia clara.</p>
       <h2>Traducción jurada</h2>
@@ -134,6 +138,7 @@ export const posts = [
     date: "2026-07-22",
     readingTime: "5 min",
     image: "/blog/real-academico.jpg",
+    alt: "Título universitario extranjero listo para homologar en España",
     html: `
       <p>Si estudiaste fuera de España y quieres que tu título tenga validez aquí (para trabajar, opositar o seguir estudiando), necesitas pasar por el proceso de <strong>homologación o equivalencia</strong> del Ministerio de Educación. La traducción jurada es un paso obligatorio dentro de ese proceso.</p>
 
@@ -178,6 +183,7 @@ export const posts = [
     date: "2026-08-05",
     readingTime: "5 min",
     image: "/blog/real-extranjeria.jpg",
+    alt: "Pasaporte y documentos para trámites de nacionalidad española",
     html: `
       <p>El expediente de nacionalidad española por residencia exige aportar varios documentos del país de origen, y si no están en español, deben acompañarse de su <strong>traducción jurada</strong>. Esto es lo que normalmente se pide traducido.</p>
 
@@ -214,6 +220,7 @@ export const posts = [
     date: "2026-08-12",
     readingTime: "3 min",
     image: "/blog/real-consejos.jpg",
+    alt: "Escaneando un documento oficial con el móvil",
     html: `
       <p>Un escaneo o foto de mala calidad es la causa más frecuente de retraso al pedir una traducción jurada: si el traductor no puede leer un dato con total claridad, tiene que pararse a confirmarlo contigo. Con estos consejos lo evitas.</p>
 
@@ -248,6 +255,7 @@ export const posts = [
     date: "2026-08-13",
     readingTime: "4 min",
     image: "/blog/real-extranjeria.jpg",
+    alt: "Documentos de extranjería listos para traducción jurada",
     html: `
       <p>Los trámites de extranjería (arraigo, reagrupación familiar, renovaciones, tarjeta comunitaria de familiar) suelen requerir documentación del país de origen, que debe presentarse traducida de forma jurada al español.</p>
 

@@ -60,7 +60,7 @@ export default function RootLayout({ children }) {
             >
               <img
                 src="/logo.svg"
-                alt=""
+                alt="JuradaExpress"
                 width="26"
                 height="26"
                 className="rounded opacity-90"
@@ -123,7 +123,7 @@ export default function RootLayout({ children }) {
                   src="/logo.svg"
                   width="24"
                   height="24"
-                  alt=""
+                  alt="JuradaExpress"
                   className="opacity-90"
                 />
                 <span>JuradaExpress</span>
