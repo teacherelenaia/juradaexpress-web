@@ -6,7 +6,7 @@ import { IconCheck, IconClock, IconSend } from "./components/Icons";
 export const metadata = {
   title: "Traductor Jurado en Murcia | Traducción Jurada para toda España",
   description:
-    "Traductor jurado Español ⇆ Inglés. Trabajo con clientes de toda España, Reino Unido y el extranjero. Entrega 24/48 h. Presupuesto inmediato por email o WhatsApp.",
+    "¿Busca un traductor jurado en murcia? Ofrecemos la mejor traducción jurada en murcia. Contacte con nuestro traductor jurado para sus documentos oficiales.",
   alternates: {
     canonical: "https://juradaexpress.es/",
     languages: {
