@@ -223,10 +223,7 @@ export default function RootLayout({ children }) {
                 image: "https://juradaexpress.es/logo.svg",
                 address: {
                   "@type": "PostalAddress",
-                  streetAddress: "Carril de los Leales",
-                  postalCode: "30009",
-                  addressLocality: "Murcia",
-                  addressRegion: "Región de Murcia",
+                  addressRegion: "Murcia",
                   addressCountry: "ES",
                 },
                 areaServed: ["Murcia", "España"],
