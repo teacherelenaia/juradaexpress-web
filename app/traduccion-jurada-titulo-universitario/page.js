@@ -62,7 +62,11 @@ export default function Page() {
       </div>
 
       <p className="mt-8 text-sm text-slate-500">
-        * Consulta también nuestros <a href="/precios" className="underline hover:text-brand-gold-700">precios orientativos</a>.
+        * Consulta también nuestros <a href="/precios" className="underline hover:text-brand-gold-700">precios orientativos</a> o <a href="/contacto" className="underline hover:text-brand-gold-700">contáctanos</a> si tienes dudas.
+      </p>
+
+      <p className="mt-2 text-sm text-slate-500">
+        Esta traducción es <a href="/traduccion-jurada-validez-oficial" className="underline hover:text-brand-gold-700">válida ante universidades, organismos oficiales y consulados</a>.
       </p>
     </main>
   );

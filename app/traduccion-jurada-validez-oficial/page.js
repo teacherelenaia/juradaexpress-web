@@ -61,7 +61,11 @@ export default function Page() {
       </div>
 
       <p className="mt-8 text-sm text-slate-500">
-        * Consulta también nuestros <a href="/precios" className="underline hover:text-brand-gold-700">precios orientativos</a>.
+        * Consulta también nuestros <a href="/precios" className="underline hover:text-brand-gold-700">precios orientativos</a> o <a href="/contacto" className="underline hover:text-brand-gold-700">contáctanos</a> si tienes dudas.
+      </p>
+
+      <p className="mt-2 text-sm text-slate-500">
+        Es habitual necesitar esta validez, por ejemplo, en la <a href="/traduccion-jurada-titulo-universitario" className="underline hover:text-brand-gold-700">traducción jurada de un título universitario</a>.
       </p>
     </main>
   );
