@@ -4,7 +4,7 @@ import TrackedLink from "./components/TrackedLink";
 import { IconCheck, IconClock, IconSend } from "./components/Icons";
 
 export const metadata = {
-  title: "Traductor Jurado Español-Inglés | España y Reino Unido",
+  title: "Traductor Jurado en Murcia | Traducción Jurada para toda España",
   description:
     "Traductor jurado Español ⇆ Inglés. Trabajo con clientes de toda España, Reino Unido y el extranjero. Entrega 24/48 h. Presupuesto inmediato por email o WhatsApp.",
   alternates: {
