@@ -37,6 +37,9 @@ export const metadata = {
       "Traducción jurada (Español ⇆ Inglés). Entrega 24/48 h. Trabajo con clientes de toda España, Reino Unido y el extranjero.",
     images: ["https://juradaexpress.es/hero-internacional.jpg"],
   },
+  verification: {
+    google: "7qUSXNkOvWn5YeesrooO2YBAmzwRRrPLKU7GWXxEi9c",
+  },
 };
 
 export default function RootLayout({ children }) {
