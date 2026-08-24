@@ -31,7 +31,7 @@ export default function BlogPage() {
               {post.image && (
                 <img
                   src={post.image}
-                  alt=""
+                  alt={post.alt || post.title}
                   className="h-40 w-full object-cover"
                 />
               )}

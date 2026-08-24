@@ -182,23 +182,26 @@ export default function Page() {
                 t: "Official certificates",
                 d: "Birth, marriage, criminal record, residency, notarial certificates…",
                 img: "/docs-real.jpg",
+                alt: "Official certificates stacked: birth, marriage and criminal record",
               },
               {
                 t: "Academic",
                 d: "Degrees, transcripts, study plans, academic reference letters.",
                 img: "/academicos.jpg",
+                alt: "Academic documents: university degree and transcript",
               },
               {
                 t: "Business & legal",
                 d: "Contracts, powers of attorney, deeds, company bylaws.",
                 img: "/mercantiles.jpg",
+                alt: "Signed business contracts and legal documents",
               },
             ].map((i) => (
               <article
                 key={i.t}
                 className="overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 hover:shadow"
               >
-                <img src={i.img} alt={i.t} className="h-44 w-full object-cover" />
+                <img src={i.img} alt={i.alt} className="h-44 w-full object-cover" />
                 <div className="p-5">
                   <h3 className="font-semibold">{i.t}</h3>
                   <p className="mt-2 text-sm text-slate-600">{i.d}</p>

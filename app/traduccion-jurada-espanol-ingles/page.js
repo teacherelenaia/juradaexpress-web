@@ -62,7 +62,11 @@ export default function Page() {
       </div>
 
       <p className="mt-8 text-sm text-slate-500">
-        * Consulta también nuestros <a href="/precios" className="underline hover:text-brand-gold-700">precios orientativos</a>.
+        * Consulta también nuestros <a href="/precios" className="underline hover:text-brand-gold-700">precios orientativos</a> o <a href="/contacto" className="underline hover:text-brand-gold-700">contáctanos</a> si tienes dudas.
+      </p>
+
+      <p className="mt-2 text-sm text-slate-500">
+        Documentos que más solemos traducir en este par de idiomas: <a href="/traduccion-jurada-partida-nacimiento" className="underline hover:text-brand-gold-700">partida de nacimiento</a>, <a href="/traduccion-jurada-titulo-universitario" className="underline hover:text-brand-gold-700">título universitario</a> y <a href="/traduccion-jurada-certificado-penales" className="underline hover:text-brand-gold-700">certificado de antecedentes penales</a>.
       </p>
     </main>
   );

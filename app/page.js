@@ -163,16 +163,19 @@ export default function Page() {
                 t: "Certificados oficiales",
                 d: "Nacimiento, matrimonio, penales, padrón, notaría…",
                 img: "/docs-real.jpg",
+                alt: "Certificados oficiales apilados: nacimiento, matrimonio y antecedentes penales",
               },
               {
                 t: "Académicos",
                 d: "Títulos, expedientes, planes de estudio, cartas académicas.",
                 img: "/academicos.jpg",
+                alt: "Documentos académicos: título universitario y expediente",
               },
               {
                 t: "Laborales y mercantiles",
                 d: "Contratos, poderes, escrituras, estatutos.",
                 img: "/mercantiles.jpg",
+                alt: "Contratos y documentos mercantiles firmados",
               },
             ].map((i) => (
               <article
@@ -181,7 +184,7 @@ export default function Page() {
               >
                 <img
                   src={i.img}
-                  alt={i.t}
+                  alt={i.alt}
                   className="h-44 w-full object-cover"
                 />
                 <div className="p-5">

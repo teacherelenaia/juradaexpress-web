@@ -8,6 +8,7 @@ export const posts = [
     date: "2025-10-22",
     readingTime: "4 min",
     image: "/blog/real-consejos.jpg",
+    alt: "Documentos y bolígrafo listos para pedir presupuesto de traducción jurada",
     // IMPORTANTE: El contenido en HTML va entre backticks ( ` ... ` )
     html: `
       <p>Para preparar un <strong>presupuesto cerrado</strong>, envíanos:</p>
@@ -20,6 +21,8 @@ export const posts = [
       </ol>
 
       <p>Con eso te respondemos con <strong>precio</strong> y <strong>plazo</strong> orientativo (24/48 h para documentos breves).</p>
+
+      <p>¿No sabes por dónde empezar? Consulta nuestro <a href="/documentos">catálogo de documentos</a> con los precios más habituales.</p>
 
       <p>
         Contacto:
@@ -40,8 +43,9 @@ export const posts = [
     date: "2026-06-10",
     readingTime: "5 min",
     image: "/blog/real-academico.jpg",
+    alt: "Título universitario y expediente académico sobre una mesa",
     html: `
-      <p>Si necesitas presentar tu título universitario ante una universidad extranjera, un colegio profesional o un organismo de homologación, necesitarás una <strong>traducción jurada</strong>, no una traducción normal. Esto es lo que debes saber antes de pedir presupuesto.</p>
+      <p>Si necesitas presentar tu título universitario ante una universidad extranjera, un colegio profesional o un organismo de homologación, necesitarás una <a href="/traduccion-jurada-titulo-universitario"><strong>traducción jurada</strong></a>, no una traducción normal. Esto es lo que debes saber antes de pedir presupuesto.</p>
       <h2>¿De qué depende el precio?</h2>
       <ul>
         <li><strong>Extensión del documento:</strong> un título universitario simple (una página) cuesta menos que un expediente académico completo con notas de varios cursos.</li>
@@ -71,6 +75,7 @@ export const posts = [
     date: "2026-06-24",
     readingTime: "4 min",
     image: "/blog/real-apostilla.jpg",
+    alt: "Sello de apostilla de La Haya sobre un documento oficial",
     html: `
       <p>Es una de las dudas más frecuentes antes de encargar una traducción jurada: <em>"¿tengo que apostillar mi documento antes o no?"</em>. Aquí te lo explico de forma sencilla.</p>
       <h2>¿Qué es la apostilla?</h2>
@@ -92,6 +97,7 @@ export const posts = [
         <li>Si aplica, apostíllalo en el país de origen.</li>
         <li>Envíanoslo (ya apostillado si corresponde) para la traducción jurada.</li>
       </ol>
+      <p>Si tu documento (partida de nacimiento, título universitario, certificado de penales…) ya está apostillado, consulta nuestro <a href="/documentos">catálogo de documentos</a> para ver precios y pedir presupuesto.</p>
       <p>
         ¿Tienes dudas sobre tu caso concreto? Escríbenos por
         <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20tengo%20una%20duda%20sobre%20la%20apostilla">WhatsApp</a>
@@ -108,10 +114,11 @@ export const posts = [
     date: "2026-07-08",
     readingTime: "4 min",
     image: "/blog/real-consejos.jpg",
+    alt: "Documentos legales sobre una mesa de trabajo",
     html: `
       <p>Es habitual confundir estos términos, y elegir el tipo equivocado puede hacer que un organismo rechace tu documento. Aquí tienes la diferencia clara.</p>
       <h2>Traducción jurada</h2>
-      <p>Es la única con <strong>validez legal oficial</strong> en España. Solo puede realizarla un traductor-intérprete jurado nombrado por el Ministerio de Asuntos Exteriores, Unión Europea y Cooperación (MAEC). Va firmada y sellada, y el traductor certifica bajo su responsabilidad que la traducción es fiel al original. Es la que exigen organismos oficiales: registros civiles, universidades, notarías, juzgados, consulados, etc.</p>
+      <p>Es la única con <strong>validez legal oficial</strong> en España. Solo puede realizarla un traductor-intérprete jurado nombrado por el Ministerio de Asuntos Exteriores, Unión Europea y Cooperación (MAEC). Va firmada y sellada, y el traductor certifica bajo su responsabilidad que la traducción es fiel al original. Es la que exigen organismos oficiales: registros civiles, universidades, notarías, juzgados, consulados, etc. Más info sobre su <a href="/traduccion-jurada-validez-oficial">validez ante organismos oficiales, universidades y consulados</a>.</p>
       <h2>Traducción certificada</h2>
       <p>Es un término que se usa más en el ámbito anglosajón (EE.UU., Reino Unido) y no siempre equivale legalmente a la traducción jurada española. En muchos países no existe la figura del "traductor jurado" como tal, y una traducción certificada es simplemente una traducción acompañada de una declaración firmada por el traductor. <strong>Importante:</strong> si el organismo español te pide "traducción jurada", una traducción certificada de otro país normalmente no es suficiente.</p>
       <h2>Traducción simple (no oficial)</h2>
@@ -134,12 +141,13 @@ export const posts = [
     date: "2026-07-22",
     readingTime: "5 min",
     image: "/blog/real-academico.jpg",
+    alt: "Título universitario extranjero listo para homologar en España",
     html: `
       <p>Si estudiaste fuera de España y quieres que tu título tenga validez aquí (para trabajar, opositar o seguir estudiando), necesitas pasar por el proceso de <strong>homologación o equivalencia</strong> del Ministerio de Educación. La traducción jurada es un paso obligatorio dentro de ese proceso.</p>
 
       <h2>¿Qué documentos suelen pedir traducidos?</h2>
       <ul>
-        <li>Título universitario original</li>
+        <li><a href="/traduccion-jurada-titulo-universitario">Título universitario original</a></li>
         <li>Certificado académico oficial con las asignaturas cursadas y calificaciones</li>
         <li>En algunos casos, el plan de estudios o programa de la titulación</li>
       </ul>
@@ -178,13 +186,14 @@ export const posts = [
     date: "2026-08-05",
     readingTime: "5 min",
     image: "/blog/real-extranjeria.jpg",
+    alt: "Pasaporte y documentos para trámites de nacionalidad española",
     html: `
       <p>El expediente de nacionalidad española por residencia exige aportar varios documentos del país de origen, y si no están en español, deben acompañarse de su <strong>traducción jurada</strong>. Esto es lo que normalmente se pide traducido.</p>
 
       <h2>Documentos que suelen necesitar traducción</h2>
       <ul>
-        <li>Certificado de nacimiento (literal, actualizado)</li>
-        <li>Certificado de antecedentes penales del país de origen (y de cualquier otro país donde se haya residido en los últimos 5 años)</li>
+        <li><a href="/traduccion-jurada-partida-nacimiento">Certificado de nacimiento</a> (literal, actualizado)</li>
+        <li><a href="/traduccion-jurada-certificado-penales">Certificado de antecedentes penales</a> del país de origen (y de cualquier otro país donde se haya residido en los últimos 5 años)</li>
         <li>Certificado de matrimonio, si aplica</li>
         <li>Libro de familia o certificado de estado civil</li>
         <li>Certificado de empadronamiento histórico, si se emitió en otro idioma</li>
@@ -214,6 +223,7 @@ export const posts = [
     date: "2026-08-12",
     readingTime: "3 min",
     image: "/blog/real-consejos.jpg",
+    alt: "Escaneando un documento oficial con el móvil",
     html: `
       <p>Un escaneo o foto de mala calidad es la causa más frecuente de retraso al pedir una traducción jurada: si el traductor no puede leer un dato con total claridad, tiene que pararse a confirmarlo contigo. Con estos consejos lo evitas.</p>
 
@@ -232,6 +242,8 @@ export const posts = [
       <h2>5. Revisa que se lea todo antes de enviarlo</h2>
       <p>Antes de enviarlo, amplía la imagen en tu propio móvil y comprueba que puedes leer perfectamente los nombres propios, fechas y números — si tú no lo lees bien, nosotros tampoco podremos.</p>
 
+      <p>Cuando tengas tu escaneo listo, consulta nuestro <a href="/documentos">catálogo de documentos</a> para ver precios y enviarlo directamente.</p>
+
       <p>
         Si tienes dudas sobre si tu escaneo vale, envíanoslo igualmente por
         <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20tengo%20una%20duda%20sobre%20la%20calidad%20de%20mi%20escaneo">WhatsApp</a>
@@ -248,15 +260,16 @@ export const posts = [
     date: "2026-08-13",
     readingTime: "4 min",
     image: "/blog/real-extranjeria.jpg",
+    alt: "Documentos de extranjería listos para traducción jurada",
     html: `
       <p>Los trámites de extranjería (arraigo, reagrupación familiar, renovaciones, tarjeta comunitaria de familiar) suelen requerir documentación del país de origen, que debe presentarse traducida de forma jurada al español.</p>
 
       <h2>Arraigo social, laboral o familiar</h2>
       <p>Dependiendo del tipo de arraigo, es habitual necesitar traducción de:</p>
       <ul>
-        <li>Certificado de nacimiento</li>
-        <li>Certificado de antecedentes penales del país de origen</li>
-        <li>Título académico o certificados de formación, si se aportan como mérito</li>
+        <li><a href="/traduccion-jurada-partida-nacimiento">Certificado de nacimiento</a></li>
+        <li><a href="/traduccion-jurada-certificado-penales">Certificado de antecedentes penales</a> del país de origen</li>
+        <li><a href="/traduccion-jurada-titulo-universitario">Título académico o certificados de formación</a>, si se aportan como mérito</li>
       </ul>
 
       <h2>Reagrupación familiar</h2>
