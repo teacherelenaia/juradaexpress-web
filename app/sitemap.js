@@ -17,6 +17,7 @@ export default function sitemap() {
     { url: `${BASE_URL}/traduccion-jurada-espanol-ingles`, priority: 0.7 },
     { url: `${BASE_URL}/traduccion-jurada-validez-oficial`, priority: 0.7 },
     { url: `${BASE_URL}/traduccion-jurada-certificado-matrimonio`, priority: 0.7 },
+    { url: `${BASE_URL}/traduccion-jurada-contrato-escritura`, priority: 0.7 },
     { url: `${BASE_URL}/en`, priority: 0.9 },
     { url: `${BASE_URL}/en/precios`, priority: 0.7 },
     { url: `${BASE_URL}/en/documentos`, priority: 0.7 },
