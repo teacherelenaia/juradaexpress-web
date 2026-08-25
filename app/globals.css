@@ -131,6 +131,13 @@
     transition: color 160ms ease;
   }
 
+  /* Migas de pan: enlace dentro de bloque de texto — subrayado sutil para
+     que no dependa solo del color (WCAG 1.4.1). */
+  .link-crumb {
+    @apply text-slate-500 underline decoration-stone-300 underline-offset-2;
+    transition: color 160ms ease, text-decoration-color 160ms ease;
+  }
+
   /* Subrayado dorado de la página activa en la navegación: 2 px que se
      dibujan de izquierda a derecha con clip-path en 180 ms al cargar. */
   .nav-underline {
@@ -261,6 +268,10 @@
 
   .link-nav:hover {
     @apply text-brand-navy;
+  }
+
+  .link-crumb:hover {
+    @apply text-brand-gold-700;
   }
 }
 

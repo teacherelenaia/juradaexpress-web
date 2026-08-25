@@ -64,11 +64,11 @@ export default function BlogPostPage({ params }) {
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 md:py-16">
       <nav aria-label="Breadcrumb" className="text-sm text-slate-500">
-        <Link href="/en" className="link-nav">
+        <Link href="/en" className="link-crumb">
           Home
         </Link>{" "}
         <span aria-hidden="true">/</span>{" "}
-        <Link href="/en/blog" className="link-nav">
+        <Link href="/en/blog" className="link-crumb">
           Blog
         </Link>{" "}
         <span aria-hidden="true">/</span>{" "}

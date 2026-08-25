@@ -52,11 +52,11 @@ export default function DocumentPage({ ficha }) {
     <main className="mx-auto max-w-3xl px-4 py-10 md:py-16">
       {/* Miga de pan */}
       <nav aria-label="Miga de pan" className="text-sm text-slate-500">
-        <a href="/" className="link-nav">
+        <a href="/" className="link-crumb">
           Inicio
         </a>{" "}
         <span aria-hidden="true">/</span>{" "}
-        <a href="/documentos" className="link-nav">
+        <a href="/documentos" className="link-crumb">
           Documentos
         </a>{" "}
         <span aria-hidden="true">/</span>{" "}

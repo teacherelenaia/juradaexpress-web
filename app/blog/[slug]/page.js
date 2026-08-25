@@ -67,11 +67,11 @@ export default function BlogPostPage({ params }) {
     <main className="mx-auto max-w-3xl px-4 py-10 md:py-16">
       {/* Miga de pan */}
       <nav aria-label="Miga de pan" className="text-sm text-slate-500">
-        <Link href="/" className="link-nav">
+        <Link href="/" className="link-crumb">
           Inicio
         </Link>{" "}
         <span aria-hidden="true">/</span>{" "}
-        <Link href="/blog" className="link-nav">
+        <Link href="/blog" className="link-crumb">
           Blog
         </Link>{" "}
         <span aria-hidden="true">/</span>{" "}
