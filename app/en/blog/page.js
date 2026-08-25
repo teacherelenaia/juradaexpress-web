@@ -1,13 +1,13 @@
-// app/blog/page.js
+// app/en/blog/page.js
 import Link from "next/link";
-import { getAllPosts } from "../../content/posts";
+import { getAllPostsEn } from "../../../content/posts.en";
 
 export const metadata = {
   title: "Blog",
   description:
-    "Consejos prácticos sobre traducción jurada: precios, plazos, apostilla y cómo preparar tus documentos para cada trámite.",
+    "Practical guides on sworn translation for Spain: NIE and residency paperwork, property purchases, prices and turnaround times.",
   alternates: {
-    canonical: "https://juradaexpress.es/blog",
+    canonical: "https://juradaexpress.es/en/blog",
     languages: {
       es: "https://juradaexpress.es/blog",
       en: "https://juradaexpress.es/en/blog",
@@ -17,7 +17,7 @@ export const metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getAllPosts();
+  const posts = getAllPostsEn();
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 md:py-16">
@@ -25,10 +25,10 @@ export default function BlogPage() {
         Blog
       </h1>
       <p className="mt-3 max-w-[68ch] text-slate-600">
-        Guías rápidas y consejos para que tu traducción jurada sea fácil y sin
-        sorpresas. También disponible en{" "}
-        <Link href="/en/blog" className="link">
-          inglés
+        Practical guides for handling Spanish paperwork with English-language
+        documents. More articles are available in{" "}
+        <Link href="/blog" className="link">
+          Spanish
         </Link>
         .
       </p>
@@ -37,7 +37,7 @@ export default function BlogPage() {
         {posts.map((post) => (
           <li key={post.slug} className="group">
             <Link
-              href={`/blog/${post.slug}`}
+              href={`/en/blog/${post.slug}`}
               className="block overflow-hidden rounded-xl bg-white no-underline ring-1 ring-stone-200 transition-shadow hover:shadow-card"
             >
               {post.image && (
@@ -57,13 +57,13 @@ export default function BlogPage() {
                 </h2>
                 <div className="mt-1 text-sm text-slate-500">
                   <time dateTime={post.date}>
-                    {new Date(post.date).toLocaleDateString("es-ES")}
+                    {new Date(post.date).toLocaleDateString("en-GB")}
                   </time>{" "}
                   · {post.readingTime}
                 </div>
                 <p className="mt-2 text-slate-700">{post.excerpt}</p>
                 <span className="mt-3 inline-block text-sm font-medium text-brand-navy">
-                  Leer artículo →
+                  Read article →
                 </span>
               </div>
             </Link>

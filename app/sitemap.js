@@ -1,5 +1,6 @@
 // app/sitemap.js
 import { getAllPosts } from "../content/posts";
+import { getAllPostsEn } from "../content/posts.en";
 
 const BASE_URL = "https://juradaexpress.es";
 
@@ -37,6 +38,7 @@ export default function sitemap() {
     { url: `${BASE_URL}/en/preguntas-frecuentes`, priority: 0.6 },
     { url: `${BASE_URL}/en/about`, lastModified: "2026-08-25", priority: 0.7 },
     { url: `${BASE_URL}/en/how-it-works`, lastModified: "2026-08-25", priority: 0.7 },
+    { url: `${BASE_URL}/en/blog`, lastModified: "2026-08-25", priority: 0.6 },
     { url: `${BASE_URL}/en/sworn-translation-british-residents-spain`, lastModified: "2026-08-25", priority: 0.7 },
     { url: `${BASE_URL}/en/legal-notice`, lastModified: "2026-08-25", priority: 0.3 },
     { url: `${BASE_URL}/en/privacy-policy`, lastModified: "2026-08-25", priority: 0.3 },
@@ -45,9 +47,15 @@ export default function sitemap() {
 
   const postRoutes = getAllPosts().map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: post.date,
+    lastModified: post.updated || post.date,
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...postRoutes];
+  const postRoutesEn = getAllPostsEn().map((post) => ({
+    url: `${BASE_URL}/en/blog/${post.slug}`,
+    lastModified: post.updated || post.date,
+    priority: 0.5,
+  }));
+
+  return [...staticRoutes, ...postRoutes, ...postRoutesEn];
 }

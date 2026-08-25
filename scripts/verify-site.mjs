@@ -10,7 +10,7 @@ import { mkdir } from "node:fs/promises";
 import path from "node:path";
 
 const BASE = process.argv[2] || "http://127.0.0.1:3210";
-const OUT = "docs/capturas/fase-3";
+const OUT = "docs/capturas/fase-4";
 
 const PAGES = [
   { path: "/", name: "home-es" },
@@ -40,6 +40,10 @@ const PAGES = [
   { path: "/traduccion-jurada-permiso-conducir", name: "ficha-conducir" },
   { path: "/traduccion-jurada-testamento-herencia", name: "ficha-testamento" },
   { path: "/traduccion-jurada-titulo-universitario", name: "ficha-titulo" },
+  { path: "/en/blog", name: "blog-en" },
+  { path: "/blog/traduccion-jurada-permiso-conducir", name: "post-conducir" },
+  { path: "/blog/cuanto-tarda-una-traduccion-jurada", name: "post-plazos" },
+  { path: "/en/blog/sworn-translation-nie-tie-spain", name: "post-nie-en" },
   { path: "/ruta-inexistente-404", name: "not-found", expect404: true },
   { path: "/en/cookie-policy", name: "cookies-en" },
 ];

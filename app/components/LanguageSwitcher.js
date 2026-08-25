@@ -16,6 +16,7 @@ const ES_TO_EN = {
   "/aviso-legal": "/en/legal-notice",
   "/politica-privacidad": "/en/privacy-policy",
   "/como-funciona": "/en/how-it-works",
+  "/blog": "/en/blog",
 };
 
 const EN_TO_ES = Object.fromEntries(
@@ -32,7 +33,7 @@ export default function LanguageSwitcher({ className = "" }) {
     if (ES_TO_EN[path]) return ES_TO_EN[path];
     if (path.startsWith("/traduccion-jurada-")) return "/en/documentos";
     if (path === "/traductor-jurado-murcia") return "/en/contacto";
-    if (path.startsWith("/blog")) return "/en";
+    if (path.startsWith("/blog/")) return "/en/blog";
     if (path.startsWith("/documentos/")) return "/en/documentos";
     return "/en";
   }

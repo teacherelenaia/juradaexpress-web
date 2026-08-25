@@ -1,29 +1,29 @@
-// app/blog/[slug]/page.js
+// app/en/blog/[slug]/page.js
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "../../../content/posts";
-import { WHATSAPP_URL } from "../../../content/site";
+import { getAllPostsEn, getPostEnBySlug } from "../../../../content/posts.en";
+import { WHATSAPP_URL_EN } from "../../../../content/site";
 
 const BASE = "https://juradaexpress.es";
 
 export async function generateStaticParams() {
-  return getAllPosts().map((p) => ({ slug: p.slug }));
+  return getAllPostsEn().map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }) {
-  const post = getPostBySlug(params.slug);
+  const post = getPostEnBySlug(params.slug);
   if (!post) return {};
   return {
     title: post.title,
     description: post.excerpt,
-    alternates: { canonical: `${BASE}/blog/${post.slug}` },
+    alternates: { canonical: `${BASE}/en/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `${BASE}/blog/${post.slug}`,
+      url: `${BASE}/en/blog/${post.slug}`,
       siteName: "JuradaExpress",
       type: "article",
-      locale: "es_ES",
+      locale: "en_GB",
       publishedTime: post.date,
       modifiedTime: post.updated || post.date,
       authors: [post.author || "Elena Peñaranda Ortega"],
@@ -41,10 +41,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// Dos artículos relacionados: los que compartan más etiquetas; si no hay
-// suficientes, se completa con los más recientes.
 function relatedPosts(post) {
-  const others = getAllPosts().filter((p) => p.slug !== post.slug);
+  const others = getAllPostsEn().filter((p) => p.slug !== post.slug);
   const tags = new Set(post.tags || []);
   return others
     .map((p) => ({
@@ -59,19 +57,18 @@ function relatedPosts(post) {
 }
 
 export default function BlogPostPage({ params }) {
-  const post = getPostBySlug(params.slug);
+  const post = getPostEnBySlug(params.slug);
   if (!post) notFound();
   const related = relatedPosts(post);
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 md:py-16">
-      {/* Miga de pan */}
-      <nav aria-label="Miga de pan" className="text-sm text-slate-500">
-        <Link href="/" className="link-nav">
-          Inicio
+      <nav aria-label="Breadcrumb" className="text-sm text-slate-500">
+        <Link href="/en" className="link-nav">
+          Home
         </Link>{" "}
         <span aria-hidden="true">/</span>{" "}
-        <Link href="/blog" className="link-nav">
+        <Link href="/en/blog" className="link-nav">
           Blog
         </Link>{" "}
         <span aria-hidden="true">/</span>{" "}
@@ -85,7 +82,7 @@ export default function BlogPostPage({ params }) {
       <div className="mt-3 text-sm text-slate-500">
         {post.author || "Elena Peñaranda Ortega"} ·{" "}
         <time dateTime={post.date}>
-          {new Date(post.date).toLocaleDateString("es-ES", {
+          {new Date(post.date).toLocaleDateString("en-GB", {
             day: "numeric",
             month: "long",
             year: "numeric",
@@ -105,30 +102,26 @@ export default function BlogPostPage({ params }) {
         />
       )}
 
-      {post.html ? (
-        <article
-          className="prose prose-slate mt-8"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
-      ) : (
-        <article className="prose prose-slate mt-8">{post.content}</article>
-      )}
+      <article
+        className="prose prose-slate mt-8"
+        dangerouslySetInnerHTML={{ __html: post.html }}
+      />
 
-      {/* CTA final */}
+      {/* Final CTA */}
       <div className="mt-12 rounded-xl bg-brand-navy p-6 text-white md:p-8" data-surface="navy">
         <h2 className="font-display text-2xl font-semibold leading-snug tracking-[-0.02em] text-white">
-          ¿Tu documento necesita traducción jurada?
+          Does your document need a sworn translation?
         </h2>
         <p className="mt-2 text-brand-navy-100">
-          Envíamelo escaneado y te respondo con precio cerrado y plazo real en
-          menos de 2 horas.
+          Send me a scan and you'll have a fixed quote and a real delivery
+          time within 2 working hours.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
-          <a href="/documentos" className="btn btn-light">
-            Pedir presupuesto
+          <a href="/en/documentos" className="btn btn-light">
+            Request a quote
           </a>
           <a
-            href={WHATSAPP_URL}
+            href={WHATSAPP_URL_EN}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-outline-light"
@@ -138,22 +131,21 @@ export default function BlogPostPage({ params }) {
         </div>
       </div>
 
-      {/* Relacionados */}
       {related.length > 0 && (
         <section className="mt-12">
           <h2 className="font-display text-2xl font-semibold leading-snug tracking-[-0.02em] text-slate-900">
-            Artículos relacionados
+            Related articles
           </h2>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             {related.map((r) => (
               <li key={r.slug}>
                 <Link
-                  href={`/blog/${r.slug}`}
+                  href={`/en/blog/${r.slug}`}
                   className="block h-full rounded-xl bg-white p-5 no-underline ring-1 ring-stone-200"
                 >
                   <span className="font-medium text-brand-navy">{r.title}</span>
                   <span className="mt-2 block text-sm text-slate-500">
-                    {new Date(r.date).toLocaleDateString("es-ES")} ·{" "}
+                    {new Date(r.date).toLocaleDateString("en-GB")} ·{" "}
                     {r.readingTime}
                   </span>
                 </Link>
@@ -163,7 +155,6 @@ export default function BlogPostPage({ params }) {
         </section>
       )}
 
-      {/* Schema: BlogPosting + BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -174,15 +165,15 @@ export default function BlogPostPage({ params }) {
                 "@type": "BlogPosting",
                 headline: post.title,
                 description: post.excerpt,
-                url: `${BASE}/blog/${post.slug}`,
+                url: `${BASE}/en/blog/${post.slug}`,
                 datePublished: post.date,
                 dateModified: post.updated || post.date,
-                inLanguage: "es",
+                inLanguage: "en",
                 image: post.image ? `${BASE}${post.image}` : undefined,
                 author: {
                   "@type": "Person",
                   name: post.author || "Elena Peñaranda Ortega",
-                  url: `${BASE}/sobre-mi`,
+                  url: `${BASE}/en/about`,
                 },
                 publisher: {
                   "@type": "Organization",
@@ -193,7 +184,7 @@ export default function BlogPostPage({ params }) {
                     url: `${BASE}/logo.svg`,
                   },
                 },
-                mainEntityOfPage: `${BASE}/blog/${post.slug}`,
+                mainEntityOfPage: `${BASE}/en/blog/${post.slug}`,
               },
               {
                 "@type": "BreadcrumbList",
@@ -201,20 +192,20 @@ export default function BlogPostPage({ params }) {
                   {
                     "@type": "ListItem",
                     position: 1,
-                    name: "Inicio",
-                    item: `${BASE}/`,
+                    name: "Home",
+                    item: `${BASE}/en`,
                   },
                   {
                     "@type": "ListItem",
                     position: 2,
                     name: "Blog",
-                    item: `${BASE}/blog`,
+                    item: `${BASE}/en/blog`,
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: post.title,
-                    item: `${BASE}/blog/${post.slug}`,
+                    item: `${BASE}/en/blog/${post.slug}`,
                   },
                 ],
               },

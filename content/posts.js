@@ -6,6 +6,9 @@ export const posts = [
     title: "Cómo pedir presupuesto (rápido y cerrado)",
     excerpt: "Qué enviar para recibir un precio cerrado en minutos (documentos, idioma, destino, entrega y plazos).",
     date: "2025-10-22",
+    updated: "2025-10-22",
+    author: "Elena Peñaranda Ortega",
+    tags: ["consejos", "precios"],
     readingTime: "4 min",
     image: "/blog/real-consejos.jpg",
     alt: "Documentos y bolígrafo listos para pedir presupuesto de traducción jurada",
@@ -41,6 +44,9 @@ export const posts = [
     excerpt:
       "Precio real de la traducción jurada de un título universitario o expediente académico: de qué depende, plazos y cómo ahorrar.",
     date: "2026-06-10",
+    updated: "2026-06-10",
+    author: "Elena Peñaranda Ortega",
+    tags: ["academico", "precios"],
     readingTime: "5 min",
     image: "/blog/real-academico.jpg",
     alt: "Título universitario y expediente académico sobre una mesa",
@@ -73,6 +79,9 @@ export const posts = [
     excerpt:
       "Explicación sencilla de la apostilla: qué es, cuándo hace falta antes de una traducción jurada y dónde se tramita.",
     date: "2026-06-24",
+    updated: "2026-06-24",
+    author: "Elena Peñaranda Ortega",
+    tags: ["apostilla", "consejos"],
     readingTime: "4 min",
     image: "/blog/real-apostilla.jpg",
     alt: "Sello de apostilla de La Haya sobre un documento oficial",
@@ -112,8 +121,11 @@ export const posts = [
     excerpt:
       "No son lo mismo. Te explico la diferencia entre traducción jurada, certificada y simple, y cuál necesitas según tu trámite.",
     date: "2026-07-08",
+    updated: "2026-07-08",
+    author: "Elena Peñaranda Ortega",
+    tags: ["validez", "consejos"],
     readingTime: "4 min",
-    image: "/blog/real-consejos.jpg",
+    image: "/blog/categoria-consejos.jpg",
     alt: "Documentos legales sobre una mesa de trabajo",
     html: `
       <p>Es habitual confundir estos términos, y elegir el tipo equivocado puede hacer que un organismo rechace tu documento. Aquí tienes la diferencia clara.</p>
@@ -139,8 +151,11 @@ export const posts = [
     excerpt:
       "Guía práctica sobre la homologación de títulos extranjeros en España: qué documentos necesitas traducir de forma jurada y en qué orden.",
     date: "2026-07-22",
+    updated: "2026-07-22",
+    author: "Elena Peñaranda Ortega",
+    tags: ["academico", "apostilla"],
     readingTime: "5 min",
-    image: "/blog/real-academico.jpg",
+    image: "/blog/categoria-academico.jpg",
     alt: "Título universitario extranjero listo para homologar en España",
     html: `
       <p>Si estudiaste fuera de España y quieres que tu título tenga validez aquí (para trabajar, opositar o seguir estudiando), necesitas pasar por el proceso de <strong>homologación o equivalencia</strong> del Ministerio de Educación. La traducción jurada es un paso obligatorio dentro de ese proceso.</p>
@@ -184,6 +199,9 @@ export const posts = [
     excerpt:
       "Lista de los documentos que suelen requerir traducción jurada al pedir la nacionalidad española por residencia.",
     date: "2026-08-05",
+    updated: "2026-08-05",
+    author: "Elena Peñaranda Ortega",
+    tags: ["extranjeria", "apostilla"],
     readingTime: "5 min",
     image: "/blog/real-extranjeria.jpg",
     alt: "Pasaporte y documentos para trámites de nacionalidad española",
@@ -221,8 +239,11 @@ export const posts = [
     excerpt:
       "Consejos prácticos para fotografiar o escanear tus documentos con el móvil antes de enviarlos a traducir, y evitar retrasos.",
     date: "2026-08-12",
+    updated: "2026-08-12",
+    author: "Elena Peñaranda Ortega",
+    tags: ["consejos"],
     readingTime: "3 min",
-    image: "/blog/real-consejos.jpg",
+    image: "/blog/post-escanear.jpg",
     alt: "Escaneando un documento oficial con el móvil",
     html: `
       <p>Un escaneo o foto de mala calidad es la causa más frecuente de retraso al pedir una traducción jurada: si el traductor no puede leer un dato con total claridad, tiene que pararse a confirmarlo contigo. Con estos consejos lo evitas.</p>
@@ -258,8 +279,11 @@ export const posts = [
     excerpt:
       "Qué documentos necesitas traducir de forma jurada para arraigo, reagrupación familiar y otros trámites de extranjería habituales.",
     date: "2026-08-13",
+    updated: "2026-08-13",
+    author: "Elena Peñaranda Ortega",
+    tags: ["extranjeria"],
     readingTime: "4 min",
-    image: "/blog/real-extranjeria.jpg",
+    image: "/blog/categoria-extranjeria.jpg",
     alt: "Documentos de extranjería listos para traducción jurada",
     html: `
       <p>Los trámites de extranjería (arraigo, reagrupación familiar, renovaciones, tarjeta comunitaria de familiar) suelen requerir documentación del país de origen, que debe presentarse traducida de forma jurada al español.</p>
@@ -293,6 +317,271 @@ export const posts = [
       </p>
     `,
   },
+
+  {
+    slug: "traduccion-jurada-permiso-conducir",
+    title: "Traducción jurada del permiso de conducir: cuándo hace falta y cuánto cuesta",
+    excerpt:
+      "Canje del permiso británico en la DGT tras el Brexit: cuándo te pedirán traducción jurada del carnet de conducir, precio desde 40 € y entrega en 24 h.",
+    date: "2026-08-04",
+    updated: "2026-08-04",
+    author: "Elena Peñaranda Ortega",
+    tags: ["conducir", "reino-unido", "precios"],
+    readingTime: "5 min",
+    image: "/blog/post-conducir.jpg",
+    alt: "Bandera británica ondeando — canje del permiso de conducir del Reino Unido en España",
+    html: `
+      <p>Desde el acuerdo posterior al Brexit, los residentes británicos en España pueden <strong>canjear su permiso de conducir en la DGT</strong> sin repetir el examen. La noticia corrió rápido; lo que corre menos es la letra pequeña del expediente, y ahí es donde aparece la traducción jurada del carnet de conducir. Te cuento cuándo hace falta, cuánto cuesta y cómo evitar el error más común.</p>
+
+      <h2>¿La DGT me va a pedir la traducción del permiso?</h2>
+      <p>No siempre, y por eso conviene entender el porqué. El permiso de conducir británico es un documento bastante estandarizado, con códigos europeos que la DGT reconoce. Pero el expediente de canje no se compone solo del carnet: según tu caso, Tráfico puede pedirte <strong>certificados de la DVLA</strong> — el llamado <em>check code</em>, cartas sobre tu <em>entitlement</em> o la confirmación de que el permiso sigue vigente — y esos documentos llegan en inglés y sin formato estándar. Es ahí donde entra la <a href="/traduccion-jurada-permiso-conducir">traducción jurada</a>: da fe oficial de lo que dice el documento, con firma y sello de traductora nombrada por el MAEC.</p>
+      <p>Mi consejo práctico: cuando pidas tu cita en la DGT, revisa la lista exacta de documentos que te indican. Si en ella aparece cualquier papel de la DVLA o el propio permiso "con traducción", ya sabes lo que toca — y si tienes dudas con la lista delante, mándamela por WhatsApp y te digo en minutos qué se traduce y qué no.</p>
+
+      <h2>¿Cuánto cuesta y cuánto se tarda?</h2>
+      <p>El permiso de conducir es de los documentos más breves que existen, y el precio lo refleja: <strong>desde 40 €</strong>, con entrega habitual en <strong>24 horas</strong> — si me llega por la mañana, muchas veces sale el mismo día. Los certificados de la DVLA cuentan como documento aparte, también breve. Recibes un PDF firmado digitalmente, válido para presentarlo telemáticamente, y el papel por mensajería si tu oficina lo pide.</p>
+
+      <h2>¿Necesita apostilla?</h2>
+      <p>Normalmente <strong>no</strong>. La DGT no suele exigir apostilla ni para el permiso ni para los certificados de la DVLA, a diferencia de lo que pasa con los <a href="/traduccion-jurada-certificado-penales">antecedentes penales</a> en los trámites de extranjería. Si tu oficina concreta la pidiera — pasa muy de tarde en tarde —, la apostilla viene en el mismo documento y la traduzco sin coste adicional.</p>
+
+      <h2>¿Qué pasa si dejé pasar el plazo de canje?</h2>
+      <p>Los plazos del acuerdo y sus prórrogas los fija la DGT, no la traducción: la traducción jurada no caduca, así que puedes prepararla cuando quieras. Si tu situación se ha complicado (permiso caducado, cambio de residencia, permisos de otros países anglófonos), el expediente puede requerir más documentos — certificados de residencia, historiales de la DVLA — y todos se traducen con el mismo formato y la misma validez.</p>
+
+      <h2>Cómo pedirlo sin equivocarte</h2>
+      <ol>
+        <li>Haz una <strong>foto nítida del permiso por las dos caras</strong> (o descarga el PDF de la DVLA).</li>
+        <li>Envíamela por WhatsApp o email junto con la lista de requisitos de tu cita, si la tienes.</li>
+        <li>Te confirmo qué documentos necesitan traducción, el precio cerrado y el plazo — en menos de 2 horas.</li>
+      </ol>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20necesito%20traducir%20mi%20permiso%20de%20conducir%20para%20el%20canje%20en%20la%20DGT">Pide presupuesto por WhatsApp</a>
+        o consulta la <a href="/traduccion-jurada-permiso-conducir">ficha del permiso de conducir</a> con precios y plazos.
+      </p>
+    `,
+  },
+
+  {
+    slug: "documentos-para-casarse-en-espana-con-extranjero",
+    title: "Casarse en España con un ciudadano extranjero: documentos que necesitan traducción jurada",
+    excerpt:
+      "Certificado de nacimiento, capacidad matrimonial, penales y empadronamiento: qué pide el Registro Civil, qué se traduce y por qué la vigencia de 3-6 meses importa tanto.",
+    date: "2026-08-18",
+    updated: "2026-08-18",
+    author: "Elena Peñaranda Ortega",
+    tags: ["matrimonio", "extranjeria", "apostilla"],
+    readingTime: "6 min",
+    image: "/blog/post-boda.jpg",
+    alt: "Certificados oficiales apilados para el expediente matrimonial del Registro Civil",
+    html: `
+      <p>Preparar una boda ya da trabajo; preparar el <strong>expediente matrimonial</strong> cuando uno de los dos es extranjero, más. La buena noticia: la lista de documentos es corta y siempre parecida. La mala: casi todos caducan, y pedir las cosas en el orden equivocado obliga a empezar de nuevo. Esto es lo que el Registro Civil te va a pedir y cómo organizarlo bien a la primera.</p>
+
+      <h2>¿Qué documentos pide el Registro Civil?</h2>
+      <p>Para el cónyuge extranjero, el expediente incluye normalmente:</p>
+      <ul>
+        <li><strong><a href="/traduccion-jurada-partida-nacimiento">Certificado de nacimiento</a></strong> reciente, expedido por su país de origen.</li>
+        <li><strong>Certificado de capacidad matrimonial</strong> o de soltería — en Reino Unido, el <em>Certificate of No Impediment (CNI)</em>. Si hay un divorcio previo, también la sentencia.</li>
+        <li><strong><a href="/traduccion-jurada-certificado-penales">Certificado de antecedentes penales</a></strong>, según el Registro y la nacionalidad.</li>
+        <li><strong>Empadronamiento</strong> de los dos, que acredita el domicilio (este es español y no se traduce).</li>
+      </ul>
+      <p>Todos los documentos extranjeros deben presentarse con su <strong>traducción jurada</strong> al español, firmada y sellada por traductor nombrado por el MAEC.</p>
+
+      <h2>¿Se apostillan antes o después de traducir?</h2>
+      <p>Siempre <strong>antes</strong>. El certificado se apostilla en el país que lo emitió y después se traduce todo junto, apostilla incluida. En el caso británico: el certificado de nacimiento del GRO y el CNI se apostillan en la <em>Legalisation Office</em>; una vez en tu correo, me los envías escaneados y te los devuelvo traducidos en 24/48 h.</p>
+
+      <h2>¿Por qué importa tanto la vigencia de 3-6 meses?</h2>
+      <p>Es el error que más expedientes retrasa. La mayoría de Registros Civiles exigen que los certificados extranjeros tengan <strong>menos de 3 a 6 meses</strong> en el momento de presentarlos (cada Registro fija su criterio — confírmalo en el tuyo). Como el expediente matrimonial tarda en tramitarse, el orden correcto es: pregunta primero en tu Registro qué vigencia aplican, pide los certificados cuando ya tengas fecha para iniciar el expediente, apostíllalos y tradúcelos entonces. La traducción no caduca, pero de nada sirve traducir en enero un certificado que presentarás en junio.</p>
+
+      <h2>¿Y si nos casamos por lo civil fuera y luego lo inscribimos en España?</h2>
+      <p>Es la otra ruta habitual: matrimonio celebrado en el extranjero e inscripción posterior en el Registro Civil español (o en el consulado). En ese caso el documento clave es el <a href="/traduccion-jurada-certificado-matrimonio">certificado de matrimonio</a> extranjero, apostillado y con traducción jurada, junto con los certificados de nacimiento. El proceso de traducción es idéntico.</p>
+
+      <h2>Cómo lo organizo yo con las parejas</h2>
+      <ol>
+        <li>Me envías por WhatsApp la lista que te ha dado tu Registro Civil.</li>
+        <li>Te confirmo qué documentos necesitan traducción y cuáles apostilla, con precio cerrado del conjunto.</li>
+        <li>Cuando llegan los certificados, los traduzco todos a la vez: mismo formato, mismos nombres, cero incoherencias.</li>
+      </ol>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20nos%20casamos%20en%20Espa%C3%B1a%20y%20necesitamos%20traducci%C3%B3n%20jurada%20de%20los%20documentos">Cuéntame tu caso por WhatsApp</a>
+        y te digo exactamente qué traducir — sin compromiso y con respuesta en menos de 2 horas.
+      </p>
+    `,
+  },
+
+  {
+    slug: "traduccion-jurada-visado-reino-unido",
+    title: "Traducción jurada para un visado del Reino Unido (Skilled Worker, familiar, estudiante)",
+    excerpt:
+      "El UKVI exige 'certified translations' con los datos del traductor. Qué documentos traducir para tu visado británico, por qué la jurada española cumple y con cuánto margen pedirla.",
+    date: "2026-08-24",
+    updated: "2026-08-24",
+    author: "Elena Peñaranda Ortega",
+    tags: ["reino-unido", "extranjeria", "validez"],
+    readingTime: "5 min",
+    image: "/blog/post-visado-uk.jpg",
+    alt: "Big Ben y bandera británica — documentos para visados del Reino Unido",
+    html: `
+      <p>Si estás preparando un visado británico — <em>Skilled Worker</em>, familiar, de estudiante — ya habrás visto la frase en la web del gobierno: todo documento que no esté en inglés debe ir acompañado de una <strong>"certified translation"</strong>. ¿Vale la traducción jurada española? Sí, y además cumple los requisitos con holgura. Te explico por qué y qué documentos suelen entrar en el expediente.</p>
+
+      <h2>¿Qué exige exactamente el UKVI?</h2>
+      <p>El UKVI (<em>UK Visas and Immigration</em>) pide que la traducción incluya: la confirmación del traductor de que es una traducción fiel del original, la <strong>fecha</strong>, el <strong>nombre completo y la firma</strong> del traductor y sus <strong>datos de contacto o credenciales</strong>. La traducción jurada española incluye todo eso de serie: mi certificación, mi firma, mi sello con el nº 7310 del MAEC y la fecha. Es decir, una <a href="/traduccion-jurada-espanol-ingles">traducción jurada español-inglés</a> es una <em>certified translation</em> a ojos del UKVI — con la ventaja de que además está respaldada por un nombramiento oficial verificable.</p>
+
+      <h2>¿Qué documentos suelen pedir traducidos?</h2>
+      <ul>
+        <li><strong><a href="/traduccion-jurada-partida-nacimiento">Certificados de nacimiento</a></strong> — visados familiares y de descendientes.</li>
+        <li><strong><a href="/traduccion-jurada-certificado-matrimonio">Certificado de matrimonio</a></strong> o de pareja registrada — visados de cónyuge.</li>
+        <li><strong><a href="/traduccion-jurada-certificado-penales">Antecedentes penales</a></strong> — obligatorios en varios tipos de visado de trabajo.</li>
+        <li><strong><a href="/traduccion-jurada-certificado-empresa">Nóminas, certificados de empresa</a> y extractos bancarios</strong> — para acreditar ingresos y ahorro (<em>financial requirement</em>).</li>
+        <li><strong><a href="/traduccion-jurada-titulo-universitario">Títulos y expedientes</a></strong> — visados de estudiante y de trabajo cualificado.</li>
+      </ul>
+
+      <h2>¿Necesitan apostilla los documentos para el UKVI?</h2>
+      <p>Como regla general, el UKVI <strong>no pide apostilla</strong>: le basta la <em>certified translation</em>. La excepción son documentos que otra autoridad del proceso sí exija legalizados. Si no lo tienes claro, revisa la lista de tu tipo de visado o pregúntame con ella delante: distinguir "traducir" de "apostillar y traducir" evita pagar trámites innecesarios.</p>
+
+      <h2>¿Con cuánto margen pido las traducciones?</h2>
+      <p>Los expedientes de visado se preparan con semanas de antelación, pero las traducciones son la parte rápida: documentos breves en <strong>24/48 horas</strong>, y lotes completos (nóminas + certificados + títulos) con presupuesto cerrado y fecha exacta en menos de 2 horas. Mi recomendación: reúne primero todos los documentos definitivos y tradúcelos de una vez — sale más barato que por goteo y garantiza coherencia entre ellos, algo que los revisores del UKVI agradecen.</p>
+
+      <h2>El detalle que marca la diferencia</h2>
+      <p>El UKVI trabaja sobre copias digitales: sube el PDF de la traducción firmada digitalmente tal cual te lo envío, sin reescanearlo (reescanear rompe la firma electrónica). Y guarda el original digital: si te piden documentación adicional, la reutilizas sin coste.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20preparo%20un%20visado%20para%20Reino%20Unido%20y%20necesito%20traducciones%20juradas">Escríbeme por WhatsApp con tu lista de documentos</a>
+        y te confirmo qué se traduce, precio cerrado y plazo en menos de 2 horas.
+      </p>
+    `,
+  },
+
+  {
+    slug: "estudiar-en-reino-unido-traduccion-expediente",
+    title: "Estudiar en Reino Unido: traducción jurada del expediente y del título para UCAS y universidades",
+    excerpt:
+      "Qué piden las universidades británicas a los estudiantes españoles: Bachillerato y EBAU para el grado, título y expediente para el máster. Precios y plazos reales.",
+    date: "2026-09-03",
+    updated: "2026-09-03",
+    author: "Elena Peñaranda Ortega",
+    tags: ["academico", "reino-unido", "precios"],
+    readingTime: "5 min",
+    image: "/blog/post-ucas.jpg",
+    alt: "Estudiante trabajando en la biblioteca — solicitudes a universidades del Reino Unido",
+    html: `
+      <p>Cada año traduzco expedientes para estudiantes que se van al Reino Unido, y las dudas se repiten: ¿qué documentos piden exactamente?, ¿los quiere UCAS o la universidad?, ¿cuánto cuesta? Vamos por partes, porque el grado y el máster funcionan distinto.</p>
+
+      <h2>¿Qué piden para el grado (undergraduate)?</h2>
+      <p>La solicitud se hace por <strong>UCAS</strong>, pero los documentos traducidos los suele pedir después <strong>cada universidad</strong>, al hacerte la oferta condicional. Lo habitual para un estudiante español es:</p>
+      <ul>
+        <li><strong>Título de Bachillerato</strong> y <strong>certificado de notas de Bachillerato y EBAU</strong> — la base de la oferta condicional.</li>
+        <li>En algunos casos, certificados de idioma o equivalencias que la propia universidad indica.</li>
+      </ul>
+      <p>Cada universidad publica sus requisitos de <em>certified translation</em>: la traducción jurada española los cumple, porque lleva la certificación, firma, sello y datos de la traductora nombrada por el MAEC.</p>
+
+      <h2>¿Y para el máster (postgraduate)?</h2>
+      <p>Aquí los protagonistas son el <strong><a href="/traduccion-jurada-titulo-universitario">título universitario</a></strong> y el <strong>expediente académico completo</strong> (transcript). Muchas universidades aceptan primero el expediente provisional y piden el título definitivo al matricularte — pregunta a tu <em>admissions office</em> qué versión quiere y cuándo, y traduce solo lo que pidan en cada fase.</p>
+
+      <h2>¿Cuánto cuesta traducir el título y el expediente?</h2>
+      <p>El <strong>título universitario</strong> (una página) tiene precio fijo: <strong>50 €</strong>, entregado en 24/48 h. El <strong>expediente académico</strong> depende del número de páginas y asignaturas, así que se presupuesta al verlo: me lo envías en PDF y en menos de 2 horas tienes <strong>precio cerrado</strong> — sin tarifas por palabra que crecen solas. El certificado de notas de Bachillerato/EBAU funciona como el expediente: presupuesto cerrado al momento.</p>
+
+      <h2>¿Necesito apostillar algo?</h2>
+      <p>Para las universidades británicas, normalmente <strong>no</strong>: les basta la traducción jurada. La apostilla aparece en el camino inverso — cuando vuelves con un título británico y quieres <a href="/blog/homologacion-titulo-universitario-extranjero-espana">homologarlo en España</a>. Si tu universidad pide algo distinto, su lista de requisitos manda; envíamela y la revisamos juntas.</p>
+
+      <h2>Calendario realista</h2>
+      <ol>
+        <li><strong>Enero-abril:</strong> solicitudes UCAS y de máster; suele bastar con el expediente provisional.</li>
+        <li><strong>Junio-julio:</strong> notas definitivas de EBAU o del grado; traducción de los certificados finales (24/48 h).</li>
+        <li><strong>Agosto-septiembre:</strong> matrícula; algunas universidades piden entonces el título definitivo traducido.</li>
+      </ol>
+      <p>Como ves, la traducción nunca es el cuello de botella — pero agradecerás tenerla lista antes de la avalancha de agosto.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20me%20voy%20a%20estudiar%20a%20Reino%20Unido%20y%20necesito%20traducir%20mi%20expediente">Envíame tu expediente por WhatsApp</a>
+        y te paso presupuesto cerrado en menos de 2 horas, o revisa la <a href="/traduccion-jurada-titulo-universitario">ficha del título universitario</a>.
+      </p>
+    `,
+  },
+
+  {
+    slug: "cuanto-tarda-una-traduccion-jurada",
+    title: "¿Cuánto tarda una traducción jurada? Plazos reales por tipo de documento",
+    excerpt:
+      "Plazos reales, no promesas: cuánto tarda cada tipo de documento, qué cosas retrasan una traducción jurada (escaneos, apostillas, sellos) y cómo funcionan las urgencias.",
+    date: "2026-09-17",
+    updated: "2026-09-17",
+    author: "Elena Peñaranda Ortega",
+    tags: ["plazos", "consejos"],
+    readingTime: "5 min",
+    image: "/blog/post-plazos.jpg",
+    alt: "Reloj de pulsera junto a un documento — plazos de entrega de la traducción jurada",
+    html: `
+      <p>"¿Para cuándo la tendría?" es, con diferencia, la pregunta que más recibo. Y merece una respuesta honesta, no un "¡ya mismo!" comercial. Estos son mis plazos reales por tipo de documento, qué cosas los alargan y cómo funcionan las urgencias de verdad.</p>
+
+      <h2>¿Cuánto tarda cada documento?</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Documento</th><th>Plazo habitual</th></tr></thead>
+        <tbody>
+          <tr><td><a href="/traduccion-jurada-permiso-conducir">Permiso de conducir</a>, DNI, pasaporte</td><td>24 h (a veces el mismo día)</td></tr>
+          <tr><td><a href="/traduccion-jurada-partida-nacimiento">Certificados</a> (nacimiento, matrimonio, penales)</td><td>24/48 h</td></tr>
+          <tr><td><a href="/traduccion-jurada-titulo-universitario">Título universitario</a></td><td>24/48 h</td></tr>
+          <tr><td>Expediente académico</td><td>2-4 días laborables, según páginas</td></tr>
+          <tr><td><a href="/traduccion-jurada-contrato-escritura">Contratos y escrituras</a></td><td>Fecha exacta con el presupuesto</td></tr>
+          <tr><td>Expedientes completos (herencias, visados)</td><td>Se planifica el lote entero</td></tr>
+        </tbody>
+      </table></div>
+      <p>El plazo cuenta desde que confirmas el presupuesto, y el presupuesto lo tienes en <strong>menos de 2 horas</strong> en horario laboral. La entrega digital (PDF firmado) llega al momento de terminar; el papel, si lo quieres, al día siguiente por mensajería.</p>
+
+      <h2>¿Qué cosas retrasan una traducción jurada?</h2>
+      <ul>
+        <li><strong>Escaneos ilegibles.</strong> La causa nº 1. Si no distingo un sello o una cifra, tengo que parar y preguntarte. Un buen escaneo (o una foto bien hecha, <a href="/blog/como-escanear-bien-documentos-con-el-movil">aquí te cuento cómo</a>) ahorra un día entero.</li>
+        <li><strong>La apostilla que llega tarde.</strong> La traducción incluye la apostilla, así que no puedo cerrar el documento hasta que la tengas. Pide la apostilla primero y la traducción después.</li>
+        <li><strong>Sellos, manuscritos y notas marginales.</strong> Todo lo que aparece en el documento se traduce o se describe — un certificado antiguo lleno de sellos manuscritos lleva más tiempo que uno recién impreso.</li>
+        <li><strong>Documentos que llegan por goteo.</strong> Si el expediente son cinco documentos, enviarlos juntos me deja organizarlos como un solo encargo, con coherencia y mejor precio.</li>
+      </ul>
+
+      <h2>¿Y si lo necesito para ya?</h2>
+      <p>Las urgencias existen y las atiendo cuando el calendario lo permite: un documento breve que llega a primera hora puede salir el mismo día. Lo que no hago es prometer plazos imposibles: si tu documento son 40 páginas para mañana, te lo diré claramente y buscaremos la alternativa real — entrega por fases, priorizar el documento que abre el trámite, o confirmar con el organismo si acepta la presentación parcial.</p>
+
+      <h2>La regla de oro</h2>
+      <p>Traduce cuando tengas el documento definitivo (¡y apostillado, si toca!), pero pide presupuesto en cuanto sepas qué te van a pedir: así el hueco en calendario queda reservado y los plazos dejan de ser una incógnita.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20necesito%20una%20traducci%C3%B3n%20jurada%20y%20quiero%20saber%20el%20plazo%20real">Pregúntame el plazo de tu documento por WhatsApp</a> — respuesta en menos de 2 horas, con fecha concreta.
+      </p>
+    `,
+  },
+
+  {
+    slug: "traduccion-jurada-digital-firma-electronica",
+    title: "¿Es válida una traducción jurada en PDF con firma digital?",
+    excerpt:
+      "Sí: el MAEC avaló la firma electrónica del traductor jurado y la administración la acepta. Cómo se verifica un PDF firmado, cuándo pueden pedirte papel y qué no debes hacer con el archivo.",
+    date: "2026-10-01",
+    updated: "2026-10-01",
+    author: "Elena Peñaranda Ortega",
+    tags: ["validez", "consejos"],
+    readingTime: "5 min",
+    image: "/blog/post-firma-digital.jpg",
+    alt: "Pluma sobre un documento — firma de una traducción jurada digital",
+    html: `
+      <p>Todavía me lo preguntan cada semana: <em>"¿seguro que el PDF vale? ¿No necesito el papel con el sello en tinta?"</em>. La respuesta corta: el PDF con firma electrónica <strong>vale</strong>, y hoy es la forma habitual de entregar y presentar traducciones juradas. La respuesta larga, con sus matices, es esta.</p>
+
+      <h2>¿Qué dice la normativa?</h2>
+      <p>La Oficina de Interpretación de Lenguas del Ministerio de Asuntos Exteriores — el organismo que regula a los traductores jurados — avaló expresamente en 2020 que las traducciones juradas <strong>firmadas electrónicamente</strong> por el traductor tienen la misma validez que las firmadas en tinta, siempre que se cumplan los requisitos de certificación, sello y firma [[COMPLETAR: confirmar la referencia normativa exacta si se quiere citar en la web]]. Desde entonces, la administración electrónica española (extranjería, universidades, registros) las acepta de forma generalizada.</p>
+
+      <h2>¿Cómo se comprueba que mi PDF es auténtico?</h2>
+      <p>Un PDF firmado electrónicamente lleva un certificado digital incrustado. Cualquier funcionario (o tú misma) puede verificarlo en segundos: al abrirlo en Adobe Reader aparece el panel de firmas con el titular y la fecha, y plataformas oficiales como VALIDe permiten validar el archivo. Además, mi número de acreditación (7310) figura en el <a href="/traduccion-jurada-validez-oficial">listado público del MAEC</a>, de modo que la cadena completa — traductora habilitada + firma verificable — se comprueba sin llamar a nadie.</p>
+
+      <h2>¿Cuándo pueden pedirme papel?</h2>
+      <p>Cada vez menos, pero ocurre: algunos registros civiles pequeños, ciertos trámites presenciales y organismos extranjeros concretos siguen pidiendo el original físico. No es un problema: la misma traducción se imprime, se firma y sella en tinta y viaja por mensajería. En <a href="/como-funciona">mi proceso</a> el papel no cuesta más por ser papel — solo se añade el envío — y si me dices desde el principio ante qué organismo va el documento, preparo las dos versiones de una vez.</p>
+
+      <h2>Los tres errores que rompen un PDF firmado</h2>
+      <ol>
+        <li><strong>Imprimirlo y reescanearlo.</strong> El escaneo es una foto: la firma electrónica desaparece. Presenta el archivo original.</li>
+        <li><strong>Editarlo o unirlo a otros PDF.</strong> Cualquier modificación invalida la firma. Si el organismo quiere un solo archivo, pregúntame y preparo la entrega como la necesiten.</li>
+        <li><strong>Reenviar versiones antiguas.</strong> Guarda el PDF definitivo que te entrego y usa siempre ese: es el que lleva la firma válida.</li>
+      </ol>
+
+      <h2>En resumen</h2>
+      <p>PDF firmado digitalmente: válido, verificable y más rápido — llega en el momento en que termino la traducción. Papel: disponible siempre que lo necesites, sin recargo por el trabajo. Y si un funcionario duda de la validez de la firma electrónica, el propio panel de firmas del PDF y el listado del MAEC responden por mí.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20necesito%20una%20traducci%C3%B3n%20jurada%20en%20PDF%20firmado%20digitalmente">Pide tu traducción jurada digital por WhatsApp</a>
+        o consulta <a href="/como-funciona">cómo funciona el proceso completo</a>.
+      </p>
+    `,
+  },
+
 
 // Puedes duplicar este objeto para añadir nuevos posts:
   // {
