@@ -169,6 +169,61 @@
   }
 }
 
+/* Sello del hero: entra con scale(0.95) → 1 y opacidad en 200 ms ease-out.
+   (Nada aparece desde scale(0): Emil.) */
+.hero-seal {
+  animation: seal-in 200ms var(--ease-out) both;
+  animation-delay: 150ms;
+}
+
+@keyframes seal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(-8deg);
+  }
+}
+
+/* Línea del proceso ("Cómo trabajamos"): ÚNICO momento animado de la home.
+   Se dibuja con clip-path en 600 ms al entrar en viewport, una sola vez. */
+.timeline-line {
+  clip-path: inset(0 100% 0 0);
+}
+
+.timeline-line-v {
+  clip-path: inset(0 0 100% 0);
+}
+
+[data-drawn="true"] .timeline-line,
+[data-drawn="true"] .timeline-line-v {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 600ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-seal {
+    animation: seal-fade 200ms ease both;
+  }
+
+  .timeline-line,
+  .timeline-line-v {
+    clip-path: inset(0 0 0 0);
+    transition: none;
+  }
+}
+
+@keyframes seal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Hovers solo en dispositivos con puntero fino: evita hovers "pegados" al
    tocar en móvil. (Emil Kowalski) */
 @media (hover: hover) and (pointer: fine) {

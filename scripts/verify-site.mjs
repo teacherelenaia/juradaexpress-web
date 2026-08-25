@@ -10,7 +10,7 @@ import { mkdir } from "node:fs/promises";
 import path from "node:path";
 
 const BASE = process.argv[2] || "http://127.0.0.1:3210";
-const OUT = "docs/capturas/fase-1";
+const OUT = "docs/capturas/fase-2";
 
 const PAGES = [
   { path: "/", name: "home-es" },
@@ -26,6 +26,14 @@ const PAGES = [
   { path: "/blog", name: "blog-es" },
   { path: "/traduccion-jurada-partida-nacimiento", name: "ficha-nacimiento" },
   { path: "/politica-cookies", name: "cookies-es" },
+  { path: "/sobre-mi", name: "sobre-mi" },
+  { path: "/en/about", name: "about-en" },
+  { path: "/traduccion-jurada-britanicos-espana", name: "britanicos-es" },
+  { path: "/en/sworn-translation-british-residents-spain", name: "british-en" },
+  { path: "/aviso-legal", name: "aviso-legal" },
+  { path: "/en/legal-notice", name: "legal-notice-en" },
+  { path: "/politica-privacidad", name: "privacidad" },
+  { path: "/en/privacy-policy", name: "privacy-en" },
   { path: "/en/cookie-policy", name: "cookies-en" },
 ];
 

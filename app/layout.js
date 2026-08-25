@@ -6,6 +6,8 @@ import ActionBar from "./components/ActionBar";
 import MobileNav from "./components/MobileNav";
 import MainNav from "./components/MainNav";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import SocialIcons from "./components/SocialIcons";
+import { INSTAGRAM_URL, FACEBOOK_URL } from "../content/site";
 
 // Tipografía del sistema visual: Manrope (cuerpo/UI) + Newsreader (display),
 // servidas con next/font para evitar CLS y peticiones a terceros.
@@ -176,8 +178,8 @@ export default function RootLayout({ children }) {
                   </a>
                 </li>
                 <li>
-                  <a href="/politica-cookies" className="link-nav">
-                    Política de cookies
+                  <a href="/sobre-mi" className="link-nav">
+                    Sobre mí
                   </a>
                 </li>
               </ul>
@@ -209,11 +211,34 @@ export default function RootLayout({ children }) {
                   </a>
                 </li>
               </ul>
+              <SocialIcons className="mt-3 -ml-3 text-slate-600" />
             </div>
           </div>
 
-          <div className="border-t border-stone-200 py-4 text-center text-xs text-slate-500">
-            <p>
+          {/* Fila legal */}
+          <div className="border-t border-stone-200 py-5 text-center text-xs text-slate-500">
+            <nav aria-label="Enlaces legales">
+              <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+                <li>
+                  <a href="/aviso-legal" className="link-nav text-xs">
+                    Aviso legal
+                  </a>
+                </li>
+                <li aria-hidden="true">·</li>
+                <li>
+                  <a href="/politica-privacidad" className="link-nav text-xs">
+                    Política de privacidad
+                  </a>
+                </li>
+                <li aria-hidden="true">·</li>
+                <li>
+                  <a href="/politica-cookies" className="link-nav text-xs">
+                    Política de cookies
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <p className="mt-3">
               © {new Date().getFullYear()} JuradaExpress · Todos los derechos
               reservados
             </p>
@@ -224,7 +249,9 @@ export default function RootLayout({ children }) {
             </p>
           </div>
 
-          {/* JSON-LD ProfessionalService (SEO) */}
+          {/* JSON-LD ProfessionalService ampliado (auditoría 5.4).
+              Pendiente de añadir la ficha de Google a sameAs:
+              [[COMPLETAR: URL de la ficha de Google Business]] */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -236,15 +263,50 @@ export default function RootLayout({ children }) {
                 email: "info@juradaexpress.es",
                 telephone: "+34685891214",
                 logo: "https://juradaexpress.es/logo.svg",
-                image: "https://juradaexpress.es/logo.svg",
+                image: "https://juradaexpress.es/fotos/hero-firma.jpg",
                 address: {
                   "@type": "PostalAddress",
                   addressRegion: "Murcia",
                   addressCountry: "ES",
                 },
-                areaServed: ["Murcia", "España"],
+                areaServed: [
+                  { "@type": "Country", name: "ES" },
+                  { "@type": "Country", name: "GB" },
+                ],
+                availableLanguage: ["es", "en"],
                 priceRange: "€€",
-                sameAs: ["https://wa.me/34685891214"],
+                founder: {
+                  "@type": "Person",
+                  name: "Elena Peñaranda Ortega",
+                  jobTitle: "Traductora-Intérprete Jurada de Inglés",
+                  hasCredential: {
+                    "@type": "EducationalOccupationalCredential",
+                    credentialCategory: "Traductora-Intérprete Jurada",
+                    recognizedBy: {
+                      "@type": "GovernmentOrganization",
+                      name: "Ministerio de Asuntos Exteriores, Unión Europea y Cooperación",
+                    },
+                    identifier: "7310",
+                  },
+                },
+                // [[COMPLETAR: confirmar horario de atención]]
+                openingHoursSpecification: {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                  ],
+                  opens: "09:00",
+                  closes: "18:00",
+                },
+                sameAs: [
+                  "https://wa.me/34685891214",
+                  INSTAGRAM_URL,
+                  FACEBOOK_URL,
+                ].filter(Boolean),
               }),
             }}
           />

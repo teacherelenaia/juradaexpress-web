@@ -1,9 +1,14 @@
 // app/en/page.js
 import Image from "next/image";
 import TrackedLink from "../components/TrackedLink";
-import { SectionHeading, Card } from "../components/ui";
 import Reviews from "../components/Reviews";
-import { IconCheck, IconClock, IconSend } from "../components/Icons";
+import HeroSeal from "../components/HeroSeal";
+import ProcessTimeline from "../components/ProcessTimeline";
+import ProcessVideo from "../components/ProcessVideo";
+import FollowUs from "../components/FollowUs";
+import { SectionHeading } from "../components/ui";
+import { DOCUMENTS } from "../../content/documents";
+import { WHATSAPP_URL_EN } from "../../content/site";
 
 export const metadata = {
   // The root layout appends "| JuradaExpress" through title.template.
@@ -29,14 +34,62 @@ export const metadata = {
     locale: "en_GB",
     images: [
       {
-        url: "https://juradaexpress.es/hero-internacional.jpg",
-        width: 1920,
-        height: 1080,
-        alt: "JuradaExpress — Sworn translation Spanish ⇆ English, delivered digitally worldwide",
+        url: "https://juradaexpress.es/fotos/hero-firma.jpg",
+        width: 1200,
+        height: 900,
+        alt: "Signing a sworn translation with a pen on the document",
       },
     ],
   },
 };
+
+// Real prices from the catalogue (content/documents.js): single source.
+const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
+
+const COMMON_DOCUMENTS = [
+  {
+    name: "Birth certificate",
+    for: "Citizenship, marriage, NIE and Civil Registry",
+    price: priceOf("partida-nacimiento"),
+    time: "24/48h",
+    href: "/traduccion-jurada-partida-nacimiento",
+  },
+  {
+    name: "Criminal record certificate",
+    for: "Immigration, visas and job offers",
+    price: priceOf("antecedentes-penales"),
+    time: "24/48h",
+    href: "/traduccion-jurada-certificado-penales",
+  },
+  {
+    name: "Marriage certificate",
+    for: "Civil Registry, residency and pensions",
+    price: priceOf("certificado-matrimonio"),
+    time: "24/48h",
+    href: "/traduccion-jurada-certificado-matrimonio",
+  },
+  {
+    name: "University degree",
+    for: "UCAS, recognition of qualifications, professional bodies",
+    price: priceOf("titulo-universitario"),
+    time: "24/48h",
+    href: "/traduccion-jurada-titulo-universitario",
+  },
+  {
+    name: "Contract or deed",
+    for: "Notary, property purchase and business",
+    price: null,
+    time: "Depends on length",
+    href: "/traduccion-jurada-contrato-escritura",
+  },
+  {
+    name: "Any other document",
+    for: "Pick yours in the catalogue and get a quote",
+    price: null,
+    time: "Usually 24/48h",
+    href: "/en/documentos",
+  },
+];
 
 export default function Page() {
   return (
@@ -46,54 +99,32 @@ export default function Page() {
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div>
             <h1 className="font-display text-balance text-display font-semibold text-slate-900">
-              Sworn Spanish ⇆ English translation, officially valid, in 24/48
-              hours
+              Sworn{" "}
+              <em className="font-display italic text-brand-gold-700">
+                Spanish ⇆ English
+              </em>{" "}
+              translation, officially valid, in 24/48 hours
             </h1>
-            <p className="mt-5 text-xl text-slate-600">
-              Official documents translated and certified for residency,
-              university admissions, property purchases, marriage
-              registration and more — accepted by Spanish authorities.
+            <p className="mt-5 text-xl text-slate-700">
+              Officially valid · Delivered in 24/48h · All of Spain and the UK
             </p>
-            <p className="mt-3 text-base text-slate-600">
+            <p className="mt-3 max-w-[68ch] text-base text-slate-600">
               Based in Murcia, Spain, I work with clients across the country
               and around the world — the entire process is 100% digital, so
               it doesn't matter where you are.
             </p>
 
-            {/* Badges */}
-            <ul className="mt-6 flex flex-wrap gap-3 text-sm text-slate-700">
-              <li className="inline-flex items-center gap-2 rounded-full bg-stone-50 px-3 py-1 ring-1 ring-stone-200">
-                <IconCheck className="h-4 w-4 text-brand-gold-700" />
-                Accepted by Spanish official bodies
-              </li>
-              <li className="inline-flex items-center gap-2 rounded-full bg-stone-50 px-3 py-1 ring-1 ring-stone-200">
-                <IconClock className="h-4 w-4 text-brand-gold-700" />
-                24/48h delivery
-              </li>
-              <li className="inline-flex items-center gap-2 rounded-full bg-stone-50 px-3 py-1 ring-1 ring-stone-200">
-                <IconSend className="h-4 w-4 text-brand-gold-700" />
-                Digital delivery worldwide
-              </li>
-            </ul>
-
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-7 flex flex-wrap gap-3">
               <TrackedLink
                 label="hero_quote_en"
-                href="mailto:info@juradaexpress.es?subject=Sworn%20translation%20quote%20request"
+                href="/en/documentos"
                 className="btn btn-primary"
               >
                 Request a quote
               </TrackedLink>
               <TrackedLink
-                label="hero_pricing_en"
-                href="/en/precios"
-                className="btn btn-secondary"
-              >
-                See pricing
-              </TrackedLink>
-              <TrackedLink
                 label="hero_whatsapp_en"
-                href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation"
+                href={WHATSAPP_URL_EN}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
@@ -107,87 +138,85 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="flex justify-center">
-            <figure>
-              <img
-                src="/hero-internacional.jpg"
-                alt="JuradaExpress — Sworn translation Spanish ⇆ English, delivered digitally worldwide"
-                className="max-h-80 rounded-xl shadow object-cover"
-              />
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICIOS */}
-      <section className="bg-stone-50">
-        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div>
-              <SectionHeading>
-                Most commonly translated documents
-              </SectionHeading>
-              <p className="mt-3 max-w-md text-sm text-slate-600">
-                Every document has its own translation requirements — here
-                are the ones we translate most often.
-              </p>
-            </div>
-            <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-64">
+          <div className="relative">
+            <figure className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
               <Image
-                src="/fotos/foto-documentos.jpg"
-                alt="Passport and travel documents on a laptop — sworn document translation"
+                src="/fotos/hero-firma.jpg"
+                alt="Hand signing a sworn translation with a pen on the document"
                 fill
-                sizes="(min-width: 768px) 480px, 100vw"
+                priority
+                sizes="(min-width: 768px) 560px, 100vw"
                 className="object-cover"
               />
-            </div>
-          </div>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {[
-              {
-                t: "Official certificates",
-                d: "Birth, marriage, criminal record, residency, notarial certificates…",
-                img: "/docs-real.jpg",
-                alt: "Official certificates stacked: birth, marriage and criminal record",
-              },
-              {
-                t: "Academic",
-                d: "Degrees, transcripts, study plans, academic reference letters.",
-                img: "/academicos.jpg",
-                alt: "Academic documents: university degree and transcript",
-              },
-              {
-                t: "Business & legal",
-                d: "Contracts, powers of attorney, deeds, company bylaws.",
-                img: "/mercantiles.jpg",
-                alt: "Signed business contracts and legal documents",
-              },
-            ].map((i) => (
-              <article
-                key={i.t}
-                className="overflow-hidden rounded-xl bg-white ring-1 ring-stone-200"
-              >
-                <img src={i.img} alt={i.alt} className="h-44 w-full object-cover" />
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold leading-snug text-slate-900 md:text-2xl">
-                    {i.t}
-                  </h3>
-                  <p className="mt-2 text-sm text-slate-600">{i.d}</p>
-                </div>
-              </article>
-            ))}
+            </figure>
+            <HeroSeal className="absolute -bottom-6 -left-4 h-32 w-32 md:-left-8 md:h-40 md:w-40" />
           </div>
         </div>
       </section>
 
-      {/* UK / BREXIT */}
+      {/* MOST COMMON DOCUMENTS — editorial list, image on the left */}
+      <section className="bg-stone-50">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <div className="grid items-start gap-10 md:grid-cols-[minmax(0,380px),1fr]">
+            <div className="order-2 md:order-1">
+              <div className="relative hidden aspect-[3/4] overflow-hidden rounded-xl shadow md:block">
+                <Image
+                  src="/fotos/foto-documentos.jpg"
+                  alt="Passport and travel documents on a laptop — sworn document translation"
+                  fill
+                  sizes="380px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+            <div className="order-1 md:order-2">
+              <SectionHeading>Most commonly translated documents</SectionHeading>
+              <p className="mt-3 max-w-[68ch] text-slate-600">
+                Every document has its own requirements. These are the ones I
+                translate most often, with prices from and typical turnaround.
+              </p>
+              <ul className="mt-8 grid gap-x-10 md:grid-cols-2">
+                {COMMON_DOCUMENTS.map((doc) => (
+                  <li
+                    key={doc.name}
+                    className="border-b border-stone-200 py-4"
+                  >
+                    <a href={doc.href} className="group block no-underline">
+                      <div className="flex items-baseline justify-between gap-3">
+                        <span className="font-medium text-brand-navy group-hover:text-brand-gold-700">
+                          {doc.name}
+                        </span>
+                        <span className="shrink-0 text-sm font-semibold tabular-nums text-slate-900">
+                          {doc.price != null ? `from €${doc.price}` : "on quote"}
+                        </span>
+                      </div>
+                      <div className="mt-1 flex items-baseline justify-between gap-3">
+                        <span className="text-sm text-slate-600">
+                          {doc.for}
+                        </span>
+                        <span className="shrink-0 text-xs text-slate-500">
+                          {doc.time}
+                        </span>
+                      </div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm text-slate-500">
+                Document guides are currently in Spanish; quotes and the whole
+                service are available in English.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* UK / BREXIT — image on the right */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
         <div className="grid items-center gap-8 md:grid-cols-2">
           <div>
-            <SectionHeading>
-              British and living in Spain?
-            </SectionHeading>
-            <p className="mt-4 max-w-xl text-slate-600">
+            <SectionHeading>British and living in Spain?</SectionHeading>
+            <p className="mt-4 max-w-[68ch] text-slate-600">
               I'll help you get your documents sworn-translated for your
               NIE, residency card (TIE), padrón registration, buying a
               property, or any other paperwork since Brexit. Everything
@@ -195,11 +224,11 @@ export default function Page() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <TrackedLink
-                label="uk_quote_en"
-                href="mailto:info@juradaexpress.es?subject=Sworn%20translation%20quote%20-%20UK"
+                label="uk_guide_en"
+                href="/en/sworn-translation-british-residents-spain"
                 className="btn btn-primary"
               >
-                Request a quote
+                Guide, procedure by procedure
               </TrackedLink>
               <TrackedLink
                 label="uk_whatsapp_en"
@@ -224,127 +253,97 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ACEPTADO POR */}
-      <section className="bg-stone-50">
-        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <SectionHeading>
-            Accepted by…
-          </SectionHeading>
-          <p className="mt-3 max-w-3xl text-sm text-slate-600">
-            Sworn translations signed and stamped by an officially appointed
-            sworn translator, legally valid before Spanish official bodies
-            (e.g. Ministries, Universities, Immigration Offices, Civil
-            Registries, Notaries, Town Halls, Spanish Consulates abroad, etc.).
-          </p>
-          <ul className="mt-5 flex flex-wrap gap-2 text-sm text-slate-700">
-            {[
-              "Ministries and Town Halls",
-              "Universities and academic institutions",
-              "Civil registries and notaries",
-              "Consulates and embassies",
-            ].map((txt) => (
-              <li
-                key={txt}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 ring-1 ring-stone-200"
-              >
-                <IconCheck className="h-4 w-4 text-brand-gold-700" />
-                {txt}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* VENTAJAS */}
-      <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-        <SectionHeading>
-          Why choose JuradaExpress
-        </SectionHeading>
-        <ul className="mt-8 grid gap-6 md:grid-cols-3">
-          {[
-            "Sworn translation, legally valid before Spanish official bodies.",
-            "Fast 24/48h delivery. Digital delivery anywhere in the world.",
-            "Direct communication by email and WhatsApp. Instant quote.",
-          ].map((li) => (
-            <Card as="li" key={li} className="p-5 text-slate-700">
-              {li}
-            </Card>
-          ))}
-        </ul>
-      </section>
-
-      {/* PROCESO */}
+      {/* HOW IT WORKS — timeline (the home's single animated moment) */}
       <section className="bg-stone-50">
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <div className="grid items-center gap-8 md:grid-cols-2">
-            <div>
-              <SectionHeading>
-                How it works
-              </SectionHeading>
-              <p className="mt-3 max-w-md text-sm text-slate-600">
+            <div className="order-2 md:order-1">
+              <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-64">
+                <Image
+                  src="/fotos/proceso-despacho.jpg"
+                  alt="Sworn translator working on the document at her desk"
+                  fill
+                  sizes="(min-width: 768px) 480px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <ProcessVideo className="mt-4 aspect-video" />
+            </div>
+            <div className="order-1 md:order-2">
+              <SectionHeading>How it works</SectionHeading>
+              <p className="mt-3 max-w-[68ch] text-slate-600">
                 The whole process is 100% digital: whether you're in Spain or
                 anywhere else in the world, sending your documents, getting
                 your quote and receiving your translation works exactly the
                 same way.
               </p>
             </div>
-            <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-64">
-              <Image
-                src="/fotos/foto-online.jpg"
-                alt="Open laptop on a desk — the entire process is handled online"
-                fill
-                sizes="(min-width: 768px) 480px, 100vw"
-                className="object-cover"
-              />
-            </div>
           </div>
-          <div className="mt-8 grid gap-6 md:grid-cols-4">
-            {[
-              { t: "1. Send", d: "Send us a scan or photo of your document by email or WhatsApp." },
-              { t: "2. Quote", d: "We give you a fixed price and a real delivery time." },
-              { t: "3. Sworn translation", d: "Signed and stamped by an officially appointed sworn translator." },
-              { t: "4. 24/48h delivery", d: "Digital and/or paper copy, shipped to your address." },
-            ].map((i) => (
-              <Card key={i.t} className="p-5">
-                <h3 className="text-xl font-semibold leading-snug text-slate-900 md:text-2xl">
-                  {i.t}
-                </h3>
-                <p className="mt-2 text-sm text-slate-600">{i.d}</p>
-              </Card>
-            ))}
-          </div>
+
+          <ProcessTimeline
+            steps={[
+              {
+                t: "Send",
+                d: "Send me a scan or photo of your document by email or WhatsApp.",
+              },
+              {
+                t: "Quote",
+                d: "You get a fixed price and a real delivery time within 2 hours.",
+              },
+              {
+                t: "Sworn translation",
+                d: "I translate, sign and stamp your document personally.",
+              },
+              {
+                t: "Delivery in 24/48h",
+                d: "A digitally signed PDF and, if you need it, paper by courier.",
+              },
+            ]}
+          />
         </div>
       </section>
 
-      {/* SOBRE MÍ */}
+      {/* ABOUT ME */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
         <div className="grid items-center gap-8 md:grid-cols-[auto,1fr]">
           <div
-            className="mx-auto flex h-24 w-24 shrink-0 items-center justify-center rounded-xl bg-stone-100 text-2xl font-semibold tracking-tight text-brand-navy md:mx-0"
+            className="mx-auto flex h-28 w-28 shrink-0 items-center justify-center rounded-xl bg-stone-100 font-display text-3xl font-semibold tracking-tight text-brand-navy md:mx-0"
             aria-hidden="true"
           >
             E.P.
           </div>
           <div>
-            <SectionHeading>
-              About me
-            </SectionHeading>
-            <p className="mt-4 max-w-2xl text-lg text-slate-600">
+            <SectionHeading>About me</SectionHeading>
+            <p className="mt-4 max-w-[68ch] text-lg text-slate-600">
               I'm <strong className="text-brand-navy">Elena Peñaranda Ortega</strong>,
               a Sworn Translator-Interpreter for English appointed by the
               Spanish Ministry of Foreign Affairs, European Union and
-              Cooperation (Accreditation No. 7310). I personally translate,
-              sign and stamp every sworn translation, guaranteeing its
-              validity before any official body in Spain.
+              Cooperation under{" "}
+              <a
+                href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link"
+              >
+                accreditation no. 7310
+              </a>
+              . I personally translate, sign and stamp every sworn
+              translation, guaranteeing its validity before any official body
+              in Spain.
+            </p>
+            <p className="mt-4">
+              <a href="/en/about" className="link">
+                Find out how I work and why my signature is trusted →
+              </a>
             </p>
           </div>
         </div>
       </section>
 
-      {/* OPINIONES — only rendered when content/reviews.js holds real reviews */}
+      {/* REVIEWS — only rendered when content/reviews.js holds real reviews */}
       <Reviews locale="en" />
 
-      {/* CTA FINAL */}
+      {/* FINAL CTA */}
       <section className="mx-auto max-w-6xl px-4 pb-16 md:pb-20">
         <div
           data-surface="navy"
@@ -352,16 +351,14 @@ export default function Page() {
         >
           <div className="grid items-center gap-8 md:grid-cols-[1.2fr,0.8fr]">
             <div>
-              <SectionHeading light>
-                Shall we get started?
-              </SectionHeading>
+              <SectionHeading light>Shall we get started?</SectionHeading>
               <p className="mt-2 text-brand-navy-100">
-                Send us your document and we'll reply with a quote and delivery time.
+                Send me your document and I'll reply with a quote and delivery time.
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <TrackedLink
                   label="cta_quote_final_en"
-                  href="mailto:info@juradaexpress.es?subject=Sworn%20translation%20quote%20request"
+                  href="/en/documentos"
                   className="btn btn-light"
                 >
                   Request a quote
@@ -377,8 +374,8 @@ export default function Page() {
             </div>
             <div className="relative h-48 w-full overflow-hidden rounded-xl shadow-lg md:h-56">
               <Image
-                src="/fotos/foto-firma.jpg"
-                alt="Signing a document with a pen — sworn translation, signed and stamped"
+                src="/docs-real.jpg"
+                alt="Official certificates stacked, ready for sworn translation"
                 fill
                 sizes="(min-width: 768px) 360px, 100vw"
                 className="object-cover"
@@ -390,9 +387,7 @@ export default function Page() {
 
       {/* FAQ + JSON-LD */}
       <section className="mx-auto max-w-6xl px-4 pb-20">
-        <SectionHeading>
-          Frequently asked questions
-        </SectionHeading>
+        <SectionHeading>Frequently asked questions</SectionHeading>
         <div className="mt-8 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200">
           {[
             {
@@ -408,11 +403,25 @@ export default function Page() {
               a: "For standard documents, yes. For documents over 20 pages, we agree on a specific delivery schedule.",
             },
           ].map((f, idx) => (
-            <details key={idx} className="p-5">
-              <summary className="cursor-pointer font-medium text-slate-900">
+            <details key={idx} className="group p-5">
+              <summary className="flex cursor-pointer items-center justify-between gap-4 font-medium text-slate-900 [&::-webkit-details-marker]:hidden">
                 {f.q}
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className="shrink-0 text-brand-navy transition-transform duration-[180ms] group-open:rotate-180"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
               </summary>
-              <p className="mt-2 text-sm text-slate-600">{f.a}</p>
+              <p className="mt-2 max-w-[68ch] text-sm text-slate-600">{f.a}</p>
             </details>
           ))}
         </div>
@@ -456,6 +465,9 @@ export default function Page() {
           }}
         />
       </section>
+
+      {/* FOLLOW US */}
+      <FollowUs locale="en" />
     </main>
   );
 }

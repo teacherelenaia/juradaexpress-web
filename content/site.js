@@ -17,3 +17,12 @@ export const WHATSAPP_URL_EN =
 // no existe todavía, deja la constante en null y el icono no se muestra.
 export const INSTAGRAM_URL = "https://www.instagram.com/juradaexpress";
 export const FACEBOOK_URL = "https://www.facebook.com/juradaexpress";
+
+// Vídeo opcional de la sección "Cómo trabajamos" (ver sección 6 de la
+// auditoría). Déjalo en null hasta tener un clip real (10-15 s, < 1,5 MB):
+//   export const PROCESS_VIDEO = {
+//     src: "/videos/proceso.mp4",
+//     poster: "/fotos/proceso-despacho.jpg",
+//     alt: "Sellado y firma de una traducción jurada",
+//   };
+export const PROCESS_VIDEO = null;
