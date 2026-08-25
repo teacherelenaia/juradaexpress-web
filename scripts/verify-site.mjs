@@ -1,16 +1,16 @@
-// scripts/verify-fase0.mjs
+// scripts/verify-site.mjs
 //
-// Verificación de la FASE 0 en navegador real (Chromium vía Playwright).
+// Verificación del sitio (FASE 0+1) en navegador real (Chromium vía Playwright).
 // Para cada página y ancho: errores de consola, enlaces internos rotos,
 // contraste del titular del CTA final, botones sin subrayar y captura.
 //
-//   node scripts/verify-fase0.mjs [baseUrl]
+//   node scripts/verify-site.mjs [baseUrl]
 import { chromium } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 
 const BASE = process.argv[2] || "http://127.0.0.1:3210";
-const OUT = "docs/capturas/fase-0";
+const OUT = "docs/capturas/fase-1";
 
 const PAGES = [
   { path: "/", name: "home-es" },
@@ -25,6 +25,8 @@ const PAGES = [
   { path: "/en/preguntas-frecuentes", name: "faq-en" },
   { path: "/blog", name: "blog-es" },
   { path: "/traduccion-jurada-partida-nacimiento", name: "ficha-nacimiento" },
+  { path: "/politica-cookies", name: "cookies-es" },
+  { path: "/en/cookie-policy", name: "cookies-en" },
 ];
 
 const VIEWPORTS = [
@@ -172,6 +174,35 @@ for (const vp of VIEWPORTS) {
       }
     }
 
+    // FASE 1: header 64 px, barra movil / flotante segun ancho, banner compacto
+    const f1 = await tab.evaluate(() => {
+      const out = [];
+      const header = document.querySelector("header");
+      if (header && Math.round(header.getBoundingClientRect().height) !== 64)
+        out.push(`header ${Math.round(header.getBoundingClientRect().height)}px (esperado 64)`);
+      const bar = document.querySelector('[aria-label="Acciones rápidas"], [aria-label="Quick actions"]');
+      const barVisible = bar && getComputedStyle(bar).display !== "none";
+      const float = document.querySelector('a[aria-label*="WhatsApp"][class*="fixed"]');
+      const floatVisible = float && getComputedStyle(float).display !== "none";
+      const mobile = window.innerWidth < 768;
+      if (mobile && !barVisible) out.push("falta barra inferior movil");
+      if (!mobile && barVisible) out.push("barra movil visible en escritorio");
+      if (mobile && floatVisible) out.push("float WhatsApp visible en movil");
+      if (!mobile && !floatVisible) out.push("falta float WhatsApp en escritorio");
+      const banner = document.querySelector('[aria-label="Aviso de cookies"], [aria-label="Cookie notice"]');
+      if (banner) {
+        const w = banner.getBoundingClientRect().width;
+        if (w > 420.5) out.push(`banner cookies ${Math.round(w)}px de ancho (max 420)`);
+      } else {
+        out.push("no se muestra el aviso de cookies");
+      }
+      const h1 = document.querySelector("h1");
+      if (h1 && !getComputedStyle(h1).fontFamily.toLowerCase().includes("newsreader"))
+        out.push(`h1 sin Newsreader: ${getComputedStyle(h1).fontFamily.slice(0, 40)}`);
+      return out;
+    });
+    for (const msg of f1) problems.push(`[${page.path} @${vp.name}] ${msg}`);
+
     await tab.screenshot({
       path: path.join(OUT, vp.name, `${page.name}.png`),
       fullPage: true,
@@ -189,4 +220,4 @@ if (problems.length) {
   for (const p of problems) console.error("  - " + p);
   process.exit(1);
 }
-console.log("\n✓ Verificación FASE 0 sin incidencias.");
+console.log("\n✓ Verificación sin incidencias.");

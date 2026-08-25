@@ -10,6 +10,7 @@ const ES_TO_EN = {
   "/contacto": "/en/contacto",
   "/documentos": "/en/documentos",
   "/preguntas-frecuentes": "/en/preguntas-frecuentes",
+  "/politica-cookies": "/en/cookie-policy",
 };
 
 const EN_TO_ES = Object.fromEntries(

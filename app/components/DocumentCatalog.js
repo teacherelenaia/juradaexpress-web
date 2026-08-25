@@ -190,7 +190,7 @@ export default function DocumentCatalog() {
           return (
             <div
               key={doc.id}
-              className={`rounded-2xl bg-white p-6 ring-1 transition hover:shadow ${
+              className={`rounded-xl bg-white p-6 ring-1 transition hover:shadow ${
                 isSelected ? "ring-2 ring-brand-gold" : "ring-stone-200"
               }`}
             >
@@ -200,7 +200,7 @@ export default function DocumentCatalog() {
               <h3 className="mt-4 text-xl font-semibold leading-snug text-slate-900 md:text-2xl">{doc.name}</h3>
               <div className="mt-3">
                 {doc.price != null ? (
-                  <span className="inline-flex rounded-full bg-brand-navy px-3 py-1 text-sm font-semibold text-white">
+                  <span className="inline-flex rounded-full bg-brand-navy px-3 py-1 text-sm font-semibold tabular-nums text-white">
                     {doc.price} €
                   </span>
                 ) : (
@@ -228,7 +228,7 @@ export default function DocumentCatalog() {
       {/* FORMULARIO */}
       <div
         ref={formRef}
-        className="mt-16 scroll-mt-24 rounded-2xl bg-stone-50 p-6 ring-1 ring-stone-200 md:p-10"
+        className="mt-16 scroll-mt-24 rounded-xl bg-stone-50 p-6 ring-1 ring-stone-200 md:p-10"
       >
         <h2 className="text-2xl font-bold leading-snug tracking-tight text-slate-900 md:text-3xl">
           Tu solicitud
@@ -248,7 +248,7 @@ export default function DocumentCatalog() {
                 >
                   <span className="text-sm text-slate-700">{d.name}</span>
                   <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium text-slate-900">
+                    <span className="text-sm font-medium tabular-nums text-slate-900">
                       {formatPrice(d.price)}
                     </span>
                     <button

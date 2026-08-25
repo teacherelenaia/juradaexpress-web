@@ -43,7 +43,7 @@ const categories = [
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:py-16">
-      <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-5xl">
+      <h1 className="font-display text-balance text-4xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-5xl">
         Documents we translate
       </h1>
       <p className="mt-4 max-w-2xl text-lg text-slate-600">
@@ -55,7 +55,7 @@ export default function Page() {
 
       <div className="mt-8 grid gap-6 md:grid-cols-3">
         {categories.map((c) => (
-          <div key={c.t} className="rounded-2xl bg-white p-5 ring-1 ring-stone-200">
+          <div key={c.t} className="rounded-xl bg-white p-5 ring-1 ring-stone-200">
             <h2 className="text-2xl font-semibold leading-snug text-brand-navy md:text-3xl">{c.t}</h2>
             <p className="mt-2 text-sm text-slate-600">{c.d}</p>
           </div>

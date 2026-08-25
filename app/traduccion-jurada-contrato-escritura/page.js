@@ -11,7 +11,7 @@ export const metadata = {
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold leading-tight text-slate-900">
+      <h1 className="font-display text-balance text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl">
         Traducción jurada de contrato o escritura
       </h1>
       <p className="mt-3 max-w-2xl text-slate-600">
@@ -36,7 +36,7 @@ export default function Page() {
             d: "Según extensión y complejidad del documento; te lo confirmamos al ver el archivo.",
           },
         ].map((i) => (
-          <div key={i.t} className="rounded-2xl bg-white p-5 ring-1 ring-stone-200">
+          <div key={i.t} className="rounded-xl bg-white p-5 ring-1 ring-stone-200">
             <h2 className="text-2xl font-semibold leading-snug text-slate-900 md:text-3xl">{i.t}</h2>
             <p className="mt-2 text-sm text-slate-600">{i.d}</p>
           </div>

@@ -12,7 +12,7 @@ export default function Page() {
       <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold-100 text-brand-gold-900">
         <IconHelpCircle className="h-8 w-8" />
       </div>
-      <h1 className="mt-6 text-3xl font-bold leading-tight tracking-tight text-slate-900 md:text-4xl">
+      <h1 className="font-display text-balance mt-6 text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl">
         Pago cancelado
       </h1>
       <p className="mt-4 text-lg text-slate-600">

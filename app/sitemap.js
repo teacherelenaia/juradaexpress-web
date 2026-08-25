@@ -18,11 +18,13 @@ export default function sitemap() {
     { url: `${BASE_URL}/traduccion-jurada-validez-oficial`, priority: 0.7 },
     { url: `${BASE_URL}/traduccion-jurada-certificado-matrimonio`, priority: 0.7 },
     { url: `${BASE_URL}/traduccion-jurada-contrato-escritura`, priority: 0.7 },
+    { url: `${BASE_URL}/politica-cookies`, lastModified: "2026-08-25", priority: 0.3 },
     { url: `${BASE_URL}/en`, priority: 0.9 },
     { url: `${BASE_URL}/en/precios`, priority: 0.7 },
     { url: `${BASE_URL}/en/documentos`, priority: 0.7 },
     { url: `${BASE_URL}/en/contacto`, priority: 0.7 },
     { url: `${BASE_URL}/en/preguntas-frecuentes`, priority: 0.6 },
+    { url: `${BASE_URL}/en/cookie-policy`, lastModified: "2026-08-25", priority: 0.3 },
   ];
 
   const postRoutes = getAllPosts().map((post) => ({

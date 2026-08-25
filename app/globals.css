@@ -37,6 +37,19 @@
     @apply min-h-screen bg-white text-slate-900 antialiased;
   }
 
+  /* Cuerpo a 17 px (1.0625 rem) con Manrope; los titulares usan la clase
+     font-display (Newsreader) de forma explícita. */
+  body {
+    @apply font-sans text-body;
+  }
+
+  /* La barra fija de acciones en móvil no debe tapar el final de la página */
+  @media (max-width: 767px) {
+    body {
+      padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
   /* Foco de teclado visible en todo el sitio */
   :focus-visible {
     outline: 2px solid var(--focus-ring);
@@ -56,8 +69,9 @@
   }
 
   /* Botones -------------------------------------------------------------- */
+  /* Radio de botón: 0.625 rem (token rounded-btn). */
   .btn {
-    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl px-5 py-3 text-base font-medium no-underline;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-btn px-5 py-3 text-base font-medium no-underline;
     transition: transform 160ms var(--ease-out), background-color 160ms ease,
       border-color 160ms ease, color 160ms ease;
   }
@@ -70,8 +84,9 @@
     @apply btn bg-brand-navy text-white;
   }
 
+  /* Secundario: borde navy, sin dorado (el dorado queda como acento único). */
   .btn-secondary {
-    @apply btn border border-brand-gold-200 bg-white text-brand-navy;
+    @apply btn border border-brand-navy-200 bg-white text-brand-navy;
   }
 
   .btn-ghost {
@@ -114,6 +129,43 @@
   .link-nav {
     @apply text-slate-600 no-underline;
     transition: color 160ms ease;
+  }
+
+  /* Subrayado dorado de la página activa en la navegación: 2 px que se
+     dibujan de izquierda a derecha con clip-path en 180 ms al cargar. */
+  .nav-underline {
+    @apply absolute inset-x-0 -bottom-0.5 h-0.5 rounded-full bg-brand-gold-300;
+    animation: nav-underline-draw 180ms var(--ease-out) both;
+  }
+
+  /* Panel del menú móvil: siempre montado; entra en 200 ms ease-out y sale
+     en 150 ms (la salida siempre más rápida que la entrada). Solo
+     transform + opacity + visibility. */
+  .mobile-panel {
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 150ms var(--ease-out), opacity 150ms var(--ease-out),
+      visibility 0s linear 150ms;
+  }
+
+  .mobile-panel[data-open="true"] {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: transform 200ms var(--ease-out), opacity 200ms var(--ease-out),
+      visibility 0s;
+  }
+}
+
+@keyframes nav-underline-draw {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
   }
 }
 
@@ -170,6 +222,21 @@
 
   .btn:active {
     transform: none;
+  }
+
+  /* Sin desplazamientos: el subrayado aparece y el panel solo funde. */
+  .nav-underline {
+    animation: none;
+  }
+
+  .mobile-panel,
+  .mobile-panel[data-open="true"] {
+    transform: none;
+    transition: opacity 150ms ease, visibility 0s linear 150ms;
+  }
+
+  .mobile-panel[data-open="true"] {
+    transition: opacity 200ms ease, visibility 0s;
   }
 }
 

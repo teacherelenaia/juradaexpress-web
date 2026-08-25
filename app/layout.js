@@ -1,9 +1,28 @@
 // app/layout.js
 import "./globals.css";
+import { Manrope, Newsreader } from "next/font/google";
 import CookieConsent from "./components/CookieConsent";
+import ActionBar from "./components/ActionBar";
 import MobileNav from "./components/MobileNav";
 import MainNav from "./components/MainNav";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+
+// Tipografía del sistema visual: Manrope (cuerpo/UI) + Newsreader (display),
+// servidas con next/font para evitar CLS y peticiones a terceros.
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-newsreader",
+  display: "swap",
+});
 
 export const metadata = {
   metadataBase: new URL("https://juradaexpress.es"),
@@ -45,7 +64,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${manrope.variable} ${newsreader.variable}`}>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
         <a href="#contenido" className="skip-link">
           Saltar al contenido
@@ -54,12 +73,15 @@ export default function RootLayout({ children }) {
         {/* Cookies + GA4 (GA4 solo se carga tras aceptar) */}
         <CookieConsent />
 
+        {/* Barra inferior móvil + botón flotante de WhatsApp en escritorio */}
+        <ActionBar />
+
         {/* Header */}
         <header
           data-surface="navy"
           className="relative sticky top-0 z-40 bg-brand-navy text-slate-100 shadow-sm"
         >
-          <div className="mx-auto flex max-w-6xl items-center gap-6 px-4 py-3">
+          <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4">
             {/* Logo */}
             <a
               href="/"
@@ -90,10 +112,7 @@ export default function RootLayout({ children }) {
               >
                 685 891 214
               </a>
-              <a
-                href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
-                className="btn btn-gold btn-sm"
-              >
+              <a href="/documentos" className="btn btn-gold btn-sm">
                 Pedir presupuesto
               </a>
               <MobileNav />
@@ -154,6 +173,11 @@ export default function RootLayout({ children }) {
                 <li>
                   <a href="/contacto" className="link-nav">
                     Contacto
+                  </a>
+                </li>
+                <li>
+                  <a href="/politica-cookies" className="link-nav">
+                    Política de cookies
                   </a>
                 </li>
               </ul>

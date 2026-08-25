@@ -62,7 +62,7 @@ export default function Reviews({ locale = "es", className = "" }) {
           {reviews.map((r) => (
             <blockquote
               key={`${r.name}-${r.date}`}
-              className="rounded-2xl bg-white p-5 ring-1 ring-stone-200"
+              className="rounded-xl bg-white p-5 ring-1 ring-stone-200"
             >
               {r.rating ? (
                 <Stars rating={r.rating} label={t.stars(r.rating)} />

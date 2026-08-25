@@ -16,7 +16,7 @@ export const metadata = {
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold leading-tight text-slate-900">Contacto</h1>
+      <h1 className="font-display text-balance text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl">Contacto</h1>
       <p className="mt-3 max-w-2xl text-slate-600">
         ¿Necesitas una traducción jurada en Murcia? Escríbenos por WhatsApp o
         email con tu documento escaneado y te respondemos con presupuesto
@@ -28,7 +28,7 @@ export default function Page() {
           href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl bg-white p-6 ring-1 ring-stone-200 hover:shadow"
+          className="rounded-xl bg-white p-6 ring-1 ring-stone-200 hover:shadow"
         >
           <h2 className="text-2xl font-semibold leading-snug text-brand-navy md:text-3xl">WhatsApp</h2>
           <p className="mt-2 text-sm text-slate-600">
@@ -39,7 +39,7 @@ export default function Page() {
 
         <a
           href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
-          className="rounded-2xl bg-white p-6 ring-1 ring-stone-200 hover:shadow"
+          className="rounded-xl bg-white p-6 ring-1 ring-stone-200 hover:shadow"
         >
           <h2 className="text-2xl font-semibold leading-snug text-brand-navy md:text-3xl">Email</h2>
           <p className="mt-2 text-sm text-slate-600">
@@ -50,7 +50,7 @@ export default function Page() {
 
         <a
           href="tel:+34685891214"
-          className="rounded-2xl bg-white p-6 ring-1 ring-stone-200 hover:shadow"
+          className="rounded-xl bg-white p-6 ring-1 ring-stone-200 hover:shadow"
         >
           <h2 className="text-2xl font-semibold leading-snug text-brand-navy md:text-3xl">Teléfono</h2>
           <p className="mt-2 text-sm text-slate-600">
@@ -60,7 +60,7 @@ export default function Page() {
         </a>
       </div>
 
-      <div className="mt-10 rounded-2xl bg-brand-navy-50 p-6 ring-1 ring-brand-navy-100">
+      <div className="mt-10 rounded-xl bg-brand-navy-50 p-6 ring-1 ring-brand-navy-100">
         <h2 className="text-2xl font-semibold leading-snug text-slate-900 md:text-3xl">Traductor jurado en Murcia</h2>
         <p className="mt-2 text-sm text-slate-600">
           Traducciones juradas Español ⇆ Inglés, firmadas y selladas, válidas

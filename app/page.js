@@ -1,6 +1,7 @@
 // app/page.js
 import Image from "next/image";
 import TrackedLink from "./components/TrackedLink";
+import { SectionHeading, Card } from "./components/ui";
 import Reviews from "./components/Reviews";
 import { IconCheck, IconClock, IconSend } from "./components/Icons";
 
@@ -44,7 +45,7 @@ export default function Page() {
       <section className="mx-auto max-w-6xl px-4 pb-16 pt-12 md:pb-20 md:pt-16">
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div>
-            <h1 className="text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 md:text-5xl">
+            <h1 className="font-display text-balance text-display font-semibold text-slate-900">
               Traducción jurada Español ⇆ Inglés con validez oficial, en 24/48 h
             </h1>
             <p className="mt-5 text-xl text-slate-600">
@@ -108,7 +109,7 @@ export default function Page() {
               <img
                 src="/hero-internacional.jpg"
                 alt="JuradaExpress — Traducción jurada Español ⇆ Inglés, entrega digital en toda España y en el extranjero"
-                className="max-h-80 rounded-2xl shadow object-cover"
+                className="max-h-80 rounded-xl shadow object-cover"
               />
             </figure>
           </div>
@@ -120,15 +121,15 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div>
-              <h2 className="text-3xl font-bold leading-snug tracking-tight text-slate-900 md:text-4xl">
+              <SectionHeading>
                 Documentos más habituales
-              </h2>
+              </SectionHeading>
               <p className="mt-3 max-w-md text-sm text-slate-600">
                 Cada documento tiene sus propios requisitos de traducción:
                 estos son los que traducimos con más frecuencia.
               </p>
             </div>
-            <div className="relative h-56 w-full overflow-hidden rounded-2xl shadow md:h-64">
+            <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-64">
               <Image
                 src="/fotos/foto-documentos.jpg"
                 alt="Pasaporte y documentos de viaje sobre un portátil — traducción jurada de documentos"
@@ -161,7 +162,7 @@ export default function Page() {
             ].map((i) => (
               <article
                 key={i.t}
-                className="overflow-hidden rounded-2xl bg-white ring-1 ring-stone-200"
+                className="overflow-hidden rounded-xl bg-white ring-1 ring-stone-200"
               >
                 <img
                   src={i.img}
@@ -184,9 +185,9 @@ export default function Page() {
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
         <div className="grid items-center gap-8 md:grid-cols-2">
           <div>
-            <h2 className="text-3xl font-bold leading-snug tracking-tight text-slate-900 md:text-4xl">
+            <SectionHeading>
               ¿Resides en España siendo británico/a?
-            </h2>
+            </SectionHeading>
             <p className="mt-4 max-w-xl text-slate-600">
               Te ayudo con la traducción jurada de tus documentos para el
               NIE, la tarjeta de residencia, el empadronamiento, la compra
@@ -213,7 +214,7 @@ export default function Page() {
               </TrackedLink>
             </div>
           </div>
-          <div className="relative h-56 w-full overflow-hidden rounded-2xl shadow md:h-72">
+          <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-72">
             <Image
               src="/fotos/foto-bandera-uk.jpg"
               alt="Bandera de Reino Unido — traducción jurada para británicos residentes en España"
@@ -228,9 +229,9 @@ export default function Page() {
       {/* ACEPTADO POR… */}
       <section className="bg-stone-50">
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <h2 className="text-3xl font-bold leading-snug tracking-tight text-slate-900 md:text-4xl">
+          <SectionHeading>
             Aceptado por…
-          </h2>
+          </SectionHeading>
           <p className="mt-3 max-w-3xl text-sm text-slate-600">
             Traducciones juradas firmadas y selladas por traductor jurado
             válidas ante organismos oficiales (p.ej., Ministerios, Universidades,
@@ -257,21 +258,18 @@ export default function Page() {
 
       {/* VENTAJAS */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-        <h2 className="text-3xl font-bold leading-snug tracking-tight text-slate-900 md:text-4xl">
+        <SectionHeading>
           Por qué elegir JuradaExpress
-        </h2>
+        </SectionHeading>
         <ul className="mt-8 grid gap-6 md:grid-cols-3">
           {[
             "Traducción jurada válida ante organismos oficiales.",
             "Entrega rápida 24/48 h. Envíos a toda España y extranjero.",
             "Atención directa por email y WhatsApp. Presupuesto inmediato.",
           ].map((li) => (
-            <li
-              key={li}
-              className="rounded-2xl bg-white p-5 text-slate-700 ring-1 ring-stone-200"
-            >
+            <Card as="li" key={li} className="p-5 text-slate-700">
               {li}
-            </li>
+            </Card>
           ))}
         </ul>
       </section>
@@ -281,16 +279,16 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div>
-              <h2 className="text-3xl font-bold leading-snug tracking-tight text-slate-900 md:text-4xl">
+              <SectionHeading>
                 ¿Cómo trabajamos?
-              </h2>
+              </SectionHeading>
               <p className="mt-3 max-w-md text-sm text-slate-600">
                 Todo el proceso es 100% digital: da igual si estás en Murcia, en
                 cualquier otro punto de España o en el extranjero — el envío, el
                 presupuesto y la entrega funcionan igual.
               </p>
             </div>
-            <div className="relative h-56 w-full overflow-hidden rounded-2xl shadow md:h-64">
+            <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-64">
               <Image
                 src="/fotos/foto-online.jpg"
                 alt="Portátil abierto sobre una mesa — todo el proceso se gestiona online"
@@ -307,12 +305,12 @@ export default function Page() {
               { t: "3. Traducción jurada", d: "Firmada y sellada por traductor jurado." },
               { t: "4. Entrega 24/48 h", d: "Digital y/o papel, con envío a tu dirección." },
             ].map((i) => (
-              <div key={i.t} className="rounded-2xl bg-white p-5 ring-1 ring-stone-200">
+              <Card key={i.t} className="p-5">
                 <h3 className="text-xl font-semibold leading-snug text-slate-900 md:text-2xl">
                   {i.t}
                 </h3>
                 <p className="mt-2 text-sm text-slate-600">{i.d}</p>
-              </div>
+              </Card>
             ))}
           </div>
         </div>
@@ -322,15 +320,15 @@ export default function Page() {
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
         <div className="grid items-center gap-8 md:grid-cols-[auto,1fr]">
           <div
-            className="mx-auto flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl bg-stone-100 text-2xl font-semibold tracking-tight text-brand-navy md:mx-0"
+            className="mx-auto flex h-24 w-24 shrink-0 items-center justify-center rounded-xl bg-stone-100 text-2xl font-semibold tracking-tight text-brand-navy md:mx-0"
             aria-hidden="true"
           >
             E.P.
           </div>
           <div>
-            <h2 className="text-3xl font-bold leading-snug tracking-tight text-slate-900 md:text-4xl">
+            <SectionHeading>
               Sobre mí
-            </h2>
+            </SectionHeading>
             <p className="mt-4 max-w-2xl text-lg text-slate-600">
               Soy <strong className="text-brand-navy">Elena Peñaranda Ortega</strong>,
               Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio
@@ -350,13 +348,13 @@ export default function Page() {
       <section className="mx-auto max-w-6xl px-4 pb-16 md:pb-20">
         <div
           data-surface="navy"
-          className="rounded-2xl bg-brand-navy p-8 text-white md:p-12"
+          className="rounded-xl bg-brand-navy p-8 text-white md:p-12"
         >
           <div className="grid items-center gap-8 md:grid-cols-[1.2fr,0.8fr]">
             <div>
-              <h2 className="text-3xl font-bold leading-snug tracking-tight text-white md:text-4xl">
+              <SectionHeading light>
                 ¿Empezamos?
-              </h2>
+              </SectionHeading>
               <p className="mt-2 text-brand-navy-100">
                 Envíanos el documento y te respondemos con presupuesto y plazo.
               </p>
@@ -377,7 +375,7 @@ export default function Page() {
                 </TrackedLink>
               </div>
             </div>
-            <div className="relative h-48 w-full overflow-hidden rounded-2xl shadow-lg md:h-56">
+            <div className="relative h-48 w-full overflow-hidden rounded-xl shadow-lg md:h-56">
               <Image
                 src="/fotos/foto-firma.jpg"
                 alt="Firma de un documento con pluma — traducción jurada firmada y sellada"
@@ -392,10 +390,10 @@ export default function Page() {
 
       {/* FAQ + JSON-LD */}
       <section className="mx-auto max-w-6xl px-4 pb-20">
-        <h2 className="text-3xl font-bold leading-snug tracking-tight text-slate-900 md:text-4xl">
+        <SectionHeading>
           Preguntas frecuentes
-        </h2>
-        <div className="mt-8 divide-y divide-stone-200 rounded-2xl bg-white ring-1 ring-stone-200">
+        </SectionHeading>
+        <div className="mt-8 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200">
           {[
             {
               q: "¿La traducción jurada es válida en todo el territorio?",

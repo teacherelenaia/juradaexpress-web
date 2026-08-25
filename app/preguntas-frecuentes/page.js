@@ -51,7 +51,7 @@ const faqs = [
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold leading-tight text-slate-900">Preguntas frecuentes</h1>
+      <h1 className="font-display text-balance text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl">Preguntas frecuentes</h1>
       <p className="mt-3 max-w-2xl text-slate-600">
         Resolvemos las dudas más habituales sobre traducción jurada en
         Murcia. Si no encuentras respuesta a tu pregunta,{" "}
@@ -61,7 +61,7 @@ export default function Page() {
         .
       </p>
 
-      <div className="mt-8 divide-y rounded-2xl ring-1 ring-stone-200 bg-white">
+      <div className="mt-8 divide-y rounded-xl ring-1 ring-stone-200 bg-white">
         {faqs.map((f, idx) => (
           <details key={idx} className="p-5">
             <summary className="cursor-pointer font-medium">{f.q}</summary>

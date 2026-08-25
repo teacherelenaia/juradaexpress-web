@@ -29,7 +29,7 @@ export default function BlogPostPage({ params }) {
         </Link>
       </div>
 
-      <h1 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-slate-900">
+      <h1 className="font-display text-balance mt-3 text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl">
         {post.title}
       </h1>
 
@@ -37,7 +37,7 @@ export default function BlogPostPage({ params }) {
         <img
           src={post.image}
           alt={post.alt || post.title}
-          className="mt-6 h-64 w-full rounded-2xl object-cover md:h-80"
+          className="mt-6 h-64 w-full rounded-xl object-cover md:h-80"
         />
       )}
 

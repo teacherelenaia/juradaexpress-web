@@ -18,7 +18,7 @@ export const metadata = {
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:py-16">
-      <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-5xl">
+      <h1 className="font-display text-balance text-4xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-5xl">
         Catálogo de documentos
       </h1>
       <p className="mt-4 max-w-2xl text-lg text-slate-600">

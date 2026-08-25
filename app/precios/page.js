@@ -16,14 +16,14 @@ export const metadata = {
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold leading-tight text-slate-900">Precios traducción jurada</h1>
+      <h1 className="font-display text-balance text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl">Precios traducción jurada</h1>
       <p className="mt-3 text-slate-600">
         El precio final depende de la extensión, complejidad y formato. Te damos
         presupuesto cerrado al ver el documento.
       </p>
 
-      <div className="mt-6 overflow-hidden rounded-2xl ring-1 ring-stone-200">
-        <table className="w-full text-sm">
+      <div className="mt-6 overflow-hidden rounded-xl ring-1 ring-stone-200">
+        <table className="w-full text-sm tabular-nums">
           <thead className="bg-stone-50 text-left text-slate-600">
             <tr>
               <th className="p-3">Documento</th>

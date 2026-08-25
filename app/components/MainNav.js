@@ -1,7 +1,9 @@
 "use client";
 
 // app/components/MainNav.js
-// Navegación de escritorio con estado activo real (usePathname).
+// Navegación de escritorio con estado activo real (usePathname). El
+// subrayado dorado de la página activa se dibuja con clip-path en 180 ms
+// (ver .nav-underline en globals.css).
 import { usePathname } from "next/navigation";
 
 const LINKS = [
@@ -35,11 +37,12 @@ export default function MainNav() {
             aria-current={active ? "page" : undefined}
             className={`relative whitespace-nowrap py-1 no-underline transition-colors ${
               active
-                ? "font-medium text-white after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-brand-gold-300 after:content-['']"
+                ? "font-medium text-white"
                 : "text-slate-200 hover:text-brand-gold-300"
             }`}
           >
             {l.label}
+            {active && <span className="nav-underline" aria-hidden="true" />}
           </a>
         );
       })}
