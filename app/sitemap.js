@@ -1,5 +1,6 @@
 // app/sitemap.js
 import { getAllPosts } from "../content/posts";
+import { getAllPostsEn } from "../content/posts.en";
 
 const BASE_URL = "https://juradaexpress.es";
 
@@ -18,18 +19,43 @@ export default function sitemap() {
     { url: `${BASE_URL}/traduccion-jurada-validez-oficial`, priority: 0.7 },
     { url: `${BASE_URL}/traduccion-jurada-certificado-matrimonio`, priority: 0.7 },
     { url: `${BASE_URL}/traduccion-jurada-contrato-escritura`, priority: 0.7 },
+    { url: `${BASE_URL}/traduccion-jurada-permiso-conducir`, lastModified: "2026-08-25", priority: 0.7 },
+    { url: `${BASE_URL}/traduccion-jurada-certificado-empresa`, lastModified: "2026-08-25", priority: 0.7 },
+    { url: `${BASE_URL}/traduccion-jurada-dni-pasaporte`, lastModified: "2026-08-25", priority: 0.7 },
+    { url: `${BASE_URL}/traduccion-jurada-testamento-herencia`, lastModified: "2026-08-25", priority: 0.7 },
+    { url: `${BASE_URL}/traduccion-jurada-certificado-medico`, lastModified: "2026-08-25", priority: 0.7 },
+    { url: `${BASE_URL}/traductor-jurado-murcia`, lastModified: "2026-08-25", priority: 0.8 },
+    { url: `${BASE_URL}/como-funciona`, lastModified: "2026-08-25", priority: 0.8 },
+    { url: `${BASE_URL}/sobre-mi`, lastModified: "2026-08-25", priority: 0.8 },
+    { url: `${BASE_URL}/traduccion-jurada-britanicos-espana`, lastModified: "2026-08-25", priority: 0.8 },
+    { url: `${BASE_URL}/aviso-legal`, lastModified: "2026-08-25", priority: 0.3 },
+    { url: `${BASE_URL}/politica-privacidad`, lastModified: "2026-08-25", priority: 0.3 },
+    { url: `${BASE_URL}/politica-cookies`, lastModified: "2026-08-25", priority: 0.3 },
     { url: `${BASE_URL}/en`, priority: 0.9 },
     { url: `${BASE_URL}/en/precios`, priority: 0.7 },
     { url: `${BASE_URL}/en/documentos`, priority: 0.7 },
     { url: `${BASE_URL}/en/contacto`, priority: 0.7 },
     { url: `${BASE_URL}/en/preguntas-frecuentes`, priority: 0.6 },
+    { url: `${BASE_URL}/en/about`, lastModified: "2026-08-25", priority: 0.7 },
+    { url: `${BASE_URL}/en/how-it-works`, lastModified: "2026-08-25", priority: 0.7 },
+    { url: `${BASE_URL}/en/blog`, lastModified: "2026-08-25", priority: 0.6 },
+    { url: `${BASE_URL}/en/sworn-translation-british-residents-spain`, lastModified: "2026-08-25", priority: 0.7 },
+    { url: `${BASE_URL}/en/legal-notice`, lastModified: "2026-08-25", priority: 0.3 },
+    { url: `${BASE_URL}/en/privacy-policy`, lastModified: "2026-08-25", priority: 0.3 },
+    { url: `${BASE_URL}/en/cookie-policy`, lastModified: "2026-08-25", priority: 0.3 },
   ];
 
   const postRoutes = getAllPosts().map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: post.date,
+    lastModified: post.updated || post.date,
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...postRoutes];
+  const postRoutesEn = getAllPostsEn().map((post) => ({
+    url: `${BASE_URL}/en/blog/${post.slug}`,
+    lastModified: post.updated || post.date,
+    priority: 0.5,
+  }));
+
+  return [...staticRoutes, ...postRoutes, ...postRoutesEn];
 }

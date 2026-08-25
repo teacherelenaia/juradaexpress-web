@@ -44,6 +44,7 @@ export default function DocumentCatalog() {
   const [fileNotice, setFileNotice] = useState("");
   const [dragActive, setDragActive] = useState(false);
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error | config-missing
+  const [fieldErrors, setFieldErrors] = useState({}); // { Nombre, Email, privacidad }
   const [payStatus, setPayStatus] = useState("idle"); // idle | redirecting | error
 
   const formRef = useRef(null);
@@ -117,6 +118,34 @@ export default function DocumentCatalog() {
     if (e.dataTransfer.files?.length) handleFiles(e.dataTransfer.files);
   }
 
+  // Validación inline (sin alert()): devuelve el mapa de errores por campo.
+  function validate(form) {
+    const errors = {};
+    if (!form.Nombre.value.trim()) {
+      errors.Nombre = "Escribe tu nombre para poder responderte.";
+    }
+    const email = form.Email.value.trim();
+    if (!email) {
+      errors.Email = "Necesito un email para enviarte el presupuesto.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      errors.Email = "Ese email no parece completo; revísalo.";
+    }
+    if (!form.privacidad.checked) {
+      errors.privacidad =
+        "Marca la casilla de privacidad para que pueda tratar tus datos.";
+    }
+    return errors;
+  }
+
+  function clearFieldError(name) {
+    setFieldErrors((prev) => {
+      if (!prev[name]) return prev;
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (selectedDocs.length === 0) return;
@@ -125,6 +154,13 @@ export default function DocumentCatalog() {
 
     if (form.botcheck.checked) {
       // Casilla honeypot: si está marcada, lo rellenó un bot. Ignoramos en silencio.
+      return;
+    }
+
+    const errors = validate(form);
+    setFieldErrors(errors);
+    if (Object.keys(errors).length > 0) {
+      form.querySelector(`[name="${Object.keys(errors)[0]}"]`)?.focus();
       return;
     }
 
@@ -137,6 +173,8 @@ export default function DocumentCatalog() {
     // FormData(form) captura Nombre/Email/Teléfono/botcheck por su atributo name.
     const fd = new FormData(form);
     fd.delete("botcheck");
+    fd.delete("privacidad");
+    fd.append("Acepta la política de privacidad", "Sí");
     if (!fd.get("Teléfono")) fd.set("Teléfono", "No indicado");
     fd.append("access_key", WEB3FORMS_ACCESS_KEY);
     fd.append("subject", "Nueva solicitud — Catálogo de documentos JuradaExpress");
@@ -190,17 +228,17 @@ export default function DocumentCatalog() {
           return (
             <div
               key={doc.id}
-              className={`rounded-2xl bg-white p-6 ring-1 transition hover:shadow ${
-                isSelected ? "ring-2 ring-brand-gold" : "ring-slate-200"
+              className={`rounded-xl bg-white p-6 ring-1 transition hover:shadow ${
+                isSelected ? "ring-2 ring-brand-gold" : "ring-stone-200"
               }`}
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-navy-50 text-brand-navy">
                 <Icon className="h-6 w-6" />
               </div>
-              <h3 className="mt-4 font-semibold text-slate-900">{doc.name}</h3>
+              <h3 className="mt-4 text-xl font-semibold leading-snug text-slate-900 md:text-2xl">{doc.name}</h3>
               <div className="mt-3">
                 {doc.price != null ? (
-                  <span className="inline-flex rounded-full bg-brand-navy px-3 py-1 text-sm font-semibold text-white">
+                  <span className="inline-flex rounded-full bg-brand-navy px-3 py-1 text-sm font-semibold tabular-nums text-white">
                     {doc.price} €
                   </span>
                 ) : (
@@ -228,9 +266,9 @@ export default function DocumentCatalog() {
       {/* FORMULARIO */}
       <div
         ref={formRef}
-        className="mt-16 scroll-mt-24 rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-200 md:p-10"
+        className="mt-16 scroll-mt-24 rounded-xl bg-stone-50 p-6 ring-1 ring-stone-200 md:p-10"
       >
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+        <h2 className="text-2xl font-bold leading-snug tracking-tight text-slate-900 md:text-3xl">
           Tu solicitud
         </h2>
 
@@ -240,7 +278,7 @@ export default function DocumentCatalog() {
           </p>
         ) : (
           <>
-            <ul className="mt-5 divide-y divide-slate-200 rounded-xl bg-white ring-1 ring-slate-200">
+            <ul className="mt-5 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200">
               {selectedDocs.map((d) => (
                 <li
                   key={d.id}
@@ -248,7 +286,7 @@ export default function DocumentCatalog() {
                 >
                   <span className="text-sm text-slate-700">{d.name}</span>
                   <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium text-slate-900">
+                    <span className="text-sm font-medium tabular-nums text-slate-900">
                       {formatPrice(d.price)}
                     </span>
                     <button
@@ -287,7 +325,7 @@ export default function DocumentCatalog() {
                   type="button"
                   onClick={handlePayOnline}
                   disabled={payStatus === "redirecting"}
-                  className="w-full rounded-xl bg-brand-gold px-5 py-3 font-medium text-brand-navy-900 transition hover:bg-brand-gold-400 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+                  className="btn btn-gold w-full disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                 >
                   {payStatus === "redirecting"
                     ? "Redirigiendo a pago…"
@@ -314,7 +352,7 @@ export default function DocumentCatalog() {
             horas (horario laboral).
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
             <input
               type="checkbox"
               name="botcheck"
@@ -332,9 +370,20 @@ export default function DocumentCatalog() {
                   id="nombre"
                   name="Nombre"
                   type="text"
-                  required
-                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
+                  aria-invalid={fieldErrors.Nombre ? "true" : undefined}
+                  aria-describedby={fieldErrors.Nombre ? "nombre-error" : undefined}
+                  onInput={() => clearFieldError("Nombre")}
+                  className={`mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-1 ${
+                    fieldErrors.Nombre
+                      ? "border-red-400 focus:border-red-500 focus:ring-red-500"
+                      : "border-stone-300 focus:border-brand-navy focus:ring-brand-navy"
+                  }`}
                 />
+                {fieldErrors.Nombre && (
+                  <p id="nombre-error" className="mt-1 text-sm text-red-600">
+                    {fieldErrors.Nombre}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor="email" className="text-sm font-medium text-slate-700">
@@ -344,9 +393,20 @@ export default function DocumentCatalog() {
                   id="email"
                   name="Email"
                   type="email"
-                  required
-                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
+                  aria-invalid={fieldErrors.Email ? "true" : undefined}
+                  aria-describedby={fieldErrors.Email ? "email-error" : undefined}
+                  onInput={() => clearFieldError("Email")}
+                  className={`mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-1 ${
+                    fieldErrors.Email
+                      ? "border-red-400 focus:border-red-500 focus:ring-red-500"
+                      : "border-stone-300 focus:border-brand-navy focus:ring-brand-navy"
+                  }`}
                 />
+                {fieldErrors.Email && (
+                  <p id="email-error" className="mt-1 text-sm text-red-600">
+                    {fieldErrors.Email}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -359,7 +419,7 @@ export default function DocumentCatalog() {
                 id="telefono"
                 name="Teléfono"
                 type="tel"
-                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
+                className="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
               />
             </div>
 
@@ -382,7 +442,7 @@ export default function DocumentCatalog() {
                 className={`mt-1 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed px-4 py-8 text-center transition ${
                   dragActive
                     ? "border-brand-gold bg-brand-gold-50"
-                    : "border-slate-300 bg-white hover:border-brand-navy-300"
+                    : "border-stone-300 bg-white hover:border-brand-navy-300"
                 }`}
               >
                 <IconUpload className="h-6 w-6 text-brand-navy-300" />
@@ -400,7 +460,7 @@ export default function DocumentCatalog() {
               </div>
 
               {file && (
-                <div className="mt-3 flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-slate-200">
+                <div className="mt-3 flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-stone-200">
                   <span className="truncate text-slate-700">
                     {file.name}{" "}
                     <span className="text-slate-400">
@@ -441,6 +501,40 @@ export default function DocumentCatalog() {
               </p>
             </div>
 
+            {/* RGPD: cláusula informativa + aceptación obligatoria */}
+            <div className="rounded-xl bg-white p-4 text-xs text-slate-500 ring-1 ring-stone-200">
+              <p>
+                <strong className="text-slate-700">Protección de datos:</strong>{" "}
+                la responsable es Elena Peñaranda Ortega. Usaré tus datos solo
+                para responder a tu solicitud y preparar el presupuesto; no se
+                ceden a terceros salvo obligación legal. Puedes ejercer tus
+                derechos de acceso, rectificación o supresión en
+                info@juradaexpress.es. Más información en la{" "}
+                <a href="/politica-privacidad" className="link">
+                  política de privacidad
+                </a>
+                .
+              </p>
+              <label className="mt-3 flex items-start gap-2 text-sm text-slate-700">
+                <input
+                  type="checkbox"
+                  name="privacidad"
+                  aria-invalid={fieldErrors.privacidad ? "true" : undefined}
+                  aria-describedby={
+                    fieldErrors.privacidad ? "privacidad-error" : undefined
+                  }
+                  onChange={() => clearFieldError("privacidad")}
+                  className="mt-0.5 h-5 w-5 shrink-0 rounded border-stone-300 text-brand-navy focus:ring-brand-navy"
+                />
+                He leído y acepto la política de privacidad.
+              </label>
+              {fieldErrors.privacidad && (
+                <p id="privacidad-error" className="mt-1 text-sm text-red-600">
+                  {fieldErrors.privacidad}
+                </p>
+              )}
+            </div>
+
             {status === "error" && (
               <p className="text-sm text-red-600">
                 Ha ocurrido un error al enviar. Inténtalo de nuevo o escríbenos
@@ -458,7 +552,7 @@ export default function DocumentCatalog() {
             <button
               type="submit"
               disabled={selectedDocs.length === 0 || status === "sending"}
-              className="w-full rounded-xl bg-brand-navy px-5 py-3 font-medium text-white transition hover:bg-brand-navy-700 disabled:cursor-not-allowed disabled:opacity-50"
+              className="btn btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
             >
               {status === "sending" ? "Enviando…" : "Enviar solicitud"}
             </button>

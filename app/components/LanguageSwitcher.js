@@ -10,6 +10,13 @@ const ES_TO_EN = {
   "/contacto": "/en/contacto",
   "/documentos": "/en/documentos",
   "/preguntas-frecuentes": "/en/preguntas-frecuentes",
+  "/politica-cookies": "/en/cookie-policy",
+  "/sobre-mi": "/en/about",
+  "/traduccion-jurada-britanicos-espana": "/en/sworn-translation-british-residents-spain",
+  "/aviso-legal": "/en/legal-notice",
+  "/politica-privacidad": "/en/privacy-policy",
+  "/como-funciona": "/en/how-it-works",
+  "/blog": "/en/blog",
 };
 
 const EN_TO_ES = Object.fromEntries(
@@ -20,10 +27,24 @@ export default function LanguageSwitcher({ className = "" }) {
   const pathname = usePathname() || "/";
   const isEnglish = pathname === "/en" || pathname.startsWith("/en/");
 
-  // Si la página actual no tiene equivalente en el otro idioma
-  // (blog, catálogo, fichas de documento…), cae al home del otro idioma.
-  const esHref = isEnglish ? EN_TO_ES[pathname] || "/" : pathname;
-  const enHref = isEnglish ? pathname : ES_TO_EN[pathname] || "/en";
+  // Si la página no tiene equivalente exacto, va a la sección equivalente
+  // más cercana del otro idioma (nunca al home a secas, salvo último recurso).
+  function nearestEn(path) {
+    if (ES_TO_EN[path]) return ES_TO_EN[path];
+    if (path.startsWith("/traduccion-jurada-")) return "/en/documentos";
+    if (path === "/traductor-jurado-murcia") return "/en/contacto";
+    if (path.startsWith("/blog/")) return "/en/blog";
+    if (path.startsWith("/documentos/")) return "/en/documentos";
+    return "/en";
+  }
+
+  function nearestEs(path) {
+    if (EN_TO_ES[path]) return EN_TO_ES[path];
+    return "/";
+  }
+
+  const esHref = isEnglish ? nearestEs(pathname) : pathname;
+  const enHref = isEnglish ? pathname : nearestEn(pathname);
 
   return (
     <div
@@ -33,7 +54,7 @@ export default function LanguageSwitcher({ className = "" }) {
       <a
         href={esHref}
         aria-current={!isEnglish ? "page" : undefined}
-        className={`rounded px-1.5 py-0.5 ${
+        className={`inline-flex min-h-[44px] items-center rounded px-2 no-underline ${
           !isEnglish
             ? "font-semibold text-brand-gold-300"
             : "text-slate-300 hover:text-brand-gold-300"
@@ -47,7 +68,7 @@ export default function LanguageSwitcher({ className = "" }) {
       <a
         href={enHref}
         aria-current={isEnglish ? "page" : undefined}
-        className={`rounded px-1.5 py-0.5 ${
+        className={`inline-flex min-h-[44px] items-center rounded px-2 no-underline ${
           isEnglish
             ? "font-semibold text-brand-gold-300"
             : "text-slate-300 hover:text-brand-gold-300"

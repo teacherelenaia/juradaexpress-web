@@ -1,4 +1,5 @@
 // app/contacto/page.js
+import SocialIcons from "../components/SocialIcons";
 export const metadata = {
   title: "Contacto — Traductor Jurado en Murcia",
   description:
@@ -16,7 +17,7 @@ export const metadata = {
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold">Contacto</h1>
+      <h1 className="font-display text-balance text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl">Contacto</h1>
       <p className="mt-3 max-w-2xl text-slate-600">
         ¿Necesitas una traducción jurada en Murcia? Escríbenos por WhatsApp o
         email con tu documento escaneado y te respondemos con presupuesto
@@ -28,9 +29,9 @@ export default function Page() {
           href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl bg-white p-6 ring-1 ring-slate-200 hover:shadow"
+          className="rounded-xl bg-white p-6 ring-1 ring-stone-200 hover:shadow"
         >
-          <h2 className="font-semibold text-brand-navy">WhatsApp</h2>
+          <h2 className="text-2xl font-semibold leading-snug text-brand-navy md:text-3xl">WhatsApp</h2>
           <p className="mt-2 text-sm text-slate-600">
             Respuesta rápida, ideal para presupuesto inmediato.
           </p>
@@ -39,9 +40,9 @@ export default function Page() {
 
         <a
           href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
-          className="rounded-2xl bg-white p-6 ring-1 ring-slate-200 hover:shadow"
+          className="rounded-xl bg-white p-6 ring-1 ring-stone-200 hover:shadow"
         >
-          <h2 className="font-semibold text-brand-navy">Email</h2>
+          <h2 className="text-2xl font-semibold leading-snug text-brand-navy md:text-3xl">Email</h2>
           <p className="mt-2 text-sm text-slate-600">
             Envíanos tu documento escaneado y los detalles del encargo.
           </p>
@@ -50,9 +51,9 @@ export default function Page() {
 
         <a
           href="tel:+34685891214"
-          className="rounded-2xl bg-white p-6 ring-1 ring-slate-200 hover:shadow"
+          className="rounded-xl bg-white p-6 ring-1 ring-stone-200 hover:shadow"
         >
-          <h2 className="font-semibold text-brand-navy">Teléfono</h2>
+          <h2 className="text-2xl font-semibold leading-snug text-brand-navy md:text-3xl">Teléfono</h2>
           <p className="mt-2 text-sm text-slate-600">
             Llámanos directamente si lo prefieres.
           </p>
@@ -60,13 +61,21 @@ export default function Page() {
         </a>
       </div>
 
-      <div className="mt-10 rounded-2xl bg-brand-navy-50 p-6 ring-1 ring-brand-navy-100">
-        <h2 className="font-semibold">Traductor jurado en Murcia</h2>
+      <div className="mt-10 rounded-xl bg-brand-navy-50 p-6 ring-1 ring-brand-navy-100">
+        <h2 className="text-2xl font-semibold leading-snug text-slate-900 md:text-3xl">Traductor jurado en Murcia</h2>
         <p className="mt-2 text-sm text-slate-600">
           Traducciones juradas Español ⇆ Inglés, firmadas y selladas, válidas
           ante organismos oficiales. Envíos a toda España y al extranjero.
-          Entrega habitual en 24/48 h.
+          Entrega habitual en 24/48 h.{" "}
+          <a href="/traductor-jurado-murcia" className="link">
+            Más sobre el servicio en Murcia →
+          </a>
         </p>
+      </div>
+
+      <div className="mt-8 flex items-center gap-3">
+        <span className="text-sm text-slate-600">También estoy en</span>
+        <SocialIcons className="text-brand-navy" />
       </div>
     </main>
   );

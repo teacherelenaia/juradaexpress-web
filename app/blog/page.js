@@ -3,22 +3,34 @@ import Link from "next/link";
 import { getAllPosts } from "../../content/posts";
 
 export const metadata = {
-  title: "Blog | JuradaExpress",
+  title: "Blog",
   description:
-    "Consejos prácticos sobre traducción jurada: precios, plazos y cómo preparar tus documentos.",
+    "Consejos prácticos sobre traducción jurada: precios, plazos, apostilla y cómo preparar tus documentos para cada trámite.",
+  alternates: {
+    canonical: "https://juradaexpress.es/blog",
+    languages: {
+      es: "https://juradaexpress.es/blog",
+      en: "https://juradaexpress.es/en/blog",
+      "x-default": "https://juradaexpress.es/blog",
+    },
+  },
 };
 
 export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+    <main className="mx-auto max-w-3xl px-4 py-10 md:py-16">
+      <h1 className="font-display text-balance text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl">
         Blog
       </h1>
-      <p className="mt-2 text-slate-600">
+      <p className="mt-3 max-w-[68ch] text-slate-600">
         Guías rápidas y consejos para que tu traducción jurada sea fácil y sin
-        sorpresas.
+        sorpresas. También disponible en{" "}
+        <Link href="/en/blog" className="link">
+          inglés
+        </Link>
+        .
       </p>
 
       <ul className="mt-8 space-y-6">
@@ -26,17 +38,21 @@ export default function BlogPage() {
           <li key={post.slug} className="group">
             <Link
               href={`/blog/${post.slug}`}
-              className="block overflow-hidden rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+              className="block overflow-hidden rounded-xl bg-white no-underline ring-1 ring-stone-200 transition-shadow hover:shadow-card"
             >
               {post.image && (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={post.image}
                   alt={post.alt || post.title}
-                  className="h-40 w-full object-cover"
+                  width="1200"
+                  height="675"
+                  loading="lazy"
+                  className="aspect-video h-44 w-full object-cover"
                 />
               )}
-              <div className="p-4">
-                <h2 className="text-xl font-semibold text-slate-900 group-hover:underline">
+              <div className="p-5">
+                <h2 className="text-xl font-semibold leading-snug text-slate-900 group-hover:text-brand-navy md:text-2xl">
                   {post.title}
                 </h2>
                 <div className="mt-1 text-sm text-slate-500">

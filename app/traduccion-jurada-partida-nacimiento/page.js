@@ -1,71 +1,13 @@
 // app/traduccion-jurada-partida-nacimiento/page.js
-export const metadata = {
-  title: "Traducción Jurada de Partida de Nacimiento – Español-Inglés",
-  description:
-    "Traducción jurada de partida/certificado de nacimiento Español ⇆ Inglés, para trámites en España y Reino Unido. Válida ante organismos oficiales. Entrega 24/48 h. Presupuesto inmediato.",
-  alternates: {
-    canonical: "https://juradaexpress.es/traduccion-jurada-partida-nacimiento",
-  },
-};
+// Ficha de documento generada desde content/fichas.js con la plantilla
+// app/components/DocumentPage.js.
+import DocumentPage, { fichaMetadata } from "../components/DocumentPage";
+import { getFichaBySlug } from "../../content/fichas";
+
+const ficha = getFichaBySlug("traduccion-jurada-partida-nacimiento");
+
+export const metadata = fichaMetadata(ficha);
 
 export default function Page() {
-  return (
-    <main className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold">
-        Traducción jurada de partida de nacimiento
-      </h1>
-      <p className="mt-3 max-w-2xl text-slate-600">
-        Traducimos tu partida o certificado de nacimiento (Español ⇆ Inglés)
-        con firma y sello de traductor jurado, válida ante registros civiles,
-        consulados, universidades y demás organismos oficiales.
-      </p>
-
-      <div className="mt-8 grid gap-6 md:grid-cols-3">
-        {[
-          {
-            t: "Válida oficialmente",
-            d: "Firmada y sellada por traductor jurado, aceptada por registros civiles y consulados.",
-          },
-          {
-            t: "Entrega 24/48 h",
-            d: "Plazo habitual para este tipo de documento breve.",
-          },
-          {
-            t: "Presupuesto cerrado",
-            d: "Envíanos el escaneo y te confirmamos precio y plazo antes de empezar.",
-          },
-        ].map((i) => (
-          <div key={i.t} className="rounded-2xl bg-white p-5 ring-1 ring-slate-200">
-            <h2 className="font-semibold">{i.t}</h2>
-            <p className="mt-2 text-sm text-slate-600">{i.d}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-8 flex flex-wrap gap-3">
-        <a
-          href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada%20partida%20de%20nacimiento"
-          className="inline-flex items-center rounded-xl bg-brand-navy px-5 py-3 text-white hover:bg-brand-navy-700"
-        >
-          Pedir presupuesto por email
-        </a>
-        <a
-          href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20necesito%20traducir%20una%20partida%20de%20nacimiento"
-          className="inline-flex items-center rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          WhatsApp inmediato
-        </a>
-      </div>
-
-      <p className="mt-8 text-sm text-slate-500">
-        * Consulta también nuestros <a href="/precios" className="underline hover:text-brand-gold-700">precios orientativos</a> o <a href="/contacto" className="underline hover:text-brand-gold-700">contáctanos</a> si tienes dudas.
-      </p>
-
-      <p className="mt-2 text-sm text-slate-500">
-        Para trámites de nacionalidad o extranjería también solemos traducir el <a href="/traduccion-jurada-certificado-penales" className="underline hover:text-brand-gold-700">certificado de antecedentes penales</a>.
-      </p>
-    </main>
-  );
+  return <DocumentPage ficha={ficha} />;
 }

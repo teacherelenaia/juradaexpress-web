@@ -51,21 +51,37 @@ const faqs = [
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold">Frequently asked questions</h1>
+      <h1 className="font-display text-balance text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl">Frequently asked questions</h1>
       <p className="mt-3 max-w-2xl text-slate-600">
         Answers to the most common questions about sworn translation for
         procedures in Spain. Can't find what you're looking for?{" "}
-        <a href="/en/contacto" className="underline hover:text-brand-gold-700">
+        <a href="/en/contacto" className="link">
           Get in touch
         </a>
         .
       </p>
 
-      <div className="mt-8 divide-y rounded-2xl ring-1 ring-slate-200 bg-white">
+      <div className="mt-8 divide-y rounded-xl ring-1 ring-stone-200 bg-white">
         {faqs.map((f, idx) => (
-          <details key={idx} className="p-5">
-            <summary className="cursor-pointer font-medium">{f.q}</summary>
-            <p className="mt-2 text-sm text-slate-600">{f.a}</p>
+          <details key={idx} className="group p-5">
+            <summary className="flex cursor-pointer items-center justify-between gap-4 font-medium text-slate-900 [&::-webkit-details-marker]:hidden">
+              {f.q}
+              <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className="shrink-0 text-brand-navy transition-transform duration-[180ms] group-open:rotate-180"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+            </summary>
+            <p className="mt-2 max-w-[68ch] text-sm text-slate-600">{f.a}</p>
           </details>
         ))}
       </div>

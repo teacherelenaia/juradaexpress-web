@@ -12,7 +12,7 @@ export default function Page() {
       <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-navy-50 text-brand-navy">
         <IconCheck className="h-8 w-8" />
       </div>
-      <h1 className="mt-6 text-3xl font-bold tracking-tight md:text-4xl">
+      <h1 className="font-display text-balance mt-6 text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl">
         Pago recibido
       </h1>
       <p className="mt-4 text-lg text-slate-600">
@@ -29,13 +29,13 @@ export default function Page() {
           href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20acabo%20de%20realizar%20un%20pago%20online%20y%20quiero%20enviaros%20el%20documento"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-xl bg-brand-navy px-5 py-3 text-white hover:bg-brand-navy-700"
+          className="btn btn-primary"
         >
           Escribir por WhatsApp
         </a>
         <a
           href="/documentos"
-          className="rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
+          className="btn btn-secondary"
         >
           Volver al catálogo
         </a>

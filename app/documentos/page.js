@@ -1,5 +1,6 @@
 // app/documentos/page.js
 import DocumentCatalog from "../components/DocumentCatalog";
+import { FICHAS } from "../../content/fichas";
 
 export const metadata = {
   title: "Catálogo de Documentos — Traducción Jurada en Murcia",
@@ -18,7 +19,7 @@ export const metadata = {
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:py-16">
-      <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
+      <h1 className="font-display text-balance text-4xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-5xl">
         Catálogo de documentos
       </h1>
       <p className="mt-4 max-w-2xl text-lg text-slate-600">
@@ -29,46 +30,18 @@ export default function Page() {
 
       <DocumentCatalog />
 
-      <div className="mt-16 border-t border-slate-200 pt-10">
-        <h2 className="text-xl font-semibold text-slate-900">
+      <div className="mt-16 border-t border-stone-200 pt-10">
+        <h2 className="text-xl font-semibold leading-snug text-slate-900 md:text-2xl">
           Guías por tipo de documento
         </h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-          <li>
-            <a href="/traduccion-jurada-partida-nacimiento" className="text-brand-navy underline hover:text-brand-gold-700">
-              Traducción jurada de partida de nacimiento
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-titulo-universitario" className="text-brand-navy underline hover:text-brand-gold-700">
-              Traducción jurada de título universitario
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-certificado-penales" className="text-brand-navy underline hover:text-brand-gold-700">
-              Traducción jurada de certificado de antecedentes penales
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-espanol-ingles" className="text-brand-navy underline hover:text-brand-gold-700">
-              Traducción jurada español-inglés e inglés-español
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-validez-oficial" className="text-brand-navy underline hover:text-brand-gold-700">
-              Validez ante organismos oficiales, universidades y consulados
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-certificado-matrimonio" className="text-brand-navy underline hover:text-brand-gold-700">
-              Traducción jurada de certificado de matrimonio
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-contrato-escritura" className="text-brand-navy underline hover:text-brand-gold-700">
-              Traducción jurada de contrato o escritura
-            </a>
-          </li>
+          {FICHAS.map((f) => (
+            <li key={f.slug}>
+              <a href={`/${f.slug}`} className="link">
+                {f.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </main>

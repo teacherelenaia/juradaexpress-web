@@ -1,30 +1,44 @@
 "use client";
 
 // app/components/MobileNav.js
-import { useState } from "react";
+// Menú móvil en panel deslizante. El panel está SIEMPRE montado: entra con
+// translateY(-8px)+opacity en 200 ms ease-out y sale en 150 ms (clases
+// .mobile-panel en globals.css). Incluye selector de idioma y redes.
+import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
-
-const links = [
-  { href: "/", label: "Inicio" },
-  { href: "/precios", label: "Precios" },
-  { href: "/documentos", label: "Documentos" },
-  { href: "/blog", label: "Blog" },
-  { href: "/preguntas-frecuentes", label: "Preguntas Frecuentes" },
-  { href: "/contacto", label: "Contacto" },
-];
+import SocialIcons from "./SocialIcons";
+import { LINKS, isActive } from "./MainNav";
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname() || "/";
+  const panelRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  // Cerrar con Escape devolviendo el foco al botón del menú.
+  useEffect(() => {
+    if (!open) return;
+    function onKeyDown(e) {
+      if (e.key === "Escape") {
+        setOpen(false);
+        buttonRef.current?.focus();
+      }
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   return (
     <div className="md:hidden">
       <button
+        ref={buttonRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
         aria-label={open ? "Cerrar menú" : "Abrir menú"}
-        className="inline-flex items-center justify-center rounded-md p-2 text-slate-100 hover:text-brand-gold-300"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-md text-slate-100 hover:text-brand-gold-300"
       >
         {open ? (
           <svg
@@ -60,28 +74,39 @@ export default function MobileNav() {
         )}
       </button>
 
-      {open && (
-        <div
-          id="mobile-nav-panel"
-          className="absolute inset-x-0 top-full border-t border-white/10 bg-brand-navy px-4 py-3 shadow-lg"
-        >
-          <nav className="flex flex-col">
-            {links.map((l) => (
+      <div
+        id="mobile-nav-panel"
+        ref={panelRef}
+        data-open={open}
+        aria-hidden={!open}
+        className="mobile-panel absolute inset-x-0 top-full border-t border-white/10 bg-brand-navy px-4 py-3 shadow-lg"
+      >
+        <nav aria-label="Navegación principal (móvil)" className="flex flex-col">
+          {LINKS.map((l) => {
+            const active = isActive(pathname, l.href);
+            return (
               <a
                 key={l.href}
                 href={l.href}
+                aria-current={active ? "page" : undefined}
+                tabIndex={open ? undefined : -1}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-slate-100 hover:bg-white/10 hover:text-brand-gold-300"
+                className={`rounded-lg px-3 py-3 no-underline ${
+                  active
+                    ? "bg-white/10 font-medium text-brand-gold-300"
+                    : "text-slate-100 hover:bg-white/10 hover:text-brand-gold-300"
+                }`}
               >
                 {l.label}
               </a>
-            ))}
-            <div className="mt-2 border-t border-white/10 px-3 pt-3">
-              <LanguageSwitcher />
-            </div>
-          </nav>
-        </div>
-      )}
+            );
+          })}
+          <div className="mt-2 flex items-center justify-between border-t border-white/10 px-3 pt-3 text-slate-100">
+            <LanguageSwitcher />
+            <SocialIcons />
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }
