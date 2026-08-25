@@ -63,9 +63,25 @@ export default function Page() {
 
       <div className="mt-8 divide-y rounded-xl ring-1 ring-stone-200 bg-white">
         {faqs.map((f, idx) => (
-          <details key={idx} className="p-5">
-            <summary className="cursor-pointer font-medium">{f.q}</summary>
-            <p className="mt-2 text-sm text-slate-600">{f.a}</p>
+          <details key={idx} className="group p-5">
+            <summary className="flex cursor-pointer items-center justify-between gap-4 font-medium text-slate-900 [&::-webkit-details-marker]:hidden">
+              {f.q}
+              <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className="shrink-0 text-brand-navy transition-transform duration-[180ms] group-open:rotate-180"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+            </summary>
+            <p className="mt-2 max-w-[68ch] text-sm text-slate-600">{f.a}</p>
           </details>
         ))}
       </div>

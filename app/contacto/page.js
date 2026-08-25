@@ -1,4 +1,5 @@
 // app/contacto/page.js
+import SocialIcons from "../components/SocialIcons";
 export const metadata = {
   title: "Contacto — Traductor Jurado en Murcia",
   description:
@@ -65,8 +66,16 @@ export default function Page() {
         <p className="mt-2 text-sm text-slate-600">
           Traducciones juradas Español ⇆ Inglés, firmadas y selladas, válidas
           ante organismos oficiales. Envíos a toda España y al extranjero.
-          Entrega habitual en 24/48 h.
+          Entrega habitual en 24/48 h.{" "}
+          <a href="/traductor-jurado-murcia" className="link">
+            Más sobre el servicio en Murcia →
+          </a>
         </p>
+      </div>
+
+      <div className="mt-8 flex items-center gap-3">
+        <span className="text-sm text-slate-600">También estoy en</span>
+        <SocialIcons className="text-brand-navy" />
       </div>
     </main>
   );

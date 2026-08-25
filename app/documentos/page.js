@@ -1,5 +1,6 @@
 // app/documentos/page.js
 import DocumentCatalog from "../components/DocumentCatalog";
+import { FICHAS } from "../../content/fichas";
 
 export const metadata = {
   title: "Catálogo de Documentos — Traducción Jurada en Murcia",
@@ -34,41 +35,13 @@ export default function Page() {
           Guías por tipo de documento
         </h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-          <li>
-            <a href="/traduccion-jurada-partida-nacimiento" className="link">
-              Traducción jurada de partida de nacimiento
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-titulo-universitario" className="link">
-              Traducción jurada de título universitario
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-certificado-penales" className="link">
-              Traducción jurada de certificado de antecedentes penales
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-espanol-ingles" className="link">
-              Traducción jurada español-inglés e inglés-español
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-validez-oficial" className="link">
-              Validez ante organismos oficiales, universidades y consulados
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-certificado-matrimonio" className="link">
-              Traducción jurada de certificado de matrimonio
-            </a>
-          </li>
-          <li>
-            <a href="/traduccion-jurada-contrato-escritura" className="link">
-              Traducción jurada de contrato o escritura
-            </a>
-          </li>
+          {FICHAS.map((f) => (
+            <li key={f.slug}>
+              <a href={`/${f.slug}`} className="link">
+                {f.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </main>

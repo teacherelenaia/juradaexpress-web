@@ -10,5 +10,8 @@ export const DOCUMENTS = [
   { id: "expediente-academico", name: "Expediente académico", price: null, icon: "bookOpen" },
   { id: "certificado-empresa", name: "Certificado de empresa / nómina", price: 45, icon: "briefcase" },
   { id: "contrato-escritura", name: "Contrato o escritura", price: null, icon: "edit" },
+  { id: "dni-pasaporte", name: "DNI o pasaporte", price: null, icon: "creditCard" },
+  { id: "testamento-herencia", name: "Testamento y documentos de herencia", price: null, icon: "edit" },
+  { id: "certificado-medico", name: "Certificado médico", price: null, icon: "heart" },
   { id: "otro-documento", name: "Otro documento", price: null, icon: "helpCircle" },
 ];

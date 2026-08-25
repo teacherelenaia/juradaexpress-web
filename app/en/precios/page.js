@@ -45,8 +45,18 @@ export default function Page() {
               <td className="p-3">24/48h</td>
             </tr>
             <tr>
+              <td className="p-3">Driving licence</td>
+              <td className="p-3">€40</td>
+              <td className="p-3">24h</td>
+            </tr>
+            <tr className="bg-stone-50/50">
+              <td className="p-3">Employer certificates / payslips</td>
+              <td className="p-3">€45</td>
+              <td className="p-3">24/48h</td>
+            </tr>
+            <tr>
               <td className="p-3">Contracts and notarial documents</td>
-              <td className="p-3">On request</td>
+              <td className="p-3">Fixed quote within 2 hours</td>
               <td className="p-3">Depends on length</td>
             </tr>
           </tbody>
@@ -54,11 +64,8 @@ export default function Page() {
       </div>
 
       <div className="mt-6 flex flex-wrap gap-3">
-        <a
-          href="mailto:info@juradaexpress.es?subject=Sworn%20translation%20quote%20request"
-          className="btn btn-primary"
-        >
-          Request a quote by email
+        <a href="/en/documentos" className="btn btn-primary">
+          Request a quote
         </a>
         <a
           href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation"

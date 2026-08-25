@@ -10,7 +10,7 @@ import { mkdir } from "node:fs/promises";
 import path from "node:path";
 
 const BASE = process.argv[2] || "http://127.0.0.1:3210";
-const OUT = "docs/capturas/fase-2";
+const OUT = "docs/capturas/fase-3";
 
 const PAGES = [
   { path: "/", name: "home-es" },
@@ -34,6 +34,13 @@ const PAGES = [
   { path: "/en/legal-notice", name: "legal-notice-en" },
   { path: "/politica-privacidad", name: "privacidad" },
   { path: "/en/privacy-policy", name: "privacy-en" },
+  { path: "/traductor-jurado-murcia", name: "murcia" },
+  { path: "/como-funciona", name: "como-funciona" },
+  { path: "/en/how-it-works", name: "how-it-works-en" },
+  { path: "/traduccion-jurada-permiso-conducir", name: "ficha-conducir" },
+  { path: "/traduccion-jurada-testamento-herencia", name: "ficha-testamento" },
+  { path: "/traduccion-jurada-titulo-universitario", name: "ficha-titulo" },
+  { path: "/ruta-inexistente-404", name: "not-found", expect404: true },
   { path: "/en/cookie-policy", name: "cookies-en" },
 ];
 
@@ -101,18 +108,24 @@ for (const vp of VIEWPORTS) {
     tab.on("pageerror", (err) => consoleErrors.push(`pageerror: ${err.message}`));
 
     const res = await tab.goto(BASE + page.path, { waitUntil: "networkidle" });
-    if (res.status() !== 200) {
-      problems.push(`[${page.path} @${vp.name}] HTTP ${res.status()}`);
+    const expected = page.expect404 ? 404 : 200;
+    if (res.status() !== expected) {
+      problems.push(`[${page.path} @${vp.name}] HTTP ${res.status()} (esperado ${expected})`);
     }
 
-    if (consoleErrors.length) {
+    // En la página 404 el propio status 404 aparece como error de red en
+    // consola: lo filtramos, es el comportamiento esperado.
+    const realErrors = page.expect404
+      ? consoleErrors.filter((e) => !e.includes("404"))
+      : consoleErrors;
+    if (realErrors.length) {
       problems.push(
-        `[${page.path} @${vp.name}] errores de consola: ${consoleErrors.join(" | ")}`
+        `[${page.path} @${vp.name}] errores de consola: ${realErrors.join(" | ")}`
       );
     }
 
     // Enlaces internos: ninguno debe dar 404
-    if (vp.name === "1440") {
+    if (vp.name === "1440" && !page.expect404) {
       const hrefs = await tab.$$eval("a[href]", (as) =>
         as.map((a) => a.getAttribute("href"))
       );

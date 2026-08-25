@@ -43,8 +43,18 @@ export default function Page() {
               <td className="p-3">24/48 h</td>
             </tr>
             <tr>
+              <td className="p-3">Permiso de conducir</td>
+              <td className="p-3">40 €</td>
+              <td className="p-3">24 h</td>
+            </tr>
+            <tr className="bg-stone-50/50">
+              <td className="p-3">Certificado de empresa / nóminas</td>
+              <td className="p-3">45 €</td>
+              <td className="p-3">24/48 h</td>
+            </tr>
+            <tr>
               <td className="p-3">Contratos y notariales</td>
-              <td className="p-3">Consultar</td>
+              <td className="p-3">Presupuesto cerrado en menos de 2 h</td>
               <td className="p-3">Según extensión</td>
             </tr>
           </tbody>
@@ -52,11 +62,8 @@ export default function Page() {
       </div>
 
       <div className="mt-6 flex flex-wrap gap-3">
-        <a
-          href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
-          className="btn btn-primary"
-        >
-          Pedir presupuesto por email
+        <a href="/documentos" className="btn btn-primary">
+          Pedir presupuesto
         </a>
         <a
           href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
