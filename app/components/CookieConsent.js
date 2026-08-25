@@ -85,7 +85,7 @@ export default function CookieConsent() {
       {showBanner && (
         <div
           ref={bannerRef}
-          className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 px-4 py-4 shadow-lg backdrop-blur"
+          className="fixed inset-x-0 bottom-0 z-50 border-t border-stone-200 bg-white/95 px-4 py-4 shadow-lg backdrop-blur"
         >
           <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 sm:flex-row">
             <p className="text-sm text-slate-600">
@@ -96,7 +96,7 @@ export default function CookieConsent() {
               <button
                 type="button"
                 onClick={() => choose("rejected")}
-                className="rounded-xl border border-slate-300 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                className="rounded-xl border border-stone-300 px-4 py-2 text-sm text-slate-700 hover:bg-stone-50"
               >
                 Rechazar
               </button>

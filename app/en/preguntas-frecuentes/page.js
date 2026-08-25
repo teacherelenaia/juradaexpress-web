@@ -51,17 +51,17 @@ const faqs = [
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold">Frequently asked questions</h1>
+      <h1 className="text-3xl font-bold leading-tight text-slate-900">Frequently asked questions</h1>
       <p className="mt-3 max-w-2xl text-slate-600">
         Answers to the most common questions about sworn translation for
         procedures in Spain. Can't find what you're looking for?{" "}
-        <a href="/en/contacto" className="underline hover:text-brand-gold-700">
+        <a href="/en/contacto" className="link">
           Get in touch
         </a>
         .
       </p>
 
-      <div className="mt-8 divide-y rounded-2xl ring-1 ring-slate-200 bg-white">
+      <div className="mt-8 divide-y rounded-2xl ring-1 ring-stone-200 bg-white">
         {faqs.map((f, idx) => (
           <details key={idx} className="p-5">
             <summary className="cursor-pointer font-medium">{f.q}</summary>

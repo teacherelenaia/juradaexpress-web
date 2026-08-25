@@ -191,13 +191,13 @@ export default function DocumentCatalog() {
             <div
               key={doc.id}
               className={`rounded-2xl bg-white p-6 ring-1 transition hover:shadow ${
-                isSelected ? "ring-2 ring-brand-gold" : "ring-slate-200"
+                isSelected ? "ring-2 ring-brand-gold" : "ring-stone-200"
               }`}
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-navy-50 text-brand-navy">
                 <Icon className="h-6 w-6" />
               </div>
-              <h3 className="mt-4 font-semibold text-slate-900">{doc.name}</h3>
+              <h3 className="mt-4 text-xl font-semibold leading-snug text-slate-900 md:text-2xl">{doc.name}</h3>
               <div className="mt-3">
                 {doc.price != null ? (
                   <span className="inline-flex rounded-full bg-brand-navy px-3 py-1 text-sm font-semibold text-white">
@@ -228,9 +228,9 @@ export default function DocumentCatalog() {
       {/* FORMULARIO */}
       <div
         ref={formRef}
-        className="mt-16 scroll-mt-24 rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-200 md:p-10"
+        className="mt-16 scroll-mt-24 rounded-2xl bg-stone-50 p-6 ring-1 ring-stone-200 md:p-10"
       >
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+        <h2 className="text-2xl font-bold leading-snug tracking-tight text-slate-900 md:text-3xl">
           Tu solicitud
         </h2>
 
@@ -240,7 +240,7 @@ export default function DocumentCatalog() {
           </p>
         ) : (
           <>
-            <ul className="mt-5 divide-y divide-slate-200 rounded-xl bg-white ring-1 ring-slate-200">
+            <ul className="mt-5 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200">
               {selectedDocs.map((d) => (
                 <li
                   key={d.id}
@@ -287,7 +287,7 @@ export default function DocumentCatalog() {
                   type="button"
                   onClick={handlePayOnline}
                   disabled={payStatus === "redirecting"}
-                  className="w-full rounded-xl bg-brand-gold px-5 py-3 font-medium text-brand-navy-900 transition hover:bg-brand-gold-400 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+                  className="btn btn-gold w-full disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                 >
                   {payStatus === "redirecting"
                     ? "Redirigiendo a pago…"
@@ -333,7 +333,7 @@ export default function DocumentCatalog() {
                   name="Nombre"
                   type="text"
                   required
-                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
+                  className="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
                 />
               </div>
               <div>
@@ -345,7 +345,7 @@ export default function DocumentCatalog() {
                   name="Email"
                   type="email"
                   required
-                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
+                  className="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
                 />
               </div>
             </div>
@@ -359,7 +359,7 @@ export default function DocumentCatalog() {
                 id="telefono"
                 name="Teléfono"
                 type="tel"
-                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
+                className="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 focus:border-brand-navy focus:outline-none focus:ring-1 focus:ring-brand-navy"
               />
             </div>
 
@@ -382,7 +382,7 @@ export default function DocumentCatalog() {
                 className={`mt-1 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed px-4 py-8 text-center transition ${
                   dragActive
                     ? "border-brand-gold bg-brand-gold-50"
-                    : "border-slate-300 bg-white hover:border-brand-navy-300"
+                    : "border-stone-300 bg-white hover:border-brand-navy-300"
                 }`}
               >
                 <IconUpload className="h-6 w-6 text-brand-navy-300" />
@@ -400,7 +400,7 @@ export default function DocumentCatalog() {
               </div>
 
               {file && (
-                <div className="mt-3 flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-slate-200">
+                <div className="mt-3 flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-stone-200">
                   <span className="truncate text-slate-700">
                     {file.name}{" "}
                     <span className="text-slate-400">
@@ -458,7 +458,7 @@ export default function DocumentCatalog() {
             <button
               type="submit"
               disabled={selectedDocs.length === 0 || status === "sending"}
-              className="w-full rounded-xl bg-brand-navy px-5 py-3 font-medium text-white transition hover:bg-brand-navy-700 disabled:cursor-not-allowed disabled:opacity-50"
+              className="btn btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
             >
               {status === "sending" ? "Enviando…" : "Enviar solicitud"}
             </button>

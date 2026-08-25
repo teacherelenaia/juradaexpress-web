@@ -12,7 +12,7 @@ export default function Page() {
       <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold-100 text-brand-gold-900">
         <IconHelpCircle className="h-8 w-8" />
       </div>
-      <h1 className="mt-6 text-3xl font-bold tracking-tight md:text-4xl">
+      <h1 className="mt-6 text-3xl font-bold leading-tight tracking-tight text-slate-900 md:text-4xl">
         Pago cancelado
       </h1>
       <p className="mt-4 text-lg text-slate-600">
@@ -27,7 +27,7 @@ export default function Page() {
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <a
           href="/documentos"
-          className="rounded-xl bg-brand-navy px-5 py-3 text-white hover:bg-brand-navy-700"
+          className="btn btn-primary"
         >
           Volver al catálogo
         </a>
@@ -35,7 +35,7 @@ export default function Page() {
           href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20he%20tenido%20un%20problema%20al%20pagar%20online"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
+          className="btn btn-secondary"
         >
           Escribir por WhatsApp
         </a>

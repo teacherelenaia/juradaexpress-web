@@ -2,6 +2,7 @@
 import "./globals.css";
 import CookieConsent from "./components/CookieConsent";
 import MobileNav from "./components/MobileNav";
+import MainNav from "./components/MainNav";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 
 export const metadata = {
@@ -46,63 +47,52 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className="min-h-screen bg-white text-slate-900 antialiased">
+        <a href="#contenido" className="skip-link">
+          Saltar al contenido
+        </a>
+
         {/* Cookies + GA4 (GA4 solo se carga tras aceptar) */}
         <CookieConsent />
 
         {/* Header */}
-        <header className="sticky top-0 z-40 bg-brand-navy text-slate-100 shadow-sm relative">
-          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <header
+          data-surface="navy"
+          className="relative sticky top-0 z-40 bg-brand-navy text-slate-100 shadow-sm"
+        >
+          <div className="mx-auto flex max-w-6xl items-center gap-6 px-4 py-3">
             {/* Logo */}
             <a
               href="/"
-              className="inline-flex items-center gap-2 font-semibold tracking-tight text-white"
+              className="inline-flex shrink-0 items-center gap-2 pr-2 font-semibold tracking-tight text-white no-underline"
               aria-label="JuradaExpress — Inicio"
             >
               <img
                 src="/logo.svg"
-                alt="JuradaExpress"
+                alt=""
                 width="26"
                 height="26"
                 className="rounded opacity-90"
+                aria-hidden="true"
               />
               <span>JuradaExpress</span>
             </a>
 
-            {/* Nav */}
-            <nav className="hidden items-center gap-6 md:flex">
-              <a href="/" className="text-slate-200 hover:text-brand-gold-300">
-                Inicio
-              </a>
-              <a href="/precios" className="text-slate-200 hover:text-brand-gold-300">
-                Precios
-              </a>
-              <a href="/documentos" className="text-slate-200 hover:text-brand-gold-300">
-                Documentos
-              </a>
-              <a href="/blog" className="text-slate-200 hover:text-brand-gold-300">
-                Blog
-              </a>
-              <a href="/preguntas-frecuentes" className="text-slate-200 hover:text-brand-gold-300">
-                Preguntas Frecuentes
-              </a>
-              <a href="/contacto" className="text-slate-200 hover:text-brand-gold-300">
-                Contacto
-              </a>
-            </nav>
+            {/* Nav (estado activo con usePathname) */}
+            <MainNav />
 
             {/* Acciones rápidas */}
-            <div className="flex items-center gap-2">
+            <div className="ml-auto flex shrink-0 items-center gap-2">
               <LanguageSwitcher className="hidden md:inline-flex" />
               <a
                 href="tel:+34685891214"
-                className="hidden rounded-full border border-white/20 px-3 py-1 text-sm text-slate-100 hover:border-brand-gold-300 hover:text-brand-gold-300 md:inline-block"
+                className="btn btn-quiet-light btn-sm hidden lg:inline-flex"
                 aria-label="Llamar 685 891 214"
               >
                 685 891 214
               </a>
               <a
                 href="mailto:info@juradaexpress.es?subject=Presupuesto%20traducci%C3%B3n%20jurada"
-                className="rounded-full bg-brand-gold px-3 py-1 text-sm font-medium text-brand-navy-900 hover:bg-brand-gold-400"
+                className="btn btn-gold btn-sm"
               >
                 Pedir presupuesto
               </a>
@@ -112,19 +102,20 @@ export default function RootLayout({ children }) {
         </header>
 
         {/* Contenido */}
-        {children}
+        <div id="contenido">{children}</div>
 
         {/* Footer */}
-        <footer className="mt-14 border-t bg-white">
+        <footer className="mt-14 border-t border-stone-200 bg-white">
           <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-3">
             <div>
-              <div className="mb-2 inline-flex items-center gap-2 font-semibold">
+              <div className="mb-2 inline-flex items-center gap-2 font-semibold text-slate-900">
                 <img
                   src="/logo.svg"
                   width="24"
                   height="24"
-                  alt="JuradaExpress"
+                  alt=""
                   className="opacity-90"
+                  aria-hidden="true"
                 />
                 <span>JuradaExpress</span>
               </div>
@@ -136,30 +127,32 @@ export default function RootLayout({ children }) {
             </div>
 
             <div>
-              <h3 className="font-medium">Enlaces</h3>
-              <ul className="mt-2 space-y-1 text-sm">
+              <h2 className="text-base font-semibold text-slate-900">
+                Enlaces
+              </h2>
+              <ul className="mt-3 space-y-2 text-sm">
                 <li>
-                  <a href="/" className="hover:text-brand-gold-700">
+                  <a href="/" className="link-nav">
                     Inicio
                   </a>
                 </li>
                 <li>
-                  <a href="/precios" className="hover:text-brand-gold-700">
+                  <a href="/precios" className="link-nav">
                     Precios
                   </a>
                 </li>
                 <li>
-                  <a href="/documentos" className="hover:text-brand-gold-700">
+                  <a href="/documentos" className="link-nav">
                     Documentos
                   </a>
                 </li>
                 <li>
-                  <a href="/blog" className="hover:text-brand-gold-700">
+                  <a href="/blog" className="link-nav">
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="/contacto" className="hover:text-brand-gold-700">
+                  <a href="/contacto" className="link-nav">
                     Contacto
                   </a>
                 </li>
@@ -167,18 +160,17 @@ export default function RootLayout({ children }) {
             </div>
 
             <div>
-              <h3 className="font-medium">Contacto</h3>
-              <ul className="mt-2 space-y-1 text-sm">
+              <h2 className="text-base font-semibold text-slate-900">
+                Contacto
+              </h2>
+              <ul className="mt-3 space-y-2 text-sm">
                 <li>
-                  <a
-                    href="mailto:info@juradaexpress.es"
-                    className="hover:text-brand-gold-700"
-                  >
+                  <a href="mailto:info@juradaexpress.es" className="link-nav">
                     info@juradaexpress.es
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+34685891214" className="hover:text-brand-gold-700">
+                  <a href="tel:+34685891214" className="link-nav">
                     685 891 214
                   </a>
                 </li>
@@ -187,7 +179,7 @@ export default function RootLayout({ children }) {
                     href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-brand-gold-700"
+                    className="link-nav"
                   >
                     WhatsApp directo
                   </a>
@@ -196,7 +188,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
 
-          <div className="border-t py-4 text-center text-xs text-slate-500">
+          <div className="border-t border-stone-200 py-4 text-center text-xs text-slate-500">
             <p>
               © {new Date().getFullYear()} JuradaExpress · Todos los derechos
               reservados

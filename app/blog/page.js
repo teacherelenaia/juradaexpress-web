@@ -13,7 +13,7 @@ export default function BlogPage() {
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+      <h1 className="text-3xl font-bold leading-tight tracking-tight text-slate-900">
         Blog
       </h1>
       <p className="mt-2 text-slate-600">
@@ -26,7 +26,7 @@ export default function BlogPage() {
           <li key={post.slug} className="group">
             <Link
               href={`/blog/${post.slug}`}
-              className="block overflow-hidden rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+              className="block overflow-hidden rounded-lg border border-stone-200 hover:border-stone-300 hover:bg-stone-50"
             >
               {post.image && (
                 <img
@@ -36,7 +36,7 @@ export default function BlogPage() {
                 />
               )}
               <div className="p-4">
-                <h2 className="text-xl font-semibold text-slate-900 group-hover:underline">
+                <h2 className="text-xl font-semibold leading-snug text-slate-900 group-hover:underline md:text-2xl">
                   {post.title}
                 </h2>
                 <div className="mt-1 text-sm text-slate-500">

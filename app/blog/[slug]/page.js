@@ -24,12 +24,12 @@ export default function BlogPostPage({ params }) {
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
       <div className="text-sm">
-        <Link href="/blog" className="text-brand-navy hover:text-brand-gold-700 hover:underline">
+        <Link href="/blog" className="link-nav">
           ← Volver al blog
         </Link>
       </div>
 
-      <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-900">
+      <h1 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-slate-900">
         {post.title}
       </h1>
 

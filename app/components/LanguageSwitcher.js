@@ -33,7 +33,7 @@ export default function LanguageSwitcher({ className = "" }) {
       <a
         href={esHref}
         aria-current={!isEnglish ? "page" : undefined}
-        className={`rounded px-1.5 py-0.5 ${
+        className={`inline-flex min-h-[44px] items-center rounded px-2 no-underline ${
           !isEnglish
             ? "font-semibold text-brand-gold-300"
             : "text-slate-300 hover:text-brand-gold-300"
@@ -47,7 +47,7 @@ export default function LanguageSwitcher({ className = "" }) {
       <a
         href={enHref}
         aria-current={isEnglish ? "page" : undefined}
-        className={`rounded px-1.5 py-0.5 ${
+        className={`inline-flex min-h-[44px] items-center rounded px-2 no-underline ${
           isEnglish
             ? "font-semibold text-brand-gold-300"
             : "text-slate-300 hover:text-brand-gold-300"

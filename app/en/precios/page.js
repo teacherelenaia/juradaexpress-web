@@ -16,7 +16,7 @@ export const metadata = {
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold">Sworn translation pricing</h1>
+      <h1 className="text-3xl font-bold leading-tight text-slate-900">Sworn translation pricing</h1>
       <p className="mt-3 text-slate-600">
         The final price depends on the length, complexity and format of the
         document. We give you a fixed quote once we've seen it. Prices below
@@ -24,9 +24,9 @@ export default function Page() {
         translations delivered in Spain.
       </p>
 
-      <div className="mt-6 overflow-hidden rounded-2xl ring-1 ring-slate-200">
+      <div className="mt-6 overflow-hidden rounded-2xl ring-1 ring-stone-200">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 text-left text-slate-600">
+          <thead className="bg-stone-50 text-left text-slate-600">
             <tr>
               <th className="p-3">Document</th>
               <th className="p-3">From</th>
@@ -39,7 +39,7 @@ export default function Page() {
               <td className="p-3">€35–45</td>
               <td className="p-3">24/48h</td>
             </tr>
-            <tr className="bg-slate-50/50">
+            <tr className="bg-stone-50/50">
               <td className="p-3">Degrees and academic transcripts</td>
               <td className="p-3">€45–60</td>
               <td className="p-3">24/48h</td>
@@ -56,13 +56,13 @@ export default function Page() {
       <div className="mt-6 flex flex-wrap gap-3">
         <a
           href="mailto:info@juradaexpress.es?subject=Sworn%20translation%20quote%20request"
-          className="inline-flex items-center rounded-xl bg-brand-navy px-5 py-3 text-white hover:bg-brand-navy-700"
+          className="btn btn-primary"
         >
           Request a quote by email
         </a>
         <a
           href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation"
-          className="inline-flex items-center rounded-xl border border-brand-gold-200 bg-white px-5 py-3 text-brand-navy hover:bg-brand-gold-50"
+          className="btn btn-secondary"
           target="_blank"
           rel="noopener noreferrer"
         >
