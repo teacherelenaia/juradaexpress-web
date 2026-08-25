@@ -12,9 +12,9 @@ export const WHATSAPP_URL =
 export const WHATSAPP_URL_EN =
   "https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation";
 
-// [[COMPLETAR: confirmar URLs definitivas de Instagram y Facebook]]
-// Valores provisionales según la auditoría (sección 5.2.8). Si un perfil
-// no existe todavía, deja la constante en null y el icono no se muestra.
+// Perfiles confirmados por Elena el 25/08/2026 (usuario: juradaexpress
+// en ambas redes). Si algún perfil se desactiva, pon la constante en null
+// y su icono desaparece de toda la web.
 export const INSTAGRAM_URL = "https://www.instagram.com/juradaexpress";
 export const FACEBOOK_URL = "https://www.facebook.com/juradaexpress";
 

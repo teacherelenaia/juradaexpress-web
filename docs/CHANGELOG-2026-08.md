@@ -129,7 +129,7 @@ rediseño) y `docs/capturas/fase-0` a `fase-4` (después, por fase).
 | Dirección fiscal (Carril de los Leales, 10, C.P. 30009, La Arboleja, Murcia) | ✅ Completado (25/08/2026) |
 | Horario de atención (L-V 09:00-20:00) | ✅ Completado en el JSON-LD del footer (25/08/2026) |
 | URL de la ficha de Google Business | ⏳ Pendiente — `content/reviews.js` (activa el enlace de reseñas) y `app/layout.js` (sameAs del JSON-LD) |
-| URLs definitivas de Instagram y Facebook | ⏳ Pendiente de confirmar — `content/site.js` (provisionales: `instagram.com/juradaexpress`, `facebook.com/juradaexpress`) |
+| URLs de Instagram y Facebook (`instagram.com/juradaexpress`, `facebook.com/juradaexpress`) | ✅ Confirmadas por Elena (25/08/2026) |
 
 ## Pendientes que no dependen de código
 
