@@ -35,12 +35,10 @@ export default function Page() {
           Ortega
         </li>
         <li>
-          <strong className="text-slate-900">NIF:</strong> [[COMPLETAR: NIF de
-          la titular]]
+          <strong className="text-slate-900">NIF:</strong> 48399700H
         </li>
         <li>
-          <strong className="text-slate-900">Domicilio:</strong> [[COMPLETAR:
-          dirección fiscal]], Murcia (España)
+          <strong className="text-slate-900">Domicilio:</strong> Carril de los Leales, 10, C.P. 30009, La Arboleja, Murcia (España)
         </li>
         <li>
           <strong className="text-slate-900">Email:</strong>{" "}

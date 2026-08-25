@@ -49,8 +49,8 @@ export default function Page() {
       <p className="mt-4 text-slate-600">
         Esta política explica qué cookies utiliza{" "}
         <strong className="text-slate-900">juradaexpress.es</strong>, titularidad
-        de Elena Peñaranda Ortega [[COMPLETAR: NIF y dirección fiscal para
-        identificar a la responsable]], para qué sirven y cómo puedes
+        de Elena Peñaranda Ortega (NIF 48399700H, Carril de los Leales, 10, C.P. 30009, La Arboleja,
+        Murcia), para qué sirven y cómo puedes
         gestionarlas.
       </p>
 

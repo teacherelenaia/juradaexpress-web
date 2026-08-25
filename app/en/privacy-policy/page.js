@@ -30,8 +30,8 @@ export default function Page() {
 
       <h2 className={H2}>Data controller</h2>
       <p className="mt-3 max-w-[68ch] text-slate-600">
-        Elena Peñaranda Ortega, Tax ID [[COMPLETAR: NIF de la titular]],
-        address [[COMPLETAR: dirección fiscal]], Murcia (Spain). Email:{" "}
+        Elena Peñaranda Ortega, Tax ID 48399700H,
+        address Carril de los Leales, 10, C.P. 30009, La Arboleja, Murcia (Spain). Email:{" "}
         <a href="mailto:info@juradaexpress.es" className="link">
           info@juradaexpress.es
         </a>

@@ -36,11 +36,10 @@ export default function Page() {
         </li>
         <li>
           <strong className="text-slate-900">Tax ID (NIF):</strong>{" "}
-          [[COMPLETAR: NIF de la titular]]
+          48399700H
         </li>
         <li>
-          <strong className="text-slate-900">Address:</strong> [[COMPLETAR:
-          dirección fiscal]], Murcia (Spain)
+          <strong className="text-slate-900">Address:</strong> Carril de los Leales, 10, C.P. 30009, La Arboleja, Murcia (Spain)
         </li>
         <li>
           <strong className="text-slate-900">Email:</strong>{" "}

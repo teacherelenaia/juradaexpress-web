@@ -289,7 +289,6 @@ export default function RootLayout({ children }) {
                     identifier: "7310",
                   },
                 },
-                // [[COMPLETAR: confirmar horario de atención]]
                 openingHoursSpecification: {
                   "@type": "OpeningHoursSpecification",
                   dayOfWeek: [
@@ -300,7 +299,7 @@ export default function RootLayout({ children }) {
                     "Friday",
                   ],
                   opens: "09:00",
-                  closes: "18:00",
+                  closes: "20:00",
                 },
                 sameAs: [
                   "https://wa.me/34685891214",

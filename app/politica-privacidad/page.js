@@ -30,8 +30,8 @@ export default function Page() {
 
       <h2 className={H2}>Responsable del tratamiento</h2>
       <p className="mt-3 max-w-[68ch] text-slate-600">
-        Elena Peñaranda Ortega, NIF [[COMPLETAR: NIF de la titular]], con
-        domicilio en [[COMPLETAR: dirección fiscal]], Murcia (España). Email:{" "}
+        Elena Peñaranda Ortega, NIF 48399700H, con
+        domicilio en Carril de los Leales, 10, C.P. 30009, La Arboleja, Murcia (España). Email:{" "}
         <a href="mailto:info@juradaexpress.es" className="link">
           info@juradaexpress.es
         </a>
