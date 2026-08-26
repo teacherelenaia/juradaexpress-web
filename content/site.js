@@ -18,6 +18,13 @@ export const WHATSAPP_URL_EN =
 export const INSTAGRAM_URL = "https://www.instagram.com/juradaexpress";
 export const FACEBOOK_URL = "https://www.facebook.com/juradaexpress";
 
+// Ficha de Google Business "Jurada Express" (place_id verificado en Maps
+// el 26/08/2026). Cuando Google verifique el perfil, se puede sustituir
+// por el enlace corto g.page/r/… si se prefiere; ambos apuntan a la misma
+// ficha y aparecen en el sameAs del JSON-LD.
+export const GOOGLE_BUSINESS_URL =
+  "https://www.google.com/maps/place/?q=place_id:ChIJPXZn2WGBYw0ROKmS0IqD-rk";
+
 // Vídeo opcional de la sección "Cómo trabajamos" (ver sección 6 de la
 // auditoría). Déjalo en null hasta tener un clip real (10-15 s, < 1,5 MB):
 //   export const PROCESS_VIDEO = {

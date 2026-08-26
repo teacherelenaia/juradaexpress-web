@@ -7,7 +7,11 @@ import MobileNav from "./components/MobileNav";
 import MainNav from "./components/MainNav";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import SocialIcons from "./components/SocialIcons";
-import { INSTAGRAM_URL, FACEBOOK_URL } from "../content/site";
+import {
+  INSTAGRAM_URL,
+  FACEBOOK_URL,
+  GOOGLE_BUSINESS_URL,
+} from "../content/site";
 
 // Tipografía del sistema visual: Manrope (cuerpo/UI) + Newsreader (display),
 // servidas con next/font para evitar CLS y peticiones a terceros.
@@ -250,8 +254,8 @@ export default function RootLayout({ children }) {
           </div>
 
           {/* JSON-LD ProfessionalService ampliado (auditoría 5.4).
-              Pendiente de añadir la ficha de Google a sameAs:
-              [[COMPLETAR: URL de la ficha de Google Business]] */}
+              La ficha de Google se añade sola al sameAs cuando
+              cambie GOOGLE_BUSINESS_URL en content/site.js. */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -305,6 +309,7 @@ export default function RootLayout({ children }) {
                   "https://wa.me/34685891214",
                   INSTAGRAM_URL,
                   FACEBOOK_URL,
+                  GOOGLE_BUSINESS_URL,
                 ].filter(Boolean),
               }),
             }}
