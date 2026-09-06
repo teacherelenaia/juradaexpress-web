@@ -1,7 +1,13 @@
 // app/sobre-mi/page.js
 import TrackedLink from "../components/TrackedLink";
 import { SectionHeading } from "../components/ui";
-import { WHATSAPP_URL } from "../../content/site";
+import {
+  WHATSAPP_URL,
+  TIMEZONE_NOTE,
+  INSTAGRAM_URL,
+  FACEBOOK_URL,
+  GOOGLE_BUSINESS_URL,
+} from "../../content/site";
 
 export const metadata = {
   title: "Sobre mí — Elena Peñaranda, Traductora Jurada de Inglés (MAEC nº 7310)",
@@ -55,9 +61,16 @@ export default function Page() {
             pymes: trámites de nacionalidad y extranjería, expedientes para
             universidades británicas, compraventas ante notario y todo lo que
             un organismo oficial pueda pedirte con firma y sello. Con sede en
-            Murcia y proceso 100% digital, atiendo a clientes de toda España
-            y del Reino Unido.
+            Murcia y proceso 100% digital, atiendo a clientes de toda España,
+            Reino Unido, Irlanda, Estados Unidos, Canadá, India, Australia y
+            cualquier otro país. Para trámites de inmigración en Estados
+            Unidos también hago{" "}
+            <a href="/traduccion-certificada-uscis" className="link">
+              traducciones certificadas para USCIS
+            </a>
+            .
           </p>
+          <p className="mt-4 text-slate-600">{TIMEZONE_NOTE.es}.</p>
         </div>
       </div>
 
@@ -118,12 +131,21 @@ export default function Page() {
             "@graph": [
               {
                 "@type": "Person",
+                "@id": "https://juradaexpress.es/sobre-mi#person",
                 name: "Elena Peñaranda Ortega",
                 jobTitle: "Traductora-Intérprete Jurada de Inglés",
+                identifier: "7310",
                 url: "https://juradaexpress.es/sobre-mi",
+                email: "info@juradaexpress.es",
+                telephone: "+34685891214",
+                knowsLanguage: ["es", "en"],
+                sameAs: [GOOGLE_BUSINESS_URL, INSTAGRAM_URL, FACEBOOK_URL].filter(
+                  Boolean
+                ),
                 worksFor: {
                   "@type": "ProfessionalService",
-                  name: "JuradaExpress",
+                  "@id": "https://juradaexpress.es/#organization",
+                  name: "Jurada Express",
                   url: "https://juradaexpress.es/",
                 },
                 hasCredential: {

@@ -11,7 +11,42 @@ import {
   INSTAGRAM_URL,
   FACEBOOK_URL,
   GOOGLE_BUSINESS_URL,
+  GOOGLE_RATING,
+  GOOGLE_REVIEW_COUNT,
+  SERVICE_COUNTRIES,
 } from "../content/site";
+import { getPublishableReviews } from "../content/reviews";
+
+// aggregateRating solo si hay reseñas publicables (se lee en build).
+const PUBLISHED_REVIEWS = getPublishableReviews().length;
+
+// Las cuatro líneas de servicio del catálogo (JSON-LD hasOfferCatalog).
+const SERVICE_LINES = [
+  {
+    name: "Traducción jurada español-inglés",
+    description:
+      "Traducción jurada con firma y sello de traductora nombrada por el MAEC, válida ante organismos oficiales. Entrega en PDF firmado en 24/48 h.",
+    url: "https://juradaexpress.es/documentos",
+  },
+  {
+    name: "Traducción certificada para USCIS",
+    description:
+      "Traducción completa al inglés con certificación de exactitud y competencia conforme a 8 CFR § 103.2(b)(3), un certificado por documento.",
+    url: "https://juradaexpress.es/traduccion-certificada-uscis",
+  },
+  {
+    name: "Expediente de visado de nómada digital",
+    description:
+      "Revisión de la lista de documentos, aviso de apostillas y traducción jurada de todo el lote con un único plazo.",
+    url: "https://juradaexpress.es/traduccion-jurada-visado-nomada-digital",
+  },
+  {
+    name: "Proyectos urgentes y grandes volúmenes",
+    description:
+      "Expedientes completos y lotes de documentos para particulares, empresas y despachos, con presupuesto y plazo cerrados por escrito.",
+    url: "https://juradaexpress.es/traduccion-jurada-urgente-grandes-volumenes",
+  },
+];
 
 // Tipografía del sistema visual: Manrope (cuerpo/UI) + Newsreader (display),
 // servidas con next/font para evitar CLS y peticiones a terceros.
@@ -32,36 +67,39 @@ const newsreader = Newsreader({
 
 export const metadata = {
   metadataBase: new URL("https://juradaexpress.es"),
+  // Posicionamiento internacional (encargo 2026-09): title ≤ 60 caracteres,
+  // description ≤ 155. "Jurada Express" (con espacio) es el nombre de la
+  // entidad; "JuradaExpress" se conserva solo como logotipo.
   title: {
-    default: "JuradaExpress — Traductor Jurado Español-Inglés | España y Reino Unido",
-    template: "%s | JuradaExpress",
+    default: "Traductor Jurado Español-Inglés Online | Jurada Express",
+    template: "%s | Jurada Express",
   },
   description:
-    "Traductor jurado Español ⇆ Inglés. Trabajo con clientes de toda España, Reino Unido y el extranjero. Envío 100% digital, entrega 24/48 h. Presupuesto inmediato por email o WhatsApp.",
+    "Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS. Clientes en España, Reino Unido, EE. UU., India y todo el mundo. Entrega 24/48 h.",
   alternates: { canonical: "https://juradaexpress.es/" },
   openGraph: {
-    title: "JuradaExpress — Traductor Jurado Español-Inglés | España y Reino Unido",
+    title: "Traductor Jurado Español-Inglés Online | Jurada Express",
     description:
-      "Traducción jurada válida ante organismos oficiales. Entrega 24/48 h. Trabajo con clientes de toda España, Reino Unido y el extranjero.",
+      "Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS. Clientes en España, Reino Unido, EE. UU., India y todo el mundo. Entrega 24/48 h.",
     url: "https://juradaexpress.es/",
-    siteName: "JuradaExpress",
+    siteName: "Jurada Express",
     type: "website",
     locale: "es_ES",
     images: [
       {
-        url: "https://juradaexpress.es/hero-internacional.jpg",
-        width: 1920,
-        height: 1080,
-        alt: "JuradaExpress — Traducción jurada Español ⇆ Inglés, envío digital a toda España y al extranjero",
+        url: "https://juradaexpress.es/fotos/hero-firma.jpg",
+        width: 1200,
+        height: 900,
+        alt: "Firma de una traducción jurada español-inglés de Jurada Express",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "JuradaExpress — Traductor Jurado Español-Inglés | España y Reino Unido",
+    title: "Traductor Jurado Español-Inglés Online | Jurada Express",
     description:
-      "Traducción jurada (Español ⇆ Inglés). Entrega 24/48 h. Trabajo con clientes de toda España, Reino Unido y el extranjero.",
-    images: ["https://juradaexpress.es/hero-internacional.jpg"],
+      "Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS. Clientes en España, Reino Unido, EE. UU., India y todo el mundo. Entrega 24/48 h.",
+    images: ["https://juradaexpress.es/fotos/hero-firma.jpg"],
   },
   verification: {
     google: "7qUSXNkOvWn5YeesrooO2YBAmzwRRrPLKU7GWXxEi9c",
@@ -145,9 +183,10 @@ export default function RootLayout({ children }) {
                 <span>JuradaExpress</span>
               </div>
               <p className="max-w-sm text-sm text-slate-600">
-                Traducciones juradas Español ⇆ Inglés. Con sede en Murcia,
-                trabajo con clientes de toda España y de cualquier país —
-                proceso 100% digital. Entrega 24/48 h.
+                Jurada Express: traducción jurada Español ⇆ Inglés y
+                traducción certificada para USCIS. Con sede en Murcia, trabajo
+                con clientes de España, Reino Unido, Estados Unidos, India y
+                cualquier país. Proceso 100% digital, entrega 24/48 h.
               </p>
             </div>
 
@@ -243,7 +282,7 @@ export default function RootLayout({ children }) {
               </ul>
             </nav>
             <p className="mt-3">
-              © {new Date().getFullYear()} JuradaExpress · Todos los derechos
+              © {new Date().getFullYear()} Jurada Express · Todos los derechos
               reservados
             </p>
             <p className="mt-1">
@@ -262,27 +301,90 @@ export default function RootLayout({ children }) {
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "ProfessionalService",
-                name: "JuradaExpress",
+                "@id": "https://juradaexpress.es/#organization",
+                name: "Jurada Express",
+                alternateName: "JuradaExpress",
                 url: "https://juradaexpress.es/",
                 email: "info@juradaexpress.es",
                 telephone: "+34685891214",
                 logo: "https://juradaexpress.es/logo.svg",
                 image: "https://juradaexpress.es/fotos/hero-firma.jpg",
+                description:
+                  "Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS, 100 % online, para clientes de España, Reino Unido, Estados Unidos, India y cualquier país.",
                 address: {
                   "@type": "PostalAddress",
                   addressRegion: "Murcia",
                   addressCountry: "ES",
                 },
                 areaServed: [
-                  { "@type": "Country", name: "ES" },
-                  { "@type": "Country", name: "GB" },
+                  ...SERVICE_COUNTRIES.filter((c) => c.code).map((c) => ({
+                    "@type": "Country",
+                    name: c.code,
+                  })),
+                  "Worldwide",
                 ],
                 availableLanguage: ["es", "en"],
+                knowsLanguage: ["es", "en"],
+                currenciesAccepted: "EUR",
+                paymentAccepted: "Tarjeta de crédito o débito internacional (Stripe), transferencia",
+                contactPoint: {
+                  "@type": "ContactPoint",
+                  contactType: "customer service",
+                  telephone: "+34685891214",
+                  email: "info@juradaexpress.es",
+                  availableLanguage: ["es", "en"],
+                  areaServed: "Worldwide",
+                  hoursAvailable: {
+                    "@type": "OpeningHoursSpecification",
+                    dayOfWeek: [
+                      "Monday",
+                      "Tuesday",
+                      "Wednesday",
+                      "Thursday",
+                      "Friday",
+                    ],
+                    opens: "09:00",
+                    closes: "20:00",
+                  },
+                },
+                hasOfferCatalog: {
+                  "@type": "OfferCatalog",
+                  name: "Servicios de traducción jurada y certificada",
+                  itemListElement: SERVICE_LINES.map((s) => ({
+                    "@type": "Offer",
+                    itemOffered: {
+                      "@type": "Service",
+                      name: s.name,
+                      description: s.description,
+                      url: s.url,
+                      provider: { "@id": "https://juradaexpress.es/#organization" },
+                    },
+                    url: s.url,
+                    priceCurrency: "EUR",
+                  })),
+                },
+                ...(PUBLISHED_REVIEWS > 0 &&
+                GOOGLE_RATING > 0 &&
+                GOOGLE_REVIEW_COUNT > 0
+                  ? {
+                      aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: GOOGLE_RATING,
+                        bestRating: 5,
+                        worstRating: 1,
+                        reviewCount: GOOGLE_REVIEW_COUNT,
+                      },
+                    }
+                  : {}),
                 priceRange: "€€",
                 founder: {
                   "@type": "Person",
+                  "@id": "https://juradaexpress.es/sobre-mi#person",
                   name: "Elena Peñaranda Ortega",
+                  url: "https://juradaexpress.es/sobre-mi",
                   jobTitle: "Traductora-Intérprete Jurada de Inglés",
+                  identifier: "7310",
+                  knowsLanguage: ["es", "en"],
                   hasCredential: {
                     "@type": "EducationalOccupationalCredential",
                     credentialCategory: "Traductora-Intérprete Jurada",

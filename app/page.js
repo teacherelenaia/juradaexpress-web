@@ -2,19 +2,25 @@
 import Image from "next/image";
 import TrackedLink from "./components/TrackedLink";
 import Reviews from "./components/Reviews";
+import TrustStrip from "./components/TrustStrip";
 import HeroSeal from "./components/HeroSeal";
 import ProcessTimeline from "./components/ProcessTimeline";
 import ProcessVideo from "./components/ProcessVideo";
 import FollowUs from "./components/FollowUs";
 import { SectionHeading } from "./components/ui";
 import { DOCUMENTS } from "../content/documents";
-import { WHATSAPP_URL } from "../content/site";
+import {
+  WHATSAPP_URL,
+  LARGE_PROJECT_CAPACITY,
+  TIMEZONE_NOTE,
+} from "../content/site";
 
 export const metadata = {
-  // El layout añade el sufijo "| JuradaExpress" mediante title.template.
-  title: "Traductor Jurado de Inglés · Traducción Jurada Online en 24/48 h",
+  // app/page.js comparte segmento con app/layout.js, así que title.template
+  // NO se aplica aquí: el sufijo va explícito (≤ 60 caracteres).
+  title: "Traductor Jurado Español-Inglés Online | Jurada Express",
   description:
-    "Traductora jurada de inglés nombrada por el MAEC (nº 7310). Traducción jurada español-inglés con validez oficial, 100% online, entrega en 24/48 h en toda España y Reino Unido. Presupuesto en minutos.",
+    "Traductora jurada de inglés nombrada por el MAEC (nº 7310). Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS, 100% online, entrega en 24/48 h. Clientes en España, Reino Unido, EE. UU., India y cualquier país.",
   alternates: {
     canonical: "https://juradaexpress.es/",
     languages: {
@@ -24,12 +30,11 @@ export const metadata = {
     },
   },
   openGraph: {
-    title:
-      "Traductor Jurado de Inglés · Traducción Jurada Online en 24/48 h | JuradaExpress",
+    title: "Traductor Jurado Español-Inglés Online | Jurada Express",
     description:
-      "Traducción jurada español-inglés con validez oficial, 100% online, entrega en 24/48 h en toda España y Reino Unido. Traductora jurada nombrada por el MAEC (nº 7310).",
+      "Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS, 100% online, entrega en 24/48 h. Traductora jurada nombrada por el MAEC (nº 7310). Clientes en cualquier país.",
     url: "https://juradaexpress.es/",
-    siteName: "JuradaExpress",
+    siteName: "Jurada Express",
     type: "website",
     locale: "es_ES",
     images: [
@@ -91,6 +96,49 @@ const COMMON_DOCUMENTS = [
   },
 ];
 
+// Documentos habituales del expediente de nómada digital (fuente: brief 0.4).
+const DNV_DOCUMENTS = [
+  "Certificado de antecedentes penales, apostillado",
+  "Contrato o carta del empleador con autorización para teletrabajar",
+  "Certificado del registro mercantil de la empresa (incorporation o good standing)",
+  "Título universitario o cartas de experiencia profesional",
+  "Certificado de cobertura de Seguridad Social (A1, certificate of coverage de la SSA)",
+];
+
+const WHATSAPP_DNV =
+  "https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20voy%20a%20pedir%20el%20visado%20de%20n%C3%B3mada%20digital%20y%20necesito%20traducci%C3%B3n%20jurada%20de%20mis%20documentos";
+const WHATSAPP_LARGE =
+  "https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20tengo%20un%20proyecto%20grande%20de%20traducci%C3%B3n%20jurada%20y%20necesito%20presupuesto%20y%20plazo%20cerrados";
+
+const FAQ = [
+  {
+    q: "¿La traducción jurada es válida en todo el territorio?",
+    a: "Sí. Las traducciones juradas firmadas y selladas por traductor jurado son válidas ante organismos oficiales.",
+  },
+  {
+    q: "¿Entregáis en papel y digital?",
+    a: "Sí. Entregamos PDF firmado digitalmente y, si lo necesitas, envío físico a tu dirección.",
+  },
+  {
+    q: "¿Puedo tener la traducción en 24/48 h?",
+    a: "Para documentos habituales, sí. Si son más de 20 folios, acordamos un calendario específico.",
+  },
+  {
+    q: "¿Trabajas con clientes fuera de España?",
+    a: "Sí. Atiendo a clientes de Estados Unidos, India, Reino Unido, Irlanda, Canadá, Australia y cualquier otro país: el envío del documento, el pago con tarjeta y la entrega en PDF firmado funcionan igual desde cualquier lugar, y el papel llega por mensajería si lo necesitas.",
+  },
+  {
+    q: "¿Haces traducciones certificadas para USCIS?",
+    a: "Sí. Entrego la traducción completa al inglés con la certificación de exactitud y competencia que exige USCIS (8 CFR § 103.2(b)(3)), firmada, fechada y con mis datos de contacto, un certificado por documento. No hace falta notario.",
+  },
+  {
+    q: "¿Cuánto tardas en traducir un expediente completo de nómada digital?",
+    a: LARGE_PROJECT_CAPACITY
+      ? `Te doy un plazo único cerrado por escrito antes de empezar; los documentos sueltos salen en 24/48 h y puedo asumir ${LARGE_PROJECT_CAPACITY.es}, así que un expediente completo suele estar listo en pocos días.`
+      : "Te doy un plazo único cerrado por escrito antes de empezar; los documentos sueltos salen en 24/48 h.",
+  },
+];
+
 export default function Page() {
   return (
     <main>
@@ -106,12 +154,14 @@ export default function Page() {
               con validez oficial, en 24/48 h
             </h1>
             <p className="mt-5 text-xl text-slate-700">
-              Validez oficial · Entrega en 24/48 h · Toda España y Reino Unido
+              Validez oficial · Entrega en 24/48 h · Clientes en España, Reino
+              Unido, EE. UU., India y cualquier país
             </p>
             <p className="mt-3 max-w-[68ch] text-base text-slate-600">
-              Con sede en Murcia, trabajo con clientes de toda España y de
-              cualquier país — todo el proceso es 100% digital, así que no
-              importa dónde estés.
+              Todo el proceso es digital: me envías el documento escaneado,
+              pagas con tarjeta desde cualquier país y recibes la traducción en
+              PDF firmado el mismo día o al siguiente. También hago traducción
+              certificada para USCIS.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
@@ -132,9 +182,6 @@ export default function Page() {
                 WhatsApp
               </TrackedLink>
             </div>
-            <p className="mt-3 text-sm text-slate-500">
-              * Proyectos &gt;20 folios: acordamos calendario y faseado.
-            </p>
           </div>
 
           <div className="relative">
@@ -152,6 +199,9 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* FRANJA DE CONFIANZA — cuatro hechos, sin iconos ni tarjetas */}
+      <TrustStrip locale="es" />
 
       {/* DOCUMENTOS MÁS HABITUALES — lista editorial, imagen a la izquierda */}
       <section className="bg-stone-50">
@@ -208,31 +258,54 @@ export default function Page() {
         </div>
       </section>
 
-      {/* REINO UNIDO — imagen a la derecha */}
+      {/* VISADO DE NÓMADA DIGITAL — imagen a la izquierda */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-        <div className="grid items-center gap-8 md:grid-cols-2">
+        <div className="grid items-center gap-10 md:grid-cols-[minmax(0,380px),1fr]">
+          <div className="relative hidden aspect-[3/4] overflow-hidden rounded-xl shadow md:block">
+            <Image
+              src="/fotos/expediente-nomada.jpg"
+              alt="Manos revisando un formulario oficial sobre una carpeta de documentos — expediente de visado de nómada digital"
+              fill
+              sizes="380px"
+              className="object-cover"
+            />
+          </div>
           <div>
             <SectionHeading>
-              ¿Resides en España siendo británico/a?
+              ¿Vas a pedir el visado de nómada digital?
             </SectionHeading>
             <p className="mt-4 max-w-[68ch] text-slate-600">
-              Te ayudo con la traducción jurada de tus documentos para el
-              NIE, la tarjeta de residencia, el empadronamiento, la compra
-              de una vivienda o cualquier otro trámite tras el Brexit.
-              Documentos en regla, sin sorpresas, para que puedas
-              centrarte en instalarte.
+              El expediente de la autorización de residencia para teletrabajo
+              internacional (Ley 28/2022) reúne muchos documentos de distintos
+              países, y casi todos tienen que llegar al consulado o a la UGE
+              en español. La mayoría de las denegaciones vienen de traducciones
+              que no son juradas o de apostillas que faltan, no del fondo del
+              caso. Yo reviso tu lista completa, te digo qué documento
+              necesita apostilla y traduzco todo el lote con un solo plazo,
+              ordenado y nombrado para subirlo a la plataforma.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <ul className="mt-6 grid max-w-[68ch] gap-2 text-slate-700 sm:grid-cols-1">
+              {DNV_DOCUMENTS.map((d) => (
+                <li key={d} className="flex gap-3">
+                  <span
+                    className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold-500"
+                    aria-hidden="true"
+                  />
+                  <span>{d}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-7 flex flex-wrap gap-3">
               <TrackedLink
-                label="uk_guia"
-                href="/traduccion-jurada-britanicos-espana"
+                label="dnv_guia"
+                href="/traduccion-jurada-visado-nomada-digital"
                 className="btn btn-primary"
               >
-                Guía trámite a trámite
+                Ver qué documentos necesitas
               </TrackedLink>
               <TrackedLink
-                label="uk_whatsapp"
-                href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20soy%20brit%C3%A1nico%2Fa%20y%20necesito%20traducci%C3%B3n%20jurada%20para%20un%20tr%C3%A1mite%20en%20Espa%C3%B1a"
+                label="dnv_whatsapp"
+                href={WHATSAPP_DNV}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
@@ -241,20 +314,69 @@ export default function Page() {
               </TrackedLink>
             </div>
           </div>
-          <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-72">
-            <Image
-              src="/fotos/foto-bandera-uk.jpg"
-              alt="Bandera de Reino Unido — traducción jurada para británicos residentes en España"
-              fill
-              sizes="(min-width: 768px) 480px, 100vw"
-              className="object-cover"
-            />
+        </div>
+      </section>
+
+      {/* REINO UNIDO — imagen a la derecha */}
+      <section className="bg-stone-50">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <div className="grid items-center gap-8 md:grid-cols-2">
+            <div>
+              <SectionHeading>
+                ¿Resides en España siendo británico/a?
+              </SectionHeading>
+              <p className="mt-4 max-w-[68ch] text-slate-600">
+                Te ayudo con la traducción jurada de tus documentos para el
+                NIE, la tarjeta de residencia, el empadronamiento, la compra
+                de una vivienda o cualquier otro trámite tras el Brexit.
+                Documentos en regla, sin sorpresas, para que puedas
+                centrarte en instalarte.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <TrackedLink
+                  label="uk_guia"
+                  href="/traduccion-jurada-britanicos-espana"
+                  className="btn btn-primary"
+                >
+                  Guía trámite a trámite
+                </TrackedLink>
+                <TrackedLink
+                  label="uk_whatsapp"
+                  href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20soy%20brit%C3%A1nico%2Fa%20y%20necesito%20traducci%C3%B3n%20jurada%20para%20un%20tr%C3%A1mite%20en%20Espa%C3%B1a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                >
+                  WhatsApp
+                </TrackedLink>
+              </div>
+              <p className="mt-6 max-w-[68ch] text-sm text-slate-600">
+                Si vienes de{" "}
+                <a href="/traduccion-jurada-estados-unidos" className="link">
+                  Estados Unidos
+                </a>{" "}
+                o de{" "}
+                <a href="/traduccion-jurada-india" className="link">
+                  India
+                </a>
+                , tienes tu propia guía.
+              </p>
+            </div>
+            <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-72">
+              <Image
+                src="/fotos/foto-bandera-uk.jpg"
+                alt="Bandera de Reino Unido — traducción jurada para británicos residentes en España"
+                fill
+                sizes="(min-width: 768px) 480px, 100vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* CÓMO TRABAJAMOS — línea temporal (momento animado único) */}
-      <section className="bg-stone-50">
+      <section>
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="order-2 md:order-1">
@@ -275,8 +397,9 @@ export default function Page() {
               <SectionHeading>¿Cómo trabajamos?</SectionHeading>
               <p className="mt-3 max-w-[68ch] text-slate-600">
                 Todo el proceso es 100% digital: da igual si estás en Murcia,
-                en cualquier otro punto de España o en el extranjero — el
-                envío, el presupuesto y la entrega funcionan igual.
+                en cualquier otro punto de España o en otro continente. El
+                envío, el presupuesto, el pago con tarjeta y la entrega
+                funcionan igual.
               </p>
             </div>
           </div>
@@ -301,6 +424,44 @@ export default function Page() {
               },
             ]}
           />
+        </div>
+      </section>
+
+      {/* PROYECTOS GRANDES EN PLAZOS CORTOS */}
+      <section className="bg-stone-50">
+        <div className="mx-auto max-w-6xl px-4 py-14 md:py-16">
+          <div className="grid gap-8 md:grid-cols-[1.4fr,1fr] md:items-center">
+            <div>
+              <SectionHeading>Proyectos grandes en plazos cortos</SectionHeading>
+              <p className="mt-4 max-w-[68ch] text-slate-600">
+                Traduzco expedientes completos y lotes de documentos para
+                particulares, empresas, despachos y gestorías. Antes de
+                empezar te doy presupuesto y plazo cerrados por escrito; al
+                terminar recibes cada documento como PDF firmado, ordenado y
+                nombrado para que sepas qué es cada archivo.
+                {LARGE_PROJECT_CAPACITY
+                  ? ` Puedo asumir ${LARGE_PROJECT_CAPACITY.es}; para más volumen o urgencias, pídeme información y te cierro plazo por escrito.`
+                  : " Para volúmenes grandes o urgencias, pídeme información y te cierro plazo por escrito."}
+              </p>
+            </div>
+            <div className="flex flex-col items-start gap-4">
+              <TrackedLink
+                label="large_whatsapp"
+                href={WHATSAPP_LARGE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Contar mi caso por WhatsApp
+              </TrackedLink>
+              <a
+                href="/traduccion-jurada-urgente-grandes-volumenes"
+                className="link inline-block py-1"
+              >
+                Cómo trabajo un lote de documentos →
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -331,6 +492,12 @@ export default function Page() {
               personalmente, garantizando su validez ante cualquier organismo
               oficial.
             </p>
+            <p className="mt-4 max-w-[68ch] text-slate-600">
+              También hago traducciones certificadas para USCIS y atiendo a
+              clientes de Estados Unidos, India, Reino Unido, Irlanda, Canadá
+              o Australia con el mismo proceso digital.{" "}
+              {TIMEZONE_NOTE.es}.
+            </p>
             <p className="mt-4">
               <a href="/sobre-mi" className="link">
                 Conoce cómo trabajo y por qué puedes confiar en mi firma →
@@ -344,7 +511,7 @@ export default function Page() {
       <Reviews locale="es" />
 
       {/* CTA FINAL */}
-      <section className="mx-auto max-w-6xl px-4 pb-16 md:pb-20">
+      <section className="mx-auto max-w-6xl px-4 pb-16 pt-16 md:pb-20 md:pt-20">
         <div
           data-surface="navy"
           className="rounded-xl bg-brand-navy p-8 text-white md:p-12"
@@ -389,20 +556,7 @@ export default function Page() {
       <section className="mx-auto max-w-6xl px-4 pb-20">
         <SectionHeading>Preguntas frecuentes</SectionHeading>
         <div className="mt-8 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200">
-          {[
-            {
-              q: "¿La traducción jurada es válida en todo el territorio?",
-              a: "Sí. Las traducciones juradas firmadas y selladas por traductor jurado son válidas ante organismos oficiales.",
-            },
-            {
-              q: "¿Entregáis en papel y digital?",
-              a: "Sí. Entregamos PDF firmado digitalmente y, si lo necesitas, envío físico a tu dirección.",
-            },
-            {
-              q: "¿Puedo tener la traducción en 24/48 h?",
-              a: "Para documentos habituales, sí. Si son más de 20 folios, acordamos un calendario específico.",
-            },
-          ].map((f, idx) => (
+          {FAQ.map((f, idx) => (
             <details key={idx} className="group p-5">
               <summary className="flex cursor-pointer items-center justify-between gap-4 font-medium text-slate-900 [&::-webkit-details-marker]:hidden">
                 {f.q}
@@ -432,35 +586,11 @@ export default function Page() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
-              mainEntity: [
-                {
-                  "@type": "Question",
-                  name: "¿La traducción jurada es válida en todo el territorio?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      "Sí. Las traducciones juradas firmadas y selladas por traductor jurado son válidas ante organismos oficiales.",
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: "¿Entregáis en papel y digital?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      "Sí. Entregamos PDF firmado digitalmente y, si lo necesitas, envío físico a tu dirección.",
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: "¿Puedo tener la traducción en 24/48 h?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      "Para documentos habituales, sí. Si son más de 20 folios, acordamos un calendario específico.",
-                  },
-                },
-              ],
+              mainEntity: FAQ.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
             }),
           }}
         />
