@@ -2,9 +2,12 @@
 
 // app/components/LanguageSwitcher.js
 import { usePathname } from "next/navigation";
+import { SERVICE_ROUTES } from "../../content/servicios/routes";
 
 // Rutas ES que tienen equivalente en /en (mismos slugs bajo /en/*)
 const ES_TO_EN = {
+  // Páginas de audiencia/servicio (encargo internacional 2026-09)
+  ...Object.fromEntries(SERVICE_ROUTES.map((r) => [r.es, r.en])),
   "/": "/en",
   "/precios": "/en/precios",
   "/contacto": "/en/contacto",

@@ -45,7 +45,7 @@ export default function DocumentPage({ ficha }) {
       ? `${ficha.priceLabel || "desde"} ${ficha.price} €`
       : ficha.priceNote || "presupuesto cerrado en menos de 2 h";
   const whatsapp = `https://wa.me/34685891214?text=${encodeURIComponent(
-    `Hola JuradaExpress, necesito una traducción jurada: ${ficha.name.toLowerCase()}`
+    `Hola Jurada Express, necesito una traducción jurada: ${ficha.name.toLowerCase()}`
   )}`;
 
   return (
@@ -177,7 +177,7 @@ export default function DocumentPage({ ficha }) {
                 url: `${BASE}/${ficha.slug}`,
                 provider: {
                   "@type": "ProfessionalService",
-                  name: "JuradaExpress",
+                  name: "Jurada Express",
                   url: `${BASE}/`,
                 },
                 areaServed: [

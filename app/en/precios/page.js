@@ -1,6 +1,11 @@
 // app/en/precios/page.js
+import { DNV_PACK_PRICE } from "../../../content/site";
+import { DOCUMENTS } from "../../../content/documents";
+
+const certPrice = DOCUMENTS.find((d) => d.id === "partida-nacimiento")?.price;
+
 export const metadata = {
-  title: "Sworn Translation Pricing — Spanish ⇆ English | JuradaExpress",
+  title: "Sworn and certified translation pricing (in euros)",
   description:
     "Certified sworn translator pricing for Spanish ⇆ English. Indicative rates in euros, fixed quote once we see your document.",
   alternates: {
@@ -20,8 +25,9 @@ export default function Page() {
       <p className="mt-3 text-slate-600">
         The final price depends on the length, complexity and format of the
         document. We give you a fixed quote once we've seen it. Prices below
-        are indicative and shown in euros (€), our billing currency for
-        translations delivered in Spain.
+        are indicative and shown in euros (€): every order is charged in
+        euros to any international card through Stripe, and your bank
+        applies the exchange rate.
       </p>
 
       <div className="mt-6 overflow-hidden rounded-xl ring-1 ring-stone-200">
@@ -59,6 +65,30 @@ export default function Page() {
               <td className="p-3">Fixed quote within 2 hours</td>
               <td className="p-3">Depends on length</td>
             </tr>
+            <tr className="bg-stone-50/50">
+              <td className="p-3">
+                <a href="/en/certified-translation-uscis" className="link">
+                  Certified translation for USCIS
+                </a>{" "}
+                (Spanish → English, with certification)
+              </td>
+              <td className="p-3">
+                {certPrice != null ? `€${certPrice} per certificate` : "Quote within 2 hours"}
+              </td>
+              <td className="p-3">24/48h</td>
+            </tr>
+            <tr>
+              <td className="p-3">
+                <a href="/en/sworn-translation-spain-digital-nomad-visa" className="link">
+                  Digital nomad visa file
+                </a>{" "}
+                (complete batch)
+              </td>
+              <td className="p-3">
+                {DNV_PACK_PRICE != null ? `€${DNV_PACK_PRICE}` : "Fixed quote within 2 hours"}
+              </td>
+              <td className="p-3">Single deadline in writing</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -68,7 +98,7 @@ export default function Page() {
           Request a quote
         </a>
         <a
-          href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation"
+          href="https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation"
           className="btn btn-secondary"
           target="_blank"
           rel="noopener noreferrer"

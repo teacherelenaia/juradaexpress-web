@@ -70,7 +70,7 @@ export default function Page() {
           Request a quote by email
         </a>
         <a
-          href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation"
+          href="https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation"
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-secondary"

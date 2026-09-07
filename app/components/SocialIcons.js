@@ -39,12 +39,12 @@ export default function SocialIcons({ className = "", iconClassName = "h-5 w-5" 
   const profiles = [
     INSTAGRAM_URL && {
       href: INSTAGRAM_URL,
-      label: "Instagram de JuradaExpress",
+      label: "Instagram de Jurada Express",
       Icon: IconInstagram,
     },
     FACEBOOK_URL && {
       href: FACEBOOK_URL,
-      label: "Facebook de JuradaExpress",
+      label: "Facebook de Jurada Express",
       Icon: IconFacebook,
     },
   ].filter(Boolean);

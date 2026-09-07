@@ -1,0 +1,26 @@
+// scripts/shot-menu.mjs — capturas del menú "Internacional" abierto (escritorio) y del menú móvil abierto.
+import { chromium } from "@playwright/test";
+const base = process.argv[2] || "http://127.0.0.1:3210";
+const out = process.argv[3] || "docs/capturas/2026-09/fase-2";
+const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+const d = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+await d.goto(base + "/traduccion-jurada-india", { waitUntil: "networkidle" });
+await d.evaluate(() => document.querySelector('[aria-label="Aviso de cookies"]')?.remove());
+await d.getByRole("button", { name: "Internacional" }).hover();
+await d.waitForTimeout(300);
+const hover = await d.getAttribute("#nav-internacional", "data-open");
+await d.screenshot({ path: `${out}/1440/menu-internacional-abierto.png`, clip: { x: 0, y: 0, width: 1440, height: 420 } });
+await d.getByRole("button", { name: "Internacional" }).click();
+await d.waitForTimeout(250);
+const afterClick = await d.getAttribute("#nav-internacional", "data-open");
+await d.keyboard.press("Escape");
+await d.waitForTimeout(250);
+const afterEsc = await d.getAttribute("#nav-internacional", "data-open");
+console.log({ hover, afterClick, afterEsc });
+const m = await browser.newPage({ viewport: { width: 390, height: 844 } });
+await m.goto(base + "/en/sworn-translation-india-spain", { waitUntil: "networkidle" });
+await m.evaluate(() => document.querySelector('[aria-label="Cookie notice"]')?.remove());
+await m.getByRole("button", { name: "Open menu" }).click();
+await m.waitForTimeout(350);
+await m.screenshot({ path: `${out}/390/menu-movil-abierto-en.png` });
+await browser.close();

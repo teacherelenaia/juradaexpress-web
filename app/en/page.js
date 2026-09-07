@@ -2,19 +2,24 @@
 import Image from "next/image";
 import TrackedLink from "../components/TrackedLink";
 import Reviews from "../components/Reviews";
+import TrustStrip from "../components/TrustStrip";
 import HeroSeal from "../components/HeroSeal";
 import ProcessTimeline from "../components/ProcessTimeline";
 import ProcessVideo from "../components/ProcessVideo";
 import FollowUs from "../components/FollowUs";
 import { SectionHeading } from "../components/ui";
 import { DOCUMENTS } from "../../content/documents";
-import { WHATSAPP_URL_EN } from "../../content/site";
+import {
+  WHATSAPP_URL_EN,
+  LARGE_PROJECT_CAPACITY,
+  TIMEZONE_NOTE,
+} from "../../content/site";
 
 export const metadata = {
-  // The root layout appends "| JuradaExpress" through title.template.
-  title: "Sworn Translator for Spain · Certified Spanish–English Translation in 24/48h",
+  // Explicit suffix (≤ 60 characters); the root template applies to /en.
+  title: { absolute: "Sworn Spanish-English Translator Online | Jurada Express" },
   description:
-    "Sworn translator of English appointed by Spain's Ministry of Foreign Affairs (no. 7310). Certified Spanish–English translations accepted for NIE, residency, university and property paperwork. Delivered digitally in 24/48 hours.",
+    "Sworn translation for Spain, certified translation for USCIS and digital nomad visa documents. Sworn translator appointed by Spain's Ministry of Foreign Affairs (no. 7310). Clients in the UK, USA, India and worldwide. Delivered in 24/48h.",
   alternates: {
     canonical: "https://juradaexpress.es/en",
     languages: {
@@ -24,12 +29,11 @@ export const metadata = {
     },
   },
   openGraph: {
-    title:
-      "Sworn Translator for Spain · Certified Spanish–English Translation in 24/48h | JuradaExpress",
+    title: "Sworn Spanish-English Translator Online | Jurada Express",
     description:
-      "Certified Spanish–English sworn translations accepted by Spanish authorities: NIE and residency, university admissions, property and marriage paperwork. Delivered digitally in 24/48 hours.",
+      "Sworn translation for Spain, certified translation for USCIS and digital nomad visa documents. Sworn translator appointed by Spain's Ministry of Foreign Affairs (no. 7310). Delivered digitally in 24/48h.",
     url: "https://juradaexpress.es/en",
-    siteName: "JuradaExpress",
+    siteName: "Jurada Express",
     type: "website",
     locale: "en_GB",
     images: [
@@ -91,6 +95,49 @@ const COMMON_DOCUMENTS = [
   },
 ];
 
+// Usual documents in a digital nomad visa file (source: brief 0.4).
+const DNV_DOCUMENTS = [
+  "Criminal record certificate, apostilled",
+  "Employment contract or employer letter authorising remote work from Spain",
+  "Company registration certificate (certificate of incorporation or good standing)",
+  "University degree or letters proving professional experience",
+  "Social security coverage certificate (UK A1, US SSA certificate of coverage)",
+];
+
+const WHATSAPP_DNV =
+  "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27m%20applying%20for%20Spain%27s%20digital%20nomad%20visa%20and%20need%20sworn%20translations%20of%20my%20documents";
+const WHATSAPP_LARGE =
+  "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%20have%20a%20large%20sworn%20translation%20project%20and%20need%20a%20fixed%20quote%20and%20deadline";
+
+const FAQ = [
+  {
+    q: "Is a sworn translation valid throughout Spain?",
+    a: "Yes. Sworn translations signed and stamped by an officially appointed sworn translator are valid before official bodies anywhere in Spain.",
+  },
+  {
+    q: "Do you deliver on paper and digitally?",
+    a: "Yes. We deliver a digitally signed PDF and, if you need it, a physical copy shipped to your address.",
+  },
+  {
+    q: "Can I get my translation in 24/48h?",
+    a: "For standard documents, yes. For documents over 20 pages, we agree on a specific delivery schedule.",
+  },
+  {
+    q: "Do you work with clients outside Spain?",
+    a: "Yes. I work with clients in the United States, India, the United Kingdom, Ireland, Canada, Australia and any other country: sending the document, paying by card and receiving the signed PDF work the same way from anywhere, and paper copies are couriered if you need them.",
+  },
+  {
+    q: "Do you provide certified translations for USCIS?",
+    a: "Yes. I deliver the complete English translation with the certification of accuracy and competence that USCIS requires (8 CFR § 103.2(b)(3)), signed, dated and with my contact details, one certificate per document. No notary is needed.",
+  },
+  {
+    q: "How long does a complete digital nomad visa file take?",
+    a: LARGE_PROJECT_CAPACITY
+      ? `You get a single fixed deadline in writing before I start; individual documents take 24/48h and I can handle ${LARGE_PROJECT_CAPACITY.en}, so a complete file is usually ready within a few days.`
+      : "You get a single fixed deadline in writing before I start; individual documents take 24/48h.",
+  },
+];
+
 export default function Page() {
   return (
     <main>
@@ -106,12 +153,14 @@ export default function Page() {
               translation, officially valid, in 24/48 hours
             </h1>
             <p className="mt-5 text-xl text-slate-700">
-              Officially valid · Delivered in 24/48h · All of Spain and the UK
+              Officially valid · Delivered in 24/48h · Clients in Spain, the
+              UK, the USA, India and any country
             </p>
             <p className="mt-3 max-w-[68ch] text-base text-slate-600">
-              Based in Murcia, Spain, I work with clients across the country
-              and around the world — the entire process is 100% digital, so
-              it doesn't matter where you are.
+              The whole process is digital: you send me a scan of the
+              document, pay by card from any country and receive the
+              translation as a signed PDF the same day or the next. I also
+              provide certified translations for USCIS.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
@@ -132,10 +181,6 @@ export default function Page() {
                 WhatsApp
               </TrackedLink>
             </div>
-            <p className="mt-3 text-sm text-slate-500">
-              * Projects over 20 pages: we agree a specific schedule and
-              delivery in stages.
-            </p>
           </div>
 
           <div className="relative">
@@ -153,6 +198,9 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* TRUST STRIP — four facts, no icons, no cards */}
+      <TrustStrip locale="en" />
 
       {/* MOST COMMON DOCUMENTS — editorial list, image on the left */}
       <section className="bg-stone-50">
@@ -204,35 +252,61 @@ export default function Page() {
               </ul>
               <p className="mt-4 text-sm text-slate-500">
                 Document guides are currently in Spanish; quotes and the whole
-                service are available in English.
+                service are available in English. Prices are in euros and
+                charged in euros to any international card.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* UK / BREXIT — image on the right */}
+      {/* DIGITAL NOMAD VISA — image on the left */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-        <div className="grid items-center gap-8 md:grid-cols-2">
+        <div className="grid items-center gap-10 md:grid-cols-[minmax(0,380px),1fr]">
+          <div className="relative hidden aspect-[3/4] overflow-hidden rounded-xl shadow md:block">
+            <Image
+              src="/fotos/expediente-nomada.jpg"
+              alt="Hands checking an official form on a folder of documents — digital nomad visa file"
+              fill
+              sizes="380px"
+              className="object-cover"
+            />
+          </div>
           <div>
-            <SectionHeading>British and living in Spain?</SectionHeading>
+            <SectionHeading>Applying for Spain&apos;s digital nomad visa?</SectionHeading>
             <p className="mt-4 max-w-[68ch] text-slate-600">
-              I'll help you get your documents sworn-translated for your
-              NIE, residency card (TIE), padrón registration, buying a
-              property, or any other paperwork since Brexit. Everything
-              done properly and on time, so you can focus on settling in.
+              The file for Spain&apos;s international remote work residence
+              permit (Law 28/2022) brings together many documents from
+              different countries, and almost all of them must reach the
+              consulate or the UGE in Spanish. Most refusals come from
+              translations that are not sworn or from missing apostilles, not
+              from the merits of the case. I check your full list, tell you
+              which documents need an apostille and translate the whole batch
+              with a single deadline, delivered in order and clearly named so
+              you can upload it straight to the platform.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <ul className="mt-6 grid max-w-[68ch] gap-2 text-slate-700">
+              {DNV_DOCUMENTS.map((d) => (
+                <li key={d} className="flex gap-3">
+                  <span
+                    className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold-500"
+                    aria-hidden="true"
+                  />
+                  <span>{d}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-7 flex flex-wrap gap-3">
               <TrackedLink
-                label="uk_guide_en"
-                href="/en/sworn-translation-british-residents-spain"
+                label="dnv_guide_en"
+                href="/en/sworn-translation-spain-digital-nomad-visa"
                 className="btn btn-primary"
               >
-                Guide, procedure by procedure
+                See which documents you need
               </TrackedLink>
               <TrackedLink
-                label="uk_whatsapp_en"
-                href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27m%20British%20and%20need%20a%20sworn%20translation%20for%20a%20procedure%20in%20Spain"
+                label="dnv_whatsapp_en"
+                href={WHATSAPP_DNV}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
@@ -241,20 +315,63 @@ export default function Page() {
               </TrackedLink>
             </div>
           </div>
-          <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-72">
-            <Image
-              src="/fotos/foto-bandera-uk.jpg"
-              alt="Union Jack flag — sworn translation for British nationals living in Spain"
-              fill
-              sizes="(min-width: 768px) 480px, 100vw"
-              className="object-cover"
-            />
+        </div>
+      </section>
+
+      {/* UK / BREXIT — image on the right */}
+      <section className="bg-stone-50">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <div className="grid items-center gap-8 md:grid-cols-2">
+            <div>
+              <SectionHeading>British and living in Spain?</SectionHeading>
+              <p className="mt-4 max-w-[68ch] text-slate-600">
+                I&apos;ll help you get your documents sworn-translated for your
+                NIE, residency card (TIE), padrón registration, buying a
+                property, or any other paperwork since Brexit. Everything
+                done properly and on time, so you can focus on settling in.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <TrackedLink
+                  label="uk_guide_en"
+                  href="/en/sworn-translation-british-residents-spain"
+                  className="btn btn-primary"
+                >
+                  Guide, procedure by procedure
+                </TrackedLink>
+                <TrackedLink
+                  label="uk_whatsapp_en"
+                  href="https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27m%20British%20and%20need%20a%20sworn%20translation%20for%20a%20procedure%20in%20Spain"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                >
+                  WhatsApp
+                </TrackedLink>
+              </div>
+              <p className="mt-6 max-w-[68ch] text-sm text-slate-600">
+                Coming from the United States, India, Ireland, Canada or
+                Australia?{" "}
+                <a href="/en/sworn-translation-spain-by-country" className="link">
+                  You have your own guide
+                </a>
+                .
+              </p>
+            </div>
+            <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-72">
+              <Image
+                src="/fotos/escritorio-documentos.jpg"
+                alt="Hand writing in a notebook next to a laptop, preparing the paperwork for a procedure in Spain"
+                fill
+                sizes="(min-width: 768px) 480px, 100vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* HOW IT WORKS — timeline (the home's single animated moment) */}
-      <section className="bg-stone-50">
+      <section>
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="order-2 md:order-1">
@@ -272,10 +389,10 @@ export default function Page() {
             <div className="order-1 md:order-2">
               <SectionHeading>How it works</SectionHeading>
               <p className="mt-3 max-w-[68ch] text-slate-600">
-                The whole process is 100% digital: whether you're in Spain or
-                anywhere else in the world, sending your documents, getting
-                your quote and receiving your translation works exactly the
-                same way.
+                The whole process is 100% digital: whether you&apos;re in Spain
+                or on another continent, sending your documents, getting your
+                quote, paying by card and receiving your translation work
+                exactly the same way.
               </p>
             </div>
           </div>
@@ -303,6 +420,44 @@ export default function Page() {
         </div>
       </section>
 
+      {/* LARGE PROJECTS, SHORT DEADLINES */}
+      <section className="bg-stone-50">
+        <div className="mx-auto max-w-6xl px-4 py-14 md:py-16">
+          <div className="grid gap-8 md:grid-cols-[1.4fr,1fr] md:items-center">
+            <div>
+              <SectionHeading>Large projects, short deadlines</SectionHeading>
+              <p className="mt-4 max-w-[68ch] text-slate-600">
+                I translate complete visa files and batches of documents for
+                individuals, companies, law firms and relocation agencies.
+                Before I start you get a fixed quote and deadline in writing;
+                when I finish you receive every document as a signed PDF, in
+                order and clearly named so you know what each file is.
+                {LARGE_PROJECT_CAPACITY
+                  ? ` I can handle ${LARGE_PROJECT_CAPACITY.en}; for larger volumes or rush jobs, ask me and I will confirm a deadline in writing.`
+                  : " For large volumes or rush jobs, ask me and I will confirm a deadline in writing."}
+              </p>
+            </div>
+            <div className="flex flex-col items-start gap-4">
+              <TrackedLink
+                label="large_whatsapp_en"
+                href={WHATSAPP_LARGE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Tell me about your project on WhatsApp
+              </TrackedLink>
+              <a
+                href="/en/urgent-sworn-translation-large-projects"
+                className="link inline-block py-1"
+              >
+                How I handle a batch of documents →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ABOUT ME */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
         <div className="grid items-center gap-8 md:grid-cols-[auto,1fr]">
@@ -315,7 +470,7 @@ export default function Page() {
           <div>
             <SectionHeading>About me</SectionHeading>
             <p className="mt-4 max-w-[68ch] text-lg text-slate-600">
-              I'm <strong className="text-brand-navy">Elena Peñaranda Ortega</strong>,
+              I&apos;m <strong className="text-brand-navy">Elena Peñaranda Ortega</strong>,
               a Sworn Translator-Interpreter for English appointed by the
               Spanish Ministry of Foreign Affairs, European Union and
               Cooperation under{" "}
@@ -331,6 +486,12 @@ export default function Page() {
               translation, guaranteeing its validity before any official body
               in Spain.
             </p>
+            <p className="mt-4 max-w-[68ch] text-slate-600">
+              I also provide certified translations for USCIS and work with
+              clients in the United States, India, the United Kingdom,
+              Ireland, Canada and Australia through the same digital process.{" "}
+              {TIMEZONE_NOTE.en}.
+            </p>
             <p className="mt-4">
               <a href="/en/about" className="link">
                 Find out how I work and why my signature is trusted →
@@ -344,7 +505,7 @@ export default function Page() {
       <Reviews locale="en" />
 
       {/* FINAL CTA */}
-      <section className="mx-auto max-w-6xl px-4 pb-16 md:pb-20">
+      <section className="mx-auto max-w-6xl px-4 pb-16 pt-16 md:pb-20 md:pt-20">
         <div
           data-surface="navy"
           className="rounded-xl bg-brand-navy p-8 text-white md:p-12"
@@ -353,7 +514,7 @@ export default function Page() {
             <div>
               <SectionHeading light>Shall we get started?</SectionHeading>
               <p className="mt-2 text-brand-navy-100">
-                Send me your document and I'll reply with a quote and delivery time.
+                Send me your document and I&apos;ll reply with a quote and delivery time.
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <TrackedLink
@@ -389,20 +550,7 @@ export default function Page() {
       <section className="mx-auto max-w-6xl px-4 pb-20">
         <SectionHeading>Frequently asked questions</SectionHeading>
         <div className="mt-8 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200">
-          {[
-            {
-              q: "Is a sworn translation valid throughout Spain?",
-              a: "Yes. Sworn translations signed and stamped by an officially appointed sworn translator are valid before official bodies anywhere in Spain.",
-            },
-            {
-              q: "Do you deliver on paper and digitally?",
-              a: "Yes. We deliver a digitally signed PDF and, if you need it, a physical copy shipped to your address.",
-            },
-            {
-              q: "Can I get my translation in 24/48h?",
-              a: "For standard documents, yes. For documents over 20 pages, we agree on a specific delivery schedule.",
-            },
-          ].map((f, idx) => (
+          {FAQ.map((f, idx) => (
             <details key={idx} className="group p-5">
               <summary className="flex cursor-pointer items-center justify-between gap-4 font-medium text-slate-900 [&::-webkit-details-marker]:hidden">
                 {f.q}
@@ -432,35 +580,11 @@ export default function Page() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
-              mainEntity: [
-                {
-                  "@type": "Question",
-                  name: "Is a sworn translation valid throughout Spain?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      "Yes. Sworn translations signed and stamped by an officially appointed sworn translator are valid before official bodies anywhere in Spain.",
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: "Do you deliver on paper and digitally?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      "Yes. We deliver a digitally signed PDF and, if you need it, a physical copy shipped to your address.",
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: "Can I get my translation in 24/48h?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      "For standard documents, yes. For documents over 20 pages, we agree on a specific delivery schedule.",
-                  },
-                },
-              ],
+              mainEntity: FAQ.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
             }),
           }}
         />
