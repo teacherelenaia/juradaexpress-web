@@ -1,6 +1,11 @@
 // app/precios/page.js
+import { DNV_PACK_PRICE } from "../../content/site";
+import { DOCUMENTS } from "../../content/documents";
+
+const certPrice = DOCUMENTS.find((d) => d.id === "partida-nacimiento")?.price;
+
 export const metadata = {
-  title: "Precios traducción jurada – JuradaExpress (Murcia)",
+  title: "Precios de traducción jurada y certificada (en euros)",
   description:
     "Tarifas orientativas de traducción jurada Español ⇆ Inglés. Presupuesto cerrado al ver el documento.",
   alternates: {
@@ -57,6 +62,30 @@ export default function Page() {
               <td className="p-3">Presupuesto cerrado en menos de 2 h</td>
               <td className="p-3">Según extensión</td>
             </tr>
+            <tr className="bg-stone-50/50">
+              <td className="p-3">
+                <a href="/traduccion-certificada-uscis" className="link">
+                  Traducción certificada para USCIS
+                </a>{" "}
+                (español → inglés, con certificación)
+              </td>
+              <td className="p-3">
+                {certPrice != null ? `${certPrice} € por certificado` : "Presupuesto en menos de 2 h"}
+              </td>
+              <td className="p-3">24/48 h</td>
+            </tr>
+            <tr>
+              <td className="p-3">
+                <a href="/traduccion-jurada-visado-nomada-digital" className="link">
+                  Expediente visado nómada digital
+                </a>{" "}
+                (lote completo)
+              </td>
+              <td className="p-3">
+                {DNV_PACK_PRICE != null ? `${DNV_PACK_PRICE} €` : "Presupuesto cerrado en menos de 2 h"}
+              </td>
+              <td className="p-3">Plazo único por escrito</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -76,6 +105,11 @@ export default function Page() {
 
       <p className="mt-8 text-sm text-slate-500">
         * Plazo orientativo 24/48 h para encargos habituales. Más de 20 folios: acordamos calendario específico.
+      </p>
+      <p className="mt-2 text-sm text-slate-500">
+        Todos los precios son en euros (€), IVA incluido. Se cobran en euros con
+        tarjeta internacional a través de Stripe; si pagas desde fuera de la zona
+        euro, tu banco aplica el cambio.
       </p>
     </main>
   );

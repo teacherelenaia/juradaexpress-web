@@ -165,6 +165,28 @@
     transition: transform 200ms var(--ease-out), opacity 200ms var(--ease-out),
       visibility 0s;
   }
+
+  /* Desplegable "Internacional" del menú de escritorio: siempre montado;
+     entra desde su botón (transform-origin arriba) con translateY(-4px) +
+     opacidad en 160 ms ease-out y sale en 120 ms. Solo transform/opacity. */
+  .nav-dropdown {
+    transform: translateX(-50%) translateY(-4px);
+    transform-origin: top center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 120ms var(--ease-out), opacity 120ms var(--ease-out),
+      visibility 0s linear 120ms;
+  }
+
+  .nav-dropdown[data-open="true"] {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: transform 160ms var(--ease-out), opacity 160ms var(--ease-out),
+      visibility 0s;
+  }
 }
 
 @keyframes nav-underline-draw {
@@ -303,6 +325,16 @@
 
   .mobile-panel[data-open="true"] {
     transition: opacity 200ms ease, visibility 0s;
+  }
+
+  .nav-dropdown,
+  .nav-dropdown[data-open="true"] {
+    transform: translateX(-50%);
+    transition: opacity 120ms ease, visibility 0s linear 120ms;
+  }
+
+  .nav-dropdown[data-open="true"] {
+    transition: opacity 160ms ease, visibility 0s;
   }
 }
 

@@ -8,11 +8,14 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 import SocialIcons from "./SocialIcons";
-import { LINKS, isActive } from "./MainNav";
+import { getLinks, getInternationalItems, isActive, isEnglishPath } from "./MainNav";
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname() || "/";
+  const english = isEnglishPath(pathname);
+  const links = getLinks(pathname).filter((l) => !l.menu);
+  const international = getInternationalItems(pathname);
   const panelRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -37,7 +40,15 @@ export default function MobileNav() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
-        aria-label={open ? "Cerrar menú" : "Abrir menú"}
+        aria-label={
+          open
+            ? english
+              ? "Close menu"
+              : "Cerrar menú"
+            : english
+              ? "Open menu"
+              : "Abrir menú"
+        }
         className="inline-flex h-11 w-11 items-center justify-center rounded-md text-slate-100 hover:text-brand-gold-300"
       >
         {open ? (
@@ -81,8 +92,13 @@ export default function MobileNav() {
         aria-hidden={!open}
         className="mobile-panel absolute inset-x-0 top-full border-t border-white/10 bg-brand-navy px-4 py-3 shadow-lg"
       >
-        <nav aria-label="Navegación principal (móvil)" className="flex flex-col">
-          {LINKS.map((l) => {
+        <nav
+          aria-label={
+            english ? "Main navigation (mobile)" : "Navegación principal (móvil)"
+          }
+          className="flex flex-col"
+        >
+          {links.map((l) => {
             const active = isActive(pathname, l.href);
             return (
               <a
@@ -101,6 +117,35 @@ export default function MobileNav() {
               </a>
             );
           })}
+          {/* Grupo Internacional (FASE 2.6) */}
+          <p
+            id="mobile-nav-internacional"
+            className="mt-2 border-t border-white/10 px-3 pb-1 pt-3 text-xs font-medium uppercase tracking-wide text-slate-400"
+          >
+            {english ? "International" : "Internacional"}
+          </p>
+          <ul aria-labelledby="mobile-nav-internacional" className="flex flex-col">
+            {international.map((l) => {
+              const active = isActive(pathname, l.href);
+              return (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    aria-current={active ? "page" : undefined}
+                    tabIndex={open ? undefined : -1}
+                    onClick={() => setOpen(false)}
+                    className={`block rounded-lg px-3 py-3 no-underline ${
+                      active
+                        ? "bg-white/10 font-medium text-brand-gold-300"
+                        : "text-slate-100 hover:bg-white/10 hover:text-brand-gold-300"
+                    }`}
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
           <div className="mt-2 flex items-center justify-between border-t border-white/10 px-3 pt-3 text-slate-100">
             <LanguageSwitcher />
             <SocialIcons />

@@ -6,6 +6,7 @@ import ActionBar from "./components/ActionBar";
 import MobileNav from "./components/MobileNav";
 import MainNav from "./components/MainNav";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import HeaderActions from "./components/HeaderActions";
 import SocialIcons from "./components/SocialIcons";
 import {
   INSTAGRAM_URL,
@@ -19,6 +20,15 @@ import { getPublishableReviews } from "../content/reviews";
 
 // aggregateRating solo si hay reseñas publicables (se lee en build).
 const PUBLISHED_REVIEWS = getPublishableReviews().length;
+
+// Columna "Clientes internacionales" del footer (FASE 2.6).
+const INTERNATIONAL_LINKS = [
+  { href: "/traduccion-jurada-visado-nomada-digital", label: "Visado de nómada digital" },
+  { href: "/traduccion-certificada-uscis", label: "Traducción certificada para USCIS" },
+  { href: "/traduccion-jurada-estados-unidos", label: "Clientes de Estados Unidos" },
+  { href: "/traduccion-jurada-india", label: "Clientes de India" },
+  { href: "/traduccion-jurada-britanicos-espana", label: "Británicos en España" },
+];
 
 // Las cuatro líneas de servicio del catálogo (JSON-LD hasOfferCatalog).
 const SERVICE_LINES = [
@@ -146,19 +156,10 @@ export default function RootLayout({ children }) {
             {/* Nav (estado activo con usePathname) */}
             <MainNav />
 
-            {/* Acciones rápidas */}
+            {/* Acciones rápidas (CTA y teléfono localizados en /en) */}
             <div className="ml-auto flex shrink-0 items-center gap-2">
               <LanguageSwitcher className="hidden md:inline-flex" />
-              <a
-                href="tel:+34685891214"
-                className="btn btn-quiet-light btn-sm hidden lg:inline-flex"
-                aria-label="Llamar 685 891 214"
-              >
-                685 891 214
-              </a>
-              <a href="/documentos" className="btn btn-gold btn-sm">
-                Pedir presupuesto
-              </a>
+              <HeaderActions />
               <MobileNav />
             </div>
           </div>
@@ -169,7 +170,7 @@ export default function RootLayout({ children }) {
 
         {/* Footer */}
         <footer className="mt-14 border-t border-stone-200 bg-white">
-          <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-3">
+          <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-2 lg:grid-cols-4">
             <div>
               <div className="mb-2 inline-flex items-center gap-2 font-semibold text-slate-900">
                 <img
@@ -225,6 +226,34 @@ export default function RootLayout({ children }) {
                     Sobre mí
                   </a>
                 </li>
+                <li>
+                  <a href="/preguntas-frecuentes" className="link-nav">
+                    Preguntas frecuentes
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/traduccion-jurada-urgente-grandes-volumenes"
+                    className="link-nav"
+                  >
+                    Urgentes y grandes volúmenes
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="text-base font-semibold text-slate-900">
+                Clientes internacionales
+              </h2>
+              <ul className="mt-3 space-y-2 text-sm">
+                {INTERNATIONAL_LINKS.map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href} className="link-nav">
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 
