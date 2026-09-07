@@ -1,10 +1,12 @@
 # Créditos de imágenes
 
-Registro de origen y licencia de las fotografías de `public/`. Todas las fotos de stock se usan bajo licencia libre (Unsplash License / Pexels License), que permite el uso comercial sin atribución obligatoria; se documenta aquí el origen por transparencia y para poder sustituirlas.
+Registro de origen y licencia de las fotografías de `public/`. Las fotos de stock se usan bajo licencia libre (Unsplash License / Pexels License), que permite el uso comercial sin atribución obligatoria; se documenta aquí el origen por transparencia y para poder sustituirlas.
 
 ## Encargo internacional (septiembre de 2026)
 
-Durante este encargo Unsplash y Pexels no eran accesibles desde el entorno de Claude Code (política de red del entorno), así que **no se descargaron fotos nuevas**. Las seis imágenes de las páginas nuevas son **recortes propios** de fotografías con licencia libre que ya estaban en el repositorio desde el rediseño de agosto, generados con `scripts/crop-image.mjs` (Chromium/canvas, JPEG calidad 0,8, todas < 150 KB). Ninguna página nueva repite un recorte.
+Durante este encargo Unsplash y Pexels no eran accesibles desde el entorno de Claude Code (política de red del entorno), así que **no se descargaron fotos nuevas**. Las doce imágenes nuevas son **recortes propios** de fotografías con licencia libre que ya estaban en el repositorio desde encargos anteriores, generados con `scripts/crop-image.mjs` (Chromium/canvas, JPEG, todas < 150 KB). Ninguna página ni post nuevo repite un recorte. Se evitaron banderas y monumentos en las páginas de Estados Unidos e India, como pedía el brief.
+
+### Páginas de servicio (FASE 1 y 2)
 
 | Archivo nuevo | Recorte de | Uso | Peso |
 |---|---|---|---|
@@ -15,10 +17,21 @@ Durante este encargo Unsplash y Pexels no eran accesibles desde el entorno de Cl
 | `public/fotos/estudiante-portatil.jpg` (1200×900) | `public/academicos.jpg` | `/traduccion-jurada-india` y `/en/sworn-translation-india-spain` | 111 KB |
 | `public/fotos/acuerdo-empresa.jpg` (1200×900) | `public/mercantiles.jpg` | `/traduccion-jurada-urgente-grandes-volumenes` y `/en/urgent-sworn-translation-large-projects` | 46 KB |
 
-Origen de los archivos base: fotografías de stock con licencia libre incorporadas al repositorio en encargos anteriores (agosto de 2026 y anteriores). [[COMPLETAR: URL de origen en Unsplash/Pexels de `real-consejos.jpg`, `foto-firma.jpg`, `post-property.jpg`, `academicos.jpg` y `mercantiles.jpg`, si Elena o el autor del rediseño de agosto las conservan]]
+### Blog (FASE 3)
+
+| Archivo nuevo | Recorte de | Post | Peso |
+|---|---|---|---|
+| `public/blog/post-nomada-digital.jpg` | `public/fotos/foto-documentos.jpg` | `/blog/documentos-visado-nomada-digital-apostilla-traduccion-jurada` | 71 KB |
+| `public/blog/post-digital-nomad-visa.jpg` | `public/blog/real-consejos.jpg` | `/en/blog/spain-digital-nomad-visa-documents-apostille-sworn-translation` | 78 KB |
+| `public/blog/post-uscis-jurada-certificada.jpg` | `public/fotos/foto-firma.jpg` | `/blog/traduccion-jurada-o-certificada-uscis-espana` | 46 KB |
+| `public/blog/post-sworn-vs-certified.jpg` | `public/docs-real.jpg` | `/en/blog/sworn-vs-certified-translation-uscis-spain` | 88 KB |
+| `public/blog/post-india-mea.jpg` | `public/academicos.jpg` | `/blog/documentos-indios-visado-espana-apostilla-mea` | 79 KB |
+| `public/blog/post-indian-documents.jpg` | `public/blog/real-apostilla.jpg` | `/en/blog/indian-documents-spanish-visa-mea-apostille-sworn-translation` | 131 KB |
+
+Origen de los archivos base: fotografías de stock con licencia libre incorporadas al repositorio en encargos anteriores (agosto de 2026 y anteriores). [[COMPLETAR: URL de origen en Unsplash/Pexels de `real-consejos.jpg`, `foto-firma.jpg`, `foto-documentos.jpg`, `post-property.jpg`, `academicos.jpg`, `mercantiles.jpg`, `docs-real.jpg` y `real-apostilla.jpg`, si Elena o el autor del rediseño de agosto las conservan]]
 
 ## Cómo sustituir una imagen
 
 1. Descarga la foto nueva de Unsplash o Pexels (licencia libre) y anota aquí su URL.
 2. Recorta y comprime con `node scripts/crop-image.mjs <entrada> <salida.jpg> <x> <y> <ancho> <alto> <anchoSalida> [calidad]` o con la herramienta que prefieras (< 150 KB).
-3. Sustituye el archivo en `public/fotos/` manteniendo el nombre, o cambia la ruta en `content/servicios/*.js` (`image.src`) y en `app/page.js` / `app/en/page.js`.
+3. Sustituye el archivo en `public/fotos/` o `public/blog/` manteniendo el nombre, o cambia la ruta en `content/servicios/*.js` (`image.src`), `content/posts*.js` (`image`) y `app/(es)/page.js` / `app/en/page.js`.
