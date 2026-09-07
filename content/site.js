@@ -8,9 +8,9 @@ export const PHONE_TEL = "+34685891214";
 export const EMAIL = "info@juradaexpress.es";
 
 export const WHATSAPP_URL =
-  "https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto";
+  "https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20quisiera%20un%20presupuesto";
 export const WHATSAPP_URL_EN =
-  "https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation";
+  "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation";
 
 // Perfiles confirmados por Elena el 25/08/2026 (usuario: juradaexpress
 // en ambas redes). Si algún perfil se desactiva, pon la constante en null

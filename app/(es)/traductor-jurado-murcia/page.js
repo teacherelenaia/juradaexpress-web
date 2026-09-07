@@ -104,7 +104,7 @@ export default function Page() {
                 url: "https://juradaexpress.es/traductor-jurado-murcia",
                 provider: {
                   "@type": "ProfessionalService",
-                  name: "JuradaExpress",
+                  name: "Jurada Express",
                   url: "https://juradaexpress.es/",
                 },
                 areaServed: {

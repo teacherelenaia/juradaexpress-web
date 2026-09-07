@@ -134,7 +134,7 @@ export default function Page() {
           </TrackedLink>
           <TrackedLink
             label="britanicos_whatsapp"
-            href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20soy%20brit%C3%A1nico%2Fa%20y%20necesito%20traducci%C3%B3n%20jurada%20para%20un%20tr%C3%A1mite%20en%20Espa%C3%B1a"
+            href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20soy%20brit%C3%A1nico%2Fa%20y%20necesito%20traducci%C3%B3n%20jurada%20para%20un%20tr%C3%A1mite%20en%20Espa%C3%B1a"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-secondary"
@@ -166,7 +166,7 @@ export default function Page() {
                 serviceType: "Traducción jurada Español ⇆ Inglés",
                 provider: {
                   "@type": "ProfessionalService",
-                  name: "JuradaExpress",
+                  name: "Jurada Express",
                   url: "https://juradaexpress.es/",
                 },
                 areaServed: [

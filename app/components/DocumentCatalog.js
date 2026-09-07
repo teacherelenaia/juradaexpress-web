@@ -177,8 +177,8 @@ export default function DocumentCatalog() {
     fd.append("Acepta la política de privacidad", "Sí");
     if (!fd.get("Teléfono")) fd.set("Teléfono", "No indicado");
     fd.append("access_key", WEB3FORMS_ACCESS_KEY);
-    fd.append("subject", "Nueva solicitud — Catálogo de documentos JuradaExpress");
-    fd.append("from_name", "Catálogo de documentos — JuradaExpress");
+    fd.append("subject", "Nueva solicitud — Catálogo de documentos Jurada Express");
+    fd.append("from_name", "Catálogo de documentos — Jurada Express");
     fd.append(
       "Documentos solicitados",
       selectedDocs.map((d) => `- ${d.name}: ${formatPrice(d.price)}`).join("\n")

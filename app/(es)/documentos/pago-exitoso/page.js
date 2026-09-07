@@ -26,7 +26,7 @@ export default function Page() {
 
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <a
-          href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20acabo%20de%20realizar%20un%20pago%20online%20y%20quiero%20enviaros%20el%20documento"
+          href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20acabo%20de%20realizar%20un%20pago%20online%20y%20quiero%20enviaros%20el%20documento"
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-primary"

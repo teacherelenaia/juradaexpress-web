@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
       title: post.title,
       description: post.excerpt,
       url: `${BASE}/en/blog/${post.slug}`,
-      siteName: "JuradaExpress",
+      siteName: "Jurada Express",
       type: "article",
       locale: "en_GB",
       publishedTime: post.date,
@@ -177,7 +177,7 @@ export default function BlogPostPage({ params }) {
                 },
                 publisher: {
                   "@type": "Organization",
-                  name: "JuradaExpress",
+                  name: "Jurada Express",
                   url: `${BASE}/`,
                   logo: {
                     "@type": "ImageObject",

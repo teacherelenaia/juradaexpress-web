@@ -1,3 +1,15 @@
+# robots.txt · juradaexpress.es
+#
+# Todo el sitio es rastreable, también para los rastreadores de IA
+# (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, etc.): la web quiere
+# ser citada por los motores de respuesta. Decisión documentada en
+# docs/CHANGELOG-2026-09.md (FASE 4).
+#
+# Resumen legible por máquinas para modelos de lenguaje (llmstxt.org):
+# https://juradaexpress.es/llms.txt
+
 User-agent: *
 Allow: /
+Disallow: /api/
+
 Sitemap: https://juradaexpress.es/sitemap.xml

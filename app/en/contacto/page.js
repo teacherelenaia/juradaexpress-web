@@ -31,7 +31,7 @@ export default function Page() {
 
       <div className="mt-8 grid gap-6 md:grid-cols-3">
         <a
-          href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation"
+          href="https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation"
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-xl bg-white p-6 ring-1 ring-stone-200 hover:shadow"

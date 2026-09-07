@@ -95,7 +95,7 @@ export default function Page() {
           Pedir presupuesto
         </a>
         <a
-          href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
+          href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20quisiera%20un%20presupuesto"
           className="btn btn-secondary"
           target="_blank" rel="noopener noreferrer"
         >

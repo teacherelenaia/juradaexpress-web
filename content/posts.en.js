@@ -40,7 +40,7 @@ export const postsEn = [
         <li><strong>Blurry photos.</strong> A clear scan of every page — stamps and apostille included — saves a full day of back-and-forth.</li>
       </ol>
       <p>
-        <a href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27m%20applying%20for%20my%20NIE%2FTIE%20and%20need%20sworn%20translations">Send me your document list on WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27m%20applying%20for%20my%20NIE%2FTIE%20and%20need%20sworn%20translations">Send me your document list on WhatsApp</a>
         and I'll confirm what needs translating, the fixed price and the delivery date within 2 working hours. There's also a full
         <a href="/en/sworn-translation-british-residents-spain">guide for British residents in Spain</a>, procedure by procedure.
       </p>
@@ -80,7 +80,7 @@ export const postsEn = [
       <h2>When should you order the translations?</h2>
       <p>The POA is the time-critical one: UK notary → FCDO apostille → sworn translation → Spanish notary, and the chain takes longer than any single step. Start it as soon as completion dates are discussed. Bank documents can go in parallel; certificates keep in mind they're often required recent. Short documents take <strong>24/48 hours</strong>; for a full purchase file you'll get a fixed quote and exact delivery date within 2 hours of sending it.</p>
       <p>
-        <a href="https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27m%20buying%20a%20property%20in%20Spain%20and%20need%20sworn%20translations">Tell me where you are in the purchase on WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27m%20buying%20a%20property%20in%20Spain%20and%20need%20sworn%20translations">Tell me where you are in the purchase on WhatsApp</a>
         and I'll tell you exactly which documents need a sworn translation — and which don't, so you don't pay for paperwork nobody will read.
       </p>
     `,

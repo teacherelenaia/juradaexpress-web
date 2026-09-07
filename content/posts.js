@@ -66,7 +66,7 @@ export const posts = [
       <h2>¿Cómo pido presupuesto?</h2>
       <p>Envía una foto o escaneo legible de tu título (y expediente, si lo necesitas) por WhatsApp o email, indicando para qué organismo lo necesitas. En unas horas recibirás un precio cerrado y el plazo real de entrega.</p>
       <p>
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quiero%20presupuesto%20para%20traducir%20mi%20t%C3%ADtulo%20universitario">Pide presupuesto por WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20quiero%20presupuesto%20para%20traducir%20mi%20t%C3%ADtulo%20universitario">Pide presupuesto por WhatsApp</a>
         o escribe a
         <a href="mailto:info@juradaexpress.es">info@juradaexpress.es</a>.
       </p>
@@ -109,7 +109,7 @@ export const posts = [
       <p>Si tu documento (partida de nacimiento, título universitario, certificado de penales…) ya está apostillado, consulta nuestro <a href="/documentos">catálogo de documentos</a> para ver precios y pedir presupuesto.</p>
       <p>
         ¿Tienes dudas sobre tu caso concreto? Escríbenos por
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20tengo%20una%20duda%20sobre%20la%20apostilla">WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20tengo%20una%20duda%20sobre%20la%20apostilla">WhatsApp</a>
         y te orientamos sin compromiso.
       </p>
     `,
@@ -139,7 +139,7 @@ export const posts = [
       <p>La forma más fiable es preguntar directamente al organismo que te pide el documento: <em>"¿necesito que sea una traducción jurada oficial?"</em>. Si la respuesta es sí, necesitas un traductor-intérprete jurado nombrado por el MAEC — puedes comprobar cualquier acreditación (incluida la mía) en el <a href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-Interpretes-Jurados.aspx" target="_blank" rel="noopener noreferrer">buscador oficial del Ministerio</a>.</p>
       <p>
         Si tienes dudas sobre tu documento concreto, escríbenos por
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20tengo%20una%20duda%20sobre%20qu%C3%A9%20tipo%20de%20traducci%C3%B3n%20necesito">WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20tengo%20una%20duda%20sobre%20qu%C3%A9%20tipo%20de%20traducci%C3%B3n%20necesito">WhatsApp</a>
         y te lo confirmamos antes de que pidas presupuesto.
       </p>
     `,
@@ -187,7 +187,7 @@ export const posts = [
 
       <p>
         ¿Tienes tus documentos listos y quieres presupuesto? Escríbenos por
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20necesito%20traducir%20documentos%20para%20homologar%20mi%20t%C3%ADtulo">WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20necesito%20traducir%20documentos%20para%20homologar%20mi%20t%C3%ADtulo">WhatsApp</a>
         indicando qué documentos necesitas traducir.
       </p>
     `,
@@ -228,7 +228,7 @@ export const posts = [
 
       <p>
         Envíanos tus documentos y te decimos exactamente qué necesita traducción y el precio cerrado:
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20estoy%20tramitando%20la%20nacionalidad%20espa%C3%B1ola%20y%20necesito%20traducir%20documentos">escríbenos por WhatsApp</a>.
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20estoy%20tramitando%20la%20nacionalidad%20espa%C3%B1ola%20y%20necesito%20traducir%20documentos">escríbenos por WhatsApp</a>.
       </p>
     `,
   },
@@ -267,7 +267,7 @@ export const posts = [
 
       <p>
         Si tienes dudas sobre si tu escaneo vale, envíanoslo igualmente por
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20tengo%20una%20duda%20sobre%20la%20calidad%20de%20mi%20escaneo">WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20tengo%20una%20duda%20sobre%20la%20calidad%20de%20mi%20escaneo">WhatsApp</a>
         y te decimos si hace falta repetirlo antes de seguir.
       </p>
     `,
@@ -312,7 +312,7 @@ export const posts = [
 
       <p>
         Cuéntanos tu caso concreto por
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20tengo%20un%20tr%C3%A1mite%20de%20extranjer%C3%ADa%20y%20necesito%20traducir%20documentos">WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20tengo%20un%20tr%C3%A1mite%20de%20extranjer%C3%ADa%20y%20necesito%20traducir%20documentos">WhatsApp</a>
         y te decimos exactamente qué necesitas y el plazo real.
       </p>
     `,
@@ -353,7 +353,7 @@ export const posts = [
         <li>Te confirmo qué documentos necesitan traducción, el precio cerrado y el plazo — en menos de 2 horas.</li>
       </ol>
       <p>
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20necesito%20traducir%20mi%20permiso%20de%20conducir%20para%20el%20canje%20en%20la%20DGT">Pide presupuesto por WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20necesito%20traducir%20mi%20permiso%20de%20conducir%20para%20el%20canje%20en%20la%20DGT">Pide presupuesto por WhatsApp</a>
         o consulta la <a href="/traduccion-jurada-permiso-conducir">ficha del permiso de conducir</a> con precios y plazos.
       </p>
     `,
@@ -400,7 +400,7 @@ export const posts = [
         <li>Cuando llegan los certificados, los traduzco todos a la vez: mismo formato, mismos nombres, cero incoherencias.</li>
       </ol>
       <p>
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20nos%20casamos%20en%20Espa%C3%B1a%20y%20necesitamos%20traducci%C3%B3n%20jurada%20de%20los%20documentos">Cuéntame tu caso por WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20nos%20casamos%20en%20Espa%C3%B1a%20y%20necesitamos%20traducci%C3%B3n%20jurada%20de%20los%20documentos">Cuéntame tu caso por WhatsApp</a>
         y te digo exactamente qué traducir — sin compromiso y con respuesta en menos de 2 horas.
       </p>
     `,
@@ -442,7 +442,7 @@ export const posts = [
       <h2>El detalle que marca la diferencia</h2>
       <p>El UKVI trabaja sobre copias digitales: sube el PDF de la traducción firmada digitalmente tal cual te lo envío, sin reescanearlo (reescanear rompe la firma electrónica). Y guarda el original digital: si te piden documentación adicional, la reutilizas sin coste.</p>
       <p>
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20preparo%20un%20visado%20para%20Reino%20Unido%20y%20necesito%20traducciones%20juradas">Escríbeme por WhatsApp con tu lista de documentos</a>
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20preparo%20un%20visado%20para%20Reino%20Unido%20y%20necesito%20traducciones%20juradas">Escríbeme por WhatsApp con tu lista de documentos</a>
         y te confirmo qué se traduce, precio cerrado y plazo en menos de 2 horas.
       </p>
     `,
@@ -488,7 +488,7 @@ export const posts = [
       </ol>
       <p>Como ves, la traducción nunca es el cuello de botella — pero agradecerás tenerla lista antes de la avalancha de agosto.</p>
       <p>
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20me%20voy%20a%20estudiar%20a%20Reino%20Unido%20y%20necesito%20traducir%20mi%20expediente">Envíame tu expediente por WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20me%20voy%20a%20estudiar%20a%20Reino%20Unido%20y%20necesito%20traducir%20mi%20expediente">Envíame tu expediente por WhatsApp</a>
         y te paso presupuesto cerrado en menos de 2 horas, o revisa la <a href="/traduccion-jurada-titulo-universitario">ficha del título universitario</a>.
       </p>
     `,
@@ -537,7 +537,7 @@ export const posts = [
       <h2>La regla de oro</h2>
       <p>Traduce cuando tengas el documento definitivo (¡y apostillado, si toca!), pero pide presupuesto en cuanto sepas qué te van a pedir: así el hueco en calendario queda reservado y los plazos dejan de ser una incógnita.</p>
       <p>
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20necesito%20una%20traducci%C3%B3n%20jurada%20y%20quiero%20saber%20el%20plazo%20real">Pregúntame el plazo de tu documento por WhatsApp</a> — respuesta en menos de 2 horas, con fecha concreta.
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20necesito%20una%20traducci%C3%B3n%20jurada%20y%20quiero%20saber%20el%20plazo%20real">Pregúntame el plazo de tu documento por WhatsApp</a> — respuesta en menos de 2 horas, con fecha concreta.
       </p>
     `,
   },
@@ -576,7 +576,7 @@ export const posts = [
       <h2>En resumen</h2>
       <p>PDF firmado digitalmente: válido, verificable y más rápido — llega en el momento en que termino la traducción. Papel: disponible siempre que lo necesites, sin recargo por el trabajo. Y si un funcionario duda de la validez de la firma electrónica, el propio panel de firmas del PDF y el listado del MAEC responden por mí.</p>
       <p>
-        <a href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20necesito%20una%20traducci%C3%B3n%20jurada%20en%20PDF%20firmado%20digitalmente">Pide tu traducción jurada digital por WhatsApp</a>
+        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20necesito%20una%20traducci%C3%B3n%20jurada%20en%20PDF%20firmado%20digitalmente">Pide tu traducción jurada digital por WhatsApp</a>
         o consulta <a href="/como-funciona">cómo funciona el proceso completo</a>.
       </p>
     `,

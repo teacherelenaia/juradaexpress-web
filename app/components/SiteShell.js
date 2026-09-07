@@ -83,7 +83,7 @@ const FOOTER = {
     contact: "Contacto",
     whatsapp: "WhatsApp directo",
     whatsappHref:
-      "https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto",
+      "https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20quisiera%20un%20presupuesto",
     legalLabel: "Enlaces legales",
     legal: [
       { href: "/aviso-legal", label: "Aviso legal" },
@@ -119,7 +119,7 @@ const FOOTER = {
     contact: "Contact",
     whatsapp: "WhatsApp",
     whatsappHref:
-      "https://wa.me/34685891214?text=Hi%20JuradaExpress,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation",
+      "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation",
     legalLabel: "Legal links",
     legal: [
       { href: "/en/legal-notice", label: "Legal notice" },

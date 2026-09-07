@@ -32,7 +32,7 @@ export default function Page() {
           Volver al catálogo
         </a>
         <a
-          href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20he%20tenido%20un%20problema%20al%20pagar%20online"
+          href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20he%20tenido%20un%20problema%20al%20pagar%20online"
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-secondary"

@@ -32,7 +32,7 @@ export default function Page() {
 
       <div className="mt-8 grid gap-6 md:grid-cols-3">
         <a
-          href="https://wa.me/34685891214?text=Hola%20JuradaExpress,%20quisiera%20un%20presupuesto"
+          href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20quisiera%20un%20presupuesto"
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-xl bg-white p-6 ring-1 ring-stone-200 hover:shadow"
