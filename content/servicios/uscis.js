@@ -27,8 +27,7 @@ export const es = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Traducción certificada para USCIS",
   metaTitle: "Traducción certificada para USCIS (español-inglés)",
-  metaDescription:
-    "Traducción certificada de documentos españoles al inglés para USCIS conforme a 8 CFR § 103.2(b)(3): traducción completa, certificación firmada y fechada, un certificado por documento. Sin notario. Entrega en PDF en 24/48 h.",
+  metaDescription: "Traducción certificada al inglés para USCIS (8 CFR § 103.2(b)(3)): traducción completa, certificación firmada por documento, sin notario. PDF en 24/48 h.",
   h1: "Traducción certificada para USCIS: documentos españoles al inglés para inmigración en Estados Unidos",
   lead:
     "Una traducción certificada para USCIS es la traducción completa al inglés de un documento en español (certificado de nacimiento, matrimonio, divorcio, antecedentes penales, título, extracto bancario, escritura) acompañada de una certificación firmada y fechada en la que el traductor declara que la traducción es completa y exacta y que es competente para traducir del español al inglés, tal como exige la norma 8 CFR § 103.2(b)(3). No hace falta notario. Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores de España (nº 7310), y entrego cada documento con su propia certificación en PDF firmado en 24/48 h.",
@@ -37,7 +36,7 @@ export const es = {
     alt: "Mano firmando con pluma la certificación de una traducción sobre el documento",
   },
   whatsapp:
-    "https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20necesito%20una%20traducci%C3%B3n%20certificada%20para%20USCIS",
+    "https://wa.me/34685891214?text=Hola%20Elena%2C%20necesito%20una%20traducci%C3%B3n%20certificada%20para%20USCIS%20de%20mi%20certificado%20de%E2%80%A6%20%28dime%20qu%C3%A9%20documento%20y%20para%20qu%C3%A9%20formulario%29",
   whatsappLabel: "Pedir traducción para USCIS",
   serviceName: "Traducción certificada español-inglés para USCIS",
   serviceType: "Certified translation (USCIS)",
@@ -204,8 +203,7 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Certified translation for USCIS",
   metaTitle: "Certified Spanish to English translation for USCIS",
-  metaDescription:
-    "USCIS certified translation of Spanish documents into English under 8 CFR § 103.2(b)(3): complete translation, signed and dated certification, one certificate per document. No notary. Signed PDF in 24/48 hours.",
+  metaDescription: "USCIS certified translation of Spanish documents (8 CFR § 103.2(b)(3)): complete translation, signed certification per document, no notary. PDF in 24/48h.",
   h1: "Certified Spanish to English translation for USCIS",
   lead:
     "A certified translation for USCIS is the complete English translation of a Spanish-language document (birth, marriage or divorce certificate, criminal record, degree, bank statement, deed) together with a signed and dated certification in which the translator states that the translation is complete and accurate and that they are competent to translate from Spanish into English, as required by 8 CFR § 103.2(b)(3). No notary is needed. I am Elena Peñaranda Ortega, a sworn translator appointed by Spain's Ministry of Foreign Affairs (no. 7310), and I deliver every document with its own certification as a signed PDF in 24/48 hours.",
@@ -214,7 +212,7 @@ export const en = {
     alt: "Hand signing a translation certification with a pen on the document",
   },
   whatsapp:
-    "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%20need%20a%20certified%20translation%20for%20USCIS",
+    "https://wa.me/34685891214?text=Hi%20Elena%2C%20I%20need%20a%20certified%20translation%20for%20USCIS%20of%20my%E2%80%A6%20%28tell%20me%20which%20document%20and%20which%20form%20you%20are%20filing%29",
   whatsappLabel: "Request a USCIS translation",
   serviceName: "Certified Spanish to English translation for USCIS",
   serviceType: "Certified translation (USCIS)",

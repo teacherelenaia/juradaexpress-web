@@ -16,8 +16,7 @@ export const es = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Clientes de Estados Unidos",
   metaTitle: "Traducción jurada para clientes de Estados Unidos",
-  metaDescription:
-    "Traductora jurada del MAEC (nº 7310) para estadounidenses que se instalan en España y para españoles con trámites en EEUU: apostilla, certificate of coverage, huso horario, pago con tarjeta estadounidense y entrega en PDF en 24/48 h.",
+  metaDescription: "Traductora jurada del MAEC (nº 7310) para estadounidenses en España y españoles con trámites en EEUU: apostilla, huso horario, tarjeta, PDF en 24/48 h.",
   h1: "Traducción jurada entre Estados Unidos y España",
   lead:
     "Si vives en Estados Unidos y vas a pedir un visado para España (nómada digital, no lucrativo, estudios), casarte, comprar una vivienda o solicitar la nacionalidad, tus documentos estadounidenses necesitan apostilla y traducción jurada al español firmada por un traductor nombrado por el Ministerio de Asuntos Exteriores de España. Y si eres español con un trámite en Estados Unidos, tus documentos necesitan una traducción certificada al inglés para USCIS. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y hago las dos cosas 100 % online: presupuesto en menos de 2 horas, pago con tarjeta estadounidense y PDF firmado en 24/48 h.",
@@ -26,7 +25,7 @@ export const es = {
     alt: "Pasaporte de Estados Unidos y tarjetas de embarque sobre un portátil",
   },
   whatsapp:
-    "https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20escribo%20desde%20Estados%20Unidos%20y%20necesito%20traducci%C3%B3n%20jurada%20para%20un%20tr%C3%A1mite%20en%20Espa%C3%B1a",
+    "https://wa.me/34685891214?text=Hola%20Elena%2C%20escribo%20desde%20Estados%20Unidos%3A%20necesito%20traducci%C3%B3n%20jurada%20de%20mis%20documentos%20para%20un%20tr%C3%A1mite%20en%20Espa%C3%B1a%20%28visado%2C%20nacionalidad%2C%20matrimonio%20o%20vivienda%29",
   whatsappLabel: "Escribir desde Estados Unidos",
   serviceName: "Traducción jurada para clientes de Estados Unidos",
   serviceType: "Traducción jurada inglés-español y certificada español-inglés",
@@ -166,8 +165,7 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Clients in the United States",
   metaTitle: "Sworn translator in Spain for Americans",
-  metaDescription:
-    "Sworn translator appointed by Spain's Ministry of Foreign Affairs (no. 7310) for US citizens moving to Spain and Spaniards with US paperwork: apostilles, SSA certificate of coverage, time zones, US card payments and signed PDF in 24/48 hours.",
+  metaDescription: "Sworn translator appointed by Spain (no. 7310) for US citizens moving to Spain: apostilles, SSA certificate of coverage, US card payment, PDF in 24/48h.",
   h1: "Sworn translation between the United States and Spain",
   lead:
     "If you live in the United States and are applying for a Spanish visa (digital nomad, non-lucrative, student), getting married in Spain, buying a property or applying for Spanish citizenship, your American documents need an apostille and a sworn translation into Spanish signed by a translator appointed by Spain's Ministry of Foreign Affairs. If you are Spanish with paperwork in the United States, your documents need a certified English translation for USCIS. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I do both fully online: a quote within 2 hours, payment with your US card and a signed PDF in 24/48 hours.",
@@ -176,7 +174,7 @@ export const en = {
     alt: "United States passport and boarding passes on a laptop",
   },
   whatsapp:
-    "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27m%20writing%20from%20the%20United%20States%20and%20need%20a%20sworn%20translation%20for%20a%20procedure%20in%20Spain",
+    "https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20writing%20from%20the%20United%20States%3A%20I%20need%20sworn%20translations%20of%20my%20documents%20for%20a%20procedure%20in%20Spain%20%28visa%2C%20citizenship%2C%20marriage%20or%20property%29",
   whatsappLabel: "Message me from the US",
   serviceName: "Sworn translation for clients in the United States",
   serviceType: "Sworn English-Spanish translation and certified Spanish-English translation",

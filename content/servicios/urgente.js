@@ -23,8 +23,7 @@ export const es = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Urgentes y grandes volúmenes",
   metaTitle: "Traducción jurada urgente y grandes volúmenes",
-  metaDescription:
-    "Traductora jurada de inglés (MAEC nº 7310) para expedientes completos, lotes de documentos y empresas: revisión previa, lista de apostillas, plazo único por escrito, entrega ordenada y facturación. Sin subcontratar.",
+  metaDescription: "Traductora jurada de inglés (MAEC nº 7310) para expedientes completos, lotes y empresas: revisión previa, apostillas, plazo único por escrito y entrega ordenada. Sin subcontratar.",
   h1: "Traducción jurada urgente y de grandes volúmenes",
   lead:
     `La traducción jurada urgente o de gran volumen es el servicio con el que traduzco expedientes completos y lotes de documentos (para particulares, empresas, despachos de abogados, gestorías y agencias de relocation) con un presupuesto y un plazo únicos cerrados por escrito antes de empezar, y con entrega ordenada, documento a documento, en PDF firmado. Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nº 7310: no subcontrato, así que cada página la traduzco, firmo y sello yo. ${
@@ -35,7 +34,7 @@ export const es = {
     alt: "Apretón de manos entre dos personas al cerrar un acuerdo de trabajo",
   },
   whatsapp:
-    "https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20tengo%20un%20proyecto%20grande%20o%20urgente%20de%20traducci%C3%B3n%20jurada%20y%20necesito%20presupuesto%20y%20plazo%20cerrados",
+    "https://wa.me/34685891214?text=Hola%20Elena%2C%20tengo%20un%20proyecto%20grande%20o%20urgente%20de%20traducci%C3%B3n%20jurada%20%28varios%20documentos%29%20y%20necesito%20presupuesto%20y%20plazo%20cerrados%20por%20escrito",
   whatsappLabel: "Contar mi caso por WhatsApp",
   serviceName: "Traducción jurada urgente y de grandes volúmenes",
   serviceType: "Traducción jurada español-inglés",
@@ -166,8 +165,7 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Urgent and large projects",
   metaTitle: "Urgent sworn translation and large projects in Spain",
-  metaDescription:
-    "Sworn translator of English (Ministry no. 7310) for complete files, document batches and companies: prior review, apostille checklist, single deadline in writing, ordered delivery and invoicing. No subcontracting.",
+  metaDescription: "Sworn translator of English (no. 7310) for complete files and batches: prior review, one deadline in writing, ordered delivery. No subcontracting.",
   h1: "Urgent sworn translation and large projects",
   lead:
     `Urgent or bulk sworn translation is the service through which I translate complete files and batches of documents (for individuals, companies, law firms, relocation agencies and administrative advisers) with a single quote and a single deadline confirmed in writing before I start, delivered in order, document by document, as signed PDFs. I am Elena Peñaranda Ortega, sworn translator no. 7310: I do not subcontract, so every page is translated, signed and stamped by me. ${
@@ -178,7 +176,7 @@ export const en = {
     alt: "Two people shaking hands as they close a working agreement",
   },
   whatsapp:
-    "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%20have%20a%20large%20or%20urgent%20sworn%20translation%20project%20and%20need%20a%20fixed%20quote%20and%20deadline",
+    "https://wa.me/34685891214?text=Hi%20Elena%2C%20I%20have%20a%20large%20or%20urgent%20sworn%20translation%20project%20%28several%20documents%29%20and%20I%20need%20a%20fixed%20quote%20and%20deadline%20in%20writing",
   whatsappLabel: "Tell me about your project on WhatsApp",
   serviceName: "Urgent sworn translation and large projects",
   serviceType: "Sworn Spanish-English translation",

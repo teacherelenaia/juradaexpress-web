@@ -17,8 +17,7 @@ export const es = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Clientes de India",
   metaTitle: "Traducción jurada de documentos de India para España",
-  metaDescription:
-    "Traducción jurada al español de documentos indios en inglés (certificado de nacimiento, matrimonio, police clearance, títulos, cartas de empleador) para visados de estudios, trabajo, nómada digital y reagrupación en el Consulado de España. Apostilla del MEA. PDF firmado en 24/48 h.",
+  metaDescription: "Traducción jurada al español de documentos indios en inglés (nacimiento, matrimonio, PCC, títulos) para visados en el Consulado de España. Apostilla MEA.",
   h1: "Traducción jurada de documentos de India para trámites en España",
   lead:
     "La traducción jurada de documentos indios para España es la traducción al español, firmada y sellada por una traductora nombrada por el Ministerio de Asuntos Exteriores de España, de los documentos emitidos en inglés en India que pide el Consulado de España (Nueva Delhi o Bombay) o la administración española: certificado de nacimiento y matrimonio, police clearance certificate, títulos y transcripts, cartas de empleador y extractos bancarios, todos con la apostilla del Ministry of External Affairs (MEA). Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y los traduzco 100 % online con entrega en PDF firmado en 24/48 h y pago con tarjeta india.",
@@ -27,7 +26,7 @@ export const es = {
     alt: "Estudiante trabajando con un portátil en una biblioteca universitaria",
   },
   whatsapp:
-    "https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20escribo%20desde%20India%20y%20necesito%20traducci%C3%B3n%20jurada%20al%20espa%C3%B1ol%20para%20el%20Consulado%20de%20Espa%C3%B1a",
+    "https://wa.me/34685891214?text=Hola%20Elena%2C%20escribo%20desde%20India%3A%20necesito%20traducci%C3%B3n%20jurada%20al%20espa%C3%B1ol%20de%20mis%20documentos%20%28en%20ingl%C3%A9s%2C%20con%20apostilla%20del%20MEA%29%20para%20el%20Consulado%20de%20Espa%C3%B1a",
   whatsappLabel: "Escribir desde India",
   serviceName: "Traducción jurada de documentos de India para España",
   serviceType: "Traducción jurada inglés-español",
@@ -198,8 +197,7 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Clients in India",
   metaTitle: "Sworn translation of Indian documents for Spain",
-  metaDescription:
-    "Sworn Spanish translation of Indian documents in English (birth and marriage certificates, police clearance certificate, degrees, employer letters) for student, work, digital nomad and family visas at the Spanish consulate. MEA apostille. Signed PDF in 24/48 hours.",
+  metaDescription: "Sworn Spanish translation of Indian documents (birth, marriage, PCC, degrees) for student, work and family visas at the Spanish consulate. MEA apostille.",
   h1: "Sworn translation of Indian documents for procedures in Spain",
   lead:
     "A sworn translation of Indian documents for Spain is the Spanish translation, signed and stamped by a translator appointed by Spain's Ministry of Foreign Affairs, of the English-language documents issued in India that the Spanish consulate (New Delhi or Mumbai) or the Spanish administration ask for: birth and marriage certificates, police clearance certificate, degrees and transcripts, employer letters and bank statements, all apostilled by the Ministry of External Affairs (MEA). I am Elena Peñaranda Ortega, sworn translator no. 7310, and I translate them fully online, delivered as a signed PDF in 24/48 hours and paid with your Indian card.",
@@ -208,7 +206,7 @@ export const en = {
     alt: "Student working on a laptop in a university library",
   },
   whatsapp:
-    "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27m%20writing%20from%20India%20and%20need%20a%20sworn%20Spanish%20translation%20for%20the%20Spanish%20consulate",
+    "https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20writing%20from%20India%3A%20I%20need%20sworn%20Spanish%20translations%20of%20my%20documents%20%28in%20English%2C%20with%20MEA%20apostille%29%20for%20the%20Spanish%20consulate",
   whatsappLabel: "Message me from India",
   serviceName: "Sworn translation of Indian documents for Spain",
   serviceType: "Sworn English-Spanish translation",

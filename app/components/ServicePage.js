@@ -54,7 +54,9 @@ export function serviceMetadata(page) {
   const es = page.alternates.es;
   const en = page.alternates.en;
   return {
-    title: page.metaTitle,
+    // Title ≤ 60 caracteres sin sufijo de marca (la marca ya va en OG y
+    // JSON-LD); description ≤ 155.
+    title: { absolute: page.metaTitle },
     description: page.metaDescription,
     alternates: {
       canonical: `${BASE}${page.path}`,
@@ -65,7 +67,7 @@ export function serviceMetadata(page) {
       },
     },
     openGraph: {
-      title: page.metaTitle,
+      title: `${page.metaTitle} | Jurada Express`,
       description: page.metaDescription,
       url: `${BASE}${page.path}`,
       siteName: "Jurada Express",

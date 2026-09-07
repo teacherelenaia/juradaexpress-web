@@ -25,9 +25,8 @@ export const es = {
   path: PATH_ES,
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Visado de nómada digital",
-  metaTitle: "Traducción jurada para el visado de nómada digital en España",
-  metaDescription:
-    "Traductora jurada del MAEC (nº 7310) para el expediente del visado de nómada digital: qué documentos llevan apostilla y traducción jurada, cómo enviar el lote y plazo único por escrito.",
+  metaTitle: "Traducción jurada para el visado de nómada digital",
+  metaDescription: "Traductora jurada del MAEC (nº 7310): qué documentos del visado de nómada digital llevan apostilla y traducción jurada, y plazo único por escrito.",
   h1: "Traducción jurada para el visado de nómada digital en España",
   lead:
     "La traducción jurada para el visado de nómada digital es la traducción al español, firmada y sellada por una traductora nombrada por el Ministerio de Asuntos Exteriores, de los documentos extranjeros que exige la autorización de residencia para teletrabajo internacional (Ley 28/2022): antecedentes penales, contrato o carta del empleador, certificado de la empresa, título, justificantes de ingresos y certificados familiares. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y traduzco el expediente completo con un único plazo cerrado por escrito; los documentos sueltos, en 24/48 h.",
@@ -36,7 +35,7 @@ export const es = {
     alt: "Manos revisando un formulario oficial sobre una carpeta de documentos, como los que componen un expediente de visado de nómada digital",
   },
   whatsapp:
-    "https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20voy%20a%20pedir%20el%20visado%20de%20n%C3%B3mada%20digital%20y%20necesito%20traducci%C3%B3n%20jurada%20de%20mi%20expediente",
+    "https://wa.me/34685891214?text=Hola%20Elena%2C%20estoy%20preparando%20el%20expediente%20del%20visado%20de%20n%C3%B3mada%20digital%20y%20quiero%20saber%20qu%C3%A9%20documentos%20necesitan%20traducci%C3%B3n%20jurada",
   whatsappLabel: "Enviar mi lista por WhatsApp",
   serviceName: "Traducción jurada del expediente de visado de nómada digital",
   serviceType: "Traducción jurada inglés-español",
@@ -226,8 +225,7 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Digital nomad visa",
   metaTitle: "Sworn translation for Spain's digital nomad visa",
-  metaDescription:
-    "Sworn translator appointed by Spain's Ministry of Foreign Affairs (no. 7310) for digital nomad visa files: which documents need an apostille and a sworn translation, how to send the batch and a single deadline in writing.",
+  metaDescription: "Sworn translator appointed by Spain (no. 7310): which digital nomad visa documents need an apostille and a sworn translation, with one deadline in writing.",
   h1: "Sworn translation for Spain's digital nomad visa",
   lead:
     "A sworn translation for Spain's digital nomad visa is the Spanish translation, signed and stamped by a translator appointed by Spain's Ministry of Foreign Affairs, of the foreign documents required for the international remote work residence permit (Law 28/2022): criminal record certificate, employment contract or employer letter, company registration certificate, degree, proof of income and family certificates. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I translate the complete file with a single deadline confirmed in writing; individual documents take 24/48 hours.",
@@ -236,7 +234,7 @@ export const en = {
     alt: "Hands checking an official form on a folder of documents, like those that make up a digital nomad visa file",
   },
   whatsapp:
-    "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27m%20applying%20for%20Spain%27s%20digital%20nomad%20visa%20and%20need%20sworn%20translations%20of%20my%20documents",
+    "https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20preparing%20my%20file%20for%20Spain%27s%20digital%20nomad%20visa%20and%20I%27d%20like%20to%20know%20which%20documents%20need%20a%20sworn%20translation",
   whatsappLabel: "Send my list on WhatsApp",
   serviceName: "Sworn translation of digital nomad visa files for Spain",
   serviceType: "Sworn English-Spanish translation",
