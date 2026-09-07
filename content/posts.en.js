@@ -85,6 +85,183 @@ export const postsEn = [
       </p>
     `,
   },
+  // ---------------------------------------------------------------------
+  // International brief (September-November 2026): 3 EN posts.
+  // Source: docs/BRIEF-INTERNACIONAL-2026-09.md (points 0.4, 0.5 and 0.6).
+  // No income thresholds, fees or processing times: they change yearly and
+  // are referred to the consulate or an immigration lawyer.
+  // ---------------------------------------------------------------------
+  {
+    slug: "spain-digital-nomad-visa-documents-apostille-sworn-translation",
+    title: "Spain digital nomad visa documents: which need an apostille and a sworn translation",
+    excerpt:
+      "The full document list for Spain's digital nomad visa, one by one: which need an apostille, which need a sworn translation into Spanish, and the order to do everything so the consulate does not send the file back.",
+    date: "2026-09-24",
+    updated: "2026-09-24",
+    author: "Elena Peñaranda Ortega",
+    tags: ["nomada-digital", "extranjeria", "apostilla"],
+    readingTime: "6 min",
+    image: "/blog/post-digital-nomad-visa.jpg",
+    alt: "Hands checking an official form on a folder of documents for a digital nomad visa file",
+    html: `
+      <p>Spain's digital nomad visa (the international remote work residence permit created by Law 28/2022) is the file with the most documents I translate. They come from two or three countries, they are issued by public bodies, employers, banks and universities, and almost all of them have to reach the consulate or the UGE in Spanish. This guide goes document by document: which needs an apostille, which needs a <a href="/en/sworn-translation-spain-digital-nomad-visa">sworn translation</a>, and the order in which everything is prepared.</p>
+
+      <h2>Why are so many files refused or sent back?</h2>
+      <p>Hardly ever because of the merits of the case. The reasons I see every week are three: a document without an apostille, a plain translation where a sworn one was required, and an incomplete batch that forces you to start again. All three are avoided before anything is submitted, with a review of the list and with a single translator applying the same criteria to the whole file (names, dates and terminology written identically in every document).</p>
+      <p>One warning before we go on: income thresholds, fees and processing times are set by the Spanish administration and change every year. You will not find them in this article, on purpose. Confirm them with the consulate, the UGE or an immigration lawyer; I take care of the documents, the apostilles and the translation.</p>
+
+      <h2>Which documents need an apostille and a sworn translation?</h2>
+      <ul>
+        <li><strong>Criminal record certificate</strong> from the country or countries where you have lived in recent years (FBI or state level in the US, ACRO in the UK, MEA and police in India). <em>Apostille: yes. Sworn translation: yes.</em> It is usually valid for a limited time, so book your appointment first and order the certificate second.</li>
+        <li><strong>Employment contract or letter from your foreign employer</strong> confirming position, salary, length of service and express authorisation to work remotely from Spain. If you are self-employed, contracts with foreign clients. <em>Apostille: not usually. Sworn translation: yes.</em></li>
+        <li><strong>Company registration certificate</strong> (certificate of incorporation, good standing or equivalent) proving at least one year of activity. <em>Apostille: usually yes. Sworn translation: yes.</em></li>
+        <li><strong>University or postgraduate degree</strong>, or letters from previous employers proving three years of experience. <em>Apostille: yes for the degree; letters depend on the consulate. Sworn translation: yes.</em></li>
+        <li><strong>Proof of income</strong>: payslips, bank statements, invoices, tax returns. <em>Apostille: no. Sworn translation: yes</em> (recent months are often enough).</li>
+        <li><strong>Social security coverage certificate</strong> from your home country (UK A1, US SSA certificate of coverage) or a commitment to register in Spain. <em>Apostille: no. Sworn translation: yes.</em></li>
+        <li><strong>Health insurance</strong> with cover in Spain. <em>Sworn translation: yes, if the policy is not in Spanish.</em></li>
+        <li><strong>For family members</strong>: marriage or partnership certificate and children's birth certificates. <em>Apostille: yes. Sworn translation: yes.</em></li>
+        <li><strong>Passport</strong>: a copy is submitted and it does not usually need translating.</li>
+      </ul>
+
+      <h2>Which comes first, the apostille or the translation?</h2>
+      <p>Always the apostille. It is a page or a sticker added to the original in the country that issued it, and it is part of the document: it gets translated too. If you send me a certificate without an apostille and the consulate requires one, I tell you before I start so you do not pay twice.</p>
+
+      <h2>How do you send a complete file?</h2>
+      <ol>
+        <li>Put everything in <strong>one folder</strong> (Drive, Dropbox, WeTransfer or attachments) named with your surname.</li>
+        <li>Scan every document in full, apostille and back page included. A sharp phone photo is fine.</li>
+        <li>Name the files in order: <em>01-criminal-record.pdf</em>, <em>02-contract.pdf</em>… I return the translations with the same numbering and an index.</li>
+        <li>Tell me which consulate you are applying at (or whether you are filing with the UGE) and your appointment date.</li>
+      </ol>
+      <p>With that I reply within 2 working hours with the review of the list, a fixed price for the batch and a single delivery deadline in writing. Individual documents take 24/48 hours; a complete file is usually ready within a few days. If you are coming from the <a href="/en/sworn-translation-usa-spain">United States</a> or from <a href="/en/sworn-translation-india-spain">India</a>, you have a guide of your own with the particulars of your country.</p>
+
+      <h2>Is the PDF translation accepted by the consulate?</h2>
+      <p>For online submission, yes: every translation carries my electronic signature, verifiable in one click, and my stamp as sworn translator no. 7310, which can be checked on the official register of Spain's Ministry of Foreign Affairs. If your consulate insists on paper, I courier the stamped originals to Spain or to your country.</p>
+      <p>
+        Preparing your file? Send me your list on
+        <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20preparing%20my%20file%20for%20Spain%27s%20digital%20nomad%20visa%20and%20I%27d%20like%20to%20know%20which%20documents%20need%20a%20sworn%20translation">WhatsApp</a>
+        and I will tell you what is missing and what needs an apostille, with no obligation.
+      </p>
+    `,
+  },
+
+  {
+    slug: "sworn-vs-certified-translation-uscis-spain",
+    title: "Sworn vs certified translation: what USCIS requires and what Spain requires",
+    excerpt:
+      "They are not the same: USCIS requires a certified translation into English with the translator's certification (8 CFR § 103.2(b)(3)) and Spain requires a sworn translation signed and stamped by a Ministry-appointed translator. Which one you need, what each carries and when you need both.",
+    date: "2026-10-15",
+    updated: "2026-10-15",
+    author: "Elena Peñaranda Ortega",
+    tags: ["uscis", "validez", "estados-unidos"],
+    readingTime: "6 min",
+    image: "/blog/post-sworn-vs-certified.jpg",
+    alt: "Official certificates stacked on a desk, ready for sworn or certified translation",
+    html: `
+      <p>Every week I get two similar questions from opposite sides of the Atlantic. From the United States: <em>"Is your sworn translation valid for USCIS?"</em>. From Spain: <em>"I had a certified translation done in New York, will the immigration office accept it?"</em>. The answer to both is that they are different documents, for different authorities, and it pays to know which one you need before ordering anything.</p>
+
+      <h2>What is a sworn translation in Spain?</h2>
+      <p>It is a translation signed and stamped by a sworn translator-interpreter appointed by Spain's Ministry of Foreign Affairs, European Union and Cooperation. The appointment has a number (mine is 7310) that any official can check on the Ministry's public register. It carries a certification in Spanish, a signature and a stamp on every page, and it is what the immigration office, the civil registry, universities, notaries and Spanish consulates require for any document that is not in Spanish.</p>
+
+      <h2>What is a certified translation for USCIS?</h2>
+      <p>The US rule is short: 8 CFR § 103.2(b)(3) requires any foreign-language document submitted to USCIS to be accompanied by a <strong>full English translation</strong> and a <strong>certification by the translator</strong> stating that the translation is complete and accurate and that they are competent to translate from that language into English. No notary is required and no specific accreditation either: a signed, dated certification with contact details, one per document, is enough. I explain it in more detail on the <a href="/en/certified-translation-uscis">certified translation for USCIS</a> page.</p>
+
+      <h2>How exactly do they differ?</h2>
+      <table>
+        <thead>
+          <tr><th></th><th>Sworn translation (Spain)</th><th>Certified translation (USA)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Who signs it</td><td>A sworn translator appointed by the Spanish Ministry</td><td>Any competent translator who signs the certification</td></tr>
+          <tr><td>Who it is for</td><td>Spanish bodies and Spanish consulates</td><td>USCIS, courts, universities and employers in the US</td></tr>
+          <tr><td>What it carries</td><td>Certification in Spanish, signature and stamp on every page</td><td>Full English translation + signed and dated certificate</td></tr>
+          <tr><td>Notary</td><td>No</td><td>No (USCIS does not require it)</td></tr>
+          <tr><td>Usual direction</td><td>English → Spanish</td><td>Spanish → English</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Does USCIS accept a translation made in Spain?</h2>
+      <p>Yes. What USCIS checks is the certification, not where the translation was produced. A certified translation prepared from Murcia is as valid as one made in Miami, as long as it is complete (stamps, apostilles and handwritten notes included) and carries the certification with signature, date and contact details. My appointment as a sworn translator is not a USCIS requirement, but it adds a verifiable credential that officers understand.</p>
+
+      <h2>Does Spain accept a certified translation made in the United States?</h2>
+      <p>In general, no. The immigration office, the civil registry or the consulate require a sworn translation by a translator appointed by the Spanish Ministry (or a consular legalisation, which is slower and more expensive). If you already have a certified translation of your US birth certificate, you will most likely have to have it translated again as a sworn translation. Send it to me with the apostille and it is ready in 24/48 hours.</p>
+
+      <h2>What if I submit the same document in both countries?</h2>
+      <p>It happens more often than you would think: a Spanish-American couple who marry in Spain and then apply for a green card, or a Spaniard applying for US citizenship while keeping paperwork going at the Spanish civil registry. In those cases I prepare both versions at the same time, with the same criteria (same names, dates and terms), so that no officer finds discrepancies between one and the other. If you live in the US, the <a href="/en/sworn-translation-usa-spain">guide for clients in the United States</a> covers apostilles, time zones and payment with a US card.</p>
+
+      <h2>Which Spanish documents are most often translated for USCIS?</h2>
+      <p>Birth certificates (full or extract) for family petitions, green cards and naturalisation; marriage certificates, divorce decrees and death certificates; criminal record certificates from the Spanish Ministry of Justice; degrees and academic transcripts for work or study visas; bank statements, employer certificates and payslips as proof of means; and deeds, powers of attorney and contracts. Each one comes with its own certification page, and every stamp, apostille and handwritten note appears in the English version: a USCIS translation has to be complete, not a summary.</p>
+
+      <h2>Summary in three lines</h2>
+      <ol>
+        <li>Procedure in Spain → sworn translation (Ministry signature and stamp).</li>
+        <li>Procedure before USCIS → certified translation into English with a signed certification, no notary.</li>
+        <li>Both → both versions at once, from a single translator.</li>
+      </ol>
+      <p>
+        Not sure which one you are being asked for? Send me the document and the name of the procedure on
+        <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20not%20sure%20whether%20I%20need%20a%20sworn%20translation%20for%20Spain%20or%20a%20certified%20translation%20for%20USCIS%3A%20here%20is%20the%20document%20and%20the%20procedure">WhatsApp</a>
+        and I will confirm it with a fixed price within 2 hours.
+      </p>
+    `,
+  },
+
+  {
+    slug: "indian-documents-spanish-visa-mea-apostille-sworn-translation",
+    title: "Indian documents for a Spanish visa: MEA apostille and sworn translation",
+    excerpt:
+      "A guide for applicants from India: which documents the Spanish consulate asks for (birth, marriage, PCC, degrees, employer letters), how the Ministry of External Affairs apostille works and why certificates must be in English before the sworn translation into Spanish.",
+    date: "2026-11-06",
+    updated: "2026-11-06",
+    author: "Elena Peñaranda Ortega",
+    tags: ["india", "extranjeria", "apostilla"],
+    readingTime: "6 min",
+    image: "/blog/post-indian-documents.jpg",
+    alt: "Wax seal and stamp on an envelope, like the seals and apostilles on official Indian documents",
+    html: `
+      <p>After the United Kingdom and the United States, India is the country I receive most enquiries from: students heading to a master's degree in Spain, engineers with a contract, families reuniting and, increasingly, remote workers applying for the <a href="/en/sworn-translation-spain-digital-nomad-visa">digital nomad visa</a>. They all meet the same chain of steps: attestation, MEA apostille and sworn translation into Spanish. This guide explains the chain in order and which documents go through it.</p>
+
+      <h2>Which Indian documents does the Spanish consulate ask for?</h2>
+      <p>It depends on the visa, but the list repeats itself:</p>
+      <ul>
+        <li><strong>Birth certificate</strong> from the municipal corporation or the registrar, for family reunification, marriage and citizenship.</li>
+        <li><strong>Marriage certificate</strong>, with the registrar's stamps.</li>
+        <li><strong>Police clearance certificate (PCC)</strong> from the passport office or the state police, for almost every long-stay visa.</li>
+        <li><strong>Degrees, mark sheets and transcripts</strong> for the student visa, recognition of qualifications and professional registration.</li>
+        <li><strong>Employer and experience letters</strong> for work visas, the EU Blue Card and the digital nomad visa.</li>
+        <li><strong>Bank statements, ITR and Form 16</strong> as proof of funds.</li>
+        <li><strong>Affidavits</strong> before a notary when a certificate is missing or something has to be declared (a change of name, for example).</li>
+      </ul>
+      <p>All of them, if they are not in Spanish, are submitted with a sworn translation. The <a href="/en/sworn-translation-india-spain">sworn translation of Indian documents</a> page has the full table with apostille yes or no for each one.</p>
+
+      <h2>How does the MEA apostille work?</h2>
+      <p>India is party to the Hague Convention, so its public documents are legalised with an apostille rather than consular legalisation. It is issued by the <strong>Ministry of External Affairs</strong> (MEA) of the Government of India through its collection centres and authorised outsourcing agencies. Before the apostille, most documents go through prior attestation: the state education department for degrees, the Home Department for personal certificates or the chamber of commerce for commercial documents. The apostille is a sticker with a QR code attached to the document, and it is part of it: it gets translated too.</p>
+
+      <h2>Why does the document have to be in English?</h2>
+      <p>Because I translate from English into Spanish, not from Hindi, Marathi, Tamil, Gujarati or Bengali. Most Indian documents are issued in English or in a bilingual version, and I work with those directly. If yours is only in a regional language, you first need an official English version: from the issuing body itself or from a recognised translator in India, with their seal. That apostilled version is what I translate into Spanish. It is one more step, but it prevents the consulate rejecting a translation made "by ear" from an original I cannot read.</p>
+
+      <h2>In what order is everything done?</h2>
+      <ol>
+        <li>Obtain the original document (or the official English version, if it is in a regional language).</li>
+        <li>Prior attestation by the relevant department.</li>
+        <li>MEA apostille.</li>
+        <li>Complete scan of the document with the apostille, and sworn translation into Spanish.</li>
+      </ol>
+      <p>If you send me a document without an apostille and the consulate requires one, I tell you before I start.</p>
+
+      <h2>How long does it take, and how do you pay from India?</h2>
+      <p>A standard document is translated in 24/48 hours; a complete student visa file (with long transcripts) gets a single deadline confirmed in writing within 2 working hours. My office hours are 9:00 to 20:00 mainland Spain time, three and a half to four and a half hours behind India: if you message me mid-morning, I reply at the start of my working day. Payment is with your Indian card (Visa, Mastercard or international RuPay) through Stripe, in euros; if international payments are blocked on your card, enable them in your banking app before paying. You receive a digitally signed PDF, valid for the consulate and for the visa platform; if paper is required, I courier it to India.</p>
+
+      <h2>And Spanish documents for use in India?</h2>
+      <p>The reverse route exists too: Spanish birth or marriage certificates, degrees, criminal record certificates or company documents to be presented to an authority, university or employer in India. I translate them into English with my signature and stamp, and when the Indian body requires it, the original is apostilled first in Spain.</p>
+      <p>
+        Have your document list ready? Send it to me on
+        <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20writing%20from%20India%3A%20I%20need%20sworn%20Spanish%20translations%20of%20my%20documents%20%28in%20English%2C%20with%20MEA%20apostille%29%20for%20the%20Spanish%20consulate">WhatsApp</a>
+        and I will tell you what needs an apostille and what the complete batch costs.
+      </p>
+    `,
+  },
+
 ];
 
 export function getAllPostsEn() {

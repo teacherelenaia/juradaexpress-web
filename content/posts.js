@@ -595,6 +595,183 @@ export const posts = [
   //     <p>Contenido del artículo en HTML...</p>
   //   `,
   // },
+  // ---------------------------------------------------------------------
+  // Encargo internacional (septiembre-noviembre de 2026): 3 posts ES.
+  // Fuente: docs/BRIEF-INTERNACIONAL-2026-09.md (puntos 0.4, 0.5 y 0.6).
+  // Sin cifras de ingresos, tasas ni plazos administrativos: cambian cada
+  // año y se remiten al consulado o a un abogado de extranjería.
+  // ---------------------------------------------------------------------
+  {
+    slug: "documentos-visado-nomada-digital-apostilla-traduccion-jurada",
+    title: "Documentos para el visado de nómada digital: cuáles necesitan apostilla y traducción jurada",
+    excerpt:
+      "La lista completa del expediente de nómada digital para España, documento a documento: cuáles llevan apostilla, cuáles traducción jurada y en qué orden se hace todo para que el consulado no lo devuelva.",
+    date: "2026-09-22",
+    updated: "2026-09-22",
+    author: "Elena Peñaranda Ortega",
+    tags: ["nomada-digital", "extranjeria", "apostilla"],
+    readingTime: "6 min",
+    image: "/blog/post-nomada-digital.jpg",
+    alt: "Pasaporte y documentos de viaje sobre un portátil, preparados para un expediente de visado de nómada digital",
+    html: `
+      <p>El visado de nómada digital (la autorización de residencia para teletrabajo internacional que creó la Ley 28/2022) es el expediente con más documentos de los que traduzco. Vienen de dos o tres países distintos, los emiten administraciones, empresas, bancos y universidades, y casi todos tienen que llegar al consulado o a la UGE en español. Esta guía va documento a documento: cuál necesita apostilla, cuál necesita <a href="/traduccion-jurada-visado-nomada-digital">traducción jurada</a> y en qué orden se prepara todo.</p>
+
+      <h2>¿Por qué se deniegan o se devuelven tantos expedientes?</h2>
+      <p>Casi nunca por el fondo del caso. Los motivos que veo cada semana son tres: un documento sin apostilla, una traducción simple donde se exigía jurada y un lote incompleto que obliga a empezar de nuevo. Los tres se evitan antes de presentar nada, con una revisión de la lista y con un solo traductor que aplique los mismos criterios a todo el expediente (nombres, fechas y terminología escritos igual en cada documento).</p>
+      <p>Una advertencia antes de seguir: los requisitos económicos, las tasas y los plazos de resolución los fija la administración y cambian cada año. No los encontrarás en este artículo a propósito. Confírmalos con el consulado, con la UGE o con un abogado de extranjería; de los documentos, las apostillas y la traducción me ocupo yo.</p>
+
+      <h2>¿Qué documentos llevan apostilla y traducción jurada?</h2>
+      <ul>
+        <li><strong>Certificado de antecedentes penales</strong> del país o países donde has vivido los últimos años (FBI o estado en Estados Unidos, ACRO en Reino Unido, MEA y policía en India). <em>Apostilla: sí. Traducción jurada: sí.</em> Suele tener validez limitada, así que pide primero la cita y después el certificado. Más detalle en la <a href="/traduccion-jurada-certificado-penales">ficha del certificado de antecedentes penales</a>.</li>
+        <li><strong>Contrato de trabajo o carta del empleador extranjero</strong> que confirme puesto, salario, antigüedad y autorización expresa para teletrabajar desde España. Si eres autónomo, contratos con clientes extranjeros. <em>Apostilla: no suele pedirse. Traducción jurada: sí.</em></li>
+        <li><strong>Certificado del registro mercantil</strong> (certificate of incorporation, good standing o equivalente) que acredite que la empresa lleva al menos un año de actividad. <em>Apostilla: habitualmente sí. Traducción jurada: sí.</em></li>
+        <li><strong>Título universitario o de posgrado</strong>, o cartas de empleadores anteriores que acrediten tres años de experiencia. <em>Apostilla: sí en el título; en las cartas, según consulado. Traducción jurada: sí.</em> Ver la <a href="/traduccion-jurada-titulo-universitario">ficha del título universitario</a>.</li>
+        <li><strong>Justificantes de ingresos</strong>: nóminas, extractos bancarios, facturas, declaraciones fiscales. <em>Apostilla: no. Traducción jurada: sí</em> (a veces basta con los últimos meses).</li>
+        <li><strong>Certificado de cobertura de Seguridad Social</strong> del país de origen (A1 en Reino Unido, certificate of coverage de la SSA en Estados Unidos) o compromiso de alta en España. <em>Apostilla: no. Traducción jurada: sí.</em></li>
+        <li><strong>Seguro médico</strong> con cobertura en España. <em>Traducción jurada: sí, si la póliza no está en español.</em></li>
+        <li><strong>Para familiares</strong>: certificado de matrimonio o de pareja y partidas de nacimiento de los hijos. <em>Apostilla: sí. Traducción jurada: sí.</em></li>
+        <li><strong>Pasaporte</strong>: se aporta copia y no suele necesitar traducción.</li>
+      </ul>
+
+      <h2>¿En qué orden se hace: apostilla o traducción?</h2>
+      <p>Siempre primero la apostilla. Es una hoja o una pegatina que se añade al original en el país que lo emitió, y forma parte del documento: también se traduce. Si me envías un certificado sin apostillar y el consulado la exige, te lo digo antes de empezar para que no pagues dos veces. Si tienes dudas sobre qué es exactamente, te lo explico en <a href="/blog/que-es-la-apostilla-de-la-haya">qué es la apostilla de La Haya y cuándo la necesitas</a>.</p>
+
+      <h2>¿Cómo se envía un expediente completo?</h2>
+      <ol>
+        <li>Reúne todo en <strong>una sola carpeta</strong> (Drive, Dropbox, WeTransfer o adjuntos) con tu apellido.</li>
+        <li>Escanea cada documento completo, apostilla y reverso incluidos. Una foto nítida del móvil vale.</li>
+        <li>Nombra los archivos con orden: <em>01-antecedentes-penales.pdf</em>, <em>02-contrato.pdf</em>… Te devuelvo las traducciones con la misma numeración y un índice.</li>
+        <li>Dime en qué consulado presentas la solicitud (o si es ante la UGE) y la fecha de tu cita.</li>
+      </ol>
+      <p>Con eso te contesto en menos de 2 horas laborables con la revisión de la lista, el precio cerrado del lote y un único plazo de entrega por escrito. Los documentos sueltos salen en 24/48 h; un expediente completo suele estar listo en pocos días. Si vienes de <a href="/traduccion-jurada-estados-unidos">Estados Unidos</a> o de <a href="/traduccion-jurada-india">India</a>, tienes una guía propia con las particularidades de tu país.</p>
+
+      <h2>¿Vale la traducción en PDF para el consulado?</h2>
+      <p>Para la presentación telemática, sí: cada traducción lleva mi firma electrónica, verificable con un clic, y mi sello de traductora jurada nº 7310, comprobable en el listado oficial del Ministerio de Asuntos Exteriores. Si tu consulado exige papel, te envío los originales sellados por mensajería a España o a tu país.</p>
+      <p>
+        ¿Estás preparando el expediente? Mándame tu lista por
+        <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20estoy%20preparando%20el%20expediente%20del%20visado%20de%20n%C3%B3mada%20digital%20y%20quiero%20saber%20qu%C3%A9%20documentos%20necesitan%20traducci%C3%B3n%20jurada">WhatsApp</a>
+        y te digo qué falta y qué lleva apostilla, sin compromiso.
+      </p>
+    `,
+  },
+
+  {
+    slug: "traduccion-jurada-o-certificada-uscis-espana",
+    title: "Traducción jurada o traducción certificada: qué pide USCIS y qué pide España",
+    excerpt:
+      "No son lo mismo: USCIS exige una certified translation al inglés con certificación del traductor (8 CFR § 103.2(b)(3)) y España exige una traducción jurada con firma y sello del MAEC. Cuál necesitas, qué lleva cada una y cuándo hacen falta las dos.",
+    date: "2026-10-13",
+    updated: "2026-10-13",
+    author: "Elena Peñaranda Ortega",
+    tags: ["uscis", "validez", "estados-unidos"],
+    readingTime: "6 min",
+    image: "/blog/post-uscis-jurada-certificada.jpg",
+    alt: "Persona con traje firmando un documento con pluma, como en la certificación de una traducción",
+    html: `
+      <p>Cada semana me llegan dos preguntas parecidas desde los dos lados del Atlántico. Desde Estados Unidos: <em>"¿Tu traducción jurada vale para USCIS?"</em>. Desde España: <em>"Me han hecho una certified translation en Nueva York, ¿la acepta extranjería?"</em>. La respuesta a las dos es que son documentos distintos, para organismos distintos, y que conviene saber cuál necesitas antes de encargar nada.</p>
+
+      <h2>¿Qué es una traducción jurada en España?</h2>
+      <p>Es la traducción firmada y sellada por un traductor-intérprete jurado nombrado por el Ministerio de Asuntos Exteriores, Unión Europea y Cooperación. El nombramiento tiene un número (el mío es el 7310) que cualquier funcionario puede comprobar en el listado público del Ministerio. Lleva una certificación en español, firma y sello en cada página, y es lo que exigen extranjería, el registro civil, las universidades, las notarías y los consulados de España para cualquier documento que no esté en español. Su validez la explico con detalle en <a href="/traduccion-jurada-validez-oficial">validez oficial de la traducción jurada</a>.</p>
+
+      <h2>¿Qué es una certified translation para USCIS?</h2>
+      <p>La norma estadounidense es corta: el 8 CFR § 103.2(b)(3) exige que todo documento en idioma extranjero que se presente ante USCIS vaya acompañado de una <strong>traducción completa al inglés</strong> y de una <strong>certificación del traductor</strong> en la que declara que la traducción es completa y exacta y que es competente para traducir de ese idioma al inglés. No se exige notario ni una acreditación concreta: basta la certificación firmada, fechada y con datos de contacto, una por documento. Lo cuento con más detalle en la página de <a href="/traduccion-certificada-uscis">traducción certificada para USCIS</a>.</p>
+
+      <h2>¿En qué se diferencian exactamente?</h2>
+      <table>
+        <thead>
+          <tr><th></th><th>Traducción jurada (España)</th><th>Certified translation (EEUU)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Quién la firma</td><td>Traductor jurado nombrado por el MAEC</td><td>Cualquier traductor competente que firme la certificación</td></tr>
+          <tr><td>Para quién</td><td>Organismos españoles y consulados de España</td><td>USCIS, tribunales, universidades y empleadores de EEUU</td></tr>
+          <tr><td>Qué lleva</td><td>Certificación en español, firma y sello en cada página</td><td>Traducción íntegra al inglés + certificado firmado y fechado</td></tr>
+          <tr><td>Notario</td><td>No</td><td>No (USCIS no lo exige)</td></tr>
+          <tr><td>Dirección habitual</td><td>Inglés → español</td><td>Español → inglés</td></tr>
+        </tbody>
+      </table>
+
+      <h2>¿Acepta USCIS una traducción hecha en España?</h2>
+      <p>Sí. Lo que revisa USCIS es la certificación, no el lugar donde se hizo la traducción. Una traducción certificada preparada desde Murcia es tan válida como una hecha en Miami, siempre que sea completa (sellos, apostillas y notas manuscritas incluidos) y lleve la certificación con firma, fecha y contacto. Mi condición de traductora jurada del MAEC no es un requisito para USCIS, pero añade una credencial verificable que los oficiales entienden.</p>
+
+      <h2>¿Acepta España una certified translation hecha en Estados Unidos?</h2>
+      <p>En general, no. Extranjería, el registro civil o el consulado piden traducción jurada por traductor nombrado por el Ministerio español (o legalizada por vía consular, que es más lenta y cara). Si ya tienes una certified translation de tu certificado de nacimiento estadounidense, lo normal es que tengas que volver a traducirlo como jurada. Si me lo envías con la apostilla, sale en 24/48 h.</p>
+
+      <h2>¿Y si presento el mismo documento en los dos países?</h2>
+      <p>Pasa más de lo que parece: una pareja hispano-estadounidense que se casa en España y después pide la green card, o un español que solicita la nacionalidad estadounidense y a la vez mantiene trámites en el registro civil español. En esos casos preparo las dos versiones a la vez, con los mismos criterios (mismos nombres, fechas y términos), para que ningún oficial encuentre discrepancias entre una y otra. Si vives en Estados Unidos, en la <a href="/traduccion-jurada-estados-unidos">guía para clientes de Estados Unidos</a> tienes el detalle de apostillas, huso horario y pago con tarjeta estadounidense.</p>
+
+      <h2>¿Qué documentos españoles se traducen más para USCIS?</h2>
+      <p>Certificados de nacimiento (literal o extracto) para peticiones familiares, green card y naturalización; certificados de matrimonio, sentencias de divorcio y certificados de defunción; certificados de antecedentes penales del Ministerio de Justicia; títulos y expedientes académicos para visados de trabajo o de estudios; extractos bancarios, certificados de empresa y nóminas como prueba de medios; y escrituras, poderes y contratos. Cada uno lleva su propia hoja de certificación, y todos los sellos, apostillas y anotaciones manuscritas aparecen en la versión inglesa: una traducción para USCIS tiene que ser completa, no un resumen.</p>
+
+      <h2>Resumen en tres líneas</h2>
+      <ol>
+        <li>Trámite en España → traducción jurada (firma y sello del MAEC).</li>
+        <li>Trámite ante USCIS → certified translation al inglés con certificación firmada, sin notario.</li>
+        <li>Los dos → las dos versiones a la vez, con un solo traductor.</li>
+      </ol>
+      <p>
+        ¿No sabes cuál te piden? Mándame el documento y el nombre del trámite por
+        <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20no%20s%C3%A9%20si%20necesito%20traducci%C3%B3n%20jurada%20o%20certificada%20para%20USCIS%3A%20te%20env%C3%ADo%20el%20documento%20y%20el%20tr%C3%A1mite">WhatsApp</a>
+        y te lo confirmo con precio cerrado en menos de 2 horas.
+      </p>
+    `,
+  },
+
+  {
+    slug: "documentos-indios-visado-espana-apostilla-mea",
+    title: "Documentos indios para un visado de España: apostilla del MEA y traducción jurada",
+    excerpt:
+      "Guía para solicitantes de India: qué documentos pide el Consulado de España (nacimiento, matrimonio, PCC, títulos, cartas de empleador), cómo funciona la apostilla del Ministry of External Affairs y por qué los certificados deben llegar en inglés antes de la traducción jurada al español.",
+    date: "2026-11-04",
+    updated: "2026-11-04",
+    author: "Elena Peñaranda Ortega",
+    tags: ["india", "extranjeria", "apostilla"],
+    readingTime: "6 min",
+    image: "/blog/post-india-mea.jpg",
+    alt: "Estantería de biblioteca universitaria con un portátil en primer plano",
+    html: `
+      <p>India es, después de Reino Unido y Estados Unidos, el país desde el que más consultas recibo: estudiantes que van a un máster en España, ingenieros con contrato, familias que se reagrupan y cada vez más teletrabajadores que piden el <a href="/traduccion-jurada-visado-nomada-digital">visado de nómada digital</a>. Todos se encuentran con la misma cadena de trámites: atestación, apostilla del MEA y traducción jurada al español. Esta guía explica la cadena en orden y qué documentos la recorren.</p>
+
+      <h2>¿Qué documentos indios pide el Consulado de España?</h2>
+      <p>Depende del visado, pero la lista se repite:</p>
+      <ul>
+        <li><strong>Birth certificate</strong> de la municipal corporation o del registrar, para reagrupación, matrimonio y nacionalidad.</li>
+        <li><strong>Marriage certificate</strong>, con los sellos del registrar.</li>
+        <li><strong>Police clearance certificate (PCC)</strong> de la oficina de pasaportes o de la policía estatal, para casi todos los visados de larga duración.</li>
+        <li><strong>Títulos, mark sheets y transcripts</strong> para el visado de estudios, la homologación y la colegiación profesional.</li>
+        <li><strong>Cartas de empleador y de experiencia</strong> para visados de trabajo, tarjeta azul y nómada digital.</li>
+        <li><strong>Extractos bancarios, ITR y Form 16</strong> como justificantes económicos.</li>
+        <li><strong>Affidavits</strong> ante notario cuando falta un certificado o hay que declarar algo (un cambio de nombre, por ejemplo).</li>
+      </ul>
+      <p>Todos ellos, si no están en español, se presentan con traducción jurada. En la página de <a href="/traduccion-jurada-india">traducción jurada de documentos de India</a> tienes la tabla completa con apostilla sí o no para cada uno.</p>
+
+      <h2>¿Cómo funciona la apostilla del MEA?</h2>
+      <p>India forma parte del Convenio de La Haya, así que sus documentos públicos se legalizan con apostilla y no con legalización consular. La emite el <strong>Ministry of External Affairs</strong> (MEA) del Gobierno de India a través de sus centros de recogida y de agencias autorizadas. Antes de la apostilla, la mayoría de los documentos pasan por una atestación previa: la del departamento de educación del estado para los títulos, la del Home Department para los certificados personales o la de la cámara de comercio para los documentos comerciales. La apostilla es una pegatina con código QR que se pega al documento y que forma parte de él: también se traduce.</p>
+
+      <h2>¿Por qué el documento tiene que estar en inglés?</h2>
+      <p>Porque yo traduzco del inglés al español, no del hindi, el marathi, el tamil, el gujarati o el bengalí. La mayoría de los documentos indios se emiten en inglés o en versión bilingüe y con esos trabajo directamente. Si el tuyo está solo en lengua regional, necesitas primero una versión inglesa oficial: la del propio organismo emisor o la de un traductor reconocido en India, con su sello. Esa versión, apostillada, es la que traduzco al español. Es un paso más, pero evita que el consulado rechace una traducción hecha "de oídas" sobre un original que no puedo leer.</p>
+
+      <h2>¿En qué orden se hace todo?</h2>
+      <ol>
+        <li>Consigue el documento original (o la versión inglesa oficial, si está en lengua regional).</li>
+        <li>Atestación previa del departamento que corresponda.</li>
+        <li>Apostilla del MEA.</li>
+        <li>Escaneo completo del documento con la apostilla y traducción jurada al español.</li>
+      </ol>
+      <p>Si me envías un documento sin apostilla y el consulado la exige, te lo digo antes de empezar. Tienes más sobre la apostilla en general en <a href="/blog/que-es-la-apostilla-de-la-haya">qué es la apostilla de La Haya</a>.</p>
+
+      <h2>¿Cuánto tarda y cómo se paga desde India?</h2>
+      <p>Un documento habitual está traducido en 24/48 h; un expediente completo de visado de estudios (con transcripts largos) lleva un único plazo cerrado por escrito que te doy en menos de 2 horas laborables. Mi horario es de 9:00 a 20:00, hora peninsular española, entre 3 horas y media y 4 horas y media por detrás de India: si me escribes a media mañana, te contesto a primera hora de mi jornada. El pago es con tarjeta india (Visa, Mastercard o RuPay internacional) a través de Stripe, en euros; si tu tarjeta tiene bloqueados los pagos internacionales, actívalos en la app del banco antes de pagar. Recibes un PDF firmado digitalmente, válido para el consulado y para la plataforma de visados; si te exigen papel, lo envío por mensajería a India.</p>
+
+      <h2>¿Y los documentos españoles para usarlos en India?</h2>
+      <p>El camino inverso también existe: certificados españoles de nacimiento o matrimonio, títulos, antecedentes penales o documentos de empresa que hay que presentar ante una administración, universidad o empleador en India. Los traduzco al inglés con mi firma y sello, y cuando el organismo indio lo pide, el original se apostilla antes en España.</p>
+      <p>
+        ¿Tienes tu lista de documentos? Envíamela por
+        <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20escribo%20desde%20India%3A%20necesito%20traducci%C3%B3n%20jurada%20al%20espa%C3%B1ol%20de%20mis%20documentos%20%28en%20ingl%C3%A9s%2C%20con%20apostilla%20del%20MEA%29%20para%20el%20Consulado%20de%20Espa%C3%B1a">WhatsApp</a>
+        y te digo qué necesita apostilla y cuánto cuesta el lote completo.
+      </p>
+    `,
+  },
+
 ];
 
 // Helpers sencillos
