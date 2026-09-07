@@ -262,6 +262,62 @@ export const postsEn = [
     `,
   },
 
+  {
+    slug: "sworn-translations-leaving-spain-uk-ireland-canada-australia",
+    title: "Sworn translations for leaving Spain: what the UK, Ireland, Canada and Australia ask for",
+    excerpt:
+      "If you are emigrating from Spain, your certificates, degrees and criminal record checks must arrive in English. What each country requires of a translation done abroad (UKVI, Irish Immigration, IRCC and Home Affairs), when the Spanish apostille is needed and in what order to do it.",
+    date: "2026-11-20",
+    updated: "2026-11-20",
+    author: "Elena Peñaranda Ortega",
+    tags: ["emigrating", "united-kingdom", "ireland", "canada", "australia", "apostille"],
+    readingTime: "7 min",
+    image: "/blog/post-leaving-spain.jpg",
+    alt: "Passport and travel documents laid out on a table before a move abroad",
+    html: `
+      <p>Most of my clients are coming to Spain. But every week I also translate in the other direction: Spaniards and residents of Spain leaving to work, study or live in the United Kingdom, Ireland, Canada or Australia who need their documents in English. All four countries speak English, all four ask for translations, and none of them has the same sworn translator system as Spain. This guide summarises what each one requires of a translation done from here, with the official source linked, and the order in which to do everything.</p>
+
+      <h2>What the four have in common</h2>
+      <ul>
+        <li><strong>No Spanish-language document is accepted without a translation</strong> into English (Ireland also accepts Irish; Canada, French).</li>
+        <li><strong>The translation must be complete</strong>, stamps, apostille and annotations included, and come with a statement from the translator giving their name, signature, date and contact details.</li>
+        <li><strong>The apostille, where required, goes on the Spanish original</strong> before translating, because it is translated too. In Spain it is issued by the notarial colleges (notarial documents), the high courts of justice (court documents) and the Ministry of Justice and government delegations (everything else). Details in <a href="/blog/que-es-la-apostilla-de-la-haya">what an apostille is</a> (guide in Spanish).</li>
+        <li><strong>The documents repeat</strong>: birth certificate, marriage certificate, criminal record certificate, degree and academic transcript, employment history (vida laboral), payslips and employer letters.</li>
+      </ul>
+      <p>My sworn translation into English comes with everything they ask for as standard: a statement of accuracy, signature, seal with MAEC number 7310, date and my contact details. What changes between countries is the small print.</p>
+
+      <h2>United Kingdom: a "certified translation" for UKVI</h2>
+      <p>UK Visas and Immigration requires any document not in English or Welsh to be submitted with a certified translation that includes the translator's confirmation that it is an accurate translation of the original, the date, their full name and signature and their contact details. A Spanish sworn translation meets that requirement as it is, with no notary. An apostille is only required for certain documents and procedures: check the guidance for your specific visa. There is also a page for <a href="/en/sworn-translation-british-residents-spain">British residents making the opposite journey</a>.</p>
+
+      <h2>Ireland: a "full and certified translation" for Immigration Service Delivery</h2>
+      <p>Ireland has no sworn translators. Immigration Service Delivery asks for a full and certified translation into English or Irish in which the translator confirms it is accurate and gives their contact details (<a href="https://www.irishimmigration.ie/how-to-make-a-certified-translation-of-a-document/" target="_blank" rel="noopener noreferrer">official source: irishimmigration.ie</a>). Universities, employers and the HSE apply the same criterion. As Ireland and Spain are both EU Member States, many public documents (birth, marriage, criminal record) can be presented without an apostille using the multilingual standard form under Regulation (EU) 2016/1191, although not every body accepts it instead of a translation: ask first. More in the <a href="/en/sworn-translation-ireland-spain">Ireland guide</a>.</p>
+
+      <h2>Canada: certified translator or affidavit for IRCC</h2>
+      <p>Immigration, Refugees and Citizenship Canada accepts documents in English or French. Everything else is submitted with its translation and, if the translator <strong>is not a member in good standing of a Canadian association of certified translators</strong>, with an affidavit in which they swear before a competent authority that they are proficient in both languages and that the translation is accurate, plus a certified copy of the original. Neither family members nor the applicant's representatives may translate (<a href="https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=018&amp;top=4" target="_blank" rel="noopener noreferrer">IRCC: language of documents</a> · <a href="https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=040&amp;top=4" target="_blank" rel="noopener noreferrer">IRCC: what is an affidavit for a translation</a>). My MAEC appointment is not a Canadian association membership, so for IRCC you should plan for the affidavit; universities, professional bodies and employers are usually satisfied with the certified translation. Step by step in the <a href="/en/sworn-translation-canada-spain">Canada guide</a>.</p>
+
+      <h2>Australia: translations done outside Australia for Home Affairs</h2>
+      <p>The Department of Home Affairs requires English translations of anything in another language. If the translation is done inside Australia, the translator must be NAATI-accredited; if it is done outside, as it is from Spain, NAATI is not required, but the translation must show the translator's full name, address, phone number and their qualifications and experience in the source language (<a href="https://immi.homeaffairs.gov.au/help-text/evidence/Pages/et-h0012.aspx" target="_blank" rel="noopener noreferrer">Home Affairs: evidence and translations</a>). My certification includes all of those details. For degree recognition and professional registration, each assessing body has its own rules: check them before ordering. The full <a href="/en/sworn-translation-australia-spain">Australia guide</a> is here.</p>
+
+      <h2>In what order to do it</h2>
+      <ol>
+        <li><strong>Get the list of documents</strong> from the receiving body (visa, university, professional body, employer) and check which ones need an apostille and which need a certified copy or an affidavit.</li>
+        <li><strong>Obtain up-to-date originals</strong>: civil registry and criminal record certificates expire for the purposes of many procedures, so request them with the visa in sight.</li>
+        <li><strong>Apostille what needs it</strong> before translating.</li>
+        <li><strong>Scan everything</strong> in full, apostille included, and send it to me by WhatsApp or through the form. You get a fixed quote in under 2 working hours and a single deadline for the batch.</li>
+        <li><strong>You receive the signed PDF</strong> in 24/48 hours for a standard document, with the certification adapted to the country. If paper is required, I send it by courier.</li>
+      </ol>
+
+      <h2>How much margin to leave</h2>
+      <p>I do not give processing times for foreign authorities, because they change and depend on each office. What I do control is my part: the translation of a complete emigration file comes with a fixed deadline in writing before I start, and I handle urgent batches as described in <a href="/en/urgent-sworn-translation-large-projects">urgent and large projects</a>. What delays a file most is not the translation, but finding out late that a certificate needed an apostille.</p>
+      <p>
+        Leaving? Send me your list of documents on
+        <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20leaving%20Spain%20and%20need%20my%20documents%20translated%20into%20English%20%28I%27ll%20tell%20you%20the%20country%20and%20the%20procedure%29">WhatsApp</a>
+        and I will tell you what to apostille, what to translate and what the full batch costs.
+      </p>
+    `,
+  },
+
+
 ];
 
 export function getAllPostsEn() {

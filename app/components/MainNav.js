@@ -5,14 +5,16 @@
 // subrayado dorado de la página activa se dibuja con clip-path en 180 ms
 // (ver .nav-underline en globals.css).
 //
-// FASE 2.6 (encargo internacional): el ítem "Internacional" es un
-// desplegable con las páginas de nómada digital, USCIS, Estados Unidos,
-// India y Reino Unido. Sustituye a "Preguntas Frecuentes" en el menú de
-// escritorio para no pasar de 6 ítems (las FAQ siguen en el footer). En las
-// rutas /en el menú se muestra en inglés y enlaza a las páginas en inglés.
+// FASE 2.6 / 2B.3 (encargo internacional): el ítem "Internacional" es un
+// desplegable en dos columnas, "Servicios" (nómada digital, USCIS,
+// urgentes) y "Por país" (Reino Unido, Estados Unidos, India, Irlanda,
+// Canadá, Australia, todos los países). Sustituye a "Preguntas Frecuentes"
+// en el menú de escritorio para no pasar de 6 ítems (las FAQ siguen en el
+// footer). En las rutas /en el menú se muestra en inglés y enlaza a las
+// páginas en inglés.
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { INTERNATIONAL_MENU } from "../../content/servicios/routes";
+import { INTERNATIONAL_MENU_GROUPS } from "../../content/servicios/routes";
 
 const LINKS_ES = [
   { href: "/", label: "Inicio" },
@@ -32,7 +34,7 @@ const LINKS_EN = [
   { href: "/en/contacto", label: "Contact" },
 ];
 
-// Se conserva por compatibilidad con MobileNav (lista ES).
+// Se conserva por compatibilidad (lista ES).
 const LINKS = LINKS_ES;
 
 export function isEnglishPath(pathname) {
@@ -43,12 +45,22 @@ export function getLinks(pathname) {
   return isEnglishPath(pathname) ? LINKS_EN : LINKS_ES;
 }
 
-export function getInternationalItems(pathname) {
+/** Grupos del menú Internacional localizados: [{ id, label, items: [{href,label}] }] */
+export function getInternationalGroups(pathname) {
   const en = isEnglishPath(pathname);
-  return INTERNATIONAL_MENU.map((r) => ({
-    href: en ? r.en : r.es,
-    label: en ? r.labelEn : r.labelEs,
+  return INTERNATIONAL_MENU_GROUPS.map((g) => ({
+    id: g.id,
+    label: en ? g.labelEn : g.labelEs,
+    items: g.items.map((r) => ({
+      href: en ? r.en : r.es,
+      label: en ? r.labelEn : r.labelEs,
+    })),
   }));
+}
+
+/** Lista plana de todos los ítems internacionales (para estado activo). */
+export function getInternationalItems(pathname) {
+  return getInternationalGroups(pathname).flatMap((g) => g.items);
 }
 
 export function isActive(pathname, href) {
@@ -83,8 +95,10 @@ function InternationalMenu({ pathname, label }) {
   const [pinned, setPinned] = useState(false);
   const rootRef = useRef(null);
   const buttonRef = useRef(null);
-  const items = getInternationalItems(pathname);
-  const active = items.some((i) => isActive(pathname, i.href));
+  const groups = getInternationalGroups(pathname);
+  const active = groups.some((g) =>
+    g.items.some((i) => isActive(pathname, i.href))
+  );
 
   // Cerrar con Escape (devolviendo el foco al botón) y al pulsar fuera.
   useEffect(() => {
@@ -149,29 +163,41 @@ function InternationalMenu({ pathname, label }) {
         id="nav-internacional"
         data-open={open}
         aria-hidden={!open}
-        className="nav-dropdown absolute left-1/2 top-full z-50 w-72 pt-3"
+        className="nav-dropdown absolute left-1/2 top-full z-50 w-[34rem] pt-3"
       >
-        <ul className="rounded-xl bg-brand-navy p-2 text-sm shadow-lg ring-1 ring-white/10">
-          {items.map((i) => {
-            const isCurrent = isActive(pathname, i.href);
-            return (
-              <li key={i.href}>
-                <a
-                  href={i.href}
-                  aria-current={isCurrent ? "page" : undefined}
-                  tabIndex={open ? undefined : -1}
-                  className={`block rounded-lg px-3 py-2.5 no-underline ${
-                    isCurrent
-                      ? "bg-white/10 font-medium text-brand-gold-300"
-                      : "text-slate-100 hover:bg-white/10 hover:text-brand-gold-300"
-                  }`}
-                >
-                  {i.label}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="grid grid-cols-2 gap-2 rounded-xl bg-brand-navy p-3 text-sm shadow-lg ring-1 ring-white/10">
+          {groups.map((g) => (
+            <div key={g.id}>
+              <p
+                id={`nav-internacional-${g.id}`}
+                className="px-3 pb-1 pt-1 text-xs font-medium uppercase tracking-wide text-slate-400"
+              >
+                {g.label}
+              </p>
+              <ul aria-labelledby={`nav-internacional-${g.id}`}>
+                {g.items.map((i) => {
+                  const isCurrent = isActive(pathname, i.href);
+                  return (
+                    <li key={i.href}>
+                      <a
+                        href={i.href}
+                        aria-current={isCurrent ? "page" : undefined}
+                        tabIndex={open ? undefined : -1}
+                        className={`block rounded-lg px-3 py-2 no-underline ${
+                          isCurrent
+                            ? "bg-white/10 font-medium text-brand-gold-300"
+                            : "text-slate-100 hover:bg-white/10 hover:text-brand-gold-300"
+                        }`}
+                      >
+                        {i.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

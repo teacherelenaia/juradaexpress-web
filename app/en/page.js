@@ -349,21 +349,18 @@ export default function Page() {
                 </TrackedLink>
               </div>
               <p className="mt-6 max-w-[68ch] text-sm text-slate-600">
-                Coming from the{" "}
-                <a href="/en/sworn-translation-usa-spain" className="link">
-                  United States
-                </a>{" "}
-                or from{" "}
-                <a href="/en/sworn-translation-india-spain" className="link">
-                  India
+                Coming from the United States, India, Ireland, Canada or
+                Australia?{" "}
+                <a href="/en/sworn-translation-spain-by-country" className="link">
+                  You have your own guide
                 </a>
-                ? You have your own guide.
+                .
               </p>
             </div>
             <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-72">
               <Image
-                src="/fotos/foto-bandera-uk.jpg"
-                alt="Union Jack flag — sworn translation for British nationals living in Spain"
+                src="/fotos/escritorio-documentos.jpg"
+                alt="Hand writing in a notebook next to a laptop, preparing the paperwork for a procedure in Spain"
                 fill
                 sizes="(min-width: 768px) 480px, 100vw"
                 className="object-cover"

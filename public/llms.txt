@@ -23,11 +23,12 @@
 - Traducción certificada para USCIS (Estados Unidos): traducción completa al inglés con certificación de exactitud y competencia conforme a 8 CFR § 103.2(b)(3), firmada, fechada y con datos de contacto, un certificado por documento; sin notario.
 - Expediente de visado de nómada digital para España (Ley 28/2022): revisión de la lista, aviso de apostillas, traducción jurada de todo el lote con un único plazo y entrega ordenada y nombrada.
 - Proyectos urgentes y grandes volúmenes: expedientes completos y lotes para particulares, empresas, despachos y gestorías; sin subcontratar.
+- Traducción certificada español → inglés para organismos de Reino Unido (UKVI), Irlanda (Immigration Service Delivery), Canadá (IRCC, con affidavit cuando lo exige) y Australia (Department of Home Affairs): declaración de exactitud firmada y fechada con nombre, datos de contacto y cualificaciones de la traductora.
 - Documentos habituales / Common documents: certificados de nacimiento, matrimonio, defunción y antecedentes penales; títulos y expedientes académicos; permisos de conducir; certificados de empresa y nóminas; contratos, escrituras y poderes; DNI y pasaporte; testamentos; certificados médicos.
 
 ## Países / Countries
 
-España, Reino Unido, Irlanda, Estados Unidos, Canadá, India, Australia y cualquier otro país. Spain, United Kingdom, Ireland, United States, Canada, India, Australia and any other country.
+España, Reino Unido, Irlanda, Estados Unidos, Canadá, India, Australia y cualquier otro país; guías breves también para Nueva Zelanda, Sudáfrica, Gibraltar, Pakistán, Nigeria y Filipinas. Spain, United Kingdom, Ireland, United States, Canada, India, Australia and any other country; short guides also for New Zealand, South Africa, Gibraltar, Pakistan, Nigeria and the Philippines.
 
 ## Páginas clave (español)
 
@@ -38,6 +39,10 @@ España, Reino Unido, Irlanda, Estados Unidos, Canadá, India, Australia y cualq
 - [Traducción jurada de documentos de India](https://juradaexpress.es/traduccion-jurada-india): documentos indios en inglés con apostilla del MEA para visados de estudios, trabajo, nómada digital y reagrupación.
 - [Traducción jurada urgente y grandes volúmenes](https://juradaexpress.es/traduccion-jurada-urgente-grandes-volumenes): cómo se trabaja un lote, capacidad y plazo por escrito, empresas y despachos.
 - [Traducción jurada para británicos en España](https://juradaexpress.es/traduccion-jurada-britanicos-espana): guía trámite a trámite (NIE/TIE, empadronamiento, vivienda, matrimonio, carné de conducir, pensión).
+- [Traducción jurada entre Irlanda y España](https://juradaexpress.es/traduccion-jurada-irlanda): traducción certificada para Immigration Service Delivery, apostilla del Department of Foreign Affairs, Reglamento (UE) 2016/1191.
+- [Traducción jurada entre Canadá y España](https://juradaexpress.es/traduccion-jurada-canada): qué pide IRCC (traductor certificado o affidavit y copia certificada), apostilla de Global Affairs Canada desde 2024.
+- [Traducción jurada entre Australia y España](https://juradaexpress.es/traduccion-jurada-australia): condiciones de Home Affairs para traducciones hechas fuera de Australia (datos y cualificaciones del traductor), apostilla del DFAT.
+- [Traducción jurada por países](https://juradaexpress.es/traduccion-jurada-por-paises): hub con una guía por país (Reino Unido, Estados Unidos, India, Irlanda, Canadá, Australia) y resúmenes de Nueva Zelanda, Sudáfrica, Gibraltar, Pakistán, Nigeria y Filipinas con su autoridad de apostilla o legalización.
 - [Precios](https://juradaexpress.es/precios): tarifas orientativas por documento, en euros.
 - [Catálogo de documentos](https://juradaexpress.es/documentos): pedir presupuesto y pagar con tarjeta.
 - [Cómo funciona](https://juradaexpress.es/como-funciona): envío, presupuesto, traducción y entrega en cuatro pasos.
@@ -55,6 +60,10 @@ España, Reino Unido, Irlanda, Estados Unidos, Canadá, India, Australia y cualq
 - [Sworn translation of Indian documents for Spain](https://juradaexpress.es/en/sworn-translation-india-spain): Indian documents in English with MEA apostille for student, work, digital nomad and family visas.
 - [Urgent sworn translation and large projects](https://juradaexpress.es/en/urgent-sworn-translation-large-projects): how a batch is handled, capacity and deadline in writing, companies and law firms.
 - [Sworn translation for British residents in Spain](https://juradaexpress.es/en/sworn-translation-british-residents-spain): procedure-by-procedure guide.
+- [Sworn translation between Ireland and Spain](https://juradaexpress.es/en/sworn-translation-ireland-spain): certified translation for Immigration Service Delivery, Department of Foreign Affairs apostille, Regulation (EU) 2016/1191.
+- [Sworn translation between Canada and Spain](https://juradaexpress.es/en/sworn-translation-canada-spain): what IRCC requires (certified translator or affidavit plus certified copy), Global Affairs Canada apostille since 2024.
+- [Sworn translation between Australia and Spain](https://juradaexpress.es/en/sworn-translation-australia-spain): Home Affairs conditions for translations done outside Australia (translator details and qualifications), DFAT apostille.
+- [Sworn translation by country](https://juradaexpress.es/en/sworn-translation-spain-by-country): hub with one guide per country (UK, USA, India, Ireland, Canada, Australia) and summaries for New Zealand, South Africa, Gibraltar, Pakistan, Nigeria and the Philippines with their apostille or legalisation authority.
 - [Pricing](https://juradaexpress.es/en/precios): indicative rates per document, in euros.
 - [Documents](https://juradaexpress.es/en/documentos): request a quote and pay by card.
 - [How it works](https://juradaexpress.es/en/how-it-works)

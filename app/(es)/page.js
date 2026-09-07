@@ -351,21 +351,18 @@ export default function Page() {
                 </TrackedLink>
               </div>
               <p className="mt-6 max-w-[68ch] text-sm text-slate-600">
-                Si vienes de{" "}
-                <a href="/traduccion-jurada-estados-unidos" className="link">
-                  Estados Unidos
-                </a>{" "}
-                o de{" "}
-                <a href="/traduccion-jurada-india" className="link">
-                  India
+                Si vienes de Estados Unidos, India, Irlanda, Canadá o
+                Australia,{" "}
+                <a href="/traduccion-jurada-por-paises" className="link">
+                  tienes tu propia guía
                 </a>
-                , tienes tu propia guía.
+                .
               </p>
             </div>
             <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-72">
               <Image
-                src="/fotos/foto-bandera-uk.jpg"
-                alt="Bandera de Reino Unido — traducción jurada para británicos residentes en España"
+                src="/fotos/escritorio-documentos.jpg"
+                alt="Mano escribiendo en un cuaderno junto a un portátil, preparando la documentación de un trámite en España"
                 fill
                 sizes="(min-width: 768px) 480px, 100vw"
                 className="object-cover"

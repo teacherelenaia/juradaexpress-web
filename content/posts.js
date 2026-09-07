@@ -329,7 +329,7 @@ export const posts = [
     tags: ["conducir", "reino-unido", "precios"],
     readingTime: "5 min",
     image: "/blog/post-conducir.jpg",
-    alt: "Bandera británica ondeando — canje del permiso de conducir del Reino Unido en España",
+    alt: "Pasaporte y documentos de viaje sobre un portátil, listos para el canje del permiso de conducir",
     html: `
       <p>Desde el acuerdo posterior al Brexit, los residentes británicos en España pueden <strong>canjear su permiso de conducir en la DGT</strong> sin repetir el examen. La noticia corrió rápido; lo que corre menos es la letra pequeña del expediente, y ahí es donde aparece la traducción jurada del carnet de conducir. Te cuento cuándo hace falta, cuánto cuesta y cómo evitar el error más común.</p>
 
@@ -417,7 +417,7 @@ export const posts = [
     tags: ["reino-unido", "extranjeria", "validez"],
     readingTime: "5 min",
     image: "/blog/post-visado-uk.jpg",
-    alt: "Big Ben y bandera británica — documentos para visados del Reino Unido",
+    alt: "Manos revisando un formulario oficial sobre una carpeta de documentos para un visado",
     html: `
       <p>Si estás preparando un visado británico — <em>Skilled Worker</em>, familiar, de estudiante — ya habrás visto la frase en la web del gobierno: todo documento que no esté en inglés debe ir acompañado de una <strong>"certified translation"</strong>. ¿Vale la traducción jurada española? Sí, y además cumple los requisitos con holgura. Te explico por qué y qué documentos suelen entrar en el expediente.</p>
 
@@ -771,6 +771,62 @@ export const posts = [
       </p>
     `,
   },
+
+  {
+    slug: "traduccion-jurada-para-irse-de-espana-reino-unido-irlanda-canada-australia",
+    title: "Traducción jurada para irse de España: qué piden Reino Unido, Irlanda, Canadá y Australia",
+    excerpt:
+      "Si emigras desde España, tus certificados, títulos y antecedentes penales tienen que llegar en inglés. Qué exige cada país a una traducción hecha fuera (UKVI, Irish Immigration, IRCC y Home Affairs), cuándo hace falta la apostilla española y en qué orden hacerlo.",
+    date: "2026-11-18",
+    updated: "2026-11-18",
+    author: "Elena Peñaranda Ortega",
+    tags: ["emigrar", "reino-unido", "irlanda", "canada", "australia", "apostilla"],
+    readingTime: "7 min",
+    image: "/blog/post-irse-de-espana.jpg",
+    alt: "Maleta preparada junto a una carpeta de documentos antes de un viaje",
+    html: `
+      <p>La mayoría de mis clientes vienen a España. Pero cada semana traduzco también en el otro sentido: españoles y residentes en España que se van a trabajar, estudiar o vivir a Reino Unido, Irlanda, Canadá o Australia y que necesitan sus documentos en inglés. Los cuatro países hablan inglés, los cuatro piden traducciones, y ninguno tiene el mismo sistema de traductores jurados que España. Esta guía resume qué exige cada uno a una traducción hecha desde aquí, con la fuente oficial enlazada, y en qué orden conviene hacerlo todo.</p>
+
+      <h2>Qué tienen en común los cuatro</h2>
+      <ul>
+        <li><strong>Ningún documento en español se acepta sin traducción</strong> al inglés (Irlanda admite también el irlandés; Canadá, el francés).</li>
+        <li><strong>La traducción tiene que ser completa</strong>, con sellos, apostilla y anotaciones incluidas, e ir acompañada de una declaración del traductor con su nombre, firma, fecha y datos de contacto.</li>
+        <li><strong>La apostilla, si se pide, se pone sobre el original español</strong> antes de traducir, porque también se traduce. En España la emiten los colegios notariales (documentos notariales), los tribunales superiores de justicia (documentos judiciales) y el Ministerio de Justicia y las delegaciones del Gobierno (el resto). Tienes el detalle en <a href="/blog/que-es-la-apostilla-de-la-haya">qué es la apostilla de La Haya</a>.</li>
+        <li><strong>Los documentos se repiten</strong>: <a href="/traduccion-jurada-partida-nacimiento">certificado de nacimiento</a>, <a href="/traduccion-jurada-certificado-matrimonio">de matrimonio</a>, <a href="/traduccion-jurada-certificado-penales">de antecedentes penales</a>, <a href="/traduccion-jurada-titulo-universitario">título y expediente académico</a>, vida laboral, nóminas y cartas de empleador.</li>
+      </ul>
+      <p>Mi traducción jurada al inglés lleva de serie todo lo que piden: certificación de exactitud, firma, sello con el nº 7310 del MAEC, fecha y mis datos de contacto. Lo que cambia entre países es la letra pequeña.</p>
+
+      <h2>Reino Unido: "certified translation" para el UKVI</h2>
+      <p>UK Visas and Immigration exige que cualquier documento que no esté en inglés o galés se presente con una traducción certificada que incluya la confirmación del traductor de que es una traducción fiel del original, la fecha, su nombre completo y firma y sus datos de contacto. La traducción jurada española cumple ese requisito tal cual, sin notario. La apostilla solo se pide para determinados documentos y trámites: confírmalo en la guía del visado concreto. Tengo un artículo específico sobre <a href="/blog/traduccion-jurada-visado-reino-unido">el visado del Reino Unido</a> y una página para <a href="/traduccion-jurada-britanicos-espana">británicos que hacen el camino contrario</a>.</p>
+
+      <h2>Irlanda: "full and certified translation" para Immigration Service Delivery</h2>
+      <p>Irlanda no tiene traductores jurados. Immigration Service Delivery pide una traducción completa y certificada al inglés o al irlandés en la que el traductor confirma que es fiel al original e indica sus datos de contacto (<a href="https://www.irishimmigration.ie/how-to-make-a-certified-translation-of-a-document/" target="_blank" rel="noopener noreferrer">fuente oficial: irishimmigration.ie</a>). Universidades, empleadores y el HSE aplican el mismo criterio. Como Irlanda y España son Estados de la UE, muchos documentos públicos (nacimiento, matrimonio, antecedentes penales) pueden presentarse sin apostilla con el impreso multilingüe del Reglamento (UE) 2016/1191, aunque no todos los organismos lo aceptan en lugar de la traducción: pregúntalo antes. Más detalle en la <a href="/traduccion-jurada-irlanda">guía de Irlanda</a>.</p>
+
+      <h2>Canadá: traductor certificado o affidavit para IRCC</h2>
+      <p>Immigration, Refugees and Citizenship Canada admite documentos en inglés o en francés. Todo lo demás se presenta con su traducción y, si el traductor <strong>no es miembro en activo de una asociación canadiense de traductores certificados</strong>, con un affidavit en el que jura ante una autoridad competente que domina los dos idiomas y que la traducción es exacta, más una copia certificada del original. Ni familiares ni representantes del solicitante pueden traducir (<a href="https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=018&amp;top=4" target="_blank" rel="noopener noreferrer">IRCC: idioma de los documentos</a> · <a href="https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=040&amp;top=4" target="_blank" rel="noopener noreferrer">IRCC: qué es un affidavit de traducción</a>). Mi nombramiento del MAEC no es una membresía de asociación canadiense, así que para IRCC hay que contar con el affidavit; universidades, colegios profesionales y empleadores suelen conformarse con la traducción certificada. Lo explico paso a paso en la <a href="/traduccion-jurada-canada">guía de Canadá</a>.</p>
+
+      <h2>Australia: traducciones hechas fuera de Australia para Home Affairs</h2>
+      <p>El Department of Home Affairs pide traducciones al inglés de todo lo que esté en otro idioma. Si la traducción se hace dentro de Australia, el traductor debe estar acreditado por NAATI; si se hace fuera, como es el caso desde España, no hace falta NAATI, pero la traducción debe indicar el nombre completo, la dirección, el teléfono y las cualificaciones y experiencia del traductor en el idioma de origen (<a href="https://immi.homeaffairs.gov.au/help-text/evidence/Pages/et-h0012.aspx" target="_blank" rel="noopener noreferrer">Home Affairs: evidencia y traducciones</a>). Mi certificación incluye todos esos datos. Para la homologación de títulos y la colegiación profesional cada organismo evaluador tiene sus normas: consúltalas antes de encargar. Tienes la <a href="/traduccion-jurada-australia">guía de Australia</a> completa.</p>
+
+      <h2>En qué orden hacerlo</h2>
+      <ol>
+        <li><strong>Pide la lista de documentos</strong> al organismo de destino (visado, universidad, colegio profesional, empleador) y comprueba para cuáles exige apostilla y para cuáles copia certificada o affidavit.</li>
+        <li><strong>Consigue los originales actualizados</strong>: los certificados del Registro Civil y de antecedentes penales caducan a efectos de muchos trámites, así que pídelos con el visado a la vista.</li>
+        <li><strong>Apostilla lo que lo necesite</strong> antes de traducir.</li>
+        <li><strong>Escanéalo todo</strong> completo, apostilla incluida, y envíamelo por WhatsApp o por el formulario. Te doy un presupuesto cerrado en menos de 2 horas laborables y un único plazo para el lote.</li>
+        <li><strong>Recibes el PDF firmado</strong> en 24/48 h para un documento habitual, con la certificación adaptada al país. Si te piden papel, lo envío por mensajería.</li>
+      </ol>
+
+      <h2>Cuánto margen dejar</h2>
+      <p>No te doy plazos de las administraciones extranjeras, porque cambian y dependen de cada oficina. Lo que sí controlo es mi parte: la traducción de un expediente completo de emigración lleva un plazo cerrado por escrito antes de empezar, y con los lotes urgentes trabajo como cuento en <a href="/traduccion-jurada-urgente-grandes-volumenes">urgentes y grandes volúmenes</a>. Lo que más retrasa un expediente no es la traducción, sino descubrir tarde que un certificado necesitaba apostilla.</p>
+      <p>
+        ¿Te vas? Envíame la lista de documentos por
+        <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20me%20voy%20de%20Espa%C3%B1a%20y%20necesito%20traducir%20mis%20documentos%20al%20ingl%C3%A9s%20%28te%20digo%20el%20pa%C3%ADs%20y%20el%20tr%C3%A1mite%29">WhatsApp</a>
+        y te digo qué apostillar, qué traducir y cuánto cuesta el lote completo.
+      </p>
+    `,
+  },
+
 
 ];
 

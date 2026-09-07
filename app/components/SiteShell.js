@@ -19,6 +19,7 @@ import {
   GOOGLE_RATING,
   GOOGLE_REVIEW_COUNT,
   SERVICE_COUNTRIES,
+  EXTRA_AREA_SERVED,
 } from "../../content/site";
 import { getPublishableReviews } from "../../content/reviews";
 import { SERVICE_ROUTES, INTERNATIONAL_MENU } from "../../content/servicios/routes";
@@ -51,6 +52,27 @@ const SERVICE_LINES = [
     description:
       "Expedientes completos y lotes de documentos para particulares, empresas y despachos, con presupuesto y plazo cerrados por escrito.",
     url: "https://juradaexpress.es/traduccion-jurada-urgente-grandes-volumenes",
+  },
+  {
+    name: "Traducción jurada para clientes de Irlanda",
+    description:
+      "Documentos irlandeses para trámites en España y documentos españoles con traducción certificada para Irish Immigration, universidades y HSE.",
+    url: "https://juradaexpress.es/traduccion-jurada-irlanda",
+    areaServed: "IE",
+  },
+  {
+    name: "Traducción jurada para clientes de Canadá",
+    description:
+      "Documentos canadienses apostillados para España y documentos españoles al inglés con certificación para IRCC y organismos canadienses.",
+    url: "https://juradaexpress.es/traduccion-jurada-canada",
+    areaServed: "CA",
+  },
+  {
+    name: "Traducción jurada para clientes de Australia",
+    description:
+      "Documentos australianos apostillados por el DFAT para España y documentos españoles al inglés con los datos del traductor que pide Home Affairs.",
+    url: "https://juradaexpress.es/traduccion-jurada-australia",
+    areaServed: "AU",
   },
 ];
 
@@ -316,6 +338,10 @@ export default function SiteShell({ locale = "es", children }) {
                     "@type": "Country",
                     name: c.code,
                   })),
+                  ...EXTRA_AREA_SERVED.map((code) => ({
+                    "@type": "Country",
+                    name: code,
+                  })),
                   "Worldwide",
                 ],
                 availableLanguage: ["es", "en"],
@@ -353,6 +379,9 @@ export default function SiteShell({ locale = "es", children }) {
                       description: s.description,
                       url: s.url,
                       provider: { "@id": "https://juradaexpress.es/#organization" },
+                      ...(s.areaServed
+                        ? { areaServed: { "@type": "Country", name: s.areaServed } }
+                        : {}),
                     },
                     url: s.url,
                     priceCurrency: "EUR",

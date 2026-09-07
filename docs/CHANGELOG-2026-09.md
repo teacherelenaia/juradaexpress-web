@@ -11,7 +11,8 @@ funcionan igual.
 a 390 y 1440 px antes del encargo), `docs/capturas/2026-09/despues/` (las
 mismas páginas al cerrar), `docs/capturas/2026-09/fase-2` (las 25 páginas
 tocadas en las fases 1 y 2, incluidos los 404, a 390/768/1440 px) y
-`docs/capturas/2026-09/fase-3` (blog y los seis posts nuevos).
+`docs/capturas/2026-09/fase-3` (blog y los seis posts nuevos) y
+`docs/capturas/2026-09/fase-2b` (hub, páginas de país, menú y post 4).
 
 ---
 
@@ -172,6 +173,168 @@ libre ya presentes en el repo (`scripts/crop-image.mjs`). Detalle en
 
 ---
 
+## Comprobaciones posteriores al cierre (07/09/2026)
+
+- **`main` intacto**: `origin/main` sigue en `d41e734`; los commits del
+  encargo están solo en `claude/vibrant-sagan-gw5kig` (PR #17, borrador).
+- **Recorrido de todas las URL del sitemap**: el preview de Vercel exige
+  inicio de sesión (SSO) desde el entorno de Claude Code, así que el
+  recorrido se hizo sobre el mismo commit servido en local con
+  `next start`. Antes de la FASE 2B (commit `2083688`): las 53 URL
+  anteriores al encargo y las 69 URL del sitemap devolvían 200 con el mismo
+  path, sin redirecciones. Tras la FASE 2B: las **79 URL** del sitemap
+  devuelven 200 con el mismo path (0 fallos, 0 redirecciones). Queda por
+  repetir el recorrido sobre el preview cuando Elena lo abra desde su cuenta
+  de Vercel.
+- El botón flotante de WhatsApp y la barra inferior móvil conservan el
+  texto genérico; los textos específicos ("Hola Elena, …" / "Hi Elena, …")
+  están solo en los CTA de cada página nueva.
+
+---
+
+## FASE 2B — Hub por países, Irlanda, Canadá y Australia
+
+### 2B.1 Hub `/traduccion-jurada-por-paises` ⇄ `/en/sworn-translation-spain-by-country`
+
+- `content/paises.js` (datos ES/EN) y `app/components/CountryHubPage.js`
+  (plantilla). H1 ES "Traducción jurada español-inglés para clientes de
+  cualquier país", primer párrafo autónomo, doce tarjetas con el mismo
+  componente `CountryCard` (sin banderas ni mapas): Reino Unido, Estados
+  Unidos, India, Irlanda, Canadá y Australia enlazan a su página; Nueva
+  Zelanda, Sudáfrica, Gibraltar, Pakistán, Nigeria y Filipinas enlazan a su
+  sección con ancla (`#nueva-zelanda`, `#sudafrica`, `#gibraltar`,
+  `#pakistan`, `#nigeria`, `#filipinas`; en EN `#new-zealand`,
+  `#south-africa`, `#gibraltar`, `#pakistan`, `#nigeria`, `#philippines`).
+  Cada sección tiene 137-172 palabras y cubre trámites habituales, autoridad
+  de apostilla o legalización (fuente oficial enlazada) y la exigencia de
+  que el documento llegue en inglés. Cierre "¿Tu país no está? Escríbeme: el
+  proceso es el mismo" con CTA. JSON-LD Service (areaServed con los 7 países
+  + NZ/ZA/GI/PK/NG/PH + Worldwide) + FAQPage + BreadcrumbList. Enlaces a las
+  páginas de documento, nómada digital y USCIS.
+- Autoridades comprobadas (07/09/2026, vía búsqueda web con resultado en la
+  fuente oficial): Nueva Zelanda, Authentication Unit del Department of
+  Internal Affairs (govt.nz); Sudáfrica, DIRCO Legalisation Section y
+  registrador del High Court (dirco.gov.za); Gibraltar, Civil Status and
+  Registration Office (gibraltar.gov.gi); Pakistán, Ministry of Foreign
+  Affairs, Convenio en vigor desde el 9 de marzo de 2023 (mofa.gov.pk);
+  Filipinas, DFA Office of Consular Affairs, Convenio desde el 14 de mayo de
+  2019 (apostille.gov.ph); Nigeria, no figura en la tabla de la HCCH, así
+  que legalización consular, remitiendo al consulado para el circuito exacto.
+
+### 2B.2 Páginas de país (ES + EN, plantilla ServicePage)
+
+| ES | EN | Palabras (main, ES/EN) |
+|---|---|---|
+| `/traduccion-jurada-irlanda` | `/en/sworn-translation-ireland-spain` | 1.072 / 1.059 |
+| `/traduccion-jurada-canada` | `/en/sworn-translation-canada-spain` | 1.233 / 1.250 |
+| `/traduccion-jurada-australia` | `/en/sworn-translation-australia-spain` | 1.212 / 1.196 |
+
+(El recuento incluye pasos, FAQ y enlaces de la plantilla, como en las
+páginas de la FASE 2; el cuerpo redactado queda dentro de 800-1.100.) Las
+tres cubren los dos sentidos, enlazan la fuente oficial en el texto, remiten
+al organismo de destino en lo que no se ha podido confirmar y no dan cifras
+ni plazos administrativos. Titles ≤ 60 y descriptions ≤ 155 en las ocho
+páginas nuevas (hub incluido).
+
+**Afirmaciones sobre IRCC y Home Affairs y su fuente.** canada.ca y
+homeaffairs.gov.au no eran accesibles directamente desde el entorno
+(bloqueo de red); las reglas se confirmaron con búsquedas web cuyo resumen
+citaba la página oficial, que es la que se enlaza. Conviene que Elena abra
+las cuatro URL antes de publicar:
+
+| Afirmación en la página | Fuente enlazada |
+|---|---|
+| IRCC: los documentos que no estén en inglés o francés se presentan con traducción; si el traductor no es miembro en activo de una asociación de traductores certificados, hace falta un affidavit del traductor y una copia certificada del original; ni familiares ni representantes pueden traducir | https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=018&top=4 |
+| IRCC: qué es el affidavit de traducción (declaración jurada ante autoridad competente de que domina los idiomas y la traducción es exacta) | https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=040&top=4 |
+| Canadá aplica el Convenio de La Haya desde el 11 de enero de 2024; apostilla de Global Affairs Canada (federal y mayoría de provincias) o de Alberta, Columbia Británica, Ontario, Quebec y Saskatchewan | https://www.international.gc.ca/gac-amc/about-a_propos/services/authentication-authentification/index.aspx?lang=eng |
+| Home Affairs: traducciones al inglés de todo documento en otro idioma; dentro de Australia, traductor acreditado por NAATI; fuera de Australia, sin NAATI pero con nombre completo, dirección, teléfono, cualificaciones y experiencia del traductor | https://immi.homeaffairs.gov.au/help-text/evidence/Pages/et-h0012.aspx |
+| Home Affairs: comprobaciones antes de solicitar (traducciones) | https://immi.homeaffairs.gov.au/check-twice-submit-once/visitor-visa |
+| Apostilla australiana: DFAT a través de la Australian Passport Office, con cita y verificación en línea | https://www.smartraveller.gov.au/consular-services/notarial-services/documents-in-australia |
+| Irlanda: Immigration Service Delivery pide "full and certified translation" con confirmación de exactitud y datos de contacto del traductor | https://www.irishimmigration.ie/how-to-make-a-certified-translation-of-a-document/ |
+| Apostilla irlandesa: Department of Foreign Affairs | https://authentications.dfa.ie/ |
+
+Lo que **no** se afirma y se remite al organismo de destino: si IRCC acepta
+la certificación de una traductora jurada española sin affidavit (la página
+dice claramente que el nombramiento del MAEC no es una membresía de
+asociación canadiense y que hay que contar con el affidavit); qué formato
+de traducción aceptan las universidades y colegios profesionales
+australianos y neozelandeses; si cada organismo irlandés acepta el impreso
+multilingüe del Reglamento (UE) 2016/1191 en lugar de la traducción.
+
+### 2B.3 Menú, footer, LanguageSwitcher, sitemap y JSON-LD
+
+- `content/servicios/routes.js`: cuatro pares nuevos (Irlanda, Canadá,
+  Australia, hub) y `INTERNATIONAL_MENU_GROUPS` (Servicios: nómada digital ·
+  USCIS · urgentes; Por país: Reino Unido · Estados Unidos · India · Irlanda
+  · Canadá · Australia · Todos los países → hub).
+- `MainNav.js`: desplegable "Internacional" en dos columnas con rótulos de
+  grupo; `MobileNav.js`: acordeón "Internacional" con los dos grupos
+  (abierto automáticamente cuando la página activa está dentro).
+- Footer "Clientes internacionales" = seis países + hub (ES/EN).
+- `LanguageSwitcher` y `sitemap.xml` toman los pares de `SERVICE_ROUTES`:
+  las cuatro páginas nuevas ES/EN entran con hreflang.
+- JSON-LD ProfessionalService: IE, CA y AU en `hasOfferCatalog`
+  (`SERVICE_LINES`) y NZ, ZA, GI, PK, NG y PH en `areaServed`
+  (`EXTRA_AREA_SERVED` en `content/site.js`).
+- `SectionHeading` ahora propaga `id` y otros atributos: los
+  `aria-labelledby` de las plantillas apuntan a ids que existen.
+
+### 2B.4 Sin banderas
+
+- Home ES/EN, sección para británicos: `foto-bandera-uk.jpg` sustituida por
+  `escritorio-documentos.jpg` (documentos sobre escritorio) y archivo
+  eliminado del repo. Las páginas de británicos no tienen imagen. Revisión
+  del resto del sitio: solo dos posts del blog usaban banderas como imagen
+  principal (`post-conducir.jpg`, `post-visado-uk.jpg`); ambas sustituidas
+  por recortes de documentos con su alt nuevo. Créditos en
+  `docs/CREDITOS-IMAGENES.md`.
+
+### 2B.5 Enlazado interno
+
+- Cada página de país enlaza al hub, a nómada digital, a tres páginas de
+  documento (nacimiento, penales, título; en EN, como guías en español) y,
+  solo Estados Unidos, a USCIS. El hub enlaza a las seis páginas de país,
+  DNV, USCIS, urgentes y las tres páginas de documento.
+- Home, sección para británicos: última frase "Si vienes de Estados Unidos,
+  India, Irlanda, Canadá o Australia, tienes tu propia guía" enlazando al
+  hub (ES/EN).
+
+### 2B.6 Blog
+
+- `/blog/traduccion-jurada-para-irse-de-espana-reino-unido-irlanda-canada-australia`
+  (18/11/2026) y
+  `/en/blog/sworn-translations-leaving-spain-uk-ireland-canada-australia`
+  (20/11/2026): qué pide cada país a una traducción hecha desde España
+  (UKVI, ISD, IRCC, Home Affairs) con la fuente oficial, cuándo apostillar
+  y en qué orden; enlazan a las guías de país y a urgentes. Imágenes
+  `post-irse-de-espana.jpg` y `post-leaving-spain.jpg`.
+
+### 2B.7 Verificación
+
+- `public/llms.txt` actualizado con las cuatro páginas nuevas (ES/EN), el
+  servicio de traducción certificada para UKVI/ISD/IRCC/Home Affairs y los
+  seis países resumidos.
+- `npm run build` sin errores ni avisos: 86 rutas estáticas.
+- Playwright (`scripts/verify-2026-09.mjs`, capturas en
+  `docs/capturas/2026-09/fase-2b/`): 16 páginas (home ES/EN, hub ES/EN,
+  Irlanda/Canadá/Australia ES/EN, post 4 ES/EN, los dos posts con imagen
+  sustituida, blog ES/EN) a 390/768/1440 px, 0 errores de consola, 0
+  enlaces internos rotos, `lang` correcto. Capturas adicionales del
+  desplegable de escritorio (ES/EN), del acordeón móvil (ES/EN) y del ancla
+  `#pakistan` del hub (aterriza a 96 px del borde superior, con
+  `scroll-mt-24`).
+- `npx impeccable detect app content`: **0 hallazgos**.
+- **Lighthouse móvil**:
+
+  | Página | Rendimiento | Accesibilidad | Buenas prácticas | SEO |
+  |---|---|---|---|---|
+  | `/traduccion-jurada-por-paises` | 96 | 100 | 100 | 100 |
+  | `/traduccion-jurada-canada` | 96 | 100 | 100 | 100 |
+
+- Sin tocar: URLs existentes, Stripe, Web3Forms y GA4/CookieConsent.
+
+---
+
 ## Lista de [[COMPLETAR]] (datos que solo Elena puede aportar)
 
 | Dato | Dónde | Estado |
@@ -181,6 +344,7 @@ libre ya presentes en el repo (`scripts/crop-image.mjs`). Detalle en
 | Precio orientativo del pack de nómada digital | `content/site.js` → `DNV_PACK_PRICE` | ⏳ Opcional; mientras tanto "presupuesto cerrado en menos de 2 h" |
 | Foto profesional de Elena (sustituye al monograma E.P. en la home y en /sobre-mi) | `app/(es)/page.js`, `app/en/page.js`, `app/(es)/sobre-mi`, `app/en/about` | ⏳ Pendiente |
 | URL de origen de las fotos base usadas para los recortes | `docs/CREDITOS-IMAGENES.md` | ⏳ Si se conservan |
+| Si Elena ofrece el affidavit notarial que exige IRCC a un traductor no certificado en Canadá, y su coste (la nota de la página dice "vemos cómo obtenerlo") | `content/servicios/canada.js` (comentario junto a la nota, ES y EN) | ⏳ Pendiente |
 | `GOOGLE_RATING` / `GOOGLE_REVIEW_COUNT` | `content/site.js` | ✅ 5,0 · 7 (07/09/2026); actualizar a mano cuando cambien |
 
 ## Pendientes que no dependen de código (Google Business Profile)

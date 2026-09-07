@@ -59,6 +59,10 @@ export const SERVICE_COUNTRIES = [
   { code: null, es: "cualquier otro país", en: "any other country" },
 ];
 
+// Otros países con sección propia en el hub /traduccion-jurada-por-paises
+// (FASE 2B). Solo para areaServed del JSON-LD.
+export const EXTRA_AREA_SERVED = ["NZ", "ZA", "GI", "PK", "NG", "PH"];
+
 // Horario de atención con referencia horaria explícita (los clientes de
 // EEUU, India o Australia necesitan saber a qué hora escriben).
 export const TIMEZONE_NOTE = {

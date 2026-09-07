@@ -7,7 +7,19 @@ import * as uscis from "./uscis";
 import * as estadosUnidos from "./estados-unidos";
 import * as india from "./india";
 import * as urgente from "./urgente";
+import * as irlanda from "./irlanda";
+import * as canada from "./canada";
+import * as australia from "./australia";
 
 export { SERVICE_ROUTES, INTERNATIONAL_MENU } from "./routes";
 
-export const SERVICE_PAGES = [nomadaDigital, uscis, estadosUnidos, india, urgente];
+export const SERVICE_PAGES = [
+  nomadaDigital,
+  uscis,
+  estadosUnidos,
+  india,
+  urgente,
+  irlanda,
+  canada,
+  australia,
+];

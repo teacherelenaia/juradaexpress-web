@@ -12,9 +12,11 @@ export function SectionHeading({
   light = false,
   className = "",
   children,
+  ...rest
 }) {
   return (
     <Tag
+      {...rest}
       className={`font-display text-balance text-3xl font-semibold leading-snug tracking-[-0.02em] md:text-4xl ${
         light ? "text-white" : "text-slate-900"
       } ${className}`}
