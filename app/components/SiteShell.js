@@ -22,6 +22,7 @@ import {
   EXTRA_AREA_SERVED,
 } from "../../content/site";
 import { getPublishableReviews } from "../../content/reviews";
+import { personJsonLd, personRef, PERSON_ID } from "../../content/persona";
 import { SERVICE_ROUTES, INTERNATIONAL_MENU } from "../../content/servicios/routes";
 
 // aggregateRating solo si hay reseñas publicables (se lee en build).
@@ -309,14 +310,18 @@ export default function SiteShell({ locale = "es", children }) {
             <p className="mt-1">{t.credential}</p>
           </div>
 
-          {/* JSON-LD ProfessionalService ampliado (auditoría 5.4).
-              La ficha de Google se añade sola al sameAs cuando
-              cambie GOOGLE_BUSINESS_URL en content/site.js. */}
+          {/* JSON-LD: grafo con el ProfessionalService ampliado (auditoría
+              5.4) y la Person de Elena (content/persona.js), enlazada como
+              founder y employee. La ficha de Google se añade sola al sameAs
+              cuando cambie GOOGLE_BUSINESS_URL en content/site.js. */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
               __html: JSON.stringify({
                 "@context": "https://schema.org",
+                "@graph": [
+                personJsonLd(locale),
+                {
                 "@type": "ProfessionalService",
                 "@id": "https://juradaexpress.es/#organization",
                 name: "Jurada Express",
@@ -401,24 +406,8 @@ export default function SiteShell({ locale = "es", children }) {
                     }
                   : {}),
                 priceRange: "€€",
-                founder: {
-                  "@type": "Person",
-                  "@id": "https://juradaexpress.es/sobre-mi#person",
-                  name: "Elena Peñaranda Ortega",
-                  url: "https://juradaexpress.es/sobre-mi",
-                  jobTitle: "Traductora-Intérprete Jurada de Inglés",
-                  identifier: "7310",
-                  knowsLanguage: ["es", "en"],
-                  hasCredential: {
-                    "@type": "EducationalOccupationalCredential",
-                    credentialCategory: "Traductora-Intérprete Jurada",
-                    recognizedBy: {
-                      "@type": "GovernmentOrganization",
-                      name: "Ministerio de Asuntos Exteriores, Unión Europea y Cooperación",
-                    },
-                    identifier: "7310",
-                  },
-                },
+                founder: personRef(locale),
+                employee: { "@id": PERSON_ID },
                 openingHoursSpecification: {
                   "@type": "OpeningHoursSpecification",
                   dayOfWeek: [
@@ -437,6 +426,8 @@ export default function SiteShell({ locale = "es", children }) {
                   FACEBOOK_URL,
                   GOOGLE_BUSINESS_URL,
                 ].filter(Boolean),
+                },
+                ],
               }),
             }}
           />

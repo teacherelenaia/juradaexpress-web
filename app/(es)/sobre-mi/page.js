@@ -4,10 +4,8 @@ import { SectionHeading } from "../../components/ui";
 import {
   WHATSAPP_URL,
   TIMEZONE_NOTE,
-  INSTAGRAM_URL,
-  FACEBOOK_URL,
-  GOOGLE_BUSINESS_URL,
 } from "../../../content/site";
+import { personRef } from "../../../content/persona";
 
 export const metadata = {
   title: "Sobre mí — Elena Peñaranda, Traductora Jurada de Inglés (MAEC nº 7310)",
@@ -129,34 +127,12 @@ export default function Page() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@graph": [
+              // La entidad Person completa se emite en el footer (SiteShell,
+              // content/persona.js); aquí solo se referencia por @id para no
+              // duplicar datos con dos identificadores distintos.
               {
-                "@type": "Person",
-                "@id": "https://juradaexpress.es/sobre-mi#person",
-                name: "Elena Peñaranda Ortega",
-                jobTitle: "Traductora-Intérprete Jurada de Inglés",
-                identifier: "7310",
-                url: "https://juradaexpress.es/sobre-mi",
-                email: "info@juradaexpress.es",
-                telephone: "+34685891214",
-                knowsLanguage: ["es", "en"],
-                sameAs: [GOOGLE_BUSINESS_URL, INSTAGRAM_URL, FACEBOOK_URL].filter(
-                  Boolean
-                ),
-                worksFor: {
-                  "@type": "ProfessionalService",
-                  "@id": "https://juradaexpress.es/#organization",
-                  name: "Jurada Express",
-                  url: "https://juradaexpress.es/",
-                },
-                hasCredential: {
-                  "@type": "EducationalOccupationalCredential",
-                  credentialCategory: "Traductora-Intérprete Jurada",
-                  identifier: "7310",
-                  recognizedBy: {
-                    "@type": "GovernmentOrganization",
-                    name: "Ministerio de Asuntos Exteriores, Unión Europea y Cooperación",
-                  },
-                },
+                ...personRef("es"),
+                mainEntityOfPage: "https://juradaexpress.es/sobre-mi",
               },
               {
                 "@type": "BreadcrumbList",
