@@ -84,6 +84,7 @@ const FOOTER = {
   es: {
     skip: "Saltar al contenido",
     logoLabel: "Jurada Express — Inicio",
+    logoAlt: "Logotipo de Jurada Express, traducción jurada de inglés",
     home: "/",
     about:
       "Jurada Express: traducción jurada Español ⇆ Inglés y traducción certificada para USCIS. Con sede en Murcia, trabajo con clientes de España, Reino Unido, Estados Unidos, India y cualquier país. Proceso 100% digital, entrega 24/48 h.",
@@ -120,6 +121,7 @@ const FOOTER = {
   en: {
     skip: "Skip to content",
     logoLabel: "Jurada Express — Home",
+    logoAlt: "Jurada Express logo, sworn English translation",
     home: "/en",
     about:
       "Jurada Express: sworn Spanish ⇆ English translation for Spain and certified translation for USCIS. Based in Murcia, Spain, working with clients in the UK, the USA, India and any country. Fully digital process, delivered in 24/48h.",
@@ -184,11 +186,10 @@ export default function SiteShell({ locale = "es", children }) {
             >
               <img
                 src="/logo.svg"
-                alt=""
+                alt={t.logoAlt}
                 width="26"
                 height="26"
                 className="rounded opacity-90"
-                aria-hidden="true"
               />
               <span>JuradaExpress</span>
             </a>
@@ -217,9 +218,8 @@ export default function SiteShell({ locale = "es", children }) {
                   src="/logo.svg"
                   width="24"
                   height="24"
-                  alt=""
+                  alt={t.logoAlt}
                   className="opacity-90"
-                  aria-hidden="true"
                 />
                 <span>JuradaExpress</span>
               </div>
