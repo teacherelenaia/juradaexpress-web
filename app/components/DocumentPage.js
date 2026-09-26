@@ -67,6 +67,18 @@ export default function DocumentPage({ ficha }) {
         {ficha.name}
       </h1>
       <p className="mt-4 max-w-[68ch] text-lg text-slate-600">{ficha.intro}</p>
+      {ficha.updated && (
+        <p className="mt-3 text-sm text-slate-500">
+          Ficha revisada el{" "}
+          <time dateTime={ficha.updated}>
+            {new Date(ficha.updated).toLocaleDateString("es-ES", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </time>
+        </p>
+      )}
 
       {/* Datos clave */}
       <dl className="mt-8 grid gap-4 rounded-xl bg-stone-50 p-6 ring-1 ring-stone-200 sm:grid-cols-3">

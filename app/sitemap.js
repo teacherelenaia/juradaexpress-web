@@ -3,6 +3,7 @@ import { getAllPosts } from "../content/posts";
 import { getAllPostsEn } from "../content/posts.en";
 import { SERVICE_ROUTES } from "../content/servicios/routes";
 import { CIUDADES } from "../content/ciudades";
+import { FICHAS } from "../content/fichas";
 
 const BASE_URL = "https://juradaexpress.es";
 
@@ -40,6 +41,14 @@ const cityRoutes = CIUDADES.map((c) => ({
   priority: 0.7,
 }));
 
+// Fichas de documento (/traduccion-jurada-*): lastModified = campo `updated`
+// de cada ficha en content/fichas.js.
+const fichaRoutes = FICHAS.map((f) => ({
+  url: `${BASE_URL}/${f.slug}`,
+  lastModified: f.updated,
+  priority: 0.7,
+}));
+
 export default function sitemap() {
   const staticRoutes = [
     {
@@ -59,18 +68,6 @@ export default function sitemap() {
     { url: `${BASE_URL}/contacto`, priority: 0.8 },
     { url: `${BASE_URL}/blog`, priority: 0.6 },
     { url: `${BASE_URL}/preguntas-frecuentes`, priority: 0.6 },
-    { url: `${BASE_URL}/traduccion-jurada-partida-nacimiento`, priority: 0.7 },
-    { url: `${BASE_URL}/traduccion-jurada-titulo-universitario`, priority: 0.7 },
-    { url: `${BASE_URL}/traduccion-jurada-certificado-penales`, priority: 0.7 },
-    { url: `${BASE_URL}/traduccion-jurada-espanol-ingles`, priority: 0.7 },
-    { url: `${BASE_URL}/traduccion-jurada-validez-oficial`, priority: 0.7 },
-    { url: `${BASE_URL}/traduccion-jurada-certificado-matrimonio`, priority: 0.7 },
-    { url: `${BASE_URL}/traduccion-jurada-contrato-escritura`, priority: 0.7 },
-    { url: `${BASE_URL}/traduccion-jurada-permiso-conducir`, lastModified: "2026-08-25", priority: 0.7 },
-    { url: `${BASE_URL}/traduccion-jurada-certificado-empresa`, lastModified: "2026-08-25", priority: 0.7 },
-    { url: `${BASE_URL}/traduccion-jurada-dni-pasaporte`, lastModified: "2026-08-25", priority: 0.7 },
-    { url: `${BASE_URL}/traduccion-jurada-testamento-herencia`, lastModified: "2026-08-25", priority: 0.7 },
-    { url: `${BASE_URL}/traduccion-jurada-certificado-medico`, lastModified: "2026-08-25", priority: 0.7 },
     { url: `${BASE_URL}/traductor-jurado-murcia`, lastModified: CITY_LAST_MODIFIED, priority: 0.8 },
     { url: `${BASE_URL}/como-funciona`, lastModified: "2026-08-25", priority: 0.8 },
     { url: `${BASE_URL}/sobre-mi`, lastModified: SERVICE_LAST_MODIFIED, priority: 0.8 },
@@ -117,6 +114,7 @@ export default function sitemap() {
 
   return [
     ...staticRoutes,
+    ...fichaRoutes,
     ...serviceRoutes,
     ...cityRoutes,
     ...postRoutes,
