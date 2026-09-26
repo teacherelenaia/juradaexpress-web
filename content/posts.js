@@ -828,6 +828,221 @@ export const posts = [
   },
 
 
+  // ---------------------------------------------------------------------
+  // SEO Fase 2 (septiembre de 2026): artículos de fondo con FAQ propia.
+  // El campo `faq` lo pinta app/(es)/blog/[slug]/page.js y genera FAQPage.
+  // Precios: solo los de content/documents.js.
+  // ---------------------------------------------------------------------
+  {
+    slug: "como-saber-si-una-traduccion-jurada-es-valida",
+    title: "Cómo saber si una traducción jurada es válida en España (y qué hacer si te entregan una que no lo es)",
+    excerpt:
+      "Los cinco puntos que comprueba un funcionario en una traducción jurada: nombramiento del MAEC, listado oficial, firma, sello, certificación y fecha. Cómo verificarlos tú mismo, los errores típicos de algunas agencias y qué hacer si el organismo la rechaza.",
+    date: "2026-09-26",
+    updated: "2026-09-26",
+    author: "Elena Peñaranda Ortega",
+    tags: ["validez", "consejos"],
+    readingTime: "7 min",
+    image: "/blog/post-firma-digital.jpg",
+    alt: "Traducción jurada con sello y firma digital de traductora jurada",
+    html: `
+      <p>Una traducción jurada es válida en España cuando la ha hecho y firmado un <strong>traductor-intérprete jurado nombrado por el Ministerio de Asuntos Exteriores, Unión Europea y Cooperación (MAEC)</strong> para ese idioma, y lleva su <strong>certificación, firma, sello y fecha</strong>, con una copia del documento original adjunta. Nada más y nada menos. No la hace válida el papel timbrado, ni el logotipo de una agencia, ni un notario, ni la palabra «certificada». Si alguna de esas piezas falta, el organismo puede rechazarla, y lo hace con más frecuencia de la que se cree. Soy Elena Peñaranda, traductora jurada de inglés nº 7310, y en este artículo te enseño a comprobar en cinco minutos si la traducción que tienes delante pasará el filtro.</p>
+
+      <h2>1. Quién puede firmar una traducción jurada en España</h2>
+      <p>En España la única figura habilitada es el <strong>traductor-intérprete jurado</strong>, un título que concede el MAEC a través de la Oficina de Interpretación de Lenguas, bien por examen, bien por reconocimiento de una cualificación de otro Estado de la UE. Cada nombramiento es para un idioma concreto y lleva un <strong>número de traductor jurado</strong>. El mío es el 7310, para inglés: puedo certificar traducciones del inglés al español y del español al inglés, y ninguna otra combinación.</p>
+      <p>Esto tiene dos consecuencias prácticas. La primera: una agencia no es traductora jurada. Puede intermediar, pero la traducción la firma una persona con nombre, apellidos y número, y esa persona responde legalmente de cada frase. La segunda: un traductor jurado de francés no puede firmar una traducción del inglés, aunque hable inglés perfectamente. Es un error más frecuente de lo que parece cuando el encargo pasa por varias manos.</p>
+
+      <h2>2. Cómo comprobar el nombramiento en el listado oficial</h2>
+      <p>El MAEC publica el <a href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx" target="_blank" rel="noopener noreferrer">listado oficial de traductores-intérpretes jurados</a>, y es exactamente lo que consulta un funcionario cuando duda. Busca el nombre que aparece en el sello y comprueba tres cosas: que <strong>figura</strong>, que el <strong>idioma</strong> coincide con el de tu documento y que el <strong>número</strong> es el mismo que el del sello. Si el nombre no está, o está para otro idioma, la traducción no es jurada por mucho que lo diga el encabezado.</p>
+      <p>Un matiz honesto: el listado se actualiza periódicamente y puede haber nombramientos muy recientes que tarden unas semanas en aparecer. Si el traductor te dice que acaba de ser nombrado, pídele el número de su título; con ese dato el organismo puede verificarlo. En mi caso no hay duda posible: llevo años en el listado y cualquiera puede comprobarlo.</p>
+
+      <h2>3. Qué tiene que llevar la traducción, página por página</h2>
+      <p>La normativa vigente (Real Decreto 724/2020 y la orden que regula el sello y la certificación) fija un formato bastante estricto. Esto es lo que debe aparecer:</p>
+      <ul>
+        <li><strong>La certificación final</strong>, con la fórmula oficial: el traductor, identificado con nombre y número, certifica que la que antecede es traducción fiel y completa al idioma de destino de un documento redactado en el idioma de origen, y lo firma en un lugar y una fecha concretos.</li>
+        <li><strong>La firma</strong> del traductor, manuscrita en papel o electrónica en PDF, junto a la certificación.</li>
+        <li><strong>El sello</strong>, con el nombre completo, la mención «Traductor/a-Intérprete Jurado/a de [idioma]» y el número de nombramiento. Ni dirección ni logotipos: el modelo oficial es sobrio y no admite adornos.</li>
+        <li><strong>La fecha</strong> de la certificación, que es la que el organismo tomará como fecha de la traducción.</li>
+        <li><strong>Una copia del documento original</strong>, sellada y fechada, unida a la traducción. El traductor certifica la traducción de <em>ese</em> documento en concreto, no de un texto abstracto; sin la copia, el funcionario no puede saber qué se ha traducido.</li>
+        <li><strong>Todo el contenido</strong>: sellos, apostilla, firmas, notas manuscritas y anotaciones marginales. Lo que no se traduce se describe entre corchetes («[sello ilegible]», «[firma]»). Una traducción jurada nunca resume ni omite.</li>
+      </ul>
+      <p>Si quieres verlo aplicado a un caso concreto, en la ficha de <a href="/traduccion-jurada-validez-oficial">validez oficial de la traducción jurada</a> explico cómo se comprueba ante ministerios, universidades y consulados.</p>
+
+      <h2>4. Firma digital: sí, vale, y así se verifica</h2>
+      <p>Desde 2020 la Oficina de Interpretación de Lenguas admite que la traducción jurada se firme <strong>electrónicamente</strong> y se entregue en PDF, y la administración lo acepta de forma generalizada para presentación telemática. La firma digital no sustituye al sello y a la certificación: los acompaña. El PDF debe llevar la certificación, la imagen del sello y la fecha, y además la firma electrónica del traductor incrustada en el archivo.</p>
+      <p>Para verificarla, abre el PDF en un lector que muestre el panel de firmas (Adobe Acrobat Reader lo hace) y comprueba que la firma es válida, que el nombre del firmante es el del traductor y que el documento <strong>no se ha modificado</strong> después de firmarse. Si el PDF es solo una imagen escaneada de una firma, sin firma electrónica detrás, es una copia digital de una traducción en papel: puede servir si el organismo acepta copias, pero no es una traducción firmada digitalmente. Trato el tema a fondo en <a href="/blog/traduccion-jurada-digital-firma-electronica">traducción jurada digital y firma electrónica</a>.</p>
+
+      <h2>Tabla: válida frente a rechazable</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Qué comprobar</th><th>Traducción válida</th><th>Señal de alarma</th></tr></thead>
+        <tbody>
+          <tr><td>Quién firma</td><td>Traductor-intérprete jurado del MAEC, con nombre y número</td><td>Sello de agencia, «traductor certificado», notario o firma sin número</td></tr>
+          <tr><td>Listado oficial</td><td>Aparece con ese idioma y ese número</td><td>No aparece, o aparece para otro idioma</td></tr>
+          <tr><td>Certificación</td><td>Fórmula oficial, lugar y fecha</td><td>Falta, está en otro idioma o dice «traducción certificada»</td></tr>
+          <tr><td>Sello</td><td>Nombre, idioma y número; sobrio</td><td>Logotipos, dirección, sin número o de otro idioma</td></tr>
+          <tr><td>Copia del original</td><td>Adjunta, sellada y fechada</td><td>Solo se entrega la traducción</td></tr>
+          <tr><td>Contenido</td><td>Completo: sellos, apostilla, notas</td><td>Falta la apostilla o hay párrafos «no relevantes» omitidos</td></tr>
+          <tr><td>Firma digital</td><td>Firma electrónica válida en el PDF</td><td>Imagen de una firma pegada, sin firma electrónica</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2>5. Errores típicos que veo en traducciones de algunas agencias</h2>
+      <p>No todas las agencias trabajan mal; muchas subcontratan a traductores jurados serios y entregan un producto impecable. Pero cuando un cliente me trae una traducción rechazada, casi siempre es por uno de estos motivos:</p>
+      <ol>
+        <li><strong>La firma un traductor no jurado</strong> y la agencia «certifica» con su propio sello. En Reino Unido o Estados Unidos eso es una traducción certificada y vale; en España, no.</li>
+        <li><strong>El traductor es jurado de otro idioma.</strong> Suele pasar con documentos bilingües o con expedientes de varios países que se reparten sin cuidado.</li>
+        <li><strong>Se ha traducido una versión y se ha sellado otra</strong>: el cliente envía un borrador, luego el documento definitivo con apostilla, y la traducción no incluye la apostilla.</li>
+        <li><strong>Falta la copia del original</strong>, o se adjunta sin sellar. Es el defecto más fácil de subsanar y el más habitual.</li>
+        <li><strong>La firma electrónica no es del traductor</strong>, sino de la agencia, o el PDF se ha «aplanado» después de firmarlo y la firma aparece como inválida.</li>
+        <li><strong>Traducción de una traducción</strong>: el documento original está en hindi o en árabe, alguien lo tradujo al inglés y la traducción jurada se hace desde ese inglés. Para muchos organismos, no vale.</li>
+      </ol>
+      <p>Si tienes dudas sobre qué tipo de traducción te están vendiendo, en <a href="/blog/traduccion-jurada-vs-traduccion-certificada">traducción jurada frente a traducción certificada</a> explico las diferencias con calma.</p>
+
+      <h2>6. Qué hacer si el organismo la rechaza</h2>
+      <p>Primero, <strong>pide el motivo por escrito</strong>. «No es válida» no es un motivo; «falta la copia del original» o «el traductor no figura en el listado» sí. Con el motivo delante, hay tres escenarios:</p>
+      <ul>
+        <li><strong>Defecto subsanable con el mismo traductor</strong> (falta la copia, falta una página, la apostilla no se tradujo). Contacta con el traductor jurado que firmó: tiene la obligación profesional de entregar una traducción completa y normalmente lo arregla sin coste o por un importe pequeño.</li>
+        <li><strong>El traductor no es jurado o no lo es de ese idioma.</strong> No hay arreglo posible sobre esa traducción; hace falta una nueva. Reclama a quien te la vendió, guardando el rechazo por escrito como prueba.</li>
+        <li><strong>El funcionario se equivoca.</strong> Ocurre, sobre todo con la firma electrónica. Aporta el enlace al listado del MAEC y, si es un PDF, el informe de validación de la firma. Si insiste en papel, el traductor puede enviarte el original en papel por mensajería; en mi caso, el precio de la traducción es el mismo, solo se añade el envío.</li>
+      </ul>
+      <p>Y si necesitas rehacerla, no partas de cero a ciegas: envíame el documento original y el escrito de rechazo, te digo en menos de 2 horas qué falló y te doy precio cerrado. Los certificados habituales (nacimiento, matrimonio, antecedentes penales) están <a href="/precios">desde 35 €</a> y se entregan en 24/48 h.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20me%20han%20rechazado%20una%20traducci%C3%B3n%20jurada%20y%20quiero%20saber%20qu%C3%A9%20ha%20fallado">Escríbeme por WhatsApp</a>
+        con el documento y el motivo del rechazo, o consulta la página de
+        <a href="/traductor-jurado-ingles">traductora jurada de inglés</a> para saber cómo trabajo.
+      </p>
+    `,
+    faq: [
+      {
+        q: "¿Cómo compruebo que un traductor jurado existe de verdad?",
+        a: "Busca su nombre en el listado oficial de traductores-intérpretes jurados del MAEC y comprueba que el idioma y el número coinciden con los del sello. Es la misma comprobación que hace la administración.",
+      },
+      {
+        q: "¿Una traducción jurada en PDF con firma digital vale igual que en papel?",
+        a: "Sí. La Oficina de Interpretación de Lenguas admite la firma electrónica desde 2020 y la administración la acepta para presentación telemática. Si un organismo concreto exige papel, el traductor puede enviarte el original.",
+      },
+      {
+        q: "¿Caduca una traducción jurada?",
+        a: "No. Lo que puede caducar es el documento original: los certificados de antecedentes penales o de empadronamiento suelen tener una vigencia limitada a efectos del trámite, así que revisa la del original antes de traducir.",
+      },
+      {
+        q: "¿Puede una agencia certificar una traducción jurada con su sello?",
+        a: "No. En España solo certifica el traductor-intérprete jurado nombrado por el MAEC, con su firma, su sello y su número. El sello de una agencia no añade validez.",
+      },
+      {
+        q: "Me han rechazado la traducción, ¿tengo que pagar otra completa?",
+        a: "Depende del motivo. Si es un defecto de forma (falta la copia del original, una página o la apostilla), el mismo traductor jurado debería subsanarlo. Si quien la firmó no es traductor jurado de ese idioma, hace falta una traducción nueva y conviene reclamar a quien te la vendió.",
+      },
+    ],
+  },
+
+  {
+    slug: "nacionalidad-espanola-residencia-documentos-reino-unido-eeuu-india",
+    title: "Documentos traducidos para la nacionalidad española por residencia: guía para ciudadanos de Reino Unido, EE. UU. e India",
+    excerpt:
+      "Qué documentos de tu país de origen necesitas traducir para la nacionalidad española por residencia, qué apostilla lleva cada uno y en qué orden hacerlo, con las particularidades del Reino Unido, Estados Unidos e India y precios reales.",
+    date: "2026-09-28",
+    updated: "2026-09-28",
+    author: "Elena Peñaranda Ortega",
+    tags: ["extranjeria", "apostilla", "reino-unido", "estados-unidos", "india"],
+    readingTime: "8 min",
+    image: "/blog/real-extranjeria.jpg",
+    alt: "Pasaporte y certificados preparados para el expediente de nacionalidad española",
+    html: `
+      <p>Para la nacionalidad española por residencia necesitas, como mínimo, dos documentos de tu país de origen con <strong>apostilla y traducción jurada</strong>: el <a href="/traduccion-jurada-partida-nacimiento">certificado de nacimiento</a> y el <a href="/traduccion-jurada-certificado-penales">certificado de antecedentes penales</a>. Si estás casado o casada, casi siempre también el <a href="/traduccion-jurada-certificado-matrimonio">certificado de matrimonio</a>. La traducción jurada de cada uno de estos certificados cuesta <strong>desde 35 €</strong> y se entrega en <strong>24/48 h</strong> en PDF firmado digitalmente, válido para la presentación telemática. Soy Elena Peñaranda, traductora jurada de inglés nº 7310 del MAEC, y preparo estos expedientes cada semana para clientes británicos, estadounidenses e indios; esta guía es lo que les cuento antes de empezar.</p>
+
+      <p>Un aviso antes de seguir: los años de residencia exigidos, las tasas, los exámenes del Instituto Cervantes y el estado de tu expediente los fija el Ministerio de Justicia y los conoce mejor tu abogado o el propio portal de trámites. Yo me ocupo de la parte documental: qué traducir, qué apostillar y en qué orden, para que no te devuelvan el expediente por un papel.</p>
+
+      <h2>Qué documentos extranjeros pide el expediente</h2>
+      <p>La solicitud de nacionalidad por residencia se presenta por vía telemática y combina documentos españoles (que no se traducen) con documentos de tu país de origen (que sí). Los extranjeros que se piden con carácter general son:</p>
+      <ul>
+        <li><strong>Certificado de nacimiento</strong> del país de origen, literal o completo, legalizado con apostilla y con traducción jurada.</li>
+        <li><strong>Certificado de antecedentes penales</strong> del país de origen, apostillado y traducido. Si has vivido en otros países en los últimos años, también el de esos países.</li>
+        <li><strong>Certificado de matrimonio</strong>, si solicitas por estar casado o casada con ciudadano español, o si tu estado civil consta en el expediente.</li>
+        <li>En algunos casos, <strong>certificados de nacimiento de los hijos</strong> y documentación del cónyuge.</li>
+      </ul>
+      <p>El resto (empadronamiento, tarjeta de residencia, exámenes DELE y CCSE, justificantes) se emite en España y en español, así que no me hace falta verlo. Tienes la lista general, sin distinguir por país, en <a href="/blog/documentos-traducidos-nacionalidad-espanola-residencia">qué documentos traducir para la nacionalidad por residencia</a>.</p>
+
+      <h2>Apostilla primero, traducción después</h2>
+      <p>El orden importa, y es el motivo número uno por el que se rehacen traducciones: la <a href="/blog/que-es-la-apostilla-de-la-haya">apostilla de La Haya</a> se pone en el documento original, en el país que lo emitió, y la traducción jurada debe incluirla. Si me envías el certificado sin apostilla y la consigues después, la traducción ya entregada no la recoge y habría que ampliarla. Así que: pide el certificado, apostíllalo y, con las dos cosas en la mano, escanéalo todo y me lo envías. Reino Unido, Estados Unidos e India están en el Convenio de La Haya; ninguno de los tres necesita legalización consular.</p>
+
+      <h2>Reino Unido</h2>
+      <p>Los clientes británicos son los que más expedientes de nacionalidad me encargan, y sus documentos son los más previsibles:</p>
+      <ul>
+        <li><strong>Certificado de nacimiento</strong>: se pide una copia certificada reciente a la General Register Office (Inglaterra y Gales), a National Records of Scotland o a GRONI (Irlanda del Norte). Conviene el certificado completo (con datos de los padres), no la versión corta.</li>
+        <li><strong>Antecedentes penales</strong>: el <strong>ACRO Police Certificate</strong>, no el DBS, que es para empleadores. Llega en papel por correo.</li>
+        <li><strong>Apostilla</strong>: la emite la Legalisation Office del FCDO sobre cada documento por separado. Desde el Brexit los documentos británicos ya no se benefician de la exención de apostilla del Reglamento (UE) 2016/1191.</li>
+        <li><strong>Matrimonio</strong>: certificado de la GRO o del registro local, apostillado igual.</li>
+      </ul>
+      <p>Detalle que ahorra disgustos: el ACRO tiene una vigencia práctica corta a ojos de la administración española, así que pídelo cuando ya tengas el resto del expediente listo. Todo lo específico de este perfil está en la guía para <a href="/traduccion-jurada-britanicos-espana">británicos en España</a>.</p>
+
+      <h2>Estados Unidos</h2>
+      <p>Aquí la trampa es que hay <strong>dos niveles de apostilla</strong>, y elegir mal el nivel obliga a repetir:</p>
+      <ul>
+        <li><strong>Certificado de nacimiento</strong>: lo emite la oficina de registros vitales del <em>estado</em> (o del condado, según el caso) y lo apostilla el <strong>Secretary of State de ese estado</strong>. Una apostilla federal no sirve para un documento estatal.</li>
+        <li><strong>Antecedentes penales</strong>: para la nacionalidad se pide el certificado federal, el <strong>FBI Identity History Summary</strong> (a veces llamado <em>FBI background check</em>), y lo apostilla el <strong>U.S. Department of State</strong> (Office of Authentications), porque es un documento federal. Algunos solicitantes aportan además el certificado estatal de su estado de residencia; confírmalo con tu abogado.</li>
+        <li><strong>Matrimonio</strong>: certificado del condado o del estado, apostilla del Secretary of State correspondiente.</li>
+      </ul>
+      <p>Los certificados de nacimiento estadounidenses varían muchísimo de un estado a otro (formato, campos, sellos en relieve), y los traduzco tal como vienen, incluidos los textos legales al dorso. Cómo pagar con tarjeta estadounidense, horarios y el resto de detalles están en la guía para <a href="/traduccion-jurada-estados-unidos">clientes en Estados Unidos</a>.</p>
+
+      <h2>India</h2>
+      <p>Con la India el punto delicado no es la apostilla, que es única y sencilla, sino el <strong>documento de origen</strong>:</p>
+      <ul>
+        <li><strong>Certificado de nacimiento</strong>: lo emite la municipalidad o el registro civil local, a menudo en el idioma del estado (hindi, tamil, maratí…) o bilingüe. Para que yo pueda hacer la traducción jurada, el certificado tiene que estar <strong>en inglés emitido por la autoridad</strong>, no traducido al inglés por un tercero: una traducción jurada de una traducción suele rechazarse. Si tu certificado está solo en idioma local, pide a la municipalidad una versión en inglés o busca un traductor jurado de ese idioma.</li>
+        <li><strong>Antecedentes penales</strong>: el <strong>Police Clearance Certificate (PCC)</strong> que expide la Regional Passport Office a través de Passport Seva, en inglés.</li>
+        <li><strong>Apostilla</strong>: la emite el <strong>Ministry of External Affairs (MEA)</strong>, normalmente previa autenticación del documento por el estado emisor y a través de las agencias de externalización autorizadas. La apostilla del MEA es una pegatina con código, y la traduzco como parte del documento.</li>
+        <li><strong>Matrimonio</strong>: certificado del registrador de matrimonios del estado, en inglés, con apostilla del MEA.</li>
+      </ul>
+      <p>La guía para <a href="/traduccion-jurada-india">clientes de la India</a> tiene el detalle de nombres con una sola palabra, fechas y grafías, que en la nacionalidad conviene que coincidan al milímetro con el pasaporte y el NIE.</p>
+
+      <h2>Tabla resumen por país</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Documento</th><th>Reino Unido</th><th>Estados Unidos</th><th>India</th><th>Traducción jurada</th></tr></thead>
+        <tbody>
+          <tr><td>Nacimiento</td><td>GRO / NRS / GRONI, certificado completo. Apostilla FCDO</td><td>Registro vital del estado. Apostilla del Secretary of State</td><td>Municipalidad, en inglés. Apostilla MEA</td><td>Desde 35 €, 24/48 h</td></tr>
+          <tr><td>Antecedentes penales</td><td>ACRO Police Certificate. Apostilla FCDO</td><td>FBI Identity History Summary. Apostilla del Department of State</td><td>PCC de Passport Seva. Apostilla MEA</td><td>Desde 35 €, 24/48 h</td></tr>
+          <tr><td>Matrimonio (si aplica)</td><td>GRO o registro local. Apostilla FCDO</td><td>Condado o estado. Apostilla del Secretary of State</td><td>Registrador de matrimonios. Apostilla MEA</td><td>Desde 35 €, 24/48 h</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2>Cómo lo preparo yo y qué recibes</h2>
+      <ol>
+        <li><strong>Escaneas cada documento completo</strong>, apostilla incluida, y me lo envías por WhatsApp o por el formulario. Mejor todo junto, aunque sean tres o cuatro archivos.</li>
+        <li><strong>Te confirmo en menos de 2 horas laborables</strong> qué documentos necesitan traducción, un precio cerrado para el lote y una única fecha de entrega.</li>
+        <li><strong>Traduzco el expediente de una vez</strong>, con los nombres, las fechas y los términos escritos igual en todos los documentos. Un mismo apellido escrito de dos formas en dos certificados es motivo de requerimiento.</li>
+        <li><strong>Recibes los PDF firmados digitalmente</strong>, con mi certificación, sello y firma electrónica, listos para adjuntar en la plataforma telemática. Si el Registro Civil o tu abogado quieren papel, envío los originales por mensajería.</li>
+      </ol>
+      <p>Si quieres saber cómo se comprueba que una traducción jurada es válida antes de subirla, lo explico en <a href="/blog/como-saber-si-una-traduccion-jurada-es-valida">cómo saber si una traducción jurada es válida en España</a>.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20estoy%20preparando%20mi%20expediente%20de%20nacionalidad%20por%20residencia%20y%20necesito%20traducir%20mis%20certificados">Envíame tus certificados por WhatsApp</a>
+        y te digo qué traducir, qué apostillar y cuánto cuesta el lote completo. También puedes ver todos los
+        <a href="/precios">precios</a> o la página de <a href="/traductor-jurado-ingles">traductora jurada de inglés</a>.
+      </p>
+    `,
+    faq: [
+      {
+        q: "¿Tengo que traducir el pasaporte para la nacionalidad?",
+        a: "Normalmente no: el pasaporte se aporta en copia completa y no se exige traducción jurada. Si tu abogado o el Registro Civil te la pidieran expresamente, se traduce igual que cualquier documento.",
+      },
+      {
+        q: "¿La traducción jurada incluye la apostilla o se paga aparte?",
+        a: "La incluye. La apostilla forma parte del documento y se traduce con él; cuando viene en la misma página o adherida al certificado no tiene coste adicional.",
+      },
+      {
+        q: "¿Puedo presentar la traducción en PDF con firma digital?",
+        a: "Sí. La solicitud es telemática y el PDF firmado electrónicamente por traductor jurado se acepta. Si más adelante el Registro Civil pide el original en papel, te lo envío por mensajería.",
+      },
+      {
+        q: "Mi certificado de nacimiento indio está en hindi, ¿me lo traduces?",
+        a: "Solo estoy habilitada para inglés. Si el certificado está en hindi u otro idioma local, pide a la municipalidad una versión en inglés emitida por la propia autoridad o acude a un traductor jurado de ese idioma; una traducción jurada hecha desde una traducción no oficial suele rechazarse.",
+      },
+      {
+        q: "¿Cuánto tardan las traducciones del expediente completo?",
+        a: "Cada certificado habitual (nacimiento, penales, matrimonio) se entrega en 24/48 h. Si me envías los tres o cuatro documentos juntos, te doy una única fecha para el lote, normalmente dentro de ese mismo plazo.",
+      },
+    ],
+  },
+
 ];
 
 // Helpers sencillos
