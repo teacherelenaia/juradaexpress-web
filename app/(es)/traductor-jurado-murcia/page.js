@@ -20,7 +20,7 @@ const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
 
 export const metadata = {
   title: `Traductor jurado de inglés en Murcia · desde ${MIN_PRICE} €`,
-  description: `Traductora jurada de inglés con sede en Murcia (MAEC nº 7310). PDF firmado en 24/48 h, papel en 24 h en la capital. Extranjería, Registro Civil, UMU. Desde ${MIN_PRICE} €.`,
+  description: `Traductora jurada de inglés en Murcia (MAEC nº 7310). PDF firmado en 24/48 h, papel en 24 h en la capital. Extranjería, Registro Civil, UMU y UCAM. Desde ${MIN_PRICE} €.`,
   alternates: {
     canonical: `${BASE}${PATH}`,
   },
