@@ -1,13 +1,12 @@
 // app/precios/page.js
 import { DNV_PACK_PRICE } from "../../../content/site";
-import { DOCUMENTS } from "../../../content/documents";
+import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 
 const certPrice = DOCUMENTS.find((d) => d.id === "partida-nacimiento")?.price;
 
 export const metadata = {
-  title: "Precios de traducción jurada y certificada (en euros)",
-  description:
-    "Tarifas orientativas de traducción jurada Español ⇆ Inglés. Presupuesto cerrado al ver el documento.",
+  title: `Precios de traducción jurada desde ${MIN_PRICE} € (en euros)`,
+  description: `Tarifas de traducción jurada Español ⇆ Inglés desde ${MIN_PRICE} € por documento, entrega en 24/48 h. Presupuesto cerrado al ver el documento.`,
   alternates: {
     canonical: "https://juradaexpress.es/precios",
     languages: {

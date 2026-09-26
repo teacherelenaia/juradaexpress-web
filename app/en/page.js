@@ -8,7 +8,7 @@ import ProcessTimeline from "../components/ProcessTimeline";
 import ProcessVideo from "../components/ProcessVideo";
 import FollowUs from "../components/FollowUs";
 import { SectionHeading } from "../components/ui";
-import { DOCUMENTS } from "../../content/documents";
+import { DOCUMENTS, MIN_PRICE } from "../../content/documents";
 import {
   WHATSAPP_URL_EN,
   LARGE_PROJECT_CAPACITY,
@@ -16,10 +16,10 @@ import {
 } from "../../content/site";
 
 export const metadata = {
-  // Explicit suffix (≤ 60 characters); the root template applies to /en.
-  title: { absolute: "Sworn Spanish-English Translator Online | Jurada Express" },
-  description:
-    "Sworn translation for Spain, certified translation for USCIS and digital nomad visa documents. Sworn translator appointed by Spain's Ministry of Foreign Affairs (no. 7310). Clients in the UK, USA, India and worldwide. Delivered in 24/48h.",
+  // Explicit suffix; the root template applies to /en. The real minimum
+  // price comes from content/documents.js so the title never drifts.
+  title: { absolute: `Sworn Spanish-English Translation Online from €${MIN_PRICE} | Jurada Express` },
+  description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF in 24/48h. Sworn translator appointed by Spain's Foreign Ministry (no. 7310), fully online.`,
   alternates: {
     canonical: "https://juradaexpress.es/en",
     languages: {
@@ -29,9 +29,8 @@ export const metadata = {
     },
   },
   openGraph: {
-    title: "Sworn Spanish-English Translator Online | Jurada Express",
-    description:
-      "Sworn translation for Spain, certified translation for USCIS and digital nomad visa documents. Sworn translator appointed by Spain's Ministry of Foreign Affairs (no. 7310). Delivered digitally in 24/48h.",
+    title: `Sworn Spanish-English Translation Online from €${MIN_PRICE} | Jurada Express`,
+    description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF in 24/48h. Sworn translator appointed by Spain's Foreign Ministry (no. 7310), fully online.`,
     url: "https://juradaexpress.es/en",
     siteName: "Jurada Express",
     type: "website",
@@ -155,6 +154,15 @@ export default function Page() {
             <p className="mt-5 text-xl text-slate-700">
               Officially valid · Delivered in 24/48h · Clients in Spain, the
               UK, the USA, India and any country
+            </p>
+            <p className="mt-4">
+              <span className="inline-flex flex-wrap items-center gap-x-2 rounded-full bg-brand-gold-50 px-3.5 py-1.5 text-sm font-medium text-brand-navy ring-1 ring-brand-gold-200">
+                <span className="tabular-nums">From €{MIN_PRICE} per document</span>
+                <span className="text-brand-gold-700" aria-hidden="true">
+                  ·
+                </span>
+                <span>Fixed quote in under 2 hours</span>
+              </span>
             </p>
             <p className="mt-3 max-w-[68ch] text-base text-slate-600">
               The whole process is digital: you send me a scan of the

@@ -15,3 +15,11 @@ export const DOCUMENTS = [
   { id: "certificado-medico", name: "Certificado médico", price: null, icon: "heart" },
   { id: "otro-documento", name: "Otro documento", price: null, icon: "helpCircle" },
 ];
+
+// Precio mínimo real del catálogo (35 € a 26/09/2026: partida de
+// nacimiento, matrimonio y penales). Se usa en el title/description y en
+// el chip del hero de la home ES/EN, en /precios y en las landings, para
+// que "desde X €" nunca se desincronice de la tabla de arriba.
+export const MIN_PRICE = Math.min(
+  ...DOCUMENTS.filter((d) => d.price != null).map((d) => d.price)
+);

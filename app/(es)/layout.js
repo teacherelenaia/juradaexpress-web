@@ -14,16 +14,16 @@ export const metadata = {
   // description ≤ 155. "Jurada Express" (con espacio) es el nombre de la
   // entidad; "JuradaExpress" se conserva solo como logotipo.
   title: {
-    default: "Traductor Jurado Español-Inglés Online | Jurada Express",
+    default: "Traducción Jurada de Inglés Online desde 35 € | Jurada Express",
     template: "%s | Jurada Express",
   },
   description:
-    "Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS. Clientes en España, Reino Unido, EE. UU., India y todo el mundo. Entrega 24/48 h.",
+    "Traducción jurada español-inglés desde 35 € por documento, entrega en 24/48 h en PDF firmado. Traductora jurada de inglés MAEC nº 7310, 100 % online.",
   alternates: { canonical: "https://juradaexpress.es/" },
   openGraph: {
-    title: "Traductor Jurado Español-Inglés Online | Jurada Express",
+    title: "Traducción Jurada de Inglés Online desde 35 € | Jurada Express",
     description:
-      "Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS. Clientes en España, Reino Unido, EE. UU., India y todo el mundo. Entrega 24/48 h.",
+      "Traducción jurada español-inglés desde 35 € por documento, entrega en 24/48 h en PDF firmado. Traductora jurada de inglés MAEC nº 7310, 100 % online.",
     url: "https://juradaexpress.es/",
     siteName: "Jurada Express",
     type: "website",
@@ -39,9 +39,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Traductor Jurado Español-Inglés Online | Jurada Express",
+    title: "Traducción Jurada de Inglés Online desde 35 € | Jurada Express",
     description:
-      "Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS. Clientes en España, Reino Unido, EE. UU., India y todo el mundo. Entrega 24/48 h.",
+      "Traducción jurada español-inglés desde 35 € por documento, entrega en 24/48 h en PDF firmado. Traductora jurada de inglés MAEC nº 7310, 100 % online.",
     images: ["https://juradaexpress.es/fotos/hero-firma.jpg"],
   },
   verification: {
