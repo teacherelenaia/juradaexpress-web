@@ -13,7 +13,7 @@ export const metadata = {
     template: "%s | Jurada Express",
   },
   description:
-    "Sworn Spanish-English translation from €35 per document, signed PDF in 24/48h. Sworn translator appointed by Spain's Foreign Ministry (no. 7310), fully online.",
+    "Sworn Spanish-English translation from €35 per document, signed PDF in 24/48h. Appointed by Spain's Foreign Ministry (no. 7310). 100% online.",
   alternates: { canonical: "https://juradaexpress.es/en" },
   openGraph: {
     siteName: "Jurada Express",

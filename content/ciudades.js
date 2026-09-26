@@ -28,7 +28,7 @@ export const CIUDADES = [
     provincia: "Región de Murcia",
     metaTitle: `Traductor jurado de inglés para Cartagena · desde ${MIN_PRICE} €`,
     metaDescription:
-      "Traductora jurada de inglés online para clientes de Cartagena y el Mar Menor (MAEC nº 7310). PDF firmado en 24/48 h y papel por mensajería desde Murcia. Desde 35 €.",
+      "Traductora jurada de inglés online para Cartagena y el Mar Menor (MAEC nº 7310). PDF firmado en 24/48 h, papel por mensajería desde Murcia. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Cartagena",
     lead:
       "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC (nº 7310) con sede en Murcia. Atiendo a clientes de Cartagena, La Manga, el Mar Menor y toda la comarca sin que tengan que desplazarse: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si tu trámite exige papel, te lo envío por mensajería desde Murcia y lo tienes normalmente al día siguiente.",
@@ -80,7 +80,7 @@ export const CIUDADES = [
     provincia: "Provincia de Alicante",
     metaTitle: `Traductor jurado de inglés para Alicante · desde ${MIN_PRICE} €`,
     metaDescription:
-      "Traductora jurada de inglés online para clientes de Alicante y la Costa Blanca (MAEC nº 7310). PDF firmado en 24/48 h y papel por mensajería en 24/48 h. Desde 35 €.",
+      "Traductora jurada de inglés online para Alicante y la Costa Blanca (MAEC nº 7310). PDF firmado en 24/48 h, papel por mensajería en 24/48 h. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Alicante",
     lead:
       "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC (nº 7310) con sede en Murcia, a una hora de Alicante. Atiendo a clientes de Alicante capital, Elche, Torrevieja, Orihuela Costa, Benidorm, Jávea y Dénia de forma 100 % online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. El papel, si tu organismo lo exige, llega por mensajería en 24/48 h a cualquier punto de la provincia.",
@@ -132,7 +132,7 @@ export const CIUDADES = [
     provincia: "Comunidad de Madrid",
     metaTitle: `Traductor jurado de inglés para Madrid · online desde ${MIN_PRICE} €`,
     metaDescription:
-      "Traductora jurada de inglés online para clientes de Madrid (MAEC nº 7310): Extranjería, Registro Civil Central, Ministerio de Educación, UGE, embajadas. PDF en 24/48 h, papel por mensajería. Desde 35 €.",
+      "Traductora jurada de inglés online para Madrid (MAEC nº 7310): Extranjería, Registro Civil Central, Educación, UGE y embajadas. PDF en 24/48 h. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Madrid",
     lead:
       "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC (nº 7310). Trabajo online desde Murcia con clientes de Madrid que necesitan una traducción jurada válida para Extranjería, el Registro Civil, el Ministerio de Educación, la UGE, una universidad o una embajada: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si te exigen papel, lo envío por mensajería y en Madrid capital suele llegar al día siguiente.",
@@ -185,7 +185,7 @@ export const CIUDADES = [
     provincia: "Provincia de Barcelona",
     metaTitle: `Traductor jurado de inglés para Barcelona · online desde ${MIN_PRICE} €`,
     metaDescription:
-      "Traductora jurada de inglés online para clientes de Barcelona (MAEC nº 7310): Extranjería, Registro Civil, universidades, consulados, nómadas digitales. PDF en 24/48 h, papel por mensajería. Desde 35 €.",
+      "Traductora jurada de inglés online para Barcelona (MAEC nº 7310): Extranjería, Registro Civil, universidades y consulados. PDF en 24/48 h. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Barcelona",
     lead:
       "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC (nº 7310). Atiendo online, desde Murcia, a clientes de Barcelona y su área metropolitana que necesitan una traducción jurada español-inglés con validez oficial: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. El papel, si tu organismo lo pide, llega por mensajería en 24/48 h.",
@@ -237,7 +237,7 @@ export const CIUDADES = [
     provincia: "Provincia de Valencia",
     metaTitle: `Traductor jurado de inglés para Valencia · online desde ${MIN_PRICE} €`,
     metaDescription:
-      "Traductora jurada de inglés online para clientes de Valencia (MAEC nº 7310): Extranjería, Registro Civil, UV y UPV, notarías, nómadas digitales. PDF en 24/48 h, papel por mensajería. Desde 35 €.",
+      "Traductora jurada de inglés online para Valencia (MAEC nº 7310): Extranjería, Registro Civil, UV y UPV, notarías. PDF en 24/48 h. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Valencia",
     lead:
       "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC (nº 7310). Trabajo online desde Murcia con clientes de Valencia capital, l'Horta, la Safor y el resto de la provincia: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si tu organismo exige papel, te lo envío por mensajería y suele llegar en 24/48 h.",

@@ -88,7 +88,7 @@ export const es = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Traductor jurado de inglés",
   metaTitle: `Traductor jurado de inglés online desde ${MIN_PRICE} € | MAEC 7310`,
-  metaDescription: `Traducción jurada español-inglés con validez oficial, firmada por traductora nombrada por el MAEC (nº 7310). Desde ${MIN_PRICE} € por documento, PDF firmado en 24/48 h.`,
+  metaDescription: `Traducción jurada español-inglés con validez oficial, firmada por traductora nombrada por el MAEC (nº 7310). Desde ${MIN_PRICE} €, PDF firmado en 24/48 h.`,
   h1: "Traductor jurado de inglés online: traducción jurada español-inglés con validez oficial",
   lead: `Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores con el nº 7310. Traduzco, firmo y sello personalmente documentos del español al inglés y del inglés al español para que tengan validez ante cualquier organismo oficial: Extranjería, Registro Civil, universidades, notarías, Home Office, USCIS o IRCC. Todo el proceso es online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado electrónicamente en 24/48 h. Los documentos más habituales cuestan desde ${MIN_PRICE} €.`,
   image: {
@@ -267,7 +267,7 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Sworn English translator",
   metaTitle: `Sworn English translator online from €${MIN_PRICE} | MAEC no. 7310`,
-  metaDescription: `Officially valid sworn Spanish-English translation signed by a translator appointed by Spain's Foreign Ministry (no. 7310). From €${MIN_PRICE} per document, signed PDF in 24/48h.`,
+  metaDescription: `Officially valid sworn Spanish-English translation by a translator appointed by Spain's Foreign Ministry (no. 7310). From €${MIN_PRICE}, signed PDF in 24/48h.`,
   h1: "Sworn English translator online: officially valid Spanish-English sworn translation",
   lead: `I'm Elena Peñaranda Ortega, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs under no. 7310. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 hours and you receive the electronically signed PDF in 24/48h. The most common documents start at €${MIN_PRICE}.`,
   image: {

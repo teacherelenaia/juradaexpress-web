@@ -19,7 +19,7 @@ export const metadata = {
   // Explicit suffix; the root template applies to /en. The real minimum
   // price comes from content/documents.js so the title never drifts.
   title: { absolute: `Sworn Spanish-English Translation Online from €${MIN_PRICE} | Jurada Express` },
-  description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF in 24/48h. Sworn translator appointed by Spain's Foreign Ministry (no. 7310), fully online.`,
+  description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF in 24/48h. Appointed by Spain's Foreign Ministry (no. 7310). 100% online.`,
   alternates: {
     canonical: "https://juradaexpress.es/en",
     languages: {
@@ -30,7 +30,7 @@ export const metadata = {
   },
   openGraph: {
     title: `Sworn Spanish-English Translation Online from €${MIN_PRICE} | Jurada Express`,
-    description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF in 24/48h. Sworn translator appointed by Spain's Foreign Ministry (no. 7310), fully online.`,
+    description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF in 24/48h. Appointed by Spain's Foreign Ministry (no. 7310). 100% online.`,
     url: "https://juradaexpress.es/en",
     siteName: "Jurada Express",
     type: "website",
