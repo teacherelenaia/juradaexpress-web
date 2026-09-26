@@ -21,6 +21,11 @@ export const PERSON_ID = `${BASE}/#elena`;
 export const ORGANIZATION_ID = `${BASE}/#organization`;
 export const PERSON_NAME = "Elena Peñaranda Ortega";
 export const MAEC_NUMBER = "7310";
+// Año del nombramiento como Traductora-Intérprete Jurada (vigente desde
+// entonces). Los años de experiencia se calculan siempre a partir de aquí
+// para que ningún texto se quede anticuado.
+export const SINCE = 2009;
+export const yearsOfExperience = () => new Date().getFullYear() - SINCE;
 
 // Listado oficial de Traductores/as-Intérpretes Jurados/as del MAEC, donde
 // cualquiera puede comprobar el nombramiento nº 7310.
@@ -35,6 +40,11 @@ const JOB_TITLE = {
 const CREDENTIAL_NAME = {
   es: `Traductora-Intérprete Jurada nombrada por el MAEC, nº ${MAEC_NUMBER}`,
   en: `Sworn Translator-Interpreter appointed by Spain's Ministry of Foreign Affairs, no. ${MAEC_NUMBER}`,
+};
+
+const CREDENTIAL_DESCRIPTION = {
+  es: `Nombramiento vigente desde ${SINCE}.`,
+  en: `Appointment in force since ${SINCE}.`,
 };
 
 const MINISTRY = {
@@ -79,6 +89,8 @@ export function personJsonLd(locale = "es") {
       credentialCategory:
         l === "en" ? "Sworn Translator-Interpreter" : "Traductora-Intérprete Jurada",
       identifier: MAEC_NUMBER,
+      description: CREDENTIAL_DESCRIPTION[l],
+      dateCreated: String(SINCE),
       url: MAEC_URL,
       recognizedBy: {
         "@type": "GovernmentOrganization",

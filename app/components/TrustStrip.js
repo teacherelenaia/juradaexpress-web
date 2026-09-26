@@ -10,13 +10,11 @@ import {
   GOOGLE_REVIEW_COUNT,
 } from "../../content/site";
 import { getPublishableReviews } from "../../content/reviews";
-
-const MAEC_URL =
-  "https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx";
+import { MAEC_URL, MAEC_NUMBER, SINCE } from "../../content/persona";
 
 const COPY = {
   es: {
-    maec: "Nombrada por el MAEC · nº 7310",
+    maec: `Traductora jurada desde ${SINCE} · MAEC nº ${MAEC_NUMBER}`,
     maecLabel: "Comprobar el nombramiento en el listado oficial del MAEC",
     google: (rating, count) =>
       `${rating.toLocaleString("es-ES", { minimumFractionDigits: 1 })} en Google · ${count} reseñas`,
@@ -27,7 +25,7 @@ const COPY = {
     aria: "Datos de confianza",
   },
   en: {
-    maec: "Appointed by the Spanish Ministry of Foreign Affairs · no. 7310",
+    maec: `Sworn translator since ${SINCE} · MAEC no. ${MAEC_NUMBER}`,
     maecLabel: "Check the appointment on the Ministry's official register",
     google: (rating, count) =>
       `${rating.toLocaleString("en-GB", { minimumFractionDigits: 1 })} on Google · ${count} reviews`,

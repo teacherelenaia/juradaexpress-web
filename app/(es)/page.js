@@ -9,6 +9,7 @@ import ProcessVideo from "../components/ProcessVideo";
 import FollowUs from "../components/FollowUs";
 import { SectionHeading } from "../components/ui";
 import { DOCUMENTS, MIN_PRICE } from "../../content/documents";
+import { SINCE, yearsOfExperience } from "../../content/persona";
 import {
   WHATSAPP_URL,
   LARGE_PROJECT_CAPACITY,
@@ -21,7 +22,7 @@ export const metadata = {
   // (content/documents.js) el título queda en 62 caracteres; la versión
   // larga con "Traductora jurada MAEC 7310" superaba los 65 y se descartó.
   title: `Traducción Jurada de Inglés Online desde ${MIN_PRICE} € | Jurada Express`,
-  description: `Traducción jurada español-inglés desde ${MIN_PRICE} € por documento, entrega en 24/48 h en PDF firmado. Traductora jurada de inglés MAEC nº 7310, 100 % online.`,
+  description: `Traductora jurada de inglés desde ${SINCE} (MAEC nº 7310). Traducción jurada español-inglés desde ${MIN_PRICE} € por documento, PDF firmado en 24/48 h, 100 % online.`,
   alternates: {
     canonical: "https://juradaexpress.es/",
     languages: {
@@ -32,7 +33,7 @@ export const metadata = {
   },
   openGraph: {
     title: `Traducción Jurada de Inglés Online desde ${MIN_PRICE} € | Jurada Express`,
-    description: `Traducción jurada español-inglés desde ${MIN_PRICE} € por documento, entrega en 24/48 h en PDF firmado. Traductora jurada de inglés MAEC nº 7310, 100 % online.`,
+    description: `Traductora jurada de inglés desde ${SINCE} (MAEC nº 7310). Traducción jurada español-inglés desde ${MIN_PRICE} € por documento, PDF firmado en 24/48 h, 100 % online.`,
     url: "https://juradaexpress.es/",
     siteName: "Jurada Express",
     type: "website",
@@ -171,7 +172,8 @@ export default function Page() {
               <a href="/traductor-jurado-ingles" className="link">
                 traductora jurada de inglés
               </a>{" "}
-              nombrada por el MAEC. Todo el proceso es digital: me envías el
+              nombrada por el MAEC en {SINCE}, con {yearsOfExperience()} años
+              de experiencia. Todo el proceso es digital: me envías el
               documento escaneado, pagas con tarjeta desde cualquier país y
               recibes la traducción en PDF firmado el mismo día o al
               siguiente. También hago traducción certificada para USCIS.
@@ -497,8 +499,8 @@ export default function Page() {
                 className="link"
               >
                 nº de acreditación 7310
-              </a>
-              . Cada traducción jurada la realizo, firmo y sello
+              </a>{" "}
+              desde {SINCE}. Cada traducción jurada la realizo, firmo y sello
               personalmente, garantizando su validez ante cualquier organismo
               oficial.
             </p>

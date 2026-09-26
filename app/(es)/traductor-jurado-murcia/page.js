@@ -11,7 +11,12 @@ import { SectionHeading } from "../../components/ui";
 import { WHATSAPP_URL, TIMEZONE_NOTE } from "../../../content/site";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { CIUDADES } from "../../../content/ciudades";
-import { MAEC_URL, ORGANIZATION_ID } from "../../../content/persona";
+import {
+  MAEC_URL,
+  ORGANIZATION_ID,
+  SINCE,
+  yearsOfExperience,
+} from "../../../content/persona";
 
 const BASE = "https://juradaexpress.es";
 const PATH = "/traductor-jurado-murcia";
@@ -175,8 +180,9 @@ export default function Page() {
           className="link"
         >
           nº de acreditación 7310 del MAEC
-        </a>
-        . Trabajo con clientes de Murcia capital, de las pedanías y de toda
+        </a>{" "}
+        desde {SINCE} ({yearsOfExperience()} años de nombramiento vigente).
+        Trabajo con clientes de Murcia capital, de las pedanías y de toda
         la Región: me envías el documento escaneado, te doy precio cerrado en
         menos de 2 horas y recibes el PDF firmado en 24/48 h. Y si tu trámite
         exige la traducción en papel, en Murcia capital la tienes normalmente

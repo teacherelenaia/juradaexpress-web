@@ -8,7 +8,7 @@
 // plazos, validez de la firma digital frente al papel, apostilla y
 // organismos que la aceptan. Se pinta con app/components/ServicePage.js.
 import { DOCUMENTS, MIN_PRICE } from "../documents";
-import { MAEC_URL, MAEC_NUMBER } from "../persona";
+import { MAEC_URL, MAEC_NUMBER, SINCE, yearsOfExperience } from "../persona";
 import {
   TIMEZONE_NOTE,
   INTERNATIONAL_SHIPPING,
@@ -90,7 +90,7 @@ export const es = {
   metaTitle: `Traductor jurado de inglés online desde ${MIN_PRICE} € | MAEC 7310`,
   metaDescription: `Traducción jurada español-inglés con validez oficial, firmada por traductora nombrada por el MAEC (nº 7310). Desde ${MIN_PRICE} €, PDF firmado en 24/48 h.`,
   h1: "Traductor jurado de inglés online: traducción jurada español-inglés con validez oficial",
-  lead: `Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores con el nº 7310. Traduzco, firmo y sello personalmente documentos del español al inglés y del inglés al español para que tengan validez ante cualquier organismo oficial: Extranjería, Registro Civil, universidades, notarías, Home Office, USCIS o IRCC. Todo el proceso es online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado electrónicamente en 24/48 h. Los documentos más habituales cuestan desde ${MIN_PRICE} €.`,
+  lead: `Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores en ${SINCE} con el nº 7310: ${yearsOfExperience()} años de nombramiento vigente. Traduzco, firmo y sello personalmente documentos del español al inglés y del inglés al español para que tengan validez ante cualquier organismo oficial: Extranjería, Registro Civil, universidades, notarías, Home Office, USCIS o IRCC. Todo el proceso es online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado electrónicamente en 24/48 h. Los documentos más habituales cuestan desde ${MIN_PRICE} €.`,
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Traductora jurada firmando y sellando una traducción jurada de inglés",
@@ -269,7 +269,7 @@ export const en = {
   metaTitle: `Sworn English translator online from €${MIN_PRICE} | MAEC no. 7310`,
   metaDescription: `Officially valid sworn Spanish-English translation by a translator appointed by Spain's Foreign Ministry (no. 7310). From €${MIN_PRICE}, signed PDF in 24/48h.`,
   h1: "Sworn English translator online: officially valid Spanish-English sworn translation",
-  lead: `I'm Elena Peñaranda Ortega, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs under no. 7310. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 hours and you receive the electronically signed PDF in 24/48h. The most common documents start at €${MIN_PRICE}.`,
+  lead: `I'm Elena Peñaranda Ortega, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs in ${SINCE} under no. 7310, an appointment in force for ${yearsOfExperience()} years. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 hours and you receive the electronically signed PDF in 24/48h. The most common documents start at €${MIN_PRICE}.`,
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Sworn translator signing and stamping a sworn English translation",
