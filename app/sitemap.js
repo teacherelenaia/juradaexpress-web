@@ -14,16 +14,17 @@ const serviceRoutes = SERVICE_ROUTES.flatMap((r) => {
     en: `${BASE_URL}${r.en}`,
     "x-default": `${BASE_URL}${r.es}`,
   };
+  const lastModified = r.lastModified || SERVICE_LAST_MODIFIED;
   return [
     {
       url: `${BASE_URL}${r.es}`,
-      lastModified: SERVICE_LAST_MODIFIED,
-      priority: 0.8,
+      lastModified,
+      priority: r.id === "traductor-ingles" ? 0.9 : 0.8,
       alternates: { languages },
     },
     {
       url: `${BASE_URL}${r.en}`,
-      lastModified: SERVICE_LAST_MODIFIED,
+      lastModified,
       priority: 0.8,
       alternates: { languages },
     },

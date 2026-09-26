@@ -167,10 +167,14 @@ export default function Page() {
               </span>
             </p>
             <p className="mt-3 max-w-[68ch] text-base text-slate-600">
-              Todo el proceso es digital: me envías el documento escaneado,
-              pagas con tarjeta desde cualquier país y recibes la traducción en
-              PDF firmado el mismo día o al siguiente. También hago traducción
-              certificada para USCIS.
+              Soy{" "}
+              <a href="/traductor-jurado-ingles" className="link">
+                traductora jurada de inglés
+              </a>{" "}
+              nombrada por el MAEC. Todo el proceso es digital: me envías el
+              documento escaneado, pagas con tarjeta desde cualquier país y
+              recibes la traducción en PDF firmado el mismo día o al
+              siguiente. También hago traducción certificada para USCIS.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">

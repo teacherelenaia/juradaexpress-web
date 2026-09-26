@@ -165,10 +165,15 @@ export default function Page() {
               </span>
             </p>
             <p className="mt-3 max-w-[68ch] text-base text-slate-600">
-              The whole process is digital: you send me a scan of the
-              document, pay by card from any country and receive the
-              translation as a signed PDF the same day or the next. I also
-              provide certified translations for USCIS.
+              I'm a{" "}
+              <a href="/en/sworn-english-translator" className="link">
+                sworn English translator
+              </a>{" "}
+              appointed by Spain's Foreign Ministry. The whole process is
+              digital: you send me a scan of the document, pay by card from
+              any country and receive the translation as a signed PDF the
+              same day or the next. I also provide certified translations
+              for USCIS.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">

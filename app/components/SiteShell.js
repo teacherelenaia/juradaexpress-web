@@ -31,6 +31,12 @@ const PUBLISHED_REVIEWS = getPublishableReviews().length;
 // Las cuatro líneas de servicio del catálogo (JSON-LD hasOfferCatalog).
 const SERVICE_LINES = [
   {
+    name: "Traducción jurada de inglés online",
+    description:
+      "Traducción jurada español-inglés e inglés-español firmada por traductora nombrada por el MAEC (nº 7310), desde 35 € por documento, PDF firmado en 24/48 h.",
+    url: "https://juradaexpress.es/traductor-jurado-ingles",
+  },
+  {
     name: "Traducción jurada español-inglés",
     description:
       "Traducción jurada con firma y sello de traductora nombrada por el MAEC, válida ante organismos oficiales. Entrega en PDF firmado en 24/48 h.",
@@ -91,6 +97,10 @@ const FOOTER = {
     links: "Enlaces",
     linkList: [
       { href: "/", label: "Inicio" },
+      {
+        href: SERVICE_ROUTES.find((r) => r.id === "traductor-ingles").es,
+        label: "Traductor jurado de inglés",
+      },
       { href: "/precios", label: "Precios" },
       { href: "/documentos", label: "Documentos" },
       { href: "/blog", label: "Blog" },
@@ -128,6 +138,10 @@ const FOOTER = {
     links: "Links",
     linkList: [
       { href: "/en", label: "Home" },
+      {
+        href: SERVICE_ROUTES.find((r) => r.id === "traductor-ingles").en,
+        label: "Sworn English translator",
+      },
       { href: "/en/precios", label: "Pricing" },
       { href: "/en/documentos", label: "Documents" },
       { href: "/en/blog", label: "Blog" },
