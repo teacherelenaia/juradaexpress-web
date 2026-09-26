@@ -1,13 +1,12 @@
 // app/en/precios/page.js
 import { DNV_PACK_PRICE } from "../../../content/site";
-import { DOCUMENTS } from "../../../content/documents";
+import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 
 const certPrice = DOCUMENTS.find((d) => d.id === "partida-nacimiento")?.price;
 
 export const metadata = {
-  title: "Sworn and certified translation pricing (in euros)",
-  description:
-    "Certified sworn translator pricing for Spanish ⇆ English. Indicative rates in euros, fixed quote once we see your document.",
+  title: `Sworn translation pricing from €${MIN_PRICE} (in euros)`,
+  description: `Sworn Spanish ⇆ English translation from €${MIN_PRICE} per document, delivered in 24/48h. Indicative rates in euros, fixed quote once we see your document.`,
   alternates: {
     canonical: "https://juradaexpress.es/en/precios",
     languages: {

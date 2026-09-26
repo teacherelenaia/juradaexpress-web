@@ -8,7 +8,7 @@ import ProcessTimeline from "../components/ProcessTimeline";
 import ProcessVideo from "../components/ProcessVideo";
 import FollowUs from "../components/FollowUs";
 import { SectionHeading } from "../components/ui";
-import { DOCUMENTS } from "../../content/documents";
+import { DOCUMENTS, MIN_PRICE } from "../../content/documents";
 import {
   WHATSAPP_URL,
   LARGE_PROJECT_CAPACITY,
@@ -17,10 +17,11 @@ import {
 
 export const metadata = {
   // app/page.js comparte segmento con app/layout.js, así que title.template
-  // NO se aplica aquí: el sufijo va explícito (≤ 60 caracteres).
-  title: "Traductor Jurado Español-Inglés Online | Jurada Express",
-  description:
-    "Traductora jurada de inglés nombrada por el MAEC (nº 7310). Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS, 100% online, entrega en 24/48 h. Clientes en España, Reino Unido, EE. UU., India y cualquier país.",
+  // NO se aplica aquí: el sufijo va explícito. Con el precio mínimo real
+  // (content/documents.js) el título queda en 62 caracteres; la versión
+  // larga con "Traductora jurada MAEC 7310" superaba los 65 y se descartó.
+  title: `Traducción Jurada de Inglés Online desde ${MIN_PRICE} € | Jurada Express`,
+  description: `Traducción jurada español-inglés desde ${MIN_PRICE} € por documento, entrega en 24/48 h en PDF firmado. Traductora jurada de inglés MAEC nº 7310, 100 % online.`,
   alternates: {
     canonical: "https://juradaexpress.es/",
     languages: {
@@ -30,9 +31,8 @@ export const metadata = {
     },
   },
   openGraph: {
-    title: "Traductor Jurado Español-Inglés Online | Jurada Express",
-    description:
-      "Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS, 100% online, entrega en 24/48 h. Traductora jurada nombrada por el MAEC (nº 7310). Clientes en cualquier país.",
+    title: `Traducción Jurada de Inglés Online desde ${MIN_PRICE} € | Jurada Express`,
+    description: `Traducción jurada español-inglés desde ${MIN_PRICE} € por documento, entrega en 24/48 h en PDF firmado. Traductora jurada de inglés MAEC nº 7310, 100 % online.`,
     url: "https://juradaexpress.es/",
     siteName: "Jurada Express",
     type: "website",
@@ -157,11 +157,24 @@ export default function Page() {
               Validez oficial · Entrega en 24/48 h · Clientes en España, Reino
               Unido, EE. UU., India y cualquier país
             </p>
+            <p className="mt-4">
+              <span className="inline-flex flex-wrap items-center gap-x-2 rounded-full bg-brand-gold-50 px-3.5 py-1.5 text-sm font-medium text-brand-navy ring-1 ring-brand-gold-200">
+                <span className="tabular-nums">Desde {MIN_PRICE} € por documento</span>
+                <span className="text-brand-gold-700" aria-hidden="true">
+                  ·
+                </span>
+                <span>Presupuesto cerrado en menos de 2 h</span>
+              </span>
+            </p>
             <p className="mt-3 max-w-[68ch] text-base text-slate-600">
-              Todo el proceso es digital: me envías el documento escaneado,
-              pagas con tarjeta desde cualquier país y recibes la traducción en
-              PDF firmado el mismo día o al siguiente. También hago traducción
-              certificada para USCIS.
+              Soy{" "}
+              <a href="/traductor-jurado-ingles" className="link">
+                traductora jurada de inglés
+              </a>{" "}
+              nombrada por el MAEC. Todo el proceso es digital: me envías el
+              documento escaneado, pagas con tarjeta desde cualquier país y
+              recibes la traducción en PDF firmado el mismo día o al
+              siguiente. También hago traducción certificada para USCIS.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">

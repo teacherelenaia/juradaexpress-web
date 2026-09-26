@@ -10,10 +10,12 @@ import * as urgente from "./urgente";
 import * as irlanda from "./irlanda";
 import * as canada from "./canada";
 import * as australia from "./australia";
+import * as traductorIngles from "./traductor-jurado-ingles";
 
 export { SERVICE_ROUTES, INTERNATIONAL_MENU } from "./routes";
 
 export const SERVICE_PAGES = [
+  traductorIngles,
   nomadaDigital,
   uscis,
   estadosUnidos,

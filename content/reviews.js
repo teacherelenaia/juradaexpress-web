@@ -1,7 +1,8 @@
 // content/reviews.js
 //
 // Reseñas reales de clientes, copiadas literalmente de la ficha de Google
-// Business "Jurada Express" (5,0 · 7 reseñas a 07/09/2026). La sección
+// Business "Jurada Express" (5,0 · 24 reseñas a 26/09/2026; aquí se
+// transcriben las que se han podido leer completas en Maps). La sección
 // "Opiniones" de la home (ES y EN) solo se publica cuando aquí hay reseñas
 // reales. Nunca inventes reseñas ni uses ejemplos.
 //
@@ -27,12 +28,49 @@
 // - `lang` indica el idioma ORIGINAL de la reseña. Todas se muestran en las
 //   dos versiones de la web (ES y EN) en su idioma original, con etiqueta.
 // - Las fechas salen de las etiquetas relativas de Google ("3 days ago",
-//   "6 days ago", "1 week ago") leídas el 07/09/2026 y pueden bailar un
-//   día. [[COMPLETAR opcional: día exacto de cada reseña]]
+//   "2 weeks ago", "1 month ago") leídas el 07/09/2026 (primeras 7) y el
+//   26/09/2026 (resto) y pueden bailar algunos días.
+//   [[COMPLETAR opcional: día exacto de cada reseña]]
 
 import { GOOGLE_BUSINESS_URL } from "./site";
 
 export const REVIEWS = [
+  // Leídas el 26/09/2026 (fechas aproximadas a partir de etiquetas relativas).
+  {
+    name: "Kevin Greenall",
+    date: "2026-09-26",
+    source: "Google",
+    rating: 5,
+    lang: "en",
+    text: "Incredibly fast and efficient service. You also make the process very easy. Thankyou",
+  },
+  {
+    name: "Youssef Zaghloul",
+    date: "2026-09-23",
+    source: "Google",
+    rating: 5,
+    lang: "en",
+    text: "Great service,fast and she translates everything for a very good price and nearly instantly. I would 100% recommend her service.",
+  },
+  {
+    name: "Reka P",
+    date: "2026-09-12",
+    source: "Google",
+    rating: 5,
+    lang: "en",
+    text: "Elena did an amazing job! She responded immediately to my request and did the translation of a few documents within 1,5 hours. I‘m so happy I found her, it‘s a flawless service! Thank you very much!",
+  },
+  {
+    name: "Casa Walsh",
+    date: "2026-09-12",
+    source: "Google",
+    rating: 5,
+    lang: "en",
+    text: "Speedy responses and great service provided thank you",
+  },
+  // Leídas el 07/09/2026. Matt Marson y Emilia Crawley aparecían en Maps el
+  // 26/09/2026 con etiqueta "4 weeks ago" (≈ 29/08); se conserva la fecha y
+  // el texto completo ya transcritos (en Maps el de Emilia sale truncado).
   {
     name: "Laura Pay Garcia",
     date: "2026-09-04",
@@ -94,7 +132,8 @@ export const REVIEWS = [
 // Criterio editorial de la home: por defecto se muestran las 4 reseñas
 // más útiles comercialmente (hablan de Embajada, procedimientos, rapidez y
 // apostilla), en este orden. El resto se ve en Google con el botón
-// "Ver las 7 en Google". Si un nombre deja de existir en REVIEWS, se
+// "Ver las N en Google" (N = GOOGLE_REVIEW_COUNT). Si un nombre deja de
+// existir en REVIEWS, se
 // ignora sin romper nada.
 export const FEATURED_REVIEW_NAMES = [
   "Ona Montes Vivancos",

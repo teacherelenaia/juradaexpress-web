@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllPostsEn, getPostEnBySlug } from "../../../../content/posts.en";
 import { WHATSAPP_URL_EN } from "../../../../content/site";
+import { personRef, ORGANIZATION_ID } from "../../../../content/persona";
 
 const BASE = "https://juradaexpress.es";
 
@@ -89,6 +90,19 @@ export default function BlogPostPage({ params }) {
           })}
         </time>{" "}
         · {post.readingTime}
+        {post.updated && post.updated !== post.date ? (
+          <>
+            {" "}
+            · Updated on{" "}
+            <time dateTime={post.updated}>
+              {new Date(post.updated).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </time>
+          </>
+        ) : null}
       </div>
 
       {post.image && (
@@ -163,6 +177,7 @@ export default function BlogPostPage({ params }) {
             "@graph": [
               {
                 "@type": "BlogPosting",
+                "@id": `${BASE}/en/blog/${post.slug}#article`,
                 headline: post.title,
                 description: post.excerpt,
                 url: `${BASE}/en/blog/${post.slug}`,
@@ -170,13 +185,12 @@ export default function BlogPostPage({ params }) {
                 dateModified: post.updated || post.date,
                 inLanguage: "en",
                 image: post.image ? `${BASE}${post.image}` : undefined,
-                author: {
-                  "@type": "Person",
-                  name: post.author || "Elena Peñaranda Ortega",
-                  url: `${BASE}/en/about`,
-                },
+                // Author: the shared Person entity (content/persona.js, full
+                // entity in the footer), referenced by @id.
+                author: personRef("en"),
                 publisher: {
                   "@type": "Organization",
+                  "@id": ORGANIZATION_ID,
                   name: "Jurada Express",
                   url: `${BASE}/`,
                   logo: {
@@ -184,7 +198,10 @@ export default function BlogPostPage({ params }) {
                     url: `${BASE}/logo.svg`,
                   },
                 },
-                mainEntityOfPage: `${BASE}/en/blog/${post.slug}`,
+                mainEntityOfPage: {
+                  "@type": "WebPage",
+                  "@id": `${BASE}/en/blog/${post.slug}`,
+                },
               },
               {
                 "@type": "BreadcrumbList",

@@ -2,6 +2,7 @@
 import { getAllPosts } from "../content/posts";
 import { getAllPostsEn } from "../content/posts.en";
 import { SERVICE_ROUTES } from "../content/servicios/routes";
+import { CIUDADES } from "../content/ciudades";
 
 const BASE_URL = "https://juradaexpress.es";
 
@@ -14,21 +15,30 @@ const serviceRoutes = SERVICE_ROUTES.flatMap((r) => {
     en: `${BASE_URL}${r.en}`,
     "x-default": `${BASE_URL}${r.es}`,
   };
+  const lastModified = r.lastModified || SERVICE_LAST_MODIFIED;
   return [
     {
       url: `${BASE_URL}${r.es}`,
-      lastModified: SERVICE_LAST_MODIFIED,
-      priority: 0.8,
+      lastModified,
+      priority: r.id === "traductor-ingles" ? 0.9 : 0.8,
       alternates: { languages },
     },
     {
       url: `${BASE_URL}${r.en}`,
-      lastModified: SERVICE_LAST_MODIFIED,
+      lastModified,
       priority: 0.8,
       alternates: { languages },
     },
   ];
 });
+
+// Landings de ciudad (solo ES), FASE 1 SEO 26/09/2026.
+const CITY_LAST_MODIFIED = "2026-09-26";
+const cityRoutes = CIUDADES.map((c) => ({
+  url: `${BASE_URL}/${c.slug}`,
+  lastModified: CITY_LAST_MODIFIED,
+  priority: 0.7,
+}));
 
 export default function sitemap() {
   const staticRoutes = [
@@ -61,7 +71,7 @@ export default function sitemap() {
     { url: `${BASE_URL}/traduccion-jurada-dni-pasaporte`, lastModified: "2026-08-25", priority: 0.7 },
     { url: `${BASE_URL}/traduccion-jurada-testamento-herencia`, lastModified: "2026-08-25", priority: 0.7 },
     { url: `${BASE_URL}/traduccion-jurada-certificado-medico`, lastModified: "2026-08-25", priority: 0.7 },
-    { url: `${BASE_URL}/traductor-jurado-murcia`, lastModified: "2026-08-25", priority: 0.8 },
+    { url: `${BASE_URL}/traductor-jurado-murcia`, lastModified: CITY_LAST_MODIFIED, priority: 0.8 },
     { url: `${BASE_URL}/como-funciona`, lastModified: "2026-08-25", priority: 0.8 },
     { url: `${BASE_URL}/sobre-mi`, lastModified: SERVICE_LAST_MODIFIED, priority: 0.8 },
     { url: `${BASE_URL}/traduccion-jurada-britanicos-espana`, lastModified: "2026-08-25", priority: 0.8 },
@@ -105,5 +115,11 @@ export default function sitemap() {
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...postRoutes, ...postRoutesEn];
+  return [
+    ...staticRoutes,
+    ...serviceRoutes,
+    ...cityRoutes,
+    ...postRoutes,
+    ...postRoutesEn,
+  ];
 }

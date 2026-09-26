@@ -9,11 +9,11 @@ import { fontClassName } from "../fonts";
 export const metadata = {
   metadataBase: new URL("https://juradaexpress.es"),
   title: {
-    default: "Sworn Spanish-English Translator Online | Jurada Express",
+    default: "Sworn Spanish-English Translation Online from €35 | Jurada Express",
     template: "%s | Jurada Express",
   },
   description:
-    "Sworn translation for Spain, certified translation for USCIS and digital nomad visa documents. Sworn translator appointed by Spain's Ministry of Foreign Affairs (no. 7310). Delivered in 24/48h.",
+    "Sworn Spanish-English translation from €35 per document, signed PDF in 24/48h. Appointed by Spain's Foreign Ministry (no. 7310). 100% online.",
   alternates: { canonical: "https://juradaexpress.es/en" },
   openGraph: {
     siteName: "Jurada Express",

@@ -55,16 +55,21 @@ export function serviceMetadata(page) {
   const en = page.alternates.en;
   return {
     // Title ≤ 60 caracteres sin sufijo de marca (la marca ya va en OG y
-    // JSON-LD); description ≤ 155.
+    // JSON-LD); description ≤ 155. Las páginas solo en español (landings
+    // de ciudad) no llevan hreflang: sin `en` solo se emite el canonical.
     title: { absolute: page.metaTitle },
     description: page.metaDescription,
     alternates: {
       canonical: `${BASE}${page.path}`,
-      languages: {
-        es: `${BASE}${es}`,
-        en: `${BASE}${en}`,
-        "x-default": `${BASE}${es}`,
-      },
+      ...(en
+        ? {
+            languages: {
+              es: `${BASE}${es}`,
+              en: `${BASE}${en}`,
+              "x-default": `${BASE}${es}`,
+            },
+          }
+        : {}),
     },
     openGraph: {
       title: `${page.metaTitle} | Jurada Express`,
@@ -352,12 +357,14 @@ export default function ServicePage({ page }) {
             </li>
           </ul>
 
-          <p className="mt-6 text-sm text-slate-500">
-            {t.otherLang}{" "}
-            <a href={otherHref} className="link">
-              {page.otherLangLabel}
-            </a>
-          </p>
+          {otherHref ? (
+            <p className="mt-6 text-sm text-slate-500">
+              {t.otherLang}{" "}
+              <a href={otherHref} className="link">
+                {page.otherLangLabel}
+              </a>
+            </p>
+          ) : null}
         </section>
       </div>
 
@@ -394,6 +401,17 @@ export default function ServicePage({ page }) {
                   "@type": "Offer",
                   priceCurrency: "EUR",
                   ...(page.price != null ? { price: page.price } : {}),
+                  // "desde X €": precio mínimo real del catálogo, no un
+                  // precio fijo (content/documents.js → MIN_PRICE).
+                  ...(page.priceFrom != null
+                    ? {
+                        priceSpecification: {
+                          "@type": "PriceSpecification",
+                          minPrice: page.priceFrom,
+                          priceCurrency: "EUR",
+                        },
+                      }
+                    : {}),
                   availability: "https://schema.org/InStock",
                   url: `${BASE}${page.path}`,
                 },

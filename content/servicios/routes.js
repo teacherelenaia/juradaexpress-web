@@ -7,6 +7,14 @@
 // content/servicios/, añádela también aquí.
 export const SERVICE_ROUTES = [
   {
+    id: "traductor-ingles",
+    es: "/traductor-jurado-ingles",
+    en: "/en/sworn-english-translator",
+    labelEs: "Traductor jurado de inglés",
+    labelEn: "Sworn English translator",
+    lastModified: "2026-09-26",
+  },
+  {
     id: "dnv",
     es: "/traduccion-jurada-visado-nomada-digital",
     en: "/en/sworn-translation-spain-digital-nomad-visa",
@@ -88,7 +96,7 @@ export const INTERNATIONAL_MENU_GROUPS = [
     id: "servicios",
     labelEs: "Servicios",
     labelEn: "Services",
-    items: [byId("dnv"), byId("uscis"), byId("urgente")],
+    items: [byId("traductor-ingles"), byId("dnv"), byId("uscis"), byId("urgente")],
   },
   {
     id: "paises",

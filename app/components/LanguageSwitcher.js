@@ -35,7 +35,8 @@ export default function LanguageSwitcher({ className = "" }) {
   function nearestEn(path) {
     if (ES_TO_EN[path]) return ES_TO_EN[path];
     if (path.startsWith("/traduccion-jurada-")) return "/en/documentos";
-    if (path === "/traductor-jurado-murcia") return "/en/contacto";
+    // Murcia y las landings de ciudad (solo ES) → guía general en inglés.
+    if (path.startsWith("/traductor-jurado-")) return "/en/sworn-english-translator";
     if (path.startsWith("/blog/")) return "/en/blog";
     if (path.startsWith("/documentos/")) return "/en/documentos";
     return "/en";
