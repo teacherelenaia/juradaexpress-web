@@ -16,6 +16,7 @@
 // adicionales con contexto local), documentos (ids de content/documents.js
 // que se destacan), faq (4 preguntas locales), whatsapp (texto prellenado).
 import { DOCUMENTS, MIN_PRICE } from "./documents";
+import { SINCE, yearsOfExperience } from "./persona";
 
 const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
 const eur = (id) => (priceOf(id) != null ? `${priceOf(id)} €` : "presupuesto");
@@ -31,7 +32,7 @@ export const CIUDADES = [
       "Traductora jurada de inglés online para Cartagena y el Mar Menor (MAEC nº 7310). PDF firmado en 24/48 h, papel por mensajería desde Murcia. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Cartagena",
     lead:
-      "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC (nº 7310) con sede en Murcia. Atiendo a clientes de Cartagena, La Manga, el Mar Menor y toda la comarca sin que tengan que desplazarse: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si tu trámite exige papel, te lo envío por mensajería desde Murcia y lo tienes normalmente al día siguiente.",
+      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente) con sede en Murcia. Atiendo a clientes de Cartagena, La Manga, el Mar Menor y toda la comarca sin que tengan que desplazarse: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si tu trámite exige papel, te lo envío por mensajería desde Murcia y lo tienes normalmente al día siguiente.`,
     tramites: [
       "<strong>Oficina de Extranjería de Cartagena</strong>: NIE, TIE, residencia de familiares de ciudadanos de la UE, arraigo y nacionalidad por residencia. Piden traducción jurada de certificados de nacimiento, matrimonio y antecedentes penales extranjeros.",
       "<strong>Registro Civil de Cartagena</strong>: inscripción de matrimonios y nacimientos celebrados en el Reino Unido, Irlanda o Estados Unidos, expedientes matrimoniales con un cónyuge extranjero.",
@@ -83,7 +84,7 @@ export const CIUDADES = [
       "Traductora jurada de inglés online para Alicante y la Costa Blanca (MAEC nº 7310). PDF firmado en 24/48 h, papel por mensajería en 24/48 h. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Alicante",
     lead:
-      "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC (nº 7310) con sede en Murcia, a una hora de Alicante. Atiendo a clientes de Alicante capital, Elche, Torrevieja, Orihuela Costa, Benidorm, Jávea y Dénia de forma 100 % online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. El papel, si tu organismo lo exige, llega por mensajería en 24/48 h a cualquier punto de la provincia.",
+      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente) con sede en Murcia, a una hora de Alicante. Atiendo a clientes de Alicante capital, Elche, Torrevieja, Orihuela Costa, Benidorm, Jávea y Dénia de forma 100 % online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. El papel, si tu organismo lo exige, llega por mensajería en 24/48 h a cualquier punto de la provincia.`,
     tramites: [
       "<strong>Oficina de Extranjería de Alicante</strong>: NIE y TIE, residencia de familiares de ciudadanos de la UE, arraigo, nacionalidad por residencia y visados de nómada digital y no lucrativo iniciados desde España.",
       "<strong>Registro Civil de Alicante y de las localidades de la costa</strong>: inscripción de matrimonios y nacimientos ocurridos en el extranjero, expedientes de matrimonio con cónyuge británico, irlandés o estadounidense.",
@@ -135,7 +136,7 @@ export const CIUDADES = [
       "Traductora jurada de inglés online para Madrid (MAEC nº 7310): Extranjería, Registro Civil Central, Educación, UGE y embajadas. PDF en 24/48 h. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Madrid",
     lead:
-      "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC (nº 7310). Trabajo online desde Murcia con clientes de Madrid que necesitan una traducción jurada válida para Extranjería, el Registro Civil, el Ministerio de Educación, la UGE, una universidad o una embajada: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si te exigen papel, lo envío por mensajería y en Madrid capital suele llegar al día siguiente.",
+      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente). Trabajo online desde Murcia con clientes de Madrid que necesitan una traducción jurada válida para Extranjería, el Registro Civil, el Ministerio de Educación, la UGE, una universidad o una embajada: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si te exigen papel, lo envío por mensajería y en Madrid capital suele llegar al día siguiente.`,
     tramites: [
       "<strong>Oficinas de Extranjería de Madrid</strong>: NIE y TIE, arraigo, reagrupación familiar, nacionalidad por residencia y renovaciones; la ciudad concentra la mayor parte de los expedientes de extranjería del país.",
       "<strong>Registro Civil Central y Registro Civil de Madrid</strong>: nacionalidad por opción y por residencia, inscripción de matrimonios y nacimientos ocurridos en el extranjero, expedientes de matrimonio.",
@@ -188,7 +189,7 @@ export const CIUDADES = [
       "Traductora jurada de inglés online para Barcelona (MAEC nº 7310): Extranjería, Registro Civil, universidades y consulados. PDF en 24/48 h. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Barcelona",
     lead:
-      "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC (nº 7310). Atiendo online, desde Murcia, a clientes de Barcelona y su área metropolitana que necesitan una traducción jurada español-inglés con validez oficial: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. El papel, si tu organismo lo pide, llega por mensajería en 24/48 h.",
+      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente). Atiendo online, desde Murcia, a clientes de Barcelona y su área metropolitana que necesitan una traducción jurada español-inglés con validez oficial: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. El papel, si tu organismo lo pide, llega por mensajería en 24/48 h.`,
     tramites: [
       "<strong>Oficina de Extranjería de Barcelona</strong>: NIE y TIE, arraigo, reagrupación familiar, nacionalidad por residencia, autorizaciones de residencia de nómadas digitales y profesionales cualificados.",
       "<strong>Registro Civil de Barcelona</strong>: expedientes de nacionalidad, inscripción de matrimonios y nacimientos ocurridos en el extranjero, expedientes matrimoniales con cónyuge de habla inglesa.",
@@ -240,7 +241,7 @@ export const CIUDADES = [
       "Traductora jurada de inglés online para Valencia (MAEC nº 7310): Extranjería, Registro Civil, UV y UPV, notarías. PDF en 24/48 h. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Valencia",
     lead:
-      "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC (nº 7310). Trabajo online desde Murcia con clientes de Valencia capital, l'Horta, la Safor y el resto de la provincia: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si tu organismo exige papel, te lo envío por mensajería y suele llegar en 24/48 h.",
+      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente). Trabajo online desde Murcia con clientes de Valencia capital, l'Horta, la Safor y el resto de la provincia: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si tu organismo exige papel, te lo envío por mensajería y suele llegar en 24/48 h.`,
     tramites: [
       "<strong>Oficina de Extranjería de Valencia</strong>: NIE y TIE, arraigo, reagrupación familiar, nacionalidad por residencia y autorizaciones de residencia para nómadas digitales que ya están en España.",
       "<strong>Registro Civil de Valencia</strong>: expedientes de nacionalidad, inscripción de matrimonios y nacimientos ocurridos en el extranjero, expedientes matrimoniales con cónyuge británico, irlandés o estadounidense.",

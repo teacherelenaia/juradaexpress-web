@@ -5,7 +5,7 @@ import {
   WHATSAPP_URL,
   TIMEZONE_NOTE,
 } from "../../../content/site";
-import { personRef } from "../../../content/persona";
+import { personRef, SINCE, yearsOfExperience } from "../../../content/persona";
 
 export const metadata = {
   title: "Sobre mí — Elena Peñaranda, Traductora Jurada de Inglés (MAEC nº 7310)",
@@ -41,9 +41,11 @@ export default function Page() {
         <div className="max-w-[68ch]">
           <p className="text-lg text-slate-700">
             Soy <strong className="text-brand-navy">Elena Peñaranda Ortega</strong>,
-            Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio
-            de Asuntos Exteriores, Unión Europea y Cooperación con el nº de
-            acreditación 7310. Puedes comprobar mi nombramiento en el{" "}
+            Traductora-Intérprete Jurada de Inglés nombrada en {SINCE} por el
+            Ministerio de Asuntos Exteriores, Unión Europea y Cooperación con
+            el nº de acreditación 7310: {yearsOfExperience()} años traduciendo,
+            firmando y sellando documentos oficiales. Puedes comprobar mi
+            nombramiento en el{" "}
             <a
               href={MAEC_URL}
               target="_blank"

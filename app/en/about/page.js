@@ -5,7 +5,7 @@ import {
   WHATSAPP_URL_EN,
   TIMEZONE_NOTE,
 } from "../../../content/site";
-import { personRef } from "../../../content/persona";
+import { personRef, SINCE, yearsOfExperience } from "../../../content/persona";
 
 export const metadata = {
   title: "About me — Elena Peñaranda, Sworn Translator of English (MAEC no. 7310)",
@@ -41,9 +41,11 @@ export default function Page() {
         <div className="max-w-[68ch]">
           <p className="text-lg text-slate-700">
             I'm <strong className="text-brand-navy">Elena Peñaranda Ortega</strong>,
-            a Sworn Translator-Interpreter of English appointed by the Spanish
-            Ministry of Foreign Affairs, European Union and Cooperation under
-            accreditation no. 7310. You can check my appointment on the{" "}
+            a Sworn Translator-Interpreter of English appointed in {SINCE} by
+            the Spanish Ministry of Foreign Affairs, European Union and
+            Cooperation under accreditation no. 7310: {yearsOfExperience()}{" "}
+            years translating, signing and stamping official documents. You
+            can check my appointment on the{" "}
             <a
               href={MAEC_URL}
               target="_blank"

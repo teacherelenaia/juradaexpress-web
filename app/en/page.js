@@ -9,6 +9,7 @@ import ProcessVideo from "../components/ProcessVideo";
 import FollowUs from "../components/FollowUs";
 import { SectionHeading } from "../components/ui";
 import { DOCUMENTS, MIN_PRICE } from "../../content/documents";
+import { SINCE, yearsOfExperience } from "../../content/persona";
 import {
   WHATSAPP_URL_EN,
   LARGE_PROJECT_CAPACITY,
@@ -169,7 +170,8 @@ export default function Page() {
               <a href="/en/sworn-english-translator" className="link">
                 sworn English translator
               </a>{" "}
-              appointed by Spain's Foreign Ministry. The whole process is
+              appointed by Spain's Foreign Ministry in {SINCE}, with{" "}
+              {yearsOfExperience()} years of experience. The whole process is
               digital: you send me a scan of the document, pay by card from
               any country and receive the translation as a signed PDF the
               same day or the next. I also provide certified translations
@@ -494,8 +496,8 @@ export default function Page() {
                 className="link"
               >
                 accreditation no. 7310
-              </a>
-              . I personally translate, sign and stamp every sworn
+              </a>{" "}
+              since {SINCE}. I personally translate, sign and stamp every sworn
               translation, guaranteeing its validity before any official body
               in Spain.
             </p>
