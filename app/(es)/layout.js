@@ -18,12 +18,12 @@ export const metadata = {
     template: "%s | Jurada Express",
   },
   description:
-    "Traducción jurada español-inglés desde 35 € por documento, entrega en 24/48 h en PDF firmado. Traductora jurada de inglés MAEC nº 7310, 100 % online.",
+    "Traductora jurada de inglés desde 2009 (MAEC nº 7310). Traducción jurada español-inglés desde 35 € por documento, PDF firmado en 24/48 h, 100 % online.",
   alternates: { canonical: "https://juradaexpress.es/" },
   openGraph: {
     title: "Traducción Jurada de Inglés Online desde 35 € | Jurada Express",
     description:
-      "Traducción jurada español-inglés desde 35 € por documento, entrega en 24/48 h en PDF firmado. Traductora jurada de inglés MAEC nº 7310, 100 % online.",
+      "Traductora jurada de inglés desde 2009 (MAEC nº 7310). Traducción jurada español-inglés desde 35 € por documento, PDF firmado en 24/48 h, 100 % online.",
     url: "https://juradaexpress.es/",
     siteName: "Jurada Express",
     type: "website",
@@ -41,7 +41,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Traducción Jurada de Inglés Online desde 35 € | Jurada Express",
     description:
-      "Traducción jurada español-inglés desde 35 € por documento, entrega en 24/48 h en PDF firmado. Traductora jurada de inglés MAEC nº 7310, 100 % online.",
+      "Traductora jurada de inglés desde 2009 (MAEC nº 7310). Traducción jurada español-inglés desde 35 € por documento, PDF firmado en 24/48 h, 100 % online.",
     images: ["https://juradaexpress.es/fotos/hero-firma.jpg"],
   },
   verification: {
