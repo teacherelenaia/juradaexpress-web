@@ -4,7 +4,8 @@
 // el patrón de la auditoría (5.2): para qué trámites, apostilla sí/no,
 // precio desde (de content/documents.js), plazo, cómo enviarlo y FAQ propia
 // de 3 preguntas. La plantilla que las pinta es
-// app/components/DocumentPage.js.
+// app/components/DocumentPage.js. El campo `updated` (última revisión de la
+// ficha) se muestra en la página y alimenta lastModified en app/sitemap.js.
 import { DOCUMENTS } from "./documents";
 
 const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
@@ -20,6 +21,7 @@ export const FICHAS = [
       "La partida de nacimiento es el documento que más veces he traducido: la piden para la nacionalidad, para casarse, para el NIE de un hijo o para inscribir en España un nacimiento ocurrido fuera. La traduzco en ambos sentidos, con mi firma y sello, y te la entrego lista para presentar.",
     price: priceOf("partida-nacimiento"),
     time: "24/48 h",
+    updated: "2026-09-26",
     tramites: [
       "Nacionalidad española por residencia u opción",
       "Matrimonio civil y parejas de hecho",
@@ -68,6 +70,7 @@ export const FICHAS = [
       "El certificado de matrimonio aparece en más trámites de los que parece: inscribir en España un matrimonio celebrado fuera, pedir la residencia como cónyuge, cambiar el estado civil ante el HMRC británico o reclamar una pensión de viudedad. Lo traduzco con firma y sello para que lo presentes sin vueltas.",
     price: priceOf("certificado-matrimonio"),
     time: "24/48 h",
+    updated: "2026-09-26",
     tramites: [
       "Inscripción del matrimonio en el Registro Civil",
       "Residencia y tarjeta de familiar de ciudadano de la UE",
@@ -116,6 +119,7 @@ export const FICHAS = [
       "El certificado de penales es imprescindible en casi cualquier expediente de extranjería o nacionalidad, y también te lo pedirán para trabajar con menores o solicitar un visado. Traduzco tanto el certificado español del Ministerio de Justicia como los británicos (ACRO Police Certificate, DBS check), siempre con firma y sello.",
     price: priceOf("antecedentes-penales"),
     time: "24/48 h",
+    updated: "2026-09-26",
     tramites: [
       "Residencia, arraigo y nacionalidad en España",
       "Visados de trabajo y estudios (España y Reino Unido)",
@@ -164,6 +168,7 @@ export const FICHAS = [
       "Traduzco títulos y expedientes en los dos sentidos: el título español para estudiar o trabajar en Reino Unido, y el degree británico para homologarlo o colegiarte en España. El formato importa: respeto la estructura del original para que el evaluador encuentre cada dato donde lo espera.",
     price: priceOf("titulo-universitario"),
     time: "24/48 h",
+    updated: "2026-09-26",
     tramites: [
       "Admisión en universidades británicas (UCAS y másteres)",
       "Homologación y equivalencia de títulos extranjeros en España",
@@ -213,6 +218,7 @@ export const FICHAS = [
     price: null,
     priceNote: "presupuesto cerrado en menos de 2 h",
     time: "Según extensión (te doy fecha exacta con el presupuesto)",
+    updated: "2026-09-26",
     tramites: [
       "Compraventa de vivienda ante notario",
       "Poderes notariales otorgados en Reino Unido o España",
@@ -262,6 +268,7 @@ export const FICHAS = [
     price: priceOf("partida-nacimiento"),
     priceLabel: "certificados desde",
     time: "24/48 h en documentos habituales",
+    updated: "2026-09-26",
     tramites: [
       "Expedientes de nacionalidad y extranjería en España",
       "Visados y trámites ante autoridades británicas (UKVI, HMRC…)",
@@ -308,6 +315,7 @@ export const FICHAS = [
     price: priceOf("partida-nacimiento"),
     priceLabel: "certificados desde",
     time: "24/48 h en documentos habituales",
+    updated: "2026-09-26",
     tramites: [
       "Ministerios, ayuntamientos y comunidades autónomas",
       "Universidades y homologación de títulos",
@@ -353,6 +361,7 @@ export const FICHAS = [
       "Desde el acuerdo posterior al Brexit, los residentes británicos pueden canjear su permiso en la DGT — y en ese expediente aparece a menudo la traducción jurada del permiso o de los certificados de la DVLA. Es un documento corto: lo tienes traducido, firmado y sellado en 24 horas.",
     price: priceOf("permiso-conducir"),
     time: "24 h",
+    updated: "2026-09-26",
     tramites: [
       "Canje del permiso británico en la DGT",
       "Certificados de la DVLA (entitlement, check codes)",
@@ -398,6 +407,7 @@ export const FICHAS = [
       "Los documentos laborales se piden para más cosas de las que imaginas: un visado de trabajo, una hipoteca con ingresos en otro país, una pensión con años cotizados en Reino Unido. Traduzco certificados de empresa, nóminas, vidas laborales y cartas del HMRC o del DWP con firma y sello.",
     price: priceOf("certificado-empresa"),
     time: "24/48 h",
+    updated: "2026-09-26",
     tramites: [
       "Visados de trabajo (España y Reino Unido)",
       "Hipotecas y alquileres con ingresos extranjeros",
@@ -444,6 +454,7 @@ export const FICHAS = [
     price: null,
     priceNote: "presupuesto cerrado en menos de 2 h",
     time: "24 h",
+    updated: "2026-09-26",
     tramites: [
       "Poderes y escrituras ante notario extranjero",
       "Apertura de cuentas bancarias fuera de España",
@@ -490,6 +501,7 @@ export const FICHAS = [
     price: null,
     priceNote: "presupuesto cerrado en menos de 2 h",
     time: "Según extensión (fecha exacta con el presupuesto)",
+    updated: "2026-09-26",
     tramites: [
       "Aceptación y adjudicación de herencias ante notario",
       "Grant of probate y letters of administration británicos",
@@ -539,6 +551,7 @@ export const FICHAS = [
     price: null,
     priceNote: "presupuesto cerrado en menos de 2 h",
     time: "24/48 h en certificados breves",
+    updated: "2026-09-26",
     tramites: [
       "Visados que exigen certificado médico",
       "Oposiciones y pruebas físicas",

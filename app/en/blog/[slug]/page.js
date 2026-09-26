@@ -121,6 +121,25 @@ export default function BlogPostPage({ params }) {
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
 
+      {/* Article FAQ (optional `faq` field in content/posts.en.js) */}
+      {post.faq?.length > 0 && (
+        <section className="mt-12">
+          <h2 className="font-display text-2xl font-semibold leading-snug tracking-[-0.02em] text-slate-900">
+            Frequently asked questions
+          </h2>
+          <div className="mt-4 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200">
+            {post.faq.map((f) => (
+              <details key={f.q} className="group p-5">
+                <summary className="cursor-pointer font-medium text-slate-900">
+                  {f.q}
+                </summary>
+                <p className="mt-2 max-w-[68ch] text-sm text-slate-600">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Final CTA */}
       <div className="mt-12 rounded-xl bg-brand-navy p-6 text-white md:p-8" data-surface="navy">
         <h2 className="font-display text-2xl font-semibold leading-snug tracking-[-0.02em] text-white">
@@ -226,6 +245,18 @@ export default function BlogPostPage({ params }) {
                   },
                 ],
               },
+              ...(post.faq?.length > 0
+                ? [
+                    {
+                      "@type": "FAQPage",
+                      mainEntity: post.faq.map((f) => ({
+                        "@type": "Question",
+                        name: f.q,
+                        acceptedAnswer: { "@type": "Answer", text: f.a },
+                      })),
+                    },
+                  ]
+                : []),
             ],
           }),
         }}

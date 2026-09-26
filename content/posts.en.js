@@ -318,6 +318,222 @@ export const postsEn = [
   },
 
 
+  // ---------------------------------------------------------------------
+  // SEO phase 2 (September 2026): in-depth articles with their own FAQ.
+  // The `faq` field is rendered by app/en/blog/[slug]/page.js (FAQPage).
+  // Prices: only those in content/documents.js.
+  // ---------------------------------------------------------------------
+  {
+    slug: "how-to-check-sworn-translation-valid-spain",
+    title: "How to check whether a sworn translation is valid in Spain (and what to do if yours is rejected)",
+    excerpt:
+      "The five things a Spanish official checks on a sworn translation: the Ministry appointment, the official register, signature, stamp, certification and date. How to verify them yourself, the mistakes some agencies make and what to do if the office turns it down.",
+    date: "2026-09-26",
+    updated: "2026-09-26",
+    author: "Elena Peñaranda Ortega",
+    tags: ["validez", "consejos"],
+    readingTime: "7 min",
+    image: "/blog/post-sworn-vs-certified.jpg",
+    alt: "Sworn translation with the translator's stamp and digital signature",
+    html: `
+      <p>A sworn translation is valid in Spain when it has been produced and signed by a <strong>sworn translator-interpreter appointed by Spain's Ministry of Foreign Affairs, European Union and Cooperation (MAEC)</strong> for that language, and it carries the translator's <strong>certification, signature, stamp and date</strong>, with a copy of the source document attached. That is the whole test. Headed paper does not make it valid, nor does an agency logo, a notary or the word "certified". If any of those pieces is missing, the receiving office can reject it, and it does so more often than people think. I am Elena Peñaranda, sworn translator of English no. 7310, and this article shows you how to check in five minutes whether the translation in front of you will pass.</p>
+
+      <h2>1. Who is allowed to sign a sworn translation in Spain</h2>
+      <p>In Spain the only person who can do it is a <strong>sworn translator-interpreter</strong> (<em>traductor-intérprete jurado</em>), a title granted by the MAEC through its Office of Language Interpretation, either by examination or by recognition of a qualification from another EU Member State. Each appointment is for one specific language and carries a <strong>sworn translator number</strong>. Mine is 7310, for English: I can certify translations from English into Spanish and from Spanish into English, and no other combination.</p>
+      <p>Two practical consequences follow. First, an agency is not a sworn translator. It can act as intermediary, but the translation is signed by a named person with a number, and that person is legally responsible for every sentence. Second, a sworn translator of French cannot sign a translation from English, however good their English is. This happens more often than you would expect when a job passes through several hands.</p>
+
+      <h2>2. How to check the appointment on the official register</h2>
+      <p>The MAEC publishes the <a href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx" target="_blank" rel="noopener noreferrer">official register of sworn translator-interpreters</a>, and that is precisely what an official consults when in doubt. Look up the name on the stamp and check three things: that the person <strong>appears</strong>, that the <strong>language</strong> matches your document and that the <strong>number</strong> is the same as the one on the stamp. If the name is not there, or is there for a different language, the translation is not sworn no matter what the heading says.</p>
+      <p>One honest caveat: the register is updated periodically, and very recent appointments can take a few weeks to show up. If the translator tells you they have just been appointed, ask for their appointment number; the office can verify it with that. In my case there is no room for doubt: I have been on the register for years and anyone can check.</p>
+
+      <h2>3. What the translation must carry, page by page</h2>
+      <p>The current rules (Royal Decree 724/2020 and the order regulating the stamp and certification) set a fairly strict format. This is what must appear:</p>
+      <ul>
+        <li><strong>The closing certification</strong>, in the official wording: the translator, identified by name and number, certifies that the foregoing is a faithful and complete translation into the target language of a document written in the source language, and signs it in a specific place on a specific date.</li>
+        <li><strong>The signature</strong> of the translator, handwritten on paper or electronic in a PDF, next to the certification.</li>
+        <li><strong>The stamp</strong>, with the full name, the words "Traductor/a-Intérprete Jurado/a de [language]" and the appointment number. No address, no logos: the official model is plain and allows no decoration.</li>
+        <li><strong>The date</strong> of the certification, which the office will treat as the date of the translation.</li>
+        <li><strong>A copy of the source document</strong>, stamped and dated, attached to the translation. The translator certifies the translation of <em>that</em> specific document, not of an abstract text; without the copy, the official cannot tell what was translated.</li>
+        <li><strong>All of the content</strong>: stamps, apostille, signatures, handwritten notes and marginal annotations. Anything that cannot be translated is described in square brackets ("[illegible stamp]", "[signature]"). A sworn translation never summarises or leaves things out.</li>
+      </ul>
+      <p>If you want to see this applied to a real case, the page on <a href="/traduccion-jurada-validez-oficial">official validity of sworn translations</a> (in Spanish) explains how it is checked by ministries, universities and consulates.</p>
+
+      <h2>4. Digital signature: yes, it is valid, and this is how you verify it</h2>
+      <p>Since 2020 the Office of Language Interpretation has accepted sworn translations signed <strong>electronically</strong> and delivered as a PDF, and Spanish public bodies accept them across the board for online submission. The digital signature does not replace the stamp and the certification: it goes with them. The PDF must carry the certification, the image of the stamp and the date, plus the translator's electronic signature embedded in the file.</p>
+      <p>To verify it, open the PDF in a reader that shows the signature panel (Adobe Acrobat Reader does) and check that the signature is valid, that the signer's name is the translator's and that the document <strong>has not been modified</strong> since it was signed. If the PDF is just a scanned image of a signature with no electronic signature behind it, it is a digital copy of a paper translation: it may do if the office accepts copies, but it is not a digitally signed translation.</p>
+
+      <h2>Table: valid versus likely to be rejected</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>What to check</th><th>Valid translation</th><th>Warning sign</th></tr></thead>
+        <tbody>
+          <tr><td>Who signs</td><td>MAEC sworn translator-interpreter, with name and number</td><td>Agency stamp, "certified translator", notary or a signature with no number</td></tr>
+          <tr><td>Official register</td><td>Listed for that language and that number</td><td>Not listed, or listed for another language</td></tr>
+          <tr><td>Certification</td><td>Official wording, place and date</td><td>Missing, in another language or reads "certified translation"</td></tr>
+          <tr><td>Stamp</td><td>Name, language and number; plain</td><td>Logos, address, no number or a different language</td></tr>
+          <tr><td>Copy of the original</td><td>Attached, stamped and dated</td><td>Only the translation is delivered</td></tr>
+          <tr><td>Content</td><td>Complete: stamps, apostille, notes</td><td>Apostille missing or "irrelevant" paragraphs left out</td></tr>
+          <tr><td>Digital signature</td><td>Valid electronic signature in the PDF</td><td>Pasted image of a signature, no electronic signature</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2>5. Typical mistakes I see in translations from some agencies</h2>
+      <p>Not every agency works badly; many subcontract to serious sworn translators and deliver a flawless product. But when a client brings me a rejected translation, it is almost always for one of these reasons:</p>
+      <ol>
+        <li><strong>It is signed by a non-sworn translator</strong> and the agency "certifies" it with its own stamp. In the UK or the US that is a certified translation and it works; in Spain it does not.</li>
+        <li><strong>The translator is sworn for a different language.</strong> Common with bilingual documents or with multi-country files split up carelessly.</li>
+        <li><strong>One version was translated and another was stamped</strong>: the client sends a draft, then the final document with the apostille, and the translation does not include the apostille.</li>
+        <li><strong>The copy of the original is missing</strong>, or attached without a stamp. The easiest defect to fix and the most common one.</li>
+        <li><strong>The electronic signature is not the translator's</strong> but the agency's, or the PDF was "flattened" after signing and the signature shows as invalid.</li>
+        <li><strong>Translation of a translation</strong>: the original is in Hindi or Arabic, someone translated it into English, and the sworn translation was made from that English. Many offices will not accept it.</li>
+      </ol>
+      <p>If you are unsure what kind of translation you are being sold, <a href="/en/blog/sworn-vs-certified-translation-uscis-spain">sworn vs certified translation</a> walks through the differences calmly.</p>
+
+      <h2>6. What to do if the office rejects it</h2>
+      <p>First, <strong>ask for the reason in writing</strong>. "It is not valid" is not a reason; "the copy of the original is missing" or "the translator is not on the register" is. With the reason in hand there are three scenarios:</p>
+      <ul>
+        <li><strong>A defect the same translator can fix</strong> (copy missing, a page missing, apostille not translated). Contact the sworn translator who signed: they have a professional duty to deliver a complete translation and usually put it right at no cost or for a small fee.</li>
+        <li><strong>The translator is not sworn, or not for that language.</strong> Nothing can be done with that translation; you need a new one. Claim against whoever sold it to you, keeping the written rejection as evidence.</li>
+        <li><strong>The official is wrong.</strong> It happens, especially with electronic signatures. Provide the link to the MAEC register and, for a PDF, the signature validation report. If they insist on paper, the translator can courier you the original; in my case the price of the translation is the same, only postage is added.</li>
+      </ul>
+      <p>And if you do need it redone, do not start from scratch blindly: send me the source document and the rejection letter, I will tell you within 2 hours what went wrong and give you a fixed price. Standard certificates (birth, marriage, criminal record) start at <a href="/en/precios">€35</a> and are delivered in 24/48 hours.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20my%20sworn%20translation%20has%20been%20rejected%20and%20I%27d%20like%20to%20know%20what%20went%20wrong">Message me on WhatsApp</a>
+        with the document and the reason for the rejection, or see the
+        <a href="/en/sworn-english-translator">sworn English translator</a> page to learn how I work.
+      </p>
+    `,
+    faq: [
+      {
+        q: "How do I check that a sworn translator really exists?",
+        a: "Look up their name on the MAEC's official register of sworn translator-interpreters and check that the language and number match those on the stamp. It is the same check the Spanish administration performs.",
+      },
+      {
+        q: "Is a digitally signed PDF sworn translation as valid as paper?",
+        a: "Yes. The Office of Language Interpretation has accepted electronic signatures since 2020 and public bodies accept them for online submission. If a specific office demands paper, the translator can send you the original.",
+      },
+      {
+        q: "Does a sworn translation expire?",
+        a: "No. What can expire is the source document: criminal record or residence certificates often have a limited validity for the purposes of the procedure, so check the original's validity before translating.",
+      },
+      {
+        q: "Can an agency certify a sworn translation with its own stamp?",
+        a: "No. In Spain only the sworn translator-interpreter appointed by the MAEC certifies, with their signature, stamp and number. An agency stamp adds no validity.",
+      },
+      {
+        q: "My translation was rejected. Do I have to pay for a whole new one?",
+        a: "It depends on the reason. If it is a formal defect (copy of the original, a page or the apostille missing), the same sworn translator should fix it. If the person who signed is not a sworn translator for that language, you need a new translation and should claim against whoever sold it to you.",
+      },
+    ],
+  },
+
+  {
+    slug: "sworn-translations-spanish-citizenship-residence-uk-us-india",
+    title: "Sworn translations for Spanish citizenship by residence: UK, US and Indian applicants",
+    excerpt:
+      "Which documents from your home country need translating for Spanish citizenship by residence, which apostille each one takes and the order to do it in, with the specifics for the United Kingdom, the United States and India and real prices.",
+    date: "2026-09-26",
+    updated: "2026-09-26",
+    author: "Elena Peñaranda Ortega",
+    tags: ["extranjeria", "apostilla", "reino-unido", "estados-unidos", "india"],
+    readingTime: "8 min",
+    image: "/blog/post-nie.jpg",
+    alt: "Passport and certificates prepared for a Spanish citizenship application",
+    html: `
+      <p>For Spanish citizenship by residence you need, at a minimum, two documents from your home country with an <strong>apostille and a sworn translation</strong>: your <a href="/traduccion-jurada-partida-nacimiento">birth certificate</a> and your <a href="/traduccion-jurada-certificado-penales">criminal record certificate</a>. If you are married, almost always your <a href="/traduccion-jurada-certificado-matrimonio">marriage certificate</a> too. The sworn translation of each of these certificates costs <strong>from €35</strong> and is delivered in <strong>24/48 hours</strong> as a digitally signed PDF, valid for the online application. I am Elena Peñaranda, sworn translator of English no. 7310 appointed by Spain's Ministry of Foreign Affairs, and I prepare these files every week for British, American and Indian clients; this guide is what I tell them before we start.</p>
+
+      <p>A warning before we go on: the years of residence required, the fees, the Instituto Cervantes exams and the status of your application are set by the Ministry of Justice and are better known to your lawyer or the official portal. I look after the documents: what to translate, what to apostille and in what order, so your file does not come back over a piece of paper.</p>
+
+      <h2>Which foreign documents the application asks for</h2>
+      <p>The citizenship-by-residence application is filed online and combines Spanish documents (not translated) with documents from your home country (translated). The foreign ones generally requested are:</p>
+      <ul>
+        <li><strong>Birth certificate</strong> from your home country, full or long-form, legalised with an apostille and with a sworn translation.</li>
+        <li><strong>Criminal record certificate</strong> from your home country, apostilled and translated. If you have lived in other countries in recent years, one from each of those countries as well.</li>
+        <li><strong>Marriage certificate</strong>, if you apply as the spouse of a Spanish citizen or if your marital status forms part of the file.</li>
+        <li>In some cases, <strong>children's birth certificates</strong> and the spouse's documents.</li>
+      </ul>
+      <p>Everything else (municipal registration, residence card, DELE and CCSE exams, receipts) is issued in Spain and in Spanish, so I do not need to see it.</p>
+
+      <h2>Apostille first, translation second</h2>
+      <p>The order matters, and it is the number-one reason translations get redone: the Hague apostille goes on the original document, in the country that issued it, and the sworn translation must include it. If you send me the certificate without the apostille and obtain it later, the translation already delivered will not cover it and would have to be extended. So: request the certificate, apostille it and, with both in hand, scan everything and send it to me. The UK, the US and India are all parties to the Hague Convention; none of the three needs consular legalisation.</p>
+
+      <h2>United Kingdom</h2>
+      <p>British clients give me more citizenship files than anyone else, and their documents are the most predictable:</p>
+      <ul>
+        <li><strong>Birth certificate</strong>: order a recent certified copy from the General Register Office (England and Wales), National Records of Scotland or GRONI (Northern Ireland). Get the full certificate (with parents' details), not the short version.</li>
+        <li><strong>Criminal record</strong>: the <strong>ACRO Police Certificate</strong>, not a DBS check, which is for employers. It arrives on paper by post.</li>
+        <li><strong>Apostille</strong>: issued by the FCDO Legalisation Office on each document separately. Since Brexit, UK documents no longer benefit from the apostille exemption under Regulation (EU) 2016/1191.</li>
+        <li><strong>Marriage</strong>: GRO or local register office certificate, apostilled in the same way.</li>
+      </ul>
+      <p>A detail that saves grief: the Spanish administration treats the ACRO as having a short practical shelf life, so order it once the rest of your file is ready. Everything specific to this profile is in the guide for <a href="/en/sworn-translation-british-residents-spain">British residents in Spain</a>.</p>
+
+      <h2>United States</h2>
+      <p>The trap here is that there are <strong>two levels of apostille</strong>, and picking the wrong one means doing it again:</p>
+      <ul>
+        <li><strong>Birth certificate</strong>: issued by the <em>state</em> (or county) vital records office and apostilled by the <strong>Secretary of State of that state</strong>. A federal apostille is no use for a state document.</li>
+        <li><strong>Criminal record</strong>: for citizenship the federal certificate is requested, the <strong>FBI Identity History Summary</strong> (often called an FBI background check), and it is apostilled by the <strong>U.S. Department of State</strong> (Office of Authentications) because it is a federal document. Some applicants also provide the state-level certificate for their state of residence; confirm with your lawyer.</li>
+        <li><strong>Marriage</strong>: county or state certificate, apostille from the corresponding Secretary of State.</li>
+      </ul>
+      <p>US birth certificates vary enormously from state to state (layout, fields, embossed seals), and I translate them exactly as they come, including the legal text on the back. How to pay with a US card, time zones and the other details are in the guide for <a href="/en/sworn-translation-usa-spain">clients in the United States</a>.</p>
+
+      <h2>India</h2>
+      <p>With India the tricky point is not the apostille, which is single and straightforward, but the <strong>source document</strong>:</p>
+      <ul>
+        <li><strong>Birth certificate</strong>: issued by the municipal corporation or local registrar, often in the state language (Hindi, Tamil, Marathi…) or bilingual. For me to produce the sworn translation, the certificate must be <strong>in English as issued by the authority</strong>, not translated into English by a third party: a sworn translation of a translation is usually rejected. If your certificate is only in a local language, ask the municipality for an English version or find a sworn translator for that language.</li>
+        <li><strong>Criminal record</strong>: the <strong>Police Clearance Certificate (PCC)</strong> issued by the Regional Passport Office through Passport Seva, in English.</li>
+        <li><strong>Apostille</strong>: issued by the <strong>Ministry of External Affairs (MEA)</strong>, normally after authentication by the issuing state and through the authorised outsourcing agencies. The MEA apostille is a sticker with a code, and I translate it as part of the document.</li>
+        <li><strong>Marriage</strong>: certificate from the state marriage registrar, in English, with the MEA apostille.</li>
+      </ul>
+      <p>The guide for <a href="/en/sworn-translation-india-spain">clients in India</a> covers single-word names, dates and spellings, which in a citizenship file should match your passport and NIE to the letter.</p>
+
+      <h2>Summary table by country</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Document</th><th>United Kingdom</th><th>United States</th><th>India</th><th>Sworn translation</th></tr></thead>
+        <tbody>
+          <tr><td>Birth</td><td>GRO / NRS / GRONI, full certificate. FCDO apostille</td><td>State vital records. Secretary of State apostille</td><td>Municipality, in English. MEA apostille</td><td>From €35, 24/48 h</td></tr>
+          <tr><td>Criminal record</td><td>ACRO Police Certificate. FCDO apostille</td><td>FBI Identity History Summary. Department of State apostille</td><td>PCC from Passport Seva. MEA apostille</td><td>From €35, 24/48 h</td></tr>
+          <tr><td>Marriage (if applicable)</td><td>GRO or local register office. FCDO apostille</td><td>County or state. Secretary of State apostille</td><td>State marriage registrar. MEA apostille</td><td>From €35, 24/48 h</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2>How I prepare it and what you receive</h2>
+      <ol>
+        <li><strong>You scan each document in full</strong>, apostille included, and send it by WhatsApp or through the form. Preferably all together, even if that means three or four files.</li>
+        <li><strong>I confirm within 2 working hours</strong> which documents need translating, a fixed price for the batch and a single delivery date.</li>
+        <li><strong>I translate the whole file in one go</strong>, with names, dates and terms written identically across every document. The same surname spelt two ways on two certificates is grounds for a request for clarification.</li>
+        <li><strong>You receive the digitally signed PDFs</strong>, with my certification, stamp and electronic signature, ready to upload to the online platform. If the Civil Registry or your lawyer wants paper, I courier the originals.</li>
+      </ol>
+      <p>If you want to know how to check that a sworn translation is valid before uploading it, I explain it in <a href="/en/blog/how-to-check-sworn-translation-valid-spain">how to check whether a sworn translation is valid in Spain</a>.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20preparing%20my%20Spanish%20citizenship%20application%20and%20need%20my%20certificates%20translated">Send me your certificates on WhatsApp</a>
+        and I will tell you what to translate, what to apostille and what the full batch costs. You can also see all
+        <a href="/en/precios">prices</a> or the <a href="/en/sworn-english-translator">sworn English translator</a> page.
+      </p>
+    `,
+    faq: [
+      {
+        q: "Do I have to translate my passport for citizenship?",
+        a: "Normally not: the passport is provided as a full copy and no sworn translation is required. If your lawyer or the Civil Registry expressly asks for one, it is translated like any other document.",
+      },
+      {
+        q: "Does the sworn translation include the apostille, or is that extra?",
+        a: "It is included. The apostille is part of the document and is translated with it; when it is on the same page or attached to the certificate there is no additional charge.",
+      },
+      {
+        q: "Can I submit the translation as a digitally signed PDF?",
+        a: "Yes. The application is filed online and a PDF electronically signed by a sworn translator is accepted. If the Civil Registry later asks for the paper original, I send it by courier.",
+      },
+      {
+        q: "My Indian birth certificate is in Hindi. Can you translate it?",
+        a: "I am only appointed for English. If the certificate is in Hindi or another local language, ask the municipality for an English version issued by the authority itself or go to a sworn translator for that language; a sworn translation made from an unofficial translation is usually rejected.",
+      },
+      {
+        q: "How long do the translations for the whole file take?",
+        a: "Each standard certificate (birth, criminal record, marriage) is delivered in 24/48 hours. If you send me the three or four documents together, I give you a single date for the batch, usually within that same timeframe.",
+      },
+    ],
+  },
+
+
 ];
 
 export function getAllPostsEn() {
