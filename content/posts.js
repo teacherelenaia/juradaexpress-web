@@ -941,8 +941,8 @@ export const posts = [
     title: "Documentos traducidos para la nacionalidad española por residencia: guía para ciudadanos de Reino Unido, EE. UU. e India",
     excerpt:
       "Qué documentos de tu país de origen necesitas traducir para la nacionalidad española por residencia, qué apostilla lleva cada uno y en qué orden hacerlo, con las particularidades del Reino Unido, Estados Unidos e India y precios reales.",
-    date: "2026-09-28",
-    updated: "2026-09-28",
+    date: "2026-09-26",
+    updated: "2026-09-26",
     author: "Elena Peñaranda Ortega",
     tags: ["extranjeria", "apostilla", "reino-unido", "estados-unidos", "india"],
     readingTime: "8 min",

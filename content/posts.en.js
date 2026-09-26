@@ -431,8 +431,8 @@ export const postsEn = [
     title: "Sworn translations for Spanish citizenship by residence: UK, US and Indian applicants",
     excerpt:
       "Which documents from your home country need translating for Spanish citizenship by residence, which apostille each one takes and the order to do it in, with the specifics for the United Kingdom, the United States and India and real prices.",
-    date: "2026-09-28",
-    updated: "2026-09-28",
+    date: "2026-09-26",
+    updated: "2026-09-26",
     author: "Elena Peñaranda Ortega",
     tags: ["extranjeria", "apostilla", "reino-unido", "estados-unidos", "india"],
     readingTime: "8 min",
