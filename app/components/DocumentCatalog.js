@@ -2,6 +2,7 @@
 
 // app/components/DocumentCatalog.js
 import { useEffect, useRef, useState } from "react";
+import { trackAdsConversion } from "./AdsConversion";
 import { DOCUMENTS } from "../../content/documents";
 import {
   IconFileText,
@@ -205,6 +206,7 @@ export default function DocumentCatalog() {
       });
       const data = await res.json();
       if (data.success) {
+        trackAdsConversion("presupuesto_formulario");
         setStatus("sent");
         setSelectedIds([]);
         setFile(null);

@@ -38,6 +38,20 @@ const COOKIES = [
       "Keeps the measurement session state for each Google Analytics property.",
     type: "Analytics (only with your consent)",
   },
+  // Google Ads only loads when a tag is configured in Vercel
+  // (NEXT_PUBLIC_ADS_ID, see app/components/AdsConversion.js).
+  ...(process.env.NEXT_PUBLIC_ADS_ID
+    ? [
+        {
+          name: "_gcl_au",
+          provider: "Google Ads",
+          duration: "90 days",
+          purpose:
+            "Measures whether a visit from a Google ad ends in a contact (WhatsApp, phone, form or payment). No ad personalisation.",
+          type: "Conversion measurement (only with your consent)",
+        },
+      ]
+    : []),
 ];
 
 export default function Page() {
@@ -94,6 +108,9 @@ export default function Page() {
       <p className="mt-3 text-sm text-slate-500">
         Google Analytics loads with IP anonymisation and with Google
         advertising signals switched off (no remarketing).
+        {process.env.NEXT_PUBLIC_ADS_ID
+          ? " The Google Ads tag only measures conversions, with ad personalisation switched off."
+          : ""}
       </p>
 
       <h2 className="mt-10 font-display text-2xl font-semibold leading-snug text-slate-900">
