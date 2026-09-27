@@ -1,5 +1,8 @@
 // content/posts.en.js
-// English blog posts (/en/blog). Same shape as content/posts.js. Prices
+// English blog posts (/en/blog). Same shape as content/posts.js. The
+// optional `translationOf` field is the slug of the same article in Spanish
+// (content/posts.js): the blog templates emit hreflang es/en/x-default and
+// a visible link, and the sitemap adds the language alternates. Prices
 // quoted in recent posts ALWAYS come from content/documents.js
 // (eur(id) / MIN_PRICE) so they never drift from the catalogue.
 import { DOCUMENTS, MIN_PRICE } from "./documents";
@@ -100,6 +103,7 @@ export const postsEn = [
   // ---------------------------------------------------------------------
   {
     slug: "spain-digital-nomad-visa-documents-apostille-sworn-translation",
+    translationOf: "documentos-visado-nomada-digital-apostilla-traduccion-jurada",
     title: "Spain digital nomad visa documents: which need an apostille and a sworn translation",
     excerpt:
       "The full document list for Spain's digital nomad visa, one by one: which need an apostille, which need a sworn translation into Spanish, and the order to do everything so the consulate does not send the file back.",
@@ -154,6 +158,7 @@ export const postsEn = [
 
   {
     slug: "sworn-vs-certified-translation-uscis-spain",
+    translationOf: "traduccion-jurada-o-certificada-uscis-espana",
     title: "Sworn vs certified translation: what USCIS requires and what Spain requires",
     excerpt:
       "They are not the same: USCIS requires a certified translation into English with the translator's certification (8 CFR § 103.2(b)(3)) and Spain requires a sworn translation signed and stamped by a Ministry-appointed translator. Which one you need, what each carries and when you need both.",
@@ -215,6 +220,7 @@ export const postsEn = [
 
   {
     slug: "indian-documents-spanish-visa-mea-apostille-sworn-translation",
+    translationOf: "documentos-indios-visado-espana-apostilla-mea",
     title: "Indian documents for a Spanish visa: MEA apostille and sworn translation",
     excerpt:
       "A guide for applicants from India: which documents the Spanish consulate asks for (birth, marriage, PCC, degrees, employer letters), how the Ministry of External Affairs apostille works and why certificates must be in English before the sworn translation into Spanish.",
@@ -271,6 +277,7 @@ export const postsEn = [
 
   {
     slug: "sworn-translations-leaving-spain-uk-ireland-canada-australia",
+    translationOf: "traduccion-jurada-para-irse-de-espana-reino-unido-irlanda-canada-australia",
     title: "Sworn translations for leaving Spain: what the UK, Ireland, Canada and Australia ask for",
     excerpt:
       "If you are emigrating from Spain, your certificates, degrees and criminal record checks must arrive in English. What each country requires of a translation done abroad (UKVI, Irish Immigration, IRCC and Home Affairs), when the Spanish apostille is needed and in what order to do it.",
@@ -332,6 +339,7 @@ export const postsEn = [
   // ---------------------------------------------------------------------
   {
     slug: "how-to-check-sworn-translation-valid-spain",
+    translationOf: "como-saber-si-una-traduccion-jurada-es-valida",
     title: "How to check whether a sworn translation is valid in Spain (and what to do if yours is rejected)",
     excerpt:
       "The five things a Spanish official checks on a sworn translation: the Ministry appointment, the official register, signature, stamp, certification and date. How to verify them yourself, the mistakes some agencies make and what to do if the office turns it down.",
@@ -435,6 +443,7 @@ export const postsEn = [
 
   {
     slug: "sworn-translations-spanish-citizenship-residence-uk-us-india",
+    translationOf: "nacionalidad-espanola-residencia-documentos-reino-unido-eeuu-india",
     title: "Sworn translations for Spanish citizenship by residence: UK, US and Indian applicants",
     excerpt:
       "Which documents from your home country need translating for Spanish citizenship by residence, which apostille each one takes and the order to do it in, with the specifics for the United Kingdom, the United States and India and real prices.",
@@ -544,6 +553,7 @@ export const postsEn = [
 
   {
     slug: "studying-in-the-uk-from-spain-documents-sworn-translation",
+    translationOf: "estudiar-en-reino-unido-traduccion-expediente",
     title: "Studying in the UK from Spain: which documents need a sworn translation",
     excerpt:
       "What British universities and the Home Office ask Spanish students to translate, case by case: exchange or Erasmus, an undergraduate degree through UCAS, a master's and the Student visa. Which documents need a sworn translation, which do not need translating at all, and real prices per document.",
@@ -662,6 +672,7 @@ export const postsEn = [
 
   {
     slug: "sworn-translation-uk-home-office-visas-settled-status-citizenship",
+    translationOf: "traduccion-jurada-visado-reino-unido",
     title: "Sworn translations for the UK Home Office: visas, settled status and British citizenship",
     excerpt:
       "The Home Office accepts certified translations and does not demand sworn ones: what UKVI actually requires, when a Spanish sworn translation is worth it, and which Spanish documents are translated for a visa, the EU Settlement Scheme (settled status) and British citizenship. Real prices.",
@@ -772,6 +783,222 @@ export const postsEn = [
       {
         q: "How much does it cost to translate the documents for a partner visa?",
         a: `The marriage certificate costs ${eur("certificado-matrimonio")}, each birth certificate ${eur("partida-nacimiento")} and the employer's certificate or payslip ${eur("certificado-empresa")}, delivered in 24/48 hours. Bank statements and contracts are quoted once I see them; with the complete file you get a single fixed price within 2 hours.`,
+      },
+    ],
+  },
+
+  {
+    slug: "certified-translations-ircc-canada-from-spain",
+    translationOf: "traduccion-jurada-canada-ircc-express-entry-estudios-reagrupacion",
+    title: "Certified translations for IRCC Canada from Spain",
+    excerpt:
+      "What IRCC requires of a translation (certified translator or affidavit, copy of the original), how a Spanish sworn translation meets it and which Spanish documents are translated for Express Entry, a study permit and family sponsorship. Real prices per document.",
+    date: "2026-09-27",
+    updated: "2026-09-27",
+    author: "Elena Peñaranda Ortega",
+    tags: ["canada", "extranjeria", "validez"],
+    readingTime: "9 min",
+    image: "/blog/post-leaving-spain.jpg",
+    alt: "Passport and documents prepared for a Canadian immigration application",
+    html: `
+      <p>Immigration, Refugees and Citizenship Canada (<strong>IRCC</strong>) accepts documents in English or French. Anything in Spanish is submitted with a <strong>complete translation</strong> and, if the person who signs it is not a Canadian <em>certified translator</em> (a member in good standing of a provincial translators' association), with the translator's <strong>affidavit</strong> swearing to their proficiency in both languages and to the accuracy of the translation, plus a copy of the original document. My sworn translation into English carries the certification of accuracy, my name, my signature, my stamp as sworn translator no. 7310 appointed by Spain's Ministry of Foreign Affairs, the date and my contact details as standard; what I cannot guarantee is that your IRCC office will treat an official appointment by the Spanish State as equivalent to Canadian membership, so if your programme requires the affidavit we sort it out before I start. The usual certificates (criminal record, birth, marriage) cost <strong>from €${MIN_PRICE}</strong> and are delivered in 24/48 hours. I am Elena Peñaranda, sworn translator of English, and this guide is what I explain to anyone preparing Express Entry, a study permit or a family sponsorship from Spain.</p>
+
+      <h2>What IRCC actually requires of a translation</h2>
+      <p>The IRCC Help Centre boils it down to three pieces for any document that is not in English or French:</p>
+      <ul>
+        <li>the <strong>translation</strong> into English or French, complete, by a translator who is not the applicant, a family member or their representative;</li>
+        <li>an <strong>affidavit</strong> from the person who did the translation, if they are not a <em>certified translator</em> (a member in good standing of a provincial or territorial association of Canadian translators, such as ATIO in Ontario, OTTIAQ in Quebec or STIBC in British Columbia). The affidavit is sworn before a notary or a commissioner of oaths in the country where the translation was done;</li>
+        <li>where the programme says so, a <strong>certified copy of the original</strong> that was translated.</li>
+      </ul>
+      <p>The sources are the official pages <a href="https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=018&amp;top=4" target="_blank" rel="noopener noreferrer">IRCC: language of documents</a> and <a href="https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=040&amp;top=4" target="_blank" rel="noopener noreferrer">IRCC: what is an affidavit for a translation</a>. Note what it does <strong>not</strong> ask for: an apostille. IRCC works from digital copies and the translation; an apostille only comes into play if another body in the process (a university, a professional regulator, a credential assessment organisation) requires it on its own account.</p>
+
+      <h2>How a Spanish sworn translation meets it (and where the nuance lies)</h2>
+      <p>A sworn translation by a translator appointed by Spain's Ministry of Foreign Affairs is a certified translation in the strongest sense that exists in Spain: it is signed by a person appointed by the Ministry, with a number that can be checked on the <a href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx" target="_blank" rel="noopener noreferrer">official register</a>, and it carries certification, signature, stamp, date and a stamped copy of the original. For IRCC I add my contact details on the certification itself and an express declaration of proficiency in both languages and of accuracy, which is the content of the affidavit.</p>
+      <p>The nuance is one of form: IRCC defines <em>certified translator</em> as a member of a Canadian association, and my appointment is an official title from the Spanish State, not a membership. In practice many applicants submit official translations from their own country without any issue, but the written rule says certified translator <strong>or</strong> affidavit, and I would rather tell you now than have you find out through a request for more documents. If your office or your immigration adviser asks for the affidavit, my declaration is sworn before a notary in Spain and I give you its cost with the quote, before charging anything. I say the same on the page for <a href="/en/sworn-translation-canada-spain">clients with paperwork between Canada and Spain</a>.</p>
+
+      <h2>Express Entry: which Spanish documents get translated</h2>
+      <p>Express Entry (Federal Skilled Worker, Canadian Experience Class, Federal Skilled Trades and provincial nominations) is the file I translate most often for Canada. The Spanish-language documents that almost always appear:</p>
+      <ul>
+        <li><strong><a href="/traduccion-jurada-certificado-penales">Criminal record certificate</a></strong> from the Spanish Ministry of Justice, for every country where you have lived for six consecutive months or more since the age of 18. Sworn translation: <strong>${eur("antecedentes-penales")}</strong>.</li>
+        <li><strong><a href="/traduccion-jurada-titulo-universitario">University degree</a> and academic transcript</strong> for the Educational Credential Assessment (ECA) by WES, ICAS, IQAS or the body for your profession. Each assessor has its own procedure (WES, for instance, asks the university to send the transcript directly) and requires a translation whenever the documents are not in English or French. Degree: <strong>${eur("titulo-universitario")}</strong>; transcript: ${eur("expediente-academico")}.</li>
+        <li><strong><a href="/traduccion-jurada-certificado-empresa">Employment reference letters, employer's certificates and contracts</a></strong> proving the work experience you claim, with duties, dates, hours and salary. Employer's certificate or payslip: <strong>${eur("certificado-empresa")}</strong>; letters and contracts quoted once I see them.</li>
+        <li><strong><a href="/traduccion-jurada-certificado-matrimonio">Marriage certificate</a></strong> or registered-partnership certificate, and the <strong><a href="/traduccion-jurada-partida-nacimiento">birth certificates</a></strong> of accompanying children: <strong>${eur("certificado-matrimonio")}</strong> and <strong>${eur("partida-nacimiento")}</strong> each.</li>
+        <li><strong>Proof of funds</strong>: bank letters showing the six-month average balance. Many banks issue them in English; if yours is in Spanish, it is translated.</li>
+      </ul>
+      <p>The language test (IELTS, CELPIP, TEF) and the medical exam with a panel physician are already done in English or French: nothing to translate. The Spanish social security employment history can be requested in English from its own online portal; check before translating it.</p>
+
+      <h2>Study permit</h2>
+      <p>To study in Canada you need the letter of acceptance from a designated learning institution (DLI), the provincial attestation letter that the institution itself handles for most programmes, and proof of funds, on top of the records the university asked for when it admitted you:</p>
+      <ul>
+        <li><strong>Diplomas and transcripts</strong> from secondary school or university, depending on the programme. Admissions wants them translated; IRCC, afterwards, usually relies on the letter of acceptance.</li>
+        <li><strong>Funds</strong>: a guaranteed investment certificate (GIC) or bank statements; if the money is your parents', a letter of support and your birth certificate to prove the relationship.</li>
+        <li>For minors, a <strong>custodian declaration</strong> in Canada and the parents' consent.</li>
+        <li><strong>Criminal record certificate</strong> only if IRCC expressly asks for it.</li>
+      </ul>
+
+      <h2>Family sponsorship: spouse, partner, children and parents</h2>
+      <p>In Canada family reunification is a <em>sponsorship</em>: the Canadian resident or citizen sponsors and the family member applies. The file revolves around <strong>proof of the relationship</strong>, and that is where the Spanish documents carry weight:</p>
+      <ul>
+        <li><strong>Spouse</strong>: the full (<em>literal</em>) marriage certificate from the Spanish Civil Registry. The Spanish family book (<em>libro de familia</em>) helps, but IRCC understands the certificate better.</li>
+        <li><strong>Common-law partner</strong>: the registered-partnership (<em>pareja de hecho</em>) certificate and proof of at least a year of cohabitation (joint municipal registration, tenancy agreement, utility bills), translated when in Spanish.</li>
+        <li><strong>Dependent children</strong>: birth certificates and, with shared custody or a parent who is not travelling, the court order or consent.</li>
+        <li><strong>Parents and grandparents</strong>: birth certificates linking sponsor and sponsored person.</li>
+        <li><strong>Criminal record certificates</strong> for the sponsored family member, from every country where they have lived for six months or more since the age of 18.</li>
+        <li><strong>Divorce judgments</strong> or death certificates from previous marriages, where they exist.</li>
+      </ul>
+
+      <h2>Table: document, procedure, apostille, affidavit and price</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spanish document</th><th>Typical procedure</th><th>Apostille?</th><th>Affidavit?</th><th>Sworn translation</th></tr></thead>
+        <tbody>
+          <tr><td>Criminal record certificate</td><td>Express Entry, sponsorship, studies (if requested)</td><td>Not for IRCC</td><td>Only if your office requires it</td><td>${eur("antecedentes-penales")}</td></tr>
+          <tr><td>University degree</td><td>ECA (WES, ICAS…), studies</td><td>Depends on the assessor</td><td>Depends on the assessor</td><td>${eur("titulo-universitario")}</td></tr>
+          <tr><td>Academic transcript</td><td>ECA, university admission</td><td>Depends on the assessor</td><td>Depends on the assessor</td><td>${eur("expediente-academico")}</td></tr>
+          <tr><td>Marriage / registered-partnership certificate</td><td>Express Entry (spouse), sponsorship</td><td>Not for IRCC</td><td>Only if your office requires it</td><td>${eur("certificado-matrimonio")}</td></tr>
+          <tr><td>Birth certificate</td><td>Children, sponsorship of parents</td><td>Not for IRCC</td><td>Only if your office requires it</td><td>${eur("partida-nacimiento")}</td></tr>
+          <tr><td>Employer's certificate, payslips, reference letters</td><td>Work experience</td><td>No</td><td>Only if your office requires it</td><td>${eur("certificado-empresa")} (letters: quote)</td></tr>
+          <tr><td>Bank statements and letters</td><td>Funds</td><td>No</td><td>Only if your office requires it</td><td>Fixed quote within 2 hours</td></tr>
+        </tbody>
+      </table></div>
+      <p>Prices from the <a href="/en/precios">price list</a>, per standard one-page document; longer documents are quoted once I see them. With the complete file you get a single fixed price and a single date.</p>
+
+      <h2>How we do it, step by step</h2>
+      <ol>
+        <li><strong>You send me scans</strong> by WhatsApp, email or the <a href="/en/documentos">document catalogue</a>, complete and legible, and tell me the programme (Express Entry, studies, sponsorship) and, if you know it, which format your office accepts.</li>
+        <li><strong>Within 2 working hours</strong> I confirm what needs translating, whether an affidavit is advisable and its cost, a fixed price and a date in writing.</li>
+        <li><strong>I translate into English, certify, sign and stamp</strong> each document, with my contact details and the declaration of proficiency and accuracy on the certification; names and dates stay identical across all of them.</li>
+        <li><strong>You receive the electronically signed PDF</strong> in 24/48 hours for short certificates; upload it as it is to the IRCC portal, without rescanning. If a notarised affidavit or paper is needed, we courier it to Canada with the courier cost stated in the quote.</li>
+      </ol>
+      <p>If your case is the reverse, Canadian documents for a procedure in Spain, the <a href="/en/sworn-translation-canada-spain">Canada guide</a> explains the Global Affairs Canada apostille and the sworn translation into Spanish. And to compare with what the UK, Ireland and Australia ask for, see <a href="/en/blog/sworn-translations-leaving-spain-uk-ireland-canada-australia">sworn translations for leaving Spain</a>.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20preparing%20an%20IRCC%20%28Canada%29%20application%20and%20need%20my%20Spanish%20documents%20translated%20into%20English">Message me on WhatsApp with your list of documents and your programme</a>
+        and I will tell you what needs translating, whether an affidavit is needed, a fixed price and the deadline. You can also read the
+        <a href="/en/sworn-english-translator">sworn English translator</a> page.
+      </p>
+    `,
+    faq: [
+      {
+        q: "Does IRCC accept a Spanish sworn translation without an affidavit?",
+        a: "IRCC's rule speaks of a Canadian certified translator or, failing that, the translator's affidavit. My sworn translation carries certification, signature, the Spanish Foreign Ministry stamp, date, contact details and a declaration of proficiency and accuracy; many applicants submit it without any issue, but I cannot guarantee that your office will treat it as equivalent to a certified translator. If they require the affidavit, I swear it before a notary in Spain and give you the cost before starting.",
+      },
+      {
+        q: "Do Spanish documents need an apostille for IRCC?",
+        a: "No, as a rule: IRCC works from digital copies and the translation. An apostille is only needed if another body in the process, such as a credential assessment organisation or a university, requires it on its own account.",
+      },
+      {
+        q: "Which criminal record certificate does Express Entry ask for?",
+        a: "The criminal record certificate from the Spanish Ministry of Justice, for every country where you have lived for six consecutive months or more since the age of 18, translated into English. Request it once the rest of the file is ready, because IRCC wants recent certificates.",
+      },
+      {
+        q: "Can I use the same translation for WES and for IRCC?",
+        a: "Yes, as long as WES does not ask for a different format. The translated degree and transcript serve for the credential assessment and later for the Express Entry file; I deliver a signed PDF that you can reuse at no cost.",
+      },
+      {
+        q: "How much does it cost to translate the documents to sponsor my partner?",
+        a: `The marriage certificate costs ${eur("certificado-matrimonio")}, each birth certificate ${eur("partida-nacimiento")} and the criminal record certificate ${eur("antecedentes-penales")}, delivered in 24/48 hours. Proof of cohabitation (municipal registration, contracts, bills) is quoted once I see it.`,
+      },
+    ],
+  },
+  {
+    slug: "indian-degree-recognition-spain-mea-apostille-sworn-translation",
+    translationOf: "homologar-titulo-india-espana-apostilla-mea-traduccion-jurada",
+    title: "Getting an Indian degree recognised in Spain: MEA apostille and sworn translation",
+    excerpt:
+      "Homologación, equivalencia or university access: which route applies to an Indian degree, which documents the Spanish Ministry asks for, how the MEA apostille works and what I translate into Spanish as a sworn translation. The right order, common mistakes and real prices.",
+    date: "2026-09-27",
+    updated: "2026-09-27",
+    author: "Elena Peñaranda Ortega",
+    tags: ["india", "academico", "apostilla"],
+    readingTime: "9 min",
+    image: "/blog/post-indian-documents.jpg",
+    alt: "Indian university degree with MEA apostille prepared for recognition in Spain",
+    html: `
+      <p>For an Indian university degree to be valid in Spain you apply either for its <strong>homologación</strong> (if it gives access to a regulated profession, such as medicine, nursing, engineering or architecture) or for its <strong>equivalencia</strong> to bachelor's or master's level (for everything else), before the Spanish ministry responsible for universities, with three documents apostilled by India's <strong>Ministry of External Affairs (MEA)</strong> and translated into Spanish by a sworn translator: the <a href="/traduccion-jurada-titulo-universitario">degree certificate</a>, the complete transcript (<em>consolidated marksheet</em>) and, for homologación, the syllabus. The sworn translation of the degree certificate costs <strong>${eur("titulo-universitario")}</strong> and is delivered in 24/48 hours; the transcript is quoted once I see it. I am Elena Peñaranda, sworn translator of English no. 7310, and every month I translate files from Indian universities for this procedure; this is the guide I give my clients before we start.</p>
+
+      <p>An honest warning: the decision (whether your degree is recognised, which equivalence you are granted and how long it takes) rests with the Ministry, and real waiting times are measured in months. My job is to make sure the paperwork arrives right first time: the correct apostille, a complete and consistent translation, and no request for missing documents over a piece of paper.</p>
+
+      <h2>Homologación, equivalencia or access: which one applies to you</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>You want to…</th><th>Route</th><th>Before whom</th><th>Indian documents</th></tr></thead>
+        <tbody>
+          <tr><td>Practise a regulated profession (doctor, nurse, engineer, architect, pharmacist, lawyer…)</td><td><strong>Homologación</strong> to a specific Spanish degree</td><td>Ministry responsible for universities (online portal)</td><td>Degree, complete transcript, syllabus, proof of the right to practise in India if you have it</td></tr>
+          <tr><td>Have your degree count as a bachelor's or master's to work in a non-regulated profession, sit public exams or continue studying</td><td><strong>Equivalencia</strong> to academic level and field</td><td>The same Ministry</td><td>Degree and complete transcript</td></tr>
+          <tr><td>Enter a Spanish university with secondary education (Class XII)</td><td>Homologación of the secondary qualification and access accreditation</td><td>Ministry of Education and UNEDasiss</td><td>Class X and XII certificates with marksheets</td></tr>
+          <tr><td>Do a master's in Spain with your Indian bachelor's</td><td>Direct admission (no homologación) if the university accepts it</td><td>The university</td><td>Whatever the university asks for: translated degree and transcript</td></tr>
+        </tbody>
+      </table></div>
+      <p>Homologación and equivalencia of university degrees are governed by Royal Decree 889/2022. For a Spanish master's many universities admit a foreign bachelor's without homologación; ask before starting a procedure that can take months.</p>
+
+      <h2>Which Indian documents the Ministry asks for</h2>
+      <ul>
+        <li><strong>Degree certificate</strong> (the final degree, issued at convocation). The <em>provisional certificate</em> will do to start the application if the final one is delayed, but the Ministry will want the final degree; translate both if you have both.</li>
+        <li><strong>Consolidated marksheet or transcript</strong> with every subject, semester, mark and, ideally, credits or hours. If your university only issues semester marksheets, request the consolidated one: the translation comes out cleaner and the Ministry reads it more easily.</li>
+        <li><strong>Syllabus</strong> stamped by the university, only for homologación to a regulated profession: the Ministry compares content and hours with the Spanish degree.</li>
+        <li><strong>Proof of professional registration in India</strong> where it exists (National Medical Council, Bar Council, Pharmacy Council…), for regulated professions.</li>
+        <li><strong>Passport</strong> (not translated) and proof of payment of the fee.</li>
+      </ul>
+      <p>Two Indian particularities worth anticipating: single-word names and the <em>father's name</em> field, which I translate as they are without inventing surnames, and marks given as percentages, CGPA or <em>division</em>, which I reproduce literally with their scale; the conversion to the Spanish scale is done by the Ministry, not by the translator. A three-year bachelor's (BA, BSc, BCom) and a four-year one (BTech, BE) do not always receive the same equivalence; it is decided case by case.</p>
+
+      <h2>The MEA apostille, step by step</h2>
+      <p>India is a party to the Hague Convention, so its documents are legalised with an apostille, not through the consulate. For academic documents the circuit is:</p>
+      <ol>
+        <li><strong>Prior verification</strong> by the university that issued the degree and, depending on the state, attestation by the state education or human resource development (HRD) department.</li>
+        <li><strong>MEA apostille</strong>, requested through the collection centres and the outsourcing agencies authorised by the Ministry: a sticker with a QR code that is attached to the document and becomes part of it.</li>
+        <li>One document, one apostille: the degree and the transcript are apostilled separately.</li>
+      </ol>
+      <p>Important: <strong>apostille first, translation second</strong>. The apostille is translated as part of the document; if you send me the degree without it and obtain it later, the translation has to be extended. The MEA procedure for the other documents (birth, marriage, PCC) is covered in <a href="/en/blog/indian-documents-spanish-visa-mea-apostille-sworn-translation">Indian documents for a Spanish visa</a>.</p>
+
+      <h2>What I translate and what it costs</h2>
+      <p>I translate from English into Spanish the documents issued in English by the Indian university, apostille included. If your degree is only in Hindi or another regional language, you first need the official English version from the university itself (most issue one); I do not translate from unofficial translations, because the Ministry rejects them.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Document</th><th>MEA apostille?</th><th>Sworn translation</th><th>Turnaround</th></tr></thead>
+        <tbody>
+          <tr><td>Degree certificate (1 page)</td><td>Yes</td><td>${eur("titulo-universitario")}</td><td>24/48 hours</td></tr>
+          <tr><td>Provisional certificate</td><td>Yes, if you submit it</td><td>${eur("titulo-universitario")}</td><td>24/48 hours</td></tr>
+          <tr><td>Consolidated marksheet / transcript</td><td>Yes</td><td>${eur("expediente-academico")}</td><td>Date fixed with the quote</td></tr>
+          <tr><td>Syllabus</td><td>Usually the university stamp is enough; check</td><td>Fixed quote within 2 hours</td><td>Depends on length</td></tr>
+          <tr><td>Professional registration certificate</td><td>Yes</td><td>Fixed quote within 2 hours</td><td>24/48 hours</td></tr>
+          <tr><td>Passport</td><td>No</td><td>Not translated</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <p>Prices from the <a href="/en/precios">price list</a>, per standard one-page document. A syllabus can run to dozens of pages: I quote it once I see it, and if the Ministry only requires the subjects of your specialisation, I tell you so that you do not translate more than you need.</p>
+
+      <h2>The right order (and the mistakes I see every month)</h2>
+      <ol>
+        <li><strong>Gather the final originals</strong>: degree certificate, consolidated marksheet and, if you are applying for homologación, the stamped syllabus.</li>
+        <li><strong>MEA apostille</strong> on each document, with whatever prior verification your state requires.</li>
+        <li><strong>Scan everything</strong>, apostilles included, and send it to me by WhatsApp, email or the calculator on this site; you get a fixed price and a date within 2 hours.</li>
+        <li><strong>Sworn translation</strong> of the whole set, with names, dates and subjects identical across all documents; an electronically signed PDF for the online portal.</li>
+        <li><strong>Application on the Ministry's online portal</strong>, payment of the fee and waiting. If a request for documents arrives, forward it to me and we resolve it.</li>
+      </ol>
+      <p>The most frequent mistakes: translating before apostilling; submitting only the degree without the complete transcript; sending loose semester marksheets with names spelt differently; and translating the degree from a Hindi version through an unofficial English translation. All of them are avoided with the order above.</p>
+      <p>If you live in India and the degree is only part of your file (student visa, digital nomad visa, family reunification), the guide for <a href="/en/sworn-translation-india-spain">clients in India</a> has the full picture of documents, apostilles and payment with an Indian card.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20I%20want%20to%20get%20my%20Indian%20degree%20recognised%20in%20Spain%20and%20need%20a%20sworn%20translation">Send me your degree and transcript on WhatsApp</a>
+        and I will tell you what to apostille, what to translate and what the set costs. You can also read the
+        <a href="/en/sworn-english-translator">sworn English translator</a> page.
+      </p>
+    `,
+    faq: [
+      {
+        q: "Homologación or equivalencia for my Indian degree?",
+        a: "Homologación if you are going to practise a regulated profession in Spain (medicine, nursing, engineering, architecture, pharmacy, law…): it equates your degree to a specific Spanish one. Equivalencia if your profession is not regulated or you want to sit public exams or continue studying: it recognises the level (bachelor's or master's) and the field. For a Spanish master's, ask the university first: many admit the bachelor's without homologación.",
+      },
+      {
+        q: "Do I need the MEA apostille on the degree before translating it?",
+        a: "Yes. The MEA apostille is attached to the document and is translated as part of it. If you translate before apostilling, the translation does not cover the apostille and has to be extended. Apostille first, sworn translation second.",
+      },
+      {
+        q: "My degree is in Hindi. Can you translate it?",
+        a: "I am only appointed for English. Ask your university for the official English version of the degree and transcript (most issue one), get it apostilled and I translate it into Spanish. A sworn translation made from an unofficial English translation is usually rejected.",
+      },
+      {
+        q: "Is the provisional certificate enough to start?",
+        a: "It is enough to start the application, but the Ministry will ask for the final degree certificate. If you already have both, translate them together: the degree translation costs the same and you avoid a request for documents.",
+      },
+      {
+        q: "How much does it cost to translate the degree and transcript for recognition?",
+        a: `A one-page degree certificate costs ${eur("titulo-universitario")} and is delivered in 24/48 hours. The transcript or consolidated marksheet depends on the number of pages and subjects, so I give you a fixed price within 2 hours once I see it. With the complete set, a single price and a single date.`,
       },
     ],
   },

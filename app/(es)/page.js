@@ -5,6 +5,7 @@ import Reviews from "../components/Reviews";
 import TrustStrip from "../components/TrustStrip";
 import HeroSeal from "../components/HeroSeal";
 import Guarantees from "../components/Guarantees";
+import QuoteCalculator from "../components/QuoteCalculator";
 import ProcessTimeline from "../components/ProcessTimeline";
 import ProcessVideo from "../components/ProcessVideo";
 import FollowUs from "../components/FollowUs";
@@ -219,6 +220,9 @@ export default function Page() {
 
       {/* FRANJA DE CONFIANZA — cuatro hechos, sin iconos ni tarjetas */}
       <TrustStrip locale="es" />
+
+      {/* CALCULADORA — precio orientativo al instante + subida de documento */}
+      <QuoteCalculator locale="es" />
 
       {/* DOCUMENTOS MÁS HABITUALES — lista editorial, imagen a la izquierda */}
       <section className="bg-stone-50">

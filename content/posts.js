@@ -1,6 +1,9 @@
 // content/posts.js
 //
-// Artículos del blog en español. Los precios que citan los artículos
+// Artículos del blog en español. El campo opcional `translationOf` es el
+// slug del mismo artículo en inglés (content/posts.en.js): las plantillas
+// de blog emiten hreflang es/en/x-default y un enlace visible, y el sitemap
+// añade las alternates de idioma. Los precios que citan los artículos
 // recientes salen SIEMPRE de content/documents.js (eur(id) / MIN_PRICE),
 // para que nunca se desincronicen del catálogo.
 import { DOCUMENTS, MIN_PRICE } from "./documents";
@@ -417,6 +420,7 @@ export const posts = [
 
   {
     slug: "traduccion-jurada-visado-reino-unido",
+    translationOf: "sworn-translation-uk-home-office-visas-settled-status-citizenship",
     title: "Traducción jurada para el Home Office: visados, settled status y nacionalidad británica",
     excerpt:
       "El Home Office acepta traducciones certificadas y no exige juradas: qué requisitos pide el UKVI, cuándo compensa la traducción jurada española y qué documentos se traducen para un visado, el EU Settlement Scheme (settled status) y la nacionalidad británica. Precios reales.",
@@ -533,6 +537,7 @@ export const posts = [
 
   {
     slug: "estudiar-en-reino-unido-traduccion-expediente",
+    translationOf: "studying-in-the-uk-from-spain-documents-sworn-translation",
     title: "Estudiar en Reino Unido: qué documentos necesitas traducir (Erasmus, grado y máster)",
     excerpt:
       "Qué documentos españoles piden las universidades británicas y el Home Office según tu caso: intercambio o Erasmus, grado por UCAS, máster y visado de estudiante. Cuáles se traducen de forma jurada, cuáles no hace falta traducir y precios reales por documento.",
@@ -758,6 +763,7 @@ export const posts = [
   // ---------------------------------------------------------------------
   {
     slug: "documentos-visado-nomada-digital-apostilla-traduccion-jurada",
+    translationOf: "spain-digital-nomad-visa-documents-apostille-sworn-translation",
     title: "Documentos para el visado de nómada digital: cuáles necesitan apostilla y traducción jurada",
     excerpt:
       "La lista completa del expediente de nómada digital para España, documento a documento: cuáles llevan apostilla, cuáles traducción jurada y en qué orden se hace todo para que el consulado no lo devuelva.",
@@ -812,6 +818,7 @@ export const posts = [
 
   {
     slug: "traduccion-jurada-o-certificada-uscis-espana",
+    translationOf: "sworn-vs-certified-translation-uscis-spain",
     title: "Traducción jurada o traducción certificada: qué pide USCIS y qué pide España",
     excerpt:
       "No son lo mismo: USCIS exige una certified translation al inglés con certificación del traductor (8 CFR § 103.2(b)(3)) y España exige una traducción jurada con firma y sello del MAEC. Cuál necesitas, qué lleva cada una y cuándo hacen falta las dos.",
@@ -873,6 +880,7 @@ export const posts = [
 
   {
     slug: "documentos-indios-visado-espana-apostilla-mea",
+    translationOf: "indian-documents-spanish-visa-mea-apostille-sworn-translation",
     title: "Documentos indios para un visado de España: apostilla del MEA y traducción jurada",
     excerpt:
       "Guía para solicitantes de India: qué documentos pide el Consulado de España (nacimiento, matrimonio, PCC, títulos, cartas de empleador), cómo funciona la apostilla del Ministry of External Affairs y por qué los certificados deben llegar en inglés antes de la traducción jurada al español.",
@@ -929,6 +937,7 @@ export const posts = [
 
   {
     slug: "traduccion-jurada-para-irse-de-espana-reino-unido-irlanda-canada-australia",
+    translationOf: "sworn-translations-leaving-spain-uk-ireland-canada-australia",
     title: "Traducción jurada para irse de España: qué piden Reino Unido, Irlanda, Canadá y Australia",
     excerpt:
       "Si emigras desde España, tus certificados, títulos y antecedentes penales tienen que llegar en inglés. Qué exige cada país a una traducción hecha fuera (UKVI, Irish Immigration, IRCC y Home Affairs), cuándo hace falta la apostilla española y en qué orden hacerlo.",
@@ -990,6 +999,7 @@ export const posts = [
   // ---------------------------------------------------------------------
   {
     slug: "como-saber-si-una-traduccion-jurada-es-valida",
+    translationOf: "how-to-check-sworn-translation-valid-spain",
     title: "Cómo saber si una traducción jurada es válida en España (y qué hacer si te entregan una que no lo es)",
     excerpt:
       "Los cinco puntos que comprueba un funcionario en una traducción jurada: nombramiento del MAEC, listado oficial, firma, sello, certificación y fecha. Cómo verificarlos tú mismo, los errores típicos de algunas agencias y qué hacer si el organismo la rechaza.",
@@ -1093,6 +1103,7 @@ export const posts = [
 
   {
     slug: "nacionalidad-espanola-residencia-documentos-reino-unido-eeuu-india",
+    translationOf: "sworn-translations-spanish-citizenship-residence-uk-us-india",
     title: "Documentos traducidos para la nacionalidad española por residencia: guía para ciudadanos de Reino Unido, EE. UU. e India",
     excerpt:
       "Qué documentos de tu país de origen necesitas traducir para la nacionalidad española por residencia, qué apostilla lleva cada uno y en qué orden hacerlo, con las particularidades del Reino Unido, Estados Unidos e India y precios reales.",
@@ -1198,6 +1209,222 @@ export const posts = [
     ],
   },
 
+
+  {
+    slug: "traduccion-jurada-canada-ircc-express-entry-estudios-reagrupacion",
+    translationOf: "certified-translations-ircc-canada-from-spain",
+    title: "Traducción jurada para Canadá (IRCC): Express Entry, estudios y reagrupación",
+    excerpt:
+      "Qué exige IRCC a una traducción (traductor certificado o affidavit, copia del original), cómo lo cumple una traducción jurada española y qué documentos se traducen para Express Entry, el permiso de estudios y el patrocinio familiar. Precios reales por documento.",
+    date: "2026-09-27",
+    updated: "2026-09-27",
+    author: "Elena Peñaranda Ortega",
+    tags: ["canada", "extranjeria", "validez"],
+    readingTime: "9 min",
+    image: "/blog/post-irse-de-espana.jpg",
+    alt: "Pasaporte y documentos preparados para una solicitud de inmigración a Canadá",
+    html: `
+      <p>Immigration, Refugees and Citizenship Canada (<strong>IRCC</strong>) acepta documentos en inglés o en francés. Todo lo que esté en español se presenta con una <strong>traducción completa</strong> y, si quien la firma no es un <em>certified translator</em> canadiense (miembro en activo de una asociación provincial de traductores), con un <strong>affidavit</strong> del traductor en el que jura que domina los dos idiomas y que la traducción es exacta, además de una copia del documento original. Mi traducción jurada al inglés lleva de serie la certificación de exactitud, mi nombre, mi firma, mi sello con el nº 7310 del MAEC, la fecha y mis datos de contacto; lo que no puedo garantizarte es que tu oficina de IRCC equipare un nombramiento oficial del Estado español a la afiliación canadiense, así que si tu programa exige el affidavit, lo resolvemos antes de empezar. Los certificados habituales (antecedentes penales, nacimiento, matrimonio) cuestan <strong>desde ${MIN_PRICE} €</strong> y se entregan en 24/48 h. Soy Elena Peñaranda, traductora jurada de inglés, y esta guía recoge lo que explico a quien prepara Express Entry, un permiso de estudios o el patrocinio de un familiar desde España.</p>
+
+      <h2>Qué exige exactamente IRCC en una traducción</h2>
+      <p>El Centro de ayuda de IRCC lo resume en tres piezas para cualquier documento que no esté en inglés o francés:</p>
+      <ul>
+        <li>la <strong>traducción</strong> al inglés o al francés, completa, de un traductor que no sea el propio solicitante ni un familiar ni su representante;</li>
+        <li>un <strong>affidavit</strong> de quien hizo la traducción, si no es un <em>certified translator</em> (miembro en activo de una asociación provincial o territorial de traductores canadienses, como ATIO en Ontario, OTTIAQ en Quebec o STIBC en Columbia Británica). El affidavit se jura ante un notario o un <em>commissioner of oaths</em> del país donde se hizo la traducción;</li>
+        <li>cuando el programa lo indique, una <strong>copia certificada del original</strong> del que se ha traducido.</li>
+      </ul>
+      <p>Las fuentes son las páginas oficiales <a href="https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=018&amp;top=4" target="_blank" rel="noopener noreferrer">IRCC: idioma de los documentos</a> e <a href="https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=040&amp;top=4" target="_blank" rel="noopener noreferrer">IRCC: qué es un affidavit de traducción</a>. Fíjate en lo que <strong>no</strong> pide: apostilla. IRCC trabaja con copias digitales y con la traducción; la <a href="/blog/que-es-la-apostilla-de-la-haya">apostilla</a> solo aparece si otra autoridad del proceso (una universidad, un colegio profesional, un organismo de evaluación de credenciales) la exige por su cuenta.</p>
+
+      <h2>Cómo lo cumple una traducción jurada española (y dónde está el matiz)</h2>
+      <p>Una traducción jurada del MAEC es una traducción certificada en el sentido más fuerte que existe en España: la firma una persona nombrada por el Ministerio de Asuntos Exteriores, con número comprobable en el <a href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx" target="_blank" rel="noopener noreferrer">listado oficial</a>, y lleva certificación, firma, sello, fecha y una copia sellada del original. Para IRCC añado mis datos de contacto en la propia certificación y una declaración expresa de competencia en ambos idiomas y de exactitud, que es el contenido del affidavit.</p>
+      <p>El matiz es de forma: IRCC define <em>certified translator</em> como miembro de una asociación canadiense, y mi nombramiento es un título oficial del Estado español, no una afiliación. En la práctica muchos solicitantes presentan traducciones oficiales de su país sin incidencias, pero la norma escrita habla de traductor certificado <strong>o</strong> affidavit, y prefiero decírtelo antes que descubrirlo con un requerimiento. Si tu oficina o tu asesor de inmigración piden el affidavit, mi declaración se jura ante notario en España y te doy su coste con el presupuesto, antes de cobrar nada. Lo mismo cuento en la página para <a href="/traduccion-jurada-canada">clientes con trámites entre Canadá y España</a>.</p>
+
+      <h2>Express Entry: qué documentos españoles se traducen</h2>
+      <p>Express Entry (Federal Skilled Worker, Canadian Experience Class, Federal Skilled Trades y las nominaciones provinciales) es el expediente que más traduzco para Canadá. Los documentos en español que aparecen casi siempre:</p>
+      <ul>
+        <li><strong><a href="/traduccion-jurada-certificado-penales">Certificado de antecedentes penales</a></strong> del Ministerio de Justicia, para cada país en el que hayas vivido seis meses seguidos o más desde los 18 años. Traducción jurada: <strong>${eur("antecedentes-penales")}</strong>.</li>
+        <li><strong><a href="/traduccion-jurada-titulo-universitario">Título universitario</a> y expediente académico</strong> para la evaluación de credenciales (ECA) de WES, ICAS, IQAS o el organismo de tu profesión. Cada evaluador tiene su propio procedimiento (WES, por ejemplo, pide que la universidad le envíe directamente la certificación académica) y exige traducción cuando los documentos no están en inglés o francés. Título: <strong>${eur("titulo-universitario")}</strong>; expediente: ${eur("expediente-academico")}.</li>
+        <li><strong><a href="/traduccion-jurada-certificado-empresa">Cartas de referencia laboral, certificados de empresa y contratos</a></strong> que acreditan la experiencia declarada, con funciones, fechas, horas y salario. Certificado de empresa o nómina: <strong>${eur("certificado-empresa")}</strong>; cartas y contratos, presupuesto al verlos.</li>
+        <li><strong><a href="/traduccion-jurada-certificado-matrimonio">Certificado de matrimonio</a></strong> o inscripción de pareja de hecho, y <strong><a href="/traduccion-jurada-partida-nacimiento">partidas de nacimiento</a></strong> de los hijos que te acompañan: <strong>${eur("certificado-matrimonio")}</strong> y <strong>${eur("partida-nacimiento")}</strong> cada una.</li>
+        <li><strong>Justificantes de fondos</strong>: cartas del banco con saldo medio de seis meses. Muchos bancos las emiten en inglés; si la tuya está en español, se traduce.</li>
+      </ul>
+      <p>El examen de idioma (IELTS, CELPIP, TEF) y el reconocimiento médico con un <em>panel physician</em> ya se hacen en inglés o francés: no se traduce nada. La vida laboral de la Seguridad Social se puede pedir en inglés desde la propia sede electrónica; compruébalo antes de traducirla.</p>
+
+      <h2>Permiso de estudios</h2>
+      <p>Para estudiar en Canadá necesitas la carta de aceptación de una institución designada (DLI), la carta de atestación provincial que gestiona la propia institución para la mayoría de los programas y pruebas de fondos, además del expediente que te pidió la universidad al admitirte:</p>
+      <ul>
+        <li><strong>Títulos y expedientes</strong> de Bachillerato o de universidad, según el programa. La admisión los pide traducidos; IRCC, después, suele quedarse con la carta de aceptación.</li>
+        <li><strong>Fondos</strong>: certificado de inversión garantizada (GIC) o extractos bancarios; si el dinero es de tus padres, carta de apoyo y partida de nacimiento para acreditar el parentesco.</li>
+        <li>Para menores, <strong>declaración de custodio</strong> en Canadá y consentimiento de los padres.</li>
+        <li><strong>Antecedentes penales</strong> solo si IRCC te los pide expresamente.</li>
+      </ul>
+
+      <h2>Reagrupación familiar: patrocinio de cónyuge, pareja, hijos y padres</h2>
+      <p>En Canadá la reagrupación es un <em>sponsorship</em>: el residente o ciudadano canadiense patrocina y el familiar solicita. El expediente gira en torno a la <strong>prueba de la relación</strong>, y ahí los documentos españoles pesan:</p>
+      <ul>
+        <li><strong>Cónyuge</strong>: certificado literal de matrimonio del Registro Civil. El libro de familia ayuda, pero IRCC entiende mejor el certificado.</li>
+        <li><strong>Pareja de hecho o <em>common-law</em></strong>: certificado del registro de parejas de hecho y pruebas de convivencia de al menos un año (empadronamiento conjunto, contrato de alquiler, facturas), que se traducen cuando estén en español.</li>
+        <li><strong>Hijos dependientes</strong>: partidas de nacimiento y, si hay custodia compartida o un progenitor que no viaja, sentencia o consentimiento.</li>
+        <li><strong>Padres y abuelos</strong>: partidas de nacimiento que enlacen a patrocinador y patrocinado.</li>
+        <li><strong>Antecedentes penales</strong> del familiar patrocinado, de cada país en el que haya vivido seis meses o más desde los 18.</li>
+        <li><strong>Sentencias de divorcio</strong> o certificados de defunción de matrimonios anteriores, cuando existan.</li>
+      </ul>
+
+      <h2>Tabla: documento, trámite, apostilla, affidavit y precio</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Documento español</th><th>Trámite habitual</th><th>¿Apostilla?</th><th>¿Affidavit?</th><th>Traducción jurada</th></tr></thead>
+        <tbody>
+          <tr><td>Certificado de antecedentes penales</td><td>Express Entry, patrocinio, estudios (si lo piden)</td><td>No para IRCC</td><td>Solo si tu oficina lo exige</td><td>${eur("antecedentes-penales")}</td></tr>
+          <tr><td>Título universitario</td><td>ECA (WES, ICAS…), estudios</td><td>Según el evaluador</td><td>Según el evaluador</td><td>${eur("titulo-universitario")}</td></tr>
+          <tr><td>Expediente académico</td><td>ECA, admisión universitaria</td><td>Según el evaluador</td><td>Según el evaluador</td><td>${eur("expediente-academico")}</td></tr>
+          <tr><td>Certificado de matrimonio / pareja de hecho</td><td>Express Entry (cónyuge), patrocinio</td><td>No para IRCC</td><td>Solo si tu oficina lo exige</td><td>${eur("certificado-matrimonio")}</td></tr>
+          <tr><td>Partida de nacimiento</td><td>Hijos, patrocinio de padres</td><td>No para IRCC</td><td>Solo si tu oficina lo exige</td><td>${eur("partida-nacimiento")}</td></tr>
+          <tr><td>Certificado de empresa, nóminas, cartas de referencia</td><td>Experiencia laboral</td><td>No</td><td>Solo si tu oficina lo exige</td><td>${eur("certificado-empresa")} (cartas: presupuesto)</td></tr>
+          <tr><td>Extractos y cartas bancarias</td><td>Fondos</td><td>No</td><td>Solo si tu oficina lo exige</td><td>Presupuesto cerrado en menos de 2 h</td></tr>
+        </tbody>
+      </table></div>
+      <p>Precios del <a href="/precios">catálogo</a> por documento estándar de una página; los documentos largos se presupuestan al verlos. Con el expediente completo te doy un único precio cerrado y una única fecha.</p>
+
+      <h2>Cómo lo hacemos, paso a paso</h2>
+      <ol>
+        <li><strong>Me envías los documentos escaneados</strong> por WhatsApp, email o la <a href="/documentos">calculadora del catálogo</a>, completos y legibles, y me dices el programa (Express Entry, estudios, patrocinio) y, si lo sabes, qué formato acepta tu oficina.</li>
+        <li><strong>En menos de 2 horas laborables</strong> te confirmo qué se traduce, si conviene affidavit y su coste, un precio cerrado y una fecha por escrito.</li>
+        <li><strong>Traduzco al inglés, certifico, firmo y sello</strong> cada documento, con mis datos de contacto y la declaración de competencia y exactitud en la certificación; los nombres y las fechas quedan iguales en todos.</li>
+        <li><strong>Recibes el PDF firmado electrónicamente</strong> en 24/48 h para los certificados breves; súbelo tal cual al portal de IRCC, sin reescanearlo. Si hace falta affidavit notarial o papel, lo enviamos por mensajería a Canadá con el coste del transportista en el presupuesto.</li>
+      </ol>
+      <p>Si tu caso es el contrario, documentos canadienses para un trámite en España, la <a href="/traduccion-jurada-canada">guía para Canadá</a> explica la apostilla de Global Affairs Canada y la traducción jurada al español. Y para comparar con lo que piden Reino Unido, Irlanda y Australia, tienes <a href="/blog/traduccion-jurada-para-irse-de-espana-reino-unido-irlanda-canada-australia">traducción jurada para irse de España</a>.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20preparo%20un%20tr%C3%A1mite%20con%20IRCC%20%28Canad%C3%A1%29%20y%20necesito%20traducir%20mis%20documentos%20al%20ingl%C3%A9s">Escríbeme por WhatsApp con tu lista de documentos y tu programa</a>
+        y te digo qué se traduce, si hace falta affidavit, precio cerrado y plazo. También puedes ver la página de
+        <a href="/traductor-jurado-ingles">traductora jurada de inglés</a>.
+      </p>
+    `,
+    faq: [
+      {
+        q: "¿IRCC acepta una traducción jurada española sin affidavit?",
+        a: "La norma de IRCC habla de traductor certificado canadiense o, en su defecto, affidavit del traductor. Mi traducción jurada lleva certificación, firma, sello del MAEC, fecha, datos de contacto y declaración de competencia y exactitud; muchos solicitantes la presentan sin incidencias, pero no puedo garantizar que tu oficina la equipare a un certified translator. Si te exigen el affidavit, lo juro ante notario en España y te doy el coste antes de empezar.",
+      },
+      {
+        q: "¿Hay que apostillar los documentos españoles para IRCC?",
+        a: "No, como regla general: IRCC trabaja con copias digitales y con la traducción. La apostilla solo hace falta si otra entidad del proceso, como un organismo de evaluación de credenciales o una universidad, la exige por su cuenta.",
+      },
+      {
+        q: "¿Qué certificado de antecedentes penales pide Express Entry?",
+        a: "El certificado de antecedentes penales del Ministerio de Justicia, de cada país en el que hayas vivido seis meses seguidos o más desde los 18 años, traducido al inglés. Pídelo cuando el resto del expediente esté listo, porque IRCC quiere certificados recientes.",
+      },
+      {
+        q: "¿Puedo usar la misma traducción para WES y para IRCC?",
+        a: "Sí, siempre que WES no te pida un formato distinto. El título y el expediente traducidos sirven para la evaluación de credenciales y después para el expediente de Express Entry; te entrego el PDF firmado, que puedes reutilizar sin coste.",
+      },
+      {
+        q: "¿Cuánto cuesta traducir los documentos para patrocinar a mi pareja?",
+        a: `El certificado de matrimonio cuesta ${eur("certificado-matrimonio")}, cada partida de nacimiento ${eur("partida-nacimiento")} y el certificado de antecedentes penales ${eur("antecedentes-penales")}, con entrega en 24/48 h. Las pruebas de convivencia (empadronamiento, contratos, facturas) se presupuestan al verlas.`,
+      },
+    ],
+  },
+  {
+    slug: "homologar-titulo-india-espana-apostilla-mea-traduccion-jurada",
+    translationOf: "indian-degree-recognition-spain-mea-apostille-sworn-translation",
+    title: "Homologar un título de la India en España: documentos, apostilla MEA y traducción jurada",
+    excerpt:
+      "Homologación, equivalencia o acceso a la universidad: qué vía te corresponde con un título indio, qué documentos pide el Ministerio, cómo se obtiene la apostilla del MEA y qué traduzco de forma jurada al español. Orden correcto, errores habituales y precios reales.",
+    date: "2026-09-27",
+    updated: "2026-09-27",
+    author: "Elena Peñaranda Ortega",
+    tags: ["india", "academico", "apostilla"],
+    readingTime: "9 min",
+    image: "/blog/post-india-mea.jpg",
+    alt: "Título universitario indio con apostilla del MEA preparado para su homologación en España",
+    html: `
+      <p>Para que un título universitario de la India valga en España hay que pedir su <strong>homologación</strong> (si da acceso a una profesión regulada, como medicina, enfermería, ingeniería o arquitectura) o su <strong>equivalencia</strong> a nivel de Grado o Máster (para el resto), ante el Ministerio competente en universidades, con tres documentos apostillados por el <strong>Ministry of External Affairs (MEA)</strong> de la India y traducidos de forma jurada al español: el <a href="/traduccion-jurada-titulo-universitario">título</a> (<em>degree certificate</em>), el expediente completo (<em>consolidated marksheet</em> o <em>transcript</em>) y, en la homologación, el plan de estudios. La traducción jurada del título cuesta <strong>${eur("titulo-universitario")}</strong> y se entrega en 24/48 h; el expediente se presupuesta al verlo. Soy Elena Peñaranda, traductora jurada de inglés nº 7310, y cada mes traduzco expedientes de universidades indias para este trámite; esta es la guía que doy a mis clientes antes de empezar.</p>
+
+      <p>Un aviso honesto: la resolución (si te homologan, qué equivalencia te conceden y cuánto tarda) la decide el Ministerio, y los plazos reales se miden en meses. Yo me ocupo de que la parte documental llegue bien a la primera: apostilla correcta, traducción completa y coherente, y ningún requerimiento por un papel.</p>
+
+      <h2>Homologación, equivalencia o acceso: cuál te corresponde</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Quieres…</th><th>Vía</th><th>Ante quién</th><th>Documentos indios</th></tr></thead>
+        <tbody>
+          <tr><td>Ejercer una profesión regulada (médico, enfermera, ingeniero, arquitecto, farmacéutico, abogado…)</td><td><strong>Homologación</strong> a un título español concreto</td><td>Ministerio competente en universidades (sede electrónica)</td><td>Título, expediente completo, plan de estudios, acreditación del derecho a ejercer en India si la tienes</td></tr>
+          <tr><td>Que tu título cuente como Grado o Máster para trabajar en una profesión no regulada, opositar o seguir estudiando</td><td><strong>Equivalencia</strong> a nivel académico y rama</td><td>El mismo Ministerio</td><td>Título y expediente completo</td></tr>
+          <tr><td>Entrar en una universidad española con estudios de secundaria (Class XII)</td><td>Homologación del bachillerato y acreditación para el acceso</td><td>Ministerio de Educación y UNEDasiss</td><td>Certificados de Class X y XII con marksheets</td></tr>
+          <tr><td>Hacer un máster en España con tu bachelor indio</td><td>Admisión directa (sin homologar) si la universidad lo acepta</td><td>La universidad</td><td>Lo que pida la universidad: título y transcript traducidos</td></tr>
+        </tbody>
+      </table></div>
+      <p>La homologación y la equivalencia de títulos universitarios se rigen por el Real Decreto 889/2022. Para un máster español muchas universidades admiten un bachelor extranjero sin homologar; pregúntalo antes de iniciar un trámite que puede tardar meses. La guía general, sin distinguir por país, está en <a href="/blog/homologacion-titulo-universitario-extranjero-espana">homologar un título universitario extranjero en España</a>.</p>
+
+      <h2>Qué documentos indios pide el Ministerio</h2>
+      <ul>
+        <li><strong>Degree certificate</strong> (el título definitivo, expedido en la convocation). El <em>provisional certificate</em> sirve para empezar la solicitud si el definitivo tarda, pero el Ministerio querrá el título final; tradúcelos los dos si tienes ambos.</li>
+        <li><strong>Consolidated marksheet o transcript</strong> con todas las asignaturas, semestres, notas y, a ser posible, créditos u horas. Si tu universidad solo emite marksheets por semestre, pide la consolidada: la traducción sale más limpia y el Ministerio la entiende mejor.</li>
+        <li><strong>Syllabus o plan de estudios</strong> sellado por la universidad, solo para la homologación a profesión regulada: el Ministerio compara contenidos y horas con el título español.</li>
+        <li><strong>Acreditación del ejercicio profesional en India</strong> cuando exista (registro en el National Medical Council, el Bar Council, el Pharmacy Council…), para las profesiones reguladas.</li>
+        <li><strong>Pasaporte</strong> (no se traduce) y justificante de la tasa.</li>
+      </ul>
+      <p>Dos particularidades indias que conviene prever: los nombres de una sola palabra y el campo <em>father's name</em>, que traduzco tal cual sin inventar apellidos, y las calificaciones en porcentaje, CGPA o <em>division</em>, que reproduzco literalmente y con su escala; la conversión a la escala española la hace el Ministerio, no la traductora. Un bachelor de tres años (BA, BSc, BCom) y uno de cuatro (BTech, BE) no siempre reciben la misma equivalencia; se resuelve caso por caso.</p>
+
+      <h2>La apostilla del MEA, paso a paso</h2>
+      <p>La India forma parte del Convenio de La Haya, así que sus documentos se legalizan con <a href="/blog/que-es-la-apostilla-de-la-haya">apostilla</a>, no por vía consular. Para los documentos académicos el circuito es:</p>
+      <ol>
+        <li><strong>Verificación previa</strong> por la universidad que expidió el título y, según el estado, atestación del departamento de educación o de recursos humanos (HRD) estatal.</li>
+        <li><strong>Apostilla del MEA</strong>, que se solicita a través de los centros de recogida y las agencias de externalización autorizadas por el Ministerio: una pegatina con código QR que se adhiere al documento y forma parte de él.</li>
+        <li>Un documento, una apostilla: el título y el transcript se apostillan por separado.</li>
+      </ol>
+      <p>Importante: <strong>primero la apostilla y después la traducción</strong>. La apostilla se traduce como parte del documento; si me envías el título sin ella y la consigues después, hay que ampliar la traducción. El procedimiento del MEA para el resto de documentos (nacimiento, matrimonio, PCC) lo cuento en <a href="/blog/documentos-indios-visado-espana-apostilla-mea">documentos indios para un visado de España</a>.</p>
+
+      <h2>Qué traduzco y cuánto cuesta</h2>
+      <p>Traduzco del inglés al español los documentos emitidos en inglés por la universidad india, apostilla incluida. Si tu título está solo en hindi u otra lengua regional, necesitas antes la versión inglesa oficial de la propia universidad (la mayoría la emite); no traduzco a partir de traducciones no oficiales, porque el Ministerio las rechaza.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Documento</th><th>¿Apostilla MEA?</th><th>Traducción jurada</th><th>Plazo</th></tr></thead>
+        <tbody>
+          <tr><td>Degree certificate (1 página)</td><td>Sí</td><td>${eur("titulo-universitario")}</td><td>24/48 h</td></tr>
+          <tr><td>Provisional certificate</td><td>Sí, si lo presentas</td><td>${eur("titulo-universitario")}</td><td>24/48 h</td></tr>
+          <tr><td>Consolidated marksheet / transcript</td><td>Sí</td><td>${eur("expediente-academico")}</td><td>Fecha cerrada con el presupuesto</td></tr>
+          <tr><td>Syllabus / plan de estudios</td><td>Normalmente basta el sello de la universidad; confírmalo</td><td>Presupuesto cerrado en menos de 2 h</td><td>Según extensión</td></tr>
+          <tr><td>Certificado de registro profesional</td><td>Sí</td><td>Presupuesto cerrado en menos de 2 h</td><td>24/48 h</td></tr>
+          <tr><td>Pasaporte</td><td>No</td><td>No se traduce</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <p>Precios del <a href="/precios">catálogo</a> por documento estándar de una página. El plan de estudios puede tener decenas de páginas: lo presupuesto al verlo, y si el Ministerio solo exige las asignaturas de tu especialidad, te lo digo para no traducir de más. Qué incluye el precio del título lo explico en <a href="/blog/cuanto-cuesta-traducir-titulo-universitario">cuánto cuesta traducir un título universitario</a>.</p>
+
+      <h2>En qué orden hacerlo (y los errores que veo cada mes)</h2>
+      <ol>
+        <li><strong>Reúne los originales definitivos</strong>: degree certificate, consolidated marksheet y, si vas a homologar, el syllabus sellado.</li>
+        <li><strong>Apostilla del MEA</strong> en cada documento, con la verificación previa que exija tu estado.</li>
+        <li><strong>Escanea todo</strong>, apostillas incluidas, y me lo envías por WhatsApp, email o la calculadora de la web; te doy precio cerrado y fecha en menos de 2 horas.</li>
+        <li><strong>Traducción jurada</strong> del lote, con nombres, fechas y asignaturas idénticos en todos los documentos; PDF firmado electrónicamente para la sede.</li>
+        <li><strong>Solicitud en la sede electrónica</strong> del Ministerio, pago de la tasa y espera. Si llega un requerimiento, me lo reenvías y lo resolvemos.</li>
+      </ol>
+      <p>Los errores más frecuentes: traducir antes de apostillar; presentar solo el título sin el expediente completo; enviar marksheets sueltas de cada semestre con nombres escritos de forma distinta; y traducir el título a partir de una versión en hindi con una traducción no oficial al inglés. Todos se evitan con el orden de arriba.</p>
+      <p>Si vives en la India y el título es solo una parte de tu expediente (visado de estudios, nómada digital, reagrupación), en la guía para <a href="/traduccion-jurada-india">clientes de la India</a> tienes el cuadro completo de documentos, apostillas y pago con tarjeta india.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20quiero%20homologar%20mi%20t%C3%ADtulo%20de%20la%20India%20en%20Espa%C3%B1a%20y%20necesito%20traducci%C3%B3n%20jurada">Envíame tu título y tu transcript por WhatsApp</a>
+        y te digo qué apostillar, qué traducir y cuánto cuesta el lote. También puedes ver la página de
+        <a href="/traductor-jurado-ingles">traductora jurada de inglés</a>.
+      </p>
+    `,
+    faq: [
+      {
+        q: "¿Homologación o equivalencia para mi título indio?",
+        a: "Homologación si vas a ejercer una profesión regulada en España (medicina, enfermería, ingeniería, arquitectura, farmacia, abogacía…): equivale tu título a uno español concreto. Equivalencia si tu profesión no está regulada o quieres opositar o seguir estudiando: reconoce el nivel (Grado o Máster) y la rama. Para un máster español, pregunta primero a la universidad: muchas admiten el bachelor sin homologar.",
+      },
+      {
+        q: "¿Necesito apostillar el título con el MEA antes de traducirlo?",
+        a: "Sí. La apostilla del MEA se adhiere al documento y se traduce como parte de él. Si traduces antes de apostillar, la traducción no recoge la apostilla y hay que ampliarla. Primero la apostilla, después la traducción jurada.",
+      },
+      {
+        q: "Mi título está en hindi, ¿me lo traduces?",
+        a: "Solo estoy habilitada para inglés. Pide a tu universidad la versión inglesa oficial del título y del transcript (la mayoría la expide), apostíllala y la traduzco al español. Una traducción jurada hecha desde una traducción no oficial al inglés suele rechazarse.",
+      },
+      {
+        q: "¿Sirve el provisional certificate para empezar?",
+        a: "Sirve para iniciar la solicitud, pero el Ministerio pedirá el degree certificate definitivo. Si ya tienes los dos, tradúcelos juntos: la traducción del título cuesta lo mismo y te ahorras un requerimiento.",
+      },
+      {
+        q: "¿Cuánto cuesta traducir el título y el transcript para la homologación?",
+        a: `El título universitario de una página cuesta ${eur("titulo-universitario")} y se entrega en 24/48 h. El transcript o consolidated marksheet depende del número de páginas y asignaturas, así que te doy precio cerrado en menos de 2 horas al verlo. Con el lote completo, un único precio y una única fecha.`,
+      },
+    ],
+  },
 ];
 
 // Helpers sencillos
