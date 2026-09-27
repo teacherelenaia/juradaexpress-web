@@ -1,8 +1,9 @@
 // app/components/DocumentPage.js
 // Plantilla de las fichas de documento (/traduccion-jurada-*). Sigue el
 // patrón de la auditoría (5.2): para qué trámites, apostilla sí/no, precio
-// desde, plazo, cómo enviarlo, FAQ propia y schema Service + BreadcrumbList
-// (+ FAQPage). Los datos viven en content/fichas.js.
+// desde, plazo, cómo enviarlo, organismos que la aceptan (chips «Aceptada
+// por»), FAQ propia y schema Service + BreadcrumbList (+ FAQPage). Los
+// datos viven en content/fichas.js.
 import TrackedLink from "./TrackedLink";
 import { SectionHeading } from "./ui";
 import { IconCheck } from "./Icons";
@@ -112,6 +113,30 @@ export default function DocumentPage({ ficha }) {
           </li>
         ))}
       </ul>
+
+      {/* Aceptada por: organismos habituales (content/fichas.js → aceptadaPor) */}
+      {ficha.aceptadaPor?.length > 0 && (
+        <>
+          <SectionHeading as="h2" className="mt-12 !text-2xl md:!text-3xl">
+            Aceptada por
+          </SectionHeading>
+          <p className="mt-3 max-w-[68ch] text-slate-600">
+            Organismos ante los que mis clientes presentan habitualmente esta
+            traducción jurada. Cada oficina puede añadir requisitos (apostilla,
+            copia en papel): te los confirmo antes de cobrar.
+          </p>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {ficha.aceptadaPor.map((org) => (
+              <li
+                key={org}
+                className="rounded-full bg-brand-navy-50 px-3 py-1 text-sm font-medium text-brand-navy ring-1 ring-brand-navy-200"
+              >
+                {org}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
 
       {/* Apostilla */}
       <SectionHeading as="h2" className="mt-12 !text-2xl md:!text-3xl">
