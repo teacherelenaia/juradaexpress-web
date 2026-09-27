@@ -48,6 +48,7 @@ export function buildCityPage(ciudad) {
     path,
     alternates: { es: path, en: null },
     crumb: `Traductor jurado de inglés en ${ciudad.nombre}`,
+    guarantees: true,
     metaTitle: ciudad.metaTitle,
     metaDescription: ciudad.metaDescription,
     h1: ciudad.h1,

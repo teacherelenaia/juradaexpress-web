@@ -12,6 +12,61 @@ export const WHATSAPP_URL =
 export const WHATSAPP_URL_EN =
   "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27d%20like%20a%20quote%20for%20a%20sworn%20translation";
 
+// Listado oficial de Traductores/as-Intérpretes Jurados/as del MAEC, donde
+// cualquiera puede comprobar el nombramiento nº 7310. content/persona.js lo
+// reexporta como MAEC_URL (persona.js ya importa de este archivo, así que
+// la constante vive aquí para evitar una importación circular).
+export const MAEC_LIST_URL =
+  "https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx";
+
+// Tres garantías cortas (FASE 1 SEO, 27/09/2026) que se muestran bajo el
+// chip de precio del hero de la home ES/EN, en /traductor-jurado-ingles
+// (y su versión /en) y en las landings de ciudad. Las pinta
+// app/components/Guarantees.js. `icon` es el nombre de un icono de
+// app/components/Icons.js; `href` (opcional) convierte el texto en enlace.
+export const GUARANTEES = {
+  es: [
+    {
+      id: "maec",
+      icon: "shieldCheck",
+      text: "Nombramiento MAEC comprobable",
+      href: MAEC_LIST_URL,
+      hrefLabel:
+        "Comprobar el nombramiento en el listado oficial del MAEC (se abre en una pestaña nueva)",
+    },
+    {
+      id: "correccion",
+      icon: "refresh",
+      text: "Si el organismo la rechaza por un error mío, la corrijo gratis",
+    },
+    {
+      id: "plazo",
+      icon: "clock",
+      text: "Plazo cerrado por escrito antes de cobrar",
+    },
+  ],
+  en: [
+    {
+      id: "maec",
+      icon: "shieldCheck",
+      text: "Verifiable Foreign Ministry (MAEC) appointment",
+      href: MAEC_LIST_URL,
+      hrefLabel:
+        "Check the appointment on the Ministry's official register (opens in a new tab)",
+    },
+    {
+      id: "correccion",
+      icon: "refresh",
+      text: "If the authority rejects it because of my mistake, I fix it for free",
+    },
+    {
+      id: "plazo",
+      icon: "clock",
+      text: "Deadline confirmed in writing before you pay",
+    },
+  ],
+};
+
 // Perfiles confirmados por Elena el 25/08/2026 (usuario: juradaexpress
 // en ambas redes). Si algún perfil se desactiva, pon la constante en null
 // y su icono desaparece de toda la web.

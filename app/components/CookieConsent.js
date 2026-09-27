@@ -2,6 +2,8 @@
 
 // app/components/CookieConsent.js
 // Consentimiento de cookies + carga condicional de GA4 (solo tras aceptar).
+// AdsConversion.js lee la misma clave de localStorage y escucha el evento
+// CONSENT_EVENT para cargar la etiqueta de Google Ads solo con permiso.
 // La tarjeta es compacta, en la esquina inferior izquierda (máx. 420 px),
 // no a ancho completo, y enlaza con la política de cookies. En móvil se
 // coloca por encima de la barra de acciones fija.
@@ -10,11 +12,16 @@ import { usePathname } from "next/navigation";
 import Script from "next/script";
 
 const GA4_ID = "G-4Q24BN11PX";
-const CONSENT_KEY = "cookie_consent";
+export const CONSENT_KEY = "cookie_consent";
+export const CONSENT_EVENT = "jx:cookie-consent";
+// Si hay etiqueta de Google Ads configurada, el aviso lo dice.
+const HAS_ADS = Boolean(process.env.NEXT_PUBLIC_ADS_ID);
 
 const COPY = {
   es: {
-    text: "Usamos cookies de analítica (Google Analytics) para mejorar la web.",
+    text: HAS_ADS
+      ? "Usamos cookies de analítica y de medición de conversiones (Google Analytics y Google Ads) para mejorar la web."
+      : "Usamos cookies de analítica (Google Analytics) para mejorar la web.",
     policy: "Política de cookies",
     policyHref: "/politica-cookies",
     accept: "Aceptar",
@@ -22,7 +29,9 @@ const COPY = {
     ariaLabel: "Aviso de cookies",
   },
   en: {
-    text: "We use analytics cookies (Google Analytics) to improve this site.",
+    text: HAS_ADS
+      ? "We use analytics and conversion-measurement cookies (Google Analytics and Google Ads) to improve this site."
+      : "We use analytics cookies (Google Analytics) to improve this site.",
     policy: "Cookie policy",
     policyHref: "/en/cookie-policy",
     accept: "Accept",
@@ -51,6 +60,8 @@ export default function CookieConsent() {
     localStorage.setItem(CONSENT_KEY, value);
     setConsent(value);
     setShowBanner(false);
+    // Avisa a AdsConversion (y a cualquier otro oyente) del cambio.
+    window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: value }));
   }
 
   return (

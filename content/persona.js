@@ -13,6 +13,7 @@ import {
   INSTAGRAM_URL,
   FACEBOOK_URL,
   GOOGLE_BUSINESS_URL,
+  MAEC_LIST_URL,
 } from "./site";
 
 const BASE = "https://juradaexpress.es";
@@ -28,9 +29,9 @@ export const SINCE = 2009;
 export const yearsOfExperience = () => new Date().getFullYear() - SINCE;
 
 // Listado oficial de Traductores/as-Intérpretes Jurados/as del MAEC, donde
-// cualquiera puede comprobar el nombramiento nº 7310.
-export const MAEC_URL =
-  "https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx";
+// cualquiera puede comprobar el nombramiento nº 7310. La URL vive en
+// content/site.js (MAEC_LIST_URL) para que también la usen las garantías.
+export const MAEC_URL = MAEC_LIST_URL;
 
 const JOB_TITLE = {
   es: "Traductora-Intérprete Jurada de Inglés",

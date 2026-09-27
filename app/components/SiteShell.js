@@ -6,6 +6,7 @@
 // contenido de la cabecera lo localizan los componentes cliente (MainNav,
 // MobileNav, HeaderActions) y el footer se localiza aquí por `locale`.
 import CookieConsent from "./CookieConsent";
+import AdsConversion from "./AdsConversion";
 import ActionBar from "./ActionBar";
 import MobileNav from "./MobileNav";
 import MainNav from "./MainNav";
@@ -182,6 +183,9 @@ export default function SiteShell({ locale = "es", children }) {
 
         {/* Cookies + GA4 (GA4 solo se carga tras aceptar) */}
         <CookieConsent />
+
+        {/* Google Ads: etiqueta y conversiones, solo con NEXT_PUBLIC_ADS_ID y consentimiento */}
+        <AdsConversion />
 
         {/* Barra inferior móvil + botón flotante de WhatsApp en escritorio */}
         <ActionBar />

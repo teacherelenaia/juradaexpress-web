@@ -1,4 +1,13 @@
 // content/posts.js
+//
+// Artículos del blog en español. Los precios que citan los artículos
+// recientes salen SIEMPRE de content/documents.js (eur(id) / MIN_PRICE),
+// para que nunca se desincronicen del catálogo.
+import { DOCUMENTS, MIN_PRICE } from "./documents";
+
+const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
+const eur = (id) =>
+  priceOf(id) != null ? `${priceOf(id)} €` : "presupuesto cerrado en menos de 2 h";
 
 export const posts = [
   {
@@ -408,90 +417,236 @@ export const posts = [
 
   {
     slug: "traduccion-jurada-visado-reino-unido",
-    title: "Traducción jurada para un visado del Reino Unido (Skilled Worker, familiar, estudiante)",
+    title: "Traducción jurada para el Home Office: visados, settled status y nacionalidad británica",
     excerpt:
-      "El UKVI exige 'certified translations' con los datos del traductor. Qué documentos traducir para tu visado británico, por qué la jurada española cumple y con cuánto margen pedirla.",
+      "El Home Office acepta traducciones certificadas y no exige juradas: qué requisitos pide el UKVI, cuándo compensa la traducción jurada española y qué documentos se traducen para un visado, el EU Settlement Scheme (settled status) y la nacionalidad británica. Precios reales.",
     date: "2026-08-24",
-    updated: "2026-08-24",
+    updated: "2026-09-27",
     author: "Elena Peñaranda Ortega",
     tags: ["reino-unido", "extranjeria", "validez"],
-    readingTime: "5 min",
+    readingTime: "9 min",
     image: "/blog/post-visado-uk.jpg",
     alt: "Manos revisando un formulario oficial sobre una carpeta de documentos para un visado",
     html: `
-      <p>Si estás preparando un visado británico — <em>Skilled Worker</em>, familiar, de estudiante — ya habrás visto la frase en la web del gobierno: todo documento que no esté en inglés debe ir acompañado de una <strong>"certified translation"</strong>. ¿Vale la traducción jurada española? Sí, y además cumple los requisitos con holgura. Te explico por qué y qué documentos suelen entrar en el expediente.</p>
+      <p>El Home Office <strong>no exige traducción jurada</strong>: pide una <em>certified translation</em>, es decir, una traducción completa acompañada de la confirmación del traductor de que es fiel al original, con su nombre, firma, fecha y datos de contacto. La traducción jurada española cumple esos requisitos y va más allá, porque la firma una traductora nombrada por el Ministerio de Asuntos Exteriores cuyo número puede comprobar cualquier funcionario. Merece la pena elegir la jurada cuando el mismo documento va a servir también en España, cuando lo pide un abogado o un tribunal, o cuando quieres que nadie discuta quién firmó la traducción. Los certificados habituales (nacimiento, matrimonio, antecedentes penales) cuestan <strong>desde ${MIN_PRICE} €</strong> y se entregan en 24/48 h. Soy Elena Peñaranda, traductora jurada de inglés nº 7310, y en esta guía te cuento qué documentos españoles se traducen para un visado, para el <em>settled status</em> y para la nacionalidad británica, y cuándo basta con la certificada.</p>
 
-      <h2>¿Qué exige exactamente el UKVI?</h2>
-      <p>El UKVI (<em>UK Visas and Immigration</em>) pide que la traducción incluya: la confirmación del traductor de que es una traducción fiel del original, la <strong>fecha</strong>, el <strong>nombre completo y la firma</strong> del traductor y sus <strong>datos de contacto o credenciales</strong>. La traducción jurada española incluye todo eso de serie: mi certificación, mi firma, mi sello con el nº 7310 del MAEC y la fecha. Es decir, una <a href="/traduccion-jurada-espanol-ingles">traducción jurada español-inglés</a> es una <em>certified translation</em> a ojos del UKVI — con la ventaja de que además está respaldada por un nombramiento oficial verificable.</p>
-
-      <h2>¿Qué documentos suelen pedir traducidos?</h2>
+      <h2>Qué exige exactamente el Home Office en una traducción</h2>
+      <p>Las guías de <strong>UK Visas and Immigration (UKVI)</strong> repiten la misma regla para todos los trámites: cualquier documento que no esté en inglés o galés debe ir acompañado de una traducción completa que incluya:</p>
       <ul>
-        <li><strong><a href="/traduccion-jurada-partida-nacimiento">Certificados de nacimiento</a></strong> — visados familiares y de descendientes.</li>
-        <li><strong><a href="/traduccion-jurada-certificado-matrimonio">Certificado de matrimonio</a></strong> o de pareja registrada — visados de cónyuge.</li>
-        <li><strong><a href="/traduccion-jurada-certificado-penales">Antecedentes penales</a></strong> — obligatorios en varios tipos de visado de trabajo.</li>
-        <li><strong><a href="/traduccion-jurada-certificado-empresa">Nóminas, certificados de empresa</a> y extractos bancarios</strong> — para acreditar ingresos y ahorro (<em>financial requirement</em>).</li>
-        <li><strong><a href="/traduccion-jurada-titulo-universitario">Títulos y expedientes</a></strong> — visados de estudiante y de trabajo cualificado.</li>
+        <li>la <strong>confirmación del traductor</strong> de que es una traducción fiel del documento original;</li>
+        <li>la <strong>fecha</strong> de la traducción;</li>
+        <li>el <strong>nombre completo y la firma</strong> del traductor;</li>
+        <li>sus <strong>datos de contacto</strong> (o los de la empresa de traducción).</li>
+      </ul>
+      <p>No hay una lista de traductores «autorizados» por el Reino Unido ni un sello obligatorio: la responsabilidad recae en quien firma. Por eso vale una traducción certificada de cualquier traductor profesional. Tampoco piden, como regla general, <a href="/blog/que-es-la-apostilla-de-la-haya">apostilla</a>: el Home Office trabaja sobre copias digitales subidas a la plataforma de solicitud.</p>
+
+      <h2>Jurada o certificada: cuándo conviene cada una</h2>
+      <p>Hago las dos. La <strong>certificada</strong> lleva mi declaración de fidelidad, fecha, firma y datos de contacto, exactamente lo que pide el UKVI. La <strong>jurada</strong> lleva, además, la certificación con la fórmula oficial, mi sello con el nº 7310 del MAEC y la copia sellada del original, y tiene validez legal en España. Esta es la regla que aplico con mis clientes:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Situación</th><th>Qué conviene</th><th>Por qué</th></tr></thead>
+        <tbody>
+          <tr><td>El documento solo se usará en el Reino Unido (extractos, nóminas, cartas)</td><td>Certificada</td><td>Cumple el requisito del UKVI y no necesitas más</td></tr>
+          <tr><td>Certificados del Registro Civil (nacimiento, matrimonio, pareja de hecho)</td><td>Jurada</td><td>Los reutilizarás: consulado, Registro Civil, herencias, otro visado. Una sola traducción vale para todo</td></tr>
+          <tr><td>Antecedentes penales, sentencias, resoluciones judiciales</td><td>Jurada</td><td>Un documento judicial traducido por un traductor con nombramiento oficial no se cuestiona</td></tr>
+          <tr><td>Un solicitor, tribunal o empleador pide «sworn» u «official translation»</td><td>Jurada</td><td>Es lo que están describiendo; te ahorras una segunda traducción</td></tr>
+          <tr><td>Documentos que también irán a una autoridad española</td><td>Jurada</td><td>En España solo vale la jurada</td></tr>
+          <tr><td>Recurso o reconsideración de una denegación</td><td>Jurada</td><td>Tu abogado querrá una traducción que nadie pueda discutir</td></tr>
+        </tbody>
+      </table></div>
+      <p>Te digo cuál te conviene cuando veo los documentos, antes de cobrar, y en el presupuesto va por escrito qué recibes. La diferencia entre las dos figuras la explico a fondo en <a href="/blog/traduccion-jurada-vs-traduccion-certificada">traducción jurada frente a traducción certificada</a>.</p>
+
+      <h2>Visados: qué documentos españoles se traducen</h2>
+      <p>Los ciudadanos españoles no necesitan visado para visitar el Reino Unido (desde abril de 2025 basta la <strong>ETA</strong>, la autorización electrónica de viaje), pero sí para vivir, trabajar o estudiar. Estos son los expedientes que más traduzco:</p>
+      <ul>
+        <li><strong>Skilled Worker (trabajo cualificado).</strong> Para puestos en sanidad, educación y servicios sociales el Home Office exige un <a href="/traduccion-jurada-certificado-penales">certificado de antecedentes penales</a> de cada país en el que hayas vivido más de doce meses en los últimos diez años: el español lo expide el Ministerio de Justicia y se traduce (<strong>${eur("antecedentes-penales")}</strong>). Si tu <em>Certificate of Sponsorship</em> menciona una titulación, también el <a href="/traduccion-jurada-titulo-universitario">título universitario</a> (<strong>${eur("titulo-universitario")}</strong>).</li>
+        <li><strong>Visado de familiar o pareja (Family visa).</strong> El <a href="/traduccion-jurada-certificado-matrimonio">certificado de matrimonio</a> (<strong>${eur("certificado-matrimonio")}</strong>) o la inscripción como pareja de hecho, las <a href="/traduccion-jurada-partida-nacimiento">partidas de nacimiento</a> de los hijos (<strong>${eur("partida-nacimiento")}</strong> cada una) y, para el requisito económico, <a href="/traduccion-jurada-certificado-empresa">nóminas, certificado de empresa</a> (<strong>${eur("certificado-empresa")}</strong>), contrato de trabajo y extractos bancarios si están en español. El umbral de ingresos vigente lo fija el Home Office; tu abogado o la guía oficial te dirán cuál te aplica.</li>
+        <li><strong>Visado de estudiante.</strong> Título, expediente y justificantes económicos: lo detallo en <a href="/blog/estudiar-en-reino-unido-traduccion-expediente">estudiar en Reino Unido: qué documentos necesitas traducir</a>.</li>
+        <li><strong>Hijos y dependientes.</strong> Partida de nacimiento, sentencia de custodia o consentimiento del otro progenitor si viaja uno solo.</li>
       </ul>
 
-      <h2>¿Necesitan apostilla los documentos para el UKVI?</h2>
-      <p>Como regla general, el UKVI <strong>no pide apostilla</strong>: le basta la <em>certified translation</em>. La excepción son documentos que otra autoridad del proceso sí exija legalizados. Si no lo tienes claro, revisa la lista de tu tipo de visado o pregúntame con ella delante: distinguir "traducir" de "apostillar y traducir" evita pagar trámites innecesarios.</p>
+      <h2>EU Settlement Scheme: settled y pre-settled status</h2>
+      <p>El plazo general del <em>EU Settlement Scheme</em> terminó el 30 de junio de 2021, pero el sistema sigue vivo: se admiten solicitudes tardías con motivos razonables, los <strong>familiares que se reúnen</strong> con un ciudadano de la UE que ya tiene estatus pueden solicitarlo, y quien tiene <em>pre-settled status</em> pasa a <em>settled</em> al cumplir cinco años de residencia continuada. En los dos primeros casos el Home Office pide pruebas de la relación familiar, y ahí aparecen los documentos españoles: el certificado de matrimonio o de pareja de hecho, las partidas de nacimiento y, si la relación tenía que existir antes del 31 de diciembre de 2020, documentos que lo acrediten con fecha. Para el paso de pre-settled a settled las pruebas de residencia suelen ser británicas (nóminas, HMRC, contratos de alquiler) y no se traducen; el Home Office, además, amplía el estatus automáticamente y convierte a <em>settled</em> a quien puede comprobar con sus propios datos.</p>
+      <p>Aquí la jurada compensa casi siempre: el certificado de matrimonio que subes al EUSS es el mismo que necesitarás para inscribir el matrimonio en el consulado de España o para una herencia, y una sola traducción jurada te sirve para todos.</p>
 
-      <h2>¿Con cuánto margen pido las traducciones?</h2>
-      <p>Los expedientes de visado se preparan con semanas de antelación, pero las traducciones son la parte rápida: documentos breves en <strong>24/48 horas</strong>, y lotes completos (nóminas + certificados + títulos) con presupuesto cerrado y fecha exacta en menos de 2 horas. Mi recomendación: reúne primero todos los documentos definitivos y tradúcelos de una vez — sale más barato que por goteo y garantiza coherencia entre ellos, algo que los revisores del UKVI agradecen.</p>
+      <h2>Nacionalidad británica por naturalización</h2>
+      <p>La naturalización (formulario AN) exige, en resumen, cinco años de residencia (tres si estás casado o casada con ciudadano británico), <em>settled status</em> o <em>indefinite leave to remain</em>, el examen <em>Life in the UK</em>, un nivel B1 de inglés y buena conducta. Los documentos que un solicitante español suele tener que traducir son:</p>
+      <ul>
+        <li>el <strong>certificado de matrimonio</strong> español, si solicitas por la vía del cónyuge;</li>
+        <li>las <strong>partidas de nacimiento</strong> de los hijos, si los registras a la vez como ciudadanos británicos (formulario MN1);</li>
+        <li>una <strong>partida de nacimiento propia</strong> o un certificado de cambio de nombre, si tus documentos muestran nombres o apellidos distintos (muy habitual con los dos apellidos españoles);</li>
+        <li>en algunos casos, la <strong>titulación universitaria</strong> cursada en inglés, para acreditar el idioma sin examen.</li>
+      </ul>
+      <p>El Home Office no pide certificado de antecedentes penales español para la naturalización: consulta directamente su base de datos y te pide declarar cualquier condena. Un aviso que no es de traducción pero conviene saber: quien adquiere otra nacionalidad viviendo fuera de España puede tener que declarar en el consulado su voluntad de conservar la española; pregúntalo en tu consulado.</p>
 
-      <h2>El detalle que marca la diferencia</h2>
-      <p>El UKVI trabaja sobre copias digitales: sube el PDF de la traducción firmada digitalmente tal cual te lo envío, sin reescanearlo (reescanear rompe la firma electrónica). Y guarda el original digital: si te piden documentación adicional, la reutilizas sin coste.</p>
+      <h2>Tabla resumen: documento, trámite, tipo de traducción y precio</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Documento español</th><th>Trámite habitual</th><th>Certificada o jurada</th><th>Precio de la jurada</th></tr></thead>
+        <tbody>
+          <tr><td>Certificado de matrimonio / pareja de hecho</td><td>Family visa, EUSS (familiares), naturalización por cónyuge</td><td>Jurada</td><td>${eur("certificado-matrimonio")}</td></tr>
+          <tr><td>Partida de nacimiento</td><td>Hijos dependientes, EUSS, registro de hijos (MN1)</td><td>Jurada</td><td>${eur("partida-nacimiento")}</td></tr>
+          <tr><td>Certificado de antecedentes penales</td><td>Skilled Worker en sanidad, educación y servicios sociales</td><td>Jurada</td><td>${eur("antecedentes-penales")}</td></tr>
+          <tr><td>Título universitario</td><td>Skilled Worker, estudiante, nivel de inglés</td><td>Jurada o certificada</td><td>${eur("titulo-universitario")}</td></tr>
+          <tr><td>Nóminas y certificado de empresa</td><td>Requisito económico del Family visa</td><td>Certificada suele bastar</td><td>${eur("certificado-empresa")}</td></tr>
+          <tr><td>Extractos bancarios, contratos, cartas</td><td>Requisito económico, alojamiento</td><td>Certificada suele bastar</td><td>Presupuesto cerrado en menos de 2 h</td></tr>
+          <tr><td>Sentencias (divorcio, custodia)</td><td>Family visa, hijos</td><td>Jurada</td><td>Presupuesto cerrado en menos de 2 h</td></tr>
+        </tbody>
+      </table></div>
+      <p>Precios del <a href="/precios">catálogo</a> por documento estándar de una página; los documentos largos se presupuestan al verlos. Si me envías el expediente completo, te doy un único precio y una única fecha.</p>
+
+      <h2>Cómo lo hago para que el UKVI no ponga pegas</h2>
+      <ol>
+        <li><strong>Me envías los documentos escaneados</strong> por WhatsApp, email o el <a href="/documentos">catálogo</a>, completos y legibles.</li>
+        <li><strong>Te digo en menos de 2 horas laborables</strong> qué necesita traducción, si te conviene jurada o certificada en cada caso, un precio cerrado y una fecha de entrega por escrito.</li>
+        <li><strong>Traduzco y certifico</strong> cada documento con la fórmula que exige el UKVI, mis datos de contacto en la propia certificación y, en la jurada, mi sello y firma electrónica.</li>
+        <li><strong>Recibes el PDF firmado</strong> en 24/48 h para los certificados breves. Súbelo tal cual a la plataforma del Home Office: reescanearlo rompe la firma electrónica. Si un trámite pide papel, envío el original por mensajería al Reino Unido; el coste del transportista va en el presupuesto.</li>
+      </ol>
+      <p>Si lo que tienes es un documento británico que necesitas presentar en España (una partida de nacimiento del GRO, un certificado de la policía, un <em>grant of probate</em>), el camino es el inverso y ahí sí es obligatoria la jurada: lo cuento en la guía para <a href="/traduccion-jurada-britanicos-espana">británicos en España</a>. Y si dudas de la validez de una traducción que ya te han entregado, revisa <a href="/blog/como-saber-si-una-traduccion-jurada-es-valida">cómo saber si una traducción jurada es válida</a>.</p>
       <p>
-        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20preparo%20un%20visado%20para%20Reino%20Unido%20y%20necesito%20traducciones%20juradas">Escríbeme por WhatsApp con tu lista de documentos</a>
-        y te confirmo qué se traduce, precio cerrado y plazo en menos de 2 horas.
+        <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20preparo%20un%20tr%C3%A1mite%20con%20el%20Home%20Office%20y%20necesito%20traducir%20documentos">Escríbeme por WhatsApp con tu lista de documentos</a>
+        y te confirmo qué se traduce, jurada o certificada, precio cerrado y plazo en menos de 2 horas. También puedes ver la página de
+        <a href="/traductor-jurado-ingles">traductora jurada de inglés</a>.
       </p>
     `,
+    faq: [
+      {
+        q: "¿El Home Office exige traducción jurada?",
+        a: "No. Pide una certified translation: traducción completa con la confirmación del traductor de que es fiel al original, la fecha, su nombre completo, su firma y sus datos de contacto. La traducción jurada española cumple esos requisitos y añade el nombramiento oficial del MAEC.",
+      },
+      {
+        q: "Entonces, ¿cuándo me conviene la jurada en lugar de la certificada?",
+        a: "Cuando el documento también va a servir en España (certificados de nacimiento, matrimonio o pareja de hecho), cuando es un documento judicial o de antecedentes penales, cuando un solicitor o tribunal pide una sworn u official translation, o en un recurso. Para extractos bancarios, nóminas o cartas que solo se usan en el Reino Unido, la certificada suele bastar.",
+      },
+      {
+        q: "¿Necesito apostillar los documentos españoles para el Home Office?",
+        a: "Como regla general, no. El Home Office trabaja con copias digitales y le basta la traducción. Solo hace falta apostilla si otra autoridad del proceso, por ejemplo un tribunal o un registro británico, la exige expresamente.",
+      },
+      {
+        q: "¿Puedo subir la traducción en PDF con firma electrónica a la plataforma del UKVI?",
+        a: "Sí. Sube el PDF exactamente como te lo envío, sin imprimirlo ni reescanearlo, para que la firma electrónica siga siendo verificable. Si un trámite concreto pide papel, te envío el original por mensajería al Reino Unido.",
+      },
+      {
+        q: "¿Cuánto cuesta traducir los documentos para un visado de pareja?",
+        a: `El certificado de matrimonio cuesta ${eur("certificado-matrimonio")}, cada partida de nacimiento ${eur("partida-nacimiento")} y el certificado de empresa o nómina ${eur("certificado-empresa")}, con entrega en 24/48 h. Los extractos y contratos se presupuestan al verlos; con el expediente completo te doy un único precio cerrado en menos de 2 horas.`,
+      },
+    ],
   },
 
   {
     slug: "estudiar-en-reino-unido-traduccion-expediente",
-    title: "Estudiar en Reino Unido: traducción jurada del expediente y del título para UCAS y universidades",
+    title: "Estudiar en Reino Unido: qué documentos necesitas traducir (Erasmus, grado y máster)",
     excerpt:
-      "Qué piden las universidades británicas a los estudiantes españoles: Bachillerato y EBAU para el grado, título y expediente para el máster. Precios y plazos reales.",
+      "Qué documentos españoles piden las universidades británicas y el Home Office según tu caso: intercambio o Erasmus, grado por UCAS, máster y visado de estudiante. Cuáles se traducen de forma jurada, cuáles no hace falta traducir y precios reales por documento.",
     date: "2026-09-03",
-    updated: "2026-09-03",
+    updated: "2026-09-27",
     author: "Elena Peñaranda Ortega",
     tags: ["academico", "reino-unido", "precios"],
-    readingTime: "5 min",
+    readingTime: "8 min",
     image: "/blog/post-ucas.jpg",
     alt: "Estudiante trabajando en la biblioteca — solicitudes a universidades del Reino Unido",
     html: `
-      <p>Cada año traduzco expedientes para estudiantes que se van al Reino Unido, y las dudas se repiten: ¿qué documentos piden exactamente?, ¿los quiere UCAS o la universidad?, ¿cuánto cuesta? Vamos por partes, porque el grado y el máster funcionan distinto.</p>
+      <p>Para estudiar en el Reino Unido necesitas traducir al inglés, con una <em>certified translation</em>, los documentos académicos y de identidad que estén en español: para un <strong>grado</strong>, el título de Bachiller y las notas de Bachillerato y EBAU; para un <strong>máster</strong>, el <a href="/traduccion-jurada-titulo-universitario">título universitario</a> y el expediente académico; para un <strong>intercambio o Erasmus</strong>, casi nada, porque tu universidad española emite los certificados en inglés; y para el <strong>visado de estudiante</strong>, además, los justificantes económicos si están en español. La traducción jurada española cumple los requisitos británicos de <em>certified translation</em> con holgura. El título universitario cuesta <strong>${eur("titulo-universitario")}</strong> y se entrega en 24/48 h; el expediente se presupuesta al verlo. Soy Elena Peñaranda, traductora jurada de inglés nº 7310 del MAEC, y cada verano traduzco expedientes de estudiantes que se van a Reino Unido; esto es lo que les explico antes de empezar.</p>
 
-      <h2>¿Qué piden para el grado (undergraduate)?</h2>
-      <p>La solicitud se hace por <strong>UCAS</strong>, pero los documentos traducidos los suele pedir después <strong>cada universidad</strong>, al hacerte la oferta condicional. Lo habitual para un estudiante español es:</p>
+      <h2>Primero, ¿en qué caso estás?</h2>
+      <p>Los cuatro caminos hacia una universidad británica piden documentos distintos, y traducir de más es tan habitual como traducir de menos. Localízate en la tabla y ve al apartado que te corresponde.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Tu caso</th><th>Quién te pide los documentos</th><th>Qué se suele traducir</th><th>Visado</th></tr></thead>
+        <tbody>
+          <tr><td>Intercambio, Erasmus o convenio bilateral (uno o dos cuatrimestres)</td><td>Tu universidad española y la de acogida</td><td>Normalmente nada: expediente y acuerdo de aprendizaje en inglés</td><td>No, si son menos de 6 meses (solo la ETA); visado de estudiante si son más</td></tr>
+          <tr><td>Grado (undergraduate) por UCAS</td><td>Cada universidad, al hacerte la oferta</td><td>Título de Bachiller, notas de Bachillerato y EBAU</td><td>Sí: visado de estudiante</td></tr>
+          <tr><td>Máster o doctorado (postgraduate)</td><td>La universidad, en la solicitud y en la matrícula</td><td>Título universitario y expediente académico</td><td>Sí: visado de estudiante</td></tr>
+          <tr><td>Curso corto de idioma o verano</td><td>La escuela</td><td>Rara vez algo</td><td>No, hasta 6 meses (ETA)</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2>Erasmus e intercambios: lo que casi nunca hace falta traducir</h2>
+      <p>Desde el Brexit el Reino Unido no forma parte de Erasmus+, así que los intercambios con universidades británicas se hacen mediante <strong>convenios bilaterales</strong> y programas propios de cada universidad; hay un acuerdo político para que el Reino Unido vuelva a asociarse al programa a partir de 2027, pero hasta que exista la convocatoria, quien manda es tu oficina de relaciones internacionales. En cualquiera de esas modalidades la documentación circula entre universidades: el <em>learning agreement</em> se firma en inglés y la certificación académica la emite tu universidad española, casi siempre con versión en inglés. Si tu facultad solo la expide en español, la de acogida te pedirá una traducción, y ahí sí entro yo; pero pregunta antes, porque muchas la sacan bilingüe sin coste.</p>
+      <p>Si la estancia es de <strong>menos de seis meses</strong>, entras como visitante: desde abril de 2025 los ciudadanos españoles necesitan la <strong>ETA</strong> (autorización electrónica de viaje), que se pide por internet y no exige traducir nada. Si supera los seis meses, necesitas el visado de estudiante del apartado siguiente aunque sea un intercambio.</p>
+
+      <h2>Grado: título de Bachiller, notas y EBAU</h2>
+      <p>La solicitud se presenta por <strong>UCAS</strong> con las notas declaradas por ti; los documentos los pide después <strong>cada universidad</strong>, normalmente al hacerte la oferta condicional y otra vez, ya definitivos, al matricularte. Para un estudiante español lo habitual es:</p>
       <ul>
-        <li><strong>Título de Bachillerato</strong> y <strong>certificado de notas de Bachillerato y EBAU</strong> — la base de la oferta condicional.</li>
-        <li>En algunos casos, certificados de idioma o equivalencias que la propia universidad indica.</li>
+        <li><strong>Título de Bachiller</strong> (o el resguardo de haberlo solicitado, si aún no lo tienes).</li>
+        <li><strong>Certificación académica de Bachillerato</strong>, con las notas de los dos cursos.</li>
+        <li><strong>Tarjeta o certificado de calificaciones de la EBAU</strong> (PAU o EvAU según la comunidad), que es lo que convierte la oferta condicional en firme.</li>
+        <li>Certificado de inglés (IELTS, Cambridge o el que acepte esa universidad). Ya está en inglés: no se traduce.</li>
       </ul>
-      <p>Cada universidad publica sus requisitos de <em>certified translation</em>: la traducción jurada española los cumple, porque lleva la certificación, firma, sello y datos de la traductora nombrada por el MAEC.</p>
+      <p>Cada universidad publica sus requisitos de traducción, y todos se parecen: traducción completa, hecha por un traductor profesional, con su nombre, firma, fecha y datos de contacto. La traducción jurada española lleva todo eso y, además, mi nombramiento verificable en el <a href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx" target="_blank" rel="noopener noreferrer">listado del MAEC</a>. Un consejo que ahorra dinero: envía primero solo lo que pida la oferta condicional y deja las notas definitivas de la EBAU para julio; se traducen en 24/48 h y no te frenan la matrícula.</p>
 
-      <h2>¿Y para el máster (postgraduate)?</h2>
-      <p>Aquí los protagonistas son el <strong><a href="/traduccion-jurada-titulo-universitario">título universitario</a></strong> y el <strong>expediente académico completo</strong> (transcript). Muchas universidades aceptan primero el expediente provisional y piden el título definitivo al matricularte — pregunta a tu <em>admissions office</em> qué versión quiere y cuándo, y traduce solo lo que pidan en cada fase.</p>
+      <h2>Máster y doctorado: título y expediente</h2>
+      <p>Aquí los dos protagonistas son el <strong><a href="/traduccion-jurada-titulo-universitario">título universitario</a></strong> y el <strong>expediente académico</strong> (la certificación académica personal con todas las asignaturas, créditos y notas). Tres detalles que cambian el presupuesto:</p>
+      <ul>
+        <li>Si aún no tienes el título físico, sirve el <strong>certificado supletorio</strong> o el resguardo de pago de las tasas: lo traduzco igual y la universidad lo acepta como provisional.</li>
+        <li>Muchas universidades españolas emiten la certificación académica <strong>en inglés</strong> o el <strong>Suplemento Europeo al Título</strong> bilingüe. Si el tuyo está en inglés, no necesitas traducirlo; me lo mandas y te lo confirmo antes de cobrarte nada.</li>
+        <li>Las <strong>cartas de recomendación</strong> las escriben tus profesores directamente en inglés en la plataforma de la universidad; si alguna está en español, se traduce como documento suelto.</li>
+      </ul>
+      <p>El título universitario de una página tiene precio fijo, <strong>${eur("titulo-universitario")}</strong>. El expediente depende del número de páginas y asignaturas, así que te doy <strong>precio cerrado en menos de 2 horas</strong> al verlo, sin tarifas por palabra. Explico el detalle en <a href="/blog/cuanto-cuesta-traducir-titulo-universitario">cuánto cuesta traducir un título universitario</a>.</p>
 
-      <h2>¿Cuánto cuesta traducir el título y el expediente?</h2>
-      <p>El <strong>título universitario</strong> (una página) tiene precio fijo: <strong>50 €</strong>, entregado en 24/48 h. El <strong>expediente académico</strong> depende del número de páginas y asignaturas, así que se presupuesta al verlo: me lo envías en PDF y en menos de 2 horas tienes <strong>precio cerrado</strong> — sin tarifas por palabra que crecen solas. El certificado de notas de Bachillerato/EBAU funciona como el expediente: presupuesto cerrado al momento.</p>
+      <h2>El visado de estudiante y los documentos económicos</h2>
+      <p>Si el curso dura más de seis meses necesitas el <strong>Student visa</strong>, que se solicita con el <strong>CAS</strong> (el número de confirmación que te envía la universidad una vez aceptada la plaza). El Home Office pide, además del pasaporte y el CAS, pruebas de que puedes pagar la matrícula y mantenerte durante el curso, y aquí es donde aparecen los documentos en español:</p>
+      <ul>
+        <li><strong>Extractos bancarios</strong> de los últimos meses (el dinero debe llevar un mínimo de 28 días en la cuenta). Si el banco no te los da en inglés, se traducen.</li>
+        <li>Si el dinero está en la cuenta de tus padres: <strong>carta de consentimiento</strong> firmada por ellos, tu <a href="/traduccion-jurada-partida-nacimiento">partida de nacimiento</a> para acreditar el parentesco (<strong>${eur("partida-nacimiento")}</strong>) y, a veces, sus <a href="/traduccion-jurada-certificado-empresa">nóminas o certificado de empresa</a> (<strong>${eur("certificado-empresa")}</strong>).</li>
+        <li>Si eres menor de 18 años, la carta de consentimiento de tus padres y la partida de nacimiento son obligatorias.</li>
+        <li>El <strong>pasaporte español</strong> no se traduce: es plurilingüe.</li>
+      </ul>
+      <p>El Home Office exige que toda traducción incluya la confirmación del traductor de que es fiel al original, la fecha, su nombre completo y firma y sus datos de contacto. Mi certificación jurada lo lleva todo, y añado mis datos de contacto en la propia certificación para que el revisor no tenga que buscarlos. Si tu expediente incluye además documentos para un familiar o una pareja, te interesa la guía sobre <a href="/blog/traduccion-jurada-visado-reino-unido">traducción jurada para el Home Office</a>.</p>
+
+      <h2>Tabla de documentos y precios</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Documento</th><th>Para qué</th><th>¿Se traduce?</th><th>Precio de la traducción jurada</th></tr></thead>
+        <tbody>
+          <tr><td>Título de Bachiller</td><td>Grado (oferta y matrícula)</td><td>Sí</td><td>Presupuesto cerrado en menos de 2 h</td></tr>
+          <tr><td>Notas de Bachillerato y EBAU</td><td>Grado</td><td>Sí</td><td>Presupuesto cerrado en menos de 2 h</td></tr>
+          <tr><td>Título universitario (1 página)</td><td>Máster y doctorado</td><td>Sí</td><td>${eur("titulo-universitario")}</td></tr>
+          <tr><td>Expediente académico</td><td>Máster, doctorado e intercambios</td><td>Solo si tu universidad no lo emite en inglés</td><td>${eur("expediente-academico")}</td></tr>
+          <tr><td>Partida de nacimiento</td><td>Visado (fondos de los padres, menores)</td><td>Sí</td><td>${eur("partida-nacimiento")}</td></tr>
+          <tr><td>Nóminas o certificado de empresa de los padres</td><td>Visado (fondos)</td><td>Sí, si están en español</td><td>${eur("certificado-empresa")}</td></tr>
+          <tr><td>Extractos bancarios</td><td>Visado (fondos)</td><td>Sí, si el banco no los da en inglés</td><td>Presupuesto cerrado en menos de 2 h</td></tr>
+          <tr><td>Pasaporte</td><td>Todo</td><td>No</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <p>Todos los precios son los del <a href="/precios">catálogo</a>: por documento, con certificación, firma y sello, PDF firmado electrónicamente y copia sellada del original. Si envías el lote completo (título + expediente + partida), te doy un único precio cerrado y una única fecha.</p>
 
       <h2>¿Necesito apostillar algo?</h2>
-      <p>Para las universidades británicas, normalmente <strong>no</strong>: les basta la traducción jurada. La apostilla aparece en el camino inverso — cuando vuelves con un título británico y quieres <a href="/blog/homologacion-titulo-universitario-extranjero-espana">homologarlo en España</a>. Si tu universidad pide algo distinto, su lista de requisitos manda; envíamela y la revisamos juntas.</p>
+      <p>Para las universidades británicas y para el visado de estudiante, <strong>no</strong>: les basta la traducción. La <a href="/blog/que-es-la-apostilla-de-la-haya">apostilla de La Haya</a> aparece en el camino de vuelta, cuando terminas y quieres <a href="/blog/homologacion-titulo-universitario-extranjero-espana">homologar o pedir la equivalencia del título británico en España</a>. Si una universidad concreta te pide algo distinto, su lista de requisitos manda: envíamela y la revisamos juntas.</p>
 
-      <h2>Calendario realista</h2>
+      <h2>Cómo lo hacemos y en qué plazos</h2>
       <ol>
-        <li><strong>Enero-abril:</strong> solicitudes UCAS y de máster; suele bastar con el expediente provisional.</li>
-        <li><strong>Junio-julio:</strong> notas definitivas de EBAU o del grado; traducción de los certificados finales (24/48 h).</li>
-        <li><strong>Agosto-septiembre:</strong> matrícula; algunas universidades piden entonces el título definitivo traducido.</li>
+        <li><strong>Me envías los documentos escaneados</strong> por WhatsApp, email o el <a href="/documentos">catálogo</a>: PDF o foto nítida, con sellos y firmas legibles (en <a href="/blog/como-escanear-bien-documentos-con-el-movil">cómo escanear bien con el móvil</a> tienes los trucos).</li>
+        <li><strong>Te confirmo en menos de 2 horas laborables</strong> qué necesita traducción de verdad, un precio cerrado y una fecha de entrega por escrito.</li>
+        <li><strong>Traduzco, certifico, firmo y sello</strong> cada documento, con las asignaturas, notas y nombres escritos igual en todos.</li>
+        <li><strong>Recibes el PDF firmado electrónicamente</strong> en 24/48 h para los documentos breves; el expediente, en la fecha acordada. Súbelo tal cual a la plataforma de la universidad o del visado: si lo reescaneas, la firma electrónica deja de verificarse. Si te piden papel, lo envío por mensajería.</li>
       </ol>
-      <p>Como ves, la traducción nunca es el cuello de botella — pero agradecerás tenerla lista antes de la avalancha de agosto.</p>
+      <p>Calendario realista: entre enero y abril se presentan las solicitudes y suele bastar el expediente provisional; en junio y julio llegan las notas definitivas; en agosto y septiembre, la matrícula y el visado. La traducción nunca es el cuello de botella, pero en agosto se acumulan los expedientes: si puedes, tradúcelo en julio.</p>
       <p>
-        <a href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20me%20voy%20a%20estudiar%20a%20Reino%20Unido%20y%20necesito%20traducir%20mi%20expediente">Envíame tu expediente por WhatsApp</a>
-        y te paso presupuesto cerrado en menos de 2 horas, o revisa la <a href="/traduccion-jurada-titulo-universitario">ficha del título universitario</a>.
+        <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20me%20voy%20a%20estudiar%20a%20Reino%20Unido%20y%20necesito%20traducir%20mi%20expediente">Envíame tu expediente por WhatsApp</a>
+        y te digo qué hace falta traducir y cuánto cuesta en menos de 2 horas. También puedes ver la
+        <a href="/traduccion-jurada-titulo-universitario">ficha del título universitario</a> o la página de
+        <a href="/traductor-jurado-ingles">traductora jurada de inglés</a>.
       </p>
     `,
+    faq: [
+      {
+        q: "¿Las universidades británicas exigen traducción jurada o les vale una traducción certificada?",
+        a: "Piden una certified translation: traducción completa hecha por un traductor profesional, con su nombre, firma, fecha y datos de contacto. La traducción jurada española cumple esos requisitos y añade un nombramiento oficial que cualquiera puede comprobar en el listado del MAEC.",
+      },
+      {
+        q: "¿Tengo que traducir el expediente si mi universidad lo emite en inglés?",
+        a: "No. Si la certificación académica o el Suplemento Europeo al Título están en inglés emitidos por tu universidad, se aceptan tal cual. Mándamelos antes de encargar nada y te lo confirmo sin coste.",
+      },
+      {
+        q: "¿Cuánto cuesta traducir el título y el expediente para un máster en Reino Unido?",
+        a: `El título universitario de una página cuesta ${eur("titulo-universitario")} y se entrega en 24/48 h. El expediente académico se presupuesta al verlo, con precio cerrado en menos de 2 horas, porque depende del número de páginas y asignaturas.`,
+      },
+      {
+        q: "¿Necesito visado para un Erasmus o un intercambio en Reino Unido?",
+        a: "Si la estancia dura menos de seis meses, no: entras como visitante con la ETA, la autorización electrónica que los españoles necesitan desde abril de 2025. Si dura más, necesitas el visado de estudiante con el CAS de la universidad británica.",
+      },
+      {
+        q: "¿Hay que apostillar el título o las notas para estudiar en Reino Unido?",
+        a: "No. Ni las universidades ni el Home Office piden apostilla para estos documentos; basta la traducción. La apostilla se necesita en el sentido contrario, cuando vuelves con un título británico y quieres homologarlo en España.",
+      },
+    ],
   },
 
   {

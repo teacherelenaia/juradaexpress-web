@@ -38,6 +38,20 @@ const COOKIES = [
       "Mantiene el estado de la sesión de medición de cada propiedad de Google Analytics.",
     type: "Analítica (solo con tu consentimiento)",
   },
+  // Google Ads solo se carga si hay etiqueta configurada en Vercel
+  // (NEXT_PUBLIC_ADS_ID, ver app/components/AdsConversion.js).
+  ...(process.env.NEXT_PUBLIC_ADS_ID
+    ? [
+        {
+          name: "_gcl_au",
+          provider: "Google Ads",
+          duration: "90 días",
+          purpose:
+            "Mide si una visita procedente de un anuncio de Google termina en contacto (WhatsApp, teléfono, formulario o pago). Sin personalización de anuncios.",
+          type: "Medición de conversiones (solo con tu consentimiento)",
+        },
+      ]
+    : []),
 ];
 
 export default function Page() {
@@ -95,6 +109,9 @@ export default function Page() {
       <p className="mt-3 text-sm text-slate-500">
         Google Analytics se carga con la IP anonimizada y sin señales
         publicitarias de Google (remarketing desactivado).
+        {process.env.NEXT_PUBLIC_ADS_ID
+          ? " La etiqueta de Google Ads solo mide conversiones, con la personalización de anuncios desactivada."
+          : ""}
       </p>
 
       <h2 className="mt-10 font-display text-2xl font-semibold leading-snug text-slate-900">

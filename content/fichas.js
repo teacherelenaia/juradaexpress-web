@@ -4,7 +4,10 @@
 // el patrón de la auditoría (5.2): para qué trámites, apostilla sí/no,
 // precio desde (de content/documents.js), plazo, cómo enviarlo y FAQ propia
 // de 3 preguntas. La plantilla que las pinta es
-// app/components/DocumentPage.js. El campo `updated` (última revisión de la
+// app/components/DocumentPage.js. El campo `aceptadaPor` (27/09/2026) es la
+// lista de organismos ante los que los clientes presentan habitualmente
+// esa traducción; se muestra como chips «Aceptada por». Datos prudentes:
+// nombra el organismo, no promete requisitos concretos de cada oficina. El campo `updated` (última revisión de la
 // ficha) se muestra en la página y alimenta lastModified en app/sitemap.js.
 import { DOCUMENTS } from "./documents";
 
@@ -28,6 +31,15 @@ export const FICHAS = [
       "NIE, TIE y reagrupación familiar",
       "Inscripción de nacimientos en el Registro Civil",
       "Visados y trámites consulares en Reino Unido",
+    ],
+    aceptadaPor: [
+      "Registro Civil",
+      "Extranjería (NIE, TIE, reagrupación)",
+      "Ministerio de Justicia (nacionalidad)",
+      "Home Office (UKVI)",
+      "USCIS",
+      "IRCC",
+      "Consulados de España y del Reino Unido",
     ],
     apostilla: {
       verdict: "Depende del organismo",
@@ -78,6 +90,14 @@ export const FICHAS = [
       "Cambios de estado civil ante organismos británicos",
       "Divorcios y separaciones con elemento internacional",
     ],
+    aceptadaPor: [
+      "Registro Civil",
+      "Extranjería",
+      "Seguridad Social (pensiones de viudedad)",
+      "Home Office (UKVI) y HMRC",
+      "USCIS",
+      "Notarías y juzgados",
+    ],
     apostilla: {
       verdict: "Sí, en la mayoría de los casos",
       text: "El Registro Civil y Extranjería suelen pedir el certificado apostillado. Apostíllalo en el país donde se celebró el matrimonio y después me lo envías: la traducción incluye la apostilla sin coste adicional si viene en la misma página.",
@@ -127,6 +147,15 @@ export const FICHAS = [
       "Adopciones y acogimientos",
       "Licencias de armas y oposiciones",
     ],
+    aceptadaPor: [
+      "Extranjería",
+      "Ministerio de Justicia (nacionalidad)",
+      "Home Office (UKVI)",
+      "USCIS",
+      "IRCC",
+      "Empresas y colegios profesionales",
+      "Intervención de Armas (Guardia Civil)",
+    ],
     apostilla: {
       verdict: "Sí",
       text: "Extranjería y nacionalidad exigen el certificado apostillado. El ACRO británico se apostilla en la Legalisation Office del FCDO; el español, en el Ministerio de Justicia. Después me lo envías y traduzco certificado y apostilla juntos.",
@@ -175,6 +204,14 @@ export const FICHAS = [
       "Colegiación profesional (medicina, enfermería, arquitectura…)",
       "Oposiciones y bolsas de trabajo",
       "Becas y programas de intercambio",
+    ],
+    aceptadaPor: [
+      "Universidades españolas y británicas",
+      "UCAS",
+      "UK ENIC",
+      "Ministerio de Educación (homologación y equivalencia)",
+      "Colegios profesionales",
+      "Administraciones convocantes de oposiciones",
     ],
     apostilla: {
       verdict: "Depende del destino",
@@ -226,6 +263,13 @@ export const FICHAS = [
       "Contratos mercantiles y laborales",
       "Herencias con bienes en los dos países",
     ],
+    aceptadaPor: [
+      "Notarías",
+      "Registro de la Propiedad y Registro Mercantil",
+      "Juzgados y tribunales",
+      "Agencia Tributaria",
+      "Solicitors y conveyancers en el Reino Unido",
+    ],
     apostilla: {
       verdict: "Sí en documentos notariales",
       text: "Los poderes y escrituras otorgados ante notario extranjero necesitan apostilla para surtir efecto en España (y viceversa). Los contratos privados entre particulares o empresas, no.",
@@ -276,6 +320,15 @@ export const FICHAS = [
       "Empresas con actividad en España y Reino Unido",
       "Cualquier documento oficial entre ambos idiomas",
     ],
+    aceptadaPor: [
+      "Extranjería",
+      "Registro Civil",
+      "Universidades",
+      "Notarías y juzgados",
+      "Home Office (UKVI)",
+      "USCIS",
+      "IRCC",
+    ],
     apostilla: {
       verdict: "Depende del documento",
       text: "La apostilla no depende del idioma sino del tipo de documento y del organismo de destino. En cada ficha de documento de esta web te digo si la lleva; si dudas, pregúntame con el documento delante.",
@@ -319,6 +372,14 @@ export const FICHAS = [
     tramites: [
       "Ministerios, ayuntamientos y comunidades autónomas",
       "Universidades y homologación de títulos",
+      "Registros civiles, mercantiles y de la propiedad",
+      "Notarías y juzgados",
+      "Consulados y embajadas",
+    ],
+    aceptadaPor: [
+      "Ministerios y comunidades autónomas",
+      "Ayuntamientos",
+      "Universidades",
       "Registros civiles, mercantiles y de la propiedad",
       "Notarías y juzgados",
       "Consulados y embajadas",
@@ -369,6 +430,13 @@ export const FICHAS = [
       "Seguros y partes de accidente internacionales",
       "Alquiler de vehículos y gestiones con ayuntamientos",
     ],
+    aceptadaPor: [
+      "DGT (Jefaturas de Tráfico)",
+      "Aseguradoras y peritos",
+      "Juzgados",
+      "Ayuntamientos",
+      "Empresas de alquiler de vehículos",
+    ],
     apostilla: {
       verdict: "Normalmente no",
       text: "La DGT no suele pedir apostilla para el permiso ni para los certificados de la DVLA. Si tu oficina la exigiera, la traducción la incluiría sin coste extra al venir en el mismo documento.",
@@ -414,6 +482,14 @@ export const FICHAS = [
       "Pensiones con cotizaciones en los dos países",
       "Prestaciones y vida laboral internacional",
       "Justificación de ingresos ante Extranjería",
+    ],
+    aceptadaPor: [
+      "Extranjería",
+      "Home Office (UKVI)",
+      "Seguridad Social e INSS",
+      "Bancos y entidades hipotecarias",
+      "SEPE",
+      "Empleadores en el Reino Unido e Irlanda",
     ],
     apostilla: {
       verdict: "Normalmente no",
@@ -462,6 +538,14 @@ export const FICHAS = [
       "Expedientes académicos y becas en el extranjero",
       "Matrimonios y parejas de hecho",
     ],
+    aceptadaPor: [
+      "Notarías (España y extranjero)",
+      "Bancos",
+      "Universidades y programas de becas",
+      "Registro Civil",
+      "Home Office (UKVI)",
+      "USCIS",
+    ],
     apostilla: {
       verdict: "No",
       text: "El DNI y el pasaporte no se apostillan. Si el organismo pide una copia compulsada o notarial del documento, esa compulsa se hace antes y se traduce junto con el documento.",
@@ -508,6 +592,13 @@ export const FICHAS = [
       "Certificados de defunción y de últimas voluntades",
       "Testamentos otorgados en el otro país",
       "Liquidación del impuesto de sucesiones",
+    ],
+    aceptadaPor: [
+      "Notarías",
+      "Registro de la Propiedad",
+      "Agencia Tributaria (Sucesiones)",
+      "Juzgados",
+      "Solicitors y probate registries en el Reino Unido",
     ],
     apostilla: {
       verdict: "Sí en documentos oficiales",
@@ -558,6 +649,14 @@ export const FICHAS = [
       "Seguros de vida y reclamaciones",
       "Continuidad de tratamientos en otro país",
       "Adopciones internacionales",
+    ],
+    aceptadaPor: [
+      "Extranjería y consulados (visados)",
+      "Administraciones convocantes de oposiciones",
+      "Aseguradoras",
+      "Hospitales y servicios de salud",
+      "Home Office (UKVI)",
+      "Organismos de adopción internacional",
     ],
     apostilla: {
       verdict: "Depende del organismo",
