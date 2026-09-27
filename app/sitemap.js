@@ -1,6 +1,6 @@
 // app/sitemap.js
-import { getAllPosts } from "../content/posts";
-import { getAllPostsEn } from "../content/posts.en";
+import { getAllPosts, getPostBySlug } from "../content/posts";
+import { getAllPostsEn, getPostEnBySlug } from "../content/posts.en";
 import { SERVICE_ROUTES } from "../content/servicios/routes";
 import { CIUDADES } from "../content/ciudades";
 import { FICHAS } from "../content/fichas";
@@ -100,17 +100,34 @@ export default function sitemap() {
     { url: `${BASE_URL}/en/cookie-policy`, lastModified: "2026-08-25", priority: 0.3 },
   ];
 
-  const postRoutes = getAllPosts().map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: post.updated || post.date,
-    priority: 0.5,
-  }));
+  // Artículos: si un post tiene pareja en el otro idioma (`translationOf`
+  // y la pareja existe), se emiten las alternates es/en/x-default (x-default
+  // = versión española, como en el resto del sitio).
+  const blogLanguages = (esSlug, enSlug) => ({
+    es: `${BASE_URL}/blog/${esSlug}`,
+    en: `${BASE_URL}/en/blog/${enSlug}`,
+    "x-default": `${BASE_URL}/blog/${esSlug}`,
+  });
 
-  const postRoutesEn = getAllPostsEn().map((post) => ({
-    url: `${BASE_URL}/en/blog/${post.slug}`,
-    lastModified: post.updated || post.date,
-    priority: 0.5,
-  }));
+  const postRoutes = getAllPosts().map((post) => {
+    const en = post.translationOf ? getPostEnBySlug(post.translationOf) : null;
+    return {
+      url: `${BASE_URL}/blog/${post.slug}`,
+      lastModified: post.updated || post.date,
+      priority: 0.5,
+      ...(en ? { alternates: { languages: blogLanguages(post.slug, en.slug) } } : {}),
+    };
+  });
+
+  const postRoutesEn = getAllPostsEn().map((post) => {
+    const es = post.translationOf ? getPostBySlug(post.translationOf) : null;
+    return {
+      url: `${BASE_URL}/en/blog/${post.slug}`,
+      lastModified: post.updated || post.date,
+      priority: 0.5,
+      ...(es ? { alternates: { languages: blogLanguages(es.slug, post.slug) } } : {}),
+    };
+  });
 
   return [
     ...staticRoutes,

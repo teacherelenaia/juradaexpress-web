@@ -2,10 +2,17 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "../../../../content/posts";
+import { getPostEnBySlug } from "../../../../content/posts.en";
 import { WHATSAPP_URL } from "../../../../content/site";
 import { personRef, ORGANIZATION_ID } from "../../../../content/persona";
 
 const BASE = "https://juradaexpress.es";
+
+// Artículo en inglés emparejado (campo `translationOf`), solo si existe de
+// verdad en content/posts.en.js: alimenta hreflang y el enlace visible.
+function englishVersion(post) {
+  return post.translationOf ? getPostEnBySlug(post.translationOf) || null : null;
+}
 
 export async function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
@@ -14,10 +21,22 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const post = getPostBySlug(params.slug);
   if (!post) return {};
+  const en = englishVersion(post);
   return {
     title: post.title,
     description: post.excerpt,
-    alternates: { canonical: `${BASE}/blog/${post.slug}` },
+    alternates: {
+      canonical: `${BASE}/blog/${post.slug}`,
+      ...(en
+        ? {
+            languages: {
+              es: `${BASE}/blog/${post.slug}`,
+              en: `${BASE}/en/blog/${en.slug}`,
+              "x-default": `${BASE}/blog/${post.slug}`,
+            },
+          }
+        : {}),
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -63,6 +82,7 @@ export default function BlogPostPage({ params }) {
   const post = getPostBySlug(params.slug);
   if (!post) notFound();
   const related = relatedPosts(post);
+  const en = englishVersion(post);
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 md:py-16">
@@ -107,6 +127,14 @@ export default function BlogPostPage({ params }) {
           </>
         ) : null}
       </div>
+
+      {en && (
+        <p className="mt-3 text-sm text-slate-600">
+          <a href={`/en/blog/${en.slug}`} hrefLang="en" lang="en" className="link">
+            Read this article in English
+          </a>
+        </p>
+      )}
 
       {post.image && (
         // eslint-disable-next-line @next/next/no-img-element

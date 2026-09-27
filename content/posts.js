@@ -1,6 +1,9 @@
 // content/posts.js
 //
-// Artículos del blog en español. Los precios que citan los artículos
+// Artículos del blog en español. El campo opcional `translationOf` es el
+// slug del mismo artículo en inglés (content/posts.en.js): las plantillas
+// de blog emiten hreflang es/en/x-default y un enlace visible, y el sitemap
+// añade las alternates de idioma. Los precios que citan los artículos
 // recientes salen SIEMPRE de content/documents.js (eur(id) / MIN_PRICE),
 // para que nunca se desincronicen del catálogo.
 import { DOCUMENTS, MIN_PRICE } from "./documents";
@@ -417,6 +420,7 @@ export const posts = [
 
   {
     slug: "traduccion-jurada-visado-reino-unido",
+    translationOf: "sworn-translation-uk-home-office-visas-settled-status-citizenship",
     title: "Traducción jurada para el Home Office: visados, settled status y nacionalidad británica",
     excerpt:
       "El Home Office acepta traducciones certificadas y no exige juradas: qué requisitos pide el UKVI, cuándo compensa la traducción jurada española y qué documentos se traducen para un visado, el EU Settlement Scheme (settled status) y la nacionalidad británica. Precios reales.",
@@ -533,6 +537,7 @@ export const posts = [
 
   {
     slug: "estudiar-en-reino-unido-traduccion-expediente",
+    translationOf: "studying-in-the-uk-from-spain-documents-sworn-translation",
     title: "Estudiar en Reino Unido: qué documentos necesitas traducir (Erasmus, grado y máster)",
     excerpt:
       "Qué documentos españoles piden las universidades británicas y el Home Office según tu caso: intercambio o Erasmus, grado por UCAS, máster y visado de estudiante. Cuáles se traducen de forma jurada, cuáles no hace falta traducir y precios reales por documento.",
@@ -758,6 +763,7 @@ export const posts = [
   // ---------------------------------------------------------------------
   {
     slug: "documentos-visado-nomada-digital-apostilla-traduccion-jurada",
+    translationOf: "spain-digital-nomad-visa-documents-apostille-sworn-translation",
     title: "Documentos para el visado de nómada digital: cuáles necesitan apostilla y traducción jurada",
     excerpt:
       "La lista completa del expediente de nómada digital para España, documento a documento: cuáles llevan apostilla, cuáles traducción jurada y en qué orden se hace todo para que el consulado no lo devuelva.",
@@ -812,6 +818,7 @@ export const posts = [
 
   {
     slug: "traduccion-jurada-o-certificada-uscis-espana",
+    translationOf: "sworn-vs-certified-translation-uscis-spain",
     title: "Traducción jurada o traducción certificada: qué pide USCIS y qué pide España",
     excerpt:
       "No son lo mismo: USCIS exige una certified translation al inglés con certificación del traductor (8 CFR § 103.2(b)(3)) y España exige una traducción jurada con firma y sello del MAEC. Cuál necesitas, qué lleva cada una y cuándo hacen falta las dos.",
@@ -873,6 +880,7 @@ export const posts = [
 
   {
     slug: "documentos-indios-visado-espana-apostilla-mea",
+    translationOf: "indian-documents-spanish-visa-mea-apostille-sworn-translation",
     title: "Documentos indios para un visado de España: apostilla del MEA y traducción jurada",
     excerpt:
       "Guía para solicitantes de India: qué documentos pide el Consulado de España (nacimiento, matrimonio, PCC, títulos, cartas de empleador), cómo funciona la apostilla del Ministry of External Affairs y por qué los certificados deben llegar en inglés antes de la traducción jurada al español.",
@@ -929,6 +937,7 @@ export const posts = [
 
   {
     slug: "traduccion-jurada-para-irse-de-espana-reino-unido-irlanda-canada-australia",
+    translationOf: "sworn-translations-leaving-spain-uk-ireland-canada-australia",
     title: "Traducción jurada para irse de España: qué piden Reino Unido, Irlanda, Canadá y Australia",
     excerpt:
       "Si emigras desde España, tus certificados, títulos y antecedentes penales tienen que llegar en inglés. Qué exige cada país a una traducción hecha fuera (UKVI, Irish Immigration, IRCC y Home Affairs), cuándo hace falta la apostilla española y en qué orden hacerlo.",
@@ -990,6 +999,7 @@ export const posts = [
   // ---------------------------------------------------------------------
   {
     slug: "como-saber-si-una-traduccion-jurada-es-valida",
+    translationOf: "how-to-check-sworn-translation-valid-spain",
     title: "Cómo saber si una traducción jurada es válida en España (y qué hacer si te entregan una que no lo es)",
     excerpt:
       "Los cinco puntos que comprueba un funcionario en una traducción jurada: nombramiento del MAEC, listado oficial, firma, sello, certificación y fecha. Cómo verificarlos tú mismo, los errores típicos de algunas agencias y qué hacer si el organismo la rechaza.",
@@ -1093,6 +1103,7 @@ export const posts = [
 
   {
     slug: "nacionalidad-espanola-residencia-documentos-reino-unido-eeuu-india",
+    translationOf: "sworn-translations-spanish-citizenship-residence-uk-us-india",
     title: "Documentos traducidos para la nacionalidad española por residencia: guía para ciudadanos de Reino Unido, EE. UU. e India",
     excerpt:
       "Qué documentos de tu país de origen necesitas traducir para la nacionalidad española por residencia, qué apostilla lleva cada uno y en qué orden hacerlo, con las particularidades del Reino Unido, Estados Unidos e India y precios reales.",

@@ -1,5 +1,8 @@
 // content/posts.en.js
-// English blog posts (/en/blog). Same shape as content/posts.js. Prices
+// English blog posts (/en/blog). Same shape as content/posts.js. The
+// optional `translationOf` field is the slug of the same article in Spanish
+// (content/posts.js): the blog templates emit hreflang es/en/x-default and
+// a visible link, and the sitemap adds the language alternates. Prices
 // quoted in recent posts ALWAYS come from content/documents.js
 // (eur(id) / MIN_PRICE) so they never drift from the catalogue.
 import { DOCUMENTS, MIN_PRICE } from "./documents";
@@ -100,6 +103,7 @@ export const postsEn = [
   // ---------------------------------------------------------------------
   {
     slug: "spain-digital-nomad-visa-documents-apostille-sworn-translation",
+    translationOf: "documentos-visado-nomada-digital-apostilla-traduccion-jurada",
     title: "Spain digital nomad visa documents: which need an apostille and a sworn translation",
     excerpt:
       "The full document list for Spain's digital nomad visa, one by one: which need an apostille, which need a sworn translation into Spanish, and the order to do everything so the consulate does not send the file back.",
@@ -154,6 +158,7 @@ export const postsEn = [
 
   {
     slug: "sworn-vs-certified-translation-uscis-spain",
+    translationOf: "traduccion-jurada-o-certificada-uscis-espana",
     title: "Sworn vs certified translation: what USCIS requires and what Spain requires",
     excerpt:
       "They are not the same: USCIS requires a certified translation into English with the translator's certification (8 CFR § 103.2(b)(3)) and Spain requires a sworn translation signed and stamped by a Ministry-appointed translator. Which one you need, what each carries and when you need both.",
@@ -215,6 +220,7 @@ export const postsEn = [
 
   {
     slug: "indian-documents-spanish-visa-mea-apostille-sworn-translation",
+    translationOf: "documentos-indios-visado-espana-apostilla-mea",
     title: "Indian documents for a Spanish visa: MEA apostille and sworn translation",
     excerpt:
       "A guide for applicants from India: which documents the Spanish consulate asks for (birth, marriage, PCC, degrees, employer letters), how the Ministry of External Affairs apostille works and why certificates must be in English before the sworn translation into Spanish.",
@@ -271,6 +277,7 @@ export const postsEn = [
 
   {
     slug: "sworn-translations-leaving-spain-uk-ireland-canada-australia",
+    translationOf: "traduccion-jurada-para-irse-de-espana-reino-unido-irlanda-canada-australia",
     title: "Sworn translations for leaving Spain: what the UK, Ireland, Canada and Australia ask for",
     excerpt:
       "If you are emigrating from Spain, your certificates, degrees and criminal record checks must arrive in English. What each country requires of a translation done abroad (UKVI, Irish Immigration, IRCC and Home Affairs), when the Spanish apostille is needed and in what order to do it.",
@@ -332,6 +339,7 @@ export const postsEn = [
   // ---------------------------------------------------------------------
   {
     slug: "how-to-check-sworn-translation-valid-spain",
+    translationOf: "como-saber-si-una-traduccion-jurada-es-valida",
     title: "How to check whether a sworn translation is valid in Spain (and what to do if yours is rejected)",
     excerpt:
       "The five things a Spanish official checks on a sworn translation: the Ministry appointment, the official register, signature, stamp, certification and date. How to verify them yourself, the mistakes some agencies make and what to do if the office turns it down.",
@@ -435,6 +443,7 @@ export const postsEn = [
 
   {
     slug: "sworn-translations-spanish-citizenship-residence-uk-us-india",
+    translationOf: "nacionalidad-espanola-residencia-documentos-reino-unido-eeuu-india",
     title: "Sworn translations for Spanish citizenship by residence: UK, US and Indian applicants",
     excerpt:
       "Which documents from your home country need translating for Spanish citizenship by residence, which apostille each one takes and the order to do it in, with the specifics for the United Kingdom, the United States and India and real prices.",
@@ -544,6 +553,7 @@ export const postsEn = [
 
   {
     slug: "studying-in-the-uk-from-spain-documents-sworn-translation",
+    translationOf: "estudiar-en-reino-unido-traduccion-expediente",
     title: "Studying in the UK from Spain: which documents need a sworn translation",
     excerpt:
       "What British universities and the Home Office ask Spanish students to translate, case by case: exchange or Erasmus, an undergraduate degree through UCAS, a master's and the Student visa. Which documents need a sworn translation, which do not need translating at all, and real prices per document.",
@@ -662,6 +672,7 @@ export const postsEn = [
 
   {
     slug: "sworn-translation-uk-home-office-visas-settled-status-citizenship",
+    translationOf: "traduccion-jurada-visado-reino-unido",
     title: "Sworn translations for the UK Home Office: visas, settled status and British citizenship",
     excerpt:
       "The Home Office accepts certified translations and does not demand sworn ones: what UKVI actually requires, when a Spanish sworn translation is worth it, and which Spanish documents are translated for a visa, the EU Settlement Scheme (settled status) and British citizenship. Real prices.",
