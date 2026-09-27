@@ -13,6 +13,7 @@
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
+import QuoteCalculator from "./QuoteCalculator";
 import { SectionHeading } from "./ui";
 import { SERVICE_COUNTRIES } from "../../content/site";
 
@@ -251,6 +252,11 @@ export default function ServicePage({ page }) {
           />
         </figure>
       </header>
+
+      {/* Calculadora de precio + subida de documento, solo si la página la pide */}
+      {page.quoteCalculator ? (
+        <QuoteCalculator locale={page.locale} className="!px-0 !pb-0" />
+      ) : null}
 
       {/* Bloques de contenido */}
       <div className="mt-14 space-y-12 md:mt-16">
