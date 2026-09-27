@@ -139,6 +139,23 @@ export const INTERNATIONAL_SHIPPING = {
   },
 };
 
+// Entrega en papel dentro de España (calculadora de precio, 27/09/2026).
+// Sin tarifa fija publicada: mientras price sea null, la calculadora muestra
+// "+ mensajería: se indica en el presupuesto" en lugar de una cifra.
+// [[COMPLETAR opcional: tarifa fija de mensajería en España, si Elena
+// quiere publicarla]]
+export const PAPER_DELIVERY_SPAIN = {
+  price: null,
+  note: {
+    es: "Envío en papel por mensajería dentro de España: el coste del transportista se indica en el presupuesto",
+    en: "Paper copy by courier within Spain: the courier cost is stated in the quote",
+  },
+};
+
+// Recargo por urgencia (entrega en menos de 24 h) de la calculadora de
+// precio: 30 % sobre el precio de catálogo.
+export const URGENCY_SURCHARGE = 0.3;
+
 // Capacidad confirmada por Elena el 07/09/2026. Si algún día no puede
 // garantizarse, poner en null: la web deja de citar la cifra y dice
 // "pídeme información y te cierro plazo por escrito".
