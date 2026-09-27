@@ -12,6 +12,7 @@
 // content/servicios/*.js.
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
+import Guarantees from "./Guarantees";
 import { SectionHeading } from "./ui";
 import { SERVICE_COUNTRIES } from "../../content/site";
 
@@ -234,6 +235,10 @@ export default function ServicePage({ page }) {
               {t.quote}
             </TrackedLink>
           </div>
+          {/* Garantías (content/site.js → GUARANTEES), solo si la página las pide */}
+          {page.guarantees ? (
+            <Guarantees locale={page.locale} className="mt-6" />
+          ) : null}
         </div>
         <figure className="relative aspect-[4/3] overflow-hidden rounded-xl shadow">
           <Image

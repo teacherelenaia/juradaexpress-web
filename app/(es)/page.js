@@ -4,6 +4,7 @@ import TrackedLink from "../components/TrackedLink";
 import Reviews from "../components/Reviews";
 import TrustStrip from "../components/TrustStrip";
 import HeroSeal from "../components/HeroSeal";
+import Guarantees from "../components/Guarantees";
 import ProcessTimeline from "../components/ProcessTimeline";
 import ProcessVideo from "../components/ProcessVideo";
 import FollowUs from "../components/FollowUs";
@@ -167,6 +168,7 @@ export default function Page() {
                 <span>Presupuesto cerrado en menos de 2 h</span>
               </span>
             </p>
+            <Guarantees locale="es" className="mt-4" />
             <p className="mt-3 max-w-[68ch] text-base text-slate-600">
               Soy{" "}
               <a href="/traductor-jurado-ingles" className="link">

@@ -4,6 +4,7 @@ import TrackedLink from "../components/TrackedLink";
 import Reviews from "../components/Reviews";
 import TrustStrip from "../components/TrustStrip";
 import HeroSeal from "../components/HeroSeal";
+import Guarantees from "../components/Guarantees";
 import ProcessTimeline from "../components/ProcessTimeline";
 import ProcessVideo from "../components/ProcessVideo";
 import FollowUs from "../components/FollowUs";
@@ -165,6 +166,7 @@ export default function Page() {
                 <span>Fixed quote in under 2 hours</span>
               </span>
             </p>
+            <Guarantees locale="en" className="mt-4" />
             <p className="mt-3 max-w-[68ch] text-base text-slate-600">
               I'm a{" "}
               <a href="/en/sworn-english-translator" className="link">
