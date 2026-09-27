@@ -1,5 +1,12 @@
 // content/posts.en.js
-// English blog posts (/en/blog). Same shape as content/posts.js.
+// English blog posts (/en/blog). Same shape as content/posts.js. Prices
+// quoted in recent posts ALWAYS come from content/documents.js
+// (eur(id) / MIN_PRICE) so they never drift from the catalogue.
+import { DOCUMENTS, MIN_PRICE } from "./documents";
+
+const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
+const eur = (id) =>
+  priceOf(id) != null ? `€${priceOf(id)}` : "fixed quote within 2 hours";
 
 export const postsEn = [
   {
@@ -534,6 +541,240 @@ export const postsEn = [
   },
 
 
+
+  {
+    slug: "studying-in-the-uk-from-spain-documents-sworn-translation",
+    title: "Studying in the UK from Spain: which documents need a sworn translation",
+    excerpt:
+      "What British universities and the Home Office ask Spanish students to translate, case by case: exchange or Erasmus, an undergraduate degree through UCAS, a master's and the Student visa. Which documents need a sworn translation, which do not need translating at all, and real prices per document.",
+    date: "2026-09-27",
+    updated: "2026-09-27",
+    author: "Elena Peñaranda Ortega",
+    tags: ["academico", "reino-unido", "precios"],
+    readingTime: "8 min",
+    image: "/blog/post-ucas.jpg",
+    alt: "Student working in a library — applications to universities in the United Kingdom",
+    html: `
+      <p>To study in the UK you need a <em>certified translation</em> into English of every academic or identity document issued in Spanish: for an <strong>undergraduate degree</strong>, the Bachillerato diploma and the Bachillerato and EBAU grades; for a <strong>master's</strong>, the <a href="/traduccion-jurada-titulo-universitario">university degree certificate</a> and the academic transcript; for an <strong>exchange or Erasmus stay</strong>, almost nothing, because Spanish universities issue those records in English; and for the <strong>Student visa</strong>, the financial evidence too if it is in Spanish. A Spanish sworn translation meets the British requirements for a certified translation and then some. A degree certificate costs <strong>${eur("titulo-universitario")}</strong> and is delivered in 24/48 hours; a transcript is quoted once I see it. I am Elena Peñaranda, sworn translator of English no. 7310 appointed by Spain's Ministry of Foreign Affairs, and every summer I translate the files of students heading to the UK. This is what I tell them before we start.</p>
+
+      <h2>First, which case are you in?</h2>
+      <p>The four routes into a British university ask for different documents, and translating too much is as common as translating too little. Find yourself in the table and go to the matching section.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Your case</th><th>Who asks for the documents</th><th>What usually needs translating</th><th>Visa</th></tr></thead>
+        <tbody>
+          <tr><td>Exchange, Erasmus or bilateral agreement (one or two terms)</td><td>Your Spanish university and the host university</td><td>Usually nothing: transcript and learning agreement come in English</td><td>No, under 6 months (ETA only); Student visa if longer</td></tr>
+          <tr><td>Undergraduate degree through UCAS</td><td>Each university, when it makes you an offer</td><td>Bachillerato diploma, Bachillerato and EBAU grades</td><td>Yes: Student visa</td></tr>
+          <tr><td>Master's or PhD (postgraduate)</td><td>The university, at application and enrolment</td><td>Degree certificate and academic transcript</td><td>Yes: Student visa</td></tr>
+          <tr><td>Short language or summer course</td><td>The school</td><td>Rarely anything</td><td>No, up to 6 months (ETA)</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2>Erasmus and exchanges: what almost never needs translating</h2>
+      <p>Since Brexit the UK has not been part of Erasmus+, so exchanges with British universities run through <strong>bilateral agreements</strong> and each university's own mobility schemes; there is a political agreement for the UK to re-associate with the programme from 2027, but until a call actually exists, your international relations office has the last word. In all of these schemes the paperwork moves between universities: the <em>learning agreement</em> is signed in English and the transcript of records is issued by your Spanish university, almost always with an English version. If your faculty only issues it in Spanish, the host university will ask for a translation, and that is where I come in; but ask first, because many issue a bilingual version free of charge.</p>
+      <p>If the stay is <strong>under six months</strong>, you enter as a visitor: since April 2025 Spanish citizens need an <strong>ETA</strong> (Electronic Travel Authorisation), applied for online, which requires no translated documents. If it is longer than six months you need the Student visa described below, even for an exchange.</p>
+
+      <h2>Undergraduate: Bachillerato diploma, grades and EBAU</h2>
+      <p>The application goes through <strong>UCAS</strong> with the grades you declare yourself; the documents are requested afterwards by <strong>each university</strong>, usually when it makes you a conditional offer and again, in final form, at enrolment. For a Spanish student that normally means:</p>
+      <ul>
+        <li>The <strong>Título de Bachiller</strong> (or the receipt showing you have applied for it, if it has not been issued yet).</li>
+        <li>The <strong>Bachillerato academic certificate</strong>, with the grades of both years.</li>
+        <li>The <strong>EBAU results card or certificate</strong> (PAU or EvAU depending on the region), which turns the conditional offer into an unconditional one.</li>
+        <li>An English certificate (IELTS, Cambridge or whichever that university accepts). It is already in English: no translation.</li>
+      </ul>
+      <p>Every university publishes its translation requirements, and they all look alike: a complete translation by a professional translator, with their name, signature, date and contact details. A Spanish sworn translation carries all of that and, on top, my appointment, which anyone can verify on the <a href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx" target="_blank" rel="noopener noreferrer">Ministry's register</a>. A money-saving tip: send only what the conditional offer asks for first, and leave the final EBAU results for July; they are translated in 24/48 hours and will not hold up your enrolment.</p>
+
+      <h2>Master's and PhD: degree certificate and transcript</h2>
+      <p>Here the two key documents are the <strong><a href="/traduccion-jurada-titulo-universitario">university degree certificate</a></strong> and the <strong>academic transcript</strong> (the <em>certificación académica personal</em> listing every module, credit and grade). Three details change the quote:</p>
+      <ul>
+        <li>If you do not have the physical diploma yet, the <strong>provisional certificate</strong> (<em>certificado supletorio</em>) or the fee receipt will do: I translate it in the same way and the university accepts it as provisional.</li>
+        <li>Many Spanish universities issue the transcript <strong>in English</strong> or a bilingual <strong>Diploma Supplement</strong>. If yours is in English you do not need to translate it; send it over and I will confirm before charging you anything.</li>
+        <li><strong>Reference letters</strong> are written by your lecturers directly in English on the university's platform; if one is in Spanish, it is translated as a separate document.</li>
+      </ul>
+      <p>A one-page degree certificate has a fixed price, <strong>${eur("titulo-universitario")}</strong>. The transcript depends on the number of pages and modules, so I give you a <strong>fixed quote within 2 hours</strong> once I see it, with no per-word rates.</p>
+
+      <h2>The Student visa and the financial documents</h2>
+      <p>If the course lasts more than six months you need a <strong>Student visa</strong>, applied for with the <strong>CAS</strong> (the confirmation number the university sends you once you have accepted the place). Besides your passport and the CAS, the Home Office wants proof that you can pay the fees and support yourself during the course, and that is where the Spanish-language documents appear:</p>
+      <ul>
+        <li><strong>Bank statements</strong> for the last few months (the money must have been in the account for at least 28 days). If the bank cannot issue them in English, they are translated.</li>
+        <li>If the money is in your parents' account: a <strong>letter of consent</strong> signed by them, your <a href="/traduccion-jurada-partida-nacimiento">birth certificate</a> to prove the relationship (<strong>${eur("partida-nacimiento")}</strong>) and, sometimes, their <a href="/traduccion-jurada-certificado-empresa">payslips or employer's certificate</a> (<strong>${eur("certificado-empresa")}</strong>).</li>
+        <li>If you are under 18, your parents' consent letter and your birth certificate are compulsory.</li>
+        <li>A <strong>Spanish passport</strong> is not translated: it is multilingual.</li>
+      </ul>
+      <p>The Home Office requires every translation to include the translator's confirmation that it is accurate, the date, their full name and signature and their contact details. My sworn certification carries all of that, and I add my contact details on the certification itself so the caseworker does not have to look for them. If your file also includes documents for a family member or partner, see the guide on <a href="/en/blog/sworn-translation-uk-home-office-visas-settled-status-citizenship">sworn translations for the UK Home Office</a>.</p>
+
+      <h2>Documents and prices at a glance</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Document</th><th>What for</th><th>Translated?</th><th>Sworn translation price</th></tr></thead>
+        <tbody>
+          <tr><td>Título de Bachiller (secondary school diploma)</td><td>Undergraduate (offer and enrolment)</td><td>Yes</td><td>Fixed quote within 2 hours</td></tr>
+          <tr><td>Bachillerato and EBAU grades</td><td>Undergraduate</td><td>Yes</td><td>Fixed quote within 2 hours</td></tr>
+          <tr><td>University degree certificate (1 page)</td><td>Master's and PhD</td><td>Yes</td><td>${eur("titulo-universitario")}</td></tr>
+          <tr><td>Academic transcript</td><td>Master's, PhD and exchanges</td><td>Only if your university does not issue it in English</td><td>${eur("expediente-academico")}</td></tr>
+          <tr><td>Birth certificate</td><td>Visa (parents' funds, under-18s)</td><td>Yes</td><td>${eur("partida-nacimiento")}</td></tr>
+          <tr><td>Parents' payslips or employer's certificate</td><td>Visa (funds)</td><td>Yes, if in Spanish</td><td>${eur("certificado-empresa")}</td></tr>
+          <tr><td>Bank statements</td><td>Visa (funds)</td><td>Yes, if the bank cannot issue them in English</td><td>Fixed quote within 2 hours</td></tr>
+          <tr><td>Passport</td><td>Everything</td><td>No</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <p>All prices are those of the <a href="/en/precios">price list</a>: per document, including certification, signature and stamp, an electronically signed PDF and a stamped copy of the original. If you send the whole set (degree + transcript + birth certificate) you get a single fixed price and a single delivery date.</p>
+
+      <h2>Do I need an apostille?</h2>
+      <p>For British universities and for the Student visa, <strong>no</strong>: the translation is enough. The Hague apostille comes into play on the way back, when you finish and want to have your British degree recognised in Spain. If a specific university asks for something different, its requirements list wins: send it to me and we will go through it together.</p>
+
+      <h2>How we do it, and how long it takes</h2>
+      <ol>
+        <li><strong>You send me scans</strong> by WhatsApp, email or the <a href="/en/documentos">document catalogue</a>: a PDF or a sharp photo, with stamps and signatures legible.</li>
+        <li><strong>Within 2 working hours</strong> I confirm what really needs translating, a fixed price and a delivery date in writing.</li>
+        <li><strong>I translate, certify, sign and stamp</strong> each document, with modules, grades and names written identically across all of them.</li>
+        <li><strong>You receive the electronically signed PDF</strong> in 24/48 hours for short documents; the transcript on the agreed date. Upload it as it is to the university or visa platform: if you print and rescan it, the electronic signature can no longer be verified. If paper is required, I courier it.</li>
+      </ol>
+      <p>A realistic calendar: applications go in between January and April, when a provisional transcript is usually enough; final grades arrive in June and July; enrolment and the visa follow in August and September. Translation is never the bottleneck, but August is when the files pile up: if you can, get it translated in July.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20going%20to%20study%20in%20the%20UK%20and%20need%20my%20Spanish%20documents%20translated">Send me your documents on WhatsApp</a>
+        and within 2 hours I will tell you what needs translating and what it costs. You can also read the
+        <a href="/en/sworn-english-translator">sworn English translator</a> page or the guide to
+        <a href="/en/blog/sworn-translations-leaving-spain-uk-ireland-canada-australia">sworn translations for leaving Spain</a>.
+      </p>
+    `,
+    faq: [
+      {
+        q: "Do British universities require a sworn translation, or is a certified translation enough?",
+        a: "They ask for a certified translation: a complete translation by a professional translator with their name, signature, date and contact details. A Spanish sworn translation meets those requirements and adds an official appointment that anyone can check on the Spanish Foreign Ministry's register.",
+      },
+      {
+        q: "Do I have to translate my transcript if my university issues it in English?",
+        a: "No. If the academic transcript or the Diploma Supplement is issued in English by your university, it is accepted as it is. Send it to me before ordering anything and I will confirm free of charge.",
+      },
+      {
+        q: "How much does it cost to translate a degree certificate and a transcript for a UK master's?",
+        a: `A one-page degree certificate costs ${eur("titulo-universitario")} and is delivered in 24/48 hours. The transcript is quoted once I see it, with a fixed price within 2 hours, because it depends on the number of pages and modules.`,
+      },
+      {
+        q: "Do I need a visa for an Erasmus or exchange stay in the UK?",
+        a: "If the stay lasts under six months, no: you enter as a visitor with an ETA, the electronic authorisation Spanish citizens have needed since April 2025. If it lasts longer, you need a Student visa with a CAS from the British university.",
+      },
+      {
+        q: "Do my degree or grades need an apostille to study in the UK?",
+        a: "No. Neither universities nor the Home Office ask for an apostille on these documents; the translation is enough. The apostille is needed in the opposite direction, when you come back with a British degree and want it recognised in Spain.",
+      },
+    ],
+  },
+
+  {
+    slug: "sworn-translation-uk-home-office-visas-settled-status-citizenship",
+    title: "Sworn translations for the UK Home Office: visas, settled status and British citizenship",
+    excerpt:
+      "The Home Office accepts certified translations and does not demand sworn ones: what UKVI actually requires, when a Spanish sworn translation is worth it, and which Spanish documents are translated for a visa, the EU Settlement Scheme (settled status) and British citizenship. Real prices.",
+    date: "2026-09-27",
+    updated: "2026-09-27",
+    author: "Elena Peñaranda Ortega",
+    tags: ["reino-unido", "extranjeria", "validez"],
+    readingTime: "9 min",
+    image: "/blog/post-visado-uk.jpg",
+    alt: "Hands checking an official form on a folder of documents for a UK visa application",
+    html: `
+      <p>The Home Office <strong>does not require a sworn translation</strong>: it asks for a <em>certified translation</em>, that is, a complete translation accompanied by the translator's confirmation that it is accurate, with their name, signature, date and contact details. A Spanish sworn translation meets those requirements and goes further, because it is signed by a translator appointed by Spain's Ministry of Foreign Affairs whose number any caseworker can verify. A sworn translation is worth choosing when the same document will also be used in Spain, when a solicitor or a court asks for one, or when you want nobody to question who signed the translation. The usual certificates (birth, marriage, criminal record) cost <strong>from €${MIN_PRICE}</strong> and are delivered in 24/48 hours. I am Elena Peñaranda, sworn translator of English no. 7310, and this guide explains which Spanish documents get translated for a visa, for <em>settled status</em> and for British citizenship, and when a certified translation is enough.</p>
+
+      <h2>What the Home Office actually requires of a translation</h2>
+      <p>The <strong>UK Visas and Immigration (UKVI)</strong> guidance repeats the same rule for every application: any document that is not in English or Welsh must be accompanied by a full translation that includes:</p>
+      <ul>
+        <li>the <strong>translator's confirmation</strong> that it is an accurate translation of the original document;</li>
+        <li>the <strong>date</strong> of the translation;</li>
+        <li>the translator's <strong>full name and signature</strong>;</li>
+        <li>their <strong>contact details</strong> (or those of the translation company).</li>
+      </ul>
+      <p>There is no UK list of "authorised" translators and no compulsory stamp: the responsibility rests with whoever signs. That is why a certified translation by any professional translator is accepted. Nor does the Home Office, as a rule, ask for an apostille: it works from digital copies uploaded to the application platform.</p>
+
+      <h2>Sworn or certified: when each one makes sense</h2>
+      <p>I provide both. A <strong>certified translation</strong> carries my statement of accuracy, the date, my signature and my contact details, exactly what UKVI asks for. A <strong>sworn translation</strong> carries, in addition, the certification in the official Spanish wording, my stamp with MAEC number 7310 and a stamped copy of the original, and it is legally valid in Spain. This is the rule I apply with my clients:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Situation</th><th>Best choice</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>The document will only ever be used in the UK (bank statements, payslips, letters)</td><td>Certified</td><td>Meets the UKVI requirement and you need nothing more</td></tr>
+          <tr><td>Civil registry certificates (birth, marriage, registered partnership)</td><td>Sworn</td><td>You will reuse them: consulate, Spanish Civil Registry, inheritance, another visa. One translation serves all</td></tr>
+          <tr><td>Criminal record certificates, judgments, court orders</td><td>Sworn</td><td>A court document translated by an officially appointed translator is never questioned</td></tr>
+          <tr><td>A solicitor, court or employer asks for a "sworn" or "official" translation</td><td>Sworn</td><td>That is what they are describing; you avoid paying for a second translation</td></tr>
+          <tr><td>Documents that will also go to a Spanish authority</td><td>Sworn</td><td>In Spain only a sworn translation is valid</td></tr>
+          <tr><td>Appeal or reconsideration after a refusal</td><td>Sworn</td><td>Your lawyer will want a translation nobody can dispute</td></tr>
+        </tbody>
+      </table></div>
+      <p>I tell you which one you need when I see the documents, before you pay, and the quote states in writing what you will receive. The difference between the two is explained in depth in <a href="/en/blog/sworn-vs-certified-translation-uscis-spain">sworn vs certified translation</a>.</p>
+
+      <h2>Visas: which Spanish documents get translated</h2>
+      <p>Spanish citizens do not need a visa to visit the UK (since April 2025 an <strong>ETA</strong>, the Electronic Travel Authorisation, is enough), but they do need one to live, work or study there. These are the files I translate most often:</p>
+      <ul>
+        <li><strong>Skilled Worker.</strong> For jobs in health, education and social care the Home Office requires a <a href="/traduccion-jurada-certificado-penales">criminal record certificate</a> from every country you have lived in for more than twelve months in the last ten years: the Spanish one is issued by the Ministry of Justice and needs translating (<strong>${eur("antecedentes-penales")}</strong>). If your Certificate of Sponsorship mentions a qualification, the <a href="/traduccion-jurada-titulo-universitario">degree certificate</a> too (<strong>${eur("titulo-universitario")}</strong>).</li>
+        <li><strong>Family or partner visa.</strong> The <a href="/traduccion-jurada-certificado-matrimonio">marriage certificate</a> (<strong>${eur("certificado-matrimonio")}</strong>) or the registered-partnership (<em>pareja de hecho</em>) certificate, the children's <a href="/traduccion-jurada-partida-nacimiento">birth certificates</a> (<strong>${eur("partida-nacimiento")}</strong> each) and, for the financial requirement, <a href="/traduccion-jurada-certificado-empresa">payslips, an employer's certificate</a> (<strong>${eur("certificado-empresa")}</strong>), the employment contract and bank statements if they are in Spanish. The income threshold in force is set by the Home Office; your lawyer or the official guidance will tell you which one applies to you.</li>
+        <li><strong>Student visa.</strong> Degree, transcript and financial evidence: covered in <a href="/en/blog/studying-in-the-uk-from-spain-documents-sworn-translation">studying in the UK from Spain</a>.</li>
+        <li><strong>Children and dependants.</strong> Birth certificate, custody order or the other parent's consent if only one parent is travelling.</li>
+      </ul>
+
+      <h2>EU Settlement Scheme: settled and pre-settled status</h2>
+      <p>The general deadline for the <em>EU Settlement Scheme</em> passed on 30 June 2021, but the scheme is still open: late applications are accepted with reasonable grounds, <strong>joining family members</strong> of an EU citizen who already holds status can apply, and holders of <em>pre-settled status</em> move to <em>settled status</em> after five years of continuous residence. In the first two cases the Home Office asks for evidence of the family relationship, and that is where the Spanish documents come in: the marriage or registered-partnership certificate, birth certificates and, where the relationship had to exist before 31 December 2020, dated documents that prove it. For the move from pre-settled to settled the evidence of residence is usually British (payslips, HMRC records, tenancy agreements) and is not translated; the Home Office also extends the status automatically and converts it to settled where its own data allow it to.</p>
+      <p>Here the sworn translation is almost always worth it: the marriage certificate you upload to the EUSS is the same one you will need to register the marriage at the Spanish consulate or for an inheritance, and a single sworn translation serves all of them.</p>
+
+      <h2>British citizenship by naturalisation</h2>
+      <p>Naturalisation (form AN) requires, in short, five years of residence (three if you are married to a British citizen), settled status or indefinite leave to remain, the Life in the UK test, English at level B1 and good character. The documents a Spanish applicant usually has to translate are:</p>
+      <ul>
+        <li>the Spanish <strong>marriage certificate</strong>, if you apply on the spouse route;</li>
+        <li>the children's <strong>birth certificates</strong>, if you register them as British citizens at the same time (form MN1);</li>
+        <li>your <strong>own birth certificate</strong> or a change-of-name certificate, if your documents show different names or surnames (very common with the two Spanish surnames);</li>
+        <li>in some cases, a <strong>university degree</strong> taught in English, to prove the language requirement without a test.</li>
+      </ul>
+      <p>The Home Office does not ask for a Spanish criminal record certificate for naturalisation: it checks its own databases and asks you to declare any conviction. One warning that is not about translation but is worth knowing: a Spanish citizen who acquires another nationality while living abroad may need to declare at the consulate their wish to keep Spanish nationality; ask your consulate.</p>
+
+      <h2>Summary table: document, procedure, type of translation and price</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spanish document</th><th>Typical procedure</th><th>Certified or sworn</th><th>Sworn translation price</th></tr></thead>
+        <tbody>
+          <tr><td>Marriage or registered-partnership certificate</td><td>Family visa, EUSS (family members), naturalisation as a spouse</td><td>Sworn</td><td>${eur("certificado-matrimonio")}</td></tr>
+          <tr><td>Birth certificate</td><td>Dependent children, EUSS, registering children (MN1)</td><td>Sworn</td><td>${eur("partida-nacimiento")}</td></tr>
+          <tr><td>Criminal record certificate</td><td>Skilled Worker in health, education and social care</td><td>Sworn</td><td>${eur("antecedentes-penales")}</td></tr>
+          <tr><td>University degree certificate</td><td>Skilled Worker, Student, English requirement</td><td>Sworn or certified</td><td>${eur("titulo-universitario")}</td></tr>
+          <tr><td>Payslips and employer's certificate</td><td>Family visa financial requirement</td><td>Certified is usually enough</td><td>${eur("certificado-empresa")}</td></tr>
+          <tr><td>Bank statements, contracts, letters</td><td>Financial requirement, accommodation</td><td>Certified is usually enough</td><td>Fixed quote within 2 hours</td></tr>
+          <tr><td>Court orders (divorce, custody)</td><td>Family visa, children</td><td>Sworn</td><td>Fixed quote within 2 hours</td></tr>
+        </tbody>
+      </table></div>
+      <p>Prices from the <a href="/en/precios">price list</a>, per standard one-page document; longer documents are quoted once I see them. Send me the complete file and you get a single price and a single date.</p>
+
+      <h2>How I do it so UKVI raises no objections</h2>
+      <ol>
+        <li><strong>You send me scans</strong> by WhatsApp, email or the <a href="/en/documentos">document catalogue</a>, complete and legible.</li>
+        <li><strong>Within 2 working hours</strong> I tell you what needs translating, whether sworn or certified is the better choice for each document, a fixed price and a delivery date in writing.</li>
+        <li><strong>I translate and certify</strong> each document with the wording UKVI requires, my contact details on the certification itself and, for sworn translations, my stamp and electronic signature.</li>
+        <li><strong>You receive the signed PDF</strong> in 24/48 hours for short certificates. Upload it as it is to the Home Office platform: printing and rescanning breaks the electronic signature. If a procedure requires paper, I courier the original to the UK; the courier cost is stated in the quote.</li>
+      </ol>
+      <p>If what you have is a British document to present in Spain (a GRO birth certificate, a police certificate, a <em>grant of probate</em>), the direction is reversed and there a sworn translation is compulsory: see the guide for <a href="/en/sworn-translation-british-residents-spain">British residents in Spain</a>. And if you doubt the validity of a translation you have already been given, read <a href="/en/blog/how-to-check-sworn-translation-valid-spain">how to check whether a sworn translation is valid</a>.</p>
+      <p>
+        <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20preparing%20a%20Home%20Office%20application%20and%20need%20Spanish%20documents%20translated">Message me on WhatsApp with your list of documents</a>
+        and within 2 hours I will confirm what needs translating, sworn or certified, a fixed price and the deadline. You can also read the
+        <a href="/en/sworn-english-translator">sworn English translator</a> page.
+      </p>
+    `,
+    faq: [
+      {
+        q: "Does the Home Office require a sworn translation?",
+        a: "No. It asks for a certified translation: a complete translation with the translator's confirmation that it is accurate, the date, their full name, signature and contact details. A Spanish sworn translation meets those requirements and adds the official appointment by Spain's Ministry of Foreign Affairs.",
+      },
+      {
+        q: "So when is a sworn translation better than a certified one?",
+        a: "When the document will also be used in Spain (birth, marriage or registered-partnership certificates), when it is a court document or a criminal record certificate, when a solicitor or court asks for a sworn or official translation, or in an appeal. For bank statements, payslips or letters used only in the UK, a certified translation is usually enough.",
+      },
+      {
+        q: "Do Spanish documents need an apostille for the Home Office?",
+        a: "As a rule, no. The Home Office works from digital copies and the translation is enough. An apostille is only needed if another authority in the process, for example a British court or registry, expressly requires it.",
+      },
+      {
+        q: "Can I upload an electronically signed PDF translation to the UKVI platform?",
+        a: "Yes. Upload the PDF exactly as I send it, without printing or rescanning it, so the electronic signature remains verifiable. If a specific procedure requires paper, I courier the original to the UK.",
+      },
+      {
+        q: "How much does it cost to translate the documents for a partner visa?",
+        a: `The marriage certificate costs ${eur("certificado-matrimonio")}, each birth certificate ${eur("partida-nacimiento")} and the employer's certificate or payslip ${eur("certificado-empresa")}, delivered in 24/48 hours. Bank statements and contracts are quoted once I see them; with the complete file you get a single fixed price within 2 hours.`,
+      },
+    ],
+  },
 ];
 
 export function getAllPostsEn() {
