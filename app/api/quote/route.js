@@ -1,14 +1,18 @@
 // app/api/quote/route.js
 //
 // Recibe la solicitud de la calculadora de precio (QuoteCalculator.js):
-// resumen (documento, páginas, urgencia, entrega, estimación) + hasta 5
+// resumen (documento, páginas, urgencia, entrega, estimación), datos de
+// contacto del cliente (nombre, email y teléfono, opcionales) + hasta 5
 // archivos (PDF/JPG/PNG, 10 MB cada uno) y los reenvía por email a Elena
-// con Resend (API REST con fetch: sin dependencia npm). Solo servidor:
-// RESEND_API_KEY nunca llega al navegador.
+// con Resend (API REST con fetch: sin dependencia npm). Asunto:
+// «Presupuesto web · <documento> · <email>» (sin email: teléfono o nombre).
+// Solo servidor: RESEND_API_KEY nunca llega al navegador.
 //
-// Sin RESEND_API_KEY responde { ok: true, emailed: false } para que la
-// calculadora siga funcionando (abre WhatsApp con el resumen) mientras
-// Elena configura las variables en Vercel (ver .env.local.example).
+// Sin RESEND_API_KEY responde { ok: true, emailed: false }: la calculadora
+// sigue funcionando y, como los archivos NO han llegado por email, el
+// resumen de WhatsApp y la pantalla de confirmación piden al cliente que
+// los adjunte en el chat. Igual ante cualquier error de envío (ok: false).
+// Variables en .env.local.example.
 //
 // Nota Vercel: el cuerpo de una petición a una función serverless está
 // limitado a ~4,5 MB, así que el cliente envía los archivos en varias
@@ -23,6 +27,8 @@ const MAX_FILES = 5;
 const MAX_FILE_BYTES = 10 * 1024 * 1024;
 const ALLOWED_TYPES = new Set(["application/pdf", "image/jpeg", "image/png"]);
 const ALLOWED_EXT = /\.(pdf|jpe?g|png)$/i;
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const json = (body, status = 200) => NextResponse.json(body, { status });
 
@@ -62,7 +68,10 @@ export async function POST(req) {
   const pages = Math.min(20, Math.max(1, parseInt(clean(fd.get("pages")), 10) || 1));
   const urgent = clean(fd.get("urgency")) === "urgent";
   const paper = clean(fd.get("delivery")) === "paper";
-  const contact = clean(fd.get("contact"), 160);
+  const name = clean(fd.get("name"), 120);
+  const emailRaw = clean(fd.get("email"), 160);
+  const email = EMAIL_RE.test(emailRaw) ? emailRaw : "";
+  const phone = clean(fd.get("phone"), 40);
   const part = clean(fd.get("part"), 20); // "1/3" cuando hay varios lotes
 
   const files = fd
@@ -89,7 +98,9 @@ export async function POST(req) {
       price != null ? `${price} €` : `presupuesto en menos de 2 h (catálogo desde ${MIN_PRICE} €)`
     }`,
     `Idioma de la web: ${locale}`,
-    `Contacto indicado: ${contact || "(no indicado; llegará por WhatsApp)"}`,
+    `Nombre: ${name || "(no indicado)"}`,
+    `Email: ${email || (emailRaw ? `${emailRaw} (no válido)` : "(no indicado)")}`,
+    `Teléfono: ${phone || "(no indicado; llegará por WhatsApp)"}`,
     `Archivos en este email: ${files.length ? files.map((f) => f.name).join(", ") : "ninguno"}`,
     part ? `Lote: ${part}` : null,
   ].filter(Boolean);
@@ -108,9 +119,10 @@ export async function POST(req) {
     }))
   );
 
-  const subject = `Calculadora: ${docName} · ${pages} pág.${urgent ? " · URGENTE" : ""}${
-    part ? ` (${part})` : ""
-  }`;
+  // Asunto pedido por Elena: «Presupuesto web · <documento> · <email>». Si el
+  // cliente no dejó email se usa el teléfono o el nombre para distinguir
+  // solicitudes en la bandeja.
+  const subject = `Presupuesto web · ${docName} · ${email || phone || name || "sin contacto"}`;
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
@@ -122,7 +134,7 @@ export async function POST(req) {
       body: JSON.stringify({
         from,
         to: [to],
-        ...(contact.includes("@") ? { reply_to: contact } : {}),
+        ...(email ? { reply_to: email } : {}),
         subject,
         text: `Nueva solicitud desde la calculadora de juradaexpress.es\n\n${lines.join("\n")}\n`,
         attachments,
