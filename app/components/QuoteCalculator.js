@@ -8,11 +8,16 @@
 // de urgencia y nota de entrega en papel de content/site.js.
 //
 // Al pulsar «Enviar y recibir presupuesto»:
-//   1. abre WhatsApp con el resumen (documento, páginas, urgencia, entrega,
-//      precio estimado y archivos) en una pestaña nueva;
-//   2. en paralelo envía los archivos a /api/quote (email a Elena vía
+//   1. abre una pestaña en el mismo gesto de usuario (evita el bloqueo de
+//      ventanas emergentes); sin archivos ya lleva el resumen de WhatsApp;
+//   2. envía el resumen y los archivos a /api/quote (email a Elena vía
 //      Resend), en lotes de ≤ 4 MB por el límite de cuerpo de Vercel;
-//   3. registra la conversión de Google Ads (AdsConversion).
+//   3. con la respuesta real construye el resumen de WhatsApp: los archivos
+//      que llegaron por email («N enviados por email») y los que no
+//      (`emailed: false` o error: «te los adjunto aquí en WhatsApp»), y
+//      lleva la pestaña a wa.me. La pantalla de confirmación pide al
+//      cliente que adjunte en el chat los archivos que no se emailaron;
+//   4. registra la conversión de Google Ads (AdsConversion).
 // Mobile-first: una columna en móvil, dos en ≥ md. Accesible: fieldset +
 // legend en los grupos de radio, aria-live en el precio y en los estados,
 // errores asociados con aria-describedby, zona de arrastre operable por
@@ -59,26 +64,32 @@ const COPY = {
     dropHint: "Arrastra aquí tus archivos o pulsa para elegirlos",
     dropSpec: `PDF, JPG o PNG · máx. 10 MB por archivo · hasta ${MAX_FILES} archivos`,
     remove: "Quitar",
-    contact: "Tu nombre o email (opcional)",
-    contactHint: "Para que asocie los archivos a tu WhatsApp.",
+    contactLegend: "Tus datos de contacto (opcionales)",
+    contactHint: "Para asociar los archivos a tu WhatsApp y poder responderte también por email.",
+    name: "Nombre",
+    email: "Email",
+    phone: "Teléfono",
     privacy: "He leído la",
     privacyLink: "política de privacidad",
     privacyTail:
       "y acepto que Elena Peñaranda Ortega trate mis datos y los documentos adjuntos solo para preparar el presupuesto.",
     submit: "Enviar y recibir presupuesto",
     sending: "Enviando…",
+    preparing: "Enviando tus archivos… En unos segundos se abrirá WhatsApp con el resumen.",
     errPrivacy: "Marca la casilla de privacidad para continuar.",
     errCount: `Como máximo ${MAX_FILES} archivos.`,
     errSize: "supera los 10 MB.",
     errType: "no es PDF, JPG ni PNG.",
-    sent: "Archivos enviados. Termina en WhatsApp: si no se ha abierto, pulsa aquí.",
+    sent: "Archivos enviados por email. Termina en WhatsApp: si no se ha abierto, pulsa aquí.",
     sentNoFiles: "Resumen listo. Si WhatsApp no se ha abierto, pulsa aquí.",
-    notConfigured:
-      "Resumen enviado. Los archivos no se han podido adjuntar por email: envíamelos por WhatsApp.",
-    failed:
-      "No he podido enviar los archivos por email: adjúntalos en el chat de WhatsApp que se ha abierto.",
+    attach: (n) =>
+      `Los archivos no se han enviado por email. Adjunta ${
+        n === 1 ? "el archivo" : `los ${n} archivos`
+      } en el chat de WhatsApp que se ha abierto; si no se ha abierto, pulsa aquí.`,
     partial: (n) =>
-      `${n} archivo(s) no se han podido enviar por email (demasiado grandes para el envío web): adjúntalos en WhatsApp.`,
+      `${n === 1 ? "1 archivo no se ha podido enviar" : `${n} archivos no se han podido enviar`} por email: ${
+        n === 1 ? "adjúntalo" : "adjúntalos"
+      } en el chat de WhatsApp que se ha abierto.`,
     open: "Abrir WhatsApp",
     wa: {
       hello: "Hola Elena, he usado la calculadora de juradaexpress.es:",
@@ -94,7 +105,8 @@ const COPY = {
       quote: "pendiente de presupuesto",
       files: "Archivos",
       byEmail: "enviados por email",
-      none: "los adjunto aquí",
+      attachAll: "te los adjunto aquí en WhatsApp",
+      attachRest: "te adjunto aquí en WhatsApp",
       contact: "Contacto",
       close: "¿Me confirmas precio cerrado y plazo?",
     },
@@ -127,25 +139,32 @@ const COPY = {
     dropHint: "Drag your files here or click to choose them",
     dropSpec: `PDF, JPG or PNG · max. 10 MB per file · up to ${MAX_FILES} files`,
     remove: "Remove",
-    contact: "Your name or email (optional)",
-    contactHint: "So I can match the files to your WhatsApp message.",
+    contactLegend: "Your contact details (optional)",
+    contactHint: "So I can match the files to your WhatsApp message and reply by email too.",
+    name: "Name",
+    email: "Email",
+    phone: "Phone",
     privacy: "I have read the",
     privacyLink: "privacy policy",
     privacyTail:
       "and I agree that Elena Peñaranda Ortega processes my details and the attached documents only to prepare the quote.",
     submit: "Send and get my quote",
     sending: "Sending…",
+    preparing: "Sending your files… WhatsApp will open with the summary in a few seconds.",
     errPrivacy: "Tick the privacy box to continue.",
     errCount: `A maximum of ${MAX_FILES} files.`,
     errSize: "is larger than 10 MB.",
     errType: "is not a PDF, JPG or PNG.",
-    sent: "Files sent. Finish on WhatsApp: if it did not open, click here.",
+    sent: "Files sent by email. Finish on WhatsApp: if it did not open, click here.",
     sentNoFiles: "Summary ready. If WhatsApp did not open, click here.",
-    notConfigured:
-      "Summary sent. The files could not be attached by email: send them to me on WhatsApp.",
-    failed: "I could not send the files by email: attach them in the WhatsApp chat that has opened.",
+    attach: (n) =>
+      `The files were not sent by email. Please attach ${
+        n === 1 ? "the file" : `the ${n} files`
+      } in the WhatsApp chat that has opened; if it did not open, click here.`,
     partial: (n) =>
-      `${n} file(s) could not be sent by email (too large for the web upload): attach them on WhatsApp.`,
+      `${n} file${n === 1 ? "" : "s"} could not be sent by email: attach ${
+        n === 1 ? "it" : "them"
+      } in the WhatsApp chat that has opened.`,
     open: "Open WhatsApp",
     wa: {
       hello: "Hi Elena, I used the calculator on juradaexpress.es:",
@@ -161,7 +180,8 @@ const COPY = {
       quote: "to be quoted",
       files: "Files",
       byEmail: "sent by email",
-      none: "I'll attach them here",
+      attachAll: "I'll attach them here on WhatsApp",
+      attachRest: "I'll attach here on WhatsApp",
       contact: "Contact",
       close: "Could you confirm the fixed price and deadline?",
     },
@@ -183,6 +203,23 @@ export function estimatePrice(doc, pages, urgent) {
   return Math.round(urgent ? base * (1 + URGENCY_SURCHARGE) : base);
 }
 
+// Línea «Archivos» del resumen de WhatsApp según lo que llegó por email.
+//   todos por email:  «Archivos: 2 enviados por email (a.pdf, b.pdf)»
+//   ninguno:          «Archivos: 2 — te los adjunto aquí en WhatsApp»
+//   parte:            «Archivos: 3 — 2 enviados por email (a.pdf, b.pdf); te adjunto aquí en WhatsApp: c.pdf»
+export function filesLine(w, total, emailedNames, pendingNames) {
+  if (!total) return null;
+  if (!pendingNames.length) {
+    return `• ${w.files}: ${emailedNames.length} ${w.byEmail} (${emailedNames.join(", ")})`;
+  }
+  if (!emailedNames.length) {
+    return `• ${w.files}: ${total} — ${w.attachAll}`;
+  }
+  return `• ${w.files}: ${total} — ${emailedNames.length} ${w.byEmail} (${emailedNames.join(
+    ", "
+  )}); ${w.attachRest}: ${pendingNames.join(", ")}`;
+}
+
 // Agrupa los archivos en lotes de ≤ BATCH_BYTES (un archivo mayor va solo).
 function batches(files) {
   const out = [];
@@ -201,6 +238,34 @@ function batches(files) {
   return out;
 }
 
+// Abre la pestaña de WhatsApp dentro del gesto de usuario. Sin `noopener`
+// en window.open porque entonces devuelve null y no podríamos navegarla
+// después; se corta el vínculo a mano con popup.opener = null.
+function openTab(url) {
+  const popup = window.open(url || "about:blank", "_blank");
+  if (popup) {
+    try {
+      popup.opener = null;
+    } catch {
+      // Sin acceso al popup: seguimos sin él.
+    }
+  }
+  return popup;
+}
+
+// Texto de espera en la pestaña en blanco mientras suben los archivos.
+function showPreparing(popup, text) {
+  try {
+    const d = popup.document;
+    d.title = "WhatsApp…";
+    d.body.style.cssText =
+      "margin:0;padding:2rem;font:16px/1.5 system-ui,sans-serif;color:#1e293b;background:#fff";
+    d.body.textContent = text;
+  } catch {
+    // Si el navegador no deja escribir en about:blank, la pestaña queda en blanco unos segundos.
+  }
+}
+
 export default function QuoteCalculator({ locale = "es", className = "" }) {
   const t = COPY[locale] || COPY.es;
   const uid = useId();
@@ -213,11 +278,15 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
   const [files, setFiles] = useState([]);
   const [fileError, setFileError] = useState("");
   const [dragActive, setDragActive] = useState(false);
-  const [contact, setContact] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [privacy, setPrivacy] = useState(false);
   const [privacyError, setPrivacyError] = useState("");
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | not-configured | failed | partial
-  const [failedCount, setFailedCount] = useState(0);
+  // idle | sending | sent (todo por email o sin archivos) | attach (ninguno
+  // por email: adjuntar en WhatsApp) | partial (algunos no llegaron por email)
+  const [status, setStatus] = useState("idle");
+  const [pendingCount, setPendingCount] = useState(0);
   const [waUrl, setWaUrl] = useState("");
 
   const doc = DOCUMENTS.find((d) => d.id === documentId) || DOCUMENTS[0];
@@ -255,8 +324,9 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
     setFileError("");
   }
 
-  function buildWhatsApp(emailedNames) {
+  function buildWhatsApp(emailedNames, pendingNames) {
     const w = t.wa;
+    const contact = [name, email, phone].map((s) => s.trim()).filter(Boolean).join(" · ");
     const lines = [
       w.hello,
       `• ${w.document}: ${docName(doc, locale)}`,
@@ -264,13 +334,7 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
       `• ${w.urgency}: ${urgent ? w.urgent : w.normal}`,
       `• ${w.delivery}: ${delivery === "paper" ? w.paper : w.pdf}`,
       `• ${w.estimate}: ${price != null ? formatPrice(price, locale) : w.quote}`,
-      files.length
-        ? `• ${w.files}: ${
-            emailedNames.length
-              ? `${emailedNames.length} ${w.byEmail} (${emailedNames.join(", ")})`
-              : w.none
-          }`
-        : null,
+      filesLine(w, files.length, emailedNames, pendingNames),
       contact ? `• ${w.contact}: ${contact}` : null,
       w.close,
     ].filter(Boolean);
@@ -286,25 +350,30 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
     }
     setPrivacyError("");
     setStatus("sending");
-    setFailedCount(0);
+    setPendingCount(0);
+    setWaUrl("");
 
-    // 1. WhatsApp: se abre en el mismo gesto de usuario (evita bloqueos de
-    //    ventanas emergentes); el resumen asume que los archivos van por email.
-    const url = buildWhatsApp(files.map((f) => f.name));
-    setWaUrl(url);
-    const popup = window.open(url, "_blank", "noopener,noreferrer");
-    if (!popup) {
-      // Bloqueado: el enlace "Abrir WhatsApp" del estado sirve de respaldo.
+    // 1. Pestaña de WhatsApp, abierta en el mismo gesto de usuario. Sin
+    //    archivos el resumen ya es definitivo; con archivos se rellena
+    //    cuando /api/quote confirma cuáles han llegado por email.
+    let popup = null;
+    if (files.length === 0) {
+      const url = buildWhatsApp([], []);
+      setWaUrl(url);
+      popup = openTab(url);
+    } else {
+      popup = openTab("");
+      if (popup) showPreparing(popup, t.preparing);
     }
 
     // 2. Conversión de Google Ads (solo con etiqueta y consentimiento).
     trackAdsConversion("calculadora_presupuesto");
 
-    // 3. Email con el resumen y los archivos, en lotes.
+    // 3. Email con el resumen y los archivos, en lotes. Un archivo cuenta
+    //    como emailado solo si su lote responde { ok: true, emailed: true }.
     const groups = files.length ? batches(files) : [[]];
-    let emailed = 0;
-    let failed = 0;
-    let notConfigured = false;
+    const emailedNames = [];
+    const pendingNames = [];
     await Promise.all(
       groups.map(async (group, i) => {
         const fd = new FormData();
@@ -313,32 +382,46 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
         fd.append("pages", String(pages));
         fd.append("urgency", urgency);
         fd.append("delivery", delivery);
-        fd.append("contact", contact);
+        fd.append("name", name);
+        fd.append("email", email);
+        fd.append("phone", phone);
         fd.append("privacy", "on");
         if (groups.length > 1) fd.append("part", `${i + 1}/${groups.length}`);
         group.forEach((f) => fd.append("files", f, f.name));
+        let ok = false;
         try {
           const res = await fetch("/api/quote", { method: "POST", body: fd });
           const data = await res.json().catch(() => ({}));
-          if (res.ok && data.ok) {
-            if (data.emailed) emailed += group.length;
-            else notConfigured = true;
-          } else {
-            failed += group.length;
-          }
+          ok = res.ok && data.ok === true && data.emailed === true;
         } catch {
-          failed += group.length;
+          ok = false;
         }
+        (ok ? emailedNames : pendingNames).push(...group.map((f) => f.name));
       })
     );
+    // Mismo orden que la lista de archivos, sea cual sea el orden de respuesta.
+    const order = files.map((f) => f.name);
+    const byOrder = (a, b) => order.indexOf(a) - order.indexOf(b);
+    emailedNames.sort(byOrder);
+    pendingNames.sort(byOrder);
 
-    if (files.length === 0) setStatus("sent");
-    else if (failed === files.length) setStatus("failed");
-    else if (failed > 0) {
-      setFailedCount(failed);
-      setStatus("partial");
-    } else if (notConfigured && emailed === 0) setStatus("not-configured");
-    else setStatus("sent");
+    // 4. Resumen definitivo de WhatsApp y estado de confirmación.
+    if (files.length > 0) {
+      const url = buildWhatsApp(emailedNames, pendingNames);
+      setWaUrl(url);
+      if (popup && !popup.closed) {
+        try {
+          popup.location.replace(url);
+        } catch {
+          // La pestaña se cerró o no se puede navegar: queda el enlace «Abrir WhatsApp».
+        }
+      }
+    }
+
+    setPendingCount(pendingNames.length);
+    if (files.length === 0 || pendingNames.length === 0) setStatus("sent");
+    else if (emailedNames.length === 0) setStatus("attach");
+    else setStatus("partial");
   }
 
   const statusText =
@@ -346,12 +429,10 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
       ? files.length
         ? t.sent
         : t.sentNoFiles
-      : status === "not-configured"
-      ? t.notConfigured
-      : status === "failed"
-      ? t.failed
+      : status === "attach"
+      ? t.attach(pendingCount)
       : status === "partial"
-      ? t.partial(failedCount)
+      ? t.partial(pendingCount)
       : "";
 
   const labelClass = "text-sm font-medium text-slate-700";
@@ -568,24 +649,58 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
             ) : null}
           </div>
 
-          <div>
-            <label htmlFor={`${uid}-contact`} className={labelClass}>
-              {t.contact}
-            </label>
-            <input
-              id={`${uid}-contact`}
-              name="contact"
-              type="text"
-              autoComplete="name"
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-              aria-describedby={`${uid}-contact-hint`}
-              className={fieldClass}
-            />
+          <fieldset aria-describedby={`${uid}-contact-hint`}>
+            <legend className={labelClass}>{t.contactLegend}</legend>
+            <div className="mt-1 grid gap-3 sm:grid-cols-2">
+              <div className="sm:col-span-2">
+                <label htmlFor={`${uid}-name`} className="text-xs text-slate-600">
+                  {t.name}
+                </label>
+                <input
+                  id={`${uid}-name`}
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className={fieldClass}
+                />
+              </div>
+              <div>
+                <label htmlFor={`${uid}-email`} className="text-xs text-slate-600">
+                  {t.email}
+                </label>
+                <input
+                  id={`${uid}-email`}
+                  name="email"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={fieldClass}
+                />
+              </div>
+              <div>
+                <label htmlFor={`${uid}-phone`} className="text-xs text-slate-600">
+                  {t.phone}
+                </label>
+                <input
+                  id={`${uid}-phone`}
+                  name="phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className={fieldClass}
+                />
+              </div>
+            </div>
             <p id={`${uid}-contact-hint`} className="mt-1 text-xs text-slate-500">
               {t.contactHint}
             </p>
-          </div>
+          </fieldset>
 
           {/* Honeypot */}
           <input
