@@ -22,7 +22,7 @@ export const metadata = {
   // Explicit suffix; the root template applies to /en. The real minimum
   // price comes from content/documents.js so the title never drifts.
   title: { absolute: `Sworn Spanish-English Translation Online from €${MIN_PRICE} | Jurada Express` },
-  description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF in 24/48h. Appointed by Spain's Foreign Ministry (no. 7310). 100% online.`,
+  description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF the same day (up to 10 pages). Foreign Ministry appointee no. 7310. 100% online.`,
   alternates: {
     canonical: "https://juradaexpress.es/en",
     languages: {
@@ -33,7 +33,7 @@ export const metadata = {
   },
   openGraph: {
     title: `Sworn Spanish-English Translation Online from €${MIN_PRICE} | Jurada Express`,
-    description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF in 24/48h. Appointed by Spain's Foreign Ministry (no. 7310). 100% online.`,
+    description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF the same day (up to 10 pages). Foreign Ministry appointee no. 7310. 100% online.`,
     url: "https://juradaexpress.es/en",
     siteName: "Jurada Express",
     type: "website",
@@ -57,28 +57,28 @@ const COMMON_DOCUMENTS = [
     name: "Birth certificate",
     for: "Citizenship, marriage, NIE and Civil Registry",
     price: priceOf("partida-nacimiento"),
-    time: "24/48h",
+    time: "Same day (up to 10 pages)",
     href: "/traduccion-jurada-partida-nacimiento",
   },
   {
     name: "Criminal record certificate",
     for: "Immigration, visas and job offers",
     price: priceOf("antecedentes-penales"),
-    time: "24/48h",
+    time: "Same day (up to 10 pages)",
     href: "/traduccion-jurada-certificado-penales",
   },
   {
     name: "Marriage certificate",
     for: "Civil Registry, residency and pensions",
     price: priceOf("certificado-matrimonio"),
-    time: "24/48h",
+    time: "Same day (up to 10 pages)",
     href: "/traduccion-jurada-certificado-matrimonio",
   },
   {
     name: "University degree",
     for: "UCAS, recognition of qualifications, professional bodies",
     price: priceOf("titulo-universitario"),
-    time: "24/48h",
+    time: "Same day (up to 10 pages)",
     href: "/traduccion-jurada-titulo-universitario",
   },
   {
@@ -92,7 +92,7 @@ const COMMON_DOCUMENTS = [
     name: "Any other document",
     for: "Pick yours in the catalogue and get a quote",
     price: null,
-    time: "Usually 24/48h",
+    time: "Same day (up to 10 pages)",
     href: "/en/documentos",
   },
 ];
@@ -121,8 +121,8 @@ const FAQ = [
     a: "Yes. We deliver a digitally signed PDF and, if you need it, a physical copy shipped to your address.",
   },
   {
-    q: "Can I get my translation in 24/48h?",
-    a: "For standard documents, yes. For documents over 20 pages, we agree on a specific delivery schedule.",
+    q: "Can I get my translation the same day?",
+    a: "Yes, for documents of up to 10 pages, with no surcharge. Longer files get a written deadline before work starts, normally 24-72 hours; same-day delivery of more than 10 pages carries a 30% surcharge.",
   },
   {
     q: "Do you work with clients outside Spain?",
@@ -135,8 +135,8 @@ const FAQ = [
   {
     q: "How long does a complete digital nomad visa file take?",
     a: LARGE_PROJECT_CAPACITY
-      ? `You get a single fixed deadline in writing before I start; individual documents take 24/48h and I can handle ${LARGE_PROJECT_CAPACITY.en}, so a complete file is usually ready within a few days.`
-      : "You get a single fixed deadline in writing before I start; individual documents take 24/48h.",
+      ? `You get a single fixed deadline in writing before I start; documents of up to 10 pages are delivered the same day and I can handle ${LARGE_PROJECT_CAPACITY.en}, so a complete file is usually ready within a few days.`
+      : "You get a single fixed deadline in writing before I start; documents of up to 10 pages are delivered the same day.",
   },
 ];
 
@@ -152,10 +152,10 @@ export default function Page() {
               <em className="font-display italic text-brand-gold-700">
                 Spanish ⇆ English
               </em>{" "}
-              translation, officially valid, in 24/48 hours
+              translation, officially valid, the same day
             </h1>
             <p className="mt-5 text-xl text-slate-700">
-              Officially valid · Delivered in 24/48h · Clients in Spain, the
+              Officially valid · Same day up to 10 pages · Clients in Spain, the
               UK, the USA, India and any country
             </p>
             <p className="mt-4">
@@ -177,7 +177,7 @@ export default function Page() {
               {yearsOfExperience()} years of experience. The whole process is
               digital: you send me a scan of the document, pay by card from
               any country and receive the translation as a signed PDF the
-              same day or the next. I also provide certified translations
+              same day for documents of up to 10 pages. I also provide certified translations
               for USCIS.
             </p>
 
@@ -433,7 +433,7 @@ export default function Page() {
                 d: "I translate, sign and stamp your document personally.",
               },
               {
-                t: "Delivery in 24/48h",
+                t: "Same-day delivery (up to 10 pages)",
                 d: "A digitally signed PDF and, if you need it, paper by courier.",
               },
             ]}

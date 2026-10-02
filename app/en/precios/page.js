@@ -6,7 +6,7 @@ const certPrice = DOCUMENTS.find((d) => d.id === "partida-nacimiento")?.price;
 
 export const metadata = {
   title: `Sworn translation pricing from €${MIN_PRICE} (in euros)`,
-  description: `Sworn Spanish ⇆ English translation from €${MIN_PRICE} per document, delivered in 24/48h. Indicative rates in euros, fixed quote once we see your document.`,
+  description: `Sworn Spanish ⇆ English translation from €${MIN_PRICE} per document, same-day delivery (up to 10 pages). Rates in euros, fixed quote once we see your document.`,
   alternates: {
     canonical: "https://juradaexpress.es/en/precios",
     languages: {
@@ -42,12 +42,12 @@ export default function Page() {
             <tr>
               <td className="p-3">Certificates (birth, marriage, criminal record…)</td>
               <td className="p-3">€35–45</td>
-              <td className="p-3">24/48h</td>
+              <td className="p-3">Same day (up to 10 pages)</td>
             </tr>
             <tr className="bg-stone-50/50">
               <td className="p-3">Degrees and academic transcripts</td>
               <td className="p-3">€45–60</td>
-              <td className="p-3">24/48h</td>
+              <td className="p-3">Same day (up to 10 pages)</td>
             </tr>
             <tr>
               <td className="p-3">Driving licence</td>
@@ -57,7 +57,7 @@ export default function Page() {
             <tr className="bg-stone-50/50">
               <td className="p-3">Employer certificates / payslips</td>
               <td className="p-3">€45</td>
-              <td className="p-3">24/48h</td>
+              <td className="p-3">Same day (up to 10 pages)</td>
             </tr>
             <tr>
               <td className="p-3">Contracts and notarial documents</td>
@@ -74,7 +74,7 @@ export default function Page() {
               <td className="p-3">
                 {certPrice != null ? `€${certPrice} per certificate` : "Quote within 2 hours"}
               </td>
-              <td className="p-3">24/48h</td>
+              <td className="p-3">Same day (up to 10 pages)</td>
             </tr>
             <tr>
               <td className="p-3">
@@ -107,8 +107,10 @@ export default function Page() {
       </div>
 
       <p className="mt-8 text-sm text-slate-500">
-        * Indicative turnaround of 24/48h for standard orders. Documents
-        over 20 pages: we agree on a specific delivery schedule together.
+        * Same-day delivery for documents of up to 10 pages, no surcharge.
+        Longer files get a written deadline before work starts, normally
+        24-72 hours; same-day delivery of more than 10 pages carries a 30%
+        surcharge.
       </p>
     </main>
   );

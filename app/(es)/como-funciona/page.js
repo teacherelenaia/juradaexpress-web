@@ -46,7 +46,7 @@ export default function Page() {
             d: "Traduzco, firmo y sello personalmente tu documento.",
           },
           {
-            t: "Entrega 24/48 h",
+            t: "Entrega en el día (hasta 10 páginas)",
             d: "PDF firmado digitalmente y, si lo necesitas, papel por mensajería.",
           },
         ]}

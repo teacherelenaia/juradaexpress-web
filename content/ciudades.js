@@ -6,7 +6,7 @@
 // datos y de los bloques comunes (cómo funciona el envío, documentos,
 // pasos). Tono honesto: Elena es traductora jurada de inglés ONLINE con
 // sede en Murcia; no tiene oficina en estas ciudades ni promete visitas.
-// La entrega es en PDF firmado (24/48 h) y, si hace falta, papel por
+// La entrega es en PDF firmado (en el día hasta 10 páginas) y, si hace falta, papel por
 // mensajería. No se inventan direcciones ni horarios de organismos: se
 // citan por su nombre y se remite a lo que pida cada uno.
 //
@@ -29,10 +29,10 @@ export const CIUDADES = [
     provincia: "Región de Murcia",
     metaTitle: `Traductor jurado de inglés para Cartagena · desde ${MIN_PRICE} €`,
     metaDescription:
-      "Traductora jurada de inglés online para Cartagena y el Mar Menor (MAEC nº 7310). PDF firmado en 24/48 h, papel por mensajería desde Murcia. Desde 35 €.",
+      "Traductora jurada de inglés online para Cartagena y el Mar Menor (MAEC nº 7310). PDF en el día (10 págs.), papel por mensajería desde Murcia. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Cartagena",
     lead:
-      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente) con sede en Murcia. Atiendo a clientes de Cartagena, La Manga, el Mar Menor y toda la comarca sin que tengan que desplazarse: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si tu trámite exige papel, te lo envío por mensajería desde Murcia y lo tienes normalmente al día siguiente.`,
+      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente) con sede en Murcia. Atiendo a clientes de Cartagena, La Manga, el Mar Menor y toda la comarca sin que tengan que desplazarse: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en el día (hasta 10 páginas). Si tu trámite exige papel, te lo envío por mensajería desde Murcia y lo tienes normalmente al día siguiente.`,
     tramites: [
       "<strong>Oficina de Extranjería de Cartagena</strong>: NIE, TIE, residencia de familiares de ciudadanos de la UE, arraigo y nacionalidad por residencia. Piden traducción jurada de certificados de nacimiento, matrimonio y antecedentes penales extranjeros.",
       "<strong>Registro Civil de Cartagena</strong>: inscripción de matrimonios y nacimientos celebrados en el Reino Unido, Irlanda o Estados Unidos, expedientes matrimoniales con un cónyuge extranjero.",
@@ -64,7 +64,7 @@ export const CIUDADES = [
       },
       {
         q: "¿Cuánto tarda en llegar el papel a Cartagena?",
-        a: "Normalmente al día siguiente de la entrega digital. Primero recibes el PDF firmado en 24/48 h y, si has pedido papel, sale ese mismo día por mensajería desde Murcia.",
+        a: "Normalmente al día siguiente de la entrega digital. Primero recibes el PDF firmado en el día (hasta 10 páginas) y, si has pedido papel, sale ese día por mensajería desde Murcia.",
       },
       {
         q: "Soy británico y vivo en La Manga, ¿me traduces documentos al inglés para el Reino Unido?",
@@ -81,10 +81,10 @@ export const CIUDADES = [
     provincia: "Provincia de Alicante",
     metaTitle: `Traductor jurado de inglés para Alicante · desde ${MIN_PRICE} €`,
     metaDescription:
-      "Traductora jurada de inglés online para Alicante y la Costa Blanca (MAEC nº 7310). PDF firmado en 24/48 h, papel por mensajería en 24/48 h. Desde 35 €.",
+      "Traductora jurada de inglés online para Alicante y la Costa Blanca (MAEC nº 7310). PDF en el día (10 págs.), papel por mensajería en 1-2 días. Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Alicante",
     lead:
-      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente) con sede en Murcia, a una hora de Alicante. Atiendo a clientes de Alicante capital, Elche, Torrevieja, Orihuela Costa, Benidorm, Jávea y Dénia de forma 100 % online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. El papel, si tu organismo lo exige, llega por mensajería en 24/48 h a cualquier punto de la provincia.`,
+      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente) con sede en Murcia, a una hora de Alicante. Atiendo a clientes de Alicante capital, Elche, Torrevieja, Orihuela Costa, Benidorm, Jávea y Dénia de forma 100 % online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en el día (hasta 10 páginas). El papel, si tu organismo lo exige, llega por mensajería en uno o dos días laborables a cualquier punto de la provincia.`,
     tramites: [
       "<strong>Oficina de Extranjería de Alicante</strong>: NIE y TIE, residencia de familiares de ciudadanos de la UE, arraigo, nacionalidad por residencia y visados de nómada digital y no lucrativo iniciados desde España.",
       "<strong>Registro Civil de Alicante y de las localidades de la costa</strong>: inscripción de matrimonios y nacimientos ocurridos en el extranjero, expedientes de matrimonio con cónyuge británico, irlandés o estadounidense.",
@@ -108,7 +108,7 @@ export const CIUDADES = [
     faq: [
       {
         q: "¿Tienes oficina en Alicante?",
-        a: "No. Trabajo online desde Murcia y no hace falta que vengas a ninguna oficina: todo el proceso es digital. Si necesitas la traducción en papel, te la envío por mensajería a Alicante, Elche, Torrevieja, Benidorm o donde estés, normalmente en 24/48 h.",
+        a: "No. Trabajo online desde Murcia y no hace falta que vengas a ninguna oficina: todo el proceso es digital. Si necesitas la traducción en papel, te la envío por mensajería a Alicante, Elche, Torrevieja, Benidorm o donde estés, normalmente en uno o dos días laborables.",
       },
       {
         q: "¿Vale tu traducción jurada en la Oficina de Extranjería de Alicante?",
@@ -133,10 +133,10 @@ export const CIUDADES = [
     provincia: "Comunidad de Madrid",
     metaTitle: `Traductor jurado de inglés para Madrid · online desde ${MIN_PRICE} €`,
     metaDescription:
-      "Traductora jurada de inglés online para Madrid (MAEC nº 7310): Extranjería, Registro Civil Central, Educación, UGE y embajadas. PDF en 24/48 h. Desde 35 €.",
+      "Traductora jurada de inglés para Madrid (MAEC nº 7310): Extranjería, Registro Civil, Educación, UGE y embajadas. PDF en el día (10 págs.). Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Madrid",
     lead:
-      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente). Trabajo online desde Murcia con clientes de Madrid que necesitan una traducción jurada válida para Extranjería, el Registro Civil, el Ministerio de Educación, la UGE, una universidad o una embajada: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si te exigen papel, lo envío por mensajería y en Madrid capital suele llegar al día siguiente.`,
+      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente). Trabajo online desde Murcia con clientes de Madrid que necesitan una traducción jurada válida para Extranjería, el Registro Civil, el Ministerio de Educación, la UGE, una universidad o una embajada: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en el día (hasta 10 páginas). Si te exigen papel, lo envío por mensajería y en Madrid capital suele llegar al día siguiente.`,
     tramites: [
       "<strong>Oficinas de Extranjería de Madrid</strong>: NIE y TIE, arraigo, reagrupación familiar, nacionalidad por residencia y renovaciones; la ciudad concentra la mayor parte de los expedientes de extranjería del país.",
       "<strong>Registro Civil Central y Registro Civil de Madrid</strong>: nacionalidad por opción y por residencia, inscripción de matrimonios y nacimientos ocurridos en el extranjero, expedientes de matrimonio.",
@@ -173,7 +173,7 @@ export const CIUDADES = [
       },
       {
         q: "Necesito la traducción para una cita en Extranjería esta semana, ¿llegas?",
-        a: "Dímelo al pedir presupuesto con la fecha de la cita. Los documentos habituales salen en 24/48 h; si es más urgente te confirmo por escrito si puedo, y solo acepto el encargo si llego.",
+        a: "Dímelo al pedir presupuesto con la fecha de la cita. Los documentos de hasta 10 páginas salen en el día; si es más largo te doy el plazo por escrito antes de empezar, y solo acepto el encargo si llego.",
       },
     ],
     whatsapp:
@@ -186,10 +186,10 @@ export const CIUDADES = [
     provincia: "Provincia de Barcelona",
     metaTitle: `Traductor jurado de inglés para Barcelona · online desde ${MIN_PRICE} €`,
     metaDescription:
-      "Traductora jurada de inglés online para Barcelona (MAEC nº 7310): Extranjería, Registro Civil, universidades y consulados. PDF en 24/48 h. Desde 35 €.",
+      "Traductora jurada de inglés para Barcelona (MAEC nº 7310): Extranjería, Registro Civil, universidades y consulados. PDF en el día (10 págs.). Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Barcelona",
     lead:
-      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente). Atiendo online, desde Murcia, a clientes de Barcelona y su área metropolitana que necesitan una traducción jurada español-inglés con validez oficial: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. El papel, si tu organismo lo pide, llega por mensajería en 24/48 h.`,
+      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente). Atiendo online, desde Murcia, a clientes de Barcelona y su área metropolitana que necesitan una traducción jurada español-inglés con validez oficial: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en el día (hasta 10 páginas). El papel, si tu organismo lo pide, llega por mensajería en uno o dos días laborables.`,
     tramites: [
       "<strong>Oficina de Extranjería de Barcelona</strong>: NIE y TIE, arraigo, reagrupación familiar, nacionalidad por residencia, autorizaciones de residencia de nómadas digitales y profesionales cualificados.",
       "<strong>Registro Civil de Barcelona</strong>: expedientes de nacionalidad, inscripción de matrimonios y nacimientos ocurridos en el extranjero, expedientes matrimoniales con cónyuge de habla inglesa.",
@@ -213,7 +213,7 @@ export const CIUDADES = [
     faq: [
       {
         q: "¿Tienes oficina en Barcelona?",
-        a: "No. Trabajo online desde Murcia: envío del documento, presupuesto, pago con tarjeta y entrega del PDF firmado son digitales. Si necesitas el papel, te lo envío por mensajería a Barcelona o a cualquier localidad de la provincia en 24/48 h.",
+        a: "No. Trabajo online desde Murcia: envío del documento, presupuesto, pago con tarjeta y entrega del PDF firmado son digitales. Si necesitas el papel, te lo envío por mensajería a Barcelona o a cualquier localidad de la provincia en uno o dos días laborables.",
       },
       {
         q: "¿Vale en Cataluña una traducción jurada al español?",
@@ -225,7 +225,7 @@ export const CIUDADES = [
       },
       {
         q: "¿Cuánto cuesta traducir mi título y mi expediente para la UB o la UPC?",
-        a: `El título universitario de una página cuesta ${eur("titulo-universitario")}; el expediente académico se presupuesta al verlo, según el número de páginas, con precio cerrado en menos de 2 horas. Ambos se entregan en 24/48 h en PDF firmado.`,
+        a: `El título universitario de una página cuesta ${eur("titulo-universitario")}; el expediente académico se presupuesta al verlo, según el número de páginas, con precio cerrado en menos de 2 horas. Ambos se entregan en PDF firmado, en el día si no pasan de 10 páginas.`,
       },
     ],
     whatsapp:
@@ -238,10 +238,10 @@ export const CIUDADES = [
     provincia: "Provincia de Valencia",
     metaTitle: `Traductor jurado de inglés para Valencia · online desde ${MIN_PRICE} €`,
     metaDescription:
-      "Traductora jurada de inglés online para Valencia (MAEC nº 7310): Extranjería, Registro Civil, UV y UPV, notarías. PDF en 24/48 h. Desde 35 €.",
+      "Traductora jurada de inglés online para Valencia (MAEC nº 7310): Extranjería, Registro Civil, UV y UPV, notarías. PDF en el día (10 págs.). Desde 35 €.",
     h1: "Traductor jurado de inglés para clientes de Valencia",
     lead:
-      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente). Trabajo online desde Murcia con clientes de Valencia capital, l'Horta, la Safor y el resto de la provincia: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en 24/48 h. Si tu organismo exige papel, te lo envío por mensajería y suele llegar en 24/48 h.`,
+      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el MAEC en ${SINCE} (nº 7310, ${yearsOfExperience()} años de nombramiento vigente). Trabajo online desde Murcia con clientes de Valencia capital, l'Horta, la Safor y el resto de la provincia: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado en el día (hasta 10 páginas). Si tu organismo exige papel, te lo envío por mensajería y suele llegar en uno o dos días laborables.`,
     tramites: [
       "<strong>Oficina de Extranjería de Valencia</strong>: NIE y TIE, arraigo, reagrupación familiar, nacionalidad por residencia y autorizaciones de residencia para nómadas digitales que ya están en España.",
       "<strong>Registro Civil de Valencia</strong>: expedientes de nacionalidad, inscripción de matrimonios y nacimientos ocurridos en el extranjero, expedientes matrimoniales con cónyuge británico, irlandés o estadounidense.",
@@ -265,7 +265,7 @@ export const CIUDADES = [
     faq: [
       {
         q: "¿Tienes oficina en Valencia?",
-        a: "No. Trabajo online desde Murcia y todo el proceso es digital. Si necesitas la traducción en papel, la envío por mensajería a Valencia o a cualquier localidad de la provincia, normalmente en 24/48 h.",
+        a: "No. Trabajo online desde Murcia y todo el proceso es digital. Si necesitas la traducción en papel, la envío por mensajería a Valencia o a cualquier localidad de la provincia, normalmente en uno o dos días laborables.",
       },
       {
         q: "¿Aceptan en la Oficina de Extranjería de Valencia una traducción jurada firmada en Murcia?",
@@ -273,7 +273,7 @@ export const CIUDADES = [
       },
       {
         q: "¿Puedes traducir mi certificado de antecedentes penales apostillado del Reino Unido o Estados Unidos?",
-        a: "Sí. Traduzco el certificado (ACRO, DBS o FBI) con su apostilla, que forma parte del documento, y te lo entrego en 24/48 h. Si aún no lo has apostillado, te digo antes de traducir si tu trámite lo necesita.",
+        a: "Sí. Traduzco el certificado (ACRO, DBS o FBI) con su apostilla, que forma parte del documento, y te lo entrego en el día. Si aún no lo has apostillado, te digo antes de traducir si tu trámite lo necesita.",
       },
       {
         q: "¿Cuánto cuesta una traducción jurada para Valencia?",

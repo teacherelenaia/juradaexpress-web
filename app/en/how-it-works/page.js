@@ -46,7 +46,7 @@ export default function Page() {
             d: "I translate, sign and stamp your document personally.",
           },
           {
-            t: "Delivery in 24/48h",
+            t: "Same-day delivery (up to 10 pages)",
             d: "A digitally signed PDF and, if you need it, paper by courier.",
           },
         ]}

@@ -29,7 +29,7 @@ export const es = {
   metaDescription: "Traductora jurada del MAEC (nº 7310): qué documentos del visado de nómada digital llevan apostilla y traducción jurada, y plazo único por escrito.",
   h1: "Traducción jurada para el visado de nómada digital en España",
   lead:
-    "La traducción jurada para el visado de nómada digital es la traducción al español, firmada y sellada por una traductora nombrada por el Ministerio de Asuntos Exteriores, de los documentos extranjeros que exige la autorización de residencia para teletrabajo internacional (Ley 28/2022): antecedentes penales, contrato o carta del empleador, certificado de la empresa, título, justificantes de ingresos y certificados familiares. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y traduzco el expediente completo con un único plazo cerrado por escrito; los documentos sueltos, en 24/48 h.",
+    "La traducción jurada para el visado de nómada digital es la traducción al español, firmada y sellada por una traductora nombrada por el Ministerio de Asuntos Exteriores, de los documentos extranjeros que exige la autorización de residencia para teletrabajo internacional (Ley 28/2022): antecedentes penales, contrato o carta del empleador, certificado de la empresa, título, justificantes de ingresos y certificados familiares. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y traduzco el expediente completo con un único plazo cerrado por escrito; los documentos de hasta 10 páginas, en el día.",
   image: {
     src: "/fotos/expediente-documentos.jpg",
     alt: "Manos revisando un formulario oficial sobre una carpeta de documentos, como los que componen un expediente de visado de nómada digital",
@@ -156,7 +156,7 @@ export const es = {
       title: "¿Qué recibes, cuándo y cuánto cuesta?",
       body: [
         `Recibes <strong>un PDF firmado digitalmente por cada documento</strong>, con la misma numeración que me enviaste, más un índice del expediente. La firma electrónica se verifica con un clic y es válida para la presentación telemática; si el consulado te pide papel, te envío los originales sellados por mensajería a España o a tu país (coste del transportista en el presupuesto).`,
-        `Plazo: los documentos sueltos salen en 24/48 h; el expediente completo lleva un único plazo cerrado por escrito antes de empezar${
+        `Plazo: los documentos de hasta 10 páginas salen en el día; el expediente completo lleva un único plazo cerrado por escrito antes de empezar${
           LARGE_PROJECT_CAPACITY ? ` (puedo asumir ${LARGE_PROJECT_CAPACITY.es})` : ""
         }. Precio: ${priceEs}, por documento y por lote, en euros y con pago con tarjeta internacional. Los precios orientativos por documento están en la <a href="/precios">página de precios</a>.`,
       ],
@@ -197,7 +197,7 @@ export const es = {
       q: "¿Cuánto tarda un expediente completo?",
       a: LARGE_PROJECT_CAPACITY
         ? `Depende del número de páginas: puedo asumir ${LARGE_PROJECT_CAPACITY.es}, así que la mayoría de los expedientes están listos en pocos días. El plazo exacto te lo doy por escrito antes de empezar.`
-        : "Depende del número de páginas. El plazo exacto te lo doy por escrito antes de empezar; los documentos sueltos, en 24/48 h.",
+        : "Depende del número de páginas. El plazo exacto te lo doy por escrito antes de empezar; los documentos de hasta 10 páginas, en el día.",
     },
     {
       q: "¿Vale el PDF firmado para la presentación en el consulado?",
@@ -228,7 +228,7 @@ export const en = {
   metaDescription: "Sworn translator appointed by Spain (no. 7310): which digital nomad visa documents need an apostille and a sworn translation, with one deadline in writing.",
   h1: "Sworn translation for Spain's digital nomad visa",
   lead:
-    "A sworn translation for Spain's digital nomad visa is the Spanish translation, signed and stamped by a translator appointed by Spain's Ministry of Foreign Affairs, of the foreign documents required for the international remote work residence permit (Law 28/2022): criminal record certificate, employment contract or employer letter, company registration certificate, degree, proof of income and family certificates. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I translate the complete file with a single deadline confirmed in writing; individual documents take 24/48 hours.",
+    "A sworn translation for Spain's digital nomad visa is the Spanish translation, signed and stamped by a translator appointed by Spain's Ministry of Foreign Affairs, of the foreign documents required for the international remote work residence permit (Law 28/2022): criminal record certificate, employment contract or employer letter, company registration certificate, degree, proof of income and family certificates. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I translate the complete file with a single deadline confirmed in writing; documents of up to 10 pages are delivered the same day.",
   image: {
     src: "/fotos/expediente-documentos.jpg",
     alt: "Hands checking an official form on a folder of documents, like those that make up a digital nomad visa file",
@@ -355,7 +355,7 @@ export const en = {
       title: "What do you receive, when, and how much does it cost?",
       body: [
         "You receive <strong>one digitally signed PDF per document</strong>, numbered like the files you sent me, plus an index of the file. The electronic signature can be verified in one click and is valid for online submission; if the consulate asks for paper, I courier the stamped originals to Spain or to your country (courier cost stated in the quote).",
-        `Timing: individual documents take 24/48 hours; the complete file gets a single deadline confirmed in writing before I start${
+        `Timing: documents of up to 10 pages are delivered the same day; the complete file gets a single deadline confirmed in writing before I start${
           LARGE_PROJECT_CAPACITY ? ` (I can handle ${LARGE_PROJECT_CAPACITY.en})` : ""
         }. Price: ${priceEn}, per document and for the batch, in euros, charged in euros to any international card. Indicative prices per document are on the <a href="/en/precios">pricing page</a>.`,
       ],
@@ -396,7 +396,7 @@ export const en = {
       q: "How long does a complete file take?",
       a: LARGE_PROJECT_CAPACITY
         ? `It depends on the number of pages: I can handle ${LARGE_PROJECT_CAPACITY.en}, so most files are ready within a few days. You get the exact deadline in writing before I start.`
-        : "It depends on the number of pages. You get the exact deadline in writing before I start; individual documents take 24/48 hours.",
+        : "It depends on the number of pages. You get the exact deadline in writing before I start; documents of up to 10 pages are delivered the same day.",
     },
     {
       q: "Is the signed PDF accepted by the consulate?",

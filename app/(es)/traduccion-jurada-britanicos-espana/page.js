@@ -27,7 +27,7 @@ const TRAMITES = [
     apostille:
       "Apostilla: sí en los penales (la pide Extranjería); nacimiento y matrimonio, según la oficina — confírmalo antes y te lo traduzco con apostilla incluida.",
     price: priceOf("antecedentes-penales"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 págs.)",
     href: "/traduccion-jurada-certificado-penales",
   },
   {
@@ -35,7 +35,7 @@ const TRAMITES = [
     docs: "Normalmente basta el pasaporte y el contrato de alquiler o escritura; algunos ayuntamientos piden traducción jurada del certificado de nacimiento para menores.",
     apostille: "Apostilla: normalmente no.",
     price: priceOf("partida-nacimiento"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 págs.)",
     href: "/traduccion-jurada-partida-nacimiento",
   },
   {
@@ -52,7 +52,7 @@ const TRAMITES = [
     docs: "Certificado de nacimiento y certificado de no impedimento (CNI); si hay divorcio previo, la sentencia.",
     apostille: "Apostilla: sí, en los certificados británicos.",
     price: priceOf("partida-nacimiento"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 págs.)",
     href: "/traduccion-jurada-certificado-matrimonio",
   },
   {
@@ -68,7 +68,7 @@ const TRAMITES = [
     docs: "Vidas laborales británicas, cartas del HMRC o del DWP y certificados de nacimiento para tramitar pensiones en España.",
     apostille: "Apostilla: según el organismo — te lo confirmo al ver el documento.",
     price: priceOf("certificado-empresa"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 págs.)",
     href: "/documentos",
   },
 ];

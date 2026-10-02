@@ -87,7 +87,7 @@ export function buildCityPage(ciudad) {
         title: `Cómo trabajo con clientes de ${ciudad.nombre}`,
         body: [
           ...ciudad.notas,
-          `<strong>Entrega en PDF y en papel.</strong> Por defecto recibes la traducción como PDF firmado electrónicamente, que la Administración acepta para la presentación telemática y que puedes reenviar sin límite. Si tu organismo pide el original en papel, lo imprimo, lo firmo y sello a mano y lo envío por mensajería a ${ciudad.nombre}; el coste del envío va en el presupuesto y sale el mismo día que la entrega digital. No tengo oficina en ${ciudad.nombre} ni necesitas venir a Murcia: todo se resuelve por WhatsApp, email o el <a href="/documentos">catálogo</a>.`,
+          `<strong>Entrega en PDF y en papel.</strong> Por defecto recibes la traducción como PDF firmado electrónicamente, que la Administración acepta para la presentación telemática y que puedes reenviar sin límite. Si tu organismo pide el original en papel, lo imprimo, lo firmo y sello a mano y lo envío por mensajería a ${ciudad.nombre}; el coste del envío va en el presupuesto y sale por mensajería el día de la entrega digital. No tengo oficina en ${ciudad.nombre} ni necesitas venir a Murcia: todo se resuelve por WhatsApp, email o el <a href="/documentos">catálogo</a>.`,
         ],
       },
       {
@@ -131,7 +131,7 @@ export function buildCityPage(ciudad) {
       },
       {
         t: "Entrega",
-        d: `PDF firmado en 24/48 h y, si lo necesitas, papel por mensajería a ${ciudad.nombre}.`,
+        d: `PDF firmado en el día (hasta 10 páginas) y, si lo necesitas, papel por mensajería a ${ciudad.nombre}.`,
       },
     ],
     faq: ciudad.faq,

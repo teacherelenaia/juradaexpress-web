@@ -19,11 +19,11 @@ export const FICHAS = [
     name: "Traducción jurada de partida de nacimiento",
     title: "Traducción Jurada de Partida de Nacimiento – Español-Inglés",
     description:
-      "Traducción jurada de partida o certificado de nacimiento Español ⇆ Inglés, válida ante Registro Civil, Extranjería y consulados. Desde 35 €, entrega en 24/48 h.",
+      "Traducción jurada de certificado de nacimiento Español ⇆ Inglés, válida ante Registro Civil, Extranjería y consulados. Desde 35 €, entrega en el día.",
     intro:
       "La partida de nacimiento es el documento que más veces he traducido: la piden para la nacionalidad, para casarse, para el NIE de un hijo o para inscribir en España un nacimiento ocurrido fuera. La traduzco en ambos sentidos, con mi firma y sello, y te la entrego lista para presentar.",
     price: priceOf("partida-nacimiento"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 páginas)",
     updated: "2026-09-26",
     tramites: [
       "Nacionalidad española por residencia u opción",
@@ -77,11 +77,11 @@ export const FICHAS = [
     name: "Traducción jurada de certificado de matrimonio",
     title: "Traducción Jurada de Certificado de Matrimonio – Español-Inglés",
     description:
-      "Traducción jurada del certificado de matrimonio Español ⇆ Inglés para Registro Civil, residencia, pensiones y trámites en Reino Unido. Desde 35 €, entrega en 24/48 h.",
+      "Traducción jurada del certificado de matrimonio para Registro Civil, residencia, pensiones y trámites en Reino Unido. Desde 35 €, entrega en el día.",
     intro:
       "El certificado de matrimonio aparece en más trámites de los que parece: inscribir en España un matrimonio celebrado fuera, pedir la residencia como cónyuge, cambiar el estado civil ante el HMRC británico o reclamar una pensión de viudedad. Lo traduzco con firma y sello para que lo presentes sin vueltas.",
     price: priceOf("certificado-matrimonio"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 páginas)",
     updated: "2026-09-26",
     tramites: [
       "Inscripción del matrimonio en el Registro Civil",
@@ -134,11 +134,11 @@ export const FICHAS = [
     name: "Traducción jurada de certificado de antecedentes penales",
     title: "Traducción Jurada de Antecedentes Penales – Español-Inglés",
     description:
-      "Traducción jurada del certificado de antecedentes penales (ACRO, DBS o Ministerio de Justicia) para extranjería, nacionalidad, visados y empleo. Desde 35 €, entrega en 24/48 h.",
+      "Traducción jurada de antecedentes penales (ACRO, DBS o Ministerio de Justicia) para extranjería, nacionalidad y empleo. Desde 35 €, entrega en el día.",
     intro:
       "El certificado de penales es imprescindible en casi cualquier expediente de extranjería o nacionalidad, y también te lo pedirán para trabajar con menores o solicitar un visado. Traduzco tanto el certificado español del Ministerio de Justicia como los británicos (ACRO Police Certificate, DBS check), siempre con firma y sello.",
     price: priceOf("antecedentes-penales"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 páginas)",
     updated: "2026-09-26",
     tramites: [
       "Residencia, arraigo y nacionalidad en España",
@@ -192,11 +192,11 @@ export const FICHAS = [
     name: "Traducción jurada de título universitario",
     title: "Traducción Jurada de Título Universitario – Español-Inglés",
     description:
-      "Traducción jurada del título universitario y del expediente académico para UCAS, universidades británicas, homologación y colegiación. Título desde 50 €, entrega en 24/48 h.",
+      "Traducción jurada del título universitario y expediente para UCAS, universidades británicas, homologación y colegiación. Desde 50 €, entrega en el día.",
     intro:
       "Traduzco títulos y expedientes en los dos sentidos: el título español para estudiar o trabajar en Reino Unido, y el degree británico para homologarlo o colegiarte en España. El formato importa: respeto la estructura del original para que el evaluador encuentre cada dato donde lo espera.",
     price: priceOf("titulo-universitario"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 páginas)",
     updated: "2026-09-26",
     tramites: [
       "Admisión en universidades británicas (UCAS y másteres)",
@@ -306,12 +306,12 @@ export const FICHAS = [
     name: "Traducción jurada español-inglés e inglés-español",
     title: "Traducción Jurada Español-Inglés e Inglés-Español",
     description:
-      "Traducción jurada en ambos sentidos, español-inglés e inglés-español, por traductora jurada del MAEC (nº 7310). Validez oficial, entrega en 24/48 h y presupuesto en minutos.",
+      "Traducción jurada español-inglés e inglés-español, por traductora jurada del MAEC (nº 7310). Validez oficial, entrega en el día y presupuesto en minutos.",
     intro:
       "Estoy habilitada por el MAEC para traducir en los dos sentidos: del español al inglés y del inglés al español. Es la misma acreditación, el mismo sello y la misma validez oficial, así que puedes resolver con una sola traductora el expediente completo aunque mezcle documentos de los dos países.",
     price: priceOf("partida-nacimiento"),
     priceLabel: "certificados desde",
-    time: "24/48 h en documentos habituales",
+    time: "En el día (hasta 10 páginas)",
     updated: "2026-09-26",
     tramites: [
       "Expedientes de nacionalidad y extranjería en España",
@@ -367,7 +367,7 @@ export const FICHAS = [
       "Una traducción jurada no es una traducción 'muy buena': es un documento oficial. Mi firma y mi sello, con el nº 7310 del MAEC, certifican que la traducción es fiel y completa, y eso es lo que la hace válida ante cualquier organismo. Aquí te explico cómo funciona esa validez y cómo se comprueba.",
     price: priceOf("partida-nacimiento"),
     priceLabel: "certificados desde",
-    time: "24/48 h en documentos habituales",
+    time: "En el día (hasta 10 páginas)",
     updated: "2026-09-26",
     tramites: [
       "Ministerios, ayuntamientos y comunidades autónomas",
@@ -442,7 +442,7 @@ export const FICHAS = [
       text: "La DGT no suele pedir apostilla para el permiso ni para los certificados de la DVLA. Si tu oficina la exigiera, la traducción la incluiría sin coste extra al venir en el mismo documento.",
     },
     envio:
-      "Foto nítida del permiso por las dos caras, o el PDF del certificado de la DVLA. Al ser un documento breve, suelo entregarlo el mismo día si me llega por la mañana.",
+      "Foto nítida del permiso por las dos caras, o el PDF del certificado de la DVLA. Al ser un documento breve, lo entrego en el día.",
     faq: [
       {
         q: "¿Necesito cita en la DGT antes de traducir?",
@@ -470,11 +470,11 @@ export const FICHAS = [
     name: "Traducción jurada de certificado de empresa o nómina",
     title: "Traducción Jurada de Certificado de Empresa y Nóminas – Español-Inglés",
     description:
-      "Traducción jurada de certificados de empresa, nóminas, contratos laborales y vidas laborales para visados, hipotecas y pensiones. Desde 45 €, entrega en 24/48 h.",
+      "Traducción jurada de certificado de empresa, nóminas, contratos y vidas laborales para visados, hipotecas y pensiones. Desde 45 €, entrega en el día.",
     intro:
       "Los documentos laborales se piden para más cosas de las que imaginas: un visado de trabajo, una hipoteca con ingresos en otro país, una pensión con años cotizados en Reino Unido. Traduzco certificados de empresa, nóminas, vidas laborales y cartas del HMRC o del DWP con firma y sello.",
     price: priceOf("certificado-empresa"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 páginas)",
     updated: "2026-09-26",
     tramites: [
       "Visados de trabajo (España y Reino Unido)",
@@ -551,7 +551,7 @@ export const FICHAS = [
       text: "El DNI y el pasaporte no se apostillan. Si el organismo pide una copia compulsada o notarial del documento, esa compulsa se hace antes y se traduce junto con el documento.",
     },
     envio:
-      "Foto nítida por las dos caras (DNI/NIE) o de la página de datos del pasaporte. Es un documento breve: si me llega por la mañana, suele salir el mismo día.",
+      "Foto nítida por las dos caras (DNI/NIE) o de la página de datos del pasaporte. Es un documento breve: sale en el día.",
     faq: [
       {
         q: "¿Seguro que necesito traducir el pasaporte?",
@@ -641,7 +641,7 @@ export const FICHAS = [
       "Los certificados médicos aparecen en visados, oposiciones, seguros, adopciones o cuando continúas un tratamiento en otro país. Traduzco desde el certificado médico oficial de una página hasta informes clínicos completos, con el cuidado terminológico que exige un documento del que puede depender una decisión médica o administrativa.",
     price: null,
     priceNote: "presupuesto cerrado en menos de 2 h",
-    time: "24/48 h en certificados breves",
+    time: "En el día (hasta 10 páginas)",
     updated: "2026-09-26",
     tramites: [
       "Visados que exigen certificado médico",

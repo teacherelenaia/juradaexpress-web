@@ -10,7 +10,7 @@ import { personRef, SINCE, yearsOfExperience } from "../../../content/persona";
 export const metadata = {
   title: "About me — Elena Peñaranda, Sworn Translator of English (MAEC no. 7310)",
   description:
-    "I'm Elena Peñaranda Ortega, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs (no. 7310). I personally translate, sign and stamp every sworn translation, delivered digitally in 24/48h.",
+    "Elena Peñaranda, sworn translator of English (Foreign Ministry no. 7310). I translate, sign and stamp every translation; same-day delivery (10 pages).",
   alternates: {
     canonical: "https://juradaexpress.es/en/about",
     languages: {
