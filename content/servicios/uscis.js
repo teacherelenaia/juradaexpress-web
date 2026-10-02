@@ -28,10 +28,10 @@ export const es = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Traducción certificada para USCIS",
   metaTitle: "Traducción certificada para USCIS (español-inglés)",
-  metaDescription: "Traducción certificada al inglés para USCIS (8 CFR § 103.2(b)(3)): traducción completa, certificación firmada por documento, sin notario. PDF en 24/48 h.",
+  metaDescription: "Traducción certificada al inglés para USCIS (8 CFR § 103.2(b)(3)): traducción completa y certificación firmada, sin notario. PDF en el día hasta 10 págs.",
   h1: "Traducción certificada para USCIS: documentos españoles al inglés para inmigración en Estados Unidos",
   lead:
-    "Una traducción certificada para USCIS es la traducción completa al inglés de un documento en español (certificado de nacimiento, matrimonio, divorcio, antecedentes penales, título, extracto bancario, escritura) acompañada de una certificación firmada y fechada en la que el traductor declara que la traducción es completa y exacta y que es competente para traducir del español al inglés, tal como exige la norma 8 CFR § 103.2(b)(3). No hace falta notario. Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores de España (nº 7310), y entrego cada documento con su propia certificación en PDF firmado en 24/48 h.",
+    "Una traducción certificada para USCIS es la traducción completa al inglés de un documento en español (certificado de nacimiento, matrimonio, divorcio, antecedentes penales, título, extracto bancario, escritura) acompañada de una certificación firmada y fechada en la que el traductor declara que la traducción es completa y exacta y que es competente para traducir del español al inglés, tal como exige la norma 8 CFR § 103.2(b)(3). No hace falta notario. Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores de España (nº 7310), y entrego cada documento con su propia certificación en PDF firmado en el día hasta 10 páginas.",
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Mano firmando con pluma la certificación de una traducción sobre el documento",
@@ -136,7 +136,7 @@ export const es = {
       id: "entrega",
       title: "¿Cómo se entrega, cuánto tarda y cuánto cuesta?",
       body: [
-        "Me envías el documento escaneado (todas las páginas, sellos incluidos) por WhatsApp o email y te respondo con precio cerrado en menos de 2 horas laborables. Pagas con tarjeta desde Estados Unidos, en euros, a través de Stripe. Un documento habitual está traducido y certificado en 24/48 h; un encargo enviado por la noche en Estados Unidos está en marcha a primera hora de la mañana en España.",
+        "Me envías el documento escaneado (todas las páginas, sellos incluidos) por WhatsApp o email y te respondo con precio cerrado en menos de 2 horas laborables. Pagas con tarjeta desde Estados Unidos, en euros, a través de Stripe. Los documentos de hasta 10 páginas se entregan en el día, en PDF firmado; los expedientes más largos tienen plazo por escrito antes de empezar (normalmente 24-72 h). Un encargo enviado por la noche en Estados Unidos está en marcha a primera hora de la mañana en España.",
         `Precio: ${
           certPrice != null ? `certificados desde ${certPrice} €` : "presupuesto en menos de 2 h"
         }; documentos largos, presupuesto cerrado al ver el documento. Consulta la <a href="/precios">página de precios</a> (en euros).`,
@@ -158,7 +158,7 @@ export const es = {
     },
     {
       t: "Entrega",
-      d: "PDF firmado en 24/48 h; copia en papel con firma manuscrita a EEUU por mensajería si la necesitas.",
+      d: "PDF firmado en el día hasta 10 páginas; copia en papel con firma manuscrita a EEUU por mensajería si la necesitas.",
     },
   ],
   faq: [
@@ -204,10 +204,10 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Certified translation for USCIS",
   metaTitle: "Certified Spanish to English translation for USCIS",
-  metaDescription: "USCIS certified translation of Spanish documents (8 CFR § 103.2(b)(3)): complete translation, signed certification per document, no notary. PDF in 24/48h.",
+  metaDescription: "USCIS certified translation of Spanish documents (8 CFR § 103.2(b)(3)): full translation, signed certification, no notary. PDF same day (up to 10 pages).",
   h1: "Certified Spanish to English translation for USCIS",
   lead:
-    "A certified translation for USCIS is the complete English translation of a Spanish-language document (birth, marriage or divorce certificate, criminal record, degree, bank statement, deed) together with a signed and dated certification in which the translator states that the translation is complete and accurate and that they are competent to translate from Spanish into English, as required by 8 CFR § 103.2(b)(3). No notary is needed. I am Elena Peñaranda Ortega, a sworn translator appointed by Spain's Ministry of Foreign Affairs (no. 7310), and I deliver every document with its own certification as a signed PDF in 24/48 hours.",
+    "A certified translation for USCIS is the complete English translation of a Spanish-language document (birth, marriage or divorce certificate, criminal record, degree, bank statement, deed) together with a signed and dated certification in which the translator states that the translation is complete and accurate and that they are competent to translate from Spanish into English, as required by 8 CFR § 103.2(b)(3). No notary is needed. I am Elena Peñaranda Ortega, a sworn translator appointed by Spain's Ministry of Foreign Affairs (no. 7310), and I deliver every document with its own certification as a signed PDF the same day (up to 10 pages).",
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Hand signing a translation certification with a pen on the document",
@@ -318,7 +318,7 @@ export const en = {
       id: "delivery",
       title: "How is it delivered, how long does it take and what does it cost?",
       body: [
-        "You send me the scanned document (every page, stamps included) on WhatsApp or by email and I reply with a fixed price within 2 working hours. You pay by card from the United States, in euros, through Stripe. A standard document is translated and certified in 24/48 hours; an order sent in the evening in the US is under way first thing in the morning in Spain.",
+        "You send me the scanned document (every page, stamps included) on WhatsApp or by email and I reply with a fixed price within 2 working hours. You pay by card from the United States, in euros, through Stripe. Documents of up to 10 pages are delivered the same day, as a signed PDF; larger files get a written deadline before work starts (normally 24-72 hours). An order sent in the evening in the US is under way first thing in the morning in Spain.",
         `Price: ${
           certPrice != null ? `certificates from €${certPrice}` : "a quote within 2 hours"
         }; longer documents get a fixed quote once I see them. See the <a href="/en/precios">pricing page</a> (in euros).`,
@@ -340,7 +340,7 @@ export const en = {
     },
     {
       t: "Delivery",
-      d: "Signed PDF in 24/48 hours; paper copy with handwritten signature couriered to the US if you need it.",
+      d: "Signed PDF the same day for up to 10 pages; paper copy with handwritten signature couriered to the US if you need it.",
     },
   ],
   faq: [
