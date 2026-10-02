@@ -16,21 +16,33 @@
 //      comprimidas a JPEG en el navegador. Asunto: el del resumen más
 //      « · archivos (i/n)», para que queden juntos en la bandeja.
 //
+// Desde el 02/10/2026 lo normal es el punto 1 con `blobs`: el navegador ya
+// ha subido los archivos a Vercel Blob (privado, /api/quote/upload) y aquí
+// se descargan, se adjuntan al email del resumen (y, si pasan de ~25 MB en
+// total, a emails « · archivos (i/n)») y se BORRAN del almacén. Responde
+// `blobsEmailed` con las URL realmente enviadas. Los lotes directos del
+// punto 2 quedan como reserva si Blob no está disponible.
+//
 // Sin RESEND_API_KEY responde { ok: true, emailed: false }: la calculadora
 // sigue funcionando y, como los archivos NO han llegado por email, el
 // resumen de WhatsApp y la pantalla de confirmación piden al cliente que
 // los adjunte en el chat. Igual ante cualquier error de envío (ok: false).
 // Variables en .env.local.example.
 import { NextResponse } from "next/server";
+import { get, del } from "@vercel/blob";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
-import { URGENCY_SURCHARGE } from "../../../content/site";
+import { URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES } from "../../../content/site";
 
 export const runtime = "nodejs";
+// Descargar de Blob y enviar emails con adjuntos grandes puede tardar.
+export const maxDuration = 60;
 
 const MAX_FILES = 5;
-const MAX_FILE_BYTES = 10 * 1024 * 1024;
-const ALLOWED_TYPES = new Set(["application/pdf", "image/jpeg", "image/png"]);
-const ALLOWED_EXT = /\.(pdf|jpe?g|png)$/i;
+const MAX_FILE_BYTES = 25 * 1024 * 1024;
+// Resend admite 40 MB por email contando el base64 (+33 %): ~25 MB reales.
+const EMAIL_MAX_BYTES = 25 * 1024 * 1024;
+const ALLOWED_TYPES = new Set(["application/pdf", "image/jpeg", "image/png", "image/heic", "image/heif"]);
+const ALLOWED_EXT = /\.(pdf|jpe?g|png|heic|heif)$/i;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -38,7 +50,74 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const WHATSAPP_REASONS = {
   "pdf-too-large": "PDF de más de 3,5 MB",
   unsupported: "su navegador no pudo convertir la imagen",
+  failed: "no se pudo subir desde su navegador",
 };
+
+// Archivos subidos por el navegador a Vercel Blob (privado):
+// [{ name, url }]. Solo se aceptan URLs del almacén de Blob bajo
+// /presupuestos/ (las genera /api/quote/upload).
+function blobList(raw) {
+  let list;
+  try {
+    list = JSON.parse(String(raw ?? ""));
+  } catch {
+    return [];
+  }
+  if (!Array.isArray(list)) return [];
+  const out = [];
+  for (const item of list.slice(0, MAX_FILES)) {
+    const name = clean(item && item.name, 160);
+    let url;
+    try {
+      url = new URL(String(item && item.url));
+    } catch {
+      continue;
+    }
+    if (
+      url.protocol !== "https:" ||
+      !url.hostname.endsWith(".blob.vercel-storage.com") ||
+      !url.pathname.startsWith("/presupuestos/")
+    ) {
+      continue;
+    }
+    out.push({ name: name || url.pathname.split("/").pop(), url: url.toString() });
+  }
+  return out;
+}
+
+async function readBlob(url) {
+  const res = await get(url, { access: "private" });
+  if (!res || res.statusCode !== 200 || !res.stream) throw new Error("blob-missing");
+  const chunks = [];
+  let size = 0;
+  const reader = res.stream.getReader();
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > MAX_FILE_BYTES) throw new Error("blob-too-large");
+    chunks.push(Buffer.from(value));
+  }
+  return Buffer.concat(chunks);
+}
+
+// Reparte adjuntos en grupos de < EMAIL_MAX_BYTES (cada uno ya < 25 MB).
+function groupAttachments(items) {
+  const out = [];
+  let cur = [];
+  let size = 0;
+  for (const it of items) {
+    if (cur.length && size + it.bytes > EMAIL_MAX_BYTES) {
+      out.push(cur);
+      cur = [];
+      size = 0;
+    }
+    cur.push(it);
+    size += it.bytes;
+  }
+  if (cur.length) out.push(cur);
+  return out;
+}
 
 const json = (body, status = 200) => NextResponse.json(body, { status });
 
@@ -74,7 +153,7 @@ function fileList(raw) {
 function estimate(doc, pages, urgent) {
   if (!doc || doc.price == null) return null;
   const base = doc.price * pages;
-  return Math.round(urgent ? base * (1 + URGENCY_SURCHARGE) : base);
+  return Math.round(urgent && pages > SAME_DAY_MAX_PAGES ? base * (1 + URGENCY_SURCHARGE) : base);
 }
 
 export async function POST(req) {
@@ -104,8 +183,9 @@ export async function POST(req) {
   const phone = clean(fd.get("phone"), 40);
   const part = clean(fd.get("part"), 20); // "1/3" en los lotes de archivos
   const lots = Math.max(0, parseInt(clean(fd.get("lots")), 10) || 0); // emails de archivos que siguen al resumen
-  const filesEmail = fileList(fd.get("filesEmail"));
+  const filesEmail = fileList(fd.get("filesEmail")); // irán en lotes directos aparte
   const filesWhatsApp = fileList(fd.get("filesWhatsApp"));
+  const blobs = blobList(fd.get("blobs")); // ya subidos a Vercel Blob
 
   const files = fd
     .getAll("files")
@@ -119,6 +199,31 @@ export async function POST(req) {
       return json({ ok: false, error: "file-type" }, 400);
     }
   }
+
+  const apiKey = process.env.RESEND_API_KEY;
+  const to = process.env.QUOTE_TO_EMAIL || "info@juradaexpress.es";
+  const from = process.env.QUOTE_FROM_EMAIL;
+  if (!apiKey || !from) {
+    return json({ ok: true, emailed: false, reason: "email-not-configured", blobsEmailed: [] });
+  }
+
+  // Archivos de Blob: se descargan con el token del servidor. Si alguno no
+  // se puede leer, se avisa en el email y el navegador lo pide por WhatsApp.
+  const blobItems = [];
+  const blobFailed = [];
+  await Promise.all(
+    blobs.map(async (b) => {
+      try {
+        const buf = await readBlob(b.url);
+        blobItems.push({ ...b, bytes: buf.length, content: buf.toString("base64") });
+      } catch {
+        blobFailed.push(b);
+      }
+    })
+  );
+  const blobOrder = blobs.map((b) => b.url);
+  blobItems.sort((a, b) => blobOrder.indexOf(a.url) - blobOrder.indexOf(b.url));
+  const blobGroups = groupAttachments(blobItems);
 
   const price = estimate(doc, pages, urgent);
   const docName = doc ? doc.name : "(documento no indicado)";
@@ -134,26 +239,40 @@ export async function POST(req) {
     `Idioma de la web: ${locale}`,
     `Nombre: ${name || "(no indicado)"}`,
     `Email: ${email || (emailRaw ? `${emailRaw} (no válido)` : "(no indicado)")}`,
-    `Teléfono: ${phone || "(no indicado; llegará por WhatsApp)"}`,
+    `Teléfono: ${phone || "(no indicado)"}`,
   ];
+  const extraLots = Math.max(0, blobGroups.length - 1);
   if (isSummary) {
-    // Plan de archivos: qué llega en emails aparte y qué adjunta el cliente.
-    if (!filesEmail.length && !filesWhatsApp.length) {
+    if (!blobs.length && !filesEmail.length && !filesWhatsApp.length) {
       lines.push("Archivos: ninguno");
+    }
+    if (blobGroups.length) {
+      lines.push(`Archivos adjuntos a este email: ${blobGroups[0].map((b) => b.name).join(", ")}`);
+    }
+    if (extraLots) {
+      lines.push(
+        `Más archivos en ${extraLots === 1 ? "un email aparte" : `${extraLots} emails aparte`} (asunto «… · archivos (i/n)»): ${blobGroups
+          .slice(1)
+          .flat()
+          .map((b) => b.name)
+          .join(", ")}`
+      );
     }
     if (filesEmail.length) {
       lines.push(
-        `Archivos que llegan en ${lots === 1 ? "un email aparte" : `${lots || "varios"} emails aparte`} (asunto «… · archivos (i/n)»): ${filesEmail
+        `Archivos que llegan en ${lots === 1 ? "un email aparte" : `${lots || "varios"} emails aparte`} (asunto «… · archivos (lote i/n)»): ${filesEmail
           .map((f) => (f.sent && f.sent !== f.name ? `${f.name} (enviado como ${f.sent})` : f.name))
           .join(", ")}`
       );
     }
-    if (filesWhatsApp.length) {
-      lines.push(
-        `Archivos que el cliente adjunta en WhatsApp: ${filesWhatsApp
-          .map((f) => `${f.name}${WHATSAPP_REASONS[f.reason] ? ` (${WHATSAPP_REASONS[f.reason]})` : ""}`)
-          .join(", ")}`
-      );
+    const missing = [
+      ...filesWhatsApp.map(
+        (f) => `${f.name}${WHATSAPP_REASONS[f.reason] ? ` (${WHATSAPP_REASONS[f.reason]})` : ""}`
+      ),
+      ...blobFailed.map((b) => `${b.name} (no se pudo recuperar del almacenamiento)`),
+    ];
+    if (missing.length) {
+      lines.push(`Archivos que NO han llegado (se le pide que los mande por WhatsApp): ${missing.join(", ")}`);
     }
   } else {
     lines.push(
@@ -162,14 +281,7 @@ export async function POST(req) {
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.QUOTE_TO_EMAIL || "info@juradaexpress.es";
-  const from = process.env.QUOTE_FROM_EMAIL;
-  if (!apiKey || !from) {
-    return json({ ok: true, emailed: false, reason: "email-not-configured" });
-  }
-
-  const attachments = await Promise.all(
+  const directAttachments = await Promise.all(
     files.map(async (f) => ({
       filename: f.name || "documento",
       content: Buffer.from(await f.arrayBuffer()).toString("base64"),
@@ -178,36 +290,75 @@ export async function POST(req) {
 
   // Asunto pedido por Elena: «Presupuesto web · <documento> · <email>». Si el
   // cliente no dejó email se usa el teléfono o el nombre para distinguir
-  // solicitudes en la bandeja. Los lotes de archivos llevan el mismo asunto
+  // solicitudes en la bandeja. Los emails de archivos llevan el mismo asunto
   // más « · archivos (i/n)».
   const baseSubject = `Presupuesto web · ${docName} · ${email || phone || name || "sin contacto"}`;
-  const subject = isSummary ? baseSubject : `${baseSubject} · archivos (${part})`;
-  const heading = isSummary
-    ? "Nueva solicitud desde la calculadora de juradaexpress.es"
-    : `Archivos de la solicitud de la calculadora de juradaexpress.es (lote ${part})`;
 
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        ...(email ? { reply_to: email } : {}),
-        subject,
-        text: `${heading}\n\n${lines.join("\n")}\n`,
-        attachments,
-      }),
-    });
-    if (!res.ok) {
-      return json({ ok: false, emailed: false, error: "email-failed" }, 502);
+  async function send(subject, heading, attachments) {
+    try {
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from,
+          to: [to],
+          ...(email ? { reply_to: email } : {}),
+          subject,
+          text: `${heading}\n\n${lines.join("\n")}\n`,
+          attachments,
+        }),
+      });
+      return res.ok;
+    } catch {
+      return false;
     }
-  } catch {
-    return json({ ok: false, emailed: false, error: "email-failed" }, 502);
   }
 
-  return json({ ok: true, emailed: true, files: files.length });
+  const toAttachment = (b) => ({ filename: b.name || "documento", content: b.content });
+
+  if (!isSummary) {
+    const ok = await send(
+      `${baseSubject} · archivos (lote ${part})`,
+      `Archivos de la solicitud de la calculadora de juradaexpress.es (lote ${part})`,
+      directAttachments
+    );
+    return ok
+      ? json({ ok: true, emailed: true, files: files.length })
+      : json({ ok: false, emailed: false, error: "email-failed" }, 502);
+  }
+
+  // Resumen + primer grupo de archivos de Blob en el mismo email; el resto
+  // en emails aparte. Un archivo cuenta como enviado solo si su email sale.
+  const blobsEmailed = [];
+  const summaryOk = await send(
+    baseSubject,
+    "Nueva solicitud desde la calculadora de juradaexpress.es",
+    [...directAttachments, ...(blobGroups[0] || []).map(toAttachment)]
+  );
+  if (summaryOk && blobGroups[0]) blobsEmailed.push(...blobGroups[0].map((b) => b.url));
+  for (let i = 1; i < blobGroups.length; i++) {
+    const ok = await send(
+      `${baseSubject} · archivos (${i}/${extraLots})`,
+      `Archivos de la solicitud de la calculadora de juradaexpress.es (${i}/${extraLots})`,
+      blobGroups[i].map(toAttachment)
+    );
+    if (ok) blobsEmailed.push(...blobGroups[i].map((b) => b.url));
+  }
+
+  // Los documentos enviados se borran del almacenamiento (minimización RGPD).
+  if (blobsEmailed.length) {
+    try {
+      await del(blobsEmailed);
+    } catch {
+      // Si falla el borrado no se bloquea la respuesta.
+    }
+  }
+
+  if (!summaryOk && !blobsEmailed.length) {
+    return json({ ok: false, emailed: false, error: "email-failed", blobsEmailed }, 502);
+  }
+  return json({ ok: true, emailed: summaryOk, files: files.length, blobsEmailed });
 }
