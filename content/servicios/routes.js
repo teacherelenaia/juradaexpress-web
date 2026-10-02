@@ -90,7 +90,53 @@ export const UK_ROUTE = {
 
 const byId = (id) => SERVICE_ROUTES.find((r) => r.id === id);
 
-// Menú "Internacional" en dos columnas (FASE 2B.3).
+// Landings de documento para el mercado de EE. UU. (2026-10), solo en
+// inglés (sin par ES, sin hreflang es). Generadas con
+// app/components/UsDocPage.js a partir de content/us-docs.js, que importa
+// de aquí los slugs. `docId` enlaza con content/documents.js para el precio.
+const US_DOC_BASE = "/en/certified-translation-";
+export const US_DOC_ROUTES = [
+  {
+    id: "us-birth",
+    docId: "partida-nacimiento",
+    en: `${US_DOC_BASE}spanish-birth-certificate-uscis`,
+    labelEn: "Spanish birth certificate (USCIS)",
+  },
+  {
+    id: "us-marriage",
+    docId: "certificado-matrimonio",
+    en: `${US_DOC_BASE}spanish-marriage-certificate-uscis`,
+    labelEn: "Spanish marriage certificate (USCIS)",
+  },
+  {
+    id: "us-divorce",
+    docId: null,
+    en: `${US_DOC_BASE}spanish-divorce-decree-uscis`,
+    labelEn: "Spanish divorce decree (USCIS)",
+  },
+  {
+    id: "us-criminal",
+    docId: "antecedentes-penales",
+    en: `${US_DOC_BASE}spanish-criminal-record-certificate-uscis`,
+    labelEn: "Spanish criminal record certificate (USCIS)",
+  },
+  {
+    id: "us-degree",
+    docId: "titulo-universitario",
+    en: `${US_DOC_BASE}spanish-degree-evaluation-wes`,
+    labelEn: "Spanish degree for WES evaluation",
+  },
+  {
+    id: "us-passport",
+    docId: "dni-pasaporte",
+    en: `${US_DOC_BASE}spanish-passport-dni-uscis`,
+    labelEn: "Spanish passport or DNI (USCIS)",
+  },
+];
+
+// Menú "Internacional" en dos columnas (FASE 2B.3). El tercer grupo
+// (documentos para USCIS) solo existe en inglés: `enOnly` hace que
+// MainNav/MobileNav lo omitan en las rutas en español.
 export const INTERNATIONAL_MENU_GROUPS = [
   {
     id: "servicios",
@@ -111,6 +157,13 @@ export const INTERNATIONAL_MENU_GROUPS = [
       byId("australia"),
       byId("paises"),
     ],
+  },
+  {
+    id: "uscis-docs",
+    labelEs: "Documentos para USCIS",
+    labelEn: "Spanish documents for USCIS",
+    enOnly: true,
+    items: US_DOC_ROUTES,
   },
 ];
 

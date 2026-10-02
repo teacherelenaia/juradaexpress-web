@@ -44,6 +44,8 @@ export default function LanguageSwitcher({ className = "" }) {
 
   function nearestEs(path) {
     if (EN_TO_ES[path]) return EN_TO_ES[path];
+    // Landings de documento para USCIS (solo EN) → página ES de USCIS.
+    if (path.startsWith("/en/certified-translation-")) return "/traduccion-certificada-uscis";
     return "/";
   }
 
