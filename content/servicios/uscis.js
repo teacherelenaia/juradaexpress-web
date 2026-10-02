@@ -6,6 +6,7 @@
 // concreta; cada documento lleva su propia certificación.
 import { USCIS_PAPER_COPY, INTERNATIONAL_SHIPPING } from "../site";
 import { DOCUMENTS } from "../documents";
+import { US_DOC_ROUTES } from "./routes";
 
 const PATH_ES = "/traduccion-certificada-uscis";
 const PATH_EN = "/en/certified-translation-uscis";
@@ -297,6 +298,20 @@ export const en = {
           ],
         },
         "Documents from other Spanish-speaking countries (Mexico, Colombia, Argentina, Venezuela, Peru…) too, as long as they are written in Spanish.",
+      ],
+    },
+    {
+      // Landings de documento para EE. UU. (2026-10): precio en dólares,
+      // envío a EE. UU. y pago en USD. Solo en inglés (content/us-docs.js).
+      id: "us-documents",
+      title: "Translate your Spanish document for USCIS",
+      body: [
+        "Each of these guides explains what USCIS expects for that specific Spanish document, what the original looks like, the price in US dollars and how the signed PDF and the paper copy reach you in the United States:",
+        {
+          list: US_DOC_ROUTES.map(
+            (r) => `<a href="${r.en}">${r.labelEn.replace(/ \((USCIS)\)$/, "")}</a>`
+          ),
+        },
       ],
     },
     {

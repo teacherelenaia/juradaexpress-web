@@ -48,7 +48,8 @@ export function getLinks(pathname) {
 /** Grupos del menú Internacional localizados: [{ id, label, items: [{href,label}] }] */
 export function getInternationalGroups(pathname) {
   const en = isEnglishPath(pathname);
-  return INTERNATIONAL_MENU_GROUPS.map((g) => ({
+  // Los grupos `enOnly` (documentos para USCIS) no tienen versión española.
+  return INTERNATIONAL_MENU_GROUPS.filter((g) => en || !g.enOnly).map((g) => ({
     id: g.id,
     label: en ? g.labelEn : g.labelEs,
     items: g.items.map((r) => ({
@@ -163,9 +164,15 @@ function InternationalMenu({ pathname, label }) {
         id="nav-internacional"
         data-open={open}
         aria-hidden={!open}
-        className="nav-dropdown absolute left-1/2 top-full z-50 w-[34rem] pt-3"
+        className={`nav-dropdown absolute left-1/2 top-full z-50 pt-3 ${
+          groups.length > 2 ? "w-[48rem]" : "w-[34rem]"
+        }`}
       >
-        <div className="grid grid-cols-2 gap-2 rounded-xl bg-brand-navy p-3 text-sm shadow-lg ring-1 ring-white/10">
+        <div
+          className={`grid gap-2 rounded-xl bg-brand-navy p-3 text-sm shadow-lg ring-1 ring-white/10 ${
+            groups.length > 2 ? "grid-cols-3" : "grid-cols-2"
+          }`}
+        >
           {groups.map((g) => (
             <div key={g.id}>
               <p

@@ -4,6 +4,7 @@ import { getAllPostsEn, getPostEnBySlug } from "../content/posts.en";
 import { SERVICE_ROUTES } from "../content/servicios/routes";
 import { CIUDADES } from "../content/ciudades";
 import { FICHAS } from "../content/fichas";
+import { US_DOC_ROUTES } from "../content/servicios/routes";
 
 const BASE_URL = "https://juradaexpress.es";
 
@@ -46,6 +47,14 @@ const cityRoutes = CIUDADES.map((c) => ({
 const fichaRoutes = FICHAS.map((f) => ({
   url: `${BASE_URL}/${f.slug}`,
   lastModified: f.updated,
+  priority: 0.7,
+}));
+
+// Landings de documento para EE. UU. (solo EN, sin hreflang es), 2026-10.
+const US_DOC_LAST_MODIFIED = "2026-10-02";
+const usDocRoutes = US_DOC_ROUTES.map((r) => ({
+  url: `${BASE_URL}${r.en}`,
+  lastModified: US_DOC_LAST_MODIFIED,
   priority: 0.7,
 }));
 
@@ -134,6 +143,7 @@ export default function sitemap() {
     ...fichaRoutes,
     ...serviceRoutes,
     ...cityRoutes,
+    ...usDocRoutes,
     ...postRoutes,
     ...postRoutesEn,
   ];
