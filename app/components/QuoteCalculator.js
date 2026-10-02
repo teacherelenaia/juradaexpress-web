@@ -7,32 +7,30 @@
 // (ES/EN, vía ServicePage). Precios SOLO de content/documents.js; recargo
 // de urgencia y nota de entrega en papel de content/site.js.
 //
-// Archivos (01/10/2026): al añadirlos se preparan en el navegador.
-//   - Imágenes (JPG/PNG/HEIC): se decodifican, se dibujan en un canvas con
-//     lado máximo 2000 px y se recomprimen a JPEG (calidad 0,8 y bajando)
-//     hasta pesar < 1,5 MB. Si el navegador no puede decodificarlas (HEIC
-//     fuera de Safari, por ejemplo) se piden por WhatsApp y se sigue con el
-//     resto. Un JPG que ya pesa < 1,5 MB se envía tal cual.
-//   - PDF: tal cual si pesa < 3,5 MB; si pesa más, se pide por WhatsApp.
+// Archivos (02/10/2026, corrige «no deja adjuntar»):
+//   - Los archivos se suben DIRECTAMENTE desde el navegador a Vercel Blob
+//     (almacén privado, token de un solo uso de /api/quote/upload), sin el
+//     límite de ~4,5 MB por petición de Vercel. Hasta 25 MB por archivo.
+//   - Imágenes: se comprimen en el navegador (lado máx. 2000 px, JPEG < 1,5
+//     MB); si el navegador no puede (HEIC fuera de Safari) se sube el
+//     original. Los PDF se suben tal cual, pesen lo que pesen (≤ 25 MB).
+//   - Si Blob no está disponible, se usa el envío antiguo por lotes de
+//     < 3,5 MB a /api/quote; solo lo que no se pueda enviar se pide por
+//     WhatsApp.
 //
-// Al pulsar «Enviar y recibir presupuesto»:
-//   1. abre una pestaña en el mismo gesto de usuario (evita el bloqueo de
-//      ventanas emergentes); si no hay nada que subir ya lleva el resumen;
-//   2. envía SIEMPRE a /api/quote un primer lote sin archivos con el resumen
-//      y el contacto (nombre, email, teléfono), para que Elena reciba el
-//      email aunque la subida falle o no haya archivos; se reintenta una vez;
-//   3. después manda los archivos preparados en lotes de < 3,5 MB (límite de
-//      cuerpo de Vercel ≈ 4,5 MB); el servidor usa el mismo asunto que el
-//      resumen más « · archivos (i/n)»;
-//   4. con la respuesta real construye el resumen de WhatsApp (qué archivos
-//      han ido por email y cuáles adjunta el cliente, por nombre) y lleva la
-//      pestaña a wa.me; la pantalla de confirmación repite ambas listas;
-//   5. registra la conversión de Google Ads (AdsConversion).
+// Al pulsar «Enviar y recibir presupuesto» la subida ocurre EN ESTA
+// PÁGINA, con barra de progreso (antes se abría una pestaña de WhatsApp a
+// la vez y, en el móvil, la pestaña de la web quedaba en segundo plano y el
+// navegador congelaba la subida). /api/quote recibe el resumen + las URL de
+// Blob, adjunta los archivos al email a Elena y los borra del almacén. Al
+// terminar se muestra la confirmación y un botón OPCIONAL de WhatsApp.
+// Se exige email o teléfono para poder responder al cliente.
 // Mobile-first: una columna en móvil, dos en ≥ md. Accesible: fieldset +
 // legend en los grupos de radio, aria-live en el precio y en los estados,
 // errores asociados con aria-describedby, zona de arrastre operable por
 // teclado (es un <label> del <input type="file">).
-import { useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { upload as blobUpload } from "@vercel/blob/client";
 import { DOCUMENTS } from "../../content/documents";
 import { PAPER_DELIVERY_SPAIN, URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES, TURNAROUND } from "../../content/site";
 import { SectionHeading } from "./ui";
@@ -42,9 +40,9 @@ import { trackAdsConversion } from "./AdsConversion";
 const WHATSAPP_NUMBER = "34685891214";
 const MB = 1024 * 1024;
 const MAX_FILES = 5;
-const MAX_FILE_BYTES = 10 * MB; // tope de entrada por archivo
+const MAX_FILE_BYTES = 25 * MB; // tope por archivo (Blob + adjunto de Resend)
 export const BATCH_BYTES = 3.5 * MB; // por petición a /api/quote
-export const PDF_MAX_BYTES = 3.5 * MB; // un PDF mayor lo adjunta el cliente en WhatsApp
+export const DIRECT_MAX_BYTES = 3.5 * MB; // envío de reserva sin Blob
 export const IMAGE_TARGET_BYTES = 1.5 * MB; // cada imagen comprimida pesa menos que esto
 const IMAGE_MAX_SIDE = 2000;
 const IMAGE_QUALITIES = [0.8, 0.7, 0.6, 0.5, 0.4, 0.3];
@@ -80,20 +78,18 @@ const COPY = {
     }.`,
     files: "Adjunta el documento (opcional)",
     dropHint: "Arrastra aquí tus archivos o pulsa para elegirlos",
-    dropSpec: `PDF, JPG, PNG o HEIC · máx. 10 MB por archivo · hasta ${MAX_FILES} archivos`,
-    dropNote:
-      "Las fotos se comprimen en tu navegador antes de enviarse. Los PDF de más de 3,5 MB los adjuntas tú en WhatsApp.",
+    dropSpec: `PDF, JPG, PNG o HEIC · máx. 25 MB por archivo · hasta ${MAX_FILES} archivos`,
+    dropNote: "Las fotos se comprimen en tu navegador antes de enviarse. Puedes hacer foto con el móvil.",
     remove: "Quitar",
     filePreparing: "comprimiendo…",
     fileCompressed: (kb) => `se enviará comprimida (${kb} KB)`,
     fileWhatsApp: "la adjuntas tú en WhatsApp",
+    fileReady: "lista para enviar",
     reasons: {
-      "pdf-too-large": "PDF de más de 3,5 MB",
-      unsupported: "tu navegador no puede convertir este archivo",
-      failed: "no se ha podido enviar por email",
+      failed: "no se ha podido subir",
     },
-    contactLegend: "Tus datos de contacto (opcionales)",
-    contactHint: "Para asociar los archivos a tu WhatsApp y poder responderte también por email.",
+    contactLegend: "Tus datos de contacto",
+    contactHint: "Indica al menos tu email o tu teléfono para enviarte el presupuesto.",
     name: "Nombre",
     email: "Email",
     phone: "Teléfono",
@@ -103,19 +99,23 @@ const COPY = {
       "y acepto que Elena Peñaranda Ortega trate mis datos y los documentos adjuntos solo para preparar el presupuesto.",
     submit: "Enviar y recibir presupuesto",
     sending: "Enviando…",
-    preparing: "Enviando tu solicitud… En unos segundos se abrirá WhatsApp con el resumen.",
+    uploading: (pct) => `Subiendo archivos… ${pct} %. No cierres esta página.`,
+    sendingSummary: "Enviando tu solicitud…",
     errPrivacy: "Marca la casilla de privacidad para continuar.",
+    errContact: "Indica tu email o tu teléfono para poder enviarte el presupuesto.",
     errCount: `Como máximo ${MAX_FILES} archivos.`,
-    errSize: "supera los 10 MB.",
+    errSize: "supera los 25 MB.",
     errType: "no es PDF, JPG, PNG ni HEIC.",
-    sent: "Resumen y archivos enviados por email. Termina en WhatsApp: si no se ha abierto, pulsa aquí.",
-    sentNoFiles: "Resumen enviado. Si WhatsApp no se ha abierto, pulsa aquí.",
+    sent: "¡Recibido! Tengo tu solicitud y tus documentos. Te envío precio cerrado y plazo en menos de 2 h. Si quieres, escríbeme también por WhatsApp:",
+    sentNoFiles: "¡Recibido! Te envío precio cerrado y plazo en menos de 2 h. Si quieres, escríbeme también por WhatsApp:",
     attach:
-      "Los archivos no han ido por email: adjúntalos en el chat de WhatsApp que se ha abierto; si no se ha abierto, pulsa aquí.",
+      "He recibido tu solicitud, pero los archivos no se han podido subir. Envíamelos por WhatsApp, por favor:",
     partial:
-      "Algunos archivos no han ido por email: adjúntalos en el chat de WhatsApp que se ha abierto; si no se ha abierto, pulsa aquí.",
-    listEmailed: "Enviados por email",
-    listWhatsApp: "Adjunta tú en WhatsApp",
+      "He recibido tu solicitud, pero algunos archivos no se han podido subir. Envíamelos por WhatsApp, por favor:",
+    failed:
+      "No se ha podido enviar la solicitud (puede ser la conexión). Escríbeme por WhatsApp y te atiendo enseguida:",
+    listEmailed: "Recibidos",
+    listWhatsApp: "Envíame por WhatsApp",
     open: "Abrir WhatsApp",
     wa: {
       hello: "Hola Elena, he usado la calculadora de juradaexpress.es:",
@@ -130,7 +130,7 @@ const COPY = {
       estimate: "Precio estimado",
       quote: "pendiente de presupuesto",
       files: "Archivos",
-      byEmail: "enviados por email",
+      byEmail: "enviados por la web",
       attachAll: "te los adjunto aquí en WhatsApp",
       attachRest: "te adjunto aquí en WhatsApp",
       contact: "Contacto",
@@ -163,20 +163,18 @@ const COPY = {
     }.`,
     files: "Attach the document (optional)",
     dropHint: "Drag your files here or click to choose them",
-    dropSpec: `PDF, JPG, PNG or HEIC · max. 10 MB per file · up to ${MAX_FILES} files`,
-    dropNote:
-      "Photos are compressed in your browser before sending. PDFs over 3.5 MB you attach yourself on WhatsApp.",
+    dropSpec: `PDF, JPG, PNG or HEIC · max. 25 MB per file · up to ${MAX_FILES} files`,
+    dropNote: "Photos are compressed in your browser before sending. A phone photo is fine.",
     remove: "Remove",
     filePreparing: "compressing…",
     fileCompressed: (kb) => `will be sent compressed (${kb} KB)`,
     fileWhatsApp: "you attach it on WhatsApp",
+    fileReady: "ready to send",
     reasons: {
-      "pdf-too-large": "PDF over 3.5 MB",
-      unsupported: "your browser cannot convert this file",
-      failed: "could not be sent by email",
+      failed: "could not be uploaded",
     },
-    contactLegend: "Your contact details (optional)",
-    contactHint: "So I can match the files to your WhatsApp message and reply by email too.",
+    contactLegend: "Your contact details",
+    contactHint: "Give at least your email or phone so I can send you the quote.",
     name: "Name",
     email: "Email",
     phone: "Phone",
@@ -186,19 +184,23 @@ const COPY = {
       "and I agree that Elena Peñaranda Ortega processes my details and the attached documents only to prepare the quote.",
     submit: "Send and get my quote",
     sending: "Sending…",
-    preparing: "Sending your request… WhatsApp will open with the summary in a few seconds.",
+    uploading: (pct) => `Uploading files… ${pct}%. Please keep this page open.`,
+    sendingSummary: "Sending your request…",
     errPrivacy: "Tick the privacy box to continue.",
+    errContact: "Please give your email or phone so I can send you the quote.",
     errCount: `A maximum of ${MAX_FILES} files.`,
-    errSize: "is larger than 10 MB.",
+    errSize: "is larger than 25 MB.",
     errType: "is not a PDF, JPG, PNG or HEIC.",
-    sent: "Summary and files sent by email. Finish on WhatsApp: if it did not open, click here.",
-    sentNoFiles: "Summary sent. If WhatsApp did not open, click here.",
+    sent: "Received! I have your request and your documents. You will get a fixed price and deadline within 2 hours. You can also message me on WhatsApp:",
+    sentNoFiles: "Received! You will get a fixed price and deadline within 2 hours. You can also message me on WhatsApp:",
     attach:
-      "The files were not sent by email: attach them in the WhatsApp chat that has opened; if it did not open, click here.",
+      "I have your request, but the files could not be uploaded. Please send them to me on WhatsApp:",
     partial:
-      "Some files were not sent by email: attach them in the WhatsApp chat that has opened; if it did not open, click here.",
-    listEmailed: "Sent by email",
-    listWhatsApp: "Attach on WhatsApp yourself",
+      "I have your request, but some files could not be uploaded. Please send them to me on WhatsApp:",
+    failed:
+      "The request could not be sent (it may be the connection). Message me on WhatsApp and I will help you right away:",
+    listEmailed: "Received",
+    listWhatsApp: "Send me on WhatsApp",
     open: "Open WhatsApp",
     wa: {
       hello: "Hi Elena, I used the calculator on juradaexpress.es:",
@@ -213,7 +215,7 @@ const COPY = {
       estimate: "Estimated price",
       quote: "to be quoted",
       files: "Files",
-      byEmail: "sent by email",
+      byEmail: "sent through the website",
       attachAll: "I'll attach them here on WhatsApp",
       attachRest: "I'll attach here on WhatsApp",
       contact: "Contact",
@@ -340,12 +342,12 @@ export async function compressImage(file) {
   }
 }
 
-// Decide qué se envía por email y qué pide el cliente por WhatsApp.
-// Devuelve { upload: File } o { upload: null, reason }.
+// Prepara un archivo para subirlo. Los PDF van tal cual; las imágenes se
+// comprimen y, si el navegador no sabe (HEIC fuera de Safari), se sube el
+// original: ya no se manda nada a WhatsApp por tamaño o formato.
+// Devuelve { upload: File }.
 export async function prepareFile(file) {
-  if (isPdf(file)) {
-    return file.size < PDF_MAX_BYTES ? { upload: file } : { upload: null, reason: "pdf-too-large" };
-  }
+  if (isPdf(file)) return { upload: file };
   // Un JPG que ya cumple el objetivo se envía tal cual, sin recomprimir.
   if (file.type === "image/jpeg" && file.size < IMAGE_TARGET_BYTES) return { upload: file };
   try {
@@ -357,8 +359,28 @@ export async function prepareFile(file) {
       }),
     };
   } catch {
-    return { upload: null, reason: "unsupported" };
+    return { upload: file };
   }
+}
+
+function contentTypeOf(file) {
+  if (file.type) return file.type;
+  const n = (file.name || "").toLowerCase();
+  if (n.endsWith(".pdf")) return "application/pdf";
+  if (n.endsWith(".png")) return "image/png";
+  if (n.endsWith(".heic")) return "image/heic";
+  if (n.endsWith(".heif")) return "image/heif";
+  return "image/jpeg";
+}
+
+function safePath(name) {
+  const clean = String(name || "documento")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9._-]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(-80);
+  return `presupuestos/${clean || "documento"}`;
 }
 
 // Agrupa las entradas en lotes de < BATCH_BYTES. Cada archivo ya pesa menos
@@ -380,41 +402,14 @@ export function batches(entries) {
   return out;
 }
 
+// POST a /api/quote; devuelve el JSON de respuesta o null si falla.
 async function postQuote(fd) {
   try {
     const res = await fetch("/api/quote", { method: "POST", body: fd });
     const data = await res.json().catch(() => ({}));
-    return res.ok && data.ok === true && data.emailed === true;
+    return res.ok && data.ok === true ? data : null;
   } catch {
-    return false;
-  }
-}
-
-// Abre la pestaña de WhatsApp dentro del gesto de usuario. Sin `noopener`
-// en window.open porque entonces devuelve null y no podríamos navegarla
-// después; se corta el vínculo a mano con popup.opener = null.
-function openTab(url) {
-  const popup = window.open(url || "about:blank", "_blank");
-  if (popup) {
-    try {
-      popup.opener = null;
-    } catch {
-      // Sin acceso al popup: seguimos sin él.
-    }
-  }
-  return popup;
-}
-
-// Texto de espera en la pestaña en blanco mientras suben los archivos.
-function showPreparing(popup, text) {
-  try {
-    const d = popup.document;
-    d.title = "WhatsApp…";
-    d.body.style.cssText =
-      "margin:0;padding:2rem;font:16px/1.5 system-ui,sans-serif;color:#1e293b;background:#fff";
-    d.body.textContent = text;
-  } catch {
-    // Si el navegador no deja escribir en about:blank, la pestaña queda en blanco unos segundos.
+    return null;
   }
 }
 
@@ -440,8 +435,10 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
   const [phone, setPhone] = useState("");
   const [privacy, setPrivacy] = useState(false);
   const [privacyError, setPrivacyError] = useState("");
-  // idle | sending | sent (todo por email o sin archivos) | attach (ninguno
-  // por email: adjuntar en WhatsApp) | partial (algunos no llegaron por email)
+  const [contactError, setContactError] = useState("");
+  const [progress, setProgress] = useState(null); // % de subida o null
+  // idle | sending | sent (todo recibido o sin archivos) | attach (ningún
+  // archivo recibido) | partial (algunos no) | failed (no llegó la solicitud)
   const [status, setStatus] = useState("idle");
   // { emailed: [nombre], pending: [{ name, reason }] } tras el envío
   const [result, setResult] = useState(null);
@@ -504,6 +501,14 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
     }
   }
 
+  // Si el cliente eligió archivos antes de que la página terminara de cargar
+  // (móvil lento), React no vio el «change»: se recogen al montar.
+  useEffect(() => {
+    const input = fileInput.current;
+    if (input && input.files && input.files.length) addFiles(input.files);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function removeFile(key) {
     prepRef.current.delete(key);
     setFiles(files.filter((e) => e.key !== key));
@@ -529,49 +534,67 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const form = e.currentTarget;
+    if (!email.trim() && !phone.trim()) {
+      setContactError(t.errContact);
+      form.querySelector(`#${CSS.escape(uid)}-email`)?.focus();
+      return;
+    }
+    setContactError("");
     if (!privacy) {
       setPrivacyError(t.errPrivacy);
-      e.currentTarget.querySelector(`#${CSS.escape(uid)}-privacy`)?.focus();
+      form.querySelector(`#${CSS.escape(uid)}-privacy`)?.focus();
       return;
     }
     setPrivacyError("");
     setStatus("sending");
     setResult(null);
     setWaUrl("");
+    setProgress(files.length ? 0 : null);
 
-    // 1. Pestaña de WhatsApp, abierta en el mismo gesto de usuario. Si no hay
-    //    nada que subir (sin archivos, o todos van por WhatsApp y ya están
-    //    clasificados) el resumen es definitivo; si no, se rellena cuando
-    //    /api/quote confirma cuáles han llegado por email.
-    const settled = files.every((f) => f.state !== "preparing");
-    const nothingToUpload = settled && files.every((f) => !f.upload);
-    let popup = null;
-    if (nothingToUpload) {
-      const url = buildWhatsApp(
-        [],
-        files.map((f) => f.name)
-      );
-      setWaUrl(url);
-      popup = openTab(url);
-    } else {
-      popup = openTab("");
-      if (popup) showPreparing(popup, t.preparing);
-    }
-
-    // 2. Conversión de Google Ads (solo con etiqueta y consentimiento).
+    // 1. Conversión de Google Ads (solo con etiqueta y consentimiento).
     trackAdsConversion("calculadora_presupuesto");
 
-    // 3. Espera a las compresiones en curso y clasifica.
+    // 2. Espera a las compresiones en curso.
     const entries = (
       await Promise.all(
         files.map((f) => (f.state === "preparing" ? prepRef.current.get(f.key) || f : f))
       )
-    ).map((f) =>
-      f.state === "preparing" ? { ...f, state: "whatsapp", upload: null, reason: "unsupported" } : f
+    ).map((f) => (f.upload ? f : { ...f, upload: f.file }));
+
+    // 3. Subida directa a Vercel Blob, en esta página y con progreso.
+    const totalBytes = entries.reduce((n, f) => n + f.upload.size, 0) || 1;
+    const loaded = new Map();
+    const tick = () => {
+      const sum = [...loaded.values()].reduce((n, x) => n + x, 0);
+      setProgress(Math.min(99, Math.round((sum / totalBytes) * 100)));
+    };
+    const uploaded = []; // { name, url }
+    const direct = []; // envío de reserva (< 3,5 MB) si Blob falla
+    const failed = []; // { name, reason }
+    await Promise.all(
+      entries.map(async (f) => {
+        try {
+          const blob = await blobUpload(safePath(f.upload.name), f.upload, {
+            access: "private",
+            handleUploadUrl: "/api/quote/upload",
+            contentType: contentTypeOf(f.upload),
+            multipart: f.upload.size > 5 * MB,
+            onUploadProgress: ({ loaded: l }) => {
+              loaded.set(f.key, l);
+              tick();
+            },
+          });
+          loaded.set(f.key, f.upload.size);
+          tick();
+          uploaded.push({ key: f.key, name: f.name, url: blob.url });
+        } catch {
+          if (f.upload.size < DIRECT_MAX_BYTES) direct.push(f);
+          else failed.push({ name: f.name, reason: "failed" });
+        }
+      })
     );
-    const toEmail = entries.filter((f) => f.upload);
-    const toWhatsApp = entries.filter((f) => !f.upload);
-    const groups = batches(toEmail);
+    setProgress(null);
 
     const baseForm = () => {
       const fd = new FormData();
@@ -587,24 +610,27 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
       return fd;
     };
 
-    // 4. Primer lote SIN archivos: resumen + contacto. Siempre, aunque no
-    //    haya archivos o la subida falle después; un reintento si falla.
+    // 4. Resumen + URL de Blob: el servidor adjunta los archivos al email.
+    const groups = batches(direct);
     const summary = baseForm();
+    summary.append("blobs", JSON.stringify(uploaded.map((u) => ({ name: u.name, url: u.url }))));
     summary.append(
       "filesEmail",
-      JSON.stringify(toEmail.map((f) => ({ name: f.name, sent: f.upload.name })))
+      JSON.stringify(direct.map((f) => ({ name: f.name, sent: f.upload.name })))
     );
-    summary.append(
-      "filesWhatsApp",
-      JSON.stringify(toWhatsApp.map((f) => ({ name: f.name, reason: f.reason })))
-    );
+    summary.append("filesWhatsApp", JSON.stringify(failed));
     summary.append("lots", String(groups.length));
-    const summaryOk = (await postQuote(summary)) || (await postQuote(summary));
+    const data = (await postQuote(summary)) || (await postQuote(summary));
+    const summaryOk = !!(data && data.emailed);
 
-    // 5. Archivos en lotes de < 3,5 MB. Un archivo cuenta como emailado solo
-    //    si su lote responde { ok: true, emailed: true }.
-    const emailedNames = [];
-    const pending = toWhatsApp.map((f) => ({ name: f.name, reason: f.reason }));
+    const emailedKeys = new Set();
+    const okUrls = new Set((data && data.blobsEmailed) || []);
+    for (const u of uploaded) {
+      if (okUrls.has(u.url)) emailedKeys.add(u.key);
+      else failed.push({ name: u.name, reason: "failed" });
+    }
+
+    // 5. Reserva: archivos pequeños en lotes de < 3,5 MB directo a /api/quote.
     await Promise.all(
       groups.map(async (group, i) => {
         const fd = baseForm();
@@ -612,32 +638,24 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
         group.forEach((f) => fd.append("files", f.upload, f.upload.name));
         const ok = await postQuote(fd);
         for (const f of group) {
-          if (ok) emailedNames.push(f.name);
-          else pending.push({ name: f.name, reason: "failed" });
+          if (ok && ok.emailed) emailedKeys.add(f.key);
+          else failed.push({ name: f.name, reason: "failed" });
         }
       })
     );
-    // Mismo orden que la lista de archivos, sea cual sea el orden de respuesta.
+
+    // Mismo orden que la lista de archivos.
     const order = files.map((f) => f.name);
-    emailedNames.sort((a, b) => order.indexOf(a) - order.indexOf(b));
-    pending.sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name));
-    const pendingNames = pending.map((p) => p.name);
+    const emailedNames = entries.filter((f) => emailedKeys.has(f.key)).map((f) => f.name);
+    failed.sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name));
+    const pendingNames = failed.map((p) => p.name);
 
-    // 6. Resumen definitivo de WhatsApp y estado de confirmación.
-    if (!nothingToUpload) {
-      const url = buildWhatsApp(emailedNames, pendingNames);
-      setWaUrl(url);
-      if (popup && !popup.closed) {
-        try {
-          popup.location.replace(url);
-        } catch {
-          // La pestaña se cerró o no se puede navegar: queda el enlace «Abrir WhatsApp».
-        }
-      }
-    }
-
-    setResult({ emailed: emailedNames, pending, summaryOk });
-    if (files.length === 0 || pending.length === 0) setStatus("sent");
+    // 6. Enlace de WhatsApp (lo abre el cliente si quiere: sin ventanas
+    //    emergentes que dejen esta página en segundo plano).
+    setWaUrl(buildWhatsApp(emailedNames, pendingNames));
+    setResult({ emailed: emailedNames, pending: failed, summaryOk });
+    if (!summaryOk && emailedNames.length === 0) setStatus("failed");
+    else if (files.length === 0 || failed.length === 0) setStatus("sent");
     else if (emailedNames.length === 0) setStatus("attach");
     else setStatus("partial");
   }
@@ -651,6 +669,12 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
       ? t.attach
       : status === "partial"
       ? t.partial
+      : status === "failed"
+      ? t.failed
+      : status === "sending"
+      ? progress != null
+        ? t.uploading(progress)
+        : t.sendingSummary
       : "";
 
   function fileHint(f) {
@@ -660,7 +684,7 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
       return why ? `${t.fileWhatsApp} · ${why}` : t.fileWhatsApp;
     }
     if (f.upload && f.upload !== f.file) return t.fileCompressed(formatKb(f.upload.size));
-    return "";
+    return t.fileReady;
   }
 
   const labelClass = "text-sm font-medium text-slate-700";
@@ -920,7 +944,12 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
                   inputMode="email"
                   autoComplete="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (e.target.value.trim()) setContactError("");
+                  }}
+                  aria-invalid={contactError ? "true" : undefined}
+                  aria-describedby={contactError ? `${uid}-contact-error` : undefined}
                   className={fieldClass}
                 />
               </div>
@@ -935,7 +964,12 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
                   inputMode="tel"
                   autoComplete="tel"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                    if (e.target.value.trim()) setContactError("");
+                  }}
+                  aria-invalid={contactError ? "true" : undefined}
+                  aria-describedby={contactError ? `${uid}-contact-error` : undefined}
                   className={fieldClass}
                 />
               </div>
@@ -943,6 +977,11 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
             <p id={`${uid}-contact-hint`} className="mt-1 text-xs text-slate-500">
               {t.contactHint}
             </p>
+            {contactError ? (
+              <p id={`${uid}-contact-error`} role="alert" className="mt-2 text-sm text-red-700">
+                {contactError}
+              </p>
+            ) : null}
           </fieldset>
 
           {/* Honeypot */}
@@ -996,14 +1035,38 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
 
           <div aria-live="polite" className="text-sm text-slate-600">
             {statusText ? (
-              <p>
-                {statusText}{" "}
-                {waUrl ? (
-                  <a href={waUrl} target="_blank" rel="noopener noreferrer" className="link">
-                    {t.open}
-                  </a>
-                ) : null}
+              <p
+                className={
+                  status === "sent"
+                    ? "rounded-lg bg-emerald-50 px-3 py-2 text-emerald-900 ring-1 ring-emerald-200"
+                    : status === "failed" || status === "attach" || status === "partial"
+                    ? "rounded-lg bg-amber-50 px-3 py-2 text-amber-900 ring-1 ring-amber-200"
+                    : ""
+                }
+              >
+                {statusText}
               </p>
+            ) : null}
+            {status === "sending" && progress != null ? (
+              <div
+                className="mt-2 h-2 w-full overflow-hidden rounded-full bg-stone-200"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={progress}
+              >
+                <div className="h-full bg-brand-navy transition-all" style={{ width: `${progress}%` }} />
+              </div>
+            ) : null}
+            {waUrl && status !== "sending" ? (
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary mt-3 inline-flex w-full sm:w-auto"
+              >
+                {t.open}
+              </a>
             ) : null}
             {/* Qué ha ido por email y qué adjunta el cliente, por nombre. */}
             {result && status !== "sending" && files.length > 0 ? (
