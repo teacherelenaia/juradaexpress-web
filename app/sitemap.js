@@ -50,12 +50,14 @@ const fichaRoutes = FICHAS.map((f) => ({
   priority: 0.7,
 }));
 
-// Landings de documento para EE. UU. (solo EN, sin hreflang es), 2026-10.
+// Landings de documento para EE. UU. (solo EN, sin par ES), 2026-10:
+// hreflang únicamente "en", autorreferente.
 const US_DOC_LAST_MODIFIED = "2026-10-02";
 const usDocRoutes = US_DOC_ROUTES.map((r) => ({
   url: `${BASE_URL}${r.en}`,
   lastModified: US_DOC_LAST_MODIFIED,
   priority: 0.7,
+  alternates: { languages: { en: `${BASE_URL}${r.en}` } },
 }));
 
 export default function sitemap() {
