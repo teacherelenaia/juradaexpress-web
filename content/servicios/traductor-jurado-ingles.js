@@ -74,8 +74,8 @@ function priceTable(locale) {
             ? "Depends on length"
             : "Según extensión"
           : en
-            ? "24/48h"
-            : "24/48 h",
+            ? "Same day (up to 10 pages)"
+            : "En el día (hasta 10 págs.)",
       ]),
     },
   };
@@ -90,9 +90,9 @@ export const es = {
   guarantees: true,
   quoteCalculator: true,
   metaTitle: `Traductor jurado de inglés online desde ${MIN_PRICE} € | MAEC 7310`,
-  metaDescription: `Traducción jurada español-inglés con validez oficial, firmada por traductora nombrada por el MAEC (nº 7310). Desde ${MIN_PRICE} €, PDF firmado en 24/48 h.`,
+  metaDescription: `Traducción jurada español-inglés con validez oficial, firmada por traductora nombrada por el MAEC (nº 7310). Desde ${MIN_PRICE} €, PDF en el día (hasta 10 págs.).`,
   h1: "Traductor jurado de inglés online: traducción jurada español-inglés con validez oficial",
-  lead: `Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores en ${SINCE} con el nº 7310: ${yearsOfExperience()} años de nombramiento vigente. Traduzco, firmo y sello personalmente documentos del español al inglés y del inglés al español para que tengan validez ante cualquier organismo oficial: Extranjería, Registro Civil, universidades, notarías, Home Office, USCIS o IRCC. Todo el proceso es online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado electrónicamente en 24/48 h. Los documentos más habituales cuestan desde ${MIN_PRICE} €.`,
+  lead: `Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores en ${SINCE} con el nº 7310: ${yearsOfExperience()} años de nombramiento vigente. Traduzco, firmo y sello personalmente documentos del español al inglés y del inglés al español para que tengan validez ante cualquier organismo oficial: Extranjería, Registro Civil, universidades, notarías, Home Office, USCIS o IRCC. Todo el proceso es online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado electrónicamente en el día (hasta 10 páginas). Los documentos más habituales cuestan desde ${MIN_PRICE} €.`,
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Traductora jurada firmando y sellando una traducción jurada de inglés",
@@ -155,14 +155,14 @@ export const es = {
       body: [
         `Los precios de esta tabla son los que aplico a los documentos estándar de una página (certificados, títulos, permisos) y son los mismos que verás en el catálogo. Para documentos largos o con formato complejo (contratos, escrituras, expedientes académicos de varias páginas) el precio depende de la extensión, y te lo doy <strong>cerrado, por escrito y en menos de 2 horas</strong> al ver el documento; nunca cobro por palabra a ciegas ni añado recargos que no hayas visto antes de aceptar.`,
         priceTable("es"),
-        `El precio incluye la traducción completa, la certificación con firma y sello, el PDF firmado electrónicamente y la copia sellada del original. No tiene recargo por urgencia ordinaria (24/48 h). ${INTERNATIONAL_SHIPPING.note.es}. El pago es con tarjeta a través de Stripe o por transferencia, y te envío factura. Consulta la <a href="/precios">página de precios</a> completa, que incluye la traducción certificada para USCIS y los expedientes de nómada digital.`,
+        `El precio incluye la traducción completa, la certificación con firma y sello, el PDF firmado electrónicamente y la copia sellada del original. La entrega en el día hasta 10 páginas no tiene recargo. ${INTERNATIONAL_SHIPPING.note.es}. El pago es con tarjeta a través de Stripe o por transferencia, y te envío factura. Consulta la <a href="/precios">página de precios</a> completa, que incluye la traducción certificada para USCIS y los expedientes de nómada digital.`,
       ],
     },
     {
       id: "plazos",
-      title: "Plazos: 24/48 h para documentos habituales",
+      title: "Plazos: en el día hasta 10 páginas",
       body: [
-        "Un certificado, un título o un permiso de conducir lo tienes normalmente en <strong>24 horas</strong> desde que confirmas el presupuesto, y en 48 horas como máximo si me llegan varios a la vez. Cuando me escribes te digo el plazo real antes de que pagues, y ese plazo es el que cumplo: no prometo \"el mismo día\" de forma genérica porque depende de la carga de trabajo, pero si lo necesitas para una cita concreta, dímelo y te confirmo si llego.",
+        "Un documento de hasta 10 páginas (un certificado, un título, un permiso de conducir, un contrato breve) lo tienes <strong>en el día</strong> desde que confirmas el presupuesto, sin recargo. Si tiene más de 10 páginas, te doy un plazo cerrado por escrito antes de empezar, normalmente de 24 a 72 horas, y ese plazo es el que cumplo. Si necesitas más de 10 páginas en el día, lo hago con un recargo del 30 %: dímelo al pedir presupuesto y te confirmo si llego.",
         `Para lotes grandes y expedientes de varios documentos, acordamos un calendario por escrito${LARGE_PROJECT_CAPACITY ? `; puedo asumir ${LARGE_PROJECT_CAPACITY.es}` : ""}. ${TIMEZONE_NOTE.es}; si me escribes desde el Reino Unido, Irlanda o América, tenlo en cuenta para calcular cuándo recibirás la respuesta.`,
       ],
     },
@@ -171,7 +171,7 @@ export const es = {
       title: "Validez: firma digital o papel, y cuándo hace falta apostilla",
       body: [
         "<strong>PDF con firma electrónica.</strong> Es lo que entrego por defecto. La Oficina de Interpretación de Lenguas del MAEC admitió en 2020 que las traducciones juradas se firmen electrónicamente, y la Administración española (Extranjería, Registros Civiles, universidades, Seguridad Social, Hacienda) las acepta de forma generalizada, sobre todo en los trámites que se presentan por sede electrónica. La firma se verifica con un clic en el propio PDF y el documento se puede reenviar tantas veces como haga falta sin perder validez.",
-        "<strong>Papel con firma manuscrita y sello.</strong> Algunos organismos, notarías o registros siguen pidiendo el original en papel, y fuera de la Unión Europea es más frecuente. En ese caso imprimo la traducción, la firmo y sello a mano y te la envío por mensajería: al día siguiente de la entrega digital en Murcia y en 24/48 h en el resto de España. Puedes pedir las dos versiones a la vez; la traducción es la misma.",
+        "<strong>Papel con firma manuscrita y sello.</strong> Algunos organismos, notarías o registros siguen pidiendo el original en papel, y fuera de la Unión Europea es más frecuente. En ese caso imprimo la traducción, la firmo y sello a mano y te la envío por mensajería: al día siguiente de la entrega digital en Murcia y en uno o dos días laborables en el resto de España. Puedes pedir las dos versiones a la vez; la traducción es la misma.",
         '<strong>Apostilla.</strong> La apostilla de La Haya no es parte de la traducción: es un sello que legaliza el <em>documento original</em> para que surta efecto en otro país, y se tramita antes de traducir, en el país que emitió el documento (en el Reino Unido, la Legalisation Office del FCDO; en España, notarios, colegios notariales, Ministerio de Justicia o Tribunales Superiores de Justicia según el documento). Si el documento la lleva, la traduzco también. Entre Estados de la UE, el Reglamento (UE) 2016/1191 exime de apostilla a muchos documentos públicos (nacimiento, matrimonio, penales…), pero un documento británico o estadounidense normalmente sí la necesita para España. Lo explico documento a documento en <a href="/blog/que-es-la-apostilla-de-la-haya">qué es la apostilla y cuándo la necesitas</a>, y si no estás seguro, me lo preguntas antes de tramitarla.',
       ],
     },
@@ -211,7 +211,7 @@ export const es = {
     },
     {
       t: "Entrega",
-      d: "PDF firmado electrónicamente en 24/48 h y, si lo necesitas, papel por mensajería a cualquier dirección.",
+      d: "PDF firmado electrónicamente en el día (hasta 10 páginas) y, si lo necesitas, papel por mensajería a cualquier dirección.",
     },
   ],
   faq: [
@@ -241,7 +241,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda?",
-      a: "Los documentos habituales, 24/48 h desde que confirmas el presupuesto. Si tienes una cita con fecha, dímelo al pedir presupuesto y te confirmo por escrito si llego. Los lotes grandes tienen su propio calendario.",
+      a: "Hasta 10 páginas, en el día desde que confirmas el presupuesto; más de 10 páginas, plazo cerrado por escrito antes de empezar (normalmente 24-72 h). Si tienes una cita con fecha, dímelo al pedir presupuesto y te confirmo por escrito si llego. Los lotes grandes tienen su propio calendario.",
     },
     {
       q: "¿Traduces también del inglés al español?",
@@ -271,9 +271,9 @@ export const en = {
   guarantees: true,
   quoteCalculator: true,
   metaTitle: `Sworn English translator online from €${MIN_PRICE} | MAEC no. 7310`,
-  metaDescription: `Officially valid sworn Spanish-English translation by a translator appointed by Spain's Foreign Ministry (no. 7310). From €${MIN_PRICE}, signed PDF in 24/48h.`,
+  metaDescription: `Officially valid sworn Spanish-English translation by a Foreign Ministry appointee (no. 7310). From €${MIN_PRICE}, PDF the same day (up to 10 pages).`,
   h1: "Sworn English translator online: officially valid Spanish-English sworn translation",
-  lead: `I'm Elena Peñaranda Ortega, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs in ${SINCE} under no. 7310, an appointment in force for ${yearsOfExperience()} years. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 hours and you receive the electronically signed PDF in 24/48h. The most common documents start at €${MIN_PRICE}.`,
+  lead: `I'm Elena Peñaranda Ortega, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs in ${SINCE} under no. 7310, an appointment in force for ${yearsOfExperience()} years. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 hours and you receive the electronically signed PDF the same day (up to 10 pages). The most common documents start at €${MIN_PRICE}.`,
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Sworn translator signing and stamping a sworn English translation",
@@ -336,14 +336,14 @@ export const en = {
       body: [
         "The prices in this table apply to standard one-page documents (certificates, degrees, licences) and are the same ones you will see in the catalogue. For long or complex documents (contracts, deeds, multi-page transcripts) the price depends on length, and you get it <strong>fixed, in writing and within 2 hours</strong> once I have seen the document; I never quote per word blind or add surcharges you have not seen before accepting.",
         priceTable("en"),
-        `The price includes the complete translation, the certification with signature and stamp, the electronically signed PDF and the stamped copy of the source document. There is no surcharge for the ordinary 24/48h turnaround. ${INTERNATIONAL_SHIPPING.note.en}. Payment is by card through Stripe (any international card, charged in euros) or by bank transfer, and you receive an invoice. See the full <a href="/en/precios">pricing page</a>, including certified translation for USCIS and digital nomad visa files.`,
+        `The price includes the complete translation, the certification with signature and stamp, the electronically signed PDF and the stamped copy of the source document. Same-day delivery for documents of up to 10 pages carries no surcharge. ${INTERNATIONAL_SHIPPING.note.en}. Payment is by card through Stripe (any international card, charged in euros) or by bank transfer, and you receive an invoice. See the full <a href="/en/precios">pricing page</a>, including certified translation for USCIS and digital nomad visa files.`,
       ],
     },
     {
       id: "turnaround",
-      title: "Turnaround: 24/48h for common documents",
+      title: "Turnaround: same day for documents of up to 10 pages",
       body: [
-        "A certificate, a degree or a driving licence is normally ready within <strong>24 hours</strong> of confirming the quote, and within 48 hours at most if several arrive at once. When you write to me I tell you the real deadline before you pay, and that is the deadline I keep: I do not promise \"same day\" as a blanket rule because it depends on workload, but if you need it for a specific appointment, tell me and I will confirm whether I can make it.",
+        "A document of up to 10 pages (a certificate, a degree, a driving licence, a short contract) is ready <strong>the same day</strong> you confirm the quote, with no surcharge. If it runs to more than 10 pages, you get a written deadline before work starts, normally 24 to 72 hours, and that is the deadline I keep. If you need more than 10 pages the same day, I can do it with a 30% surcharge: tell me when you ask for the quote and I will confirm whether I can make it.",
         `For large batches and multi-document files we agree a schedule in writing${LARGE_PROJECT_CAPACITY ? `; I can take on ${LARGE_PROJECT_CAPACITY.en}` : ""}. ${TIMEZONE_NOTE.en}; if you are writing from the UK, Ireland or the Americas, bear that in mind when working out when you will hear back.`,
       ],
     },
@@ -352,7 +352,7 @@ export const en = {
       title: "Validity: digital signature or paper, and when you need an apostille",
       body: [
         "<strong>PDF with electronic signature.</strong> This is what I deliver by default. In 2020 the MAEC's Office of Language Interpretation confirmed that sworn translations may be signed electronically, and the Spanish authorities (immigration, civil registries, universities, social security, tax office) accept them as a matter of course, especially for procedures filed online. The signature is verified with one click inside the PDF and the document can be forwarded as many times as needed without losing validity.",
-        "<strong>Paper with handwritten signature and stamp.</strong> Some bodies, notaries or registries still ask for a paper original, and this is more common outside the EU. In that case I print the translation, sign and stamp it by hand and courier it to you: the day after digital delivery in Murcia and within 24/48h elsewhere in Spain; abroad, the courier cost is stated in the quote. You can ask for both versions at once; the translation is the same.",
+        "<strong>Paper with handwritten signature and stamp.</strong> Some bodies, notaries or registries still ask for a paper original, and this is more common outside the EU. In that case I print the translation, sign and stamp it by hand and courier it to you: the day after digital delivery in Murcia and within one or two working days elsewhere in Spain; abroad, the courier cost is stated in the quote. You can ask for both versions at once; the translation is the same.",
         '<strong>Apostille.</strong> The Hague apostille is not part of the translation: it is a stamp that legalises the <em>original document</em> so that it takes effect in another country, and it is obtained before translating, in the country that issued the document (in the UK, the FCDO Legalisation Office; in the US, the Secretary of State of the issuing state or the US Department of State). If the document carries one, I translate it too. Between EU Member States, Regulation (EU) 2016/1191 exempts many public documents (birth, marriage, criminal records…) from the apostille, but a British or American document normally does need one for Spain. If in doubt, ask me before applying for it.',
       ],
     },
@@ -392,7 +392,7 @@ export const en = {
     },
     {
       t: "Delivery",
-      d: "Electronically signed PDF in 24/48h and, if you need it, a paper copy couriered to any address.",
+      d: "Electronically signed PDF the same day (up to 10 pages) and, if you need it, a paper copy couriered to any address.",
     },
   ],
   faq: [
@@ -422,7 +422,7 @@ export const en = {
     },
     {
       q: "How long does it take?",
-      a: "Common documents, 24/48h from confirming the quote. If you have a dated appointment, tell me when asking for the quote and I will confirm in writing whether I can make it. Large batches get their own schedule.",
+      a: "Up to 10 pages, the same day from confirming the quote; longer files get a written deadline before work starts (normally 24-72 hours). If you have a dated appointment, tell me when asking for the quote and I will confirm in writing whether I can make it. Large batches get their own schedule.",
     },
     {
       q: "Do you also translate from English into Spanish?",

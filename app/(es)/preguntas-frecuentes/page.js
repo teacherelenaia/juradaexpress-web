@@ -23,8 +23,8 @@ const faqs = [
     a: "Sí. Entregamos PDF firmado digitalmente y, si lo necesitas, envío físico a tu dirección.",
   },
   {
-    q: "¿Puedo tener la traducción en 24/48 h?",
-    a: "Para documentos habituales, sí. Si son más de 20 folios, acordamos un calendario específico.",
+    q: "¿Puedo tener la traducción en el día?",
+    a: "Sí, hasta 10 páginas y sin recargo. Los expedientes más largos tienen plazo cerrado por escrito antes de empezar, normalmente 24-72 h; entregar en el día más de 10 páginas lleva un recargo del 30 %.",
   },
   {
     q: "¿Qué documentos puedo traducir de forma jurada?",

@@ -9,7 +9,7 @@ import {
 export const metadata = {
   title: "Contacto — Traductora Jurada de Inglés, desde cualquier país",
   description:
-    "Contacta con Elena Peñaranda, traductora jurada de inglés (MAEC nº 7310), por WhatsApp, email o teléfono desde España o cualquier país. Presupuesto en menos de 2 h y entrega en 24/48 h.",
+    "Contacta con Elena Peñaranda, traductora jurada de inglés (MAEC nº 7310) por WhatsApp, email o teléfono. Presupuesto en 2 h y entrega en el día (10 págs.).",
   alternates: {
     canonical: "https://juradaexpress.es/contacto",
     languages: {
@@ -72,7 +72,7 @@ export default function Page() {
         <p className="mt-2 text-sm text-slate-600">
           Traducciones juradas Español ⇆ Inglés, firmadas y selladas, válidas
           ante organismos oficiales. Envíos a toda España y al extranjero.
-          Entrega habitual en 24/48 h.{" "}
+          Entrega en el día hasta 10 páginas.{" "}
           <a href="/traductor-jurado-murcia" className="link">
             Más sobre el servicio en Murcia →
           </a>

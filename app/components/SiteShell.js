@@ -34,13 +34,13 @@ const SERVICE_LINES = [
   {
     name: "Traducción jurada de inglés online",
     description:
-      "Traducción jurada español-inglés e inglés-español firmada por traductora nombrada por el MAEC (nº 7310), desde 35 € por documento, PDF firmado en 24/48 h.",
+      "Traducción jurada español-inglés e inglés-español firmada por traductora nombrada por el MAEC (nº 7310), desde 35 € por documento, PDF firmado en el día (hasta 10 páginas).",
     url: "https://juradaexpress.es/traductor-jurado-ingles",
   },
   {
     name: "Traducción jurada español-inglés",
     description:
-      "Traducción jurada con firma y sello de traductora nombrada por el MAEC, válida ante organismos oficiales. Entrega en PDF firmado en 24/48 h.",
+      "Traducción jurada con firma y sello de traductora nombrada por el MAEC, válida ante organismos oficiales. Entrega en PDF firmado en el día (hasta 10 páginas).",
     url: "https://juradaexpress.es/documentos",
   },
   {
@@ -94,7 +94,7 @@ const FOOTER = {
     logoAlt: "Logotipo de Jurada Express, traducción jurada de inglés",
     home: "/",
     about:
-      "Jurada Express: traducción jurada Español ⇆ Inglés y traducción certificada para USCIS. Con sede en Murcia, trabajo con clientes de España, Reino Unido, Estados Unidos, India y cualquier país. Proceso 100% digital, entrega 24/48 h.",
+      "Jurada Express: traducción jurada Español ⇆ Inglés y traducción certificada para USCIS. Con sede en Murcia, trabajo con clientes de España, Reino Unido, Estados Unidos, India y cualquier país. Proceso 100% digital, entrega en el día (hasta 10 páginas).",
     links: "Enlaces",
     linkList: [
       { href: "/", label: "Inicio" },
@@ -135,7 +135,7 @@ const FOOTER = {
     logoAlt: "Jurada Express logo, sworn English translation",
     home: "/en",
     about:
-      "Jurada Express: sworn Spanish ⇆ English translation for Spain and certified translation for USCIS. Based in Murcia, Spain, working with clients in the UK, the USA, India and any country. Fully digital process, delivered in 24/48h.",
+      "Jurada Express: sworn Spanish ⇆ English translation for Spain and certified translation for USCIS. Based in Murcia, Spain, working with clients in the UK, the USA, India and any country. Fully digital process, same-day delivery (up to 10 pages).",
     links: "Links",
     linkList: [
       { href: "/en", label: "Home" },

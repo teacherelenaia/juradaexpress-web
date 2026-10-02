@@ -41,7 +41,7 @@ export const postsEn = [
       <p>For the <strong>ACRO certificate: yes</strong> — immigration offices consistently ask for it. You get it from the FCDO Legalisation Office, and it's worth knowing that the EU regulation that exempts many public documents from apostilles no longer covers UK documents since Brexit. Birth and marriage certificates: it depends on the office, so check your appointment letter — and if in doubt, send it to me and I'll tell you. The order matters: <strong>apostille first, then translation</strong>, because the apostille page gets translated too (at no extra cost when it's part of the same document).</p>
 
       <h2>How much does it cost and how fast is it?</h2>
-      <p>Standard certificates — ACRO, birth, marriage — are translated from <strong>€35 each</strong>, delivered in <strong>24/48 hours</strong> as a digitally signed PDF that's valid for online submission. If your office wants paper, I courier the original anywhere in Spain. For a complete file (say, ACRO + birth certificate + a pension letter), send everything together: you'll get one fixed quote within 2 hours, and the translations come back consistent with each other — same spelling of names, same terminology — which examiners notice.</p>
+      <p>Standard certificates — ACRO, birth, marriage — are translated from <strong>€35 each</strong>, delivered <strong>the same day</strong> as a digitally signed PDF that's valid for online submission. If your office wants paper, I courier the original anywhere in Spain. For a complete file (say, ACRO + birth certificate + a pension letter), send everything together: you'll get one fixed quote within 2 hours, and the translations come back consistent with each other — same spelling of names, same terminology — which examiners notice.</p>
 
       <h2>Three mistakes that delay NIE/TIE files</h2>
       <ol>
@@ -88,7 +88,7 @@ export const postsEn = [
       <p>No — and this is where buyers overspend. The apostille applies to <strong>public documents</strong>: notarised POAs, court documents, civil status certificates. Private documents — bank statements, payslips, reservation contracts between private parties — don't get apostilled; they're simply translated. When someone tells you to "apostille everything", check first: it's often half the cost for the same legal effect.</p>
 
       <h2>When should you order the translations?</h2>
-      <p>The POA is the time-critical one: UK notary → FCDO apostille → sworn translation → Spanish notary, and the chain takes longer than any single step. Start it as soon as completion dates are discussed. Bank documents can go in parallel; certificates keep in mind they're often required recent. Short documents take <strong>24/48 hours</strong>; for a full purchase file you'll get a fixed quote and exact delivery date within 2 hours of sending it.</p>
+      <p>The POA is the time-critical one: UK notary → FCDO apostille → sworn translation → Spanish notary, and the chain takes longer than any single step. Start it as soon as completion dates are discussed. Bank documents can go in parallel; certificates keep in mind they're often required recent. Documents of up to 10 pages are delivered <strong>the same day</strong>; for a full purchase file you'll get a fixed quote and exact delivery date within 2 hours of sending it.</p>
       <p>
         <a href="https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%27m%20buying%20a%20property%20in%20Spain%20and%20need%20sworn%20translations">Tell me where you are in the purchase on WhatsApp</a>
         and I'll tell you exactly which documents need a sworn translation — and which don't, so you don't pay for paperwork nobody will read.
@@ -144,7 +144,7 @@ export const postsEn = [
         <li>Name the files in order: <em>01-criminal-record.pdf</em>, <em>02-contract.pdf</em>… I return the translations with the same numbering and an index.</li>
         <li>Tell me which consulate you are applying at (or whether you are filing with the UGE) and your appointment date.</li>
       </ol>
-      <p>With that I reply within 2 working hours with the review of the list, a fixed price for the batch and a single delivery deadline in writing. Individual documents take 24/48 hours; a complete file is usually ready within a few days. If you are coming from the <a href="/en/sworn-translation-usa-spain">United States</a> or from <a href="/en/sworn-translation-india-spain">India</a>, you have a guide of your own with the particulars of your country.</p>
+      <p>With that I reply within 2 working hours with the review of the list, a fixed price for the batch and a single delivery deadline in writing. Documents of up to 10 pages are delivered the same day; a complete file is usually ready within a few days. If you are coming from the <a href="/en/sworn-translation-usa-spain">United States</a> or from <a href="/en/sworn-translation-india-spain">India</a>, you have a guide of your own with the particulars of your country.</p>
 
       <h2>Is the PDF translation accepted by the consulate?</h2>
       <p>For online submission, yes: every translation carries my electronic signature, verifiable in one click, and my stamp as sworn translator no. 7310, which can be checked on the official register of Spain's Ministry of Foreign Affairs. If your consulate insists on paper, I courier the stamped originals to Spain or to your country.</p>
@@ -196,7 +196,7 @@ export const postsEn = [
       <p>Yes. What USCIS checks is the certification, not where the translation was produced. A certified translation prepared from Murcia is as valid as one made in Miami, as long as it is complete (stamps, apostilles and handwritten notes included) and carries the certification with signature, date and contact details. My appointment as a sworn translator is not a USCIS requirement, but it adds a verifiable credential that officers understand.</p>
 
       <h2>Does Spain accept a certified translation made in the United States?</h2>
-      <p>In general, no. The immigration office, the civil registry or the consulate require a sworn translation by a translator appointed by the Spanish Ministry (or a consular legalisation, which is slower and more expensive). If you already have a certified translation of your US birth certificate, you will most likely have to have it translated again as a sworn translation. Send it to me with the apostille and it is ready in 24/48 hours.</p>
+      <p>In general, no. The immigration office, the civil registry or the consulate require a sworn translation by a translator appointed by the Spanish Ministry (or a consular legalisation, which is slower and more expensive). If you already have a certified translation of your US birth certificate, you will most likely have to have it translated again as a sworn translation. Send it to me with the apostille and it is ready the same day.</p>
 
       <h2>What if I submit the same document in both countries?</h2>
       <p>It happens more often than you would think: a Spanish-American couple who marry in Spain and then apply for a green card, or a Spaniard applying for US citizenship while keeping paperwork going at the Spanish civil registry. In those cases I prepare both versions at the same time, with the same criteria (same names, dates and terms), so that no officer finds discrepancies between one and the other. If you live in the US, the <a href="/en/sworn-translation-usa-spain">guide for clients in the United States</a> covers apostilles, time zones and payment with a US card.</p>
@@ -263,7 +263,7 @@ export const postsEn = [
       <p>If you send me a document without an apostille and the consulate requires one, I tell you before I start.</p>
 
       <h2>How long does it take, and how do you pay from India?</h2>
-      <p>A standard document is translated in 24/48 hours; a complete student visa file (with long transcripts) gets a single deadline confirmed in writing within 2 working hours. My office hours are 9:00 to 20:00 mainland Spain time, three and a half to four and a half hours behind India: if you message me mid-morning, I reply at the start of my working day. Payment is with your Indian card (Visa, Mastercard or international RuPay) through Stripe, in euros; if international payments are blocked on your card, enable them in your banking app before paying. You receive a digitally signed PDF, valid for the consulate and for the visa platform; if paper is required, I courier it to India.</p>
+      <p>A document of up to 10 pages is translated the same day; a complete student visa file (with long transcripts) gets a single deadline confirmed in writing within 2 working hours. My office hours are 9:00 to 20:00 mainland Spain time, three and a half to four and a half hours behind India: if you message me mid-morning, I reply at the start of my working day. Payment is with your Indian card (Visa, Mastercard or international RuPay) through Stripe, in euros; if international payments are blocked on your card, enable them in your banking app before paying. You receive a digitally signed PDF, valid for the consulate and for the visa platform; if paper is required, I courier it to India.</p>
 
       <h2>And Spanish documents for use in India?</h2>
       <p>The reverse route exists too: Spanish birth or marriage certificates, degrees, criminal record certificates or company documents to be presented to an authority, university or employer in India. I translate them into English with my signature and stamp, and when the Indian body requires it, the original is apostilled first in Spain.</p>
@@ -318,7 +318,7 @@ export const postsEn = [
         <li><strong>Obtain up-to-date originals</strong>: civil registry and criminal record certificates expire for the purposes of many procedures, so request them with the visa in sight.</li>
         <li><strong>Apostille what needs it</strong> before translating.</li>
         <li><strong>Scan everything</strong> in full, apostille included, and send it to me by WhatsApp or through the form. You get a fixed quote in under 2 working hours and a single deadline for the batch.</li>
-        <li><strong>You receive the signed PDF</strong> in 24/48 hours for a standard document, with the certification adapted to the country. If paper is required, I send it by courier.</li>
+        <li><strong>You receive the signed PDF</strong> the same day for a document of up to 10 pages, with the certification adapted to the country. If paper is required, I send it by courier.</li>
       </ol>
 
       <h2>How much margin to leave</h2>
@@ -410,7 +410,7 @@ export const postsEn = [
         <li><strong>The translator is not sworn, or not for that language.</strong> Nothing can be done with that translation; you need a new one. Claim against whoever sold it to you, keeping the written rejection as evidence.</li>
         <li><strong>The official is wrong.</strong> It happens, especially with electronic signatures. Provide the link to the MAEC register and, for a PDF, the signature validation report. If they insist on paper, the translator can courier you the original; in my case the price of the translation is the same, only postage is added.</li>
       </ul>
-      <p>And if you do need it redone, do not start from scratch blindly: send me the source document and the rejection letter, I will tell you within 2 hours what went wrong and give you a fixed price. Standard certificates (birth, marriage, criminal record) start at <a href="/en/precios">€35</a> and are delivered in 24/48 hours.</p>
+      <p>And if you do need it redone, do not start from scratch blindly: send me the source document and the rejection letter, I will tell you within 2 hours what went wrong and give you a fixed price. Standard certificates (birth, marriage, criminal record) start at <a href="/en/precios">€35</a> and are delivered the same day (up to 10 pages).</p>
       <p>
         <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20my%20sworn%20translation%20has%20been%20rejected%20and%20I%27d%20like%20to%20know%20what%20went%20wrong">Message me on WhatsApp</a>
         with the document and the reason for the rejection, or see the
@@ -455,7 +455,7 @@ export const postsEn = [
     image: "/blog/post-nie.jpg",
     alt: "Passport and certificates prepared for a Spanish citizenship application",
     html: `
-      <p>For Spanish citizenship by residence you need, at a minimum, two documents from your home country with an <strong>apostille and a sworn translation</strong>: your <a href="/traduccion-jurada-partida-nacimiento">birth certificate</a> and your <a href="/traduccion-jurada-certificado-penales">criminal record certificate</a>. If you are married, almost always your <a href="/traduccion-jurada-certificado-matrimonio">marriage certificate</a> too. The sworn translation of each of these certificates costs <strong>from €35</strong> and is delivered in <strong>24/48 hours</strong> as a digitally signed PDF, valid for the online application. I am Elena Peñaranda, sworn translator of English no. 7310 appointed by Spain's Ministry of Foreign Affairs, and I prepare these files every week for British, American and Indian clients; this guide is what I tell them before we start.</p>
+      <p>For Spanish citizenship by residence you need, at a minimum, two documents from your home country with an <strong>apostille and a sworn translation</strong>: your <a href="/traduccion-jurada-partida-nacimiento">birth certificate</a> and your <a href="/traduccion-jurada-certificado-penales">criminal record certificate</a>. If you are married, almost always your <a href="/traduccion-jurada-certificado-matrimonio">marriage certificate</a> too. The sworn translation of each of these certificates costs <strong>from €35</strong> and is delivered <strong>the same day</strong> as a digitally signed PDF, valid for the online application. I am Elena Peñaranda, sworn translator of English no. 7310 appointed by Spain's Ministry of Foreign Affairs, and I prepare these files every week for British, American and Indian clients; this guide is what I tell them before we start.</p>
 
       <p>A warning before we go on: the years of residence required, the fees, the Instituto Cervantes exams and the status of your application are set by the Ministry of Justice and are better known to your lawyer or the official portal. I look after the documents: what to translate, what to apostille and in what order, so your file does not come back over a piece of paper.</p>
 
@@ -505,9 +505,9 @@ export const postsEn = [
       <div class="table-wrap"><table>
         <thead><tr><th>Document</th><th>United Kingdom</th><th>United States</th><th>India</th><th>Sworn translation</th></tr></thead>
         <tbody>
-          <tr><td>Birth</td><td>GRO / NRS / GRONI, full certificate. FCDO apostille</td><td>State vital records. Secretary of State apostille</td><td>Municipality, in English. MEA apostille</td><td>From €35, 24/48 h</td></tr>
-          <tr><td>Criminal record</td><td>ACRO Police Certificate. FCDO apostille</td><td>FBI Identity History Summary. Department of State apostille</td><td>PCC from Passport Seva. MEA apostille</td><td>From €35, 24/48 h</td></tr>
-          <tr><td>Marriage (if applicable)</td><td>GRO or local register office. FCDO apostille</td><td>County or state. Secretary of State apostille</td><td>State marriage registrar. MEA apostille</td><td>From €35, 24/48 h</td></tr>
+          <tr><td>Birth</td><td>GRO / NRS / GRONI, full certificate. FCDO apostille</td><td>State vital records. Secretary of State apostille</td><td>Municipality, in English. MEA apostille</td><td>From €35, same day</td></tr>
+          <tr><td>Criminal record</td><td>ACRO Police Certificate. FCDO apostille</td><td>FBI Identity History Summary. Department of State apostille</td><td>PCC from Passport Seva. MEA apostille</td><td>From €35, same day</td></tr>
+          <tr><td>Marriage (if applicable)</td><td>GRO or local register office. FCDO apostille</td><td>County or state. Secretary of State apostille</td><td>State marriage registrar. MEA apostille</td><td>From €35, same day</td></tr>
         </tbody>
       </table></div>
 
@@ -544,7 +544,7 @@ export const postsEn = [
       },
       {
         q: "How long do the translations for the whole file take?",
-        a: "Each standard certificate (birth, criminal record, marriage) is delivered in 24/48 hours. If you send me the three or four documents together, I give you a single date for the batch, usually within that same timeframe.",
+        a: "Each standard certificate (birth, criminal record, marriage) is delivered the same day. If you send me the three or four documents together, I give you a single date for the batch, usually the same day too.",
       },
     ],
   },
@@ -565,7 +565,7 @@ export const postsEn = [
     image: "/blog/post-ucas.jpg",
     alt: "Student working in a library — applications to universities in the United Kingdom",
     html: `
-      <p>To study in the UK you need a <em>certified translation</em> into English of every academic or identity document issued in Spanish: for an <strong>undergraduate degree</strong>, the Bachillerato diploma and the Bachillerato and EBAU grades; for a <strong>master's</strong>, the <a href="/traduccion-jurada-titulo-universitario">university degree certificate</a> and the academic transcript; for an <strong>exchange or Erasmus stay</strong>, almost nothing, because Spanish universities issue those records in English; and for the <strong>Student visa</strong>, the financial evidence too if it is in Spanish. A Spanish sworn translation meets the British requirements for a certified translation and then some. A degree certificate costs <strong>${eur("titulo-universitario")}</strong> and is delivered in 24/48 hours; a transcript is quoted once I see it. I am Elena Peñaranda, sworn translator of English no. 7310 appointed by Spain's Ministry of Foreign Affairs, and every summer I translate the files of students heading to the UK. This is what I tell them before we start.</p>
+      <p>To study in the UK you need a <em>certified translation</em> into English of every academic or identity document issued in Spanish: for an <strong>undergraduate degree</strong>, the Bachillerato diploma and the Bachillerato and EBAU grades; for a <strong>master's</strong>, the <a href="/traduccion-jurada-titulo-universitario">university degree certificate</a> and the academic transcript; for an <strong>exchange or Erasmus stay</strong>, almost nothing, because Spanish universities issue those records in English; and for the <strong>Student visa</strong>, the financial evidence too if it is in Spanish. A Spanish sworn translation meets the British requirements for a certified translation and then some. A degree certificate costs <strong>${eur("titulo-universitario")}</strong> and is delivered the same day; a transcript is quoted once I see it. I am Elena Peñaranda, sworn translator of English no. 7310 appointed by Spain's Ministry of Foreign Affairs, and every summer I translate the files of students heading to the UK. This is what I tell them before we start.</p>
 
       <h2>First, which case are you in?</h2>
       <p>The four routes into a British university ask for different documents, and translating too much is as common as translating too little. Find yourself in the table and go to the matching section.</p>
@@ -591,7 +591,7 @@ export const postsEn = [
         <li>The <strong>EBAU results card or certificate</strong> (PAU or EvAU depending on the region), which turns the conditional offer into an unconditional one.</li>
         <li>An English certificate (IELTS, Cambridge or whichever that university accepts). It is already in English: no translation.</li>
       </ul>
-      <p>Every university publishes its translation requirements, and they all look alike: a complete translation by a professional translator, with their name, signature, date and contact details. A Spanish sworn translation carries all of that and, on top, my appointment, which anyone can verify on the <a href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx" target="_blank" rel="noopener noreferrer">Ministry's register</a>. A money-saving tip: send only what the conditional offer asks for first, and leave the final EBAU results for July; they are translated in 24/48 hours and will not hold up your enrolment.</p>
+      <p>Every university publishes its translation requirements, and they all look alike: a complete translation by a professional translator, with their name, signature, date and contact details. A Spanish sworn translation carries all of that and, on top, my appointment, which anyone can verify on the <a href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx" target="_blank" rel="noopener noreferrer">Ministry's register</a>. A money-saving tip: send only what the conditional offer asks for first, and leave the final EBAU results for July; they are translated the same day and will not hold up your enrolment.</p>
 
       <h2>Master's and PhD: degree certificate and transcript</h2>
       <p>Here the two key documents are the <strong><a href="/traduccion-jurada-titulo-universitario">university degree certificate</a></strong> and the <strong>academic transcript</strong> (the <em>certificación académica personal</em> listing every module, credit and grade). Three details change the quote:</p>
@@ -636,7 +636,7 @@ export const postsEn = [
         <li><strong>You send me scans</strong> by WhatsApp, email or the <a href="/en/documentos">document catalogue</a>: a PDF or a sharp photo, with stamps and signatures legible.</li>
         <li><strong>Within 2 working hours</strong> I confirm what really needs translating, a fixed price and a delivery date in writing.</li>
         <li><strong>I translate, certify, sign and stamp</strong> each document, with modules, grades and names written identically across all of them.</li>
-        <li><strong>You receive the electronically signed PDF</strong> in 24/48 hours for short documents; the transcript on the agreed date. Upload it as it is to the university or visa platform: if you print and rescan it, the electronic signature can no longer be verified. If paper is required, I courier it.</li>
+        <li><strong>You receive the electronically signed PDF</strong> the same day for short documents; the transcript on the agreed date. Upload it as it is to the university or visa platform: if you print and rescan it, the electronic signature can no longer be verified. If paper is required, I courier it.</li>
       </ol>
       <p>A realistic calendar: applications go in between January and April, when a provisional transcript is usually enough; final grades arrive in June and July; enrolment and the visa follow in August and September. Translation is never the bottleneck, but August is when the files pile up: if you can, get it translated in July.</p>
       <p>
@@ -657,7 +657,7 @@ export const postsEn = [
       },
       {
         q: "How much does it cost to translate a degree certificate and a transcript for a UK master's?",
-        a: `A one-page degree certificate costs ${eur("titulo-universitario")} and is delivered in 24/48 hours. The transcript is quoted once I see it, with a fixed price within 2 hours, because it depends on the number of pages and modules.`,
+        a: `A one-page degree certificate costs ${eur("titulo-universitario")} and is delivered the same day. The transcript is quoted once I see it, with a fixed price within 2 hours, because it depends on the number of pages and modules.`,
       },
       {
         q: "Do I need a visa for an Erasmus or exchange stay in the UK?",
@@ -684,7 +684,7 @@ export const postsEn = [
     image: "/blog/post-visado-uk.jpg",
     alt: "Hands checking an official form on a folder of documents for a UK visa application",
     html: `
-      <p>The Home Office <strong>does not require a sworn translation</strong>: it asks for a <em>certified translation</em>, that is, a complete translation accompanied by the translator's confirmation that it is accurate, with their name, signature, date and contact details. A Spanish sworn translation meets those requirements and goes further, because it is signed by a translator appointed by Spain's Ministry of Foreign Affairs whose number any caseworker can verify. A sworn translation is worth choosing when the same document will also be used in Spain, when a solicitor or a court asks for one, or when you want nobody to question who signed the translation. The usual certificates (birth, marriage, criminal record) cost <strong>from €${MIN_PRICE}</strong> and are delivered in 24/48 hours. I am Elena Peñaranda, sworn translator of English no. 7310, and this guide explains which Spanish documents get translated for a visa, for <em>settled status</em> and for British citizenship, and when a certified translation is enough.</p>
+      <p>The Home Office <strong>does not require a sworn translation</strong>: it asks for a <em>certified translation</em>, that is, a complete translation accompanied by the translator's confirmation that it is accurate, with their name, signature, date and contact details. A Spanish sworn translation meets those requirements and goes further, because it is signed by a translator appointed by Spain's Ministry of Foreign Affairs whose number any caseworker can verify. A sworn translation is worth choosing when the same document will also be used in Spain, when a solicitor or a court asks for one, or when you want nobody to question who signed the translation. The usual certificates (birth, marriage, criminal record) cost <strong>from €${MIN_PRICE}</strong> and are delivered the same day (up to 10 pages). I am Elena Peñaranda, sworn translator of English no. 7310, and this guide explains which Spanish documents get translated for a visa, for <em>settled status</em> and for British citizenship, and when a certified translation is enough.</p>
 
       <h2>What the Home Office actually requires of a translation</h2>
       <p>The <strong>UK Visas and Immigration (UKVI)</strong> guidance repeats the same rule for every application: any document that is not in English or Welsh must be accompanied by a full translation that includes:</p>
@@ -754,7 +754,7 @@ export const postsEn = [
         <li><strong>You send me scans</strong> by WhatsApp, email or the <a href="/en/documentos">document catalogue</a>, complete and legible.</li>
         <li><strong>Within 2 working hours</strong> I tell you what needs translating, whether sworn or certified is the better choice for each document, a fixed price and a delivery date in writing.</li>
         <li><strong>I translate and certify</strong> each document with the wording UKVI requires, my contact details on the certification itself and, for sworn translations, my stamp and electronic signature.</li>
-        <li><strong>You receive the signed PDF</strong> in 24/48 hours for short certificates. Upload it as it is to the Home Office platform: printing and rescanning breaks the electronic signature. If a procedure requires paper, I courier the original to the UK; the courier cost is stated in the quote.</li>
+        <li><strong>You receive the signed PDF</strong> the same day for short certificates. Upload it as it is to the Home Office platform: printing and rescanning breaks the electronic signature. If a procedure requires paper, I courier the original to the UK; the courier cost is stated in the quote.</li>
       </ol>
       <p>If what you have is a British document to present in Spain (a GRO birth certificate, a police certificate, a <em>grant of probate</em>), the direction is reversed and there a sworn translation is compulsory: see the guide for <a href="/en/sworn-translation-british-residents-spain">British residents in Spain</a>. And if you doubt the validity of a translation you have already been given, read <a href="/en/blog/how-to-check-sworn-translation-valid-spain">how to check whether a sworn translation is valid</a>.</p>
       <p>
@@ -782,7 +782,7 @@ export const postsEn = [
       },
       {
         q: "How much does it cost to translate the documents for a partner visa?",
-        a: `The marriage certificate costs ${eur("certificado-matrimonio")}, each birth certificate ${eur("partida-nacimiento")} and the employer's certificate or payslip ${eur("certificado-empresa")}, delivered in 24/48 hours. Bank statements and contracts are quoted once I see them; with the complete file you get a single fixed price within 2 hours.`,
+        a: `The marriage certificate costs ${eur("certificado-matrimonio")}, each birth certificate ${eur("partida-nacimiento")} and the employer's certificate or payslip ${eur("certificado-empresa")}, delivered the same day (up to 10 pages). Bank statements and contracts are quoted once I see them; with the complete file you get a single fixed price within 2 hours.`,
       },
     ],
   },
@@ -801,7 +801,7 @@ export const postsEn = [
     image: "/blog/post-leaving-spain.jpg",
     alt: "Passport and documents prepared for a Canadian immigration application",
     html: `
-      <p>Immigration, Refugees and Citizenship Canada (<strong>IRCC</strong>) accepts documents in English or French. Anything in Spanish is submitted with a <strong>complete translation</strong> and, if the person who signs it is not a Canadian <em>certified translator</em> (a member in good standing of a provincial translators' association), with the translator's <strong>affidavit</strong> swearing to their proficiency in both languages and to the accuracy of the translation, plus a copy of the original document. My sworn translation into English carries the certification of accuracy, my name, my signature, my stamp as sworn translator no. 7310 appointed by Spain's Ministry of Foreign Affairs, the date and my contact details as standard; what I cannot guarantee is that your IRCC office will treat an official appointment by the Spanish State as equivalent to Canadian membership, so if your programme requires the affidavit we sort it out before I start. The usual certificates (criminal record, birth, marriage) cost <strong>from €${MIN_PRICE}</strong> and are delivered in 24/48 hours. I am Elena Peñaranda, sworn translator of English, and this guide is what I explain to anyone preparing Express Entry, a study permit or a family sponsorship from Spain.</p>
+      <p>Immigration, Refugees and Citizenship Canada (<strong>IRCC</strong>) accepts documents in English or French. Anything in Spanish is submitted with a <strong>complete translation</strong> and, if the person who signs it is not a Canadian <em>certified translator</em> (a member in good standing of a provincial translators' association), with the translator's <strong>affidavit</strong> swearing to their proficiency in both languages and to the accuracy of the translation, plus a copy of the original document. My sworn translation into English carries the certification of accuracy, my name, my signature, my stamp as sworn translator no. 7310 appointed by Spain's Ministry of Foreign Affairs, the date and my contact details as standard; what I cannot guarantee is that your IRCC office will treat an official appointment by the Spanish State as equivalent to Canadian membership, so if your programme requires the affidavit we sort it out before I start. The usual certificates (criminal record, birth, marriage) cost <strong>from €${MIN_PRICE}</strong> and are delivered the same day (up to 10 pages). I am Elena Peñaranda, sworn translator of English, and this guide is what I explain to anyone preparing Express Entry, a study permit or a family sponsorship from Spain.</p>
 
       <h2>What IRCC actually requires of a translation</h2>
       <p>The IRCC Help Centre boils it down to three pieces for any document that is not in English or French:</p>
@@ -867,7 +867,7 @@ export const postsEn = [
         <li><strong>You send me scans</strong> by WhatsApp, email or the <a href="/en/documentos">document catalogue</a>, complete and legible, and tell me the programme (Express Entry, studies, sponsorship) and, if you know it, which format your office accepts.</li>
         <li><strong>Within 2 working hours</strong> I confirm what needs translating, whether an affidavit is advisable and its cost, a fixed price and a date in writing.</li>
         <li><strong>I translate into English, certify, sign and stamp</strong> each document, with my contact details and the declaration of proficiency and accuracy on the certification; names and dates stay identical across all of them.</li>
-        <li><strong>You receive the electronically signed PDF</strong> in 24/48 hours for short certificates; upload it as it is to the IRCC portal, without rescanning. If a notarised affidavit or paper is needed, we courier it to Canada with the courier cost stated in the quote.</li>
+        <li><strong>You receive the electronically signed PDF</strong> the same day for short certificates; upload it as it is to the IRCC portal, without rescanning. If a notarised affidavit or paper is needed, we courier it to Canada with the courier cost stated in the quote.</li>
       </ol>
       <p>If your case is the reverse, Canadian documents for a procedure in Spain, the <a href="/en/sworn-translation-canada-spain">Canada guide</a> explains the Global Affairs Canada apostille and the sworn translation into Spanish. And to compare with what the UK, Ireland and Australia ask for, see <a href="/en/blog/sworn-translations-leaving-spain-uk-ireland-canada-australia">sworn translations for leaving Spain</a>.</p>
       <p>
@@ -895,7 +895,7 @@ export const postsEn = [
       },
       {
         q: "How much does it cost to translate the documents to sponsor my partner?",
-        a: `The marriage certificate costs ${eur("certificado-matrimonio")}, each birth certificate ${eur("partida-nacimiento")} and the criminal record certificate ${eur("antecedentes-penales")}, delivered in 24/48 hours. Proof of cohabitation (municipal registration, contracts, bills) is quoted once I see it.`,
+        a: `The marriage certificate costs ${eur("certificado-matrimonio")}, each birth certificate ${eur("partida-nacimiento")} and the criminal record certificate ${eur("antecedentes-penales")}, delivered the same day (up to 10 pages). Proof of cohabitation (municipal registration, contracts, bills) is quoted once I see it.`,
       },
     ],
   },
@@ -913,7 +913,7 @@ export const postsEn = [
     image: "/blog/post-indian-documents.jpg",
     alt: "Indian university degree with MEA apostille prepared for recognition in Spain",
     html: `
-      <p>For an Indian university degree to be valid in Spain you apply either for its <strong>homologación</strong> (if it gives access to a regulated profession, such as medicine, nursing, engineering or architecture) or for its <strong>equivalencia</strong> to bachelor's or master's level (for everything else), before the Spanish ministry responsible for universities, with three documents apostilled by India's <strong>Ministry of External Affairs (MEA)</strong> and translated into Spanish by a sworn translator: the <a href="/traduccion-jurada-titulo-universitario">degree certificate</a>, the complete transcript (<em>consolidated marksheet</em>) and, for homologación, the syllabus. The sworn translation of the degree certificate costs <strong>${eur("titulo-universitario")}</strong> and is delivered in 24/48 hours; the transcript is quoted once I see it. I am Elena Peñaranda, sworn translator of English no. 7310, and every month I translate files from Indian universities for this procedure; this is the guide I give my clients before we start.</p>
+      <p>For an Indian university degree to be valid in Spain you apply either for its <strong>homologación</strong> (if it gives access to a regulated profession, such as medicine, nursing, engineering or architecture) or for its <strong>equivalencia</strong> to bachelor's or master's level (for everything else), before the Spanish ministry responsible for universities, with three documents apostilled by India's <strong>Ministry of External Affairs (MEA)</strong> and translated into Spanish by a sworn translator: the <a href="/traduccion-jurada-titulo-universitario">degree certificate</a>, the complete transcript (<em>consolidated marksheet</em>) and, for homologación, the syllabus. The sworn translation of the degree certificate costs <strong>${eur("titulo-universitario")}</strong> and is delivered the same day; the transcript is quoted once I see it. I am Elena Peñaranda, sworn translator of English no. 7310, and every month I translate files from Indian universities for this procedure; this is the guide I give my clients before we start.</p>
 
       <p>An honest warning: the decision (whether your degree is recognised, which equivalence you are granted and how long it takes) rests with the Ministry, and real waiting times are measured in months. My job is to make sure the paperwork arrives right first time: the correct apostille, a complete and consistent translation, and no request for missing documents over a piece of paper.</p>
 
@@ -953,11 +953,11 @@ export const postsEn = [
       <div class="table-wrap"><table>
         <thead><tr><th>Document</th><th>MEA apostille?</th><th>Sworn translation</th><th>Turnaround</th></tr></thead>
         <tbody>
-          <tr><td>Degree certificate (1 page)</td><td>Yes</td><td>${eur("titulo-universitario")}</td><td>24/48 hours</td></tr>
-          <tr><td>Provisional certificate</td><td>Yes, if you submit it</td><td>${eur("titulo-universitario")}</td><td>24/48 hours</td></tr>
+          <tr><td>Degree certificate (1 page)</td><td>Yes</td><td>${eur("titulo-universitario")}</td><td>Same day (up to 10 pages)</td></tr>
+          <tr><td>Provisional certificate</td><td>Yes, if you submit it</td><td>${eur("titulo-universitario")}</td><td>Same day (up to 10 pages)</td></tr>
           <tr><td>Consolidated marksheet / transcript</td><td>Yes</td><td>${eur("expediente-academico")}</td><td>Date fixed with the quote</td></tr>
           <tr><td>Syllabus</td><td>Usually the university stamp is enough; check</td><td>Fixed quote within 2 hours</td><td>Depends on length</td></tr>
-          <tr><td>Professional registration certificate</td><td>Yes</td><td>Fixed quote within 2 hours</td><td>24/48 hours</td></tr>
+          <tr><td>Professional registration certificate</td><td>Yes</td><td>Fixed quote within 2 hours</td><td>Same day (up to 10 pages)</td></tr>
           <tr><td>Passport</td><td>No</td><td>Not translated</td><td>—</td></tr>
         </tbody>
       </table></div>
@@ -998,7 +998,7 @@ export const postsEn = [
       },
       {
         q: "How much does it cost to translate the degree and transcript for recognition?",
-        a: `A one-page degree certificate costs ${eur("titulo-universitario")} and is delivered in 24/48 hours. The transcript or consolidated marksheet depends on the number of pages and subjects, so I give you a fixed price within 2 hours once I see it. With the complete set, a single price and a single date.`,
+        a: `A one-page degree certificate costs ${eur("titulo-universitario")} and is delivered the same day. The transcript or consolidated marksheet depends on the number of pages and subjects, so I give you a fixed price within 2 hours once I see it. With the complete set, a single price and a single date.`,
       },
     ],
   },

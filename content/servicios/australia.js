@@ -29,10 +29,10 @@ export const es = {
   crumb: "Clientes de Australia",
   metaTitle: "Traducción jurada para clientes de Australia",
   metaDescription:
-    "Traductora jurada nº 7310 para australianos en España y españoles con trámites en Australia: qué pide Home Affairs, apostilla del DFAT, PDF 24/48 h.",
+    "Traductora jurada nº 7310 para australianos en España y españoles con trámites en Australia: qué pide Home Affairs, apostilla del DFAT, PDF en el día.",
   h1: "Traducción jurada entre Australia y España",
   lead:
-    "Si vives en Australia y vas a pedir un visado para España (nómada digital, no lucrativo, estudios, working holiday), casarte, comprar una vivienda o solicitar la nacionalidad, tus documentos australianos necesitan apostilla del DFAT y traducción jurada al español firmada por un traductor nombrado por el Ministerio de Asuntos Exteriores de España. Y si eres español con un trámite ante el Department of Home Affairs, una universidad o un empleador australiano, las traducciones hechas fuera de Australia no necesitan traductor NAATI, pero deben llevar el nombre, la dirección, el teléfono y las cualificaciones del traductor. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y hago las dos 100 % online: presupuesto en menos de 2 horas, pago con tarjeta australiana y PDF firmado en 24/48 h.",
+    "Si vives en Australia y vas a pedir un visado para España (nómada digital, no lucrativo, estudios, working holiday), casarte, comprar una vivienda o solicitar la nacionalidad, tus documentos australianos necesitan apostilla del DFAT y traducción jurada al español firmada por un traductor nombrado por el Ministerio de Asuntos Exteriores de España. Y si eres español con un trámite ante el Department of Home Affairs, una universidad o un empleador australiano, las traducciones hechas fuera de Australia no necesitan traductor NAATI, pero deben llevar el nombre, la dirección, el teléfono y las cualificaciones del traductor. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y hago las dos 100 % online: presupuesto en menos de 2 horas, pago con tarjeta australiana y PDF firmado en el día (hasta 10 páginas).",
   image: {
     src: "/fotos/australia-viaje.jpg",
     alt: "Tarjetas de embarque y pasaporte sobre un portátil, documentos de un viaje internacional",
@@ -107,7 +107,7 @@ export const es = {
       id: "horario",
       title: "¿Cómo funciona el huso horario y el pago desde Australia?",
       body: [
-        `${TIMEZONE_NOTE.es}. Australia va entre 6 y 9 horas por delante de España según el estado y la época del año: un encargo que me envías por la tarde en Sídney o Melbourne está en mi mesa a primera hora de mi jornada, y un documento habitual te llega en 24/48 h, a menudo mientras duermes.`,
+        `${TIMEZONE_NOTE.es}. Australia va entre 6 y 9 horas por delante de España según el estado y la época del año: un encargo que me envías por la tarde en Sídney o Melbourne está en mi mesa a primera hora de mi jornada, y un documento de hasta 10 páginas te llega en el día, a menudo mientras duermes.`,
         `El presupuesto es cerrado y en euros; pagas con tu tarjeta australiana a través de Stripe y tu banco aplica el cambio a dólares australianos. La entrega es un PDF firmado digitalmente. ${INTERNATIONAL_SHIPPING.note.es}.`,
       ],
     },
@@ -127,7 +127,7 @@ export const es = {
     },
     {
       t: "Entrega",
-      d: "PDF firmado en 24/48 h y, si lo necesitas, papel por mensajería a España o a Australia.",
+      d: "PDF firmado en el día (hasta 10 páginas) y, si lo necesitas, papel por mensajería a España o a Australia.",
     },
   ],
   faq: [
@@ -145,7 +145,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda con la diferencia horaria?",
-      a: "Un documento habitual sale en 24/48 h desde que confirmas el presupuesto. Como Australia va varias horas por delante, lo normal es que lo envíes por la tarde y lo tengas al día siguiente por la mañana, hora australiana.",
+      a: "Un documento de hasta 10 páginas sale en el día desde que confirmas el presupuesto. Como Australia va varias horas por delante, lo normal es que lo envíes por la tarde y lo tengas al día siguiente por la mañana, hora australiana.",
     },
     {
       q: "¿Vale tu traducción jurada en la Embajada de España en Canberra?",
@@ -174,10 +174,10 @@ export const en = {
   crumb: "Clients in Australia",
   metaTitle: "Sworn translation between Australia and Spain",
   metaDescription:
-    "Sworn translator no. 7310 for Australians moving to Spain and Spaniards with Home Affairs paperwork: translated from abroad, DFAT apostille, PDF in 24/48h.",
+    "Sworn translator no. 7310 for Australians moving to Spain and Spaniards with Home Affairs paperwork: translated from abroad, DFAT apostille, PDF same day.",
   h1: "Sworn translation between Australia and Spain",
   lead:
-    "If you live in Australia and are applying for a Spanish visa (digital nomad, non-lucrative, student, working holiday), getting married in Spain, buying a property or applying for Spanish citizenship, your Australian documents need a DFAT apostille and a sworn translation into Spanish signed by a translator appointed by Spain's Ministry of Foreign Affairs. If you are Spanish with paperwork for the Department of Home Affairs, an Australian university or an employer, translations done outside Australia do not need a NAATI translator, but they must carry the translator's full name, address, phone number and qualifications. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I do both fully online: a quote within 2 hours, payment with your Australian card and a signed PDF in 24/48 hours.",
+    "If you live in Australia and are applying for a Spanish visa (digital nomad, non-lucrative, student, working holiday), getting married in Spain, buying a property or applying for Spanish citizenship, your Australian documents need a DFAT apostille and a sworn translation into Spanish signed by a translator appointed by Spain's Ministry of Foreign Affairs. If you are Spanish with paperwork for the Department of Home Affairs, an Australian university or an employer, translations done outside Australia do not need a NAATI translator, but they must carry the translator's full name, address, phone number and qualifications. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I do both fully online: a quote within 2 hours, payment with your Australian card and a signed PDF the same day (up to 10 pages).",
   image: {
     src: "/fotos/australia-viaje.jpg",
     alt: "Boarding passes and a passport on a laptop, documents for an international trip",
@@ -252,7 +252,7 @@ export const en = {
       id: "timezone",
       title: "How do time zones and payment from Australia work?",
       body: [
-        `${TIMEZONE_NOTE.en}. Australia is between 6 and 9 hours ahead of Spain depending on the state and the time of year: an order you send me in the afternoon in Sydney or Melbourne is on my desk at the start of my working day, and a standard document reaches you within 24/48 hours, often while you sleep.`,
+        `${TIMEZONE_NOTE.en}. Australia is between 6 and 9 hours ahead of Spain depending on the state and the time of year: an order you send me in the afternoon in Sydney or Melbourne is on my desk at the start of my working day, and a document of up to 10 pages reaches you the same day, often while you sleep.`,
         `The quote is fixed and in euros; you pay with your Australian card through Stripe and your bank converts the amount to Australian dollars. Delivery is a digitally signed PDF. ${INTERNATIONAL_SHIPPING.note.en}.`,
       ],
     },
@@ -272,7 +272,7 @@ export const en = {
     },
     {
       t: "Delivery",
-      d: "Signed PDF in 24/48 hours and, if you need it, paper by courier to Spain or to Australia.",
+      d: "Signed PDF the same day (up to 10 pages) and, if you need it, paper by courier to Spain or to Australia.",
     },
   ],
   faq: [
@@ -290,7 +290,7 @@ export const en = {
     },
     {
       q: "How long does it take with the time difference?",
-      a: "A standard document takes 24/48 hours from confirmation of the quote. As Australia is several hours ahead, you would typically send it in the afternoon and have it the next morning, Australian time.",
+      a: "A document of up to 10 pages is delivered the same day from confirmation of the quote. As Australia is several hours ahead, you would typically send it in the afternoon and have it the next morning, Australian time.",
     },
     {
       q: "Is your sworn translation valid at the Spanish embassy in Canberra?",

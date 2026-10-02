@@ -37,7 +37,7 @@ const T = {
   from: "From",
   quote: "Fixed quote in 2 hours",
   turnaround: "Turnaround",
-  turnaroundValue: "24-48 hours",
+  turnaroundValue: "Same day (up to 10 pages)",
   delivery: "Delivery",
   deliveryValue: (usd) => `Signed PDF · paper copy to the US for $${usd}`,
   payment: "Payment",

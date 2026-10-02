@@ -24,10 +24,10 @@ export const es = {
   crumb: "Clientes de Irlanda",
   metaTitle: "Traducción jurada para clientes de Irlanda",
   metaDescription:
-    "Traductora jurada nº 7310 para irlandeses en España y españoles con trámites en Irlanda: certificada para Irish Immigration, apostilla DFA, PDF 24/48 h.",
+    "Traductora jurada nº 7310 para irlandeses en España y españoles con trámites en Irlanda: certificada para Irish Immigration, apostilla DFA, PDF en el día.",
   h1: "Traducción jurada entre Irlanda y España",
   lead:
-    "Si vives en Irlanda y vas a instalarte en España (estudios, nómada digital, nacionalidad, matrimonio, compra de vivienda), tus documentos irlandeses necesitan traducción jurada al español firmada por un traductor nombrado por el Ministerio de Asuntos Exteriores de España. Y si eres español con un trámite en Irlanda, Irish Immigration, las universidades o el HSE aceptan una traducción certificada al inglés con la declaración firmada del traductor. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y hago las dos 100 % online: presupuesto en menos de 2 horas, pago con tarjeta y PDF firmado en 24/48 h.",
+    "Si vives en Irlanda y vas a instalarte en España (estudios, nómada digital, nacionalidad, matrimonio, compra de vivienda), tus documentos irlandeses necesitan traducción jurada al español firmada por un traductor nombrado por el Ministerio de Asuntos Exteriores de España. Y si eres español con un trámite en Irlanda, Irish Immigration, las universidades o el HSE aceptan una traducción certificada al inglés con la declaración firmada del traductor. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y hago las dos 100 % online: presupuesto en menos de 2 horas, pago con tarjeta y PDF firmado en el día (hasta 10 páginas).",
   image: {
     src: "/fotos/irlanda-despacho.jpg",
     alt: "Traductora firmando un documento con pluma en su despacho",
@@ -121,7 +121,7 @@ export const es = {
     },
     {
       t: "Entrega",
-      d: "PDF firmado en 24/48 h y, si lo necesitas, papel por mensajería a España o a Irlanda.",
+      d: "PDF firmado en el día (hasta 10 páginas) y, si lo necesitas, papel por mensajería a España o a Irlanda.",
     },
   ],
   faq: [
@@ -143,7 +143,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda un documento habitual?",
-      a: "Certificados, cartas y contratos breves: 24/48 h desde la confirmación del presupuesto. Expedientes completos: un plazo único cerrado por escrito antes de empezar.",
+      a: "Documentos de hasta 10 páginas: en el día desde la confirmación del presupuesto, sin recargo. Expedientes completos: un plazo único cerrado por escrito antes de empezar.",
     },
   ],
   cta: {
@@ -168,10 +168,10 @@ export const en = {
   crumb: "Clients in Ireland",
   metaTitle: "Sworn translation between Ireland and Spain",
   metaDescription:
-    "Sworn translator no. 7310 for Irish residents moving to Spain and Spaniards with paperwork in Ireland: Irish Immigration, DFA apostille, PDF in 24/48h.",
+    "Sworn translator no. 7310 for Irish residents moving to Spain and Spaniards with paperwork in Ireland: Irish Immigration, DFA apostille, PDF same day.",
   h1: "Sworn translation between Ireland and Spain",
   lead:
-    "If you live in Ireland and are moving to Spain (studies, digital nomad visa, citizenship, marriage, buying a property), your Irish documents need a sworn translation into Spanish signed by a translator appointed by Spain's Ministry of Foreign Affairs. If you are Spanish with paperwork in Ireland, Irish Immigration, universities and the HSE accept a certified English translation with the translator's signed declaration. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I do both fully online: a quote within 2 hours, card payment and a signed PDF in 24/48 hours.",
+    "If you live in Ireland and are moving to Spain (studies, digital nomad visa, citizenship, marriage, buying a property), your Irish documents need a sworn translation into Spanish signed by a translator appointed by Spain's Ministry of Foreign Affairs. If you are Spanish with paperwork in Ireland, Irish Immigration, universities and the HSE accept a certified English translation with the translator's signed declaration. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I do both fully online: a quote within 2 hours, card payment and a signed PDF the same day (up to 10 pages).",
   image: {
     src: "/fotos/irlanda-despacho.jpg",
     alt: "Translator signing a document with a pen at her desk",
@@ -265,7 +265,7 @@ export const en = {
     },
     {
       t: "Delivery",
-      d: "Signed PDF in 24/48 hours and, if you need it, paper by courier to Spain or to Ireland.",
+      d: "Signed PDF the same day (up to 10 pages) and, if you need it, paper by courier to Spain or to Ireland.",
     },
   ],
   faq: [
@@ -287,7 +287,7 @@ export const en = {
     },
     {
       q: "How long does a standard document take?",
-      a: "Certificates, letters and short contracts: 24/48 hours from confirmation of the quote. Complete files: a single deadline confirmed in writing before I start.",
+      a: "Documents of up to 10 pages: the same day from confirmation of the quote, no surcharge. Complete files: a single deadline confirmed in writing before I start.",
     },
   ],
   cta: {

@@ -10,7 +10,7 @@ import { personRef, SINCE, yearsOfExperience } from "../../../content/persona";
 export const metadata = {
   title: "Sobre mí — Elena Peñaranda, Traductora Jurada de Inglés (MAEC nº 7310)",
   description:
-    "Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nombrada por el MAEC (nº 7310). Traduzco, firmo y sello personalmente cada traducción jurada, con entrega digital en 24/48 h.",
+    "Elena Peñaranda, traductora jurada de inglés (MAEC nº 7310). Traduzco, firmo y sello cada traducción jurada; entrega digital en el día (hasta 10 págs.).",
   alternates: {
     canonical: "https://juradaexpress.es/sobre-mi",
     languages: {

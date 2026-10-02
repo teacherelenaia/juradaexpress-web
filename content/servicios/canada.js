@@ -32,10 +32,10 @@ export const es = {
   crumb: "Clientes de Canadá",
   metaTitle: "Traducción jurada para clientes de Canadá",
   metaDescription:
-    "Traductora jurada nº 7310 para canadienses en España y españoles con trámites en Canadá: qué pide IRCC (certificación o affidavit), apostilla, PDF 24/48 h.",
+    "Traductora jurada nº 7310 para canadienses y españoles con trámites en Canadá: qué pide IRCC (certificación o affidavit), apostilla, PDF en el día.",
   h1: "Traducción jurada entre Canadá y España",
   lead:
-    "Si vives en Canadá y vas a pedir un visado para España (nómada digital, no lucrativo, estudios), casarte, comprar una vivienda o solicitar la nacionalidad, tus documentos canadienses necesitan apostilla y traducción jurada al español firmada por un traductor nombrado por el Ministerio de Asuntos Exteriores de España. Y si eres español con un trámite en Canadá, IRCC exige que la traducción al inglés o al francés la haga un traductor certificado o que vaya acompañada de un affidavit del traductor. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y te explico con honestidad qué entrego y cuándo necesitas algo más: presupuesto en menos de 2 horas, pago con tarjeta canadiense y PDF firmado en 24/48 h.",
+    "Si vives en Canadá y vas a pedir un visado para España (nómada digital, no lucrativo, estudios), casarte, comprar una vivienda o solicitar la nacionalidad, tus documentos canadienses necesitan apostilla y traducción jurada al español firmada por un traductor nombrado por el Ministerio de Asuntos Exteriores de España. Y si eres español con un trámite en Canadá, IRCC exige que la traducción al inglés o al francés la haga un traductor certificado o que vaya acompañada de un affidavit del traductor. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y te explico con honestidad qué entrego y cuándo necesitas algo más: presupuesto en menos de 2 horas, pago con tarjeta canadiense y PDF firmado en el día (hasta 10 páginas).",
   image: {
     src: "/fotos/canada-firma.jpg",
     alt: "Persona con traje y reloj firmando un documento sobre la mesa de un despacho",
@@ -112,7 +112,7 @@ export const es = {
       id: "horario",
       title: "¿Cómo funciona el huso horario y el pago desde Canadá?",
       body: [
-        `${TIMEZONE_NOTE.es}: son 6 horas más que en Toronto y Montreal y 9 más que en Vancouver. Un encargo que me envías por la tarde en Canadá está en marcha a primera hora de la mañana en España y, si es un documento habitual, te llega en 24/48 h.`,
+        `${TIMEZONE_NOTE.es}: son 6 horas más que en Toronto y Montreal y 9 más que en Vancouver. Un encargo que me envías por la tarde en Canadá está en marcha a primera hora de la mañana en España y, si no pasa de 10 páginas, te llega en el día.`,
         `El presupuesto es cerrado y en euros; pagas con tu tarjeta canadiense a través de Stripe y tu banco aplica el cambio a dólares canadienses. La entrega es un PDF firmado digitalmente. ${INTERNATIONAL_SHIPPING.note.es}.`,
       ],
     },
@@ -132,7 +132,7 @@ export const es = {
     },
     {
       t: "Entrega",
-      d: "PDF firmado en 24/48 h y, si lo necesitas, papel por mensajería a España o a Canadá.",
+      d: "PDF firmado en el día (hasta 10 páginas) y, si lo necesitas, papel por mensajería a España o a Canadá.",
     },
   ],
   faq: [
@@ -179,10 +179,10 @@ export const en = {
   crumb: "Clients in Canada",
   metaTitle: "Sworn translation between Canada and Spain",
   metaDescription:
-    "Sworn translator no. 7310 for Canadians moving to Spain and Spaniards with IRCC paperwork: certification or affidavit, apostille, PDF in 24/48h.",
+    "Sworn translator no. 7310 for Canadians moving to Spain and Spaniards with IRCC paperwork: certification or affidavit, apostille, PDF same day (10 pages).",
   h1: "Sworn translation between Canada and Spain",
   lead:
-    "If you live in Canada and are applying for a Spanish visa (digital nomad, non-lucrative, student), getting married in Spain, buying a property or applying for Spanish citizenship, your Canadian documents need an apostille and a sworn translation into Spanish signed by a translator appointed by Spain's Ministry of Foreign Affairs. If you are Spanish with paperwork in Canada, IRCC requires the English or French translation to be done by a certified translator or to be accompanied by the translator's affidavit. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I explain honestly what I deliver and when you need something more: a quote within 2 hours, payment with your Canadian card and a signed PDF in 24/48 hours.",
+    "If you live in Canada and are applying for a Spanish visa (digital nomad, non-lucrative, student), getting married in Spain, buying a property or applying for Spanish citizenship, your Canadian documents need an apostille and a sworn translation into Spanish signed by a translator appointed by Spain's Ministry of Foreign Affairs. If you are Spanish with paperwork in Canada, IRCC requires the English or French translation to be done by a certified translator or to be accompanied by the translator's affidavit. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I explain honestly what I deliver and when you need something more: a quote within 2 hours, payment with your Canadian card and a signed PDF the same day (up to 10 pages).",
   image: {
     src: "/fotos/canada-firma.jpg",
     alt: "Person in a suit with a watch signing a document at an office desk",
@@ -257,7 +257,7 @@ export const en = {
       id: "timezone",
       title: "How do time zones and payment from Canada work?",
       body: [
-        `${TIMEZONE_NOTE.en}: that is 6 hours ahead of Toronto and Montreal and 9 hours ahead of Vancouver. An order you send me in the afternoon in Canada is under way first thing in the morning in Spain and, for a standard document, reaches you within 24/48 hours.`,
+        `${TIMEZONE_NOTE.en}: that is 6 hours ahead of Toronto and Montreal and 9 hours ahead of Vancouver. An order you send me in the afternoon in Canada is under way first thing in the morning in Spain and, for a document of up to 10 pages, reaches you the same day.`,
         `The quote is fixed and in euros; you pay with your Canadian card through Stripe and your bank converts the amount to Canadian dollars. Delivery is a digitally signed PDF. ${INTERNATIONAL_SHIPPING.note.en}.`,
       ],
     },
@@ -277,7 +277,7 @@ export const en = {
     },
     {
       t: "Delivery",
-      d: "Signed PDF in 24/48 hours and, if you need it, paper by courier to Spain or to Canada.",
+      d: "Signed PDF the same day (up to 10 pages) and, if you need it, paper by courier to Spain or to Canada.",
     },
   ],
   faq: [

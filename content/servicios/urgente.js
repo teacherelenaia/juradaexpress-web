@@ -28,7 +28,7 @@ export const es = {
   lead:
     `La traducción jurada urgente o de gran volumen es el servicio con el que traduzco expedientes completos y lotes de documentos (para particulares, empresas, despachos de abogados, gestorías y agencias de relocation) con un presupuesto y un plazo únicos cerrados por escrito antes de empezar, y con entrega ordenada, documento a documento, en PDF firmado. Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nº 7310: no subcontrato, así que cada página la traduzco, firmo y sello yo. ${
       LARGE_PROJECT_CAPACITY ? `Capacidad: ${LARGE_PROJECT_CAPACITY.es}.` : ""
-    } Los documentos sueltos salen en 24/48 h.`,
+    } Los documentos de hasta 10 páginas salen en el día.`,
   image: {
     src: "/fotos/acuerdo-empresa.jpg",
     alt: "Apretón de manos entre dos personas al cerrar un acuerdo de trabajo",
@@ -75,7 +75,7 @@ export const es = {
       title: "¿Cuánto volumen puedes asumir y en qué plazo?",
       body: [
         capEs,
-        "Un documento habitual (certificado, carta, contrato breve) sale en 24/48 h. Para un lote, el plazo depende del número de páginas, del formato (los escaneos en mala calidad se tardan más en preparar) y de si hay que esperar apostillas. Por eso no publico un plazo genérico: lo calculo con tu carpeta delante y te lo doy por escrito, y ese es el que se cumple.",
+        "Un documento de hasta 10 páginas sale en el día, sin recargo. Para un lote, el plazo depende del número de páginas, del formato (los escaneos en mala calidad se tardan más en preparar) y de si hay que esperar apostillas. Por eso no publico un plazo genérico: lo calculo con tu carpeta delante y te lo doy por escrito, y ese es el que se cumple.",
         {
           note: "Si tu urgencia es real (una cita en el consulado mañana, un plazo judicial), dímelo en el primer mensaje con la fecha exacta. Te digo en menos de 2 horas si llego y a qué precio, sin recargos escondidos.",
         },
@@ -136,8 +136,8 @@ export const es = {
     {
       q: "¿Cuánto tarda un expediente completo de nómada digital?",
       a: LARGE_PROJECT_CAPACITY
-        ? `Te doy un plazo único por escrito antes de empezar; los documentos sueltos, en 24/48 h. Con una capacidad de ${LARGE_PROJECT_CAPACITY.es}, la mayoría de los expedientes están listos en pocos días.`
-        : "Te doy un plazo único por escrito antes de empezar; los documentos sueltos, en 24/48 h.",
+        ? `Te doy un plazo único por escrito antes de empezar; los documentos de hasta 10 páginas, en el día. Con una capacidad de ${LARGE_PROJECT_CAPACITY.es}, la mayoría de los expedientes están listos en pocos días.`
+        : "Te doy un plazo único por escrito antes de empezar; los documentos de hasta 10 páginas, en el día.",
     },
     {
       q: "¿Trabajas con clientes fuera de España?",
@@ -170,7 +170,7 @@ export const en = {
   lead:
     `Urgent or bulk sworn translation is the service through which I translate complete files and batches of documents (for individuals, companies, law firms, relocation agencies and administrative advisers) with a single quote and a single deadline confirmed in writing before I start, delivered in order, document by document, as signed PDFs. I am Elena Peñaranda Ortega, sworn translator no. 7310: I do not subcontract, so every page is translated, signed and stamped by me. ${
       LARGE_PROJECT_CAPACITY ? `Capacity: ${LARGE_PROJECT_CAPACITY.en}.` : ""
-    } Individual documents take 24/48 hours.`,
+    } Documents of up to 10 pages are delivered the same day.`,
   image: {
     src: "/fotos/acuerdo-empresa.jpg",
     alt: "Two people shaking hands as they close a working agreement",
@@ -217,7 +217,7 @@ export const en = {
       title: "How much volume can you take on, and how fast?",
       body: [
         capEn,
-        "A standard document (certificate, letter, short contract) takes 24/48 hours. For a batch, the deadline depends on the number of pages, the format (poor-quality scans take longer to prepare) and whether apostilles are still pending. That is why I do not publish a generic turnaround: I calculate it with your folder in front of me, confirm it in writing, and that is the deadline I keep.",
+        "A document of up to 10 pages is delivered the same day, with no surcharge. For a batch, the deadline depends on the number of pages, the format (poor-quality scans take longer to prepare) and whether apostilles are still pending. That is why I do not publish a generic turnaround: I calculate it with your folder in front of me, confirm it in writing, and that is the deadline I keep.",
         {
           note: "If your deadline is real (a consulate appointment tomorrow, a court filing), tell me in your first message with the exact date. Within 2 hours I tell you whether I can make it and at what price, with no hidden surcharges.",
         },
@@ -278,8 +278,8 @@ export const en = {
     {
       q: "How long does a complete digital nomad visa file take?",
       a: LARGE_PROJECT_CAPACITY
-        ? `You get a single deadline in writing before I start; individual documents take 24/48 hours. With a capacity of ${LARGE_PROJECT_CAPACITY.en}, most files are ready within a few days.`
-        : "You get a single deadline in writing before I start; individual documents take 24/48 hours.",
+        ? `You get a single deadline in writing before I start; documents of up to 10 pages are delivered the same day. With a capacity of ${LARGE_PROJECT_CAPACITY.en}, most files are ready within a few days.`
+        : "You get a single deadline in writing before I start; documents of up to 10 pages are delivered the same day.",
     },
     {
       q: "Do you work with clients outside Spain?",

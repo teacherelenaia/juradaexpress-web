@@ -6,7 +6,7 @@ const certPrice = DOCUMENTS.find((d) => d.id === "partida-nacimiento")?.price;
 
 export const metadata = {
   title: `Precios de traducción jurada desde ${MIN_PRICE} € (en euros)`,
-  description: `Tarifas de traducción jurada Español ⇆ Inglés desde ${MIN_PRICE} € por documento, entrega en 24/48 h. Presupuesto cerrado al ver el documento.`,
+  description: `Tarifas de traducción jurada Español ⇆ Inglés desde ${MIN_PRICE} € por documento, entrega en el día (hasta 10 páginas). Presupuesto cerrado al ver el documento.`,
   alternates: {
     canonical: "https://juradaexpress.es/precios",
     languages: {
@@ -39,12 +39,12 @@ export default function Page() {
             <tr>
               <td className="p-3">Certificados (nacimiento, matrimonio, penales…)</td>
               <td className="p-3">35–45 €</td>
-              <td className="p-3">24/48 h</td>
+              <td className="p-3">En el día (hasta 10 págs.)</td>
             </tr>
             <tr className="bg-stone-50/50">
               <td className="p-3">Títulos y expedientes</td>
               <td className="p-3">45–60 €</td>
-              <td className="p-3">24/48 h</td>
+              <td className="p-3">En el día (hasta 10 págs.)</td>
             </tr>
             <tr>
               <td className="p-3">Permiso de conducir</td>
@@ -54,7 +54,7 @@ export default function Page() {
             <tr className="bg-stone-50/50">
               <td className="p-3">Certificado de empresa / nóminas</td>
               <td className="p-3">45 €</td>
-              <td className="p-3">24/48 h</td>
+              <td className="p-3">En el día (hasta 10 págs.)</td>
             </tr>
             <tr>
               <td className="p-3">Contratos y notariales</td>
@@ -71,7 +71,7 @@ export default function Page() {
               <td className="p-3">
                 {certPrice != null ? `${certPrice} € por certificado` : "Presupuesto en menos de 2 h"}
               </td>
-              <td className="p-3">24/48 h</td>
+              <td className="p-3">En el día (hasta 10 págs.)</td>
             </tr>
             <tr>
               <td className="p-3">
@@ -103,7 +103,7 @@ export default function Page() {
       </div>
 
       <p className="mt-8 text-sm text-slate-500">
-        * Plazo orientativo 24/48 h para encargos habituales. Más de 20 folios: acordamos calendario específico.
+        * Entrega en el día para documentos de hasta 10 páginas, sin recargo. Más de 10 páginas: plazo cerrado por escrito antes de empezar, normalmente 24-72 h; entregar en el día más de 10 páginas lleva un recargo del 30 %.
       </p>
       <p className="mt-2 text-sm text-slate-500">
         Todos los precios son en euros (€), IVA incluido. Se cobran en euros con
