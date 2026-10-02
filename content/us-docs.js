@@ -91,7 +91,7 @@ const STEPS = (doc) => [
   { t: "Send", d: `A full scan or clear photo of your ${doc.short}, on WhatsApp or by email.` },
   { t: "Quote and deadline", d: "Fixed price in US dollars and delivery date within 2 working hours." },
   { t: "Translation and certification", d: "Full English translation, stamps included, with my signed certificate." },
-  { t: "Delivery", d: `Signed PDF in 24-48 hours; paper copy to the US for ${fmt(US_SHIPPING_USD)} on request.` },
+  { t: "Delivery", d: `Signed PDF the same day for up to 10 pages; paper copy to the US for ${fmt(US_SHIPPING_USD)} on request.` },
 ];
 
 // FAQ comunes (se añaden a las específicas de cada documento hasta 6).
@@ -114,7 +114,7 @@ const FAQ_SHARED = {
   },
   time: {
     q: "How fast can you deliver?",
-    a: "A standard document is translated and certified in 24-48 hours; an order sent in the US evening is under way next morning in Spain. Same-day delivery costs a 30% surcharge.",
+    a: "Documents of up to 10 pages are translated, certified and delivered the same working day (Spain time); larger files get a written deadline before I start, normally 24-72 hours. No surcharge.",
   },
   apostille: {
     q: "Does USCIS require an apostille on my Spanish document?",
@@ -134,10 +134,10 @@ const RAW_DOCS = [
     unit: "certificate",
     metaTitle: "Spanish Birth Certificate Translation for USCIS",
     metaDescription:
-      "Certified English translation of a Spanish birth certificate for USCIS, by a sworn translator appointed in Spain. Fixed price in USD, signed PDF in 24-48h.",
+      "Certified English translation of a Spanish birth certificate for USCIS by a sworn translator in Spain. USD price, signed PDF same day (up to 10 pages).",
     h1: "Certified translation of a Spanish birth certificate for USCIS",
     lead:
-      "A certified translation of a Spanish birth certificate for USCIS is the complete English translation of the <em>certificación literal de nacimiento</em>, stamps and marginal notes included, plus my signed certification of accuracy and competence (8 CFR § 103.2(b)(3)). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310). I translate Spanish civil registry records every week and deliver yours as a signed PDF in 24-48 hours.",
+      "A certified translation of a Spanish birth certificate for USCIS is the complete English translation of the <em>certificación literal de nacimiento</em>, stamps and marginal notes included, plus my signed certification of accuracy and competence (8 CFR § 103.2(b)(3)). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310). I translate Spanish civil registry records every week and deliver yours as a signed PDF the same day (up to 10 pages).",
     image: {
       src: "/fotos/certificacion-firma.jpg",
       alt: "Hand signing the certification page of a translated Spanish birth certificate",
@@ -217,10 +217,10 @@ const RAW_DOCS = [
     unit: "certificate",
     metaTitle: "Spanish Marriage Certificate Translation for USCIS",
     metaDescription:
-      "Certified English translation of a Spanish marriage certificate for USCIS (I-130, I-485) by a sworn translator in Spain. Fixed USD price, PDF in 24-48h.",
+      "Certified English translation of a Spanish marriage certificate for USCIS by a sworn translator in Spain. USD price, PDF same day (up to 10 pages).",
     h1: "Certified translation of a Spanish marriage certificate for USCIS",
     lead:
-      "For a spousal petition (I-130), an adjustment of status (I-485) or a consular visa, USCIS needs your Spanish marriage certificate (<em>certificación literal de matrimonio</em>) in English, complete, with the translator's signed certification under 8 CFR § 103.2(b)(3). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310). I translate the whole record, property regime and marginal notes included, and send you the signed PDF in 24-48 hours.",
+      "For a spousal petition (I-130), an adjustment of status (I-485) or a consular visa, USCIS needs your Spanish marriage certificate (<em>certificación literal de matrimonio</em>) in English, complete, with the translator's signed certification under 8 CFR § 103.2(b)(3). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310). I translate the whole record, property regime and marginal notes included, and send you the signed PDF the same day (up to 10 pages).",
     image: {
       src: "/fotos/foto-firma.jpg",
       alt: "Signing and stamping the translation of a Spanish marriage certificate",
@@ -305,10 +305,10 @@ const RAW_DOCS = [
       "a Spanish divorce decree runs from two pages to twenty depending on the settlement attached, so I price it once I see it.",
     metaTitle: "Spanish Divorce Decree Translation for USCIS",
     metaDescription:
-      "Certified English translation of a Spanish divorce decree (sentencia de divorcio) for USCIS by a sworn translator in Spain. Quote in 2h, PDF in 24-48h.",
+      "Certified English translation of a Spanish divorce decree (sentencia de divorcio) for USCIS by a sworn translator in Spain. PDF same day (up to 10 pages).",
     h1: "Certified translation of a Spanish divorce decree for USCIS",
     lead:
-      "When you or your spouse were previously married in Spain, USCIS requires proof that the marriage legally ended: the Spanish divorce decree (<em>sentencia de divorcio</em>), or the notarial deed or court decree in uncontested cases, translated in full with the translator's certification under 8 CFR § 103.2(b)(3). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310), and I deliver the signed PDF, finality statement included, in 24-48 hours.",
+      "When you or your spouse were previously married in Spain, USCIS requires proof that the marriage legally ended: the Spanish divorce decree (<em>sentencia de divorcio</em>), or the notarial deed or court decree in uncontested cases, translated in full with the translator's certification under 8 CFR § 103.2(b)(3). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310), and I deliver the signed PDF, finality statement included, the same day (up to 10 pages).",
     image: {
       src: "/fotos/escritorio-documentos.jpg",
       alt: "Spanish court documents on a desk ready for certified translation",
@@ -390,10 +390,10 @@ const RAW_DOCS = [
     unit: "certificate",
     metaTitle: "Spanish Criminal Record Certificate Translation (USCIS)",
     metaDescription:
-      "Certified English translation of a Spanish criminal record certificate (antecedentes penales) for USCIS, NVC or US boards. Fixed USD price, PDF in 24-48h.",
+      "Certified English translation of a Spanish criminal record certificate (antecedentes penales) for USCIS or NVC. USD price, PDF same day (up to 10 pages).",
     h1: "Certified translation of a Spanish criminal record certificate for USCIS",
     lead:
-      "The Spanish criminal record certificate (<em>certificado de antecedentes penales</em>), issued by the Ministry of Justice, is the police certificate US authorities ask Spanish residents for: the National Visa Center before a consular interview, USCIS in waiver and some adjustment cases, licensing boards and employers. It must come with a complete English translation and the translator's certification under 8 CFR § 103.2(b)(3). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310). I translate the certificate, its verification code and its apostille, and deliver a signed PDF in 24-48 hours.",
+      "The Spanish criminal record certificate (<em>certificado de antecedentes penales</em>), issued by the Ministry of Justice, is the police certificate US authorities ask Spanish residents for: the National Visa Center before a consular interview, USCIS in waiver and some adjustment cases, licensing boards and employers. It must come with a complete English translation and the translator's certification under 8 CFR § 103.2(b)(3). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310). I translate the certificate, its verification code and its apostille, and deliver a signed PDF the same day (up to 10 pages).",
     image: {
       src: "/fotos/expediente-documentos.jpg",
       alt: "Official Spanish certificates being checked before translation",
@@ -478,7 +478,7 @@ const RAW_DOCS = [
       "Certified word-for-word English translation of a Spanish degree and transcript for WES, ECE and US universities, by a sworn translator in Spain. USD price.",
     h1: "Certified translation of a Spanish university degree for WES and US credential evaluation",
     lead:
-      "World Education Services (WES) and the other US credential evaluators require a complete, word-for-word English translation of every document not issued in English, with the translator's signed certification, before they evaluate a Spanish degree. The same translation serves USCIS when the degree is evidence in an H-1B, EB-2 or EB-3 petition (8 CFR § 103.2(b)(3)). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310). I translate Spanish degrees literally, without converting grades, and deliver a signed PDF in 24-48 hours.",
+      "World Education Services (WES) and the other US credential evaluators require a complete, word-for-word English translation of every document not issued in English, with the translator's signed certification, before they evaluate a Spanish degree. The same translation serves USCIS when the degree is evidence in an H-1B, EB-2 or EB-3 petition (8 CFR § 103.2(b)(3)). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310). I translate Spanish degrees literally, without converting grades, and deliver a signed PDF the same day (up to 10 pages).",
     image: {
       src: "/fotos/estudiante-portatil.jpg",
       alt: "Graduate preparing a Spanish degree and transcript for a credential evaluation",
@@ -564,10 +564,10 @@ const RAW_DOCS = [
       "an ID document is usually one or two pages, but passports with visas and stamps vary, so I price it once I see what you need.",
     metaTitle: "Spanish Passport & DNI Translation for USCIS",
     metaDescription:
-      "Certified English translation of a Spanish passport, DNI or NIE card for USCIS, by a sworn translator in Spain. Fixed quote in 2h, signed PDF in 24-48h.",
+      "Certified English translation of a Spanish passport, DNI or NIE card for USCIS by a sworn translator in Spain. Quote in 2h, PDF same day (up to 10 pages).",
     h1: "Certified translation of a Spanish passport or DNI for USCIS",
     lead:
-      "USCIS asks for a copy of your passport in most applications, and sometimes for your Spanish identity card (<em>DNI</em>) or foreigner's card (<em>TIE</em>). The Spanish passport carries English captions, but its stamps, visas and observations, and the DNI itself, are in Spanish only, and anything in Spanish you submit needs a complete English translation and the translator's certification under 8 CFR § 103.2(b)(3). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310). I tell you honestly whether a translation is needed and deliver a signed PDF in 24-48 hours.",
+      "USCIS asks for a copy of your passport in most applications, and sometimes for your Spanish identity card (<em>DNI</em>) or foreigner's card (<em>TIE</em>). The Spanish passport carries English captions, but its stamps, visas and observations, and the DNI itself, are in Spanish only, and anything in Spanish you submit needs a complete English translation and the translator's certification under 8 CFR § 103.2(b)(3). I am Elena Peñaranda Ortega, sworn translator appointed by the Spanish Ministry of Foreign Affairs in 2009 (no. 7310). I tell you honestly whether a translation is needed and deliver a signed PDF the same day (up to 10 pages).",
     image: {
       src: "/fotos/pasaporte-eeuu.jpg",
       alt: "Passport and identity documents prepared for a US immigration filing",
