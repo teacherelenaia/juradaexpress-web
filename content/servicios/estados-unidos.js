@@ -16,10 +16,10 @@ export const es = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Clientes de Estados Unidos",
   metaTitle: "Traducción jurada para clientes de Estados Unidos",
-  metaDescription: "Traductora jurada del MAEC (nº 7310) para estadounidenses en España y españoles con trámites en EEUU: apostilla, huso horario, tarjeta, PDF en 24/48 h.",
+  metaDescription: "Traductora jurada del MAEC (nº 7310) para estadounidenses en España y españoles con trámites en EEUU: apostilla, huso horario, tarjeta, PDF en el día.",
   h1: "Traducción jurada entre Estados Unidos y España",
   lead:
-    "Si vives en Estados Unidos y vas a pedir un visado para España (nómada digital, no lucrativo, estudios), casarte, comprar una vivienda o solicitar la nacionalidad, tus documentos estadounidenses necesitan apostilla y traducción jurada al español firmada por un traductor nombrado por el Ministerio de Asuntos Exteriores de España. Y si eres español con un trámite en Estados Unidos, tus documentos necesitan una traducción certificada al inglés para USCIS. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y hago las dos cosas 100 % online: presupuesto en menos de 2 horas, pago con tarjeta estadounidense y PDF firmado en 24/48 h.",
+    "Si vives en Estados Unidos y vas a pedir un visado para España (nómada digital, no lucrativo, estudios), casarte, comprar una vivienda o solicitar la nacionalidad, tus documentos estadounidenses necesitan apostilla y traducción jurada al español firmada por un traductor nombrado por el Ministerio de Asuntos Exteriores de España. Y si eres español con un trámite en Estados Unidos, tus documentos necesitan una traducción certificada al inglés para USCIS. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y hago las dos cosas 100 % online: presupuesto en menos de 2 horas, pago con tarjeta estadounidense y PDF firmado en el día (hasta 10 páginas).",
   image: {
     src: "/fotos/pasaporte-eeuu.jpg",
     alt: "Pasaporte de Estados Unidos y tarjetas de embarque sobre un portátil",
@@ -99,7 +99,7 @@ export const es = {
       id: "horario",
       title: "¿Cómo funciona el huso horario y el pago desde Estados Unidos?",
       body: [
-        `${TIMEZONE_NOTE.es}: son 6 horas más que en la costa este y 9 más que en la costa oeste. En la práctica, un encargo que me envías por la noche en Estados Unidos está en marcha a primera hora de la mañana en España, y los documentos habituales te llegan en 24/48 h, a menudo antes de que empiece tu jornada.`,
+        `${TIMEZONE_NOTE.es}: son 6 horas más que en la costa este y 9 más que en la costa oeste. En la práctica, un encargo que me envías por la noche en Estados Unidos está en marcha a primera hora de la mañana en España, y los documentos de hasta 10 páginas te llegan en el día, a menudo antes de que empiece tu jornada.`,
         `El presupuesto es cerrado y en euros; pagas con tu tarjeta estadounidense a través de Stripe y tu banco aplica el cambio a dólares. La entrega es un PDF firmado digitalmente, válido para la presentación telemática. ${INTERNATIONAL_SHIPPING.note.es}.`,
       ],
     },
@@ -119,7 +119,7 @@ export const es = {
     },
     {
       t: "Entrega",
-      d: "PDF firmado en 24/48 h y, si lo necesitas, papel por mensajería a España o a Estados Unidos.",
+      d: "PDF firmado en el día (hasta 10 páginas) y, si lo necesitas, papel por mensajería a España o a Estados Unidos.",
     },
   ],
   faq: [
@@ -141,7 +141,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda un documento habitual?",
-      a: "Certificados, contratos breves y cartas: 24/48 h desde la confirmación del presupuesto. Expedientes completos: un plazo único cerrado por escrito antes de empezar.",
+      a: "Documentos de hasta 10 páginas: en el día desde la confirmación del presupuesto, sin recargo. Expedientes completos: un plazo único cerrado por escrito antes de empezar.",
     },
   ],
   cta: {
@@ -165,10 +165,10 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Clients in the United States",
   metaTitle: "Sworn translator in Spain for Americans",
-  metaDescription: "Sworn translator appointed by Spain (no. 7310) for US citizens moving to Spain: apostilles, SSA certificate of coverage, US card payment, PDF in 24/48h.",
+  metaDescription: "Sworn translator appointed by Spain (no. 7310) for US citizens moving to Spain: apostilles, SSA certificate of coverage, US card payment, PDF same day.",
   h1: "Sworn translation between the United States and Spain",
   lead:
-    "If you live in the United States and are applying for a Spanish visa (digital nomad, non-lucrative, student), getting married in Spain, buying a property or applying for Spanish citizenship, your American documents need an apostille and a sworn translation into Spanish signed by a translator appointed by Spain's Ministry of Foreign Affairs. If you are Spanish with paperwork in the United States, your documents need a certified English translation for USCIS. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I do both fully online: a quote within 2 hours, payment with your US card and a signed PDF in 24/48 hours.",
+    "If you live in the United States and are applying for a Spanish visa (digital nomad, non-lucrative, student), getting married in Spain, buying a property or applying for Spanish citizenship, your American documents need an apostille and a sworn translation into Spanish signed by a translator appointed by Spain's Ministry of Foreign Affairs. If you are Spanish with paperwork in the United States, your documents need a certified English translation for USCIS. I am Elena Peñaranda Ortega, sworn translator no. 7310, and I do both fully online: a quote within 2 hours, payment with your US card and a signed PDF the same day (up to 10 pages).",
   image: {
     src: "/fotos/pasaporte-eeuu.jpg",
     alt: "United States passport and boarding passes on a laptop",
@@ -248,7 +248,7 @@ export const en = {
       id: "timezone",
       title: "How do time zones and payment from the US work?",
       body: [
-        `${TIMEZONE_NOTE.en}: that is 6 hours ahead of the East Coast and 9 hours ahead of the West Coast. In practice, an order you send me in the evening in the US is under way first thing in the morning in Spain, and standard documents reach you within 24/48 hours, often before your working day starts.`,
+        `${TIMEZONE_NOTE.en}: that is 6 hours ahead of the East Coast and 9 hours ahead of the West Coast. In practice, an order you send me in the evening in the US is under way first thing in the morning in Spain, and documents of up to 10 pages reach you the same day, often before your working day starts.`,
         `The quote is fixed and in euros; you pay with your US card through Stripe and your bank converts the amount to dollars. Delivery is a digitally signed PDF, valid for online submission. ${INTERNATIONAL_SHIPPING.note.en}.`,
       ],
     },
@@ -268,7 +268,7 @@ export const en = {
     },
     {
       t: "Delivery",
-      d: "Signed PDF in 24/48 hours and, if you need it, paper by courier to Spain or to the United States.",
+      d: "Signed PDF the same day (up to 10 pages) and, if you need it, paper by courier to Spain or to the United States.",
     },
   ],
   faq: [
@@ -290,7 +290,7 @@ export const en = {
     },
     {
       q: "How long does a standard document take?",
-      a: "Certificates, short contracts and letters: 24/48 hours from confirmation of the quote. Complete files: a single deadline confirmed in writing before I start.",
+      a: "Documents of up to 10 pages: the same day from confirmation of the quote, no surcharge. Complete files: a single deadline confirmed in writing before I start.",
     },
   ],
   cta: {

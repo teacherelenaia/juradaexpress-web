@@ -8,7 +8,7 @@ import {
 export const metadata = {
   title: "Contact — Sworn Spanish Translator, from any country",
   description:
-    "Contact a certified sworn Spanish translator by WhatsApp, email or phone. Instant quote and 24/48h delivery, wherever you are.",
+    "Contact a certified sworn Spanish translator by WhatsApp, email or phone. Instant quote and same-day delivery (up to 10 pages), wherever you are.",
   alternates: {
     canonical: "https://juradaexpress.es/en/contacto",
     languages: {
@@ -73,7 +73,7 @@ export default function Page() {
           before Spanish official bodies — residency, university admissions,
           property, marriage and more. Based in Murcia, Spain, working with
           clients across the country and abroad. Digital delivery worldwide,
-          typically within 24/48h.
+          the same day for documents of up to 10 pages.
         </p>
       </div>
 

@@ -34,7 +34,7 @@ export const es = {
     "Traducción jurada por país: Reino Unido, EE. UU., India, Irlanda, Canadá, Australia, Nueva Zelanda, Sudáfrica, Gibraltar, Pakistán, Nigeria y Filipinas.",
   h1: "Traducción jurada español-inglés para clientes de cualquier país",
   lead:
-    "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el Ministerio de Asuntos Exteriores de España (nº 7310), y trabajo 100 % online con clientes de cualquier país: presupuesto cerrado en menos de 2 horas, pago con tarjeta internacional y PDF firmado digitalmente en 24/48 h. El proceso es el mismo vengas de donde vengas; lo que cambia es qué apostilla o legalización necesita tu documento y qué exige el organismo que lo va a recibir. Aquí tienes una guía por país: seis con página propia y otros seis resumidos más abajo.",
+    "Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el Ministerio de Asuntos Exteriores de España (nº 7310), y trabajo 100 % online con clientes de cualquier país: presupuesto cerrado en menos de 2 horas, pago con tarjeta internacional y PDF firmado digitalmente en el día (hasta 10 páginas). El proceso es el mismo vengas de donde vengas; lo que cambia es qué apostilla o legalización necesita tu documento y qué exige el organismo que lo va a recibir. Aquí tienes una guía por país: seis con página propia y otros seis resumidos más abajo.",
   image: {
     src: "/fotos/paises-documentos.jpg",
     alt: "Documentos y pasaporte sobre un escritorio, listos para traducir",
@@ -153,7 +153,7 @@ export const es = {
     },
     {
       q: "¿Mi país no aparece en esta página?",
-      a: "Escríbeme igualmente. El proceso es el mismo para cualquier país: documento escaneado, presupuesto cerrado, pago con tarjeta y PDF firmado en 24/48 h. Lo único que cambia es la apostilla o la legalización, que te indico según tu país y tu trámite.",
+      a: "Escríbeme igualmente. El proceso es el mismo para cualquier país: documento escaneado, presupuesto cerrado, pago con tarjeta y PDF firmado en el día (hasta 10 páginas). Lo único que cambia es la apostilla o la legalización, que te indico según tu país y tu trámite.",
     },
     {
       q: "¿Sirve tu traducción en mi país si presento un documento español?",
@@ -186,7 +186,7 @@ export const en = {
     "Sworn translation by country: UK, USA, India, Ireland, Canada, Australia, New Zealand, South Africa, Gibraltar, Pakistan, Nigeria and the Philippines.",
   h1: "Sworn Spanish-English translation for clients in any country",
   lead:
-    "I am Elena Peñaranda Ortega, a sworn translator of English appointed by Spain's Ministry of Foreign Affairs (no. 7310), and I work fully online with clients in any country: a fixed quote in under 2 hours, payment by international card and a digitally signed PDF in 24/48 hours. The process is the same wherever you are; what changes is which apostille or legalisation your document needs and what the receiving body requires. Here is a guide by country: six with their own page and six more summarised below.",
+    "I am Elena Peñaranda Ortega, a sworn translator of English appointed by Spain's Ministry of Foreign Affairs (no. 7310), and I work fully online with clients in any country: a fixed quote in under 2 hours, payment by international card and a digitally signed PDF the same day (up to 10 pages). The process is the same wherever you are; what changes is which apostille or legalisation your document needs and what the receiving body requires. Here is a guide by country: six with their own page and six more summarised below.",
   image: {
     src: "/fotos/paises-documentos.jpg",
     alt: "Documents and a passport on a desk, ready for translation",
@@ -305,7 +305,7 @@ export const en = {
     },
     {
       q: "My country is not on this page?",
-      a: "Write to me anyway. The process is the same for any country: scanned document, fixed quote, card payment and a signed PDF in 24/48 hours. The only thing that changes is the apostille or legalisation, which I point out according to your country and your procedure.",
+      a: "Write to me anyway. The process is the same for any country: scanned document, fixed quote, card payment and a signed PDF the same day (up to 10 pages). The only thing that changes is the apostille or legalisation, which I point out according to your country and your procedure.",
     },
     {
       q: "Will your translation be accepted in my country if I submit a Spanish document?",

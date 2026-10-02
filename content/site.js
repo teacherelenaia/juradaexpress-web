@@ -42,7 +42,7 @@ export const GUARANTEES = {
     {
       id: "plazo",
       icon: "clock",
-      text: "Plazo cerrado por escrito antes de cobrar",
+      text: "Entrega en el día hasta 10 páginas, plazo por escrito antes de cobrar",
     },
   ],
   en: [
@@ -62,7 +62,7 @@ export const GUARANTEES = {
     {
       id: "plazo",
       icon: "clock",
-      text: "Deadline confirmed in writing before you pay",
+      text: "Same-day delivery up to 10 pages, deadline in writing before you pay",
     },
   ],
 };
@@ -152,9 +152,25 @@ export const PAPER_DELIVERY_SPAIN = {
   },
 };
 
-// Recargo por urgencia (entrega en menos de 24 h) de la calculadora de
-// precio: 30 % sobre el precio de catálogo.
+// Promesa de plazo de toda la web (oferta comercial, 02/10/2026): hasta
+// SAME_DAY_MAX_PAGES páginas, entrega en el día en PDF firmado y sin
+// recargo; más páginas, plazo cerrado por escrito antes de empezar
+// (normalmente 24-72 h). URGENCY_SURCHARGE: recargo del 30 % sobre el
+// precio de catálogo, solo para entregar más de 10 páginas en el día.
+export const SAME_DAY_MAX_PAGES = 10;
 export const URGENCY_SURCHARGE = 0.3;
+export const TURNAROUND = {
+  es: {
+    short: `en el día (hasta ${SAME_DAY_MAX_PAGES} páginas)`,
+    long: `Los documentos de hasta ${SAME_DAY_MAX_PAGES} páginas se entregan en el día, en PDF firmado y sin recargo; los más largos tienen plazo cerrado por escrito antes de empezar, normalmente 24-72 h.`,
+    urgent: `más de ${SAME_DAY_MAX_PAGES} páginas en el día`,
+  },
+  en: {
+    short: `the same day (up to ${SAME_DAY_MAX_PAGES} pages)`,
+    long: `Documents of up to ${SAME_DAY_MAX_PAGES} pages are delivered the same day as a signed PDF, with no surcharge; longer files get a written deadline before work starts, normally 24-72 hours.`,
+    urgent: `more than ${SAME_DAY_MAX_PAGES} pages the same day`,
+  },
+};
 
 // Capacidad confirmada por Elena el 07/09/2026. Si algún día no puede
 // garantizarse, poner en null: la web deja de citar la cifra y dice

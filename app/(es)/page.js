@@ -24,7 +24,7 @@ export const metadata = {
   // (content/documents.js) el título queda en 62 caracteres; la versión
   // larga con "Traductora jurada MAEC 7310" superaba los 65 y se descartó.
   title: `Traducción Jurada de Inglés Online desde ${MIN_PRICE} € | Jurada Express`,
-  description: `Traductora jurada de inglés desde ${SINCE} (MAEC nº 7310). Traducción jurada español-inglés desde ${MIN_PRICE} € por documento, PDF firmado en 24/48 h, 100 % online.`,
+  description: `Traductora jurada de inglés desde ${SINCE} (MAEC nº 7310). Traducción jurada español-inglés desde ${MIN_PRICE} €, PDF firmado en el día (hasta 10 páginas), 100 % online.`,
   alternates: {
     canonical: "https://juradaexpress.es/",
     languages: {
@@ -35,7 +35,7 @@ export const metadata = {
   },
   openGraph: {
     title: `Traducción Jurada de Inglés Online desde ${MIN_PRICE} € | Jurada Express`,
-    description: `Traductora jurada de inglés desde ${SINCE} (MAEC nº 7310). Traducción jurada español-inglés desde ${MIN_PRICE} € por documento, PDF firmado en 24/48 h, 100 % online.`,
+    description: `Traductora jurada de inglés desde ${SINCE} (MAEC nº 7310). Traducción jurada español-inglés desde ${MIN_PRICE} €, PDF firmado en el día (hasta 10 páginas), 100 % online.`,
     url: "https://juradaexpress.es/",
     siteName: "Jurada Express",
     type: "website",
@@ -59,28 +59,28 @@ const COMMON_DOCUMENTS = [
     name: "Partida de nacimiento",
     for: "Nacionalidad, matrimonio, NIE y Registro Civil",
     price: priceOf("partida-nacimiento"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 págs.)",
     href: "/traduccion-jurada-partida-nacimiento",
   },
   {
     name: "Certificado de antecedentes penales",
     for: "Extranjería, visados y ofertas de empleo",
     price: priceOf("antecedentes-penales"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 págs.)",
     href: "/traduccion-jurada-certificado-penales",
   },
   {
     name: "Certificado de matrimonio",
     for: "Registro Civil, residencia y pensiones",
     price: priceOf("certificado-matrimonio"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 págs.)",
     href: "/traduccion-jurada-certificado-matrimonio",
   },
   {
     name: "Título universitario",
     for: "UCAS, homologación y colegiación profesional",
     price: priceOf("titulo-universitario"),
-    time: "24/48 h",
+    time: "En el día (hasta 10 págs.)",
     href: "/traduccion-jurada-titulo-universitario",
   },
   {
@@ -94,7 +94,7 @@ const COMMON_DOCUMENTS = [
     name: "Cualquier otro documento",
     for: "Elige el tuyo en el catálogo y pide presupuesto",
     price: null,
-    time: "24/48 h habitual",
+    time: "En el día (hasta 10 págs.)",
     href: "/documentos",
   },
 ];
@@ -123,8 +123,8 @@ const FAQ = [
     a: "Sí. Entregamos PDF firmado digitalmente y, si lo necesitas, envío físico a tu dirección.",
   },
   {
-    q: "¿Puedo tener la traducción en 24/48 h?",
-    a: "Para documentos habituales, sí. Si son más de 20 folios, acordamos un calendario específico.",
+    q: "¿Puedo tener la traducción en el día?",
+    a: "Sí, hasta 10 páginas y sin recargo. Los expedientes más largos tienen plazo cerrado por escrito antes de empezar, normalmente 24-72 h; entregar en el día más de 10 páginas lleva un recargo del 30 %.",
   },
   {
     q: "¿Trabajas con clientes fuera de España?",
@@ -137,8 +137,8 @@ const FAQ = [
   {
     q: "¿Cuánto tardas en traducir un expediente completo de nómada digital?",
     a: LARGE_PROJECT_CAPACITY
-      ? `Te doy un plazo único cerrado por escrito antes de empezar; los documentos sueltos salen en 24/48 h y puedo asumir ${LARGE_PROJECT_CAPACITY.es}, así que un expediente completo suele estar listo en pocos días.`
-      : "Te doy un plazo único cerrado por escrito antes de empezar; los documentos sueltos salen en 24/48 h.",
+      ? `Te doy un plazo único cerrado por escrito antes de empezar; los documentos de hasta 10 páginas salen en el día y puedo asumir ${LARGE_PROJECT_CAPACITY.es}, así que un expediente completo suele estar listo en pocos días.`
+      : "Te doy un plazo único cerrado por escrito antes de empezar; los documentos de hasta 10 páginas salen en el día.",
   },
 ];
 
@@ -154,10 +154,10 @@ export default function Page() {
               <em className="font-display italic text-brand-gold-700">
                 Español ⇆ Inglés
               </em>{" "}
-              con validez oficial, en 24/48 h
+              con validez oficial, en el día
             </h1>
             <p className="mt-5 text-xl text-slate-700">
-              Validez oficial · Entrega en 24/48 h · Clientes en España, Reino
+              Validez oficial · En el día hasta 10 páginas · Clientes en España, Reino
               Unido, EE. UU., India y cualquier país
             </p>
             <p className="mt-4">
@@ -178,8 +178,8 @@ export default function Page() {
               nombrada por el MAEC en {SINCE}, con {yearsOfExperience()} años
               de experiencia. Todo el proceso es digital: me envías el
               documento escaneado, pagas con tarjeta desde cualquier país y
-              recibes la traducción en PDF firmado el mismo día o al
-              siguiente. También hago traducción certificada para USCIS.
+              recibes la traducción en PDF firmado en el día si no pasa de
+              10 páginas. También hago traducción certificada para USCIS.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
@@ -437,7 +437,7 @@ export default function Page() {
                 d: "Traduzco, firmo y sello personalmente tu documento.",
               },
               {
-                t: "Entrega 24/48 h",
+                t: "Entrega en el día (hasta 10 páginas)",
                 d: "PDF firmado digitalmente y, si lo necesitas, papel por mensajería.",
               },
             ]}

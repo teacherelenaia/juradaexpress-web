@@ -27,8 +27,8 @@ const faqs = [
     a: "Yes. We deliver a digitally signed PDF and, if you need it, a physical copy shipped to your address — anywhere in the world.",
   },
   {
-    q: "Can I get my translation in 24/48h?",
-    a: "For standard documents, yes. For documents over 20 pages, we agree on a specific delivery schedule.",
+    q: "Can I get my translation the same day?",
+    a: "Yes, for documents of up to 10 pages, with no surcharge. Longer files get a written deadline before work starts, normally 24-72 hours; same-day delivery of more than 10 pages carries a 30% surcharge.",
   },
   {
     q: "Which documents can be sworn-translated?",

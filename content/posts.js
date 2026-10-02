@@ -35,7 +35,7 @@ export const posts = [
         <li>Plazo deseado, si es urgente.</li>
       </ol>
 
-      <p>Con eso te respondemos con <strong>precio</strong> y <strong>plazo</strong> orientativo (24/48 h para documentos breves).</p>
+      <p>Con eso te respondemos con <strong>precio</strong> y <strong>plazo</strong> orientativo (en el día para documentos de hasta 10 páginas).</p>
 
       <p>¿No sabes por dónde empezar? Consulta nuestro <a href="/documentos">catálogo de documentos</a> con los precios más habituales.</p>
 
@@ -69,7 +69,7 @@ export const posts = [
         <li><strong>Extensión del documento:</strong> un título universitario simple (una página) cuesta menos que un expediente académico completo con notas de varios cursos.</li>
         <li><strong>Complejidad del contenido:</strong> nombres de asignaturas, calificaciones y terminología académica específica pueden requerir más tiempo de traducción.</li>
         <li><strong>Idioma:</strong> en la combinación español-inglés, al haber muchos traductores jurados acreditados, los precios suelen ser más ajustados que en idiomas menos comunes.</li>
-        <li><strong>Urgencia:</strong> un plazo estándar de 24/48h no suele tener recargo; pedir el mismo día sí puede tenerlo.</li>
+        <li><strong>Urgencia:</strong> la entrega en el día de documentos de hasta 10 páginas no tiene recargo; entregar en el día más de 10 páginas sí lo tiene (30 %).</li>
       </ul>
       <h2>Precio orientativo</h2>
       <p>Para un título universitario estándar (una página), el precio habitual se sitúa entre <strong>45€ y 60€</strong>. Si necesitas también el expediente académico completo con todas las asignaturas, el precio depende del número de páginas y se calcula con presupuesto cerrado tras ver el documento.</p>
@@ -195,7 +195,7 @@ export const posts = [
       </ul>
 
       <h2>¿Cuánto se tarda en traducir estos documentos?</h2>
-      <p>Con el documento ya apostillado y en buena calidad de escaneo, el plazo habitual es de <strong>24 a 48 horas</strong>. Si el expediente académico es muy extenso (varios cursos con muchas asignaturas), puede llevar algo más.</p>
+      <p>Con el documento ya apostillado y en buena calidad de escaneo, la entrega es <strong>en el día para documentos de hasta 10 páginas</strong>. Si el expediente académico es más extenso (varios cursos con muchas asignaturas), te doy un plazo por escrito antes de empezar, normalmente 24-72 h.</p>
 
       <p>
         ¿Tienes tus documentos listos y quieres presupuesto? Escríbenos por
@@ -317,7 +317,7 @@ export const posts = [
       </ul>
 
       <h2>Un aviso importante sobre los plazos</h2>
-      <p>Los expedientes de extranjería suelen tener plazos ajustados para subsanar documentación. Si te piden una traducción jurada con poco margen, dínoslo al pedir presupuesto — trabajamos con plazos de 24/48h, y si es realmente urgente, intentamos ajustarnos siempre que sea posible.</p>
+      <p>Los expedientes de extranjería suelen tener plazos ajustados para subsanar documentación. Si te piden una traducción jurada con poco margen, dínoslo al pedir presupuesto — entregamos en el día los documentos de hasta 10 páginas, y si es realmente urgente, intentamos ajustarnos siempre que sea posible.</p>
 
       <h2>¿Y si el documento está dañado o es una copia?</h2>
       <p>Podemos traducir a partir de una fotocopia o escaneo, pero el traductor debe hacer constar en la traducción que se ha trabajado a partir de una copia y no del original. Si el organismo exige expresamente el original, tenlo en cuenta antes de presentar el expediente.</p>
@@ -350,7 +350,7 @@ export const posts = [
       <p>Mi consejo práctico: cuando pidas tu cita en la DGT, revisa la lista exacta de documentos que te indican. Si en ella aparece cualquier papel de la DVLA o el propio permiso "con traducción", ya sabes lo que toca — y si tienes dudas con la lista delante, mándamela por WhatsApp y te digo en minutos qué se traduce y qué no.</p>
 
       <h2>¿Cuánto cuesta y cuánto se tarda?</h2>
-      <p>El permiso de conducir es de los documentos más breves que existen, y el precio lo refleja: <strong>desde 40 €</strong>, con entrega habitual en <strong>24 horas</strong> — si me llega por la mañana, muchas veces sale el mismo día. Los certificados de la DVLA cuentan como documento aparte, también breve. Recibes un PDF firmado digitalmente, válido para presentarlo telemáticamente, y el papel por mensajería si tu oficina lo pide.</p>
+      <p>El permiso de conducir es de los documentos más breves que existen, y el precio lo refleja: <strong>desde 40 €</strong>, con entrega <strong>en el día</strong>. Los certificados de la DVLA cuentan como documento aparte, también breve. Recibes un PDF firmado digitalmente, válido para presentarlo telemáticamente, y el papel por mensajería si tu oficina lo pide.</p>
 
       <h2>¿Necesita apostilla?</h2>
       <p>Normalmente <strong>no</strong>. La DGT no suele exigir apostilla ni para el permiso ni para los certificados de la DVLA, a diferencia de lo que pasa con los <a href="/traduccion-jurada-certificado-penales">antecedentes penales</a> en los trámites de extranjería. Si tu oficina concreta la pidiera — pasa muy de tarde en tarde —, la apostilla viene en el mismo documento y la traduzco sin coste adicional.</p>
@@ -397,7 +397,7 @@ export const posts = [
       <p>Todos los documentos extranjeros deben presentarse con su <strong>traducción jurada</strong> al español, firmada y sellada por traductor nombrado por el MAEC.</p>
 
       <h2>¿Se apostillan antes o después de traducir?</h2>
-      <p>Siempre <strong>antes</strong>. El certificado se apostilla en el país que lo emitió y después se traduce todo junto, apostilla incluida. En el caso británico: el certificado de nacimiento del GRO y el CNI se apostillan en la <em>Legalisation Office</em>; una vez en tu correo, me los envías escaneados y te los devuelvo traducidos en 24/48 h.</p>
+      <p>Siempre <strong>antes</strong>. El certificado se apostilla en el país que lo emitió y después se traduce todo junto, apostilla incluida. En el caso británico: el certificado de nacimiento del GRO y el CNI se apostillan en la <em>Legalisation Office</em>; una vez en tu correo, me los envías escaneados y te los devuelvo traducidos en el día (hasta 10 páginas).</p>
 
       <h2>¿Por qué importa tanto la vigencia de 3-6 meses?</h2>
       <p>Es el error que más expedientes retrasa. La mayoría de Registros Civiles exigen que los certificados extranjeros tengan <strong>menos de 3 a 6 meses</strong> en el momento de presentarlos (cada Registro fija su criterio — confírmalo en el tuyo). Como el expediente matrimonial tarda en tramitarse, el orden correcto es: pregunta primero en tu Registro qué vigencia aplican, pide los certificados cuando ya tengas fecha para iniciar el expediente, apostíllalos y tradúcelos entonces. La traducción no caduca, pero de nada sirve traducir en enero un certificado que presentarás en junio.</p>
@@ -432,7 +432,7 @@ export const posts = [
     image: "/blog/post-visado-uk.jpg",
     alt: "Manos revisando un formulario oficial sobre una carpeta de documentos para un visado",
     html: `
-      <p>El Home Office <strong>no exige traducción jurada</strong>: pide una <em>certified translation</em>, es decir, una traducción completa acompañada de la confirmación del traductor de que es fiel al original, con su nombre, firma, fecha y datos de contacto. La traducción jurada española cumple esos requisitos y va más allá, porque la firma una traductora nombrada por el Ministerio de Asuntos Exteriores cuyo número puede comprobar cualquier funcionario. Merece la pena elegir la jurada cuando el mismo documento va a servir también en España, cuando lo pide un abogado o un tribunal, o cuando quieres que nadie discuta quién firmó la traducción. Los certificados habituales (nacimiento, matrimonio, antecedentes penales) cuestan <strong>desde ${MIN_PRICE} €</strong> y se entregan en 24/48 h. Soy Elena Peñaranda, traductora jurada de inglés nº 7310, y en esta guía te cuento qué documentos españoles se traducen para un visado, para el <em>settled status</em> y para la nacionalidad británica, y cuándo basta con la certificada.</p>
+      <p>El Home Office <strong>no exige traducción jurada</strong>: pide una <em>certified translation</em>, es decir, una traducción completa acompañada de la confirmación del traductor de que es fiel al original, con su nombre, firma, fecha y datos de contacto. La traducción jurada española cumple esos requisitos y va más allá, porque la firma una traductora nombrada por el Ministerio de Asuntos Exteriores cuyo número puede comprobar cualquier funcionario. Merece la pena elegir la jurada cuando el mismo documento va a servir también en España, cuando lo pide un abogado o un tribunal, o cuando quieres que nadie discuta quién firmó la traducción. Los certificados habituales (nacimiento, matrimonio, antecedentes penales) cuestan <strong>desde ${MIN_PRICE} €</strong> y se entregan en el día (hasta 10 páginas). Soy Elena Peñaranda, traductora jurada de inglés nº 7310, y en esta guía te cuento qué documentos españoles se traducen para un visado, para el <em>settled status</em> y para la nacionalidad británica, y cuándo basta con la certificada.</p>
 
       <h2>Qué exige exactamente el Home Office en una traducción</h2>
       <p>Las guías de <strong>UK Visas and Immigration (UKVI)</strong> repiten la misma regla para todos los trámites: cualquier documento que no esté en inglés o galés debe ir acompañado de una traducción completa que incluya:</p>
@@ -502,7 +502,7 @@ export const posts = [
         <li><strong>Me envías los documentos escaneados</strong> por WhatsApp, email o el <a href="/documentos">catálogo</a>, completos y legibles.</li>
         <li><strong>Te digo en menos de 2 horas laborables</strong> qué necesita traducción, si te conviene jurada o certificada en cada caso, un precio cerrado y una fecha de entrega por escrito.</li>
         <li><strong>Traduzco y certifico</strong> cada documento con la fórmula que exige el UKVI, mis datos de contacto en la propia certificación y, en la jurada, mi sello y firma electrónica.</li>
-        <li><strong>Recibes el PDF firmado</strong> en 24/48 h para los certificados breves. Súbelo tal cual a la plataforma del Home Office: reescanearlo rompe la firma electrónica. Si un trámite pide papel, envío el original por mensajería al Reino Unido; el coste del transportista va en el presupuesto.</li>
+        <li><strong>Recibes el PDF firmado</strong> en el día para los certificados breves. Súbelo tal cual a la plataforma del Home Office: reescanearlo rompe la firma electrónica. Si un trámite pide papel, envío el original por mensajería al Reino Unido; el coste del transportista va en el presupuesto.</li>
       </ol>
       <p>Si lo que tienes es un documento británico que necesitas presentar en España (una partida de nacimiento del GRO, un certificado de la policía, un <em>grant of probate</em>), el camino es el inverso y ahí sí es obligatoria la jurada: lo cuento en la guía para <a href="/traduccion-jurada-britanicos-espana">británicos en España</a>. Y si dudas de la validez de una traducción que ya te han entregado, revisa <a href="/blog/como-saber-si-una-traduccion-jurada-es-valida">cómo saber si una traducción jurada es válida</a>.</p>
       <p>
@@ -530,7 +530,7 @@ export const posts = [
       },
       {
         q: "¿Cuánto cuesta traducir los documentos para un visado de pareja?",
-        a: `El certificado de matrimonio cuesta ${eur("certificado-matrimonio")}, cada partida de nacimiento ${eur("partida-nacimiento")} y el certificado de empresa o nómina ${eur("certificado-empresa")}, con entrega en 24/48 h. Los extractos y contratos se presupuestan al verlos; con el expediente completo te doy un único precio cerrado en menos de 2 horas.`,
+        a: `El certificado de matrimonio cuesta ${eur("certificado-matrimonio")}, cada partida de nacimiento ${eur("partida-nacimiento")} y el certificado de empresa o nómina ${eur("certificado-empresa")}, con entrega en el día (hasta 10 páginas). Los extractos y contratos se presupuestan al verlos; con el expediente completo te doy un único precio cerrado en menos de 2 horas.`,
       },
     ],
   },
@@ -549,7 +549,7 @@ export const posts = [
     image: "/blog/post-ucas.jpg",
     alt: "Estudiante trabajando en la biblioteca — solicitudes a universidades del Reino Unido",
     html: `
-      <p>Para estudiar en el Reino Unido necesitas traducir al inglés, con una <em>certified translation</em>, los documentos académicos y de identidad que estén en español: para un <strong>grado</strong>, el título de Bachiller y las notas de Bachillerato y EBAU; para un <strong>máster</strong>, el <a href="/traduccion-jurada-titulo-universitario">título universitario</a> y el expediente académico; para un <strong>intercambio o Erasmus</strong>, casi nada, porque tu universidad española emite los certificados en inglés; y para el <strong>visado de estudiante</strong>, además, los justificantes económicos si están en español. La traducción jurada española cumple los requisitos británicos de <em>certified translation</em> con holgura. El título universitario cuesta <strong>${eur("titulo-universitario")}</strong> y se entrega en 24/48 h; el expediente se presupuesta al verlo. Soy Elena Peñaranda, traductora jurada de inglés nº 7310 del MAEC, y cada verano traduzco expedientes de estudiantes que se van a Reino Unido; esto es lo que les explico antes de empezar.</p>
+      <p>Para estudiar en el Reino Unido necesitas traducir al inglés, con una <em>certified translation</em>, los documentos académicos y de identidad que estén en español: para un <strong>grado</strong>, el título de Bachiller y las notas de Bachillerato y EBAU; para un <strong>máster</strong>, el <a href="/traduccion-jurada-titulo-universitario">título universitario</a> y el expediente académico; para un <strong>intercambio o Erasmus</strong>, casi nada, porque tu universidad española emite los certificados en inglés; y para el <strong>visado de estudiante</strong>, además, los justificantes económicos si están en español. La traducción jurada española cumple los requisitos británicos de <em>certified translation</em> con holgura. El título universitario cuesta <strong>${eur("titulo-universitario")}</strong> y se entrega en el día; el expediente se presupuesta al verlo. Soy Elena Peñaranda, traductora jurada de inglés nº 7310 del MAEC, y cada verano traduzco expedientes de estudiantes que se van a Reino Unido; esto es lo que les explico antes de empezar.</p>
 
       <h2>Primero, ¿en qué caso estás?</h2>
       <p>Los cuatro caminos hacia una universidad británica piden documentos distintos, y traducir de más es tan habitual como traducir de menos. Localízate en la tabla y ve al apartado que te corresponde.</p>
@@ -575,7 +575,7 @@ export const posts = [
         <li><strong>Tarjeta o certificado de calificaciones de la EBAU</strong> (PAU o EvAU según la comunidad), que es lo que convierte la oferta condicional en firme.</li>
         <li>Certificado de inglés (IELTS, Cambridge o el que acepte esa universidad). Ya está en inglés: no se traduce.</li>
       </ul>
-      <p>Cada universidad publica sus requisitos de traducción, y todos se parecen: traducción completa, hecha por un traductor profesional, con su nombre, firma, fecha y datos de contacto. La traducción jurada española lleva todo eso y, además, mi nombramiento verificable en el <a href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx" target="_blank" rel="noopener noreferrer">listado del MAEC</a>. Un consejo que ahorra dinero: envía primero solo lo que pida la oferta condicional y deja las notas definitivas de la EBAU para julio; se traducen en 24/48 h y no te frenan la matrícula.</p>
+      <p>Cada universidad publica sus requisitos de traducción, y todos se parecen: traducción completa, hecha por un traductor profesional, con su nombre, firma, fecha y datos de contacto. La traducción jurada española lleva todo eso y, además, mi nombramiento verificable en el <a href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx" target="_blank" rel="noopener noreferrer">listado del MAEC</a>. Un consejo que ahorra dinero: envía primero solo lo que pida la oferta condicional y deja las notas definitivas de la EBAU para julio; se traducen en el día y no te frenan la matrícula.</p>
 
       <h2>Máster y doctorado: título y expediente</h2>
       <p>Aquí los dos protagonistas son el <strong><a href="/traduccion-jurada-titulo-universitario">título universitario</a></strong> y el <strong>expediente académico</strong> (la certificación académica personal con todas las asignaturas, créditos y notas). Tres detalles que cambian el presupuesto:</p>
@@ -620,7 +620,7 @@ export const posts = [
         <li><strong>Me envías los documentos escaneados</strong> por WhatsApp, email o el <a href="/documentos">catálogo</a>: PDF o foto nítida, con sellos y firmas legibles (en <a href="/blog/como-escanear-bien-documentos-con-el-movil">cómo escanear bien con el móvil</a> tienes los trucos).</li>
         <li><strong>Te confirmo en menos de 2 horas laborables</strong> qué necesita traducción de verdad, un precio cerrado y una fecha de entrega por escrito.</li>
         <li><strong>Traduzco, certifico, firmo y sello</strong> cada documento, con las asignaturas, notas y nombres escritos igual en todos.</li>
-        <li><strong>Recibes el PDF firmado electrónicamente</strong> en 24/48 h para los documentos breves; el expediente, en la fecha acordada. Súbelo tal cual a la plataforma de la universidad o del visado: si lo reescaneas, la firma electrónica deja de verificarse. Si te piden papel, lo envío por mensajería.</li>
+        <li><strong>Recibes el PDF firmado electrónicamente</strong> en el día para los documentos breves; el expediente, en la fecha acordada. Súbelo tal cual a la plataforma de la universidad o del visado: si lo reescaneas, la firma electrónica deja de verificarse. Si te piden papel, lo envío por mensajería.</li>
       </ol>
       <p>Calendario realista: entre enero y abril se presentan las solicitudes y suele bastar el expediente provisional; en junio y julio llegan las notas definitivas; en agosto y septiembre, la matrícula y el visado. La traducción nunca es el cuello de botella, pero en agosto se acumulan los expedientes: si puedes, tradúcelo en julio.</p>
       <p>
@@ -641,7 +641,7 @@ export const posts = [
       },
       {
         q: "¿Cuánto cuesta traducir el título y el expediente para un máster en Reino Unido?",
-        a: `El título universitario de una página cuesta ${eur("titulo-universitario")} y se entrega en 24/48 h. El expediente académico se presupuesta al verlo, con precio cerrado en menos de 2 horas, porque depende del número de páginas y asignaturas.`,
+        a: `El título universitario de una página cuesta ${eur("titulo-universitario")} y se entrega en el día. El expediente académico se presupuesta al verlo, con precio cerrado en menos de 2 horas, porque depende del número de páginas y asignaturas.`,
       },
       {
         q: "¿Necesito visado para un Erasmus o un intercambio en Reino Unido?",
@@ -673,9 +673,9 @@ export const posts = [
       <div class="table-wrap"><table>
         <thead><tr><th>Documento</th><th>Plazo habitual</th></tr></thead>
         <tbody>
-          <tr><td><a href="/traduccion-jurada-permiso-conducir">Permiso de conducir</a>, DNI, pasaporte</td><td>24 h (a veces el mismo día)</td></tr>
-          <tr><td><a href="/traduccion-jurada-partida-nacimiento">Certificados</a> (nacimiento, matrimonio, penales)</td><td>24/48 h</td></tr>
-          <tr><td><a href="/traduccion-jurada-titulo-universitario">Título universitario</a></td><td>24/48 h</td></tr>
+          <tr><td><a href="/traduccion-jurada-permiso-conducir">Permiso de conducir</a>, DNI, pasaporte</td><td>En el día</td></tr>
+          <tr><td><a href="/traduccion-jurada-partida-nacimiento">Certificados</a> (nacimiento, matrimonio, penales)</td><td>En el día (hasta 10 págs.)</td></tr>
+          <tr><td><a href="/traduccion-jurada-titulo-universitario">Título universitario</a></td><td>En el día (hasta 10 págs.)</td></tr>
           <tr><td>Expediente académico</td><td>2-4 días laborables, según páginas</td></tr>
           <tr><td><a href="/traduccion-jurada-contrato-escritura">Contratos y escrituras</a></td><td>Fecha exacta con el presupuesto</td></tr>
           <tr><td>Expedientes completos (herencias, visados)</td><td>Se planifica el lote entero</td></tr>
@@ -692,7 +692,7 @@ export const posts = [
       </ul>
 
       <h2>¿Y si lo necesito para ya?</h2>
-      <p>Las urgencias existen y las atiendo cuando el calendario lo permite: un documento breve que llega a primera hora puede salir el mismo día. Lo que no hago es prometer plazos imposibles: si tu documento son 40 páginas para mañana, te lo diré claramente y buscaremos la alternativa real — entrega por fases, priorizar el documento que abre el trámite, o confirmar con el organismo si acepta la presentación parcial.</p>
+      <p>Las urgencias existen y las atiendo cuando el calendario lo permite: un documento de hasta 10 páginas sale en el día sin recargo. Lo que no hago es prometer plazos imposibles: si tu documento son 40 páginas para mañana, te lo diré claramente y buscaremos la alternativa real — entrega por fases, priorizar el documento que abre el trámite, o confirmar con el organismo si acepta la presentación parcial.</p>
 
       <h2>La regla de oro</h2>
       <p>Traduce cuando tengas el documento definitivo (¡y apostillado, si toca!), pero pide presupuesto en cuanto sepas qué te van a pedir: así el hueco en calendario queda reservado y los plazos dejan de ser una incógnita.</p>
@@ -804,7 +804,7 @@ export const posts = [
         <li>Nombra los archivos con orden: <em>01-antecedentes-penales.pdf</em>, <em>02-contrato.pdf</em>… Te devuelvo las traducciones con la misma numeración y un índice.</li>
         <li>Dime en qué consulado presentas la solicitud (o si es ante la UGE) y la fecha de tu cita.</li>
       </ol>
-      <p>Con eso te contesto en menos de 2 horas laborables con la revisión de la lista, el precio cerrado del lote y un único plazo de entrega por escrito. Los documentos sueltos salen en 24/48 h; un expediente completo suele estar listo en pocos días. Si vienes de <a href="/traduccion-jurada-estados-unidos">Estados Unidos</a> o de <a href="/traduccion-jurada-india">India</a>, tienes una guía propia con las particularidades de tu país.</p>
+      <p>Con eso te contesto en menos de 2 horas laborables con la revisión de la lista, el precio cerrado del lote y un único plazo de entrega por escrito. Los documentos de hasta 10 páginas salen en el día; un expediente completo suele estar listo en pocos días. Si vienes de <a href="/traduccion-jurada-estados-unidos">Estados Unidos</a> o de <a href="/traduccion-jurada-india">India</a>, tienes una guía propia con las particularidades de tu país.</p>
 
       <h2>¿Vale la traducción en PDF para el consulado?</h2>
       <p>Para la presentación telemática, sí: cada traducción lleva mi firma electrónica, verificable con un clic, y mi sello de traductora jurada nº 7310, comprobable en el listado oficial del Ministerio de Asuntos Exteriores. Si tu consulado exige papel, te envío los originales sellados por mensajería a España o a tu país.</p>
@@ -856,7 +856,7 @@ export const posts = [
       <p>Sí. Lo que revisa USCIS es la certificación, no el lugar donde se hizo la traducción. Una traducción certificada preparada desde Murcia es tan válida como una hecha en Miami, siempre que sea completa (sellos, apostillas y notas manuscritas incluidos) y lleve la certificación con firma, fecha y contacto. Mi condición de traductora jurada del MAEC no es un requisito para USCIS, pero añade una credencial verificable que los oficiales entienden.</p>
 
       <h2>¿Acepta España una certified translation hecha en Estados Unidos?</h2>
-      <p>En general, no. Extranjería, el registro civil o el consulado piden traducción jurada por traductor nombrado por el Ministerio español (o legalizada por vía consular, que es más lenta y cara). Si ya tienes una certified translation de tu certificado de nacimiento estadounidense, lo normal es que tengas que volver a traducirlo como jurada. Si me lo envías con la apostilla, sale en 24/48 h.</p>
+      <p>En general, no. Extranjería, el registro civil o el consulado piden traducción jurada por traductor nombrado por el Ministerio español (o legalizada por vía consular, que es más lenta y cara). Si ya tienes una certified translation de tu certificado de nacimiento estadounidense, lo normal es que tengas que volver a traducirlo como jurada. Si me lo envías con la apostilla, sale en el día.</p>
 
       <h2>¿Y si presento el mismo documento en los dos países?</h2>
       <p>Pasa más de lo que parece: una pareja hispano-estadounidense que se casa en España y después pide la green card, o un español que solicita la nacionalidad estadounidense y a la vez mantiene trámites en el registro civil español. En esos casos preparo las dos versiones a la vez, con los mismos criterios (mismos nombres, fechas y términos), para que ningún oficial encuentre discrepancias entre una y otra. Si vives en Estados Unidos, en la <a href="/traduccion-jurada-estados-unidos">guía para clientes de Estados Unidos</a> tienes el detalle de apostillas, huso horario y pago con tarjeta estadounidense.</p>
@@ -923,7 +923,7 @@ export const posts = [
       <p>Si me envías un documento sin apostilla y el consulado la exige, te lo digo antes de empezar. Tienes más sobre la apostilla en general en <a href="/blog/que-es-la-apostilla-de-la-haya">qué es la apostilla de La Haya</a>.</p>
 
       <h2>¿Cuánto tarda y cómo se paga desde India?</h2>
-      <p>Un documento habitual está traducido en 24/48 h; un expediente completo de visado de estudios (con transcripts largos) lleva un único plazo cerrado por escrito que te doy en menos de 2 horas laborables. Mi horario es de 9:00 a 20:00, hora peninsular española, entre 3 horas y media y 4 horas y media por detrás de India: si me escribes a media mañana, te contesto a primera hora de mi jornada. El pago es con tarjeta india (Visa, Mastercard o RuPay internacional) a través de Stripe, en euros; si tu tarjeta tiene bloqueados los pagos internacionales, actívalos en la app del banco antes de pagar. Recibes un PDF firmado digitalmente, válido para el consulado y para la plataforma de visados; si te exigen papel, lo envío por mensajería a India.</p>
+      <p>Un documento de hasta 10 páginas está traducido en el día; un expediente completo de visado de estudios (con transcripts largos) lleva un único plazo cerrado por escrito que te doy en menos de 2 horas laborables. Mi horario es de 9:00 a 20:00, hora peninsular española, entre 3 horas y media y 4 horas y media por detrás de India: si me escribes a media mañana, te contesto a primera hora de mi jornada. El pago es con tarjeta india (Visa, Mastercard o RuPay internacional) a través de Stripe, en euros; si tu tarjeta tiene bloqueados los pagos internacionales, actívalos en la app del banco antes de pagar. Recibes un PDF firmado digitalmente, válido para el consulado y para la plataforma de visados; si te exigen papel, lo envío por mensajería a India.</p>
 
       <h2>¿Y los documentos españoles para usarlos en India?</h2>
       <p>El camino inverso también existe: certificados españoles de nacimiento o matrimonio, títulos, antecedentes penales o documentos de empresa que hay que presentar ante una administración, universidad o empleador en India. Los traduzco al inglés con mi firma y sello, y cuando el organismo indio lo pide, el original se apostilla antes en España.</p>
@@ -978,7 +978,7 @@ export const posts = [
         <li><strong>Consigue los originales actualizados</strong>: los certificados del Registro Civil y de antecedentes penales caducan a efectos de muchos trámites, así que pídelos con el visado a la vista.</li>
         <li><strong>Apostilla lo que lo necesite</strong> antes de traducir.</li>
         <li><strong>Escanéalo todo</strong> completo, apostilla incluida, y envíamelo por WhatsApp o por el formulario. Te doy un presupuesto cerrado en menos de 2 horas laborables y un único plazo para el lote.</li>
-        <li><strong>Recibes el PDF firmado</strong> en 24/48 h para un documento habitual, con la certificación adaptada al país. Si te piden papel, lo envío por mensajería.</li>
+        <li><strong>Recibes el PDF firmado</strong> en el día para un documento de hasta 10 páginas, con la certificación adaptada al país. Si te piden papel, lo envío por mensajería.</li>
       </ol>
 
       <h2>Cuánto margen dejar</h2>
@@ -1070,7 +1070,7 @@ export const posts = [
         <li><strong>El traductor no es jurado o no lo es de ese idioma.</strong> No hay arreglo posible sobre esa traducción; hace falta una nueva. Reclama a quien te la vendió, guardando el rechazo por escrito como prueba.</li>
         <li><strong>El funcionario se equivoca.</strong> Ocurre, sobre todo con la firma electrónica. Aporta el enlace al listado del MAEC y, si es un PDF, el informe de validación de la firma. Si insiste en papel, el traductor puede enviarte el original en papel por mensajería; en mi caso, el precio de la traducción es el mismo, solo se añade el envío.</li>
       </ul>
-      <p>Y si necesitas rehacerla, no partas de cero a ciegas: envíame el documento original y el escrito de rechazo, te digo en menos de 2 horas qué falló y te doy precio cerrado. Los certificados habituales (nacimiento, matrimonio, antecedentes penales) están <a href="/precios">desde 35 €</a> y se entregan en 24/48 h.</p>
+      <p>Y si necesitas rehacerla, no partas de cero a ciegas: envíame el documento original y el escrito de rechazo, te digo en menos de 2 horas qué falló y te doy precio cerrado. Los certificados habituales (nacimiento, matrimonio, antecedentes penales) están <a href="/precios">desde 35 €</a> y se entregan en el día (hasta 10 páginas).</p>
       <p>
         <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20me%20han%20rechazado%20una%20traducci%C3%B3n%20jurada%20y%20quiero%20saber%20qu%C3%A9%20ha%20fallado">Escríbeme por WhatsApp</a>
         con el documento y el motivo del rechazo, o consulta la página de
@@ -1115,7 +1115,7 @@ export const posts = [
     image: "/blog/real-extranjeria.jpg",
     alt: "Pasaporte y certificados preparados para el expediente de nacionalidad española",
     html: `
-      <p>Para la nacionalidad española por residencia necesitas, como mínimo, dos documentos de tu país de origen con <strong>apostilla y traducción jurada</strong>: el <a href="/traduccion-jurada-partida-nacimiento">certificado de nacimiento</a> y el <a href="/traduccion-jurada-certificado-penales">certificado de antecedentes penales</a>. Si estás casado o casada, casi siempre también el <a href="/traduccion-jurada-certificado-matrimonio">certificado de matrimonio</a>. La traducción jurada de cada uno de estos certificados cuesta <strong>desde 35 €</strong> y se entrega en <strong>24/48 h</strong> en PDF firmado digitalmente, válido para la presentación telemática. Soy Elena Peñaranda, traductora jurada de inglés nº 7310 del MAEC, y preparo estos expedientes cada semana para clientes británicos, estadounidenses e indios; esta guía es lo que les cuento antes de empezar.</p>
+      <p>Para la nacionalidad española por residencia necesitas, como mínimo, dos documentos de tu país de origen con <strong>apostilla y traducción jurada</strong>: el <a href="/traduccion-jurada-partida-nacimiento">certificado de nacimiento</a> y el <a href="/traduccion-jurada-certificado-penales">certificado de antecedentes penales</a>. Si estás casado o casada, casi siempre también el <a href="/traduccion-jurada-certificado-matrimonio">certificado de matrimonio</a>. La traducción jurada de cada uno de estos certificados cuesta <strong>desde 35 €</strong> y se entrega <strong>en el día</strong> en PDF firmado digitalmente, válido para la presentación telemática. Soy Elena Peñaranda, traductora jurada de inglés nº 7310 del MAEC, y preparo estos expedientes cada semana para clientes británicos, estadounidenses e indios; esta guía es lo que les cuento antes de empezar.</p>
 
       <p>Un aviso antes de seguir: los años de residencia exigidos, las tasas, los exámenes del Instituto Cervantes y el estado de tu expediente los fija el Ministerio de Justicia y los conoce mejor tu abogado o el propio portal de trámites. Yo me ocupo de la parte documental: qué traducir, qué apostillar y en qué orden, para que no te devuelvan el expediente por un papel.</p>
 
@@ -1165,9 +1165,9 @@ export const posts = [
       <div class="table-wrap"><table>
         <thead><tr><th>Documento</th><th>Reino Unido</th><th>Estados Unidos</th><th>India</th><th>Traducción jurada</th></tr></thead>
         <tbody>
-          <tr><td>Nacimiento</td><td>GRO / NRS / GRONI, certificado completo. Apostilla FCDO</td><td>Registro vital del estado. Apostilla del Secretary of State</td><td>Municipalidad, en inglés. Apostilla MEA</td><td>Desde 35 €, 24/48 h</td></tr>
-          <tr><td>Antecedentes penales</td><td>ACRO Police Certificate. Apostilla FCDO</td><td>FBI Identity History Summary. Apostilla del Department of State</td><td>PCC de Passport Seva. Apostilla MEA</td><td>Desde 35 €, 24/48 h</td></tr>
-          <tr><td>Matrimonio (si aplica)</td><td>GRO o registro local. Apostilla FCDO</td><td>Condado o estado. Apostilla del Secretary of State</td><td>Registrador de matrimonios. Apostilla MEA</td><td>Desde 35 €, 24/48 h</td></tr>
+          <tr><td>Nacimiento</td><td>GRO / NRS / GRONI, certificado completo. Apostilla FCDO</td><td>Registro vital del estado. Apostilla del Secretary of State</td><td>Municipalidad, en inglés. Apostilla MEA</td><td>Desde 35 €, en el día</td></tr>
+          <tr><td>Antecedentes penales</td><td>ACRO Police Certificate. Apostilla FCDO</td><td>FBI Identity History Summary. Apostilla del Department of State</td><td>PCC de Passport Seva. Apostilla MEA</td><td>Desde 35 €, en el día</td></tr>
+          <tr><td>Matrimonio (si aplica)</td><td>GRO o registro local. Apostilla FCDO</td><td>Condado o estado. Apostilla del Secretary of State</td><td>Registrador de matrimonios. Apostilla MEA</td><td>Desde 35 €, en el día</td></tr>
         </tbody>
       </table></div>
 
@@ -1204,7 +1204,7 @@ export const posts = [
       },
       {
         q: "¿Cuánto tardan las traducciones del expediente completo?",
-        a: "Cada certificado habitual (nacimiento, penales, matrimonio) se entrega en 24/48 h. Si me envías los tres o cuatro documentos juntos, te doy una única fecha para el lote, normalmente dentro de ese mismo plazo.",
+        a: "Cada certificado habitual (nacimiento, penales, matrimonio) se entrega en el día. Si me envías los tres o cuatro documentos juntos, te doy una única fecha para el lote, normalmente dentro de ese mismo plazo.",
       },
     ],
   },
@@ -1224,7 +1224,7 @@ export const posts = [
     image: "/blog/post-irse-de-espana.jpg",
     alt: "Pasaporte y documentos preparados para una solicitud de inmigración a Canadá",
     html: `
-      <p>Immigration, Refugees and Citizenship Canada (<strong>IRCC</strong>) acepta documentos en inglés o en francés. Todo lo que esté en español se presenta con una <strong>traducción completa</strong> y, si quien la firma no es un <em>certified translator</em> canadiense (miembro en activo de una asociación provincial de traductores), con un <strong>affidavit</strong> del traductor en el que jura que domina los dos idiomas y que la traducción es exacta, además de una copia del documento original. Mi traducción jurada al inglés lleva de serie la certificación de exactitud, mi nombre, mi firma, mi sello con el nº 7310 del MAEC, la fecha y mis datos de contacto; lo que no puedo garantizarte es que tu oficina de IRCC equipare un nombramiento oficial del Estado español a la afiliación canadiense, así que si tu programa exige el affidavit, lo resolvemos antes de empezar. Los certificados habituales (antecedentes penales, nacimiento, matrimonio) cuestan <strong>desde ${MIN_PRICE} €</strong> y se entregan en 24/48 h. Soy Elena Peñaranda, traductora jurada de inglés, y esta guía recoge lo que explico a quien prepara Express Entry, un permiso de estudios o el patrocinio de un familiar desde España.</p>
+      <p>Immigration, Refugees and Citizenship Canada (<strong>IRCC</strong>) acepta documentos en inglés o en francés. Todo lo que esté en español se presenta con una <strong>traducción completa</strong> y, si quien la firma no es un <em>certified translator</em> canadiense (miembro en activo de una asociación provincial de traductores), con un <strong>affidavit</strong> del traductor en el que jura que domina los dos idiomas y que la traducción es exacta, además de una copia del documento original. Mi traducción jurada al inglés lleva de serie la certificación de exactitud, mi nombre, mi firma, mi sello con el nº 7310 del MAEC, la fecha y mis datos de contacto; lo que no puedo garantizarte es que tu oficina de IRCC equipare un nombramiento oficial del Estado español a la afiliación canadiense, así que si tu programa exige el affidavit, lo resolvemos antes de empezar. Los certificados habituales (antecedentes penales, nacimiento, matrimonio) cuestan <strong>desde ${MIN_PRICE} €</strong> y se entregan en el día (hasta 10 páginas). Soy Elena Peñaranda, traductora jurada de inglés, y esta guía recoge lo que explico a quien prepara Express Entry, un permiso de estudios o el patrocinio de un familiar desde España.</p>
 
       <h2>Qué exige exactamente IRCC en una traducción</h2>
       <p>El Centro de ayuda de IRCC lo resume en tres piezas para cualquier documento que no esté en inglés o francés:</p>
@@ -1290,7 +1290,7 @@ export const posts = [
         <li><strong>Me envías los documentos escaneados</strong> por WhatsApp, email o la <a href="/documentos">calculadora del catálogo</a>, completos y legibles, y me dices el programa (Express Entry, estudios, patrocinio) y, si lo sabes, qué formato acepta tu oficina.</li>
         <li><strong>En menos de 2 horas laborables</strong> te confirmo qué se traduce, si conviene affidavit y su coste, un precio cerrado y una fecha por escrito.</li>
         <li><strong>Traduzco al inglés, certifico, firmo y sello</strong> cada documento, con mis datos de contacto y la declaración de competencia y exactitud en la certificación; los nombres y las fechas quedan iguales en todos.</li>
-        <li><strong>Recibes el PDF firmado electrónicamente</strong> en 24/48 h para los certificados breves; súbelo tal cual al portal de IRCC, sin reescanearlo. Si hace falta affidavit notarial o papel, lo enviamos por mensajería a Canadá con el coste del transportista en el presupuesto.</li>
+        <li><strong>Recibes el PDF firmado electrónicamente</strong> en el día para los certificados breves; súbelo tal cual al portal de IRCC, sin reescanearlo. Si hace falta affidavit notarial o papel, lo enviamos por mensajería a Canadá con el coste del transportista en el presupuesto.</li>
       </ol>
       <p>Si tu caso es el contrario, documentos canadienses para un trámite en España, la <a href="/traduccion-jurada-canada">guía para Canadá</a> explica la apostilla de Global Affairs Canada y la traducción jurada al español. Y para comparar con lo que piden Reino Unido, Irlanda y Australia, tienes <a href="/blog/traduccion-jurada-para-irse-de-espana-reino-unido-irlanda-canada-australia">traducción jurada para irse de España</a>.</p>
       <p>
@@ -1318,7 +1318,7 @@ export const posts = [
       },
       {
         q: "¿Cuánto cuesta traducir los documentos para patrocinar a mi pareja?",
-        a: `El certificado de matrimonio cuesta ${eur("certificado-matrimonio")}, cada partida de nacimiento ${eur("partida-nacimiento")} y el certificado de antecedentes penales ${eur("antecedentes-penales")}, con entrega en 24/48 h. Las pruebas de convivencia (empadronamiento, contratos, facturas) se presupuestan al verlas.`,
+        a: `El certificado de matrimonio cuesta ${eur("certificado-matrimonio")}, cada partida de nacimiento ${eur("partida-nacimiento")} y el certificado de antecedentes penales ${eur("antecedentes-penales")}, con entrega en el día (hasta 10 páginas). Las pruebas de convivencia (empadronamiento, contratos, facturas) se presupuestan al verlas.`,
       },
     ],
   },
@@ -1336,7 +1336,7 @@ export const posts = [
     image: "/blog/post-india-mea.jpg",
     alt: "Título universitario indio con apostilla del MEA preparado para su homologación en España",
     html: `
-      <p>Para que un título universitario de la India valga en España hay que pedir su <strong>homologación</strong> (si da acceso a una profesión regulada, como medicina, enfermería, ingeniería o arquitectura) o su <strong>equivalencia</strong> a nivel de Grado o Máster (para el resto), ante el Ministerio competente en universidades, con tres documentos apostillados por el <strong>Ministry of External Affairs (MEA)</strong> de la India y traducidos de forma jurada al español: el <a href="/traduccion-jurada-titulo-universitario">título</a> (<em>degree certificate</em>), el expediente completo (<em>consolidated marksheet</em> o <em>transcript</em>) y, en la homologación, el plan de estudios. La traducción jurada del título cuesta <strong>${eur("titulo-universitario")}</strong> y se entrega en 24/48 h; el expediente se presupuesta al verlo. Soy Elena Peñaranda, traductora jurada de inglés nº 7310, y cada mes traduzco expedientes de universidades indias para este trámite; esta es la guía que doy a mis clientes antes de empezar.</p>
+      <p>Para que un título universitario de la India valga en España hay que pedir su <strong>homologación</strong> (si da acceso a una profesión regulada, como medicina, enfermería, ingeniería o arquitectura) o su <strong>equivalencia</strong> a nivel de Grado o Máster (para el resto), ante el Ministerio competente en universidades, con tres documentos apostillados por el <strong>Ministry of External Affairs (MEA)</strong> de la India y traducidos de forma jurada al español: el <a href="/traduccion-jurada-titulo-universitario">título</a> (<em>degree certificate</em>), el expediente completo (<em>consolidated marksheet</em> o <em>transcript</em>) y, en la homologación, el plan de estudios. La traducción jurada del título cuesta <strong>${eur("titulo-universitario")}</strong> y se entrega en el día; el expediente se presupuesta al verlo. Soy Elena Peñaranda, traductora jurada de inglés nº 7310, y cada mes traduzco expedientes de universidades indias para este trámite; esta es la guía que doy a mis clientes antes de empezar.</p>
 
       <p>Un aviso honesto: la resolución (si te homologan, qué equivalencia te conceden y cuánto tarda) la decide el Ministerio, y los plazos reales se miden en meses. Yo me ocupo de que la parte documental llegue bien a la primera: apostilla correcta, traducción completa y coherente, y ningún requerimiento por un papel.</p>
 
@@ -1376,11 +1376,11 @@ export const posts = [
       <div class="table-wrap"><table>
         <thead><tr><th>Documento</th><th>¿Apostilla MEA?</th><th>Traducción jurada</th><th>Plazo</th></tr></thead>
         <tbody>
-          <tr><td>Degree certificate (1 página)</td><td>Sí</td><td>${eur("titulo-universitario")}</td><td>24/48 h</td></tr>
-          <tr><td>Provisional certificate</td><td>Sí, si lo presentas</td><td>${eur("titulo-universitario")}</td><td>24/48 h</td></tr>
+          <tr><td>Degree certificate (1 página)</td><td>Sí</td><td>${eur("titulo-universitario")}</td><td>En el día (hasta 10 págs.)</td></tr>
+          <tr><td>Provisional certificate</td><td>Sí, si lo presentas</td><td>${eur("titulo-universitario")}</td><td>En el día (hasta 10 págs.)</td></tr>
           <tr><td>Consolidated marksheet / transcript</td><td>Sí</td><td>${eur("expediente-academico")}</td><td>Fecha cerrada con el presupuesto</td></tr>
           <tr><td>Syllabus / plan de estudios</td><td>Normalmente basta el sello de la universidad; confírmalo</td><td>Presupuesto cerrado en menos de 2 h</td><td>Según extensión</td></tr>
-          <tr><td>Certificado de registro profesional</td><td>Sí</td><td>Presupuesto cerrado en menos de 2 h</td><td>24/48 h</td></tr>
+          <tr><td>Certificado de registro profesional</td><td>Sí</td><td>Presupuesto cerrado en menos de 2 h</td><td>En el día (hasta 10 págs.)</td></tr>
           <tr><td>Pasaporte</td><td>No</td><td>No se traduce</td><td>—</td></tr>
         </tbody>
       </table></div>
@@ -1421,7 +1421,7 @@ export const posts = [
       },
       {
         q: "¿Cuánto cuesta traducir el título y el transcript para la homologación?",
-        a: `El título universitario de una página cuesta ${eur("titulo-universitario")} y se entrega en 24/48 h. El transcript o consolidated marksheet depende del número de páginas y asignaturas, así que te doy precio cerrado en menos de 2 horas al verlo. Con el lote completo, un único precio y una única fecha.`,
+        a: `El título universitario de una página cuesta ${eur("titulo-universitario")} y se entrega en el día. El transcript o consolidated marksheet depende del número de páginas y asignaturas, así que te doy precio cerrado en menos de 2 horas al verlo. Con el lote completo, un único precio y una única fecha.`,
       },
     ],
   },

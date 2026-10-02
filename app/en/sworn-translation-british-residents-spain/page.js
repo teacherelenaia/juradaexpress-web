@@ -28,7 +28,7 @@ const PROCEDURES = [
     apostille:
       "Apostille: yes for the ACRO certificate (immigration offices ask for it); birth and marriage depend on the office — check first, and I'll translate it apostille included.",
     price: priceOf("antecedentes-penales"),
-    time: "24/48h",
+    time: "Same day (up to 10 pages)",
     href: "/traduccion-jurada-certificado-penales",
   },
   {
@@ -36,7 +36,7 @@ const PROCEDURES = [
     docs: "Usually your passport and rental contract or deeds are enough; some town halls ask for a sworn translation of birth certificates for children.",
     apostille: "Apostille: usually not.",
     price: priceOf("partida-nacimiento"),
-    time: "24/48h",
+    time: "Same day (up to 10 pages)",
     href: "/traduccion-jurada-partida-nacimiento",
   },
   {
@@ -53,7 +53,7 @@ const PROCEDURES = [
     docs: "Birth certificate and Certificate of No Impediment (CNI); if either of you is divorced, the decree absolute.",
     apostille: "Apostille: yes, on the UK certificates.",
     price: priceOf("partida-nacimiento"),
-    time: "24/48h",
+    time: "Same day (up to 10 pages)",
     href: "/traduccion-jurada-certificado-matrimonio",
   },
   {
@@ -69,7 +69,7 @@ const PROCEDURES = [
     docs: "UK employment records, HMRC or DWP letters and birth certificates for Spanish pension paperwork.",
     apostille: "Apostille: depends on the office — I'll confirm when I see the document.",
     price: priceOf("certificado-empresa"),
-    time: "24/48h",
+    time: "Same day (up to 10 pages)",
     href: "/en/documentos",
   },
 ];

@@ -126,7 +126,7 @@ export async function POST(req) {
   const lines = [
     `Documento: ${docName}`,
     `Páginas: ${pages}`,
-    `Urgencia: ${urgent ? "urgente (< 24 h, +30 %)" : "normal (24/48 h)"}`,
+    `Urgencia: ${urgent ? "urgente (más de 10 páginas en el día, +30 %)" : "normal (en el día hasta 10 páginas)"}`,
     `Entrega: ${paper ? "PDF firmado + papel por mensajería en España" : "PDF firmado"}`,
     `Estimación mostrada: ${
       price != null ? `${price} €` : `presupuesto en menos de 2 h (catálogo desde ${MIN_PRICE} €)`

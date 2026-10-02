@@ -25,7 +25,7 @@ const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
 
 export const metadata = {
   title: `Traductor jurado de inglés en Murcia · desde ${MIN_PRICE} €`,
-  description: `Traductora jurada de inglés en Murcia (MAEC nº 7310). PDF firmado en 24/48 h, papel en 24 h en la capital. Extranjería, Registro Civil, UMU y UCAM. Desde ${MIN_PRICE} €.`,
+  description: `Traductora jurada de inglés en Murcia (MAEC nº 7310). PDF en el día (10 págs.), papel en 24 h. Extranjería, Registro Civil, UMU y UCAM. Desde ${MIN_PRICE} €.`,
   alternates: {
     canonical: `${BASE}${PATH}`,
   },
@@ -135,7 +135,7 @@ const FAQ = [
   },
   {
     q: "¿Cuánto tarda en llegar la traducción en papel en Murcia?",
-    a: "En Murcia capital y pedanías, normalmente al día siguiente de la entrega digital (24 h); en el resto de la Región, 24/48 h. El papel lleva firma manuscrita y sello y es la misma traducción que el PDF.",
+    a: "En Murcia capital y pedanías, normalmente al día siguiente de la entrega digital (24 h); en el resto de la Región, uno o dos días laborables. El papel lleva firma manuscrita y sello y es la misma traducción que el PDF.",
   },
   {
     q: "¿La traducción jurada vale en la Oficina de Extranjería de Murcia y en el Registro Civil?",
@@ -184,7 +184,7 @@ export default function Page() {
         desde {SINCE} ({yearsOfExperience()} años de nombramiento vigente).
         Trabajo con clientes de Murcia capital, de las pedanías y de toda
         la Región: me envías el documento escaneado, te doy precio cerrado en
-        menos de 2 horas y recibes el PDF firmado en 24/48 h. Y si tu trámite
+        menos de 2 horas y recibes el PDF firmado en el día (hasta 10 páginas). Y si tu trámite
         exige la traducción en papel, en Murcia capital la tienes normalmente
         al día siguiente. Los documentos habituales cuestan desde{" "}
         <span className="tabular-nums">{MIN_PRICE} €</span>.
@@ -223,16 +223,16 @@ export default function Page() {
           </a>
           , y en menos de 2 horas te respondo con precio cerrado y plazo real.
           Pagas con tarjeta o transferencia y recibes la traducción jurada en
-          PDF firmado electrónicamente en 24/48 h, con la misma validez que el
+          PDF firmado electrónicamente en el día (hasta 10 páginas), con la misma validez que el
           papel para la presentación telemática en Extranjería, Registro Civil,
           universidad o sede electrónica.
         </p>
         <p>
           <strong className="text-slate-900">Entrega en papel en 24 h en Murcia capital.</strong>{" "}
           Si tu organismo pide el original con firma manuscrita y sello, lo
-          imprimo, lo firmo y sello a mano y sale por mensajería el mismo día
-          que la entrega digital. En la capital y las pedanías suele llegar al
-          día siguiente; en el resto de la Región, en 24/48 h. El coste del
+          imprimo, lo firmo y sello a mano y sale por mensajería el día
+          de la entrega digital. En la capital y las pedanías suele llegar al
+          día siguiente; en el resto de la Región, en uno o dos días laborables. El coste del
           envío va indicado en el presupuesto y no hay recargo por la versión
           en papel además del PDF.
         </p>
@@ -371,8 +371,8 @@ export default function Page() {
           el título universitario,{" "}
           <span className="tabular-nums">{priceOf("titulo-universitario")} €</span>.
           Contratos, escrituras y expedientes largos se presupuestan al ver el
-          documento, con precio cerrado en menos de 2 horas. Plazo habitual:
-          24/48 h. Consulta la{" "}
+          documento, con precio cerrado en menos de 2 horas. Plazo:
+          en el día hasta 10 páginas. Consulta la{" "}
           <a href="/precios" className="link">
             tabla de precios completa
           </a>{" "}
@@ -391,7 +391,7 @@ export default function Page() {
       </SectionHeading>
       <p className="mt-4 max-w-[68ch] text-slate-600">
         La traducción jurada es válida en toda España y el PDF firmado llega
-        igual a cualquier ciudad; el papel, por mensajería en 24/48 h. Tengo
+        igual a cualquier ciudad; el papel, por mensajería en uno o dos días laborables. Tengo
         páginas con los trámites habituales de:
       </p>
       <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">

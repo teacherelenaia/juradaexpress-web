@@ -20,7 +20,7 @@ export const es = {
   metaDescription: "Traducción jurada al español de documentos indios en inglés (nacimiento, matrimonio, PCC, títulos) para visados en el Consulado de España. Apostilla MEA.",
   h1: "Traducción jurada de documentos de India para trámites en España",
   lead:
-    "La traducción jurada de documentos indios para España es la traducción al español, firmada y sellada por una traductora nombrada por el Ministerio de Asuntos Exteriores de España, de los documentos emitidos en inglés en India que pide el Consulado de España (Nueva Delhi o Bombay) o la administración española: certificado de nacimiento y matrimonio, police clearance certificate, títulos y transcripts, cartas de empleador y extractos bancarios, todos con la apostilla del Ministry of External Affairs (MEA). Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y los traduzco 100 % online con entrega en PDF firmado en 24/48 h y pago con tarjeta india.",
+    "La traducción jurada de documentos indios para España es la traducción al español, firmada y sellada por una traductora nombrada por el Ministerio de Asuntos Exteriores de España, de los documentos emitidos en inglés en India que pide el Consulado de España (Nueva Delhi o Bombay) o la administración española: certificado de nacimiento y matrimonio, police clearance certificate, títulos y transcripts, cartas de empleador y extractos bancarios, todos con la apostilla del Ministry of External Affairs (MEA). Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y los traduzco 100 % online con entrega en PDF firmado en el día (hasta 10 páginas) y pago con tarjeta india.",
   image: {
     src: "/fotos/estudiante-portatil.jpg",
     alt: "Estudiante trabajando con un portátil en una biblioteca universitaria",
@@ -131,7 +131,7 @@ export const es = {
       id: "horario",
       title: "¿Cómo funciona el envío, el pago y el huso horario desde India?",
       body: [
-        `${TIMEZONE_NOTE.es}. India va entre 3 horas y media y 4 horas y media por delante de España, así que si me escribes a media mañana en India te contesto a primera hora de mi jornada y un documento habitual te llega en 24/48 h.`,
+        `${TIMEZONE_NOTE.es}. India va entre 3 horas y media y 4 horas y media por delante de España, así que si me escribes a media mañana en India te contesto a primera hora de mi jornada y un documento de hasta 10 páginas te llega en el día.`,
         `Me envías el escaneo completo de cada documento (con la apostilla) por WhatsApp o email; te doy precio cerrado en euros en menos de 2 horas laborables y pagas con tarjeta india (Visa, Mastercard o RuPay internacional) a través de Stripe. Recibes un PDF firmado digitalmente, válido para la presentación en el consulado y en la plataforma de visados. ${INTERNATIONAL_SHIPPING.note.es}.`,
       ],
     },
@@ -151,7 +151,7 @@ export const es = {
     },
     {
       t: "Entrega",
-      d: "PDF firmado en 24/48 h para el consulado o la plataforma; papel por mensajería si te lo exigen.",
+      d: "PDF firmado en el día (hasta 10 páginas) para el consulado o la plataforma; papel por mensajería si te lo exigen.",
     },
   ],
   faq: [
@@ -200,7 +200,7 @@ export const en = {
   metaDescription: "Sworn Spanish translation of Indian documents (birth, marriage, PCC, degrees) for student, work and family visas at the Spanish consulate. MEA apostille.",
   h1: "Sworn translation of Indian documents for procedures in Spain",
   lead:
-    "A sworn translation of Indian documents for Spain is the Spanish translation, signed and stamped by a translator appointed by Spain's Ministry of Foreign Affairs, of the English-language documents issued in India that the Spanish consulate (New Delhi or Mumbai) or the Spanish administration ask for: birth and marriage certificates, police clearance certificate, degrees and transcripts, employer letters and bank statements, all apostilled by the Ministry of External Affairs (MEA). I am Elena Peñaranda Ortega, sworn translator no. 7310, and I translate them fully online, delivered as a signed PDF in 24/48 hours and paid with your Indian card.",
+    "A sworn translation of Indian documents for Spain is the Spanish translation, signed and stamped by a translator appointed by Spain's Ministry of Foreign Affairs, of the English-language documents issued in India that the Spanish consulate (New Delhi or Mumbai) or the Spanish administration ask for: birth and marriage certificates, police clearance certificate, degrees and transcripts, employer letters and bank statements, all apostilled by the Ministry of External Affairs (MEA). I am Elena Peñaranda Ortega, sworn translator no. 7310, and I translate them fully online, delivered as a signed PDF the same day (up to 10 pages) and paid with your Indian card.",
   image: {
     src: "/fotos/estudiante-portatil.jpg",
     alt: "Student working on a laptop in a university library",
@@ -306,7 +306,7 @@ export const en = {
       id: "timezone",
       title: "How do sending, payment and time zones work from India?",
       body: [
-        `${TIMEZONE_NOTE.en}. India is three and a half to four and a half hours ahead of Spain, so if you message me mid-morning in India I reply at the start of my working day, and a standard document reaches you within 24/48 hours.`,
+        `${TIMEZONE_NOTE.en}. India is three and a half to four and a half hours ahead of Spain, so if you message me mid-morning in India I reply at the start of my working day, and a document of up to 10 pages reaches you the same day.`,
         `You send me a complete scan of each document (with the apostille) on WhatsApp or by email; I give you a fixed price in euros within 2 working hours and you pay with your Indian card (Visa, Mastercard or international RuPay) through Stripe. You receive a digitally signed PDF, valid for submission at the consulate and on the visa platform. ${INTERNATIONAL_SHIPPING.note.en}.`,
       ],
     },
@@ -326,7 +326,7 @@ export const en = {
     },
     {
       t: "Delivery",
-      d: "Signed PDF in 24/48 hours for the consulate or the platform; paper by courier if required.",
+      d: "Signed PDF the same day (up to 10 pages) for the consulate or the platform; paper by courier if required.",
     },
   ],
   faq: [
