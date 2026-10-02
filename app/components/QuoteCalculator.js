@@ -32,7 +32,7 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { upload as blobUpload } from "@vercel/blob/client";
 import { DOCUMENTS } from "../../content/documents";
-import { PAPER_DELIVERY_SPAIN, URGENCY_SURCHARGE } from "../../content/site";
+import { PAPER_DELIVERY_SPAIN, URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES, TURNAROUND } from "../../content/site";
 import { SectionHeading } from "./ui";
 import { IconUpload, IconFileText } from "./Icons";
 import { trackAdsConversion } from "./AdsConversion";
@@ -61,8 +61,8 @@ const COPY = {
     pages: "Número de páginas",
     pagesHint: "De 1 a 20. Si son más, elige 20 y te lo presupuesto al verlo.",
     urgency: "Urgencia",
-    urgencyNormal: "Normal · 24/48 h",
-    urgencyUrgent: `Urgente · menos de 24 h (+${Math.round(URGENCY_SURCHARGE * 100)} %)`,
+    urgencyNormal: `Normal · ${TURNAROUND.es.short}`,
+    urgencyUrgent: `Urgente · ${TURNAROUND.es.urgent} (+${Math.round(URGENCY_SURCHARGE * 100)} %)`,
     delivery: "Entrega",
     deliveryPdf: "PDF firmado (incluido)",
     deliveryPaper: "PDF + papel por mensajería en España",
@@ -122,8 +122,8 @@ const COPY = {
       document: "Documento",
       pages: "Páginas",
       urgency: "Urgencia",
-      normal: "normal (24/48 h)",
-      urgent: "urgente (menos de 24 h)",
+      normal: `normal (${TURNAROUND.es.short})`,
+      urgent: `urgente (${TURNAROUND.es.urgent})`,
       delivery: "Entrega",
       pdf: "PDF firmado",
       paper: "PDF + papel por mensajería",
@@ -146,8 +146,8 @@ const COPY = {
     pages: "Number of pages",
     pagesHint: "From 1 to 20. If there are more, choose 20 and I will quote it once I see it.",
     urgency: "Urgency",
-    urgencyNormal: "Standard · 24/48 hours",
-    urgencyUrgent: `Urgent · under 24 hours (+${Math.round(URGENCY_SURCHARGE * 100)}%)`,
+    urgencyNormal: `Standard · ${TURNAROUND.en.short}`,
+    urgencyUrgent: `Urgent · ${TURNAROUND.en.urgent} (+${Math.round(URGENCY_SURCHARGE * 100)}%)`,
     delivery: "Delivery",
     deliveryPdf: "Signed PDF (included)",
     deliveryPaper: "PDF + paper copy by courier within Spain",
@@ -207,8 +207,8 @@ const COPY = {
       document: "Document",
       pages: "Pages",
       urgency: "Urgency",
-      normal: "standard (24/48h)",
-      urgent: "urgent (under 24h)",
+      normal: `standard (${TURNAROUND.en.short})`,
+      urgent: `urgent (${TURNAROUND.en.urgent})`,
       delivery: "Delivery",
       pdf: "signed PDF",
       paper: "PDF + paper copy by courier",
@@ -237,10 +237,16 @@ function formatKb(bytes) {
   return Math.max(1, Math.round(bytes / 1024));
 }
 
+// El recargo de urgencia solo se aplica a partir de SAME_DAY_MAX_PAGES: hasta
+// esa cifra la entrega en el día ya está incluida en el precio.
+export function hasUrgencySurcharge(pages, urgent) {
+  return Boolean(urgent) && pages > SAME_DAY_MAX_PAGES;
+}
+
 export function estimatePrice(doc, pages, urgent) {
   if (!doc || doc.price == null) return null;
   const base = doc.price * pages;
-  return Math.round(urgent ? base * (1 + URGENCY_SURCHARGE) : base);
+  return Math.round(hasUrgencySurcharge(pages, urgent) ? base * (1 + URGENCY_SURCHARGE) : base);
 }
 
 // Línea «Archivos» del resumen de WhatsApp según lo que llegó por email,
@@ -814,7 +820,7 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
             <p className="mt-1 font-display text-3xl font-semibold tabular-nums text-brand-navy">
               {price != null ? formatPrice(price, locale) : t.quoteOnly}
             </p>
-            {price != null && urgent ? (
+            {price != null && hasUrgencySurcharge(pages, urgent) ? (
               <p className="mt-1 text-xs text-slate-500">{t.surchargeNote}</p>
             ) : null}
             {delivery === "paper" ? (
