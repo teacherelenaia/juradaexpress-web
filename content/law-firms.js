@@ -162,7 +162,7 @@ export const LAW_FIRMS = {
 
   cta: {
     title: "Try it with one document",
-    text: "Send a document from a case you are working on now. The first one is free, and you will know by the end of the day whether this works for your firm.",
+    text: "Send a document from a case you are working on now. The first one is free, up to 5 pages, and you will know by the end of the day whether this works for your firm.",
   },
   related: [
     { href: USCIS.en, label: "What USCIS requires in a translation" },
