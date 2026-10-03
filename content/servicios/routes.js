@@ -134,6 +134,15 @@ export const US_DOC_ROUTES = [
   },
 ];
 
+// Landing para despachos de inmigración de EE. UU. (2026-10), solo en inglés
+// (sin par ES). Contenido en content/law-firms.js, plantilla en
+// app/components/LawFirmPage.js.
+export const LAW_FIRMS_ROUTE = {
+  id: "law-firms",
+  en: "/en/for-immigration-law-firms",
+  labelEn: "For immigration law firms",
+};
+
 // Menú "Internacional" en dos columnas (FASE 2B.3). El tercer grupo
 // (documentos para USCIS) solo existe en inglés: `enOnly` hace que
 // MainNav/MobileNav lo omitan en las rutas en español.
@@ -163,7 +172,7 @@ export const INTERNATIONAL_MENU_GROUPS = [
     labelEs: "Documentos para USCIS",
     labelEn: "Spanish documents for USCIS",
     enOnly: true,
-    items: US_DOC_ROUTES,
+    items: [...US_DOC_ROUTES, LAW_FIRMS_ROUTE],
   },
 ];
 

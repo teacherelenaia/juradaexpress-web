@@ -4,7 +4,7 @@ import { getAllPostsEn, getPostEnBySlug } from "../content/posts.en";
 import { SERVICE_ROUTES } from "../content/servicios/routes";
 import { CIUDADES } from "../content/ciudades";
 import { FICHAS } from "../content/fichas";
-import { US_DOC_ROUTES } from "../content/servicios/routes";
+import { US_DOC_ROUTES, LAW_FIRMS_ROUTE } from "../content/servicios/routes";
 
 const BASE_URL = "https://juradaexpress.es";
 
@@ -59,6 +59,17 @@ const usDocRoutes = US_DOC_ROUTES.map((r) => ({
   priority: 0.7,
   alternates: { languages: { en: `${BASE_URL}${r.en}` } },
 }));
+
+// Landing para despachos de inmigración de EE. UU. (solo EN, sin par ES):
+// hreflang únicamente "en", autorreferente.
+const lawFirmRoutes = [
+  {
+    url: `${BASE_URL}${LAW_FIRMS_ROUTE.en}`,
+    lastModified: "2026-10-03",
+    priority: 0.7,
+    alternates: { languages: { en: `${BASE_URL}${LAW_FIRMS_ROUTE.en}` } },
+  },
+];
 
 export default function sitemap() {
   const staticRoutes = [
@@ -146,6 +157,7 @@ export default function sitemap() {
     ...serviceRoutes,
     ...cityRoutes,
     ...usDocRoutes,
+    ...lawFirmRoutes,
     ...postRoutes,
     ...postRoutesEn,
   ];

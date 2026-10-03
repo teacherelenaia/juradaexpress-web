@@ -2,7 +2,7 @@
 
 // app/components/LanguageSwitcher.js
 import { usePathname } from "next/navigation";
-import { SERVICE_ROUTES } from "../../content/servicios/routes";
+import { SERVICE_ROUTES, LAW_FIRMS_ROUTE } from "../../content/servicios/routes";
 
 // Rutas ES que tienen equivalente en /en (mismos slugs bajo /en/*)
 const ES_TO_EN = {
@@ -46,6 +46,8 @@ export default function LanguageSwitcher({ className = "" }) {
     if (EN_TO_ES[path]) return EN_TO_ES[path];
     // Landings de documento para USCIS (solo EN) → página ES de USCIS.
     if (path.startsWith("/en/certified-translation-")) return "/traduccion-certificada-uscis";
+    // Landing para despachos de inmigración (solo EN) → página ES de USCIS.
+    if (path === LAW_FIRMS_ROUTE.en) return "/traduccion-certificada-uscis";
     return "/";
   }
 

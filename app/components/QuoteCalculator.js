@@ -25,6 +25,12 @@
 // Blob, adjunta los archivos al email a Elena y los borra del almacén. Al
 // terminar se muestra la confirmación y un botón OPCIONAL de WhatsApp.
 // Se exige email o teléfono para poder responder al cliente.
+//
+// Modo despacho (firmMode, 03/10/2026): formulario de pedido de la landing
+// /en/for-immigration-law-firms. Añade «Firm name» (obligatorio) y
+// «Client/matter reference», muestra los precios en dólares (content/usd.js),
+// oculta la opción de urgencia con recargo y envía a /api/quote con
+// firmMode=1, que pone el asunto «[LAW FIRM] …».
 // Mobile-first: una columna en móvil, dos en ≥ md. Accesible: fieldset +
 // legend en los grupos de radio, aria-live en el precio y en los estados,
 // errores asociados con aria-describedby, zona de arrastre operable por
@@ -33,6 +39,7 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { upload as blobUpload } from "@vercel/blob/client";
 import { DOCUMENTS } from "../../content/documents";
 import { PAPER_DELIVERY_SPAIN, URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES, TURNAROUND } from "../../content/site";
+import { toUsd, US_SHIPPING_USD } from "../../content/usd";
 import { SectionHeading } from "./ui";
 import { IconUpload, IconFileText } from "./Icons";
 import { trackAdsConversion } from "./AdsConversion";
@@ -222,6 +229,33 @@ const COPY = {
       close: "Could you confirm the fixed price and deadline?",
     },
     privacyHref: "/en/privacy-policy",
+  },
+};
+
+// Textos del modo despacho (solo inglés): se superponen a COPY.en.
+const FIRM_COPY = {
+  ...COPY.en,
+  title: "Order form for law firms",
+  intro:
+    "Pick the document, set the pages and attach the scan. I confirm the fixed price in US dollars and the delivery date within 2 working hours, and the order goes on your firm's monthly invoice.",
+  pagesHint: `From 1 to 20. Up to ${SAME_DAY_MAX_PAGES} pages are delivered the same day; longer files get a written deadline before I start.`,
+  deliveryPaper: "PDF + paper copy couriered to the US",
+  paperNote: `+ courier: flat $${US_SHIPPING_USD} to any US address.`,
+  disclaimer: "Fixed price once I see the document; nothing is invoiced without your approval.",
+  files: "Attach the document",
+  firm: "Firm name",
+  reference: "Client/matter reference",
+  referenceHint: "Optional. It appears on the delivery and on the monthly invoice.",
+  errFirm: "Please enter your firm name.",
+  contactLegend: "Firm and contact details",
+  name: "Your name",
+  submit: "Send the order",
+  wa: {
+    ...COPY.en.wa,
+    hello: "Hi Elena, law firm order sent from juradaexpress.es:",
+    firm: "Firm",
+    reference: "Client/matter reference",
+    paper: "PDF + paper copy couriered to the US",
   },
 };
 
@@ -424,8 +458,8 @@ async function postQuote(fd) {
   }
 }
 
-export default function QuoteCalculator({ locale = "es", className = "" }) {
-  const t = COPY[locale] || COPY.es;
+export default function QuoteCalculator({ locale = "es", className = "", firmMode = false }) {
+  const t = firmMode ? FIRM_COPY : COPY[locale] || COPY.es;
   const uid = useId();
   const fileInput = useRef(null);
   // Promesas de preparación por clave de archivo (compresión en curso).
@@ -444,6 +478,10 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  // Solo en modo despacho.
+  const [firm, setFirm] = useState("");
+  const [reference, setReference] = useState("");
+  const [firmError, setFirmError] = useState("");
   const [privacy, setPrivacy] = useState(false);
   const [privacyError, setPrivacyError] = useState("");
   const [contactError, setContactError] = useState("");
@@ -457,7 +495,17 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
 
   const doc = DOCUMENTS.find((d) => d.id === documentId) || DOCUMENTS[0];
   const urgent = urgency === "urgent";
-  const price = useMemo(() => estimatePrice(doc, pages, urgent), [doc, pages, urgent]);
+  // Modo despacho: precio por documento en dólares, sin recargo de urgencia.
+  const price = useMemo(
+    () =>
+      firmMode
+        ? doc.price != null
+          ? toUsd(doc.price) * pages
+          : null
+        : estimatePrice(doc, pages, urgent),
+    [firmMode, doc, pages, urgent]
+  );
+  const money = (n) => (firmMode ? `$${n}` : formatPrice(n, locale));
 
   function addFiles(list) {
     const incoming = Array.from(list || []);
@@ -533,9 +581,11 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
       w.hello,
       `• ${w.document}: ${docName(doc, locale)}`,
       `• ${w.pages}: ${pages}`,
-      `• ${w.urgency}: ${urgent ? w.urgent : w.normal}`,
+      firmMode ? `• ${w.firm}: ${firm.trim()}` : null,
+      firmMode && reference.trim() ? `• ${w.reference}: ${reference.trim()}` : null,
+      firmMode ? null : `• ${w.urgency}: ${urgent ? w.urgent : w.normal}`,
       `• ${w.delivery}: ${delivery === "paper" ? w.paper : w.pdf}`,
-      `• ${w.estimate}: ${price != null ? formatPrice(price, locale) : w.quote}`,
+      `• ${w.estimate}: ${price != null ? money(price) : w.quote}`,
       filesLine(w, files.length, emailedNames, pendingNames),
       contact ? `• ${w.contact}: ${contact}` : null,
       w.close,
@@ -546,6 +596,12 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
   async function handleSubmit(e) {
     e.preventDefault();
     const form = e.currentTarget;
+    if (firmMode && !firm.trim()) {
+      setFirmError(t.errFirm);
+      form.querySelector(`#${CSS.escape(uid)}-firm`)?.focus();
+      return;
+    }
+    setFirmError("");
     if (!email.trim() && !phone.trim()) {
       setContactError(t.errContact);
       form.querySelector(`#${CSS.escape(uid)}-email`)?.focus();
@@ -618,6 +674,11 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
       fd.append("email", email);
       fd.append("phone", phone);
       fd.append("privacy", "on");
+      if (firmMode) {
+        fd.append("firmMode", "1");
+        fd.append("firm", firm);
+        fd.append("reference", reference);
+      }
       return fd;
     };
 
@@ -706,7 +767,7 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
 
   return (
     <section
-      id="calculadora"
+      id={firmMode ? "order" : "calculadora"}
       aria-labelledby={`${uid}-title`}
       className={`mx-auto max-w-6xl scroll-mt-24 px-4 py-16 md:py-20 ${className}`}
     >
@@ -734,7 +795,7 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
               {DOCUMENTS.map((d) => (
                 <option key={d.id} value={d.id}>
                   {docName(d, locale)}
-                  {d.price != null ? ` · ${formatPrice(d.price, locale)}` : ""}
+                  {d.price != null ? ` · ${money(firmMode ? toUsd(d.price) : d.price)}` : ""}
                 </option>
               ))}
             </select>
@@ -765,6 +826,7 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
             </p>
           </div>
 
+          {firmMode ? null : (
           <fieldset>
             <legend className={labelClass}>{t.urgency}</legend>
             <div className="mt-1 grid gap-2 sm:grid-cols-2">
@@ -792,6 +854,7 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
               </label>
             </div>
           </fieldset>
+          )}
 
           <fieldset>
             <legend className={labelClass}>{t.delivery}</legend>
@@ -829,9 +892,9 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
           >
             <p className="text-sm text-slate-500">{t.estimate}</p>
             <p className="mt-1 font-display text-3xl font-semibold tabular-nums text-brand-navy">
-              {price != null ? formatPrice(price, locale) : t.quoteOnly}
+              {price != null ? money(price) : t.quoteOnly}
             </p>
-            {price != null && hasUrgencySurcharge(pages, urgent) ? (
+            {!firmMode && price != null && hasUrgencySurcharge(pages, urgent) ? (
               <p className="mt-1 text-xs text-slate-500">{t.surchargeNote}</p>
             ) : null}
             {delivery === "paper" ? (
@@ -930,6 +993,53 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
           <fieldset aria-describedby={`${uid}-contact-hint`}>
             <legend className={labelClass}>{t.contactLegend}</legend>
             <div className="mt-1 grid gap-3 sm:grid-cols-2">
+              {firmMode ? (
+                <>
+                  <div className="sm:col-span-2">
+                    <label htmlFor={`${uid}-firm`} className="text-xs text-slate-600">
+                      {t.firm}
+                    </label>
+                    <input
+                      id={`${uid}-firm`}
+                      name="firm"
+                      type="text"
+                      autoComplete="organization"
+                      required
+                      value={firm}
+                      onChange={(e) => {
+                        setFirm(e.target.value);
+                        if (e.target.value.trim()) setFirmError("");
+                      }}
+                      aria-invalid={firmError ? "true" : undefined}
+                      aria-describedby={firmError ? `${uid}-firm-error` : undefined}
+                      className={fieldClass}
+                    />
+                    {firmError ? (
+                      <p id={`${uid}-firm-error`} role="alert" className="mt-2 text-sm text-red-700">
+                        {firmError}
+                      </p>
+                    ) : null}
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label htmlFor={`${uid}-reference`} className="text-xs text-slate-600">
+                      {t.reference}
+                    </label>
+                    <input
+                      id={`${uid}-reference`}
+                      name="reference"
+                      type="text"
+                      autoComplete="off"
+                      value={reference}
+                      onChange={(e) => setReference(e.target.value)}
+                      aria-describedby={`${uid}-reference-hint`}
+                      className={fieldClass}
+                    />
+                    <p id={`${uid}-reference-hint`} className="mt-1 text-xs text-slate-500">
+                      {t.referenceHint}
+                    </p>
+                  </div>
+                </>
+              ) : null}
               <div className="sm:col-span-2">
                 <label htmlFor={`${uid}-name`} className="text-xs text-slate-600">
                   {t.name}
