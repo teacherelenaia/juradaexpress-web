@@ -24,7 +24,11 @@ import {
 } from "../../content/site";
 import { getPublishableReviews } from "../../content/reviews";
 import { personJsonLd, personRef, PERSON_ID } from "../../content/persona";
-import { SERVICE_ROUTES, INTERNATIONAL_MENU } from "../../content/servicios/routes";
+import {
+  SERVICE_ROUTES,
+  INTERNATIONAL_MENU,
+  LAW_FIRMS_ROUTE,
+} from "../../content/servicios/routes";
 
 // aggregateRating solo si hay reseñas publicables (se lee en build).
 const PUBLISHED_REVIEWS = getPublishableReviews().length;
@@ -112,6 +116,8 @@ const FOOTER = {
         href: SERVICE_ROUTES.find((r) => r.id === "urgente").es,
         label: "Urgentes y grandes volúmenes",
       },
+      // Landing solo en inglés: enlace con hreflang="en".
+      { href: LAW_FIRMS_ROUTE.en, label: "Despachos EE. UU.", hrefLang: "en" },
     ],
     international: "Clientes internacionales",
     internationalList: INTERNATIONAL_MENU.map((r) => ({ href: r.es, label: r.labelEs })),
@@ -153,6 +159,7 @@ const FOOTER = {
         href: SERVICE_ROUTES.find((r) => r.id === "urgente").en,
         label: "Urgent and large projects",
       },
+      { href: LAW_FIRMS_ROUTE.en, label: "For law firms" },
     ],
     international: "International clients",
     internationalList: INTERNATIONAL_MENU.map((r) => ({ href: r.en, label: r.labelEn })),
@@ -251,7 +258,7 @@ export default function SiteShell({ locale = "es", children }) {
               <ul className="mt-3 space-y-2 text-sm">
                 {t.linkList.map((l) => (
                   <li key={l.href}>
-                    <a href={l.href} className="link-nav">
+                    <a href={l.href} hrefLang={l.hrefLang} className="link-nav">
                       {l.label}
                     </a>
                   </li>

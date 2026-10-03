@@ -175,6 +175,7 @@ export default function MobileNav() {
                       <li key={l.href}>
                         <a
                           href={l.href}
+                          hrefLang={l.hrefLang}
                           aria-current={active ? "page" : undefined}
                           tabIndex={open && (intlOpen || intlActive) ? undefined : -1}
                           onClick={() => setOpen(false)}
