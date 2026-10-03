@@ -23,6 +23,11 @@
 // `blobsEmailed` con las URL realmente enviadas. Los lotes directos del
 // punto 2 quedan como reserva si Blob no está disponible.
 //
+// Modo despacho (03/10/2026): el formulario de /en/for-immigration-law-firms
+// manda firmMode=1 con `firm` (nombre del despacho) y `reference`
+// (referencia de cliente/asunto). Asunto: «[LAW FIRM] <despacho> ·
+// <documento> · <contacto>»; la estimación va en dólares y sin urgencia.
+//
 // Sin RESEND_API_KEY responde { ok: true, emailed: false }: la calculadora
 // sigue funcionando y, como los archivos NO han llegado por email, el
 // resumen de WhatsApp y la pantalla de confirmación piden al cliente que
@@ -32,6 +37,7 @@ import { NextResponse } from "next/server";
 import { get, del } from "@vercel/blob";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES } from "../../../content/site";
+import { toUsd, US_SHIPPING_USD } from "../../../content/usd";
 
 export const runtime = "nodejs";
 // Descargar de Blob y enviar emails con adjuntos grandes puede tardar.
@@ -175,7 +181,10 @@ export async function POST(req) {
   const locale = clean(fd.get("locale")) === "en" ? "en" : "es";
   const doc = DOCUMENTS.find((d) => d.id === clean(fd.get("documentId")));
   const pages = Math.min(20, Math.max(1, parseInt(clean(fd.get("pages")), 10) || 1));
-  const urgent = clean(fd.get("urgency")) === "urgent";
+  const firmMode = clean(fd.get("firmMode")) === "1";
+  const firm = firmMode ? clean(fd.get("firm"), 160) : "";
+  const reference = firmMode ? clean(fd.get("reference"), 160) : "";
+  const urgent = !firmMode && clean(fd.get("urgency")) === "urgent";
   const paper = clean(fd.get("delivery")) === "paper";
   const name = clean(fd.get("name"), 120);
   const emailRaw = clean(fd.get("email"), 160);
@@ -228,14 +237,28 @@ export async function POST(req) {
   const price = estimate(doc, pages, urgent);
   const docName = doc ? doc.name : "(documento no indicado)";
   const isSummary = !part;
+  const estimateLine = firmMode
+    ? doc && doc.price != null
+      ? `${toUsd(doc.price) * pages} $ (tarifa de despacho en dólares)`
+      : `presupuesto en menos de 2 h (catálogo desde ${toUsd(MIN_PRICE)} $)`
+    : price != null
+    ? `${price} €`
+    : `presupuesto en menos de 2 h (catálogo desde ${MIN_PRICE} €)`;
+  const paperLine = firmMode
+    ? `PDF firmado + papel por mensajería a EE. UU. (${US_SHIPPING_USD} $)`
+    : "PDF firmado + papel por mensajería en España";
   const lines = [
+    ...(firmMode
+      ? [
+          `DESPACHO DE ABOGADOS (EE. UU.): ${firm || "(no indicado)"}`,
+          `Referencia de cliente/asunto: ${reference || "(no indicada)"}`,
+        ]
+      : []),
     `Documento: ${docName}`,
     `Páginas: ${pages}`,
     `Urgencia: ${urgent ? "urgente (más de 10 páginas en el día, +30 %)" : "normal (en el día hasta 10 páginas)"}`,
-    `Entrega: ${paper ? "PDF firmado + papel por mensajería en España" : "PDF firmado"}`,
-    `Estimación mostrada: ${
-      price != null ? `${price} €` : `presupuesto en menos de 2 h (catálogo desde ${MIN_PRICE} €)`
-    }`,
+    `Entrega: ${paper ? paperLine : "PDF firmado"}`,
+    `Estimación mostrada: ${estimateLine}`,
     `Idioma de la web: ${locale}`,
     `Nombre: ${name || "(no indicado)"}`,
     `Email: ${email || (emailRaw ? `${emailRaw} (no válido)` : "(no indicado)")}`,
@@ -292,7 +315,10 @@ export async function POST(req) {
   // cliente no dejó email se usa el teléfono o el nombre para distinguir
   // solicitudes en la bandeja. Los emails de archivos llevan el mismo asunto
   // más « · archivos (i/n)».
-  const baseSubject = `Presupuesto web · ${docName} · ${email || phone || name || "sin contacto"}`;
+  const contact = email || phone || name || "sin contacto";
+  const baseSubject = firmMode
+    ? `[LAW FIRM] ${firm || "sin nombre"} · ${docName} · ${contact}`
+    : `Presupuesto web · ${docName} · ${contact}`;
 
   async function send(subject, heading, attachments) {
     try {

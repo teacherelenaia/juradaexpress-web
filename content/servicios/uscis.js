@@ -6,7 +6,7 @@
 // concreta; cada documento lleva su propia certificación.
 import { USCIS_PAPER_COPY, INTERNATIONAL_SHIPPING } from "../site";
 import { DOCUMENTS } from "../documents";
-import { US_DOC_ROUTES } from "./routes";
+import { US_DOC_ROUTES, LAW_FIRMS_ROUTE } from "./routes";
 
 const PATH_ES = "/traduccion-certificada-uscis";
 const PATH_EN = "/en/certified-translation-uscis";
@@ -312,6 +312,14 @@ export const en = {
             (r) => `<a href="${r.en}">${r.labelEn.replace(/ \((USCIS)\)$/, "")}</a>`
           ),
         },
+      ],
+    },
+    {
+      // Enlace a la landing para despachos de inmigración (solo EN).
+      id: "attorneys",
+      title: "Are you an attorney?",
+      body: [
+        `If your firm files Spanish documents with USCIS regularly, I work with you on account: your paralegals upload, I translate and certify, and the firm gets one invoice a month in US dollars. See <a href="${LAW_FIRMS_ROUTE.en}">Spanish document translation for US immigration law firms</a>.`,
       ],
     },
     {

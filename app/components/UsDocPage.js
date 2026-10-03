@@ -18,6 +18,7 @@ import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
 import { SectionHeading } from "./ui";
 import { US_SHIPPING_USD, MIN_PRICE_USD, RATE_NOTE } from "../../content/us-docs";
+import { LAW_FIRMS_ROUTE } from "../../content/servicios/routes";
 import { GOOGLE_BUSINESS_URL, GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from "../../content/site";
 
 const BASE = "https://juradaexpress.es";
@@ -45,6 +46,10 @@ const T = {
   pricesHref: "/en/precios",
   prices: "See all prices",
   uscisGuide: "Read the general USCIS guide",
+  attorney: "Are you an attorney?",
+  attorneyText:
+    "If your firm files Spanish documents with USCIS regularly, your paralegals upload, I translate and certify, and the firm gets one invoice a month in US dollars.",
+  attorneyLink: "See how I work with immigration law firms",
 };
 
 export function usDocMetadata(doc) {
@@ -76,10 +81,10 @@ export function usDocMetadata(doc) {
   };
 }
 
-const PROSE =
+export const PROSE =
   "[&_a]:text-brand-navy [&_a]:underline [&_a]:underline-offset-2 [&_strong]:font-semibold [&_strong]:text-slate-900 [&_em]:not-italic [&_em]:text-slate-800";
 
-function Chevron() {
+export function Chevron() {
   return (
     <svg
       width="20"
@@ -111,7 +116,7 @@ function Stars({ rating, label, size = 16 }) {
 }
 
 // Bloques de contenido: párrafo (HTML inline permitido) o lista.
-function Block({ block }) {
+export function Block({ block }) {
   if (typeof block === "string") {
     return (
       <p
@@ -366,6 +371,19 @@ export default function UsDocPage({ doc }) {
             </div>
           </section>
         ) : null}
+
+        {/* Enlace a la landing para despachos de inmigración */}
+        <aside
+          aria-labelledby={`${doc.id}-attorney`}
+          className="rounded-xl bg-brand-gold-50 p-6 ring-1 ring-brand-gold-200"
+        >
+          <h2 id={`${doc.id}-attorney`} className="font-display text-xl font-semibold text-slate-900">
+            {T.attorney}
+          </h2>
+          <p className={`mt-2 max-w-[68ch] text-slate-700 ${PROSE}`}>
+            {T.attorneyText} <a href={LAW_FIRMS_ROUTE.en}>{T.attorneyLink}</a>.
+          </p>
+        </aside>
 
         {/* FAQ */}
         <section aria-labelledby={`${doc.id}-faq`}>

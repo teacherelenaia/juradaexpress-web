@@ -21,13 +21,10 @@ import { getPublishableReviews } from "./reviews";
 import { US_DOC_ROUTES, SERVICE_ROUTES } from "./servicios/routes";
 import { MAEC_NUMBER, SINCE } from "./persona";
 
-// Tipo de cambio fijo de referencia EUR → USD y redondeo a 5 $.
-export const USD_RATE = 1.1;
-// Tarifa fija del envío en papel por mensajería a Estados Unidos (USD).
-export const US_SHIPPING_USD = 25;
+import { USD_RATE, US_SHIPPING_USD, toUsd } from "./usd";
 
-export const toUsd = (eur) =>
-  eur == null ? null : Math.round((eur * USD_RATE) / 5) * 5;
+// Tipo de cambio, envío a EE. UU. y conversión: viven en content/usd.js.
+export { USD_RATE, US_SHIPPING_USD, toUsd };
 
 export const MIN_PRICE_USD = toUsd(MIN_PRICE);
 
