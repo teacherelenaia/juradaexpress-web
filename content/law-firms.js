@@ -125,8 +125,8 @@ export const LAW_FIRMS = {
   },
 
   trial: {
-    title: "Free trial: one document at no charge",
-    text: "Send me one document from a live case. I translate it, certify it and deliver the signed PDF exactly as I would for a paying client, and I do not invoice it. If the result is not what your firm needs, you owe me nothing.",
+    title: "Free trial: one document of up to 5 pages at no charge",
+    text: "Send me one document of up to 5 pages from a live case. I translate it, certify it and deliver the signed PDF exactly as I would for a paying client, and I do not invoice it. If the result is not what your firm needs, you owe me nothing.",
   },
 
   order: {
@@ -152,7 +152,7 @@ export const LAW_FIRMS = {
     },
     {
       q: "How do we open an account?",
-      a: "There is nothing to sign. Send the first document through the order form with your firm name: that one is free. From then on, every order carrying the same firm name goes on the monthly invoice.",
+      a: "There is nothing to sign. Send the first document through the order form with your firm name: that one is free if it has up to 5 pages. From then on, every order carrying the same firm name goes on the monthly invoice.",
     },
     {
       q: "Do the Spanish documents need an apostille?",
