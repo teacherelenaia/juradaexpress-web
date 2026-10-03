@@ -45,16 +45,18 @@ export function getLinks(pathname) {
   return isEnglishPath(pathname) ? LINKS_EN : LINKS_ES;
 }
 
-/** Grupos del menú Internacional localizados: [{ id, label, items: [{href,label}] }] */
+/** Grupos del menú Internacional localizados: [{ id, label, items: [{href,label,hrefLang?}] }] */
 export function getInternationalGroups(pathname) {
   const en = isEnglishPath(pathname);
-  // Los grupos `enOnly` (documentos para USCIS) no tienen versión española.
-  return INTERNATIONAL_MENU_GROUPS.filter((g) => en || !g.enOnly).map((g) => ({
+  // Las rutas sin `es` (documentos para USCIS, despachos) solo existen en
+  // inglés: en el menú ES enlazan a la página /en con hreflang="en".
+  return INTERNATIONAL_MENU_GROUPS.map((g) => ({
     id: g.id,
     label: en ? g.labelEn : g.labelEs,
     items: g.items.map((r) => ({
-      href: en ? r.en : r.es,
+      href: en ? r.en : r.es || r.en,
       label: en ? r.labelEn : r.labelEs,
+      ...(!en && !r.es ? { hrefLang: "en" } : {}),
     })),
   }));
 }
@@ -160,34 +162,35 @@ function InternationalMenu({ pathname, label }) {
         {active && <span className="nav-underline" aria-hidden="true" />}
       </button>
 
+      {/* Tres grupos: tres columnas desde lg. Entre md y lg el panel de 48rem
+          no cabe en la ventana, así que va a dos columnas y el tercer grupo
+          ocupa todo el ancho debajo, con sus enlaces en dos columnas. */}
       <div
         id="nav-internacional"
         data-open={open}
         aria-hidden={!open}
-        className={`nav-dropdown absolute left-1/2 top-full z-50 pt-3 ${
-          groups.length > 2 ? "w-[48rem]" : "w-[34rem]"
-        }`}
+        className="nav-dropdown absolute left-1/2 top-full z-50 w-[30rem] pt-3 lg:w-[48rem]"
       >
-        <div
-          className={`grid gap-2 rounded-xl bg-brand-navy p-3 text-sm shadow-lg ring-1 ring-white/10 ${
-            groups.length > 2 ? "grid-cols-3" : "grid-cols-2"
-          }`}
-        >
-          {groups.map((g) => (
-            <div key={g.id}>
+        <div className="grid grid-cols-2 gap-2 rounded-xl bg-brand-navy p-3 text-sm shadow-lg ring-1 ring-white/10 lg:grid-cols-3">
+          {groups.map((g, gi) => (
+            <div key={g.id} className={gi === 2 ? "col-span-2 lg:col-span-1" : undefined}>
               <p
                 id={`nav-internacional-${g.id}`}
                 className="px-3 pb-1 pt-1 text-xs font-medium uppercase tracking-wide text-slate-400"
               >
                 {g.label}
               </p>
-              <ul aria-labelledby={`nav-internacional-${g.id}`}>
+              <ul
+                aria-labelledby={`nav-internacional-${g.id}`}
+                className={gi === 2 ? "grid grid-cols-2 gap-x-2 lg:block" : undefined}
+              >
                 {g.items.map((i) => {
                   const isCurrent = isActive(pathname, i.href);
                   return (
                     <li key={i.href}>
                       <a
                         href={i.href}
+                        hrefLang={i.hrefLang}
                         aria-current={isCurrent ? "page" : undefined}
                         tabIndex={open ? undefined : -1}
                         className={`block rounded-lg px-3 py-2 no-underline ${

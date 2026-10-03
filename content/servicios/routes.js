@@ -94,42 +94,50 @@ const byId = (id) => SERVICE_ROUTES.find((r) => r.id === id);
 // inglés (sin par ES, sin hreflang es). Generadas con
 // app/components/UsDocPage.js a partir de content/us-docs.js, que importa
 // de aquí los slugs. `docId` enlaza con content/documents.js para el precio.
+// `labelEs` es el texto del enlace en el menú ES, que apunta a la página en
+// inglés (no hay `es`): MainNav/MobileNav le ponen hreflang="en".
 const US_DOC_BASE = "/en/certified-translation-";
 export const US_DOC_ROUTES = [
   {
     id: "us-birth",
     docId: "partida-nacimiento",
     en: `${US_DOC_BASE}spanish-birth-certificate-uscis`,
+    labelEs: "Partida de nacimiento española",
     labelEn: "Spanish birth certificate (USCIS)",
   },
   {
     id: "us-marriage",
     docId: "certificado-matrimonio",
     en: `${US_DOC_BASE}spanish-marriage-certificate-uscis`,
+    labelEs: "Certificado de matrimonio español",
     labelEn: "Spanish marriage certificate (USCIS)",
   },
   {
     id: "us-divorce",
     docId: null,
     en: `${US_DOC_BASE}spanish-divorce-decree-uscis`,
+    labelEs: "Sentencia de divorcio española",
     labelEn: "Spanish divorce decree (USCIS)",
   },
   {
     id: "us-criminal",
     docId: "antecedentes-penales",
     en: `${US_DOC_BASE}spanish-criminal-record-certificate-uscis`,
+    labelEs: "Antecedentes penales españoles",
     labelEn: "Spanish criminal record certificate (USCIS)",
   },
   {
     id: "us-degree",
     docId: "titulo-universitario",
     en: `${US_DOC_BASE}spanish-degree-evaluation-wes`,
+    labelEs: "Título español para evaluación WES",
     labelEn: "Spanish degree for WES evaluation",
   },
   {
     id: "us-passport",
     docId: "dni-pasaporte",
     en: `${US_DOC_BASE}spanish-passport-dni-uscis`,
+    labelEs: "Pasaporte o DNI español",
     labelEn: "Spanish passport or DNI (USCIS)",
   },
 ];
@@ -140,12 +148,14 @@ export const US_DOC_ROUTES = [
 export const LAW_FIRMS_ROUTE = {
   id: "law-firms",
   en: "/en/for-immigration-law-firms",
+  labelEs: "Despachos de inmigración EE. UU. (EN)",
   labelEn: "For immigration law firms",
 };
 
-// Menú "Internacional" en dos columnas (FASE 2B.3). El tercer grupo
-// (documentos para USCIS) solo existe en inglés: `enOnly` hace que
-// MainNav/MobileNav lo omitan en las rutas en español.
+// Menú "Internacional" (FASE 2B.3). Las páginas del tercer grupo
+// (documentos para USCIS y despachos de inmigración) solo existen en inglés:
+// en el menú ES se muestran igualmente, con etiqueta en español, enlace a la
+// página /en y hreflang="en" (04/10/2026).
 export const INTERNATIONAL_MENU_GROUPS = [
   {
     id: "servicios",
@@ -169,9 +179,8 @@ export const INTERNATIONAL_MENU_GROUPS = [
   },
   {
     id: "uscis-docs",
-    labelEs: "Documentos para USCIS",
+    labelEs: "Documentos para USCIS (en inglés)",
     labelEn: "Spanish documents for USCIS",
-    enOnly: true,
     items: [...US_DOC_ROUTES, LAW_FIRMS_ROUTE],
   },
 ];
