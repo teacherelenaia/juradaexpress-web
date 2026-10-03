@@ -402,15 +402,15 @@ export function batches(entries) {
   return out;
 }
 
-// Señal de aborto con tiempo límite: AbortSignal.timeout si el navegador lo
-// tiene y, si no, un AbortController abortado con setTimeout.
+// AbortSignal que se dispara a los `ms` milisegundos (con respaldo para
+// navegadores sin AbortSignal.timeout).
 function timeoutSignal(ms) {
   if (typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function") {
     return AbortSignal.timeout(ms);
   }
-  const controller = new AbortController();
-  setTimeout(() => controller.abort(), ms);
-  return controller.signal;
+  const c = new AbortController();
+  setTimeout(() => c.abort(), ms);
+  return c.signal;
 }
 
 // POST a /api/quote; devuelve el JSON de respuesta o null si falla.
@@ -586,14 +586,15 @@ export default function QuoteCalculator({ locale = "es", className = "" }) {
     await Promise.all(
       entries.map(async (f) => {
         try {
+          // Sin onUploadProgress a propósito: con él, Chrome sube con
+          // «fetch» en streaming, que exige HTTP/2 y falla tras proxies o
+          // antivirus que solo hablan HTTP/1.1 (se quedaba en «0 %»). El
+          // progreso se cuenta por archivo terminado. Tope de tiempo por
+          // archivo para no dejar al cliente esperando indefinidamente.
           const blob = await blobUpload(safePath(f.upload.name), f.upload, {
             access: "private",
             handleUploadUrl: "/api/quote/upload",
             contentType: contentTypeOf(f.upload),
-            // Sin multipart ni onUploadProgress: con onUploadProgress,
-            // @vercel/blob sube con fetch en streaming en Chrome, que exige
-            // HTTP/2 y se queda en «0 %» tras proxies HTTP/1.1. El tiempo
-            // límite crece con el tamaño del archivo.
             abortSignal: timeoutSignal(60000 + Math.round(f.upload.size / 25)),
           });
           loaded.set(f.key, f.upload.size);
