@@ -202,11 +202,11 @@ export default function SiteShell({ locale = "es", children }) {
           data-surface="navy"
           className="relative sticky top-0 z-40 bg-brand-navy text-slate-100 shadow-sm"
         >
-          <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4">
+          <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:gap-3 lg:gap-6">
             {/* Logo */}
             <a
               href={t.home}
-              className="inline-flex shrink-0 items-center gap-2 pr-2 font-semibold tracking-tight text-white no-underline"
+              className="inline-flex shrink-0 items-center gap-2 font-semibold tracking-tight text-white no-underline lg:pr-2"
               aria-label={t.logoLabel}
             >
               <img
@@ -216,15 +216,15 @@ export default function SiteShell({ locale = "es", children }) {
                 height="26"
                 className="rounded opacity-90"
               />
-              <span>JuradaExpress</span>
+              <span className="max-[339px]:hidden">JuradaExpress</span>
             </a>
 
             {/* Nav (estado activo con usePathname) */}
             <MainNav />
 
             {/* Acciones rápidas (CTA y teléfono localizados en /en) */}
-            <div className="ml-auto flex shrink-0 items-center gap-2">
-              <LanguageSwitcher className="hidden md:inline-flex" />
+            <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
+              <LanguageSwitcher className="hidden lg:inline-flex" />
               <HeaderActions />
               <MobileNav />
             </div>

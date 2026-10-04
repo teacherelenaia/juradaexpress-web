@@ -1,7 +1,8 @@
 "use client";
 
 // app/components/MainNav.js
-// Navegación de escritorio con estado activo real (usePathname). El
+// Navegación de escritorio (desde lg, 1024 px; por debajo la cabecera usa
+// el menú hamburguesa de MobileNav) con estado activo real (usePathname). El
 // subrayado dorado de la página activa se dibuja con clip-path en 180 ms
 // (ver .nav-underline en globals.css).
 //
@@ -162,28 +163,23 @@ function InternationalMenu({ pathname, label }) {
         {active && <span className="nav-underline" aria-hidden="true" />}
       </button>
 
-      {/* Tres grupos: tres columnas desde lg. Entre md y lg el panel de 48rem
-          no cabe en la ventana, así que va a dos columnas y el tercer grupo
-          ocupa todo el ancho debajo, con sus enlaces en dos columnas. */}
+      {/* Tres grupos, tres columnas (el menú de escritorio solo existe desde lg). */}
       <div
         id="nav-internacional"
         data-open={open}
         aria-hidden={!open}
-        className="nav-dropdown absolute left-1/2 top-full z-50 w-[30rem] pt-3 lg:w-[48rem]"
+        className="nav-dropdown absolute left-1/2 top-full z-50 w-[48rem] pt-3"
       >
-        <div className="grid grid-cols-2 gap-2 rounded-xl bg-brand-navy p-3 text-sm shadow-lg ring-1 ring-white/10 lg:grid-cols-3">
-          {groups.map((g, gi) => (
-            <div key={g.id} className={gi === 2 ? "col-span-2 lg:col-span-1" : undefined}>
+        <div className="grid grid-cols-3 gap-2 rounded-xl bg-brand-navy p-3 text-sm shadow-lg ring-1 ring-white/10">
+          {groups.map((g) => (
+            <div key={g.id}>
               <p
                 id={`nav-internacional-${g.id}`}
                 className="px-3 pb-1 pt-1 text-xs font-medium uppercase tracking-wide text-slate-400"
               >
                 {g.label}
               </p>
-              <ul
-                aria-labelledby={`nav-internacional-${g.id}`}
-                className={gi === 2 ? "grid grid-cols-2 gap-x-2 lg:block" : undefined}
-              >
+              <ul aria-labelledby={`nav-internacional-${g.id}`}>
                 {g.items.map((i) => {
                   const isCurrent = isActive(pathname, i.href);
                   return (
@@ -221,7 +217,7 @@ export default function MainNav() {
   return (
     <nav
       aria-label={english ? "Main navigation" : "Navegación principal"}
-      className="hidden items-center gap-5 md:flex lg:gap-6"
+      className="hidden items-center gap-5 lg:flex xl:gap-6"
     >
       {links.map((l) => {
         if (l.menu) {

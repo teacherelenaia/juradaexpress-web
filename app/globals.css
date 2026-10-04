@@ -397,6 +397,12 @@
     @apply block rounded-lg bg-slate-900 text-slate-100 p-4 overflow-x-auto;
   }
 
+  /* Las tablas de los artículos se desplazan dentro de su contenedor en
+     pantallas estrechas en lugar de ensanchar la página. */
+  .prose .table-wrap {
+    @apply overflow-x-auto;
+  }
+
   .prose table {
     @apply w-full text-left border-collapse my-6;
   }

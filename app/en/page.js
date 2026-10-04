@@ -244,7 +244,7 @@ export default function Page() {
                 Every document has its own requirements. These are the ones I
                 translate most often, with prices from and typical turnaround.
               </p>
-              <ul className="mt-8 grid gap-x-10 md:grid-cols-2">
+              <ul className="mt-8 grid gap-x-10 lg:grid-cols-2">
                 {COMMON_DOCUMENTS.map((doc) => (
                   <li
                     key={doc.name}
