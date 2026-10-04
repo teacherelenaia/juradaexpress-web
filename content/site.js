@@ -72,6 +72,8 @@ export const GUARANTEES = {
 // y su icono desaparece de toda la web.
 export const INSTAGRAM_URL = "https://www.instagram.com/juradaexpress";
 export const FACEBOOK_URL = "https://www.facebook.com/juradaexpress";
+export const LINKEDIN_URL =
+  "https://www.linkedin.com/in/elena-penaranda-sworn-translator";
 
 // Ficha de Google Business "Jurada Express" (place_id verificado en Maps
 // el 26/08/2026). Cuando Google verifique el perfil, se puede sustituir

@@ -16,6 +16,7 @@ import SocialIcons from "./SocialIcons";
 import {
   INSTAGRAM_URL,
   FACEBOOK_URL,
+  LINKEDIN_URL,
   GOOGLE_BUSINESS_URL,
   GOOGLE_RATING,
   GOOGLE_REVIEW_COUNT,
@@ -449,6 +450,7 @@ export default function SiteShell({ locale = "es", children }) {
                   "https://wa.me/34685891214",
                   INSTAGRAM_URL,
                   FACEBOOK_URL,
+                  LINKEDIN_URL,
                   GOOGLE_BUSINESS_URL,
                 ].filter(Boolean),
                 },
