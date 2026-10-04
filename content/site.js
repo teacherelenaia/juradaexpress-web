@@ -17,7 +17,7 @@ export const WHATSAPP_URL_EN =
 // reexporta como MAEC_URL (persona.js ya importa de este archivo, así que
 // la constante vive aquí para evitar una importación circular).
 export const MAEC_LIST_URL =
-  "https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx";
+  "https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Buscador-STIJ.aspx";
 
 // Tres garantías cortas (FASE 1 SEO, 27/09/2026) que se muestran bajo el
 // chip de precio del hero de la home ES/EN, en /traductor-jurado-ingles

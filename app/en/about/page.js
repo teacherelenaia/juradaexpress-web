@@ -1,11 +1,17 @@
 // app/en/about/page.js
+import Image from "next/image";
 import TrackedLink from "../../components/TrackedLink";
 import { SectionHeading } from "../../components/ui";
 import {
   WHATSAPP_URL_EN,
   TIMEZONE_NOTE,
 } from "../../../content/site";
-import { personRef, SINCE, yearsOfExperience } from "../../../content/persona";
+import {
+  personRef,
+  SINCE,
+  yearsOfExperience,
+  MAEC_URL,
+} from "../../../content/persona";
 
 export const metadata = {
   title: "About me — Elena Peñaranda, Sworn Translator of English (MAEC no. 7310)",
@@ -20,9 +26,6 @@ export const metadata = {
     },
   },
 };
-
-const MAEC_URL =
-  "https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx";
 
 export default function Page() {
   return (
@@ -73,6 +76,33 @@ export default function Page() {
           <p className="mt-4 text-slate-600">{TIMEZONE_NOTE.en}.</p>
         </div>
       </div>
+
+      <SectionHeading as="h2" className="mt-12 !text-2xl md:!text-3xl">
+        My appointment, verifiable
+      </SectionHeading>
+      <figure className="mt-4 max-w-[720px]">
+        <Image
+          src="/fotos/maec-listado-7310.png"
+          alt="Entry for Elena Peñaranda Ortega, no. 7310, in the official sworn translator search tool of Spain's Ministry of Foreign Affairs"
+          width={1570}
+          height={196}
+          sizes="(min-width: 768px) 720px, 100vw"
+          className="h-auto w-full rounded-lg border border-slate-200"
+        />
+        <figcaption className="mt-3 text-sm text-slate-600">
+          Screenshot of the official register of Spain's Ministry of Foreign
+          Affairs. Check it yourself:{" "}
+          <a
+            href={MAEC_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            open the search tool
+          </a>{" "}
+          and type "Peñaranda" under Apellidos (surname).
+        </figcaption>
+      </figure>
 
       <SectionHeading as="h2" className="mt-12 !text-2xl md:!text-3xl">
         How I sign and stamp

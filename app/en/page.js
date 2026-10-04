@@ -496,7 +496,7 @@ export default function Page() {
               Spanish Ministry of Foreign Affairs, European Union and
               Cooperation under{" "}
               <a
-                href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx"
+                href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Buscador-STIJ.aspx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link"

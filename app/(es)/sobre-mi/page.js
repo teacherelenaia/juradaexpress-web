@@ -1,11 +1,17 @@
 // app/sobre-mi/page.js
+import Image from "next/image";
 import TrackedLink from "../../components/TrackedLink";
 import { SectionHeading } from "../../components/ui";
 import {
   WHATSAPP_URL,
   TIMEZONE_NOTE,
 } from "../../../content/site";
-import { personRef, SINCE, yearsOfExperience } from "../../../content/persona";
+import {
+  personRef,
+  SINCE,
+  yearsOfExperience,
+  MAEC_URL,
+} from "../../../content/persona";
 
 export const metadata = {
   title: "Sobre mí — Elena Peñaranda, Traductora Jurada de Inglés (MAEC nº 7310)",
@@ -20,9 +26,6 @@ export const metadata = {
     },
   },
 };
-
-const MAEC_URL =
-  "https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Traductores-as---Interpretes-Jurados-as.aspx";
 
 export default function Page() {
   return (
@@ -73,6 +76,33 @@ export default function Page() {
           <p className="mt-4 text-slate-600">{TIMEZONE_NOTE.es}.</p>
         </div>
       </div>
+
+      <SectionHeading as="h2" className="mt-12 !text-2xl md:!text-3xl">
+        Mi nombramiento, comprobable
+      </SectionHeading>
+      <figure className="mt-4 max-w-[720px]">
+        <Image
+          src="/fotos/maec-listado-7310.png"
+          alt="Entrada de Elena Peñaranda Ortega, nº 7310, en el buscador oficial de traductores jurados del Ministerio de Asuntos Exteriores"
+          width={1570}
+          height={196}
+          sizes="(min-width: 768px) 720px, 100vw"
+          className="h-auto w-full rounded-lg border border-slate-200"
+        />
+        <figcaption className="mt-3 text-sm text-slate-600">
+          Captura del buscador oficial del Ministerio de Asuntos Exteriores,
+          Unión Europea y Cooperación. Puedes comprobarlo tú mismo:{" "}
+          <a
+            href={MAEC_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            entra en el buscador
+          </a>{" "}
+          y escribe «Peñaranda» en Apellidos.
+        </figcaption>
+      </figure>
 
       <SectionHeading as="h2" className="mt-12 !text-2xl md:!text-3xl">
         Cómo firmo y sello
