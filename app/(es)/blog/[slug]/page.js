@@ -22,9 +22,12 @@ export async function generateMetadata({ params }) {
   const post = getPostBySlug(params.slug);
   if (!post) return {};
   const en = englishVersion(post);
+  // Meta description: campo propio (110–155 caracteres); `excerpt` sigue
+  // siendo el resumen visible y sirve de fallback.
+  const description = post.metaDescription || post.excerpt;
   return {
     title: post.title,
-    description: post.excerpt,
+    description,
     alternates: {
       canonical: `${BASE}/blog/${post.slug}`,
       ...(en
@@ -39,7 +42,7 @@ export async function generateMetadata({ params }) {
     },
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description,
       url: `${BASE}/blog/${post.slug}`,
       siteName: "Jurada Express",
       type: "article",

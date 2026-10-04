@@ -14,6 +14,8 @@ const eur = (id) =>
 export const postsEn = [
   {
     slug: "sworn-translation-nie-tie-spain",
+    metaDescription:
+      "Sworn translation for your NIE or TIE: which documents Spanish immigration offices ask for, when the apostille applies, what it costs and how fast it is.",
     title: "Sworn translation for your NIE/TIE application in Spain: what British citizens need",
     excerpt:
       "Which documents Spanish immigration offices ask for, when the apostille applies, what a sworn translation costs and how fast you can have it — from someone who prepares these files every week.",
@@ -59,6 +61,8 @@ export const postsEn = [
 
   {
     slug: "buying-property-in-spain-documents-translation",
+    metaDescription:
+      "Sworn translation when buying property in Spain: power of attorney, NIE paperwork, bank documents and the deed, and what the notary handles differently.",
     title: "Buying property in Spain: which documents need a sworn translation",
     excerpt:
       "Power of attorney, NIE paperwork, bank documents, the deed itself: what actually needs a sworn translation when you buy a Spanish property, and what the notary handles differently.",
@@ -103,6 +107,8 @@ export const postsEn = [
   // ---------------------------------------------------------------------
   {
     slug: "spain-digital-nomad-visa-documents-apostille-sworn-translation",
+    metaDescription:
+      "Spain digital nomad visa documents, one by one: which need an apostille, which need a sworn translation into Spanish and the order to do everything in.",
     translationOf: "documentos-visado-nomada-digital-apostilla-traduccion-jurada",
     title: "Spain digital nomad visa documents: which need an apostille and a sworn translation",
     excerpt:
@@ -158,6 +164,8 @@ export const postsEn = [
 
   {
     slug: "sworn-vs-certified-translation-uscis-spain",
+    metaDescription:
+      "Sworn or certified translation: USCIS wants a certified translation under 8 CFR § 103.2(b)(3), Spain a sworn one. Which you need and when you need both.",
     translationOf: "traduccion-jurada-o-certificada-uscis-espana",
     title: "Sworn vs certified translation: what USCIS requires and what Spain requires",
     excerpt:
@@ -220,6 +228,8 @@ export const postsEn = [
 
   {
     slug: "indian-documents-spanish-visa-mea-apostille-sworn-translation",
+    metaDescription:
+      "Indian documents for a Spanish visa: what the consulate asks for, how the MEA apostille works and why certificates must be in English before translation.",
     translationOf: "documentos-indios-visado-espana-apostilla-mea",
     title: "Indian documents for a Spanish visa: MEA apostille and sworn translation",
     excerpt:
@@ -277,6 +287,8 @@ export const postsEn = [
 
   {
     slug: "sworn-translations-leaving-spain-uk-ireland-canada-australia",
+    metaDescription:
+      "Sworn translations for leaving Spain: what UKVI, Irish Immigration, IRCC and Home Affairs require, when the Spanish apostille is needed and in what order.",
     translationOf: "traduccion-jurada-para-irse-de-espana-reino-unido-irlanda-canada-australia",
     title: "Sworn translations for leaving Spain: what the UK, Ireland, Canada and Australia ask for",
     excerpt:
@@ -339,6 +351,8 @@ export const postsEn = [
   // ---------------------------------------------------------------------
   {
     slug: "how-to-check-sworn-translation-valid-spain",
+    metaDescription:
+      "How to check a Spanish sworn translation is valid: Ministry appointment, signature, stamp, certification and date, and what to do if refused.",
     translationOf: "como-saber-si-una-traduccion-jurada-es-valida",
     title: "How to check whether a sworn translation is valid in Spain (and what to do if yours is rejected)",
     excerpt:
@@ -443,6 +457,8 @@ export const postsEn = [
 
   {
     slug: "sworn-translations-spanish-citizenship-residence-uk-us-india",
+    metaDescription:
+      "Sworn translations for Spanish citizenship by residence: which UK, US and Indian documents to translate, which apostille each takes and in what order.",
     translationOf: "nacionalidad-espanola-residencia-documentos-reino-unido-eeuu-india",
     title: "Sworn translations for Spanish citizenship by residence: UK, US and Indian applicants",
     excerpt:
@@ -553,6 +569,8 @@ export const postsEn = [
 
   {
     slug: "studying-in-the-uk-from-spain-documents-sworn-translation",
+    metaDescription:
+      "Studying in the UK from Spain: what universities and the Home Office ask you to translate for Erasmus, UCAS, a master's and the Student visa, with prices.",
     translationOf: "estudiar-en-reino-unido-traduccion-expediente",
     title: "Studying in the UK from Spain: which documents need a sworn translation",
     excerpt:
@@ -672,6 +690,8 @@ export const postsEn = [
 
   {
     slug: "sworn-translation-uk-home-office-visas-settled-status-citizenship",
+    metaDescription:
+      "Translations for the UK Home Office: what UKVI requires, when a Spanish sworn translation is worth it, and what is translated for visas and settled status.",
     translationOf: "traduccion-jurada-visado-reino-unido",
     title: "Sworn translations for the UK Home Office: visas, settled status and British citizenship",
     excerpt:
@@ -789,6 +809,8 @@ export const postsEn = [
 
   {
     slug: "certified-translations-ircc-canada-from-spain",
+    metaDescription:
+      "Certified translations for IRCC from Spain: translator or affidavit rules and which documents are translated for Express Entry, study and sponsorship.",
     translationOf: "traduccion-jurada-canada-ircc-express-entry-estudios-reagrupacion",
     title: "Certified translations for IRCC Canada from Spain",
     excerpt:
@@ -901,6 +923,8 @@ export const postsEn = [
   },
   {
     slug: "indian-degree-recognition-spain-mea-apostille-sworn-translation",
+    metaDescription:
+      "Indian degree recognition in Spain: which route applies, what the Ministry asks for, how the MEA apostille works and what needs sworn translation.",
     translationOf: "homologar-titulo-india-espana-apostilla-mea-traduccion-jurada",
     title: "Getting an Indian degree recognised in Spain: MEA apostille and sworn translation",
     excerpt:

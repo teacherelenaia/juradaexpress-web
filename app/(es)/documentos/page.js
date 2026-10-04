@@ -5,7 +5,7 @@ import { FICHAS } from "../../../content/fichas";
 export const metadata = {
   title: "Catálogo de Documentos — Traducción Jurada en Murcia",
   description:
-    "Elige tus documentos para traducción jurada en Murcia: partida de nacimiento, título universitario, antecedentes penales y más. Precios claros, presupuesto en menos de 2 horas.",
+    "Traducción jurada de partida de nacimiento, título universitario, antecedentes penales y más. Precios claros por documento y presupuesto en menos de 2 h.",
   alternates: {
     canonical: "https://juradaexpress.es/documentos",
     languages: {

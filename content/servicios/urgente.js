@@ -23,7 +23,7 @@ export const es = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Urgentes y grandes volúmenes",
   metaTitle: "Traducción jurada urgente y grandes volúmenes",
-  metaDescription: "Traductora jurada de inglés (MAEC nº 7310) para expedientes completos, lotes y empresas: revisión previa, apostillas, plazo único por escrito y entrega ordenada. Sin subcontratar.",
+  metaDescription: "Traducción jurada urgente de expedientes completos y lotes (MAEC nº 7310): revisión previa, plazo único por escrito y entrega ordenada. Sin subcontratar.",
   h1: "Traducción jurada urgente y de grandes volúmenes",
   lead:
     `La traducción jurada urgente o de gran volumen es el servicio con el que traduzco expedientes completos y lotes de documentos (para particulares, empresas, despachos de abogados, gestorías y agencias de relocation) con un presupuesto y un plazo únicos cerrados por escrito antes de empezar, y con entrega ordenada, documento a documento, en PDF firmado. Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nº 7310: no subcontrato, así que cada página la traduzco, firmo y sello yo. ${
