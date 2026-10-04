@@ -1,7 +1,7 @@
 "use client";
 
 // app/components/MobileNav.js
-// Menú móvil en panel deslizante. El panel está SIEMPRE montado: entra con
+// Menú móvil en panel deslizante (por debajo de lg, 1024 px). El panel está SIEMPRE montado: entra con
 // translateY(-8px)+opacity en 200 ms ease-out y sale en 150 ms (clases
 // .mobile-panel en globals.css). Incluye selector de idioma y redes.
 import { useEffect, useRef, useState } from "react";
@@ -39,7 +39,7 @@ export default function MobileNav() {
   }, [open]);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         ref={buttonRef}
         type="button"
@@ -55,7 +55,7 @@ export default function MobileNav() {
               ? "Open menu"
               : "Abrir menú"
         }
-        className="inline-flex h-11 w-11 items-center justify-center rounded-md text-slate-100 hover:text-brand-gold-300"
+        className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-md text-slate-100 hover:text-brand-gold-300"
       >
         {open ? (
           <svg

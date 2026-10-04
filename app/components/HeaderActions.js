@@ -15,16 +15,23 @@ export default function HeaderActions() {
     <>
       <a
         href={`tel:${PHONE_TEL}`}
-        className="btn btn-quiet-light btn-sm hidden lg:inline-flex"
+        className="btn btn-quiet-light btn-sm hidden xl:inline-flex"
         aria-label={english ? `Call +34 ${PHONE_DISPLAY}` : `Llamar ${PHONE_DISPLAY}`}
       >
         {english ? `+34 ${PHONE_DISPLAY}` : PHONE_DISPLAY}
       </a>
       <a
         href={english ? "/en/documentos" : "/documentos"}
-        className="btn btn-gold btn-sm"
+        className="btn btn-gold btn-sm max-sm:px-3"
       >
-        {english ? "Request a quote" : "Pedir presupuesto"}
+        {/* En móviles de menos de 380 px la etiqueta completa no cabe junto al
+            logo y el botón del menú: se acorta, sin ocultar el botón. */}
+        <span className="max-[379px]:hidden">
+          {english ? "Request a quote" : "Pedir presupuesto"}
+        </span>
+        <span className="min-[380px]:hidden">
+          {english ? "Get a quote" : "Presupuesto"}
+        </span>
       </a>
     </>
   );

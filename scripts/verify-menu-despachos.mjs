@@ -5,6 +5,11 @@
 // móvil) y en el pie de página. Guarda capturas del menú abierto si se pasa
 // una carpeta.
 //
+// Además mide el desbordamiento horizontal (scrollWidth - clientWidth debe
+// ser 0) en todas las páginas ES y EN del sitemap, más las dos páginas 404,
+// a esos tres anchos. Si una página desborda, lista los elementos que se
+// salen de la ventana (querySelectorAll + getBoundingClientRect).
+//
 // Uso: node scripts/verify-menu-despachos.mjs http://localhost:3000 [carpeta-capturas]
 import { chromium } from "@playwright/test";
 import { mkdirSync } from "node:fs";
@@ -35,7 +40,24 @@ for (const options of [{}, { channel: "chrome" }, { channel: "msedge" }]) {
 }
 if (!browser) throw new Error("No hay navegador: ejecuta `npx playwright install chromium`.");
 
-for (const width of [390, 768, 1440]) {
+const WIDTHS = [390, 768, 1440];
+const overflowPx = () =>
+  document.documentElement.scrollWidth - document.documentElement.clientWidth;
+// Elementos visibles que se salen de la ventana por la derecha o la izquierda.
+const offenders = () => {
+  const cw = document.documentElement.clientWidth;
+  const out = [];
+  for (const el of document.querySelectorAll("body *")) {
+    const r = el.getBoundingClientRect();
+    if (!r.width || r.right <= 0 || (r.right <= cw + 0.5 && r.left >= -0.5)) continue;
+    if (getComputedStyle(el).visibility === "hidden") continue;
+    const cls = String(el.className.baseVal ?? el.className).slice(0, 60);
+    out.push(`${el.tagName.toLowerCase()}.${cls} left=${Math.round(r.left)} right=${Math.round(r.right)}`);
+  }
+  return out.slice(0, 8);
+};
+
+for (const width of WIDTHS) {
   const ctx = await browser.newContext({ viewport: { width, height: 900 } });
   const page = await ctx.newPage();
   for (const l of LOCALES) {
@@ -45,11 +67,11 @@ for (const width of [390, 768, 1440]) {
       const b = document.querySelector('[aria-label="Aviso de cookies"], [aria-label="Cookie notice"]');
       if (b) b.remove();
     });
-    const docWidth = () =>
-      page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    const docWidth = () => page.evaluate(overflowPx);
     const closed = await docWidth();
 
-    const desktop = width >= 768;
+    // El menú de escritorio existe desde lg (1024 px); por debajo, hamburguesa.
+    const desktop = width >= 1024;
     const panel = page.locator(desktop ? "#nav-internacional" : "#mobile-nav-internacional");
     if (desktop) {
       await page.locator('header button[aria-controls="nav-internacional"]').click();
@@ -72,7 +94,10 @@ for (const width of [390, 768, 1440]) {
     const box = await panel.boundingBox();
     check(box.x >= 0 && box.x + box.width <= width + 1, `${tag} open menu inside viewport`, `x=${Math.round(box.x)} right=${Math.round(box.x + box.width)}`);
     const open = await docWidth();
-    if (closed > 0 || open > 0) console.log(`WARN  ${tag} document overflow: ${closed}px closed, ${open}px with menu open`);
+    check(closed === 0 && open === 0, `${tag} no horizontal overflow (menu closed and open)`, `${closed}px closed, ${open}px open`);
+    // El botón dorado de presupuesto sigue visible y dentro de la ventana.
+    const cta = await page.locator("header a.btn-gold").boundingBox();
+    check(cta && cta.x >= 0 && cta.x + cta.width <= width, `${tag} quote button visible in header`, cta ? `right=${Math.round(cta.x + cta.width)}` : "hidden");
     if (outDir) await page.screenshot({ path: `${outDir}/menu-${l.id}-${width}.png` });
 
     const foot = page.locator(`footer a[href="${PATH}"]`);
@@ -83,6 +108,36 @@ for (const width of [390, 768, 1440]) {
       await page.screenshot({ path: `${outDir}/footer-${l.id}-${width}.png` });
     }
   }
+  await ctx.close();
+}
+
+// Desbordamiento horizontal en todas las páginas ES y EN.
+const sitemap = await (await fetch(base + "/sitemap.xml")).text();
+const paths = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
+paths.push("/ruta-inexistente-404", "/en/ruta-inexistente-404");
+const isEn = (p) => p === "/en" || p.startsWith("/en/");
+const counts = { es: paths.filter((p) => !isEn(p)).length, en: paths.filter(isEn).length };
+console.log(`
+Overflow: ${counts.es} ES + ${counts.en} EN pages x ${WIDTHS.join("/")} px`);
+{
+  const ctx = await browser.newContext({ viewport: { width: WIDTHS[0], height: 900 } });
+  const page = await ctx.newPage();
+  let clean = 0;
+  for (const p of paths) {
+    await page.setViewportSize({ width: WIDTHS[0], height: 900 });
+    await page.goto(base + p, { waitUntil: "load" });
+    for (const width of WIDTHS) {
+      await page.setViewportSize({ width, height: 900 });
+      const over = await page.evaluate(overflowPx);
+      if (over === 0) {
+        clean++;
+        continue;
+      }
+      check(false, `[${width} ${isEn(p) ? "en" : "es"}] ${p} scrollWidth == clientWidth`, `${over}px`);
+      for (const o of await page.evaluate(offenders)) console.log(`        ${o}`);
+    }
+  }
+  check(clean === paths.length * WIDTHS.length, "no horizontal overflow on any page", `${clean}/${paths.length * WIDTHS.length} page-width combinations clean`);
   await ctx.close();
 }
 
