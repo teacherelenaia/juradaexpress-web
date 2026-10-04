@@ -1,7 +1,7 @@
 // app/components/SocialIcons.js
-// Iconos de Instagram y Facebook. Solo se muestran los perfiles con URL
-// definida en content/site.js.
-import { INSTAGRAM_URL, FACEBOOK_URL } from "../../content/site";
+// Iconos de Instagram, Facebook y LinkedIn. Solo se muestran los perfiles
+// con URL definida en content/site.js.
+import { INSTAGRAM_URL, FACEBOOK_URL, LINKEDIN_URL } from "../../content/site";
 
 const IconInstagram = (props) => (
   <svg
@@ -35,6 +35,24 @@ const IconFacebook = (props) => (
   </svg>
 );
 
+const IconLinkedIn = (props) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    {...props}
+  >
+    <rect x="3" y="3" width="18" height="18" rx="3" />
+    <path d="M8 11v5" />
+    <path d="M12 16v-5m0 2.8a2 2 0 0 1 4 0V16" />
+    <circle cx="8" cy="7.8" r="0.9" fill="currentColor" stroke="none" />
+  </svg>
+);
+
 export default function SocialIcons({ className = "", iconClassName = "h-5 w-5" }) {
   const profiles = [
     INSTAGRAM_URL && {
@@ -46,6 +64,11 @@ export default function SocialIcons({ className = "", iconClassName = "h-5 w-5" 
       href: FACEBOOK_URL,
       label: "Facebook de Jurada Express",
       Icon: IconFacebook,
+    },
+    LINKEDIN_URL && {
+      href: LINKEDIN_URL,
+      label: "LinkedIn",
+      Icon: IconLinkedIn,
     },
   ].filter(Boolean);
 

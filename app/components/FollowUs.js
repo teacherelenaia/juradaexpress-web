@@ -2,21 +2,21 @@
 // Bloque "Síguenos" antes del footer de la home. Solo se muestra si hay
 // perfiles con URL en content/site.js.
 import SocialIcons from "./SocialIcons";
-import { INSTAGRAM_URL, FACEBOOK_URL } from "../../content/site";
+import { INSTAGRAM_URL, FACEBOOK_URL, LINKEDIN_URL } from "../../content/site";
 
 const COPY = {
   es: {
     heading: "Síguenos",
-    text: "Consejos breves sobre trámites y traducción jurada, en Instagram y Facebook.",
+    text: "Consejos breves sobre trámites y traducción jurada, en Instagram, Facebook y LinkedIn.",
   },
   en: {
     heading: "Follow us",
-    text: "Short, practical tips on Spanish paperwork and sworn translation, on Instagram and Facebook.",
+    text: "Short, practical tips on Spanish paperwork and sworn translation, on Instagram, Facebook and LinkedIn.",
   },
 };
 
 export default function FollowUs({ locale = "es" }) {
-  if (!INSTAGRAM_URL && !FACEBOOK_URL) return null;
+  if (!INSTAGRAM_URL && !FACEBOOK_URL && !LINKEDIN_URL) return null;
   const t = COPY[locale] || COPY.es;
 
   return (

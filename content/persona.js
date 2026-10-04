@@ -12,6 +12,7 @@ import {
   PHONE_TEL,
   INSTAGRAM_URL,
   FACEBOOK_URL,
+  LINKEDIN_URL,
   GOOGLE_BUSINESS_URL,
   MAEC_LIST_URL,
 } from "./site";
@@ -105,8 +106,12 @@ export function personJsonLd(locale = "es") {
       name: "Jurada Express",
       url: `${BASE}/`,
     },
-    sameAs: [MAEC_URL, INSTAGRAM_URL, FACEBOOK_URL, GOOGLE_BUSINESS_URL].filter(
-      Boolean
-    ),
+    sameAs: [
+      MAEC_URL,
+      INSTAGRAM_URL,
+      FACEBOOK_URL,
+      LINKEDIN_URL,
+      GOOGLE_BUSINESS_URL,
+    ].filter(Boolean),
   };
 }
