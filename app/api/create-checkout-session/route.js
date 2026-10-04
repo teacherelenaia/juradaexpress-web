@@ -56,6 +56,10 @@ export async function POST(req) {
         },
         quantity: 1,
       })),
+      // Teléfono del cliente para poder contactarle por WhatsApp; llega en
+      // el aviso de pago (app/api/stripe-webhook).
+      phone_number_collection: { enabled: true },
+      metadata: { origen: "web" },
       success_url: `${origin}/documentos/pago-exitoso?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/documentos/pago-cancelado`,
     });
