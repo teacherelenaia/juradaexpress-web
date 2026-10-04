@@ -2,7 +2,7 @@
 export const metadata = {
   title: "FAQ — Sworn Spanish Translator",
   description:
-    "Answers about sworn translation for Spain: validity, turnaround, pricing, delivery and accepted documents.",
+    "Answers to common questions about sworn translation for Spain: validity, turnaround, pricing, delivery and accepted documents.",
   alternates: {
     canonical: "https://juradaexpress.es/en/preguntas-frecuentes",
     languages: {

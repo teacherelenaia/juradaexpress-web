@@ -2,7 +2,7 @@
 export const metadata = {
   title: "Política de privacidad",
   description:
-    "Cómo trata juradaexpress.es tus datos personales: responsable, finalidades, base jurídica, destinatarios, plazos de conservación y cómo ejercer tus derechos RGPD.",
+    "Cómo trata juradaexpress.es tus datos personales: responsable, finalidades, base jurídica, destinatarios, conservación y cómo ejercer tus derechos RGPD.",
   alternates: {
     canonical: "https://juradaexpress.es/politica-privacidad",
     languages: {

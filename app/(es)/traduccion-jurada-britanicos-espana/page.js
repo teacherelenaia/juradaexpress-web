@@ -6,7 +6,7 @@ import { DOCUMENTS } from "../../../content/documents";
 export const metadata = {
   title: "Traducción jurada para británicos en España — guía por trámite",
   description:
-    "Guía práctica para británicos residentes en España: qué documentos necesitan traducción jurada para el NIE/TIE, el empadronamiento, la compra de vivienda, el matrimonio, el carné de conducir y la pensión. Precios desde y plazos reales.",
+    "Traducción jurada para británicos residentes en España: NIE/TIE, padrón, vivienda, matrimonio, carné de conducir y pensión. Precios desde y plazos reales.",
   alternates: {
     canonical: "https://juradaexpress.es/traduccion-jurada-britanicos-espana",
     languages: {

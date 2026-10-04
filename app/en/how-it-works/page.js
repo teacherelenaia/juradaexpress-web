@@ -8,7 +8,7 @@ import { WHATSAPP_URL_EN } from "../../../content/site";
 export const metadata = {
   title: "How sworn translation works, step by step",
   description:
-    "The whole sworn translation process: how to send your document, what you receive (digitally signed PDF and paper), how to pay, and what happens if the office insists on paper.",
+    "The sworn translation process: how to send your document, what you receive (signed PDF and paper), how to pay and what happens if the office wants paper.",
   alternates: {
     canonical: "https://juradaexpress.es/en/how-it-works",
     languages: {

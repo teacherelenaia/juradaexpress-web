@@ -249,7 +249,7 @@ export const FICHAS = [
     name: "Traducción jurada de contrato o escritura",
     title: "Traducción Jurada de Contratos y Escrituras – Español-Inglés",
     description:
-      "Traducción jurada de contratos, escrituras, poderes notariales y estatutos Español ⇆ Inglés para notarías, empresas y compraventas. Presupuesto cerrado en menos de 2 h.",
+      "Traducción jurada de contratos, escrituras, poderes notariales y estatutos Español ⇆ Inglés para notarías y empresas. Presupuesto cerrado en menos de 2 h.",
     intro:
       "Contratos de compraventa, poderes notariales, escrituras de constitución, estatutos: son documentos largos y técnicos donde un matiz mal traducido puede costar caro. Los traduzco con terminología jurídica precisa y te entrego un documento con la misma estructura que el original, firmado y sellado.",
     price: null,
@@ -362,7 +362,7 @@ export const FICHAS = [
     name: "Validez oficial de la traducción jurada",
     title: "Traducción Jurada Válida ante Organismos Oficiales y Consulados",
     description:
-      "Por qué la traducción jurada tiene validez oficial ante ministerios, universidades, registros y consulados, cómo se verifica y cuándo vale el PDF firmado digitalmente.",
+      "Traducción jurada con validez oficial ante ministerios, universidades, registros y consulados: cómo se verifica y cuándo vale el PDF firmado digitalmente.",
     intro:
       "Una traducción jurada no es una traducción 'muy buena': es un documento oficial. Mi firma y mi sello, con el nº 7310 del MAEC, certifican que la traducción es fiel y completa, y eso es lo que la hace válida ante cualquier organismo. Aquí te explico cómo funciona esa validez y cómo se comprueba.",
     price: priceOf("partida-nacimiento"),
@@ -524,7 +524,7 @@ export const FICHAS = [
     name: "Traducción jurada de DNI o pasaporte",
     title: "Traducción Jurada de DNI y Pasaporte – Español-Inglés",
     description:
-      "Traducción jurada del DNI, NIE o pasaporte para notarías, bancos, herencias y trámites en el extranjero. Presupuesto cerrado en menos de 2 h, entrega en 24 h.",
+      "Traducción jurada del DNI, NIE o pasaporte para notarías, bancos, herencias y trámites en el extranjero. Presupuesto en menos de 2 h, entrega en 24 h.",
     intro:
       "El DNI o el pasaporte se traducen menos veces de las que se piden: muchos organismos aceptan el documento tal cual. Pero cuando una notaría, un banco extranjero o un expediente de herencia exige la traducción jurada del documento de identidad, la resuelvo en 24 horas — y si veo que en tu caso no hace falta, te lo digo antes de cobrar.",
     price: null,
@@ -579,7 +579,7 @@ export const FICHAS = [
     name: "Traducción jurada de testamento y documentos de herencia",
     title: "Traducción Jurada de Testamentos y Herencias – Español-Inglés",
     description:
-      "Traducción jurada de testamentos, grants of probate, certificados de últimas voluntades y escrituras de herencia entre España y Reino Unido. Presupuesto cerrado en menos de 2 h.",
+      "Traducción jurada de testamentos, grants of probate, últimas voluntades y escrituras de herencia entre España y Reino Unido. Presupuesto en menos de 2 h.",
     intro:
       "Las herencias con bienes o familiares en los dos países generan un expediente completo: testamento, certificado de defunción, últimas voluntades, el grant of probate británico, poderes… Traduzco el conjunto con terminología sucesoria precisa y coherente entre documentos, que es lo que la notaría necesita para no devolverte nada.",
     price: null,
@@ -636,7 +636,7 @@ export const FICHAS = [
     name: "Traducción jurada de certificado médico",
     title: "Traducción Jurada de Certificado Médico – Español-Inglés",
     description:
-      "Traducción jurada de certificados médicos, informes clínicos y certificados de aptitud para visados, oposiciones, seguros y tratamientos. Presupuesto cerrado en menos de 2 h.",
+      "Traducción jurada de certificados médicos, informes clínicos y certificados de aptitud para visados, oposiciones y seguros. Presupuesto en menos de 2 h.",
     intro:
       "Los certificados médicos aparecen en visados, oposiciones, seguros, adopciones o cuando continúas un tratamiento en otro país. Traduzco desde el certificado médico oficial de una página hasta informes clínicos completos, con el cuidado terminológico que exige un documento del que puede depender una decisión médica o administrativa.",
     price: null,

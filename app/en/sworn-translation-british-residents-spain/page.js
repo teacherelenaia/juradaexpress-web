@@ -6,7 +6,7 @@ import { DOCUMENTS } from "../../../content/documents";
 export const metadata = {
   title: "Sworn translation for British residents in Spain — procedure by procedure",
   description:
-    "A practical guide for British nationals in Spain: which documents need a sworn translation for your NIE/TIE, padrón, property purchase, marriage, driving licence exchange and pension. Prices from and real turnaround times.",
+    "Sworn translation for British nationals in Spain: NIE/TIE, padrón, property purchase, marriage, driving licence and pension. Prices and real turnaround.",
   alternates: {
     canonical:
       "https://juradaexpress.es/en/sworn-translation-british-residents-spain",

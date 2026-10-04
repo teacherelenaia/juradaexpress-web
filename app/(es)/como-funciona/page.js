@@ -8,7 +8,7 @@ import { WHATSAPP_URL } from "../../../content/site";
 export const metadata = {
   title: "Cómo funciona la traducción jurada, paso a paso",
   description:
-    "El proceso completo de tu traducción jurada: cómo enviar el documento, qué recibes (PDF firmado digitalmente y papel), cómo pagar y qué pasa si el organismo pide el original en papel.",
+    "Proceso de la traducción jurada: cómo enviar el documento, qué recibes (PDF con firma digital y papel), cómo pagar y qué pasa si el organismo pide papel.",
   alternates: {
     canonical: "https://juradaexpress.es/como-funciona",
     languages: {

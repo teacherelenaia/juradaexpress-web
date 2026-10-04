@@ -2,7 +2,7 @@
 export const metadata = {
   title: "Documents We Translate — Sworn Spanish Translator",
   description:
-    "Sworn translation of birth certificates, degrees, criminal record certificates, contracts and more for your procedures in Spain. Clear pricing, quote in under 2 hours.",
+    "Sworn translation of birth certificates, degrees, criminal record certificates, contracts and more for Spain. Clear pricing, quote in under 2 hours.",
   alternates: {
     canonical: "https://juradaexpress.es/en/documentos",
     languages: {
