@@ -1,6 +1,8 @@
 // app/precios/page.js
 import { DNV_PACK_PRICE } from "../../../content/site";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
+import { packOffers } from "../../../content/packs";
+import PacksSection from "../../components/PacksSection";
 
 const certPrice = DOCUMENTS.find((d) => d.id === "partida-nacimiento")?.price;
 
@@ -110,6 +112,22 @@ export default function Page() {
         tarjeta internacional a través de Stripe; si pagas desde fuera de la zona
         euro, tu banco aplica el cambio.
       </p>
+
+      <PacksSection locale="es" />
+
+      {/* JSON-LD: un Offer por paquete (content/packs.js) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "OfferCatalog",
+            name: "Paquetes de traducción jurada por trámite",
+            url: "https://juradaexpress.es/precios#packs",
+            itemListElement: packOffers("es"),
+          }),
+        }}
+      />
     </main>
   );
 }

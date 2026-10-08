@@ -112,6 +112,13 @@ export default function Page() {
           ? " The Google Ads tag only measures conversions, with ad personalisation switched off."
           : ""}
       </p>
+      <p className="mt-3 text-sm text-slate-500">
+        This site uses Google Consent Mode v2: until you accept, every Google
+        purpose is set to denied and no tag is loaded. If you arrive from a
+        Google ad, the click identifier (gclid) is stored in your browser only
+        with your consent, and it is used solely to know that a quote request
+        came from that ad.
+      </p>
 
       <h2 className="mt-10 font-display text-2xl font-semibold leading-snug text-slate-900">
         How to accept, reject or change your mind
@@ -135,7 +142,7 @@ export default function Page() {
         </a>
         .
       </p>
-      <p className="mt-3 text-sm text-slate-500">Last reviewed: August 2026.</p>
+      <p className="mt-3 text-sm text-slate-500">Last reviewed: October 2026.</p>
     </main>
   );
 }

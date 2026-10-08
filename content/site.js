@@ -186,7 +186,7 @@ export const LARGE_PROJECT_CAPACITY = {
 // PDF firmado (confirmado por Elena el 07/09/2026).
 export const USCIS_PAPER_COPY = true;
 
-// Tarifa del expediente de visado de nómada digital. Mientras sea null la
-// web dice "presupuesto cerrado en menos de 2 h".
-// [[COMPLETAR opcional: precio orientativo del pack de nómada digital]]
-export const DNV_PACK_PRICE = null;
+// Tarifa del expediente de visado de nómada digital (Digital Nomad Visa
+// Pack, content/packs.js; fijada el 08/10/2026). Si se pone en null, la web
+// vuelve a decir "presupuesto cerrado en menos de 2 h".
+export const DNV_PACK_PRICE = 189;

@@ -113,6 +113,14 @@ export default function Page() {
           ? " La etiqueta de Google Ads solo mide conversiones, con la personalización de anuncios desactivada."
           : ""}
       </p>
+      <p className="mt-3 text-sm text-slate-500">
+        Esta web usa el modo de consentimiento de Google (Consent Mode v2):
+        hasta que aceptas, todas las finalidades de Google quedan denegadas y
+        no se carga ninguna etiqueta. Si llegas desde un anuncio de Google, el
+        identificador del clic (gclid) solo se guarda en tu navegador con tu
+        consentimiento; se usa únicamente para saber que una solicitud de
+        presupuesto procede de ese anuncio.
+      </p>
 
       <h2 className="mt-10 font-display text-2xl font-semibold leading-snug text-slate-900">
         Cómo aceptarlas, rechazarlas o cambiar de opinión
@@ -138,7 +146,7 @@ export default function Page() {
         .
       </p>
       <p className="mt-3 text-sm text-slate-500">
-        Última revisión: agosto de 2026.
+        Última revisión: octubre de 2026.
       </p>
     </main>
   );

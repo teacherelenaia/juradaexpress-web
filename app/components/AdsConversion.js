@@ -2,38 +2,59 @@
 
 // app/components/AdsConversion.js
 //
-// Conversiones de Google Ads (FASE 1 SEO, 27/09/2026). Se monta una vez en
-// SiteShell, junto a CookieConsent, y:
+// Conversiones de Google Ads (FASE 1 SEO, 27/09/2026; medición ampliada el
+// 08/10/2026). Se monta una vez en SiteShell, junto a CookieConsent, y:
 //
 //   1. Carga gtag.js con la etiqueta de Ads (NEXT_PUBLIC_ADS_ID, "AW-…")
 //      SOLO si esa variable existe y el visitante ha aceptado las cookies
 //      (misma clave de localStorage que CookieConsent.js). Sin variable no
-//      se carga nada; sin consentimiento tampoco.
-//   2. Dispara gtag('event', 'conversion', { send_to: NEXT_PUBLIC_ADS_CONVERSION_ID })
-//      en: clic en cualquier enlace wa.me (o api.whatsapp.com), clic en
-//      enlaces tel:, envío correcto del formulario de presupuesto
-//      (DocumentCatalog.js llama a trackAdsConversion) y carga de
-//      /documentos/pago-exitoso (con el session_id de Stripe como
-//      transaction_id para que Ads no cuente dos veces una recarga).
+//      se carga nada; sin consentimiento tampoco. El modo de consentimiento
+//      v2 (default denegado en el layout, update en CookieConsent.js) va
+//      aparte y siempre por delante.
+//   2. Dispara gtag('event', 'conversion', { send_to: <etiqueta> }) con una
+//      acción de conversión distinta según el origen:
+//        - NEXT_PUBLIC_ADS_CONV_QUOTE: envío del formulario de presupuesto
+//          (QuoteCalculator.js y DocumentCatalog.js llaman a trackAdsConversion).
+//        - NEXT_PUBLIC_ADS_CONV_WHATSAPP: clic en enlaces wa.me / api.whatsapp.com.
+//        - NEXT_PUBLIC_ADS_CONV_CALL: clic en enlaces tel:.
+//        - NEXT_PUBLIC_ADS_CONV_PURCHASE: pago completado en Stripe; la dispara
+//          app/(es)/documentos/pago-exitoso con value, currency y
+//          transaction_id (session_id) para que Ads no cuente dos veces.
+//      Si falta alguna, se usa NEXT_PUBLIC_ADS_CONVERSION_ID como reserva.
 //
-// Elena rellena las dos variables en Vercel (ver .env.local.example). La
+// Elena rellena las variables en Vercel (ver .env.local.example). La
 // personalización de anuncios queda desactivada, igual que las señales
 // publicitarias de GA4, para que la política de cookies siga siendo cierta.
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import Script from "next/script";
 import { CONSENT_KEY, CONSENT_EVENT } from "./CookieConsent";
 
 const ADS_ID = process.env.NEXT_PUBLIC_ADS_ID || "";
-const CONVERSION_ID = process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || "";
+const FALLBACK_ID = process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || "";
 
-// Páginas cuya carga cuenta como conversión.
-const CONVERSION_PATHS = ["/documentos/pago-exitoso"];
+// Etiqueta ("send_to") de cada acción de conversión, con la antigua variable
+// única como reserva.
+const CONVERSION_LABELS = {
+  quote: process.env.NEXT_PUBLIC_ADS_CONV_QUOTE || FALLBACK_ID,
+  whatsapp: process.env.NEXT_PUBLIC_ADS_CONV_WHATSAPP || FALLBACK_ID,
+  call: process.env.NEXT_PUBLIC_ADS_CONV_CALL || FALLBACK_ID,
+  purchase: process.env.NEXT_PUBLIC_ADS_CONV_PURCHASE || FALLBACK_ID,
+};
+
+// Origen que pasan los componentes → acción de conversión.
+const SOURCE_TO_ACTION = {
+  whatsapp: "whatsapp",
+  telefono: "call",
+  call: "call",
+  pago_exitoso: "purchase",
+  compra: "purchase",
+  purchase: "purchase",
+};
 
 const WHATSAPP_RE = /^https?:\/\/(wa\.me|api\.whatsapp\.com)\//i;
 const TEL_RE = /^tel:/i;
 
-function hasConsent() {
+export function hasAdsConsent() {
   try {
     return localStorage.getItem(CONSENT_KEY) === "accepted";
   } catch {
@@ -53,34 +74,57 @@ function ensureGtag() {
   return window.gtag;
 }
 
+// Etiqueta de conversión para un origen dado ("" si no está configurada).
+export function conversionLabel(source) {
+  const action = SOURCE_TO_ACTION[source] || "quote";
+  return CONVERSION_LABELS[action] || "";
+}
+
+/**
+ * Conversiones mejoradas: datos del cliente (email) que gtag.js cifra
+ * antes de enviarlos. Llamar ANTES de trackAdsConversion. Solo con
+ * etiqueta y consentimiento.
+ */
+export function setAdsUserData(data = {}) {
+  if (typeof window === "undefined") return false;
+  if (!ADS_ID || !hasAdsConsent()) return false;
+  const clean = {};
+  if (data.email) clean.email = String(data.email).trim().toLowerCase();
+  if (data.phone) clean.phone_number = String(data.phone).trim();
+  if (!Object.keys(clean).length) return false;
+  ensureGtag()("set", "user_data", clean);
+  return true;
+}
+
 /**
  * Registra una conversión de Google Ads. No hace nada si faltan las
  * variables de entorno o si el visitante no ha aceptado las cookies.
- * `extra` permite añadir p. ej. transaction_id para deduplicar.
+ * `source` elige la acción (quote / whatsapp / call / purchase); `extra`
+ * permite añadir value, currency y transaction_id para deduplicar.
  * Devuelve true si se ha enviado el evento.
  */
 export function trackAdsConversion(source, extra = {}) {
   if (typeof window === "undefined") return false;
-  if (!ADS_ID || !CONVERSION_ID || !hasConsent()) return false;
+  const label = conversionLabel(source);
+  if (!ADS_ID || !label || !hasAdsConsent()) return false;
   ensureGtag()("event", "conversion", {
-    send_to: CONVERSION_ID,
+    send_to: label,
     ...extra,
   });
   if (process.env.NODE_ENV !== "production") {
     // eslint-disable-next-line no-console
-    console.debug("[AdsConversion]", source, extra);
+    console.debug("[AdsConversion]", source, label, extra);
   }
   return true;
 }
 
 export default function AdsConversion() {
   const [consent, setConsent] = useState(false);
-  const pathname = usePathname() || "/";
 
   // Estado inicial del consentimiento + cambios desde el aviso de cookies.
   useEffect(() => {
     if (!ADS_ID) return;
-    setConsent(hasConsent());
+    setConsent(hasAdsConsent());
     function onChange(e) {
       setConsent(e?.detail === "accepted");
     }
@@ -104,21 +148,6 @@ export default function AdsConversion() {
     return () => document.removeEventListener("click", onClick, true);
   }, []);
 
-  // Página de pago exitoso (Stripe redirige con ?session_id=…).
-  useEffect(() => {
-    if (!ADS_ID || !consent || !CONVERSION_PATHS.includes(pathname)) return;
-    let extra = {};
-    try {
-      const sessionId = new URLSearchParams(window.location.search).get(
-        "session_id"
-      );
-      if (sessionId) extra = { transaction_id: sessionId };
-    } catch {
-      /* sin query string */
-    }
-    trackAdsConversion("pago_exitoso", extra);
-  }, [consent, pathname]);
-
   if (!ADS_ID || !consent) return null;
 
   return (
@@ -134,7 +163,8 @@ export default function AdsConversion() {
           window.gtag = window.gtag || gtag;
           gtag('js', new Date());
           gtag('config', '${ADS_ID}', {
-            allow_ad_personalization_signals: false
+            allow_ad_personalization_signals: false,
+            allow_enhanced_conversions: true
           });
         `}
       </Script>

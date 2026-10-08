@@ -43,6 +43,8 @@ import { toUsd, US_SHIPPING_USD } from "../../content/usd";
 import { SectionHeading } from "./ui";
 import { IconUpload, IconFileText } from "./Icons";
 import { trackAdsConversion } from "./AdsConversion";
+import { getAttribution } from "../lib/attribution";
+import { SOURCE_OPTIONS } from "../../content/sources";
 
 const WHATSAPP_NUMBER = "34685891214";
 const MB = 1024 * 1024;
@@ -100,6 +102,9 @@ const COPY = {
     name: "Nombre",
     email: "Email",
     phone: "Teléfono",
+    source: "¿Cómo nos has conocido?",
+    sourceOptional: "(opcional)",
+    sourcePlaceholder: "Elige una opción",
     privacy: "He leído la",
     privacyLink: "política de privacidad",
     privacyTail:
@@ -185,6 +190,9 @@ const COPY = {
     name: "Name",
     email: "Email",
     phone: "Phone",
+    source: "How did you find us?",
+    sourceOptional: "(optional)",
+    sourcePlaceholder: "Choose an option",
     privacy: "I have read the",
     privacyLink: "privacy policy",
     privacyTail:
@@ -478,6 +486,7 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [source, setSource] = useState(""); // «¿Cómo nos has conocido?» (opcional)
   // Solo en modo despacho.
   const [firm, setFirm] = useState("");
   const [reference, setReference] = useState("");
@@ -674,10 +683,22 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
       fd.append("email", email);
       fd.append("phone", phone);
       fd.append("privacy", "on");
+      // Medición de Google Ads (08/10/2026): procedencia declarada por el
+      // cliente y atribución capturada en la sesión (gclid, utm_*…), para
+      // importar después la venta a Google Ads junto con el email.
+      fd.append("source", source);
+      fd.append("attribution", JSON.stringify(getAttribution() || {}));
       if (firmMode) {
         fd.append("firmMode", "1");
         fd.append("firm", firm);
         fd.append("reference", reference);
+      }
+      if (process.env.NODE_ENV !== "production") {
+        // eslint-disable-next-line no-console
+        console.debug("[QuoteCalculator] FormData", {
+          source: fd.get("source"),
+          attribution: fd.get("attribution"),
+        });
       }
       return fd;
     };
@@ -1104,6 +1125,27 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
               </p>
             ) : null}
           </fieldset>
+
+          <div>
+            <label htmlFor={`${uid}-source`} className={labelClass}>
+              {t.source}{" "}
+              <span className="font-normal text-slate-500">{t.sourceOptional}</span>
+            </label>
+            <select
+              id={`${uid}-source`}
+              name="source"
+              value={source}
+              onChange={(e) => setSource(e.target.value)}
+              className={fieldClass}
+            >
+              <option value="">{t.sourcePlaceholder}</option>
+              {SOURCE_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {locale === "en" ? o.en : o.es}
+                </option>
+              ))}
+            </select>
+          </div>
 
           {/* Honeypot */}
           <input

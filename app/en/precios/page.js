@@ -1,6 +1,8 @@
 // app/en/precios/page.js
 import { DNV_PACK_PRICE } from "../../../content/site";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
+import { packOffers } from "../../../content/packs";
+import PacksSection from "../../components/PacksSection";
 
 const certPrice = DOCUMENTS.find((d) => d.id === "partida-nacimiento")?.price;
 
@@ -112,6 +114,22 @@ export default function Page() {
         24-72 hours; same-day delivery of more than 10 pages carries a 30%
         surcharge.
       </p>
+
+      <PacksSection locale="en" />
+
+      {/* JSON-LD: one Offer per pack (content/packs.js) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "OfferCatalog",
+            name: "Sworn translation packs by procedure",
+            url: "https://juradaexpress.es/en/precios#packs",
+            itemListElement: packOffers("en"),
+          }),
+        }}
+      />
     </main>
   );
 }

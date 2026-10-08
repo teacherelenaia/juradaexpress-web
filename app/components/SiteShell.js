@@ -7,6 +7,7 @@
 // MobileNav, HeaderActions) y el footer se localiza aquí por `locale`.
 import CookieConsent from "./CookieConsent";
 import AdsConversion from "./AdsConversion";
+import AttributionCapture from "./AttributionCapture";
 import ActionBar from "./ActionBar";
 import MobileNav from "./MobileNav";
 import MainNav from "./MainNav";
@@ -194,6 +195,9 @@ export default function SiteShell({ locale = "es", children }) {
 
         {/* Google Ads: etiqueta y conversiones, solo con NEXT_PUBLIC_ADS_ID y consentimiento */}
         <AdsConversion />
+
+        {/* Atribución (gclid, utm_*) para importar ventas a Google Ads */}
+        <AttributionCapture />
 
         {/* Barra inferior móvil + botón flotante de WhatsApp en escritorio */}
         <ActionBar />
