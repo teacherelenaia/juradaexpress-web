@@ -15,6 +15,17 @@ export const SERVICE_ROUTES = [
     lastModified: "2026-09-26",
   },
   {
+    // Landing de la campaña 1 de Google Ads (08/10/2026): cabecera reducida
+    // (`landing: true` → MainNav/MobileNav muestran solo precios y contacto).
+    id: "visados",
+    es: "/traduccion-jurada-visados-espana",
+    en: "/en/sworn-translations-spanish-visas",
+    labelEs: "Visados de España",
+    labelEn: "Spanish visas",
+    lastModified: "2026-10-08",
+    landing: true,
+  },
+  {
     id: "dnv",
     es: "/traduccion-jurada-visado-nomada-digital",
     en: "/en/sworn-translation-spain-digital-nomad-visa",
@@ -90,6 +101,13 @@ export const UK_ROUTE = {
 
 const byId = (id) => SERVICE_ROUTES.find((r) => r.id === id);
 
+// Rutas con cabecera reducida (landings de campaña): el menú principal se
+// limita a precios y contacto y no muestra el desplegable "Internacional".
+export const LANDING_PATHS = SERVICE_ROUTES.filter((r) => r.landing).flatMap(
+  (r) => [r.es, r.en].filter(Boolean)
+);
+export const isLandingPath = (pathname) => LANDING_PATHS.includes(pathname);
+
 // Landings de documento para el mercado de EE. UU. (2026-10), solo en
 // inglés (sin par ES, sin hreflang es). Generadas con
 // app/components/UsDocPage.js a partir de content/us-docs.js, que importa
@@ -161,7 +179,13 @@ export const INTERNATIONAL_MENU_GROUPS = [
     id: "servicios",
     labelEs: "Servicios",
     labelEn: "Services",
-    items: [byId("traductor-ingles"), byId("dnv"), byId("uscis"), byId("urgente")],
+    items: [
+      byId("traductor-ingles"),
+      byId("visados"),
+      byId("dnv"),
+      byId("uscis"),
+      byId("urgente"),
+    ],
   },
   {
     id: "paises",

@@ -2,6 +2,7 @@
 // Registro de las páginas de audiencia/servicio del encargo internacional.
 // Cada módulo exporta { es, en } con la misma forma (ver ServicePage.js).
 // Las rutas (sin contenido) viven en ./routes.js para los componentes cliente.
+import * as visados from "./visados";
 import * as nomadaDigital from "./nomada-digital";
 import * as uscis from "./uscis";
 import * as estadosUnidos from "./estados-unidos";
@@ -16,6 +17,7 @@ export { SERVICE_ROUTES, INTERNATIONAL_MENU } from "./routes";
 
 export const SERVICE_PAGES = [
   traductorIngles,
+  visados,
   nomadaDigital,
   uscis,
   estadosUnidos,

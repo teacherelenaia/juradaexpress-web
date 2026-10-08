@@ -10,12 +10,21 @@
 // propia con JSON-LD FAQPage, schema Service + BreadcrumbList y CTA de
 // WhatsApp con texto prellenado específico. Los datos viven en
 // content/servicios/*.js.
+//
+// Landings de campaña (08/10/2026, página de visados): campos opcionales
+// `trust` (franja de confianza bajo el H1, sin iconos), `primaryCta` (un
+// solo botón principal en la cabecera y en el CTA final, con WhatsApp como
+// secundario) y el bloque `{ packs: [ids] }` (tarjetas de content/packs.js
+// con un Offer por pack en el JSON-LD). En móvil la franja y el botón van
+// antes del párrafo de entrada para que se vean sin hacer scroll.
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
 import QuoteCalculator from "./QuoteCalculator";
+import { PackGrid } from "./PacksSection";
 import { SectionHeading } from "./ui";
 import { SERVICE_COUNTRIES } from "../../content/site";
+import { packOffers } from "../../content/packs";
 
 const BASE = "https://juradaexpress.es";
 
@@ -34,6 +43,7 @@ const UI = {
     pricesHref: "/precios",
     docs: "Catálogo de documentos",
     docsHref: "/documentos",
+    trustAria: "Datos de confianza",
   },
   en: {
     home: "Home",
@@ -49,6 +59,7 @@ const UI = {
     pricesHref: "/en/precios",
     docs: "Document catalogue",
     docsHref: "/en/documentos",
+    trustAria: "Trust facts",
   },
 };
 
@@ -113,7 +124,7 @@ function Chevron() {
 
 // Bloques de contenido: cadena (párrafo con HTML inline permitido), lista,
 // tabla o nota destacada.
-function Block({ block }) {
+function Block({ block, page }) {
   if (typeof block === "string") {
     return (
       <p
@@ -181,6 +192,16 @@ function Block({ block }) {
       </div>
     );
   }
+  if (block.packs) {
+    return (
+      <PackGrid
+        ids={block.packs}
+        locale={page.locale}
+        orderHref={page.primaryCta ? page.primaryCta.href : undefined}
+        className="mt-6"
+      />
+    );
+  }
   if (block.note) {
     return (
       <aside
@@ -196,6 +217,15 @@ export default function ServicePage({ page }) {
   const t = UI[page.locale] || UI.es;
   const otherHref =
     page.locale === "en" ? page.alternates.es : page.alternates.en;
+  // Packs mostrados en la página (bloque { packs: [ids] }) → un Offer por
+  // pack en el JSON-LD, anclado a esta URL.
+  const packIds = page.sections
+    .flatMap((s) => s.body)
+    .filter((b) => b && b.packs)
+    .flatMap((b) => b.packs);
+  const packOfferNodes = packIds.length
+    ? packOffers(page.locale, { ids: packIds, base: `${BASE}${page.path}` })
+    : [];
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:py-16">
@@ -210,35 +240,79 @@ export default function ServicePage({ page }) {
 
       {/* Cabecera: H1 + párrafo citable + CTA, imagen a la derecha */}
       <header className="mt-6 grid items-center gap-8 md:grid-cols-[1.15fr,0.85fr] md:gap-12">
-        <div>
-          <h1 className="font-display text-balance text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl lg:text-[2.75rem]">
+        <div className="flex flex-col">
+          <h1 className="order-1 font-display text-balance text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 md:text-4xl lg:text-[2.75rem]">
             {page.h1}
           </h1>
+          {/* Franja de confianza (landings): hechos en una fila, sin iconos */}
+          {page.trust ? (
+            <ul
+              aria-label={t.trustAria}
+              className="order-2 mt-4 flex flex-col gap-y-1 text-sm font-medium leading-snug text-slate-700 sm:flex-row sm:flex-wrap sm:gap-x-2"
+            >
+              {page.trust.map((f, i) => (
+                <li key={f.text} className="flex items-center gap-2">
+                  {f.href ? (
+                    <a
+                      href={f.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={f.label}
+                      className="link-nav inline-block py-1 text-slate-700 sm:py-0"
+                    >
+                      {f.text}
+                    </a>
+                  ) : (
+                    <span className="inline-block py-1 sm:py-0">{f.text}</span>
+                  )}
+                  {i < page.trust.length - 1 ? (
+                    <span className="hidden text-stone-400 sm:inline" aria-hidden="true">
+                      ·
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          ) : null}
           <p
-            className="mt-5 max-w-[68ch] text-lg text-slate-700 [&_a]:text-brand-navy [&_a]:underline [&_a]:underline-offset-2 [&_strong]:font-semibold [&_strong]:text-slate-900"
+            className={`${page.trust ? "order-4 mt-6 md:order-3 md:mt-5" : "order-3 mt-5"} max-w-[68ch] text-lg text-slate-700 [&_a]:text-brand-navy [&_a]:underline [&_a]:underline-offset-2 [&_strong]:font-semibold [&_strong]:text-slate-900`}
             dangerouslySetInnerHTML={{ __html: page.lead }}
           />
-          <div className="mt-7 flex flex-wrap gap-3">
-            <TrackedLink
-              label={`${page.id}_whatsapp_${page.locale}`}
-              href={page.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              {page.whatsappLabel || t.whatsapp}
-            </TrackedLink>
-            <TrackedLink
-              label={`${page.id}_quote_${page.locale}`}
-              href={t.quoteHref}
-              className="btn btn-secondary"
-            >
-              {t.quote}
-            </TrackedLink>
+          <div
+            className={`${page.trust ? "order-3 mt-5 md:order-4 md:mt-7" : "order-4 mt-7"} flex flex-wrap gap-3`}
+          >
+            {page.primaryCta ? (
+              <TrackedLink
+                label={`${page.id}_primary_${page.locale}`}
+                href={page.primaryCta.href}
+                className="btn btn-primary"
+              >
+                {page.primaryCta.label}
+              </TrackedLink>
+            ) : (
+              <>
+                <TrackedLink
+                  label={`${page.id}_whatsapp_${page.locale}`}
+                  href={page.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                >
+                  {page.whatsappLabel || t.whatsapp}
+                </TrackedLink>
+                <TrackedLink
+                  label={`${page.id}_quote_${page.locale}`}
+                  href={t.quoteHref}
+                  className="btn btn-secondary"
+                >
+                  {t.quote}
+                </TrackedLink>
+              </>
+            )}
           </div>
           {/* Garantías (content/site.js → GUARANTEES), solo si la página las pide */}
           {page.guarantees ? (
-            <Guarantees locale={page.locale} className="mt-6" />
+            <Guarantees locale={page.locale} className="order-5 mt-6" />
           ) : null}
         </div>
         <figure className="relative aspect-[4/3] overflow-hidden rounded-xl shadow">
@@ -267,7 +341,7 @@ export default function ServicePage({ page }) {
             </SectionHeading>
             <div className="mt-4 space-y-4">
               {s.body.map((b, i) => (
-                <Block key={i} block={b} />
+                <Block key={i} block={b} page={page} />
               ))}
             </div>
           </section>
@@ -329,25 +403,48 @@ export default function ServicePage({ page }) {
           </SectionHeading>
           <p className="mt-3 max-w-[68ch] text-slate-600">{page.cta.text}</p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <TrackedLink
-              label={`${page.id}_cta_whatsapp_${page.locale}`}
-              href={page.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              {page.whatsappLabel || t.whatsapp}
-            </TrackedLink>
-            <TrackedLink
-              label={`${page.id}_cta_quote_${page.locale}`}
-              href={t.quoteHref}
-              className="btn btn-secondary"
-            >
-              {t.quote}
-            </TrackedLink>
-            <a href={t.pricesHref} className="btn btn-ghost">
-              {t.prices}
-            </a>
+            {page.primaryCta ? (
+              <>
+                <TrackedLink
+                  label={`${page.id}_cta_primary_${page.locale}`}
+                  href={page.primaryCta.href}
+                  className="btn btn-primary"
+                >
+                  {page.cta.primaryLabel || page.primaryCta.label}
+                </TrackedLink>
+                <TrackedLink
+                  label={`${page.id}_cta_whatsapp_${page.locale}`}
+                  href={page.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                >
+                  {page.whatsappLabel || t.whatsapp}
+                </TrackedLink>
+              </>
+            ) : (
+              <>
+                <TrackedLink
+                  label={`${page.id}_cta_whatsapp_${page.locale}`}
+                  href={page.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                >
+                  {page.whatsappLabel || t.whatsapp}
+                </TrackedLink>
+                <TrackedLink
+                  label={`${page.id}_cta_quote_${page.locale}`}
+                  href={t.quoteHref}
+                  className="btn btn-secondary"
+                >
+                  {t.quote}
+                </TrackedLink>
+                <a href={t.pricesHref} className="btn btn-ghost">
+                  {t.prices}
+                </a>
+              </>
+            )}
           </div>
 
           <h3 className="mt-8 text-base font-semibold text-slate-900">
@@ -379,7 +476,7 @@ export default function ServicePage({ page }) {
         </section>
       </div>
 
-      {/* JSON-LD: Service + BreadcrumbList + FAQPage */}
+      {/* JSON-LD: Service + BreadcrumbList + FAQPage (+ un Offer por pack) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -452,6 +549,7 @@ export default function ServicePage({ page }) {
                   acceptedAnswer: { "@type": "Answer", text: f.a },
                 })),
               },
+              ...packOfferNodes,
             ],
           }),
         }}

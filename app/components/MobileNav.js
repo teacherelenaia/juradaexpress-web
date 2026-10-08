@@ -8,7 +8,13 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 import SocialIcons from "./SocialIcons";
-import { getLinks, getInternationalGroups, isActive, isEnglishPath } from "./MainNav";
+import {
+  getLinks,
+  getInternationalGroups,
+  isActive,
+  isEnglishPath,
+  isLandingPath,
+} from "./MainNav";
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -17,8 +23,10 @@ export default function MobileNav() {
   const [intlOpen, setIntlOpen] = useState(false);
   const pathname = usePathname() || "/";
   const english = isEnglishPath(pathname);
+  // Landings de campaña: solo precios y contacto, sin acordeón Internacional.
+  const landing = isLandingPath(pathname);
   const links = getLinks(pathname).filter((l) => !l.menu);
-  const groups = getInternationalGroups(pathname);
+  const groups = landing ? [] : getInternationalGroups(pathname);
   const intlActive = groups.some((g) =>
     g.items.some((l) => isActive(pathname, l.href))
   );
@@ -124,7 +132,9 @@ export default function MobileNav() {
             );
           })}
           {/* Acordeón Internacional (FASE 2B.3): misma jerarquía que el
-              desplegable de escritorio, dos grupos. */}
+              desplegable de escritorio, dos grupos. Oculto en landings. */}
+          {landing ? null : (
+          <>
           <button
             type="button"
             onClick={() => setIntlOpen((v) => !v)}
@@ -194,6 +204,8 @@ export default function MobileNav() {
               </div>
             ))}
           </div>
+          </>
+          )}
           <div className="mt-2 flex items-center justify-between border-t border-white/10 px-3 pt-3 text-slate-100">
             <LanguageSwitcher />
             <SocialIcons />

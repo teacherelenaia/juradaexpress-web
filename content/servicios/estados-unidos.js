@@ -149,6 +149,7 @@ export const es = {
     text: "Mándame el documento escaneado y dime para qué consulado u organismo es. Te respondo en horario de España con precio cerrado y plazo; el pago es con tu tarjeta habitual.",
   },
   related: [
+    { href: "/traduccion-jurada-visados-espana", label: "Visados de España (no lucrativo, estudiantes, familiares)" },
     { href: "/traduccion-jurada-visado-nomada-digital", label: "Visado de nómada digital" },
     { href: "/traduccion-certificada-uscis", label: "Traducción certificada para USCIS" },
     { href: "/traduccion-jurada-certificado-penales", label: "Antecedentes penales" },
@@ -298,6 +299,7 @@ export const en = {
     text: "Send me the scanned document and tell me which consulate or body it is for. I reply during Spanish office hours with a fixed price and deadline; you pay with your usual card.",
   },
   related: [
+    { href: "/en/sworn-translations-spanish-visas", label: "Spanish visas (non-lucrative, student, family)" },
     { href: "/en/sworn-translation-spain-digital-nomad-visa", label: "Digital nomad visa" },
     { href: "/en/certified-translation-uscis", label: "Certified translation for USCIS" },
     { href: "/traduccion-jurada-certificado-penales", label: "Criminal record certificate (guide in Spanish)" },

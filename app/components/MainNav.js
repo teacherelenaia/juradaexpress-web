@@ -13,9 +13,16 @@
 // en el menú de escritorio para no pasar de 6 ítems (las FAQ siguen en el
 // footer). En las rutas /en el menú se muestra en inglés y enlaza a las
 // páginas en inglés.
+//
+// Landings de campaña (content/servicios/routes.js → `landing: true`,
+// 08/10/2026): cabecera reducida a precios y contacto, sin desplegable
+// "Internacional" ni enlace al blog, para no dispersar el tráfico de pago.
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { INTERNATIONAL_MENU_GROUPS } from "../../content/servicios/routes";
+import {
+  INTERNATIONAL_MENU_GROUPS,
+  isLandingPath,
+} from "../../content/servicios/routes";
 
 const LINKS_ES = [
   { href: "/", label: "Inicio" },
@@ -35,6 +42,17 @@ const LINKS_EN = [
   { href: "/en/contacto", label: "Contact" },
 ];
 
+// Cabecera reducida de las landings de campaña.
+const LANDING_LINKS_ES = [
+  { href: "/precios", label: "Precios" },
+  { href: "/contacto", label: "Contacto" },
+];
+
+const LANDING_LINKS_EN = [
+  { href: "/en/precios", label: "Pricing" },
+  { href: "/en/contacto", label: "Contact" },
+];
+
 // Se conserva por compatibilidad (lista ES).
 const LINKS = LINKS_ES;
 
@@ -42,8 +60,12 @@ export function isEnglishPath(pathname) {
   return pathname === "/en" || pathname.startsWith("/en/");
 }
 
+export { isLandingPath };
+
 export function getLinks(pathname) {
-  return isEnglishPath(pathname) ? LINKS_EN : LINKS_ES;
+  const en = isEnglishPath(pathname);
+  if (isLandingPath(pathname)) return en ? LANDING_LINKS_EN : LANDING_LINKS_ES;
+  return en ? LINKS_EN : LINKS_ES;
 }
 
 /** Grupos del menú Internacional localizados: [{ id, label, items: [{href,label,hrefLang?}] }] */
