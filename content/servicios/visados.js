@@ -47,7 +47,7 @@ export const es = {
   crumb: "Visados de España",
   metaTitle: `Traducción jurada para visados de España desde ${MIN_PRICE} € | Jurada Express`,
   metaDescription:
-    "Traductora jurada nombrada por el Ministerio de Asuntos Exteriores (nº 7310). Antecedentes del FBI, certificado médico, partidas de nacimiento y matrimonio traducidos para tu visado no lucrativo, de estudios o de nómada digital. PDF en el día, paquetes de visado desde 129 €.",
+    "Traductora jurada nº 7310 del MAEC. Antecedentes del FBI, certificado médico y partidas traducidos para tu visado de España. PDF en el día, desde 129 €.",
   h1: "Traducción jurada para tu visado de España",
   lead:
     "La traducción jurada es la versión en español de tus documentos, firmada y certificada por una traductora nombrada por el Ministerio de Asuntos Exteriores de España, y es lo que los consulados españoles piden con cada documento extranjero del expediente de visado: el certificado de antecedentes del FBI, el certificado médico, la prueba de ingresos y las partidas de nacimiento y el certificado de matrimonio de tu familia. Soy Elena Peñaranda Ortega, traductora jurada nº 7310 desde 2009, y traduzco expedientes de visado completos procedentes de Estados Unidos, Reino Unido, Canadá y Australia con un único precio cerrado y un único plazo por escrito. Los documentos de hasta 10 páginas se entregan el mismo día en PDF firmado digitalmente.",
@@ -252,7 +252,7 @@ export const en = {
   crumb: "Spanish visas",
   metaTitle: `Sworn Translations for Spanish Visas from €${MIN_PRICE} | Jurada Express`,
   metaDescription:
-    "Sworn translator appointed by Spain's Foreign Ministry (No. 7310). FBI check, medical certificate, birth and marriage certificates translated for your non-lucrative, student or digital nomad visa. Same-day PDF, visa packs from €129.",
+    "Sworn translator No. 7310 (Spain's Foreign Ministry). FBI check, medical and birth certificates translated for your Spanish visa. Same-day PDF, from €129.",
   h1: "Sworn translations for your Spanish visa application",
   lead:
     "A sworn translation is the Spanish-language version of your documents, signed and certified by a translator appointed by Spain's Ministry of Foreign Affairs, and it is what Spanish consulates ask for with every foreign document in a visa file: the FBI background check, the medical certificate, proof of income, and your family's birth and marriage certificates. I am Elena Peñaranda Ortega, sworn translator No. 7310 since 2009, and I translate complete visa files from the United States, the UK, Canada and Australia with one fixed price and one written deadline. Documents of up to 10 pages are delivered the same day as a digitally signed PDF.",
