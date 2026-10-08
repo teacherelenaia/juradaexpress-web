@@ -78,6 +78,12 @@ export const PACKS_COPY = {
     orderHref: "/documentos",
     whatsapp: "WhatsApp",
     whatsappText: (name, price) => `Hola, quiero el ${name} (${price} €)`,
+    // Enlace desde /precios a la página de visados (08/10/2026).
+    visaPage: {
+      text: "Los tres paquetes de visado se explican documento a documento en la página de",
+      label: "traducción jurada para visados de España",
+      href: "/traduccion-jurada-visados-espana",
+    },
   },
   en: {
     title: "Packs by procedure",
@@ -90,6 +96,12 @@ export const PACKS_COPY = {
     orderHref: "/en/documentos",
     whatsapp: "WhatsApp",
     whatsappText: (name, price) => `Hi, I'd like the ${name} (€${price})`,
+    // Link from /en/precios to the visa page (08/10/2026).
+    visaPage: {
+      text: "The three visa packs are explained document by document on the",
+      label: "sworn translations for Spanish visas page",
+      href: "/en/sworn-translations-spanish-visas",
+    },
   },
 };
 
@@ -101,10 +113,16 @@ export function packWhatsAppUrl(pack, locale = "es") {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.whatsappText(name, pack.price))}`;
 }
 
-// Offer de schema.org por pack (JSON-LD de /precios y /en/precios).
-export function packOffers(locale = "es") {
-  const base = locale === "en" ? "https://juradaexpress.es/en/precios" : "https://juradaexpress.es/precios";
-  return PACKS.map((p) => ({
+// Offer de schema.org por pack. Sin argumentos extra, los de /precios y
+// /en/precios (todos los packs, anclados a esa página). Con `ids` y `base`
+// (URL absoluta de otra página, p. ej. la landing de visados), solo esos
+// packs anclados a esa URL.
+export function packOffers(locale = "es", { ids, base: baseUrl } = {}) {
+  const base =
+    baseUrl ||
+    (locale === "en" ? "https://juradaexpress.es/en/precios" : "https://juradaexpress.es/precios");
+  const packs = ids ? ids.map((id) => PACKS.find((p) => p.id === id)).filter(Boolean) : PACKS;
+  return packs.map((p) => ({
     "@type": "Offer",
     "@id": `${base}#pack-${p.id}`,
     name: p.name[locale] || p.name.es,
