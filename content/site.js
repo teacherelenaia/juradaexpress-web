@@ -97,11 +97,11 @@ export const PROCESS_VIDEO = null;
 
 // Valoración pública de la ficha de Google Business. Google no ofrece API
 // gratuita para leerla: ACTUALIZAR A MANO cuando cambie (leído en Google
-// Maps el 26/09/2026: 5,0 estrellas · 24 reseñas; antes, 7 reseñas a
-// 07/09/2026). Se usa en la franja de confianza de la home, en la cabecera
+// Maps el 08/10/2026: 5,0 estrellas · 35 reseñas; antes, 24 reseñas a
+// 26/09/2026 y 7 a 07/09/2026). Se usa en la franja de confianza de la home, en la cabecera
 // de Opiniones y en aggregateRating del JSON-LD.
 export const GOOGLE_RATING = 5.0;
-export const GOOGLE_REVIEW_COUNT = 24;
+export const GOOGLE_REVIEW_COUNT = 35;
 
 // Países desde los que Elena atiende con más frecuencia. El último elemento
 // es deliberadamente abierto: el servicio es 100 % online y no excluye a
