@@ -38,9 +38,23 @@ export const metadata = {
   },
 };
 
+// Valores por defecto del modo de consentimiento v2 (Google Ads / GA4).
+const CONSENT_DEFAULT =
+  "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});";
+
 export default function RootLayoutEn({ children }) {
   return (
     <html lang="en" className={fontClassName}>
+      <head>
+        {/* Modo de consentimiento v2 de Google: todo denegado por defecto.
+            Script inline síncrono en <head>, antes de cualquier otro script
+            (next/script con beforeInteractive fuera de <head> rompe la
+            hidratación en Next 14); CookieConsent.js envía el `update`. */}
+        <script
+          id="consent-default"
+          dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT }}
+        />
+      </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
         <SiteShell locale="en">{children}</SiteShell>
         <Analytics />

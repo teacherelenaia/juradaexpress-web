@@ -23,6 +23,12 @@
 // `blobsEmailed` con las URL realmente enviadas. Los lotes directos del
 // punto 2 quedan como reserva si Blob no está disponible.
 //
+// Medición de Google Ads (08/10/2026): la calculadora manda además `source`
+// («¿Cómo nos has conocido?», valor de content/sources.js) y `attribution`
+// (JSON de app/lib/attribution.js: gclid, utm_*, landing, referrer). Van en
+// el email tras el teléfono para que Elena pueda importar la venta a Google
+// Ads con el gclid y el email del cliente.
+//
 // Modo despacho (03/10/2026): el formulario de /en/for-immigration-law-firms
 // manda firmMode=1 con `firm` (nombre del despacho) y `reference`
 // (referencia de cliente/asunto). Asunto: «[LAW FIRM] <despacho> ·
@@ -38,6 +44,7 @@ import { get, del } from "@vercel/blob";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES } from "../../../content/site";
 import { toUsd, US_SHIPPING_USD } from "../../../content/usd";
+import { sourceLabel } from "../../../content/sources";
 
 export const runtime = "nodejs";
 // Descargar de Blob y enviar emails con adjuntos grandes puede tardar.
@@ -154,6 +161,41 @@ function fileList(raw) {
     .filter((item) => item.name);
 }
 
+// Atribución que manda el navegador (JSON). Solo se acepta un objeto y
+// cada valor se recorta a 200 caracteres.
+const ATTR_KEYS = ["gclid", "gbraid", "wbraid", "landing", "referrer", "ts"];
+const UTM_KEYS = ["source", "medium", "campaign", "term", "content"];
+function attributionOf(raw) {
+  let data;
+  try {
+    data = JSON.parse(String(raw ?? ""));
+  } catch {
+    return null;
+  }
+  if (!data || typeof data !== "object" || Array.isArray(data)) return null;
+  const out = {};
+  for (const k of ATTR_KEYS) out[k] = clean(data[k], 200);
+  out.utm = {};
+  const utm = data.utm && typeof data.utm === "object" ? data.utm : {};
+  for (const k of UTM_KEYS) out.utm[k] = clean(utm[k], 200);
+  return out;
+}
+
+// «Atribución: gclid=… · landing=… · referrer=… · utm=source/medium/campaign»
+// sin las partes vacías; si no hay nada, «directa».
+function attributionLine(attr) {
+  if (!attr) return "directa";
+  const parts = [];
+  for (const k of ["gclid", "gbraid", "wbraid"]) {
+    if (attr[k]) parts.push(`${k}=${attr[k]}`);
+  }
+  if (attr.landing) parts.push(`landing=${attr.landing}`);
+  if (attr.referrer) parts.push(`referrer=${attr.referrer}`);
+  const utm = [attr.utm.source, attr.utm.medium, attr.utm.campaign].filter(Boolean);
+  if (utm.length) parts.push(`utm=${utm.join("/")}`);
+  return parts.length ? parts.join(" · ") : "directa";
+}
+
 // La estimación se recalcula aquí a partir del catálogo: nunca se confía
 // en el importe que manda el navegador.
 function estimate(doc, pages, urgent) {
@@ -190,6 +232,8 @@ export async function POST(req) {
   const emailRaw = clean(fd.get("email"), 160);
   const email = EMAIL_RE.test(emailRaw) ? emailRaw : "";
   const phone = clean(fd.get("phone"), 40);
+  const source = clean(fd.get("source"), 40); // «¿Cómo nos has conocido?»
+  const attribution = attributionOf(fd.get("attribution"));
   const part = clean(fd.get("part"), 20); // "1/3" en los lotes de archivos
   const lots = Math.max(0, parseInt(clean(fd.get("lots")), 10) || 0); // emails de archivos que siguen al resumen
   const filesEmail = fileList(fd.get("filesEmail")); // irán en lotes directos aparte
@@ -263,6 +307,8 @@ export async function POST(req) {
     `Nombre: ${name || "(no indicado)"}`,
     `Email: ${email || (emailRaw ? `${emailRaw} (no válido)` : "(no indicado)")}`,
     `Teléfono: ${phone || "(no indicado)"}`,
+    `Cómo nos ha conocido: ${sourceLabel(source, "es") || "(no indicado)"}`,
+    `Atribución: ${attributionLine(attribution)}`,
   ];
   const extraLots = Math.max(0, blobGroups.length - 1);
   if (isSummary) {
