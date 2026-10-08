@@ -1,7 +1,7 @@
 // content/reviews.js
 //
 // Reseñas reales de clientes, copiadas literalmente de la ficha de Google
-// Business "Jurada Express" (5,0 · 24 reseñas a 26/09/2026; aquí se
+// Business "Jurada Express" (5,0 · 35 reseñas a 08/10/2026; aquí se
 // transcriben las que se han podido leer completas en Maps). La sección
 // "Opiniones" de la home (ES y EN) solo se publica cuando aquí hay reseñas
 // reales. Nunca inventes reseñas ni uses ejemplos.

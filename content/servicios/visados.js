@@ -26,8 +26,8 @@ const PATH_EN = "/en/sworn-translations-spanish-visas";
 // Packs que se muestran en la página (ids de content/packs.js).
 const PACK_IDS = ["visa", "visa-family", "nomad"];
 
-// "24 five-star Google reviews": solo si la nota es 5,0; si baja, el texto
-// pasa a "5,0 en Google · 24 reseñas" sin tocar la página.
+// "35 five-star Google reviews": solo si la nota es 5,0; si baja, el texto
+// pasa a "5,0 en Google · 35 reseñas" sin tocar la página.
 const fiveStar = GOOGLE_RATING >= 5;
 const reviewsEn = fiveStar
   ? `${GOOGLE_REVIEW_COUNT} five-star Google reviews`
