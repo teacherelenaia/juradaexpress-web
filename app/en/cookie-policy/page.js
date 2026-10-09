@@ -117,7 +117,11 @@ export default function Page() {
         purpose is set to denied and no tag is loaded. If you arrive from a
         Google ad, the click identifier (gclid) is stored in your browser only
         with your consent, and it is used solely to know that a quote request
-        came from that ad.
+        came from that ad. If you arrive from an ad and tap the WhatsApp
+        button, we keep a reference to that click (the ad identifier, the
+        page and the date; never your name or phone number) so we know which
+        ad the enquiry came from, and that reference appears at the end of
+        the message that opens in WhatsApp.
       </p>
 
       <h2 className="mt-10 font-display text-2xl font-semibold leading-snug text-slate-900">

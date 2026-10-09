@@ -41,6 +41,7 @@
 // Variables en .env.local.example.
 import { NextResponse } from "next/server";
 import { get, del } from "@vercel/blob";
+import { resendConfig, sendResendEmail } from "../../lib/resend";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES } from "../../../content/site";
 import { toUsd, US_SHIPPING_USD } from "../../../content/usd";
@@ -253,10 +254,8 @@ export async function POST(req) {
     }
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.QUOTE_TO_EMAIL || "info@juradaexpress.es";
-  const from = process.env.QUOTE_FROM_EMAIL;
-  if (!apiKey || !from) {
+  const mail = resendConfig();
+  if (!mail) {
     return json({ ok: true, emailed: false, reason: "email-not-configured", blobsEmailed: [] });
   }
 
@@ -366,27 +365,14 @@ export async function POST(req) {
     ? `[LAW FIRM] ${firm || "sin nombre"} · ${docName} · ${contact}`
     : `Presupuesto web · ${docName} · ${contact}`;
 
-  async function send(subject, heading, attachments) {
-    try {
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from,
-          to: [to],
-          ...(email ? { reply_to: email } : {}),
-          subject,
-          text: `${heading}\n\n${lines.join("\n")}\n`,
-          attachments,
-        }),
-      });
-      return res.ok;
-    } catch {
-      return false;
-    }
+  function send(subject, heading, attachments) {
+    return sendResendEmail({
+      ...mail,
+      replyTo: email || "",
+      subject,
+      text: `${heading}\n\n${lines.join("\n")}\n`,
+      attachments,
+    });
   }
 
   const toAttachment = (b) => ({ filename: b.name || "documento", content: b.content });

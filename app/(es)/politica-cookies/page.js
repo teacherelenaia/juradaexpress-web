@@ -119,7 +119,11 @@ export default function Page() {
         no se carga ninguna etiqueta. Si llegas desde un anuncio de Google, el
         identificador del clic (gclid) solo se guarda en tu navegador con tu
         consentimiento; se usa únicamente para saber que una solicitud de
-        presupuesto procede de ese anuncio.
+        presupuesto procede de ese anuncio. Si llegas desde un anuncio y
+        pulsas el botón de WhatsApp, se guarda una referencia de ese clic
+        (identificador del anuncio, página y fecha; nunca tu nombre ni tu
+        teléfono) para saber de qué anuncio procede la consulta, y esa
+        referencia aparece al final del mensaje que se abre en WhatsApp.
       </p>
 
       <h2 className="mt-10 font-display text-2xl font-semibold leading-snug text-slate-900">
