@@ -44,6 +44,7 @@ import { SectionHeading } from "./ui";
 import { IconUpload, IconFileText } from "./Icons";
 import { trackAdsConversion } from "./AdsConversion";
 import { getAttribution } from "../lib/attribution";
+import { appendWaOrigin } from "../lib/waOrigin";
 import { SOURCE_OPTIONS } from "../../content/sources";
 
 const WHATSAPP_NUMBER = "34685891214";
@@ -599,7 +600,12 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
       contact ? `• ${w.contact}: ${contact}` : null,
       w.close,
     ].filter(Boolean);
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+    // Si la visita viene de un anuncio, la última línea es la referencia de
+    // origen («Ref. anuncio: JX-…», app/lib/waOrigin.js).
+    return appendWaOrigin(
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`,
+      locale
+    );
   }
 
   async function handleSubmit(e) {

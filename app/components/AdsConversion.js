@@ -28,6 +28,7 @@
 import { useEffect, useState } from "react";
 import Script from "next/script";
 import { CONSENT_KEY, CONSENT_EVENT } from "./CookieConsent";
+import { handleWhatsAppClick, WHATSAPP_HREF_RE } from "../lib/waOrigin";
 
 const ADS_ID = process.env.NEXT_PUBLIC_ADS_ID || "";
 const FALLBACK_ID = process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || "";
@@ -51,7 +52,8 @@ const SOURCE_TO_ACTION = {
   purchase: "purchase",
 };
 
-const WHATSAPP_RE = /^https?:\/\/(wa\.me|api\.whatsapp\.com)\//i;
+// wa.me, api.whatsapp.com y whatsapp:// (misma regla que app/lib/waOrigin.js).
+const WHATSAPP_RE = WHATSAPP_HREF_RE;
 const TEL_RE = /^tel:/i;
 
 export function hasAdsConsent() {
@@ -134,15 +136,19 @@ export default function AdsConversion() {
 
   // Clics en WhatsApp (wa.me) y teléfono (tel:), en cualquier página.
   // Fase de captura: se registra aunque el enlace abra otra pestaña o la
-  // app de teléfono.
+  // app de teléfono. En los de WhatsApp, app/lib/waOrigin.js añade antes la
+  // referencia de origen («Ref. anuncio: JX-…») al mensaje y avisa a
+  // /api/wa-click si la visita viene de un anuncio; eso no depende de la
+  // etiqueta de Ads (trackAdsConversion ya comprueba ADS_ID y consentimiento).
   useEffect(() => {
-    if (!ADS_ID) return;
     function onClick(e) {
       const a = e.target?.closest?.("a[href]");
       if (!a) return;
       const href = a.getAttribute("href") || "";
-      if (WHATSAPP_RE.test(href)) trackAdsConversion("whatsapp");
-      else if (TEL_RE.test(href)) trackAdsConversion("telefono");
+      if (WHATSAPP_RE.test(href)) {
+        handleWhatsAppClick(a);
+        trackAdsConversion("whatsapp");
+      } else if (TEL_RE.test(href)) trackAdsConversion("telefono");
     }
     document.addEventListener("click", onClick, true);
     return () => document.removeEventListener("click", onClick, true);
