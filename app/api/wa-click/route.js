@@ -18,7 +18,7 @@
 //      importar la venta a Google Ads (gclid, etc.).
 //   4. Responde 204 siempre: el beacon no espera nada y ningún error llega
 //      al navegador (todo en try/catch, errores a console.error).
-import { head, put } from "@vercel/blob";
+import { BlobNotFoundError, head, put } from "@vercel/blob";
 import { resendConfig, sendResendEmail } from "../../lib/resend";
 
 export const runtime = "nodejs";
@@ -112,9 +112,17 @@ async function storeClick(pathname, record) {
     await head(pathname, { access: "private" });
     return "exists";
   } catch (err) {
-    if (err && err.name !== "BlobNotFoundError" && !/not found/i.test(String(err.message))) {
-      console.error("[wa-click] head", err);
-    }
+    // Caso normal: la referencia es nueva y el blob aún no existe. La
+    // librería lanza BlobNotFoundError («The requested blob does not
+    // exist»); se comprueba por clase y, por si cambia el mensaje o la
+    // clase, por el texto. Solo lo demás se registra como error.
+    const msg = String((err && err.message) || "").toLowerCase();
+    const notFound =
+      err instanceof BlobNotFoundError ||
+      (err && err.name === "BlobNotFoundError") ||
+      msg.includes("does not exist") ||
+      msg.includes("not found");
+    if (!notFound) console.error("[wa-click] head", err);
   }
   try {
     await put(pathname, JSON.stringify(record, null, 2), {

@@ -78,6 +78,13 @@ export function usDocMetadata(doc) {
         },
       ],
     },
+    // twitter:image con la misma foto que og:image (ver ServicePage).
+    twitter: {
+      card: "summary_large_image",
+      title: `${doc.metaTitle} | Jurada Express`,
+      description: doc.metaDescription,
+      images: [`${BASE}${doc.image.src}`],
+    },
   };
 }
 
