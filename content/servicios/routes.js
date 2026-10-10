@@ -12,7 +12,7 @@ export const SERVICE_ROUTES = [
     en: "/en/sworn-english-translator",
     labelEs: "Traductor jurado de inglés",
     labelEn: "Sworn English translator",
-    lastModified: "2026-09-26",
+    lastModified: "2026-10-10",
   },
   {
     // Landing de la campaña 1 de Google Ads (08/10/2026): cabecera reducida

@@ -64,6 +64,44 @@ export function personRef(locale = "es") {
   };
 }
 
+/**
+ * Person como `provider` de un Service (10/10/2026, /traductor-jurado-ingles):
+ * referencia intermedia entre personRef y personJsonLd, con el título, el
+ * número de nombramiento y la credencial enlazada al buscador STIJ del
+ * MAEC, que es lo que los motores de respuesta extraen para citar a la
+ * traductora. Mismo @id que la entidad completa del footer.
+ */
+export function personProviderRef(locale = "es") {
+  const l = locale === "en" ? "en" : "es";
+  return {
+    "@type": "Person",
+    "@id": PERSON_ID,
+    name: PERSON_NAME,
+    jobTitle: JOB_TITLE[l],
+    identifier: MAEC_NUMBER,
+    url: l === "en" ? `${BASE}/en/about` : `${BASE}/sobre-mi`,
+    knowsLanguage: ["es", "en"],
+    hasCredential: {
+      "@type": "EducationalOccupationalCredential",
+      name: CREDENTIAL_NAME[l],
+      identifier: MAEC_NUMBER,
+      dateCreated: String(SINCE),
+      url: MAEC_URL,
+      recognizedBy: {
+        "@type": "GovernmentOrganization",
+        name: MINISTRY[l],
+        url: "https://www.exteriores.gob.es/",
+      },
+    },
+    worksFor: {
+      "@type": "ProfessionalService",
+      "@id": ORGANIZATION_ID,
+      name: "Jurada Express",
+      url: `${BASE}/`,
+    },
+  };
+}
+
 /** Entidad Person completa (se emite una vez por página, en SiteShell). */
 export function personJsonLd(locale = "es") {
   const l = locale === "en" ? "en" : "es";

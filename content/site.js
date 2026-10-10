@@ -161,6 +161,21 @@ export const PAPER_DELIVERY_SPAIN = {
 // precio de catálogo, solo para entregar más de 10 páginas en el día.
 export const SAME_DAY_MAX_PAGES = 10;
 export const URGENCY_SURCHARGE = 0.3;
+
+// Precio por página de los documentos largos (contratos, escrituras,
+// expedientes de varias páginas, pólizas, extractos), en euros, IVA
+// incluido (10/10/2026). Es la misma cifra que la página adicional de los
+// packs de /precios (content/packs.js la importa de aquí) y la que publica
+// /traductor-jurado-ingles en su tabla «precio por página» y en el
+// OfferCatalog del JSON-LD. Una página es una cara del documento original;
+// la apostilla cuenta como página si hay que traducirla. Si cambia, se
+// cambia solo aquí. [[CONFIRMAR con Elena antes de fusionar]]
+export const PRICE_PER_PAGE = 20;
+
+// Hora de corte para la entrega en el día (misma regla que la landing del
+// FBI): documento recibido antes de esta hora de Madrid, PDF el mismo día;
+// después, en 24 horas.
+export const SAME_DAY_CUTOFF = "15:00";
 export const TURNAROUND = {
   es: {
     short: `en el día (hasta ${SAME_DAY_MAX_PAGES} páginas)`,

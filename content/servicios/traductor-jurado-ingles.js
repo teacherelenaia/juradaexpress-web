@@ -7,12 +7,37 @@
 // comprobarlo), qué documentos, precios reales de content/documents.js,
 // plazos, validez de la firma digital frente al papel, apostilla y
 // organismos que la aceptan. Se pinta con app/components/ServicePage.js.
+//
+// Revisión GEO (10/10/2026): la medición en Perplexity con «traductor
+// jurado de inglés online en España» no mostraba a Jurada Express; de la
+// competencia extraía cuatro datos: precio por página con IVA, tipo de
+// firma, plazo en horas y si el proceso es online de principio a fin. Esta
+// página publica ahora esos mismos datos en texto plano y en el JSON-LD:
+// precio por documento y por página (PRICE_PER_PAGE) con IVA incluido,
+// firma electrónica cualificada (Orden AUC/213/2025) y cómo comprobarla,
+// regla de las 15:00 (SAME_DAY_CUTOFF), pasos con tiempos, qué incluye el
+// precio, ficha de la traductora y OfferCatalog con un Offer por fila.
 import { DOCUMENTS, MIN_PRICE } from "../documents";
-import { MAEC_URL, MAEC_NUMBER, SINCE, yearsOfExperience } from "../persona";
 import {
-  TIMEZONE_NOTE,
+  MAEC_URL,
+  MAEC_NUMBER,
+  PERSON_NAME,
+  SINCE,
+  yearsOfExperience,
+} from "../persona";
+import {
+  EMAIL,
+  GOOGLE_BUSINESS_URL,
+  GOOGLE_RATING,
+  GOOGLE_REVIEW_COUNT,
   INTERNATIONAL_SHIPPING,
   LARGE_PROJECT_CAPACITY,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  PRICE_PER_PAGE,
+  SAME_DAY_CUTOFF,
+  SAME_DAY_MAX_PAGES,
+  TIMEZONE_NOTE,
 } from "../site";
 
 const PATH_ES = "/traductor-jurado-ingles";
@@ -50,35 +75,186 @@ const NAME_EN = {
   "otro-documento": "Any other document",
 };
 
+// Documentos cuyo precio depende de la extensión: en la tabla remiten al
+// precio por página en lugar de a un plazo fijo.
+const BY_PAGE = ["contrato-escritura", "testamento-herencia", "expediente-academico"];
+
+const priceOf = (id) => DOCUMENTS.find((d) => d.id === id).price;
+const nameOf = (d, locale) =>
+  locale === "en" ? NAME_EN[d.id] || d.nameEn || d.name : d.name;
+
+const eur = (n, locale) => (locale === "en" ? `€${n}` : `${n} €`);
+
+// Tabla 1: precio por documento (los estándar de una página).
 function priceTable(locale) {
   const en = locale === "en";
   return {
     table: {
+      title: en
+        ? "Standard documents: price per document"
+        : "Documentos estándar: precio por documento",
       caption: en
-        ? "Sworn translation prices per document, in euros"
-        : "Precios de traducción jurada por documento, en euros",
+        ? "Sworn translation prices per document, in euros, VAT included"
+        : "Precios de traducción jurada por documento, en euros, IVA incluido",
       head: en
-        ? ["Document", "Price", "Usual turnaround"]
-        : ["Documento", "Precio", "Plazo habitual"],
+        ? ["Document", "Price (VAT included)", "Usual turnaround"]
+        : ["Documento", "Precio (IVA incluido)", "Plazo habitual"],
       rows: DOCUMENTS.map((d) => [
-        `<a href="${FICHA_OF[d.id] || "/documentos"}">${en ? NAME_EN[d.id] || d.name : d.name}</a>`,
+        `<a href="${FICHA_OF[d.id] || "/documentos"}">${nameOf(d, locale)}</a>`,
         d.price != null
+          ? eur(d.price, locale)
+          : BY_PAGE.includes(d.id)
+            ? en
+              ? `${eur(PRICE_PER_PAGE, locale)} per page`
+              : `${eur(PRICE_PER_PAGE, locale)} por página`
+            : en
+              ? "Fixed quote within 2 working hours"
+              : "Presupuesto cerrado en menos de 2 h laborables",
+        BY_PAGE.includes(d.id)
           ? en
-            ? `€${d.price}`
-            : `${d.price} €`
+            ? "Depends on length (see price per page)"
+            : "Según extensión (ver precio por página)"
           : en
-            ? "Fixed quote in under 2 hours"
-            : "Presupuesto cerrado en menos de 2 h",
-        d.id === "contrato-escritura" || d.id === "testamento-herencia"
-          ? en
-            ? "Depends on length"
-            : "Según extensión"
-          : en
-            ? "Same day (up to 10 pages)"
-            : "En el día (hasta 10 págs.)",
+            ? `Same day (up to ${SAME_DAY_MAX_PAGES} pages)`
+            : `En el día (hasta ${SAME_DAY_MAX_PAGES} págs.)`,
       ]),
     },
   };
+}
+
+// Tabla 2: precio por página de los documentos largos (content/site.js).
+function pagePriceTable(locale) {
+  const en = locale === "en";
+  return {
+    table: {
+      title: en
+        ? "Long documents: price per page"
+        : "Documentos largos: precio por página",
+      caption: en
+        ? "Price per page for long documents, in euros, VAT included"
+        : "Precio por página de los documentos largos, en euros, IVA incluido",
+      head: en
+        ? ["Type of document", "Price (VAT included)", "Turnaround"]
+        : ["Tipo de documento", "Precio (IVA incluido)", "Plazo"],
+      rows: [
+        [
+          en
+            ? "Contracts, deeds, multi-page academic transcripts, insurance policies, bank statements"
+            : "Contratos, escrituras, expedientes académicos de varias páginas, pólizas, extractos bancarios",
+          en
+            ? `${eur(PRICE_PER_PAGE, locale)} per page`
+            : `${eur(PRICE_PER_PAGE, locale)} por página`,
+          en
+            ? `Same day up to ${SAME_DAY_MAX_PAGES} pages; longer files get a written deadline before work starts`
+            : `En el día hasta ${SAME_DAY_MAX_PAGES} páginas; más páginas, plazo cerrado por escrito antes de empezar`,
+        ],
+      ],
+    },
+  };
+}
+
+// OfferCatalog del JSON-LD: un Offer por documento con precio de catálogo y
+// otro por página para los documentos largos. Las cifras salen de
+// content/documents.js y content/site.js.
+function offerCatalog(locale) {
+  const en = locale === "en";
+  return {
+    name: en
+      ? "Sworn English translation prices (VAT included)"
+      : "Precios de traducción jurada de inglés (IVA incluido)",
+    offers: [
+      ...DOCUMENTS.filter((d) => d.price != null).map((d) => ({
+        name: en
+          ? `Sworn translation: ${nameOf(d, "en").toLowerCase()}`
+          : `Traducción jurada: ${d.name.toLowerCase()}`,
+        price: d.price,
+      })),
+      {
+        name: en
+          ? "Sworn translation of long documents (contracts, deeds, transcripts, policies, statements), per page"
+          : "Traducción jurada de documentos largos (contratos, escrituras, expedientes, pólizas, extractos), por página",
+        price: PRICE_PER_PAGE,
+        unitText: en ? "page" : "página",
+      },
+    ],
+  };
+}
+
+// Nota y número de reseñas de la ficha de Google (content/site.js), con
+// enlace a Maps. Sin reseñas publicables, no se muestra nada.
+function reviews(locale) {
+  if (!(GOOGLE_RATING > 0 && GOOGLE_REVIEW_COUNT > 0)) return undefined;
+  const en = locale === "en";
+  const rating = GOOGLE_RATING.toLocaleString(en ? "en-GB" : "es-ES", {
+    minimumFractionDigits: 1,
+  });
+  return {
+    text: en
+      ? `${rating} on Google · ${GOOGLE_REVIEW_COUNT} reviews`
+      : `${rating} en Google · ${GOOGLE_REVIEW_COUNT} reseñas`,
+    href: GOOGLE_BUSINESS_URL,
+    label: en
+      ? "See the reviews on the Google Business profile (opens in a new tab)"
+      : "Ver las reseñas en la ficha de Google Business (se abre en una pestaña nueva)",
+  };
+}
+
+const maecLink = (label) =>
+  `<a href="${MAEC_URL}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+const mapsLink = (label) =>
+  `<a href="${GOOGLE_BUSINESS_URL}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+const contactLine = `<a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a> · <a href="mailto:${EMAIL}">${EMAIL}</a>`;
+
+// Ficha de la traductora en texto plano: los datos que un organismo (o un
+// motor de respuestas) necesita para identificarla, juntos y sin repartir.
+function translatorSheet(locale) {
+  const en = locale === "en";
+  const r = reviews(locale);
+  const rows = en
+    ? [
+        ["Translator", PERSON_NAME],
+        [
+          "Title",
+          `Sworn Translator-Interpreter of English, appointed by Spain's Ministry of Foreign Affairs, European Union and Cooperation (MAEC) in ${SINCE}`,
+        ],
+        [
+          "Appointment no.",
+          `${MAEC_NUMBER} · ${maecLink("check it on the Ministry's STIJ register")}`,
+        ],
+        ["Language pair", "Spanish ⇆ English, both directions"],
+        [
+          "Service",
+          "100% online from Murcia, Spain: you send a scan, you receive the PDF with a qualified electronic signature by email, and a paper copy by courier if you need one",
+        ],
+        ["Office hours", "Monday to Friday, 9:00 to 20:00, mainland Spain time (CET/CEST)"],
+        ["Contact", `WhatsApp and phone ${contactLine}`],
+      ]
+    : [
+        ["Traductora", PERSON_NAME],
+        [
+          "Título",
+          `Traductora-Intérprete Jurada de Inglés, nombrada por el Ministerio de Asuntos Exteriores, Unión Europea y Cooperación (MAEC) en ${SINCE}`,
+        ],
+        [
+          "Nº de nombramiento",
+          `${MAEC_NUMBER} · ${maecLink("comprobar en el buscador STIJ del MAEC")}`,
+        ],
+        ["Combinación", "español ⇆ inglés, en los dos sentidos"],
+        [
+          "Servicio",
+          "100 % online desde Murcia (España): me envías el documento escaneado, recibes el PDF con firma electrónica cualificada por email y, si lo necesitas, papel por mensajería",
+        ],
+        ["Horario", "lunes a viernes, de 9:00 a 20:00, hora peninsular española (CET/CEST)"],
+        ["Contacto", `WhatsApp y teléfono ${contactLine}`],
+      ];
+  if (r) {
+    rows.push(
+      en
+        ? ["Reviews", `${r.text} · ${mapsLink("see the Google profile")}`]
+        : ["Reseñas", `${r.text} · ${mapsLink("ver la ficha de Google")}`]
+    );
+  }
+  return { dl: rows };
 }
 
 export const es = {
@@ -89,10 +265,14 @@ export const es = {
   crumb: "Traductor jurado de inglés",
   guarantees: true,
   quoteCalculator: true,
-  metaTitle: `Traductor jurado de inglés online desde ${MIN_PRICE} € | MAEC 7310`,
-  metaDescription: `Traducción jurada español-inglés con validez oficial, firmada por traductora nombrada por el MAEC (nº 7310). Desde ${MIN_PRICE} €, PDF en el día (hasta 10 págs.).`,
+  reviews: reviews("es"),
+  providerPerson: true,
+  offerCatalog: offerCatalog("es"),
+  howTo: { totalTime: "PT24H" },
+  metaTitle: `Traductor jurado de inglés online | Desde ${MIN_PRICE} €, IVA incl., PDF firmado en el día`,
+  metaDescription: `Traducción jurada español-inglés desde ${MIN_PRICE} € por documento o ${PRICE_PER_PAGE} € por página, IVA incluido. PDF con firma cualificada en el día. Traductora MAEC nº ${MAEC_NUMBER}.`,
   h1: "Traductor jurado de inglés online: traducción jurada español-inglés con validez oficial",
-  lead: `Soy Elena Peñaranda Ortega, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores en ${SINCE} con el nº 7310: ${yearsOfExperience()} años de nombramiento vigente. Traduzco, firmo y sello personalmente documentos del español al inglés y del inglés al español para que tengan validez ante cualquier organismo oficial: Extranjería, Registro Civil, universidades, notarías, Home Office, USCIS o IRCC. Todo el proceso es online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas y recibes el PDF firmado electrónicamente en el día (hasta 10 páginas). Los documentos más habituales cuestan desde ${MIN_PRICE} €.`,
+  lead: `Soy ${PERSON_NAME}, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores en ${SINCE} con el nº ${MAEC_NUMBER}: ${yearsOfExperience()} años de nombramiento vigente. Traduzco, firmo y sello personalmente documentos del español al inglés y del inglés al español para que tengan validez ante cualquier organismo oficial: Extranjería, Registro Civil, universidades, notarías, Home Office, USCIS o IRCC. Todo el proceso es online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas laborables y recibes el PDF con firma electrónica cualificada, conforme a la Orden AUC/213/2025, el mismo día si el documento llega antes de las ${SAME_DAY_CUTOFF}, hora de Madrid (hasta ${SAME_DAY_MAX_PAGES} páginas). Los documentos habituales cuestan desde ${MIN_PRICE} €, IVA incluido; los largos, ${PRICE_PER_PAGE} € por página.`,
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Traductora jurada firmando y sellando una traducción jurada de inglés",
@@ -119,10 +299,18 @@ export const es = {
       title: "¿Quién puede hacer una traducción jurada de inglés?",
       body: [
         "Solo un <strong>Traductor-Intérprete Jurado</strong> nombrado por el MAEC para la combinación inglés-español, bien por examen de la Oficina de Interpretación de Lenguas, bien por reconocimiento de una cualificación profesional obtenida en otro Estado de la Unión Europea. El nombramiento es personal e intransferible: la traducción la firma la persona nombrada, no una agencia, y el número que aparece en el sello identifica a esa persona en el registro público del Ministerio.",
-        `Mi nombramiento es el <strong>nº ${MAEC_NUMBER}</strong>, para inglés. Puedes comprobarlo tú mismo, sin pedirme nada, en el <a href="${MAEC_URL}" target="_blank" rel="noopener noreferrer">listado oficial de Traductores/as-Intérpretes Jurados/as del MAEC</a>: descarga el listado de inglés y busca mi nombre o mi número. Es la única comprobación que necesita un organismo para saber que la firma es válida, y es la que yo te recomiendo hacer con cualquier traductor jurado antes de encargarle un documento.`,
+        `Mi nombramiento es el <strong>nº ${MAEC_NUMBER}</strong>, para inglés. Puedes comprobarlo tú mismo, sin pedirme nada, en el ${maecLink("buscador oficial de Traductores/as-Intérpretes Jurados/as del MAEC")}: busca mi nombre o mi número en la lista de inglés. Es la única comprobación que necesita un organismo para saber que la firma es válida, y es la que yo te recomiendo hacer con cualquier traductor jurado antes de encargarle un documento.`,
         {
           note: "Una traducción jurada de inglés hecha en España es válida para presentarla en cualquier organismo español, con independencia de en qué provincia esté el traductor o el organismo. No existen traductores jurados \"de Murcia\" o \"de Madrid\": el nombramiento es estatal y la traducción vale en todo el territorio.",
         },
+      ],
+    },
+    {
+      id: "traductora",
+      title: "Datos de la traductora jurada",
+      body: [
+        "Todo lo que necesita un organismo, o tú, para identificarme y comprobar el nombramiento, en un solo bloque:",
+        translatorSheet("es"),
       ],
     },
     {
@@ -132,18 +320,18 @@ export const es = {
         "Estos son los documentos que más traduzco, cada uno con su ficha, donde explico para qué trámites se pide, si lleva apostilla y cómo enviármelo:",
         {
           list: [
-            '<a href="/traduccion-jurada-partida-nacimiento">Partida o certificado de nacimiento</a> — nacionalidad, matrimonio, NIE de hijos, Registro Civil.',
-            '<a href="/traduccion-jurada-certificado-matrimonio">Certificado de matrimonio</a> — residencia por reagrupación, pensiones, inscripción del matrimonio.',
-            '<a href="/traduccion-jurada-certificado-penales">Certificado de antecedentes penales</a> — visados, residencia, nacionalidad, ofertas de empleo.',
-            '<a href="/traduccion-jurada-titulo-universitario">Título universitario y expediente académico</a> — homologación, equivalencia, UCAS, colegiación, másteres.',
-            '<a href="/traduccion-jurada-permiso-conducir">Permiso de conducir</a> — canje o reconocimiento en la DGT y en la DVLA.',
-            '<a href="/traduccion-jurada-certificado-empresa">Certificado de empresa y nóminas</a> — visados de trabajo, nómada digital, hipotecas, alquileres.',
-            '<a href="/traduccion-jurada-dni-pasaporte">DNI o pasaporte</a> — expedientes en los que se exige traducción del documento de identidad.',
-            '<a href="/traduccion-jurada-contrato-escritura">Contratos y escrituras</a> — compraventa de vivienda, poderes, constitución de sociedades.',
-            '<a href="/traduccion-jurada-testamento-herencia">Testamentos y documentos de herencia</a> — herencias con bienes en España y en el Reino Unido (grant of probate).',
-            '<a href="/traduccion-jurada-certificado-medico">Certificado médico</a> — visados, bajas, seguros y pruebas ante la Administración.',
-            '<a href="/traduccion-jurada-espanol-ingles">Traducción jurada español-inglés</a> — la ficha general de la combinación, con ejemplos de ambos sentidos.',
-            '<a href="/traduccion-jurada-validez-oficial">Validez oficial de la traducción jurada</a> — qué lleva, cómo se verifica y quién la acepta.',
+            '<a href="/traduccion-jurada-partida-nacimiento">Partida o certificado de nacimiento</a>: nacionalidad, matrimonio, NIE de hijos, Registro Civil.',
+            '<a href="/traduccion-jurada-certificado-matrimonio">Certificado de matrimonio</a>: residencia por reagrupación, pensiones, inscripción del matrimonio.',
+            '<a href="/traduccion-jurada-certificado-penales">Certificado de antecedentes penales</a>: visados, residencia, nacionalidad, ofertas de empleo.',
+            '<a href="/traduccion-jurada-titulo-universitario">Título universitario y expediente académico</a>: homologación, equivalencia, UCAS, colegiación, másteres.',
+            '<a href="/traduccion-jurada-permiso-conducir">Permiso de conducir</a>: canje o reconocimiento en la DGT y en la DVLA.',
+            '<a href="/traduccion-jurada-certificado-empresa">Certificado de empresa y nóminas</a>: visados de trabajo, nómada digital, hipotecas, alquileres.',
+            '<a href="/traduccion-jurada-dni-pasaporte">DNI o pasaporte</a>: expedientes en los que se exige traducción del documento de identidad.',
+            '<a href="/traduccion-jurada-contrato-escritura">Contratos y escrituras</a>: compraventa de vivienda, poderes, constitución de sociedades.',
+            '<a href="/traduccion-jurada-testamento-herencia">Testamentos y documentos de herencia</a>: herencias con bienes en España y en el Reino Unido (grant of probate).',
+            '<a href="/traduccion-jurada-certificado-medico">Certificado médico</a>: visados, bajas, seguros y pruebas ante la Administración.',
+            '<a href="/traduccion-jurada-espanol-ingles">Traducción jurada español-inglés</a>: la ficha general de la combinación, con ejemplos de ambos sentidos.',
+            '<a href="/traduccion-jurada-validez-oficial">Validez oficial de la traducción jurada</a>: qué lleva, cómo se verifica y quién la acepta.',
           ],
         },
         'Si tu documento no está en la lista, elige "otro documento" en el <a href="/documentos">catálogo</a> y te doy presupuesto igual. Para expedientes completos (visado de nómada digital, nacionalidad, homologación con varios documentos) trabajo con un solo plazo y un solo precio para todo el lote; lo explico en <a href="/traduccion-jurada-urgente-grandes-volumenes">urgentes y grandes volúmenes</a>.',
@@ -151,26 +339,60 @@ export const es = {
     },
     {
       id: "precios",
-      title: `Precios de traducción jurada de inglés: desde ${MIN_PRICE} € por documento`,
+      title: `Precios de traducción jurada de inglés: desde ${MIN_PRICE} € por documento, IVA incluido`,
       body: [
-        `Los precios de esta tabla son los que aplico a los documentos estándar de una página (certificados, títulos, permisos) y son los mismos que verás en el catálogo. Para documentos largos o con formato complejo (contratos, escrituras, expedientes académicos de varias páginas) el precio depende de la extensión, y te lo doy <strong>cerrado, por escrito y en menos de 2 horas</strong> al ver el documento; nunca cobro por palabra a ciegas ni añado recargos que no hayas visto antes de aceptar.`,
+        `Los precios de la primera tabla son los que aplico a los documentos estándar de una página (certificados, títulos, permisos) y son los mismos que verás en el catálogo. Los documentos largos (contratos, escrituras, expedientes de varias páginas, pólizas, extractos) van por página, en la segunda tabla. Todos los precios llevan el <strong>IVA incluido</strong>. <strong>No cobro por palabra</strong>: el precio es por documento o por página, cerrado por escrito antes de empezar, y nunca añado recargos que no hayas visto antes de aceptar.`,
         priceTable("es"),
-        `El precio incluye la traducción completa, la certificación con firma y sello, el PDF firmado electrónicamente y la copia sellada del original. La entrega en el día hasta 10 páginas no tiene recargo. ${INTERNATIONAL_SHIPPING.note.es}. El pago es con tarjeta a través de Stripe o por transferencia, y te envío factura. Consulta la <a href="/precios">página de precios</a> completa, que incluye la traducción certificada para USCIS y los expedientes de nómada digital.`,
+        pagePriceTable("es"),
+        `Una <strong>página</strong> es una cara del documento original; si el documento lleva apostilla y hay que traducirla, la apostilla cuenta como una página más. Para los documentos largos te confirmo el número de páginas y el total cerrado, por escrito, en menos de 2 horas laborables al ver el documento.`,
+        `El pago es con tarjeta a través de Stripe o por transferencia, y te envío factura. ${INTERNATIONAL_SHIPPING.note.es}. Consulta la <a href="/precios">página de precios</a> completa, que incluye los paquetes por trámite, la traducción certificada para USCIS y los expedientes de nómada digital.`,
+      ],
+    },
+    {
+      id: "incluye",
+      title: "Qué incluye el precio y qué no",
+      body: [
+        {
+          columns: [
+            {
+              title: "El precio incluye",
+              list: [
+                "La traducción completa del documento, con sellos, apostilla y anotaciones.",
+                "La certificación con mi firma y mi sello en cada página.",
+                "El PDF con firma cualificada, listo para presentarlo por sede electrónica o reenviarlo por email.",
+                "La copia sellada y fechada del documento original, unida a la traducción.",
+                "La factura.",
+                "La corrección gratis si un organismo rechaza la traducción por un error mío.",
+              ],
+            },
+            {
+              title: "No incluye",
+              list: [
+                'La apostilla: se tramita antes de traducir, en el país que emitió el documento. Te lo explico en <a href="/blog/que-es-la-apostilla-de-la-haya">qué es la apostilla y cuándo la necesitas</a>.',
+                "El envío en papel: el precio del transportista se indica en el presupuesto (1-2 días laborables en España).",
+                "La legalización consular del documento o de la traducción, cuando el país de destino la exige.",
+              ],
+            },
+          ],
+        },
       ],
     },
     {
       id: "plazos",
-      title: "Plazos: en el día hasta 10 páginas",
+      title: `Plazos: PDF firmado en el día hasta ${SAME_DAY_MAX_PAGES} páginas`,
       body: [
-        "Un documento de hasta 10 páginas (un certificado, un título, un permiso de conducir, un contrato breve) lo tienes <strong>en el día</strong> desde que confirmas el presupuesto, sin recargo. Si tiene más de 10 páginas, te doy un plazo cerrado por escrito antes de empezar, normalmente de 24 a 72 horas, y ese plazo es el que cumplo. Si necesitas más de 10 páginas en el día, lo hago con un recargo del 30 %: dímelo al pedir presupuesto y te confirmo si llego.",
-        `Para lotes grandes y expedientes de varios documentos, acordamos un calendario por escrito${LARGE_PROJECT_CAPACITY ? `; puedo asumir ${LARGE_PROJECT_CAPACITY.es}` : ""}. ${TIMEZONE_NOTE.es}; si me escribes desde el Reino Unido, Irlanda o América, tenlo en cuenta para calcular cuándo recibirás la respuesta.`,
+        `<strong>Presupuesto en menos de 2 horas laborables.</strong> ${TIMEZONE_NOTE.es}: dentro de ese horario, te respondo con precio cerrado y plazo por escrito en menos de dos horas; si escribes fuera de él, a primera hora del día siguiente.`,
+        `<strong>Traducción firmada el mismo día.</strong> Un documento de hasta ${SAME_DAY_MAX_PAGES} páginas (un certificado, un título, un permiso de conducir, un contrato breve) que me llega antes de las <strong>${SAME_DAY_CUTOFF}, hora de Madrid</strong>, lo tienes en PDF firmado ese mismo día, sin recargo; si llega después de esa hora, en 24 horas. Si tiene más de ${SAME_DAY_MAX_PAGES} páginas, te doy un plazo cerrado por escrito antes de empezar, normalmente de 24 a 72 horas, y ese plazo es el que cumplo. Si necesitas más de ${SAME_DAY_MAX_PAGES} páginas en el día, lo hago con un recargo del 30 %: dímelo al pedir presupuesto y te confirmo si llego.`,
+        "<strong>Si tienes cita con fecha</strong> (Extranjería, consulado, notaría, universidad), dime la fecha al pedir presupuesto y te confirmo por escrito que llegas.",
+        `Para lotes grandes y expedientes de varios documentos, acordamos un calendario por escrito${LARGE_PROJECT_CAPACITY ? `; puedo asumir ${LARGE_PROJECT_CAPACITY.es}` : ""}. Si me escribes desde el Reino Unido, Irlanda o América, ten en cuenta el horario de Madrid para calcular cuándo recibirás la respuesta.`,
       ],
     },
     {
       id: "validez",
-      title: "Validez: firma digital o papel, y cuándo hace falta apostilla",
+      title: "Validez: firma cualificada o papel, y cuándo hace falta apostilla",
       body: [
-        "<strong>PDF con firma electrónica.</strong> Es lo que entrego por defecto. La Oficina de Interpretación de Lenguas del MAEC admitió en 2020 que las traducciones juradas se firmen electrónicamente, y la Administración española (Extranjería, Registros Civiles, universidades, Seguridad Social, Hacienda) las acepta de forma generalizada, sobre todo en los trámites que se presentan por sede electrónica. La firma se verifica con un clic en el propio PDF y el documento se puede reenviar tantas veces como haga falta sin perder validez.",
+        "<strong>PDF con firma electrónica cualificada, conforme a la Orden AUC/213/2025.</strong> Es lo que entrego por defecto. La Oficina de Interpretación de Lenguas del MAEC admitió en 2020 que las traducciones juradas se firmen electrónicamente, y la Administración española (Extranjería, Registros Civiles, universidades, Seguridad Social, Hacienda) acepta el PDF con firma cualificada de forma generalizada, sobre todo en los trámites que se presentan por sede electrónica. El documento se puede reenviar tantas veces como haga falta sin perder validez.",
+        "<strong>Cómo comprobar la firma del PDF.</strong> Abre el PDF en Adobe Acrobat Reader o en el visor de tu navegador y pulsa en el panel de firmas. Verás que el certificado está emitido por un prestador cualificado de servicios de confianza y que el documento no se ha modificado desde que lo firmé. Es la misma comprobación que hace el funcionario que recibe la traducción, y puedes hacerla tú antes de presentarla.",
         "<strong>Papel con firma manuscrita y sello.</strong> Algunos organismos, notarías o registros siguen pidiendo el original en papel, y fuera de la Unión Europea es más frecuente. En ese caso imprimo la traducción, la firmo y sello a mano y te la envío por mensajería: al día siguiente de la entrega digital en Murcia y en uno o dos días laborables en el resto de España. Puedes pedir las dos versiones a la vez; la traducción es la misma.",
         '<strong>Apostilla.</strong> La apostilla de La Haya no es parte de la traducción: es un sello que legaliza el <em>documento original</em> para que surta efecto en otro país, y se tramita antes de traducir, en el país que emitió el documento (en el Reino Unido, la Legalisation Office del FCDO; en España, notarios, colegios notariales, Ministerio de Justicia o Tribunales Superiores de Justicia según el documento). Si el documento la lleva, la traduzco también. Entre Estados de la UE, el Reglamento (UE) 2016/1191 exime de apostilla a muchos documentos públicos (nacimiento, matrimonio, penales…), pero un documento británico o estadounidense normalmente sí la necesita para España. Lo explico documento a documento en <a href="/blog/que-es-la-apostilla-de-la-haya">qué es la apostilla y cuándo la necesitas</a>, y si no estás seguro, me lo preguntas antes de tramitarla.',
       ],
@@ -199,19 +421,23 @@ export const es = {
   steps: [
     {
       t: "Envío",
-      d: "Me mandas el documento escaneado o fotografiado (nítido, completo, con anverso y reverso) por WhatsApp, email o el catálogo.",
+      d: "Me mandas el documento escaneado o fotografiado (nítido, completo, con anverso y reverso) por WhatsApp, email o la calculadora de esta página.",
+      time: "En cualquier momento, también fuera de horario.",
     },
     {
       t: "Presupuesto",
-      d: "En menos de 2 horas te respondo con precio cerrado, plazo y, si procede, aviso de apostilla o de documento plurilingüe.",
+      d: "Te respondo con precio cerrado, plazo y, si procede, aviso de apostilla o de documento plurilingüe.",
+      time: "En menos de 2 horas laborables (9:00 a 20:00, hora de Madrid).",
     },
     {
       t: "Traducción jurada",
       d: "Traduzco, certifico, firmo y sello personalmente. Ningún texto pasa por terceros.",
+      time: `Firmada el mismo día hasta ${SAME_DAY_MAX_PAGES} páginas si llega antes de las ${SAME_DAY_CUTOFF}; si no, en 24 horas.`,
     },
     {
       t: "Entrega",
-      d: "PDF firmado electrónicamente en el día (hasta 10 páginas) y, si lo necesitas, papel por mensajería a cualquier dirección.",
+      d: "PDF con firma cualificada por email y, si lo necesitas, papel con firma manuscrita y sello por mensajería a cualquier dirección.",
+      time: "PDF al momento; papel en 1-2 días laborables en España.",
     },
   ],
   faq: [
@@ -221,7 +447,7 @@ export const es = {
     },
     {
       q: "¿Cómo compruebo que un traductor jurado está realmente nombrado?",
-      a: "Buscando su nombre o su número en el listado oficial de Traductores/as-Intérpretes Jurados/as que publica el Ministerio de Asuntos Exteriores en su web. Mi número es el 7310, para inglés. Si un traductor no aparece en ese listado, su traducción no es jurada en España.",
+      a: "Buscando su nombre o su número en el buscador oficial de Traductores/as-Intérpretes Jurados/as que publica el Ministerio de Asuntos Exteriores en su web. Mi número es el 7310, para inglés. Si un traductor no aparece en ese listado, su traducción no es jurada en España.",
     },
     {
       q: "¿Tengo que enviarte el documento original?",
@@ -229,7 +455,7 @@ export const es = {
     },
     {
       q: "¿La versión PDF con firma electrónica la aceptan igual que el papel?",
-      a: "En la mayoría de trámites, sí: el MAEC admite la firma electrónica del traductor jurado y la Administración la acepta, sobre todo por sede electrónica. Si un organismo concreto te pide papel, te lo envío por mensajería con firma manuscrita y sello; es la misma traducción.",
+      a: "En la mayoría de trámites, sí. El PDF lleva firma electrónica cualificada conforme a la Orden AUC/213/2025, el MAEC admite la firma electrónica del traductor jurado y la Administración la acepta, sobre todo por sede electrónica. Si un organismo concreto te pide papel, te lo envío por mensajería con firma manuscrita y sello; es la misma traducción.",
     },
     {
       q: "¿Necesito apostillar el documento antes de traducirlo?",
@@ -237,11 +463,15 @@ export const es = {
     },
     {
       q: "¿Cuánto cuesta una traducción jurada de inglés?",
-      a: `Los documentos habituales de una página (partida de nacimiento, certificado de matrimonio, antecedentes penales) cuestan ${MIN_PRICE} €; el permiso de conducir, 40 €; el certificado de empresa, 45 €; el título universitario, 50 €. Los documentos largos se presupuestan al ver el documento, con precio cerrado en menos de 2 horas.`,
+      a: `Los documentos habituales de una página (partida de nacimiento, certificado de matrimonio, antecedentes penales) cuestan ${MIN_PRICE} €, IVA incluido; el permiso de conducir, ${priceOf("permiso-conducir")} €; el certificado de empresa, ${priceOf("certificado-empresa")} €; el título universitario, ${priceOf("titulo-universitario")} €. Los documentos largos (contratos, escrituras, expedientes) van a ${PRICE_PER_PAGE} € por página, IVA incluido, con el total cerrado por escrito en menos de 2 horas laborables al ver el documento.`,
+    },
+    {
+      q: "¿Cobras por palabra?",
+      a: `No. El precio es por documento, para los habituales de una página, o por página (${PRICE_PER_PAGE} €, IVA incluido) para los largos; una página es una cara del documento original, y la apostilla cuenta como página si hay que traducirla. Lo cierro por escrito antes de empezar y no hay recargos que no hayas visto.`,
     },
     {
       q: "¿Cuánto tarda?",
-      a: "Hasta 10 páginas, en el día desde que confirmas el presupuesto; más de 10 páginas, plazo cerrado por escrito antes de empezar (normalmente 24-72 h). Si tienes una cita con fecha, dímelo al pedir presupuesto y te confirmo por escrito si llego. Los lotes grandes tienen su propio calendario.",
+      a: `Hasta ${SAME_DAY_MAX_PAGES} páginas, PDF firmado el mismo día si el documento llega antes de las ${SAME_DAY_CUTOFF}, hora de Madrid, y en 24 horas si llega después; más de ${SAME_DAY_MAX_PAGES} páginas, plazo cerrado por escrito antes de empezar (normalmente 24-72 h). Si tienes una cita con fecha, dímelo al pedir presupuesto y te confirmo por escrito que llegas. Los lotes grandes tienen su propio calendario.`,
     },
     {
       q: "¿Traduces también del inglés al español?",
@@ -250,7 +480,7 @@ export const es = {
   ],
   cta: {
     title: "¿Te traduzco tu documento?",
-    text: "Envíamelo escaneado por WhatsApp o email y en menos de 2 horas tendrás precio cerrado y plazo real. Sin compromiso: si no necesita traducción jurada, te lo diré.",
+    text: "Envíamelo escaneado por WhatsApp o email y en menos de 2 horas laborables tendrás precio cerrado, IVA incluido, y plazo real. Sin compromiso: si no necesita traducción jurada, te lo diré.",
   },
   related: [
     { href: "/traduccion-jurada-espanol-ingles", label: "Traducción jurada español-inglés" },
@@ -270,10 +500,14 @@ export const en = {
   crumb: "Sworn English translator",
   guarantees: true,
   quoteCalculator: true,
-  metaTitle: `Sworn English translator online from €${MIN_PRICE} | MAEC no. 7310`,
-  metaDescription: `Officially valid sworn Spanish-English translation by a Foreign Ministry appointee (no. 7310). From €${MIN_PRICE}, PDF the same day (up to 10 pages).`,
+  reviews: reviews("en"),
+  providerPerson: true,
+  offerCatalog: offerCatalog("en"),
+  howTo: { totalTime: "PT24H" },
+  metaTitle: `Sworn English translator online | From €${MIN_PRICE}, same-day signed PDF`,
+  metaDescription: `Sworn Spanish-English translation from €${MIN_PRICE} per document or €${PRICE_PER_PAGE} per page, VAT included. Qualified e-signature, same-day PDF. MAEC translator no. ${MAEC_NUMBER}.`,
   h1: "Sworn English translator online: officially valid Spanish-English sworn translation",
-  lead: `I'm Elena Peñaranda Ortega, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs in ${SINCE} under no. 7310, an appointment in force for ${yearsOfExperience()} years. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 hours and you receive the electronically signed PDF the same day (up to 10 pages). The most common documents start at €${MIN_PRICE}.`,
+  lead: `I'm ${PERSON_NAME}, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs in ${SINCE} under no. ${MAEC_NUMBER}, an appointment in force for ${yearsOfExperience()} years. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 working hours, and you receive the PDF with a qualified electronic signature under Spain's Order AUC/213/2025 the same day if the document reaches me before ${SAME_DAY_CUTOFF} Madrid time (up to ${SAME_DAY_MAX_PAGES} pages). The most common documents cost from €${MIN_PRICE}, VAT included; long documents are €${PRICE_PER_PAGE} per page.`,
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Sworn translator signing and stamping a sworn English translation",
@@ -300,10 +534,18 @@ export const en = {
       title: "Who can produce a sworn English translation?",
       body: [
         "Only a <strong>Sworn Translator-Interpreter</strong> appointed by the MAEC for the English-Spanish pair, either by passing the exam set by the Ministry's Office of Language Interpretation or through recognition of a professional qualification obtained in another EU Member State. The appointment is personal and non-transferable: the translation is signed by the appointed individual, not by an agency, and the number on the stamp identifies that person in the Ministry's public register.",
-        `My appointment number is <strong>${MAEC_NUMBER}</strong>, for English. You can check it yourself, without asking me, on the <a href="${MAEC_URL}" target="_blank" rel="noopener noreferrer">MAEC's official list of sworn translators and interpreters</a>: download the English list and look for my name or number. It is the only check an official body needs to know the signature is valid, and it is the check I recommend you make with any sworn translator before sending them a document.`,
+        `My appointment number is <strong>${MAEC_NUMBER}</strong>, for English. You can check it yourself, without asking me, on the ${maecLink("MAEC's official register of sworn translators and interpreters")}: look for my name or number in the English list. It is the only check an official body needs to know the signature is valid, and it is the check I recommend you make with any sworn translator before sending them a document.`,
         {
           note: "A sworn English translation produced in Spain is valid before any Spanish body, whatever province the translator or the office is in. There is no such thing as a sworn translator \"for Murcia\" or \"for Madrid\": the appointment is national and the translation is valid throughout Spain.",
         },
+      ],
+    },
+    {
+      id: "translator",
+      title: "About the sworn translator",
+      body: [
+        "Everything an official body, or you, needs to identify me and verify the appointment, in one place:",
+        translatorSheet("en"),
       ],
     },
     {
@@ -313,18 +555,18 @@ export const en = {
         "These are the documents I translate most, each with its own page (in Spanish) explaining which procedures ask for it, whether it needs an apostille and how to send it:",
         {
           list: [
-            '<a href="/traduccion-jurada-partida-nacimiento">Birth certificate</a> — citizenship, marriage, children\'s NIE, Civil Registry.',
-            '<a href="/traduccion-jurada-certificado-matrimonio">Marriage certificate</a> — family reunification residency, pensions, registering the marriage.',
-            '<a href="/traduccion-jurada-certificado-penales">Criminal record certificate</a> (ACRO, DBS, FBI, Garda) — visas, residency, citizenship, job offers.',
-            '<a href="/traduccion-jurada-titulo-universitario">University degree and transcript</a> — recognition of qualifications, UCAS, professional bodies, master\'s admissions.',
-            '<a href="/traduccion-jurada-permiso-conducir">Driving licence</a> — exchange or recognition with the DGT or the DVLA.',
-            '<a href="/traduccion-jurada-certificado-empresa">Employment certificate and payslips</a> — work visas, digital nomad visa, mortgages, rentals.',
-            '<a href="/traduccion-jurada-dni-pasaporte">ID card or passport</a> — files where a translation of the identity document is required.',
-            '<a href="/traduccion-jurada-contrato-escritura">Contracts and deeds</a> — property purchases, powers of attorney, company formation.',
-            '<a href="/traduccion-jurada-testamento-herencia">Wills and inheritance documents</a> — estates with assets in Spain and the UK (grant of probate).',
-            '<a href="/traduccion-jurada-certificado-medico">Medical certificate</a> — visas, sick leave, insurance and evidence before the authorities.',
-            '<a href="/traduccion-jurada-espanol-ingles">Sworn Spanish-English translation</a> — the general page for the language pair.',
-            '<a href="/traduccion-jurada-validez-oficial">Official validity</a> — what a sworn translation contains, how it is verified and who accepts it.',
+            '<a href="/traduccion-jurada-partida-nacimiento">Birth certificate</a>: citizenship, marriage, children\'s NIE, Civil Registry.',
+            '<a href="/traduccion-jurada-certificado-matrimonio">Marriage certificate</a>: family reunification residency, pensions, registering the marriage.',
+            '<a href="/traduccion-jurada-certificado-penales">Criminal record certificate</a> (ACRO, DBS, FBI, Garda): visas, residency, citizenship, job offers.',
+            '<a href="/traduccion-jurada-titulo-universitario">University degree and transcript</a>: recognition of qualifications, UCAS, professional bodies, master\'s admissions.',
+            '<a href="/traduccion-jurada-permiso-conducir">Driving licence</a>: exchange or recognition with the DGT or the DVLA.',
+            '<a href="/traduccion-jurada-certificado-empresa">Employment certificate and payslips</a>: work visas, digital nomad visa, mortgages, rentals.',
+            '<a href="/traduccion-jurada-dni-pasaporte">ID card or passport</a>: files where a translation of the identity document is required.',
+            '<a href="/traduccion-jurada-contrato-escritura">Contracts and deeds</a>: property purchases, powers of attorney, company formation.',
+            '<a href="/traduccion-jurada-testamento-herencia">Wills and inheritance documents</a>: estates with assets in Spain and the UK (grant of probate).',
+            '<a href="/traduccion-jurada-certificado-medico">Medical certificate</a>: visas, sick leave, insurance and evidence before the authorities.',
+            '<a href="/traduccion-jurada-espanol-ingles">Sworn Spanish-English translation</a>: the general page for the language pair.',
+            '<a href="/traduccion-jurada-validez-oficial">Official validity</a>: what a sworn translation contains, how it is verified and who accepts it.',
           ],
         },
         'If your document is not listed, choose "other document" in the <a href="/en/documentos">catalogue</a> and I will quote for it all the same. For complete files (digital nomad visa, citizenship, recognition of qualifications with several documents) I work with a single deadline and a single price for the whole batch; see <a href="/en/urgent-sworn-translation-large-projects">urgent and large projects</a>.',
@@ -332,26 +574,60 @@ export const en = {
     },
     {
       id: "prices",
-      title: `Sworn English translation prices: from €${MIN_PRICE} per document`,
+      title: `Sworn English translation prices: from €${MIN_PRICE} per document, VAT included`,
       body: [
-        "The prices in this table apply to standard one-page documents (certificates, degrees, licences) and are the same ones you will see in the catalogue. For long or complex documents (contracts, deeds, multi-page transcripts) the price depends on length, and you get it <strong>fixed, in writing and within 2 hours</strong> once I have seen the document; I never quote per word blind or add surcharges you have not seen before accepting.",
+        "The prices in the first table apply to standard one-page documents (certificates, degrees, licences) and are the same ones you will see in the catalogue. Long documents (contracts, deeds, multi-page transcripts, insurance policies, bank statements) are priced per page, in the second table. All prices are <strong>VAT included</strong>. <strong>I do not charge per word</strong>: the price is per document or per page, fixed in writing before work starts, and I never add surcharges you have not seen before accepting.",
         priceTable("en"),
-        `The price includes the complete translation, the certification with signature and stamp, the electronically signed PDF and the stamped copy of the source document. Same-day delivery for documents of up to 10 pages carries no surcharge. ${INTERNATIONAL_SHIPPING.note.en}. Payment is by card through Stripe (any international card, charged in euros) or by bank transfer, and you receive an invoice. See the full <a href="/en/precios">pricing page</a>, including certified translation for USCIS and digital nomad visa files.`,
+        pagePriceTable("en"),
+        "A <strong>page</strong> is one side of the original document; if the document carries an apostille that needs translating, the apostille counts as one more page. For long documents I confirm the page count and the fixed total in writing, within 2 working hours of seeing the document.",
+        `Payment is by card through Stripe (any international card, charged in euros) or by bank transfer, and you receive an invoice. ${INTERNATIONAL_SHIPPING.note.en}. See the full <a href="/en/precios">pricing page</a>, including the packs by procedure, certified translation for USCIS and digital nomad visa files.`,
+      ],
+    },
+    {
+      id: "included",
+      title: "What the price includes and what it does not",
+      body: [
+        {
+          columns: [
+            {
+              title: "The price includes",
+              list: [
+                "The complete translation of the document, including stamps, apostille and annotations.",
+                "The certification with my signature and stamp on every page.",
+                "The PDF with a qualified electronic signature, ready to file online or forward by email.",
+                "A stamped, dated copy of the source document attached to the translation.",
+                "An invoice.",
+                "A free correction if an official body rejects the translation because of my mistake.",
+              ],
+            },
+            {
+              title: "Not included",
+              list: [
+                'The apostille: it is obtained before translating, in the country that issued the document. See <a href="/blog/que-es-la-apostilla-de-la-haya">what the apostille is and when you need it</a> (in Spanish).',
+                "Paper delivery: the courier cost is stated in the quote (1-2 working days within Spain).",
+                "Consular legalisation of the document or the translation, where the destination country requires it.",
+              ],
+            },
+          ],
+        },
       ],
     },
     {
       id: "turnaround",
-      title: "Turnaround: same day for documents of up to 10 pages",
+      title: `Turnaround: signed PDF the same day for up to ${SAME_DAY_MAX_PAGES} pages`,
       body: [
-        "A document of up to 10 pages (a certificate, a degree, a driving licence, a short contract) is ready <strong>the same day</strong> you confirm the quote, with no surcharge. If it runs to more than 10 pages, you get a written deadline before work starts, normally 24 to 72 hours, and that is the deadline I keep. If you need more than 10 pages the same day, I can do it with a 30% surcharge: tell me when you ask for the quote and I will confirm whether I can make it.",
-        `For large batches and multi-document files we agree a schedule in writing${LARGE_PROJECT_CAPACITY ? `; I can take on ${LARGE_PROJECT_CAPACITY.en}` : ""}. ${TIMEZONE_NOTE.en}; if you are writing from the UK, Ireland or the Americas, bear that in mind when working out when you will hear back.`,
+        `<strong>Quote within 2 working hours.</strong> ${TIMEZONE_NOTE.en}: within those hours you get a fixed price and a written deadline in under two hours; if you write outside them, first thing the next working day.`,
+        `<strong>Translation signed the same day.</strong> A document of up to ${SAME_DAY_MAX_PAGES} pages (a certificate, a degree, a driving licence, a short contract) that reaches me before <strong>${SAME_DAY_CUTOFF} Madrid time</strong> (3 pm) is delivered as a signed PDF that same day, with no surcharge; if it arrives after that time, within 24 hours. If it runs to more than ${SAME_DAY_MAX_PAGES} pages, you get a written deadline before work starts, normally 24 to 72 hours, and that is the deadline I keep. If you need more than ${SAME_DAY_MAX_PAGES} pages the same day, I can do it with a 30% surcharge: tell me when you ask for the quote and I will confirm whether I can make it.`,
+        "<strong>If you have a dated appointment</strong> (immigration office, consulate, notary, university), tell me the date when you ask for the quote and I will confirm in writing that you will make it.",
+        `For large batches and multi-document files we agree a schedule in writing${LARGE_PROJECT_CAPACITY ? `; I can take on ${LARGE_PROJECT_CAPACITY.en}` : ""}. If you are writing from the UK, Ireland or the Americas, bear Madrid time in mind when working out when you will hear back.`,
       ],
     },
     {
       id: "validity",
-      title: "Validity: digital signature or paper, and when you need an apostille",
+      title: "Validity: qualified signature or paper, and when you need an apostille",
       body: [
-        "<strong>PDF with electronic signature.</strong> This is what I deliver by default. In 2020 the MAEC's Office of Language Interpretation confirmed that sworn translations may be signed electronically, and the Spanish authorities (immigration, civil registries, universities, social security, tax office) accept them as a matter of course, especially for procedures filed online. The signature is verified with one click inside the PDF and the document can be forwarded as many times as needed without losing validity.",
+        "<strong>PDF with a qualified electronic signature under Spain's Order AUC/213/2025.</strong> This is what I deliver by default. In 2020 the MAEC's Office of Language Interpretation confirmed that sworn translations may be signed electronically, and the Spanish authorities (immigration, civil registries, universities, social security, tax office) accept the PDF with a qualified signature as a matter of course, especially for procedures filed online. The document can be forwarded as many times as needed without losing validity.",
+        "<strong>How to check the signature on the PDF.</strong> Open the PDF in Adobe Acrobat Reader or in your browser's viewer and click on the signature panel. You will see that the certificate was issued by a qualified trust service provider and that the document has not been modified since I signed it. It is the same check the official receiving the translation makes, and you can make it yourself before filing.",
         "<strong>Paper with handwritten signature and stamp.</strong> Some bodies, notaries or registries still ask for a paper original, and this is more common outside the EU. In that case I print the translation, sign and stamp it by hand and courier it to you: the day after digital delivery in Murcia and within one or two working days elsewhere in Spain; abroad, the courier cost is stated in the quote. You can ask for both versions at once; the translation is the same.",
         '<strong>Apostille.</strong> The Hague apostille is not part of the translation: it is a stamp that legalises the <em>original document</em> so that it takes effect in another country, and it is obtained before translating, in the country that issued the document (in the UK, the FCDO Legalisation Office; in the US, the Secretary of State of the issuing state or the US Department of State). If the document carries one, I translate it too. Between EU Member States, Regulation (EU) 2016/1191 exempts many public documents (birth, marriage, criminal records…) from the apostille, but a British or American document normally does need one for Spain. If in doubt, ask me before applying for it.',
       ],
@@ -380,19 +656,23 @@ export const en = {
   steps: [
     {
       t: "Send",
-      d: "Send me a clear, complete scan or photo (front and back) by WhatsApp, email or through the catalogue.",
+      d: "Send me a clear, complete scan or photo (front and back) by WhatsApp, email or the calculator on this page.",
+      time: "Any time, including outside office hours.",
     },
     {
       t: "Quote",
-      d: "Within 2 hours you get a fixed price, a deadline and, where relevant, a note about apostilles or multilingual forms.",
+      d: "You get a fixed price, a deadline and, where relevant, a note about apostilles or multilingual forms.",
+      time: "Within 2 working hours (9:00 to 20:00 Madrid time).",
     },
     {
       t: "Sworn translation",
       d: "I translate, certify, sign and stamp it personally. No text is passed on to third parties.",
+      time: `Signed the same day for up to ${SAME_DAY_MAX_PAGES} pages if it arrives before ${SAME_DAY_CUTOFF} Madrid time; otherwise within 24 hours.`,
     },
     {
       t: "Delivery",
-      d: "Electronically signed PDF the same day (up to 10 pages) and, if you need it, a paper copy couriered to any address.",
+      d: "PDF with a qualified electronic signature by email and, if you need it, a paper copy with handwritten signature and stamp couriered to any address.",
+      time: "PDF straight away; paper in 1-2 working days within Spain.",
     },
   ],
   faq: [
@@ -402,7 +682,7 @@ export const en = {
     },
     {
       q: "How do I check that a sworn translator is really appointed?",
-      a: "Look up their name or number on the official list of sworn translators and interpreters published by Spain's Ministry of Foreign Affairs on its website. My number is 7310, for English. If a translator is not on that list, their translation is not a sworn translation in Spain.",
+      a: "Look up their name or number on the official register of sworn translators and interpreters published by Spain's Ministry of Foreign Affairs on its website. My number is 7310, for English. If a translator is not on that list, their translation is not a sworn translation in Spain.",
     },
     {
       q: "Do I need to send you the original document?",
@@ -410,7 +690,7 @@ export const en = {
     },
     {
       q: "Is the electronically signed PDF accepted the same as paper?",
-      a: "For most procedures, yes: the MAEC allows the sworn translator's electronic signature and the Spanish authorities accept it, especially when filing online. If a particular body asks for paper, I courier it to you with a handwritten signature and stamp; it is the same translation.",
+      a: "For most procedures, yes. The PDF carries a qualified electronic signature under Spain's Order AUC/213/2025, the MAEC allows the sworn translator's electronic signature and the Spanish authorities accept it, especially when filing online. If a particular body asks for paper, I courier it to you with a handwritten signature and stamp; it is the same translation.",
     },
     {
       q: "Do I need to apostille the document before translating it?",
@@ -418,11 +698,15 @@ export const en = {
     },
     {
       q: "How much does a sworn English translation cost?",
-      a: `Common one-page documents (birth certificate, marriage certificate, criminal record certificate) cost €${MIN_PRICE}; a driving licence €40; an employment certificate €45; a university degree €50. Long documents are quoted once I see them, with a fixed price within 2 hours.`,
+      a: `Common one-page documents (birth certificate, marriage certificate, criminal record certificate) cost €${MIN_PRICE}, VAT included; a driving licence €${priceOf("permiso-conducir")}; an employment certificate €${priceOf("certificado-empresa")}; a university degree €${priceOf("titulo-universitario")}. Long documents (contracts, deeds, transcripts) are €${PRICE_PER_PAGE} per page, VAT included, with the total fixed in writing within 2 working hours of seeing the document.`,
+    },
+    {
+      q: "Do you charge per word?",
+      a: `No. The price is per document for the common one-page documents, or per page (€${PRICE_PER_PAGE}, VAT included) for long ones; a page is one side of the original, and the apostille counts as a page if it needs translating. I fix it in writing before starting and there are no surcharges you have not seen.`,
     },
     {
       q: "How long does it take?",
-      a: "Up to 10 pages, the same day from confirming the quote; longer files get a written deadline before work starts (normally 24-72 hours). If you have a dated appointment, tell me when asking for the quote and I will confirm in writing whether I can make it. Large batches get their own schedule.",
+      a: `Up to ${SAME_DAY_MAX_PAGES} pages, signed PDF the same day if the document reaches me before ${SAME_DAY_CUTOFF} Madrid time, and within 24 hours if it arrives later; more than ${SAME_DAY_MAX_PAGES} pages, written deadline before work starts (normally 24-72 hours). If you have a dated appointment, tell me when asking for the quote and I will confirm in writing that you will make it. Large batches get their own schedule.`,
     },
     {
       q: "Do you also translate from English into Spanish?",
@@ -431,7 +715,7 @@ export const en = {
   ],
   cta: {
     title: "Shall I translate your document?",
-    text: "Send me a scan by WhatsApp or email and within 2 hours you will have a fixed price and a real deadline. No obligation: if it does not need a sworn translation, I will tell you.",
+    text: "Send me a scan by WhatsApp or email and within 2 working hours you will have a fixed price, VAT included, and a real deadline. No obligation: if it does not need a sworn translation, I will tell you.",
   },
   related: [
     { href: "/en/how-it-works", label: "How it works" },
