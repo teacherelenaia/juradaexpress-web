@@ -298,6 +298,11 @@ export default function GuidePage({ page }) {
             <a href={page.offer.landing.href} className="btn btn-secondary">
               {page.offer.landing.label}
             </a>
+            {(page.offer.more || []).map((l) => (
+              <a key={l.href} href={l.href} className="btn btn-ghost">
+                {l.label}
+              </a>
+            ))}
           </div>
         </section>
 

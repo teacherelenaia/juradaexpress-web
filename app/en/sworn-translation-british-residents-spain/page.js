@@ -25,6 +25,10 @@ const PROCEDURES = [
   {
     title: "NIE and residency card (TIE)",
     docs: "UK criminal record certificate (ACRO), birth certificate and, depending on your case, marriage certificate.",
+    guide: {
+      href: "/en/spain-digital-nomad-visa-documents-checklist",
+      label: "Guide: digital nomad visa documents, with apostille and translation",
+    },
     apostille:
       "Apostille: yes for the ACRO certificate (immigration offices ask for it); birth and marriage depend on the office — check first, and I'll translate it apostille included.",
     price: priceOf("antecedentes-penales"),
@@ -71,6 +75,10 @@ const PROCEDURES = [
   {
     title: "Pension and Social Security",
     docs: "UK employment records, HMRC or DWP letters and birth certificates for Spanish pension paperwork.",
+    guide: {
+      href: "/en/spain-non-lucrative-visa-documents-checklist",
+      label: "Guide: non-lucrative visa documents, with apostille and translation",
+    },
     apostille: "Apostille: depends on the office — I'll confirm when I see the document.",
     price: priceOf("certificado-empresa"),
     time: "Same day (up to 10 pages)",

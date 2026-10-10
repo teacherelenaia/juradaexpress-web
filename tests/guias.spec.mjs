@@ -30,6 +30,42 @@ const GUIDES = [
     wa: "Hi Elena, I need my driving licence translated to exchange it at the DGT",
     official: ["dgt.gob.es", "boe.es"],
   },
+  {
+    path: "/documentos-visado-nomada-digital-espana",
+    h1: "Qué documentos necesito para el visado de nómada digital de España, y cuáles llevan apostilla y traducción jurada",
+    rows: 14,
+    reviewed: "Guía revisada el",
+    texts: ["Certificado médico", "UGE-CE", "Washington", "Nueva York", "Londres", "Los Ángeles", "Fuentes"],
+    wa: "Hola Elena, estoy preparando el visado de nómada digital y necesito traducir mis documentos",
+    official: ["exteriores.gob.es", "inclusion.gob.es", "boe.es"],
+  },
+  {
+    path: "/en/spain-digital-nomad-visa-documents-checklist",
+    h1: "What documents I need for Spain's digital nomad visa, and which ones need an apostille and a sworn translation",
+    rows: 14,
+    reviewed: "Guide reviewed on",
+    texts: ["Medical certificate", "UGE-CE", "Washington", "New York", "London", "Los Angeles", "Sources"],
+    wa: "Hi Elena, I am preparing my digital nomad visa and need my documents translated",
+    official: ["exteriores.gob.es", "inclusion.gob.es", "boe.es"],
+  },
+  {
+    path: "/documentos-visado-no-lucrativo-espana",
+    h1: "Qué documentos necesito para el visado no lucrativo de España, y cuáles llevan apostilla y traducción jurada",
+    rows: 10,
+    reviewed: "Guía revisada el",
+    texts: ["400 % del IPREM", "Certificado médico", "¿Cuántas páginas suele tener?", "Nueva York", "Fuentes"],
+    wa: "Hola Elena, estoy preparando el visado no lucrativo y necesito traducir mis documentos",
+    official: ["exteriores.gob.es", "boe.es"],
+  },
+  {
+    path: "/en/spain-non-lucrative-visa-documents-checklist",
+    h1: "What documents I need for Spain's non-lucrative visa, and which ones need an apostille and a sworn translation",
+    rows: 10,
+    reviewed: "Guide reviewed on",
+    texts: ["400% of the IPREM", "Medical certificate", "How many pages?", "New York", "Sources"],
+    wa: "Hi Elena, I am preparing my non-lucrative visa and need my documents translated",
+    official: ["exteriores.gob.es", "boe.es"],
+  },
 ];
 
 const textOf = (href) => new URL(href).searchParams.get("text") || "";

@@ -24,6 +24,10 @@ const TRAMITES = [
   {
     title: "NIE y tarjeta de residencia (TIE)",
     docs: "Certificado de antecedentes penales del Reino Unido (ACRO), certificado de nacimiento y, según el caso, certificado de matrimonio.",
+    guide: {
+      href: "/documentos-visado-nomada-digital-espana",
+      label: "Guía: documentos del visado de nómada digital, con apostilla y traducción",
+    },
     apostille:
       "Apostilla: sí en los penales (la pide Extranjería); nacimiento y matrimonio, según la oficina — confírmalo antes y te lo traduzco con apostilla incluida.",
     price: priceOf("antecedentes-penales"),
@@ -70,6 +74,10 @@ const TRAMITES = [
   {
     title: "Pensión y Seguridad Social",
     docs: "Vidas laborales británicas, cartas del HMRC o del DWP y certificados de nacimiento para tramitar pensiones en España.",
+    guide: {
+      href: "/documentos-visado-no-lucrativo-espana",
+      label: "Guía: documentos del visado no lucrativo, con apostilla y traducción",
+    },
     apostille: "Apostilla: según el organismo — te lo confirmo al ver el documento.",
     price: priceOf("certificado-empresa"),
     time: "En el día (hasta 10 págs.)",

@@ -209,6 +209,7 @@ export const es = {
     text: "Mándame la carpeta con tus documentos por WhatsApp o email. En menos de 2 horas te devuelvo la revisión, el precio cerrado y el plazo único del expediente.",
   },
   related: [
+    { href: "/documentos-visado-nomada-digital-espana", label: "Guía: documentos del visado de nómada digital, con apostilla y traducción" },
     { href: "/traduccion-jurada-visados-espana", label: "Otros visados de España (no lucrativo, estudiantes, familiares)" },
     { href: "/traduccion-jurada-estados-unidos", label: "Vienes de Estados Unidos" },
     { href: "/traduccion-jurada-india", label: "Vienes de India" },
@@ -409,6 +410,7 @@ export const en = {
     text: "Send me the folder with your documents on WhatsApp or by email. Within 2 hours you get my review, a fixed price and a single deadline for the whole file.",
   },
   related: [
+    { href: "/en/spain-digital-nomad-visa-documents-checklist", label: "Guide: digital nomad visa documents, with apostille and translation" },
     { href: "/en/sworn-translations-spanish-visas", label: "Other Spanish visas (non-lucrative, student, family)" },
     { href: "/en/sworn-translation-usa-spain", label: "Coming from the United States" },
     { href: "/en/sworn-translation-india-spain", label: "Coming from India" },
