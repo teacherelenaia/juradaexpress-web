@@ -26,6 +26,27 @@ export const SERVICE_ROUTES = [
     landing: true,
   },
   {
+    // Landings de documento para visados (10/10/2026): certificado del FBI
+    // (EE. UU.) y ACRO Police Certificate (Reino Unido). Cabecera reducida
+    // como la de visados; no van en el menú "Internacional".
+    id: "fbi",
+    es: "/traduccion-jurada-antecedentes-fbi",
+    en: "/en/fbi-background-check-translation-spain",
+    labelEs: "Certificado del FBI",
+    labelEn: "FBI background check",
+    lastModified: "2026-10-10",
+    landing: true,
+  },
+  {
+    id: "acro",
+    es: "/traduccion-jurada-acro-reino-unido",
+    en: "/en/acro-police-certificate-translation-spain",
+    labelEs: "Certificado ACRO (Reino Unido)",
+    labelEn: "ACRO police certificate",
+    lastModified: "2026-10-10",
+    landing: true,
+  },
+  {
     id: "dnv",
     es: "/traduccion-jurada-visado-nomada-digital",
     en: "/en/sworn-translation-spain-digital-nomad-visa",

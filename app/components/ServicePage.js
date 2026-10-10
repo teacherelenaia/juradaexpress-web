@@ -17,6 +17,9 @@
 // secundario) y el bloque `{ packs: [ids] }` (tarjetas de content/packs.js
 // con un Offer por pack en el JSON-LD). En móvil la franja y el botón van
 // antes del párrafo de entrada para que se vean sin hacer scroll.
+// `quoteCta` (10/10/2026, landings del FBI y ACRO): sustituye el botón
+// secundario "Pedir presupuesto" (catálogo) por otro enlace, por ejemplo la
+// calculadora de la home, cuando WhatsApp es el botón principal.
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
@@ -217,6 +220,9 @@ export default function ServicePage({ page }) {
   const t = UI[page.locale] || UI.es;
   const otherHref =
     page.locale === "en" ? page.alternates.es : page.alternates.en;
+  // Botón secundario junto a WhatsApp: el catálogo por defecto o el enlace
+  // que indique la página (`quoteCta`, por ejemplo la calculadora).
+  const quoteCta = page.quoteCta || { label: t.quote, href: t.quoteHref };
   // Packs mostrados en la página (bloque { packs: [ids] }) → un Offer por
   // pack en el JSON-LD, anclado a esta URL.
   const packIds = page.sections
@@ -302,10 +308,10 @@ export default function ServicePage({ page }) {
                 </TrackedLink>
                 <TrackedLink
                   label={`${page.id}_quote_${page.locale}`}
-                  href={t.quoteHref}
+                  href={quoteCta.href}
                   className="btn btn-secondary"
                 >
-                  {t.quote}
+                  {quoteCta.label}
                 </TrackedLink>
               </>
             )}
@@ -435,10 +441,10 @@ export default function ServicePage({ page }) {
                 </TrackedLink>
                 <TrackedLink
                   label={`${page.id}_cta_quote_${page.locale}`}
-                  href={t.quoteHref}
+                  href={quoteCta.href}
                   className="btn btn-secondary"
                 >
-                  {t.quote}
+                  {quoteCta.label}
                 </TrackedLink>
                 <a href={t.pricesHref} className="btn btn-ghost">
                   {t.prices}
