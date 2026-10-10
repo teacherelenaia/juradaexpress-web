@@ -38,14 +38,23 @@ export const metadata = {
     siteName: "Jurada Express",
     type: "website",
     locale: "en_GB",
+    // Brand image (scripts/build-brand-images.mjs, 10/10/2026): logo, name
+    // and credential, so link cards and answer engines show the brand rather
+    // than a generic photo. Home page only; other pages keep their photo.
     images: [
       {
-        url: "https://juradaexpress.es/fotos/hero-firma.jpg",
+        url: "https://juradaexpress.es/og-home-en.png",
         width: 1200,
-        height: 900,
-        alt: "Signing a sworn translation with a pen on the document",
+        height: 630,
+        alt: "Jurada Express, sworn English–Spanish translator, MAEC No. 7310",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Sworn Spanish-English Translation Online from €${MIN_PRICE} | Jurada Express`,
+    description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF the same day (up to 10 pages). Foreign Ministry appointee no. 7310. 100% online.`,
+    images: ["https://juradaexpress.es/og-home-en.png"],
   },
 };
 

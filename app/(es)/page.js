@@ -40,14 +40,24 @@ export const metadata = {
     siteName: "Jurada Express",
     type: "website",
     locale: "es_ES",
+    // Imagen de marca (scripts/build-brand-images.mjs, 10/10/2026): logo +
+    // nombre + credencial, para que las tarjetas de enlace y los motores de
+    // respuesta muestren la marca y no una foto genérica. Solo en la portada;
+    // el resto de páginas conserva su foto.
     images: [
       {
-        url: "https://juradaexpress.es/fotos/hero-firma.jpg",
+        url: "https://juradaexpress.es/og-home.png",
         width: 1200,
-        height: 900,
-        alt: "Firma de una traducción jurada con pluma sobre el documento",
+        height: 630,
+        alt: "Jurada Express, traductora jurada de inglés, MAEC nº 7310",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Traducción Jurada de Inglés Online desde ${MIN_PRICE} € | Jurada Express`,
+    description: `Traductora jurada de inglés desde ${SINCE} (MAEC nº 7310). Traducción jurada español-inglés desde ${MIN_PRICE} €, PDF firmado en el día (hasta 10 páginas), 100 % online.`,
+    images: ["https://juradaexpress.es/og-home.png"],
   },
 };
 

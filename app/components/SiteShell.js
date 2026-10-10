@@ -97,7 +97,7 @@ const FOOTER = {
   es: {
     skip: "Saltar al contenido",
     logoLabel: "Jurada Express — Inicio",
-    logoAlt: "Logotipo de Jurada Express, traducción jurada de inglés",
+    logoAlt: "Jurada Express, traductora jurada de inglés",
     home: "/",
     about:
       "Jurada Express: traducción jurada Español ⇆ Inglés y traducción certificada para USCIS. Con sede en Murcia, trabajo con clientes de España, Reino Unido, Estados Unidos, India y cualquier país. Proceso 100% digital, entrega en el día (hasta 10 páginas).",
@@ -140,7 +140,7 @@ const FOOTER = {
   en: {
     skip: "Skip to content",
     logoLabel: "Jurada Express — Home",
-    logoAlt: "Jurada Express logo, sworn English translation",
+    logoAlt: "Jurada Express, sworn English–Spanish translator",
     home: "/en",
     about:
       "Jurada Express: sworn Spanish ⇆ English translation for Spain and certified translation for USCIS. Based in Murcia, Spain, working with clients in the UK, the USA, India and any country. Fully digital process, same-day delivery (up to 10 pages).",
@@ -359,7 +359,11 @@ export default function SiteShell({ locale = "es", children }) {
                 url: "https://juradaexpress.es/",
                 email: "info@juradaexpress.es",
                 telephone: "+34685891214",
-                logo: "https://juradaexpress.es/logo.svg",
+                // PNG 1200×1200 generado con scripts/build-brand-images.mjs
+                // (10/10/2026): los motores de respuesta y las tarjetas de
+                // ChatGPT/Bing no leen el SVG y acababan mostrando el logo
+                // de un competidor junto al nombre.
+                logo: "https://juradaexpress.es/jurada-express-logo.png",
                 image: "https://juradaexpress.es/fotos/hero-firma.jpg",
                 description:
                   "Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS, 100 % online, para clientes de España, Reino Unido, Estados Unidos, India y cualquier país.",
