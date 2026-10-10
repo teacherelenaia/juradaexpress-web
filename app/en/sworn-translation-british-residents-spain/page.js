@@ -75,6 +75,10 @@ const PROCEDURES = [
   {
     title: "Pension and Social Security",
     docs: "UK employment records, HMRC or DWP letters and birth certificates for Spanish pension paperwork.",
+    guide: {
+      href: "/en/spain-non-lucrative-visa-documents-checklist",
+      label: "Guide: non-lucrative visa documents, with apostille and translation",
+    },
     apostille: "Apostille: depends on the office — I'll confirm when I see the document.",
     price: priceOf("certificado-empresa"),
     time: "Same day (up to 10 pages)",

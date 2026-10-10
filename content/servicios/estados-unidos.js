@@ -149,6 +149,7 @@ export const es = {
     text: "Mándame el documento escaneado y dime para qué consulado u organismo es. Te respondo en horario de España con precio cerrado y plazo; el pago es con tu tarjeta habitual.",
   },
   related: [
+    { href: "/documentos-visado-no-lucrativo-espana", label: "Guía: documentos del visado no lucrativo" },
     { href: "/documentos-visado-nomada-digital-espana", label: "Guía: documentos del visado de nómada digital" },
     { href: "/traduccion-jurada-visados-espana", label: "Visados de España (no lucrativo, estudiantes, familiares)" },
     { href: "/traduccion-jurada-visado-nomada-digital", label: "Visado de nómada digital" },
@@ -300,6 +301,7 @@ export const en = {
     text: "Send me the scanned document and tell me which consulate or body it is for. I reply during Spanish office hours with a fixed price and deadline; you pay with your usual card.",
   },
   related: [
+    { href: "/en/spain-non-lucrative-visa-documents-checklist", label: "Guide: non-lucrative visa documents checklist" },
     { href: "/en/spain-digital-nomad-visa-documents-checklist", label: "Guide: digital nomad visa documents checklist" },
     { href: "/en/sworn-translations-spanish-visas", label: "Spanish visas (non-lucrative, student, family)" },
     { href: "/en/sworn-translation-spain-digital-nomad-visa", label: "Digital nomad visa" },
