@@ -24,6 +24,10 @@ const TRAMITES = [
   {
     title: "NIE y tarjeta de residencia (TIE)",
     docs: "Certificado de antecedentes penales del Reino Unido (ACRO), certificado de nacimiento y, según el caso, certificado de matrimonio.",
+    guide: {
+      href: "/documentos-visado-nomada-digital-espana",
+      label: "Guía: documentos del visado de nómada digital, con apostilla y traducción",
+    },
     apostille:
       "Apostilla: sí en los penales (la pide Extranjería); nacimiento y matrimonio, según la oficina — confírmalo antes y te lo traduzco con apostilla incluida.",
     price: priceOf("antecedentes-penales"),

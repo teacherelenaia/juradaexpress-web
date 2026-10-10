@@ -25,6 +25,10 @@ const PROCEDURES = [
   {
     title: "NIE and residency card (TIE)",
     docs: "UK criminal record certificate (ACRO), birth certificate and, depending on your case, marriage certificate.",
+    guide: {
+      href: "/en/spain-digital-nomad-visa-documents-checklist",
+      label: "Guide: digital nomad visa documents, with apostille and translation",
+    },
     apostille:
       "Apostille: yes for the ACRO certificate (immigration offices ask for it); birth and marriage depend on the office — check first, and I'll translate it apostille included.",
     price: priceOf("antecedentes-penales"),

@@ -15,6 +15,15 @@ export const GUIDE_ROUTES = [
     datePublished: "2026-10-10",
     lastModified: "2026-10-10",
   },
+  {
+    id: "nomada-digital-documentos",
+    es: "/documentos-visado-nomada-digital-espana",
+    en: "/en/spain-digital-nomad-visa-documents-checklist",
+    labelEs: "Documentos para el visado de nómada digital",
+    labelEn: "Spain digital nomad visa documents checklist",
+    datePublished: "2026-10-10",
+    lastModified: "2026-10-10",
+  },
 ];
 
 export const guideById = (id) => GUIDE_ROUTES.find((r) => r.id === id);
