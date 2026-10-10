@@ -8,6 +8,7 @@
 //
 // Cada pack: id, name (ES/EN), includes (ES/EN), documents (número máximo
 // de documentos) y price (euros, IVA incluido).
+import { PRICE_PER_PAGE } from "./site";
 
 export const PACKS = [
   {
@@ -63,8 +64,9 @@ export const PACKS = [
 ];
 
 // Página adicional (extractos bancarios, pólizas o contratos) dentro del
-// mismo plazo del pack, en euros.
-export const EXTRA_PAGE_PRICE = 20;
+// mismo plazo del pack, en euros: la misma cifra que el precio por página
+// de los documentos largos (content/site.js → PRICE_PER_PAGE).
+export const EXTRA_PAGE_PRICE = PRICE_PER_PAGE;
 
 export const PACKS_COPY = {
   es: {

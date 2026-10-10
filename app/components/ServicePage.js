@@ -20,6 +20,18 @@
 // `quoteCta` (10/10/2026, landings del FBI y ACRO): sustituye el botón
 // secundario "Pedir presupuesto" (catálogo) por otro enlace, por ejemplo la
 // calculadora de la home, cuando WhatsApp es el botón principal.
+//
+// Datos extraíbles por los motores de respuesta (10/10/2026, página del
+// traductor de inglés): bloques opcionales `{ table: { title } }` (título
+// visible sobre la tabla), `{ columns: [{ title, list }] }` (dos listas
+// cortas lado a lado, «incluye / no incluye») y `{ dl: [[término,
+// definición]] }` (ficha en texto plano, por ejemplo los datos de la
+// traductora); `steps[].time` (segunda línea con el plazo de cada paso);
+// `reviews` (nota y número de reseñas con enlace a Maps, bajo las
+// garantías); y en el JSON-LD, `providerPerson` (el provider del Service
+// es la Person de Elena con su credencial, no la organización),
+// `offerCatalog` (un Offer por fila de precios, con UnitPriceSpecification
+// cuando el precio es por página) y `howTo` (HowTo con los 4 pasos).
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
@@ -28,6 +40,7 @@ import { PackGrid } from "./PacksSection";
 import { SectionHeading } from "./ui";
 import { SERVICE_COUNTRIES } from "../../content/site";
 import { packOffers } from "../../content/packs";
+import { personProviderRef } from "../../content/persona";
 
 const BASE = "https://juradaexpress.es";
 
@@ -155,8 +168,12 @@ function Block({ block, page }) {
     );
   }
   if (block.table) {
-    const { head, rows, caption } = block.table;
+    const { head, rows, caption, title } = block.table;
     return (
+      <div>
+        {title ? (
+          <h3 className="mb-3 font-semibold text-slate-900">{title}</h3>
+        ) : null}
       <div className="overflow-x-auto rounded-xl ring-1 ring-stone-200">
         <table className="w-full min-w-[640px] text-left text-sm">
           {caption ? <caption className="sr-only">{caption}</caption> : null}
@@ -193,6 +210,54 @@ function Block({ block, page }) {
           </tbody>
         </table>
       </div>
+      </div>
+    );
+  }
+  if (block.columns) {
+    // Dos (o más) listas cortas lado a lado, cada una con su título:
+    // «Qué incluye el precio / Qué no incluye».
+    return (
+      <div className="grid gap-4 sm:grid-cols-2">
+        {block.columns.map((col) => (
+          <div
+            key={col.title}
+            className="rounded-xl bg-white p-5 ring-1 ring-stone-200"
+          >
+            <h3 className="font-semibold text-slate-900">{col.title}</h3>
+            <ul className="mt-3 space-y-2 text-sm text-slate-700">
+              {col.list.map((item, i) => (
+                <li key={i} className="flex gap-3">
+                  <span
+                    className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold-500"
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="[&_a]:text-brand-navy [&_a]:underline [&_a]:underline-offset-2 [&_strong]:font-semibold [&_strong]:text-slate-900"
+                    dangerouslySetInnerHTML={{ __html: item }}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  if (block.dl) {
+    // Ficha en texto plano (término / definición), por ejemplo los datos de
+    // la traductora: nombre, nombramiento, combinación, horario, contacto.
+    return (
+      <dl className="grid max-w-[68ch] gap-x-6 gap-y-2 rounded-xl bg-white p-5 text-sm ring-1 ring-stone-200 sm:grid-cols-[max-content,1fr]">
+        {block.dl.map(([term, def]) => (
+          <div key={term} className="contents">
+            <dt className="font-semibold text-slate-900">{term}</dt>
+            <dd
+              className="text-slate-700 [&_a]:text-brand-navy [&_a]:underline [&_a]:underline-offset-2"
+              dangerouslySetInnerHTML={{ __html: def }}
+            />
+          </div>
+        ))}
+      </dl>
     );
   }
   if (block.packs) {
@@ -320,6 +385,20 @@ export default function ServicePage({ page }) {
           {page.guarantees ? (
             <Guarantees locale={page.locale} className="order-5 mt-6" />
           ) : null}
+          {/* Nota y número de reseñas con enlace a la ficha de Google Maps */}
+          {page.reviews ? (
+            <p className="order-6 mt-3 text-sm font-medium text-slate-700">
+              <a
+                href={page.reviews.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={page.reviews.label}
+                className="link-nav text-slate-700"
+              >
+                {page.reviews.text}
+              </a>
+            </p>
+          ) : null}
         </div>
         <figure className="relative aspect-[4/3] overflow-hidden rounded-xl shadow">
           <Image
@@ -374,6 +453,11 @@ export default function ServicePage({ page }) {
                 <div>
                   <h3 className="font-semibold text-slate-900">{step.t}</h3>
                   <p className="mt-1 text-sm text-slate-600">{step.d}</p>
+                  {step.time ? (
+                    <p className="mt-2 text-sm font-medium text-brand-navy">
+                      {step.time}
+                    </p>
+                  ) : null}
                 </div>
               </li>
             ))}
@@ -497,12 +581,18 @@ export default function ServicePage({ page }) {
                 description: page.metaDescription,
                 url: `${BASE}${page.path}`,
                 inLanguage: page.locale,
-                provider: {
-                  "@type": "ProfessionalService",
-                  "@id": `${BASE}/#organization`,
-                  name: "Jurada Express",
-                  url: `${BASE}/`,
-                },
+                // Por defecto el proveedor es la organización; con
+                // `providerPerson` es la Person de Elena con su credencial
+                // (nº MAEC y enlace al buscador STIJ), que los motores de
+                // respuesta citan mejor que una marca.
+                provider: page.providerPerson
+                  ? personProviderRef(page.locale)
+                  : {
+                      "@type": "ProfessionalService",
+                      "@id": `${BASE}/#organization`,
+                      name: "Jurada Express",
+                      url: `${BASE}/`,
+                    },
                 areaServed: page.areaServed || [
                   ...SERVICE_COUNTRIES.filter((c) => c.code).map((c) => ({
                     "@type": "Country",
@@ -529,7 +619,62 @@ export default function ServicePage({ page }) {
                   availability: "https://schema.org/InStock",
                   url: `${BASE}${page.path}`,
                 },
+                // Catálogo de precios: un Offer por fila de la tabla de
+                // documentos y otro por página para los documentos largos
+                // (UnitPriceSpecification). Los precios llegan ya leídos de
+                // content/documents.js y content/site.js, nunca a mano.
+                ...(page.offerCatalog
+                  ? {
+                      hasOfferCatalog: {
+                        "@type": "OfferCatalog",
+                        name: page.offerCatalog.name,
+                        itemListElement: page.offerCatalog.offers.map((o) => ({
+                          "@type": "Offer",
+                          name: o.name,
+                          ...(o.description ? { description: o.description } : {}),
+                          price: o.price,
+                          priceCurrency: "EUR",
+                          availability: "https://schema.org/InStock",
+                          url: `${BASE}${page.path}`,
+                          ...(o.unitText
+                            ? {
+                                priceSpecification: {
+                                  "@type": "UnitPriceSpecification",
+                                  price: o.price,
+                                  priceCurrency: "EUR",
+                                  unitText: o.unitText,
+                                  valueAddedTaxIncluded: true,
+                                },
+                              }
+                            : {
+                                priceSpecification: {
+                                  "@type": "PriceSpecification",
+                                  price: o.price,
+                                  priceCurrency: "EUR",
+                                  valueAddedTaxIncluded: true,
+                                },
+                              }),
+                        })),
+                      },
+                    }
+                  : {}),
               },
+              // HowTo con los 4 pasos (opcional): nombre, texto y plazo total.
+              ...(page.howTo
+                ? [
+                    {
+                      "@type": "HowTo",
+                      name: page.howTo.name || page.howTitle || t.how,
+                      totalTime: page.howTo.totalTime || "PT24H",
+                      step: page.steps.map((s, i) => ({
+                        "@type": "HowToStep",
+                        position: i + 1,
+                        name: s.t,
+                        text: s.time ? `${s.d} ${s.time}` : s.d,
+                      })),
+                    },
+                  ]
+                : []),
               {
                 "@type": "BreadcrumbList",
                 itemListElement: [
