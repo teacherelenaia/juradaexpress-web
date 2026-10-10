@@ -5,8 +5,23 @@ import { SERVICE_ROUTES } from "../content/servicios/routes";
 import { CIUDADES } from "../content/ciudades";
 import { FICHAS } from "../content/fichas";
 import { US_DOC_ROUTES, LAW_FIRMS_ROUTE } from "../content/servicios/routes";
+import { GUIDE_ROUTES } from "../content/guias/routes";
 
 const BASE_URL = "https://juradaexpress.es";
+
+// Guías con tabla por trámite (content/guias/routes.js, 2026-10), con
+// hreflang ES ⇄ EN y la fecha de la última revisión de cada guía.
+const guideRoutes = GUIDE_ROUTES.flatMap((r) => {
+  const languages = {
+    es: `${BASE_URL}${r.es}`,
+    en: `${BASE_URL}${r.en}`,
+    "x-default": `${BASE_URL}${r.es}`,
+  };
+  return [
+    { url: `${BASE_URL}${r.es}`, lastModified: r.lastModified, priority: 0.8, alternates: { languages } },
+    { url: `${BASE_URL}${r.en}`, lastModified: r.lastModified, priority: 0.8, alternates: { languages } },
+  ];
+});
 
 // Páginas de audiencia/servicio del encargo internacional (2026-09), con
 // hreflang ES ⇄ EN. Fecha real de publicación en la rama.
@@ -155,6 +170,7 @@ export default function sitemap() {
     ...staticRoutes,
     ...fichaRoutes,
     ...serviceRoutes,
+    ...guideRoutes,
     ...cityRoutes,
     ...usDocRoutes,
     ...lawFirmRoutes,

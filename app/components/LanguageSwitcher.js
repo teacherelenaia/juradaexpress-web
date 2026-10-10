@@ -3,11 +3,14 @@
 // app/components/LanguageSwitcher.js
 import { usePathname } from "next/navigation";
 import { SERVICE_ROUTES, LAW_FIRMS_ROUTE } from "../../content/servicios/routes";
+import { GUIDE_ROUTES } from "../../content/guias/routes";
 
 // Rutas ES que tienen equivalente en /en (mismos slugs bajo /en/*)
 const ES_TO_EN = {
   // Páginas de audiencia/servicio (encargo internacional 2026-09)
   ...Object.fromEntries(SERVICE_ROUTES.map((r) => [r.es, r.en])),
+  // Guías con tabla por trámite (2026-10)
+  ...Object.fromEntries(GUIDE_ROUTES.map((r) => [r.es, r.en])),
   "/": "/en",
   "/precios": "/en/precios",
   "/contacto": "/en/contacto",

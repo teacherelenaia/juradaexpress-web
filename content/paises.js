@@ -165,6 +165,7 @@ export const es = {
     },
   ],
   related: [
+    { href: "/canje-permiso-conducir-dgt-por-paises", label: "Guía: canje del permiso de conducir en la DGT por países" },
     { href: "/traduccion-jurada-visado-nomada-digital", label: "Visado de nómada digital" },
     { href: "/traduccion-certificada-uscis", label: "Traducción certificada para USCIS" },
     { href: "/traduccion-jurada-partida-nacimiento", label: "Partida de nacimiento" },
@@ -317,6 +318,7 @@ export const en = {
     },
   ],
   related: [
+    { href: "/en/exchange-driving-licence-spain-dgt-by-country", label: "Guide: exchanging a driving licence in Spain, by country" },
     { href: "/en/sworn-translation-spain-digital-nomad-visa", label: "Digital nomad visa" },
     { href: "/en/certified-translation-uscis", label: "Certified translation for USCIS" },
     { href: "/traduccion-jurada-partida-nacimiento", label: "Birth certificate (guide in Spanish)" },

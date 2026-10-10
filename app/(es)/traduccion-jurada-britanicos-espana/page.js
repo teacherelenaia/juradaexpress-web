@@ -62,6 +62,10 @@ const TRAMITES = [
     price: priceOf("permiso-conducir"),
     time: "24 h",
     href: "/documentos",
+    guide: {
+      href: "/canje-permiso-conducir-dgt-por-paises",
+      label: "Guía: qué pide la DGT para el canje, país por país",
+    },
   },
   {
     title: "Pensión y Seguridad Social",
@@ -111,6 +115,13 @@ export default function Page() {
                 Más sobre este documento →
               </a>
             </p>
+            {t.guide ? (
+              <p className="mt-2">
+                <a href={t.guide.href} className="link text-sm">
+                  {t.guide.label} →
+                </a>
+              </p>
+            ) : null}
           </article>
         ))}
       </div>
