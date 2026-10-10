@@ -233,6 +233,7 @@ export const es = {
     primaryLabel: "Subir documentos",
   },
   related: [
+    { href: "/documentos-visado-nomada-digital-espana", label: "Guía: documentos del visado de nómada digital" },
     { href: "/traduccion-jurada-estados-unidos", label: "Vienes de Estados Unidos" },
     { href: "/traduccion-jurada-visado-nomada-digital", label: "Visado de nómada digital" },
     { href: "/traduccion-jurada-antecedentes-fbi", label: "Certificado del FBI (Estados Unidos)" },
@@ -439,6 +440,7 @@ export const en = {
     primaryLabel: "Upload documents",
   },
   related: [
+    { href: "/en/spain-digital-nomad-visa-documents-checklist", label: "Guide: digital nomad visa documents checklist" },
     { href: "/en/sworn-translation-usa-spain", label: "Coming from the United States" },
     { href: "/en/sworn-translation-spain-digital-nomad-visa", label: "Digital nomad visa" },
     { href: "/en/fbi-background-check-translation-spain", label: "FBI background check" },
