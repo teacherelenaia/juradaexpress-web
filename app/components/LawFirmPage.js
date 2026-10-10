@@ -54,6 +54,13 @@ export function lawFirmMetadata(page) {
         },
       ],
     },
+    // twitter:image con la misma foto que og:image (ver ServicePage).
+    twitter: {
+      card: "summary_large_image",
+      title: `${page.metaTitle} | Jurada Express`,
+      description: page.metaDescription,
+      images: [`${BASE}${page.image.src}`],
+    },
   };
 }
 

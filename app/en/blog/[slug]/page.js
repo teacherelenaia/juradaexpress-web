@@ -61,6 +61,17 @@ export async function generateMetadata({ params }) {
           ]
         : undefined,
     },
+    // twitter:image with the same image as og:image (no image: layout default).
+    ...(post.image
+      ? {
+          twitter: {
+            card: "summary_large_image",
+            title: post.title,
+            description,
+            images: [`${BASE}${post.image}`],
+          },
+        }
+      : {}),
   };
 }
 

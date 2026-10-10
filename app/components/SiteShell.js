@@ -214,6 +214,9 @@ export default function SiteShell({ locale = "es", children }) {
               className="inline-flex shrink-0 items-center gap-2 font-semibold tracking-tight text-white no-underline lg:pr-2"
               aria-label={t.logoLabel}
             >
+              {/* Logo SVG de 26 px: next/image no optimiza SVG y añadiría un
+                  wrapper sin beneficio; se deja <img> a propósito. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.svg"
                 alt={t.logoAlt}
@@ -244,6 +247,8 @@ export default function SiteShell({ locale = "es", children }) {
           <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-2 lg:grid-cols-4">
             <div>
               <div className="mb-2 inline-flex items-center gap-2 font-semibold text-slate-900">
+                {/* Logo SVG de 24 px, igual que en la cabecera: <img> a propósito. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/logo.svg"
                   width="24"
