@@ -74,6 +74,10 @@ const TRAMITES = [
   {
     title: "Pensión y Seguridad Social",
     docs: "Vidas laborales británicas, cartas del HMRC o del DWP y certificados de nacimiento para tramitar pensiones en España.",
+    guide: {
+      href: "/documentos-visado-no-lucrativo-espana",
+      label: "Guía: documentos del visado no lucrativo, con apostilla y traducción",
+    },
     apostille: "Apostilla: según el organismo — te lo confirmo al ver el documento.",
     price: priceOf("certificado-empresa"),
     time: "En el día (hasta 10 págs.)",

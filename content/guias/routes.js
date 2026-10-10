@@ -24,6 +24,15 @@ export const GUIDE_ROUTES = [
     datePublished: "2026-10-10",
     lastModified: "2026-10-10",
   },
+  {
+    id: "no-lucrativo-documentos",
+    es: "/documentos-visado-no-lucrativo-espana",
+    en: "/en/spain-non-lucrative-visa-documents-checklist",
+    labelEs: "Documentos para el visado no lucrativo",
+    labelEn: "Spain non-lucrative visa documents checklist",
+    datePublished: "2026-10-10",
+    lastModified: "2026-10-10",
+  },
 ];
 
 export const guideById = (id) => GUIDE_ROUTES.find((r) => r.id === id);

@@ -217,6 +217,8 @@ export const es = {
     text: "Por WhatsApp o desde la calculadora: en menos de dos horas tienes el precio cerrado y el plazo por escrito, y el PDF firmado el mismo día si llega antes de las 15:00, hora de Madrid.",
   },
   related: [
+    { href: "/documentos-visado-no-lucrativo-espana", label: "Guía: documentos del visado no lucrativo" },
+    { href: "/documentos-visado-nomada-digital-espana", label: "Guía: documentos del visado de nómada digital" },
     { href: "/traduccion-jurada-visados-espana", label: "Visados de España" },
     { href: "/traduccion-jurada-visado-nomada-digital", label: "Visado de nómada digital" },
     { href: "/traduccion-jurada-estados-unidos", label: "Vienes de Estados Unidos" },
@@ -394,6 +396,8 @@ export const en = {
     text: "On WhatsApp or through the calculator: you get the fixed price and the delivery time in writing within two hours, and the signed PDF the same day if it arrives before 3 pm Madrid time.",
   },
   related: [
+    { href: "/en/spain-non-lucrative-visa-documents-checklist", label: "Guide: non-lucrative visa documents checklist" },
+    { href: "/en/spain-digital-nomad-visa-documents-checklist", label: "Guide: digital nomad visa documents checklist" },
     { href: "/en/sworn-translations-spanish-visas", label: "Spanish visas" },
     { href: "/en/sworn-translation-spain-digital-nomad-visa", label: "Digital nomad visa" },
     { href: "/en/sworn-translation-usa-spain", label: "Coming from the United States" },
