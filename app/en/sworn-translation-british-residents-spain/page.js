@@ -63,6 +63,10 @@ const PROCEDURES = [
     price: priceOf("permiso-conducir"),
     time: "24h",
     href: "/en/documentos",
+    guide: {
+      href: "/en/exchange-driving-licence-spain-dgt-by-country",
+      label: "Guide: what the DGT asks for in the exchange, country by country",
+    },
   },
   {
     title: "Pension and Social Security",
@@ -113,6 +117,13 @@ export default function Page() {
                 More about this document →
               </a>
             </p>
+            {t.guide ? (
+              <p className="mt-2">
+                <a href={t.guide.href} className="link text-sm">
+                  {t.guide.label} →
+                </a>
+              </p>
+            ) : null}
           </article>
         ))}
       </div>

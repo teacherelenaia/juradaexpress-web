@@ -140,7 +140,7 @@ function Chevron() {
 
 // Bloques de contenido: cadena (párrafo con HTML inline permitido), lista,
 // tabla o nota destacada.
-function Block({ block, page }) {
+export function Block({ block, page }) {
   if (typeof block === "string") {
     return (
       <p

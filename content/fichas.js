@@ -459,6 +459,10 @@ export const FICHAS = [
     ],
     related: [
       {
+        href: "/canje-permiso-conducir-dgt-por-paises",
+        label: "Guía: canje del permiso de conducir en la DGT por países",
+      },
+      {
         href: "/traduccion-jurada-britanicos-espana",
         label: "Guía para británicos en España",
       },
