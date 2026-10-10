@@ -1,0 +1,34 @@
+# Aviso a IndexNow (Bing, Yandex) tras cada deploy de producción (10/10/2026).
+#
+# Vercel despliega main por su cuenta; esta acción espera tres minutos a que
+# la URL nueva esté servida y llama a POST /api/indexnow, que envía todo el
+# sitemap. Necesita el secreto INDEXNOW_KEY (Settings → Secrets and variables
+# → Actions), con el mismo valor que la variable INDEXNOW_KEY de Vercel.
+# También se puede lanzar a mano desde la pestaña Actions (workflow_dispatch).
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Esperar al deploy de Vercel
+        run: sleep 180
+
+      - name: Enviar el sitemap a IndexNow
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: |
+          if [ -z "$INDEXNOW_KEY" ]; then
+            echo "::error::Falta el secreto INDEXNOW_KEY en GitHub (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+          curl --silent --show-error --fail-with-body \
+            --request POST "https://juradaexpress.es/api/indexnow" \
+            --header "Authorization: Bearer $INDEXNOW_KEY" \
+            --header "Content-Type: application/json" \
+            --data '{}'

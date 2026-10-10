@@ -81,4 +81,45 @@ El gclid caduca a los 90 días del clic: conviene importar las ventas cada seman
 
 ## Variables de entorno
 
-Las de Google Ads (`NEXT_PUBLIC_ADS_ID`, `NEXT_PUBLIC_ADS_CONV_*`), Resend (`RESEND_API_KEY`, `QUOTE_FROM_EMAIL`, `QUOTE_TO_EMAIL`) y Blob (`BLOB_READ_WRITE_TOKEN`) están documentadas en `.env.local.example`. El origen de los WhatsApp no necesita ninguna variable nueva.
+Las de Google Ads (`NEXT_PUBLIC_ADS_ID`, `NEXT_PUBLIC_ADS_CONV_*`), Resend (`RESEND_API_KEY`, `QUOTE_FROM_EMAIL`, `QUOTE_TO_EMAIL`) y Blob (`BLOB_READ_WRITE_TOKEN`) están documentadas en `.env.local.example`. El origen de los WhatsApp no necesita ninguna variable nueva. IndexNow (sección siguiente) usa `INDEXNOW_KEY`.
+
+## IndexNow
+
+Desde el 10/10/2026 la web avisa a Bing y a Yandex de las URL nuevas o cambiadas con el protocolo IndexNow. Importa porque ChatGPT busca en el índice de Bing: sin aviso, una página nueva tarda semanas en aparecer; con aviso, Bing la lee en horas o días.
+
+### Qué hay que configurar una sola vez
+
+La clave es una cadena de 32 caracteres hexadecimales (se genera con `node -e "console.log(require('crypto').randomBytes(16).toString('hex'))"`) y tiene que ser la misma en tres sitios:
+
+1. **Vercel** → el proyecto → Settings → Environment Variables: `INDEXNOW_KEY` en Production (y en Preview si se quiere probar ahí). Después, un nuevo deploy: con la variable en el build, la web sirve `https://juradaexpress.es/<clave>.txt` con la clave en texto plano, que es como Bing comprueba que la clave es nuestra.
+2. **GitHub** → el repositorio → Settings → Secrets and variables → Actions → New repository secret: `INDEXNOW_KEY`, mismo valor.
+3. **`.env.local`** del ordenador desde el que se lance `npm run indexnow` a mano.
+
+### Qué pasa en cada deploy
+
+La acción `.github/workflows/indexnow.yml` se ejecuta en cada push a `main`: espera tres minutos a que Vercel haya publicado la versión nueva y llama a `POST https://juradaexpress.es/api/indexnow` con la cabecera `Authorization: Bearer <clave>`. La ruta lee el sitemap de producción y lo manda entero a `https://api.indexnow.org/indexnow` (Bing lo reparte a los demás buscadores del protocolo). Sin cabecera o con otra clave, la ruta responde 401; sin `INDEXNOW_KEY` en Vercel, 503. El resultado se ve en la pestaña Actions del repositorio; también se puede lanzar a mano desde ahí («Run workflow»).
+
+### Cómo lanzarlo a mano
+
+Todo el sitemap:
+
+```
+npm run indexnow
+```
+
+Solo unas URL (rutas o URL completas, las que haga falta):
+
+```
+npm run indexnow -- https://juradaexpress.es/en/fbi-background-check-translation-spain
+npm run indexnow -- /traduccion-jurada-antecedentes-fbi /en/sworn-translations-spanish-visas
+```
+
+Con `--dry-run` muestra la lista sin enviar nada. Respuestas de IndexNow: 200 o 202, enviado; 403, la clave no coincide con el archivo `<clave>.txt` (revisar Vercel); 422, alguna URL no es de juradaexpress.es; 429, demasiados envíos seguidos.
+
+### Dónde está el código
+
+- `app/lib/indexnow.mjs`: lectura del sitemap, validación de las URL y envío (compartido por la ruta y el script).
+- `app/api/indexnow/route.js`: `POST /api/indexnow` protegida con la clave.
+- `app/indexnow-key/route.js` y la reescritura de `next.config.mjs`: sirven `/<clave>.txt`.
+- `scripts/indexnow.mjs`: envío a mano (`npm run indexnow`).
+- `.github/workflows/indexnow.yml`: llamada automática tras cada push a `main`.

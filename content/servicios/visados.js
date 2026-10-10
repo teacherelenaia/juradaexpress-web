@@ -93,7 +93,7 @@ export const es = {
             head: ["Documento", "Visado", "¿Apostilla?", "¿Traducción jurada?", "Paquete"],
             rows: [
               [
-                "Identity History Summary del FBI (antecedentes penales) o certificado de la policía estatal",
+                '<a href="/traduccion-jurada-antecedentes-fbi">Identity History Summary del FBI</a> (antecedentes penales) o certificado de la policía estatal; en el Reino Unido, el <a href="/traduccion-jurada-acro-reino-unido">ACRO Police Certificate</a>',
                 "No lucrativo, estudiantes (más de 6 meses), nómada digital, residencia",
                 "Sí (apostilla federal del Departamento de Estado de EE. UU.)",
                 "Sí",
@@ -235,6 +235,8 @@ export const es = {
   related: [
     { href: "/traduccion-jurada-estados-unidos", label: "Vienes de Estados Unidos" },
     { href: "/traduccion-jurada-visado-nomada-digital", label: "Visado de nómada digital" },
+    { href: "/traduccion-jurada-antecedentes-fbi", label: "Certificado del FBI (Estados Unidos)" },
+    { href: "/traduccion-jurada-acro-reino-unido", label: "Certificado ACRO (Reino Unido)" },
     { href: "/traduccion-jurada-certificado-penales", label: "Certificado de antecedentes penales" },
     { href: "/traduccion-jurada-certificado-medico", label: "Certificado médico" },
     { href: "/traduccion-jurada-partida-nacimiento", label: "Partida de nacimiento" },
@@ -298,7 +300,7 @@ export const en = {
             head: ["Document", "Visa", "Apostille?", "Sworn translation?", "Pack"],
             rows: [
               [
-                "FBI Identity History Summary (background check), or state police certificate",
+                '<a href="/en/fbi-background-check-translation-spain">FBI Identity History Summary</a> (background check) or state police certificate; in the UK, the <a href="/en/acro-police-certificate-translation-spain">ACRO Police Certificate</a>',
                 "Non-lucrative, student (over 6 months), digital nomad, residence",
                 "Yes (federal apostille from the US Department of State)",
                 "Yes",
@@ -439,6 +441,8 @@ export const en = {
   related: [
     { href: "/en/sworn-translation-usa-spain", label: "Coming from the United States" },
     { href: "/en/sworn-translation-spain-digital-nomad-visa", label: "Digital nomad visa" },
+    { href: "/en/fbi-background-check-translation-spain", label: "FBI background check" },
+    { href: "/en/acro-police-certificate-translation-spain", label: "ACRO police certificate" },
     { href: "/en/sworn-translation-canada-spain", label: "Coming from Canada" },
     { href: "/en/sworn-translation-australia-spain", label: "Coming from Australia" },
     { href: "/en/how-it-works", label: "How it works" },
