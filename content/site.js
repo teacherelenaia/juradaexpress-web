@@ -2,6 +2,7 @@
 //
 // Datos de contacto y redes en un único sitio, para que header, panel
 // móvil, barra de acciones y footer no dupliquen URLs.
+import { MIN_PRICE } from "./documents";
 
 export const PHONE_DISPLAY = "685 891 214";
 export const PHONE_TEL = "+34685891214";
@@ -171,6 +172,15 @@ export const URGENCY_SURCHARGE = 0.3;
 // la apostilla cuenta como página si hay que traducirla. Si cambia, se
 // cambia solo aquí. [[CONFIRMAR con Elena antes de fusionar]]
 export const PRICE_PER_PAGE = 20;
+
+// Mínimo por documento de los documentos largos (regla de Elena,
+// 10/10/2026): 20 € por página con un mínimo de MIN_DOC_PRICE por
+// documento (1 página, 35 €; 2 páginas, 40 €; 5 páginas, 100 €). Es la
+// misma cifra que el precio mínimo del catálogo (content/documents.js →
+// MIN_PRICE, 35 €), así que se reutiliza; documents.js no importa nada, no
+// hay ciclo. La página adicional de los packs (EXTRA_PAGE_PRICE) no lleva
+// mínimo.
+export const MIN_DOC_PRICE = MIN_PRICE;
 
 // Hora de corte para la entrega en el día (misma regla que la landing del
 // FBI): documento recibido antes de esta hora de Madrid, PDF el mismo día;

@@ -22,7 +22,8 @@ const PAGES = [
       "firma electrónica cualificada",
       "Orden AUC/213/2025",
       "15:00",
-      "20 € por página",
+      "20 € por página, mínimo 35 €",
+      "mínimo 35 € por documento",
       "No cobro por palabra",
       "Datos de la traductora jurada",
       "Qué incluye el precio y qué no",
@@ -37,7 +38,8 @@ const PAGES = [
       "qualified electronic signature",
       "Order AUC/213/2025",
       "15:00",
-      "€20 per page",
+      "€20 per page, minimum €35",
+      "minimum €35 per document",
       "I do not charge per word",
       "About the sworn translator",
       "What the price includes and what it does not",
@@ -92,6 +94,7 @@ for (const p of PAGES) {
       (o) => o.priceSpecification["@type"] === "UnitPriceSpecification"
     );
     expect(perPage.price).toBe(20);
+    expect(perPage.description).toContain("35");
     expect(perPage.priceSpecification.unitText).toBe(p.unit);
     expect(perPage.priceSpecification.valueAddedTaxIncluded).toBe(true);
 

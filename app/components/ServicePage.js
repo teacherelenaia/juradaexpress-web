@@ -631,6 +631,7 @@ export default function ServicePage({ page }) {
                         itemListElement: page.offerCatalog.offers.map((o) => ({
                           "@type": "Offer",
                           name: o.name,
+                          ...(o.description ? { description: o.description } : {}),
                           price: o.price,
                           priceCurrency: "EUR",
                           availability: "https://schema.org/InStock",

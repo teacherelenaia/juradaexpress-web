@@ -32,6 +32,7 @@ import {
   GOOGLE_REVIEW_COUNT,
   INTERNATIONAL_SHIPPING,
   LARGE_PROJECT_CAPACITY,
+  MIN_DOC_PRICE,
   PHONE_DISPLAY,
   PHONE_TEL,
   PRICE_PER_PAGE,
@@ -85,6 +86,15 @@ const nameOf = (d, locale) =>
 
 const eur = (n, locale) => (locale === "en" ? `€${n}` : `${n} €`);
 
+// «20 € por página, mínimo 35 €»: precio de los documentos largos con el
+// mínimo por documento (content/site.js → PRICE_PER_PAGE, MIN_DOC_PRICE).
+// longDoc(n): total de un documento largo de n páginas con ese mínimo.
+const longDoc = (pages) => Math.max(MIN_DOC_PRICE, pages * PRICE_PER_PAGE);
+const perPage = (locale) =>
+  locale === "en"
+    ? `${eur(PRICE_PER_PAGE, locale)} per page, minimum ${eur(MIN_DOC_PRICE, locale)}`
+    : `${eur(PRICE_PER_PAGE, locale)} por página, mínimo ${eur(MIN_DOC_PRICE, locale)}`;
+
 // Tabla 1: precio por documento (los estándar de una página).
 function priceTable(locale) {
   const en = locale === "en";
@@ -104,9 +114,7 @@ function priceTable(locale) {
         d.price != null
           ? eur(d.price, locale)
           : BY_PAGE.includes(d.id)
-            ? en
-              ? `${eur(PRICE_PER_PAGE, locale)} per page`
-              : `${eur(PRICE_PER_PAGE, locale)} por página`
+            ? perPage(locale)
             : en
               ? "Fixed quote within 2 working hours"
               : "Presupuesto cerrado en menos de 2 h laborables",
@@ -142,8 +150,8 @@ function pagePriceTable(locale) {
             ? "Contracts, deeds, multi-page academic transcripts, insurance policies, bank statements"
             : "Contratos, escrituras, expedientes académicos de varias páginas, pólizas, extractos bancarios",
           en
-            ? `${eur(PRICE_PER_PAGE, locale)} per page`
-            : `${eur(PRICE_PER_PAGE, locale)} por página`,
+            ? `${eur(PRICE_PER_PAGE, locale)} per page (minimum ${eur(MIN_DOC_PRICE, locale)} per document)`
+            : `${eur(PRICE_PER_PAGE, locale)} por página (mínimo ${eur(MIN_DOC_PRICE, locale)} por documento)`,
           en
             ? `Same day up to ${SAME_DAY_MAX_PAGES} pages; longer files get a written deadline before work starts`
             : `En el día hasta ${SAME_DAY_MAX_PAGES} páginas; más páginas, plazo cerrado por escrito antes de empezar`,
@@ -175,6 +183,9 @@ function offerCatalog(locale) {
           : "Traducción jurada de documentos largos (contratos, escrituras, expedientes, pólizas, extractos), por página",
         price: PRICE_PER_PAGE,
         unitText: en ? "page" : "página",
+        description: en
+          ? `Minimum €${MIN_DOC_PRICE} per document. One page is one side of the original; VAT included.`
+          : `Mínimo ${MIN_DOC_PRICE} € por documento. Una página es una cara del original; IVA incluido.`,
       },
     ],
   };
@@ -269,10 +280,10 @@ export const es = {
   providerPerson: true,
   offerCatalog: offerCatalog("es"),
   howTo: { totalTime: "PT24H" },
-  metaTitle: `Traductor jurado de inglés online | Desde ${MIN_PRICE} €, IVA incl., PDF firmado en el día`,
+  metaTitle: `Traductor jurado de inglés online | Desde ${MIN_PRICE} €, PDF en el día`,
   metaDescription: `Traducción jurada español-inglés desde ${MIN_PRICE} € por documento o ${PRICE_PER_PAGE} € por página, IVA incluido. PDF con firma cualificada en el día. Traductora MAEC nº ${MAEC_NUMBER}.`,
   h1: "Traductor jurado de inglés online: traducción jurada español-inglés con validez oficial",
-  lead: `Soy ${PERSON_NAME}, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores en ${SINCE} con el nº ${MAEC_NUMBER}: ${yearsOfExperience()} años de nombramiento vigente. Traduzco, firmo y sello personalmente documentos del español al inglés y del inglés al español para que tengan validez ante cualquier organismo oficial: Extranjería, Registro Civil, universidades, notarías, Home Office, USCIS o IRCC. Todo el proceso es online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas laborables y recibes el PDF con firma electrónica cualificada, conforme a la Orden AUC/213/2025, el mismo día si el documento llega antes de las ${SAME_DAY_CUTOFF}, hora de Madrid (hasta ${SAME_DAY_MAX_PAGES} páginas). Los documentos habituales cuestan desde ${MIN_PRICE} €, IVA incluido; los largos, ${PRICE_PER_PAGE} € por página.`,
+  lead: `Soy ${PERSON_NAME}, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores en ${SINCE} con el nº ${MAEC_NUMBER}: ${yearsOfExperience()} años de nombramiento vigente. Traduzco, firmo y sello personalmente documentos del español al inglés y del inglés al español para que tengan validez ante cualquier organismo oficial: Extranjería, Registro Civil, universidades, notarías, Home Office, USCIS o IRCC. Todo el proceso es online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas laborables y recibes el PDF con firma electrónica cualificada, conforme a la Orden AUC/213/2025, el mismo día si el documento llega antes de las ${SAME_DAY_CUTOFF}, hora de Madrid (hasta ${SAME_DAY_MAX_PAGES} páginas). Los documentos habituales cuestan desde ${MIN_PRICE} €, IVA incluido; los largos, ${PRICE_PER_PAGE} € por página con un mínimo de ${MIN_DOC_PRICE} € por documento.`,
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Traductora jurada firmando y sellando una traducción jurada de inglés",
@@ -344,7 +355,7 @@ export const es = {
         `Los precios de la primera tabla son los que aplico a los documentos estándar de una página (certificados, títulos, permisos) y son los mismos que verás en el catálogo. Los documentos largos (contratos, escrituras, expedientes de varias páginas, pólizas, extractos) van por página, en la segunda tabla. Todos los precios llevan el <strong>IVA incluido</strong>. <strong>No cobro por palabra</strong>: el precio es por documento o por página, cerrado por escrito antes de empezar, y nunca añado recargos que no hayas visto antes de aceptar.`,
         priceTable("es"),
         pagePriceTable("es"),
-        `Una <strong>página</strong> es una cara del documento original; si el documento lleva apostilla y hay que traducirla, la apostilla cuenta como una página más. Para los documentos largos te confirmo el número de páginas y el total cerrado, por escrito, en menos de 2 horas laborables al ver el documento.`,
+        `Una <strong>página</strong> es una cara del documento original; si el documento lleva apostilla y hay que traducirla, la apostilla cuenta como una página más. El precio por página lleva un <strong>mínimo de ${MIN_DOC_PRICE} € por documento</strong>: un documento largo de 1 página, ${longDoc(1)} €; de 2 páginas, ${longDoc(2)} €; de 5 páginas, ${longDoc(5)} €. Para los documentos largos te confirmo el número de páginas y el total cerrado, por escrito, en menos de 2 horas laborables al ver el documento.`,
         `El pago es con tarjeta a través de Stripe o por transferencia, y te envío factura. ${INTERNATIONAL_SHIPPING.note.es}. Consulta la <a href="/precios">página de precios</a> completa, que incluye los paquetes por trámite, la traducción certificada para USCIS y los expedientes de nómada digital.`,
       ],
     },
@@ -463,11 +474,11 @@ export const es = {
     },
     {
       q: "¿Cuánto cuesta una traducción jurada de inglés?",
-      a: `Los documentos habituales de una página (partida de nacimiento, certificado de matrimonio, antecedentes penales) cuestan ${MIN_PRICE} €, IVA incluido; el permiso de conducir, ${priceOf("permiso-conducir")} €; el certificado de empresa, ${priceOf("certificado-empresa")} €; el título universitario, ${priceOf("titulo-universitario")} €. Los documentos largos (contratos, escrituras, expedientes) van a ${PRICE_PER_PAGE} € por página, IVA incluido, con el total cerrado por escrito en menos de 2 horas laborables al ver el documento.`,
+      a: `Los documentos habituales de una página (partida de nacimiento, certificado de matrimonio, antecedentes penales) cuestan ${MIN_PRICE} €, IVA incluido; el permiso de conducir, ${priceOf("permiso-conducir")} €; el certificado de empresa, ${priceOf("certificado-empresa")} €; el título universitario, ${priceOf("titulo-universitario")} €. Los documentos largos (contratos, escrituras, expedientes) van a ${PRICE_PER_PAGE} € por página, IVA incluido, con un mínimo de ${MIN_DOC_PRICE} € por documento y el total cerrado por escrito en menos de 2 horas laborables al ver el documento.`,
     },
     {
       q: "¿Cobras por palabra?",
-      a: `No. El precio es por documento, para los habituales de una página, o por página (${PRICE_PER_PAGE} €, IVA incluido) para los largos; una página es una cara del documento original, y la apostilla cuenta como página si hay que traducirla. Lo cierro por escrito antes de empezar y no hay recargos que no hayas visto.`,
+      a: `No. El precio es por documento, para los habituales de una página, o por página (${PRICE_PER_PAGE} €, IVA incluido, con un mínimo de ${MIN_DOC_PRICE} € por documento) para los largos; una página es una cara del documento original, y la apostilla cuenta como página si hay que traducirla. Lo cierro por escrito antes de empezar y no hay recargos que no hayas visto.`,
     },
     {
       q: "¿Cuánto tarda?",
@@ -507,7 +518,7 @@ export const en = {
   metaTitle: `Sworn English translator online | From €${MIN_PRICE}, same-day signed PDF`,
   metaDescription: `Sworn Spanish-English translation from €${MIN_PRICE} per document or €${PRICE_PER_PAGE} per page, VAT included. Qualified e-signature, same-day PDF. MAEC translator no. ${MAEC_NUMBER}.`,
   h1: "Sworn English translator online: officially valid Spanish-English sworn translation",
-  lead: `I'm ${PERSON_NAME}, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs in ${SINCE} under no. ${MAEC_NUMBER}, an appointment in force for ${yearsOfExperience()} years. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 working hours, and you receive the PDF with a qualified electronic signature under Spain's Order AUC/213/2025 the same day if the document reaches me before ${SAME_DAY_CUTOFF} Madrid time (up to ${SAME_DAY_MAX_PAGES} pages). The most common documents cost from €${MIN_PRICE}, VAT included; long documents are €${PRICE_PER_PAGE} per page.`,
+  lead: `I'm ${PERSON_NAME}, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs in ${SINCE} under no. ${MAEC_NUMBER}, an appointment in force for ${yearsOfExperience()} years. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 working hours, and you receive the PDF with a qualified electronic signature under Spain's Order AUC/213/2025 the same day if the document reaches me before ${SAME_DAY_CUTOFF} Madrid time (up to ${SAME_DAY_MAX_PAGES} pages). The most common documents cost from €${MIN_PRICE}, VAT included; long documents are €${PRICE_PER_PAGE} per page with a minimum of €${MIN_DOC_PRICE} per document.`,
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Sworn translator signing and stamping a sworn English translation",
@@ -579,7 +590,7 @@ export const en = {
         "The prices in the first table apply to standard one-page documents (certificates, degrees, licences) and are the same ones you will see in the catalogue. Long documents (contracts, deeds, multi-page transcripts, insurance policies, bank statements) are priced per page, in the second table. All prices are <strong>VAT included</strong>. <strong>I do not charge per word</strong>: the price is per document or per page, fixed in writing before work starts, and I never add surcharges you have not seen before accepting.",
         priceTable("en"),
         pagePriceTable("en"),
-        "A <strong>page</strong> is one side of the original document; if the document carries an apostille that needs translating, the apostille counts as one more page. For long documents I confirm the page count and the fixed total in writing, within 2 working hours of seeing the document.",
+        `A <strong>page</strong> is one side of the original document; if the document carries an apostille that needs translating, the apostille counts as one more page. The per-page price has a <strong>minimum of €${MIN_DOC_PRICE} per document</strong>: a 1-page long document is €${longDoc(1)}; 2 pages, €${longDoc(2)}; 5 pages, €${longDoc(5)}. For long documents I confirm the page count and the fixed total in writing, within 2 working hours of seeing the document.`,
         `Payment is by card through Stripe (any international card, charged in euros) or by bank transfer, and you receive an invoice. ${INTERNATIONAL_SHIPPING.note.en}. See the full <a href="/en/precios">pricing page</a>, including the packs by procedure, certified translation for USCIS and digital nomad visa files.`,
       ],
     },
@@ -698,11 +709,11 @@ export const en = {
     },
     {
       q: "How much does a sworn English translation cost?",
-      a: `Common one-page documents (birth certificate, marriage certificate, criminal record certificate) cost €${MIN_PRICE}, VAT included; a driving licence €${priceOf("permiso-conducir")}; an employment certificate €${priceOf("certificado-empresa")}; a university degree €${priceOf("titulo-universitario")}. Long documents (contracts, deeds, transcripts) are €${PRICE_PER_PAGE} per page, VAT included, with the total fixed in writing within 2 working hours of seeing the document.`,
+      a: `Common one-page documents (birth certificate, marriage certificate, criminal record certificate) cost €${MIN_PRICE}, VAT included; a driving licence €${priceOf("permiso-conducir")}; an employment certificate €${priceOf("certificado-empresa")}; a university degree €${priceOf("titulo-universitario")}. Long documents (contracts, deeds, transcripts) are €${PRICE_PER_PAGE} per page, VAT included, with a minimum of €${MIN_DOC_PRICE} per document and the total fixed in writing within 2 working hours of seeing the document.`,
     },
     {
       q: "Do you charge per word?",
-      a: `No. The price is per document for the common one-page documents, or per page (€${PRICE_PER_PAGE}, VAT included) for long ones; a page is one side of the original, and the apostille counts as a page if it needs translating. I fix it in writing before starting and there are no surcharges you have not seen.`,
+      a: `No. The price is per document for the common one-page documents, or per page (€${PRICE_PER_PAGE}, VAT included, with a minimum of €${MIN_DOC_PRICE} per document) for long ones; a page is one side of the original, and the apostille counts as a page if it needs translating. I fix it in writing before starting and there are no surcharges you have not seen.`,
     },
     {
       q: "How long does it take?",
