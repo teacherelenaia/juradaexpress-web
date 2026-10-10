@@ -116,6 +116,15 @@ export function serviceMetadata(page) {
         },
       ],
     },
+    // twitter:image con la misma foto que og:image (si no, Next hereda la
+    // de app/(es)/layout.js, hero-firma.jpg, y las tarjetas de X/Twitter
+    // muestran una imagen distinta a la de WhatsApp o LinkedIn).
+    twitter: {
+      card: "summary_large_image",
+      title: `${page.metaTitle} | Jurada Express`,
+      description: page.metaDescription,
+      images: [`${BASE}${page.image.src}`],
+    },
   };
 }
 

@@ -1,0 +1,10 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    // 42 avisos (10/10/2026), todos apóstrofos ingleses en texto JSX de las
+    // páginas /en ("you'll", "I'll"). React ya escapa el texto al renderizar,
+    // así que la regla no evita ningún fallo y escribir &apos; en cada frase
+    // solo estorba al editar los textos. Desactivada a propósito.
+    "react/no-unescaped-entities": "off"
+  }
+}

@@ -1,0 +1,46 @@
+# .github/workflows/ci.yml
+#
+# Comprobaciones en cada pull request a main (10/10/2026): instalación
+# limpia, ESLint, build de producción y check-meta (descripciones de todas
+# las URL del sitemap entre 110 y 155 caracteres y sin duplicados). Los
+# tests de Playwright (npm test) no se ejecutan aquí: necesitan la web
+# levantada con sus servicios y se pasan en local antes de abrir el PR.
+#
+# El build no necesita claves reales: STRIPE_SECRET_KEY lleva un valor de
+# prueba para que el SDK de Stripe se inicialice, y las NEXT_PUBLIC_* van
+# vacías o con valores de prueba (sin ID de Google Ads no se carga nada).
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      STRIPE_SECRET_KEY: sk_test_dummy
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: pk_test_dummy
+      NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: test-access-key
+      NEXT_PUBLIC_ADS_ID: ""
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: Build de producción
+        run: npm run build
+
+      - name: check-meta (descripciones del sitemap)
+        run: node scripts/check-meta.mjs
