@@ -292,7 +292,7 @@ export default function CountryHubPage({ page }) {
         </section>
 
         {/* FAQ */}
-        <section aria-labelledby={`${page.id}-faq`}>
+        <section aria-labelledby={`${page.id}-faq`} data-track-section="faq">
           <SectionHeading
             as="h2"
             id={`${page.id}-faq`}

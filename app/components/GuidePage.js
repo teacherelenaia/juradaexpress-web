@@ -210,7 +210,7 @@ export default function GuidePage({ page }) {
 
       <div className="mt-12 space-y-12 md:mt-16">
         {/* Tabla principal */}
-        <section id={page.table.id || "tabla"}>
+        <section id={page.table.id || "tabla"} data-track-section="tabla">
           <SectionHeading as="h2" className="!text-2xl md:!text-3xl">
             {page.table.title}
           </SectionHeading>
@@ -246,7 +246,7 @@ export default function GuidePage({ page }) {
         ))}
 
         {/* FAQ */}
-        <section aria-labelledby={`${page.id}-faq`}>
+        <section aria-labelledby={`${page.id}-faq`} data-track-section="faq">
           <SectionHeading as="h2" id={`${page.id}-faq`} className="!text-2xl md:!text-3xl">
             {t.faq}
           </SectionHeading>
@@ -266,6 +266,7 @@ export default function GuidePage({ page }) {
         {/* Oferta: una sola vez, al cierre */}
         <section
           id={page.offer.id || "traduccion-jurada"}
+          data-track-section="oferta"
           className="rounded-xl bg-stone-50 p-6 ring-1 ring-stone-200 md:p-8"
         >
           <SectionHeading as="h2" className="!text-2xl md:!text-3xl">
@@ -307,7 +308,11 @@ export default function GuidePage({ page }) {
         </section>
 
         {/* Fuentes oficiales con fecha de consulta */}
-        <section id="fuentes" aria-labelledby={`${page.id}-sources`}>
+        <section
+          id="fuentes"
+          aria-labelledby={`${page.id}-sources`}
+          data-track-section="fuentes"
+        >
           <SectionHeading as="h2" id={`${page.id}-sources`} className="!text-2xl md:!text-3xl">
             {t.sources}
           </SectionHeading>

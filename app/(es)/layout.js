@@ -5,7 +5,7 @@
 // app/en/layout.js con <html lang="en"> (antes todo el sitio se servía con
 // lang="es", incluidas las páginas /en/*).
 import "../globals.css";
-import { Analytics } from "@vercel/analytics/next";
+import VercelAnalytics from "../components/VercelAnalytics";
 import SiteShell from "../components/SiteShell";
 import { fontClassName } from "../fonts";
 
@@ -69,7 +69,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
         <SiteShell locale="es">{children}</SiteShell>
-        <Analytics />
+        <VercelAnalytics />
       </body>
     </html>
   );

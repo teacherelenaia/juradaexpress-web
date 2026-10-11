@@ -79,6 +79,51 @@ El gclid caduca a los 90 días del clic: conviene importar las ventas cada seman
 - `app/api/wa-click/route.js`: valida el aviso, guarda el JSON en Blob y manda el email (Resend, `app/lib/resend.js`).
 - `tests/whatsapp-origen.spec.mjs`: prueba de Playwright (`npm test`).
 
+## Comportamiento sin cookies (Vercel)
+
+Desde el 11/10/2026 la web manda a Vercel Analytics qué hace cada visita en la página: hasta dónde baja, cuánto tiempo está, qué secciones llega a ver y en qué pulsa. Vercel Analytics no usa cookies ni identificadores de usuario, así que no necesita consentimiento y cuenta a todas las visitas (GA4 solo ve a quien acepta las cookies: en los primeros días de campaña vio 2 de los 13 clics). Hasta ahora Vercel solo registraba páginas vistas.
+
+### Antes de nada: el plan de Vercel
+
+**Los eventos personalizados de Vercel Analytics solo se recogen en los planes Pro y Enterprise.** El equipo de Vercel de la web (`elena-penarandas-projects`) está en el plan Hobby: el 11/10/2026 la API de eventos respondió «Accessing Analytics custom events requires an Enterprise or Pro plan». Con Hobby, la web envía los eventos pero Vercel los descarta y la pestaña Events no muestra nada; las páginas vistas siguen contándose como hasta ahora (50.000 eventos al mes incluidos, un mes de histórico).
+
+Para que esto funcione hay que pasar el equipo a Pro (20 $ al mes por miembro, con 14 días de prueba). Con Pro: eventos personalizados, 12 meses de histórico y **2 propiedades como máximo por evento**; el complemento Web Analytics Plus (10 $ al mes más) sube a 8 propiedades y a 24 meses. Los eventos se cobran por volumen (0,03 $ por cada 1.000 por encima del crédito mensual incluido): con el tráfico actual, unos 5 a 10 eventos por visita son calderilla.
+
+Hasta que se cambie el plan, el código no estorba ni cuesta nada: la medición de Google (Ads, consent mode, GA4) y las páginas vistas de Vercel siguen igual.
+
+### Qué se envía
+
+Cada evento lleva una propiedad común, `lang` (`es` o `en`), más la suya. La página se registra sola (Vercel guarda la ruta de cada evento, y aquí se le manda sin parámetros), así que no hace falta como propiedad y se respeta el límite de 2 del plan Pro.
+
+| Evento | Propiedad | Cuándo |
+| --- | --- | --- |
+| `scroll_depth` | `depth`: 25, 50, 75 o 100 | Al bajar hasta ese % del documento. Una vez por valor y carga de página. |
+| `time_on_page` | `seconds`: 10, 30, 60 o 120 | Segundos con la pestaña visible (el contador se para si la pestaña está en segundo plano). Una vez por valor. |
+| `section_view` | `section` | Cuando al menos la mitad de una sección marcada entra en pantalla (o, si la sección es más alta que la ventana, cuando ocupa al menos media ventana). Una vez por sección y carga. |
+| `cta_click` | `cta`: `whatsapp`, `presupuesto`, `llamar`, `email`, `calculadora_enviar` o `pack` (este último con `pack`: id del pack, y sin `lang`) | Pulsación en un enlace de WhatsApp, al catálogo (`/documentos`, `/en/documentos`), a `tel:` o `mailto:`, envío del formulario de la calculadora (se envíe o no) o botón «pedir este pack». |
+| `outbound_click` | `host` | Pulsación en un enlace a otro dominio (MAEC, DGT, consulados, Maps…). Solo el host, nunca la URL completa. |
+
+Secciones marcadas (`data-track-section`), solo donde existen en cada plantilla: `precios` (tabla de precios en /precios y /en/precios, sección de precios de la landing del traductor de inglés y de la landing de despachos), `calculadora` (calculadora de precio, en la home y en las landings que la llevan), `pasos` (cómo lo hacemos / cómo funciona), `faq`, y en las guías `tabla`, `oferta` (bloque final) y `fuentes`.
+
+No se envía nunca gclid, gbraid, wbraid, `utm_*`, la referencia `JX-…` de los WhatsApp, email, teléfono ni nada escrito por el visitante. La URL que el script de Vercel adjunta a cada evento propio se recorta a la ruta (sin parámetros); las páginas vistas se dejan como estaban, porque Vercel usa los `utm_*` de esa URL para sus propios filtros de campaña. Los eventos solo se envían en producción (en `next dev` no sale nada) y nunca en las rutas `/api/*`. Nada de esto toca Google Ads, el modo de consentimiento ni GA4.
+
+### Dónde verlo
+
+Vercel → el proyecto → **Analytics** → pestaña **Events**. Cada evento se puede desplegar para ver sus propiedades y filtrar por página, por referrer (`google.com` para las visitas que vienen de Ads) y por país o dispositivo. Los eventos tardan unos minutos en aparecer y se conservan según el plan (12 meses en Pro).
+
+Dos lecturas tipo, con el filtro de referrer en `google.com`:
+
+1. **¿Llegan a ver los precios?** Visitas a `/en/sworn-english-translator`: páginas vistas en la pestaña Pages frente a `section_view` con `section = precios` en la misma página. Si de 10 visitas solo 2 llegan a los precios, el problema está arriba (texto, tiempo de carga, lo que promete el anuncio); si llegan y no escriben, está en los precios o en el botón.
+2. **¿Cuántas escriben?** `cta_click` con `cta = whatsapp` (y `presupuesto`, `llamar`) en esa misma página frente a las páginas vistas. Con `scroll_depth` y `time_on_page` se ve si las visitas que no pulsan se van en los primeros segundos (rebote del anuncio) o leen hasta el final y aun así no escriben.
+
+### Dónde está el código
+
+- `app/lib/engagement.js`: envío con `track` de `@vercel/analytics` (añade `lang`), clasificación de los enlaces y el `beforeSend` que recorta la URL.
+- `app/components/EngagementEvents.js`: scroll, tiempo, secciones y clics; montado una vez en `SiteShell`.
+- `app/components/VercelAnalytics.js`: el `<Analytics>` de Vercel con ese `beforeSend` (lo usan los dos root layouts).
+- `app/components/QuoteCalculator.js`: `cta_click: calculadora_enviar` al enviar el formulario; `PacksSection.js`: botón de pack con `data-track-cta="pack"`.
+- `tests/eventos-vercel.spec.mjs`: prueba de Playwright contra el build de producción (proyecto `produccion` de `npm test`, puerto 3312; con `PLAYWRIGHT_PROD_URL` reutiliza un `npm start` ya levantado).
+
 ## Variables de entorno
 
 Las de Google Ads (`NEXT_PUBLIC_ADS_ID`, `NEXT_PUBLIC_ADS_CONV_*`), Resend (`RESEND_API_KEY`, `QUOTE_FROM_EMAIL`, `QUOTE_TO_EMAIL`) y Blob (`BLOB_READ_WRITE_TOKEN`) están documentadas en `.env.local.example`. El origen de los WhatsApp no necesita ninguna variable nueva. IndexNow (sección siguiente) usa `INDEXNOW_KEY`.

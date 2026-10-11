@@ -45,6 +45,7 @@ import { IconUpload, IconFileText } from "./Icons";
 import { trackAdsConversion } from "./AdsConversion";
 import { getAttribution } from "../lib/attribution";
 import { appendWaOrigin } from "../lib/waOrigin";
+import { trackEngagement } from "../lib/engagement";
 import { SOURCE_OPTIONS } from "../../content/sources";
 
 const WHATSAPP_NUMBER = "34685891214";
@@ -610,6 +611,9 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
 
   async function handleSubmit(e) {
     e.preventDefault();
+    // Evento sin cookies (Vercel Analytics): se registra el intento de envío,
+    // termine o no en solicitud enviada.
+    trackEngagement("cta_click", { cta: "calculadora_enviar" });
     const form = e.currentTarget;
     if (firmMode && !firm.trim()) {
       setFirmError(t.errFirm);
@@ -795,6 +799,7 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
   return (
     <section
       id={firmMode ? "order" : "calculadora"}
+      data-track-section="calculadora"
       aria-labelledby={`${uid}-title`}
       className={`mx-auto max-w-6xl scroll-mt-24 px-4 py-16 md:py-20 ${className}`}
     >

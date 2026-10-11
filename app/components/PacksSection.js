@@ -38,7 +38,12 @@ export function PackCard({ pack: p, locale = "es", orderHref }) {
         ) : null}
       </p>
       <div className="mt-5 flex flex-wrap gap-2 pt-1">
-        <a href={orderHref || t.orderHref} className="btn btn-primary">
+        <a
+          href={orderHref || t.orderHref}
+          className="btn btn-primary"
+          data-track-cta="pack"
+          data-track-pack={p.id}
+        >
           {t.order}
         </a>
         <a

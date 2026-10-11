@@ -173,7 +173,10 @@ export default function DocumentPage({ ficha }) {
       <SectionHeading as="h2" className="mt-12 !text-2xl md:!text-3xl">
         Preguntas frecuentes
       </SectionHeading>
-      <div className="mt-4 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200">
+      <div
+        className="mt-4 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200"
+        data-track-section="faq"
+      >
         {ficha.faq.map((f) => (
           <details key={f.q} className="group p-5">
             <summary className="flex cursor-pointer items-center justify-between gap-4 font-medium text-slate-900 [&::-webkit-details-marker]:hidden">
