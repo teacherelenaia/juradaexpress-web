@@ -577,7 +577,7 @@ export default function Page() {
       </section>
 
       {/* FAQ + JSON-LD */}
-      <section className="mx-auto max-w-6xl px-4 pb-20">
+      <section className="mx-auto max-w-6xl px-4 pb-20" data-track-section="faq">
         <SectionHeading>Frequently asked questions</SectionHeading>
         <div className="mt-8 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200">
           {FAQ.map((f, idx) => (

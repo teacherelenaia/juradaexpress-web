@@ -37,6 +37,10 @@ import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
 import QuoteCalculator from "./QuoteCalculator";
 import { PackGrid } from "./PacksSection";
+
+// Secciones de contenido (content/servicios/*.js) que cuentan como «precios»
+// en los eventos section_view de Vercel Analytics (app/lib/engagement.js).
+const TRACKED_SECTIONS = { precios: "precios", prices: "precios" };
 import { SectionHeading } from "./ui";
 import { SERVICE_COUNTRIES } from "../../content/site";
 import { packOffers } from "../../content/packs";
@@ -429,7 +433,11 @@ export default function ServicePage({ page }) {
       {/* Bloques de contenido */}
       <div className="mt-14 space-y-12 md:mt-16">
         {page.sections.map((s) => (
-          <section key={s.title} id={s.id}>
+          <section
+            key={s.title}
+            id={s.id}
+            data-track-section={TRACKED_SECTIONS[s.id]}
+          >
             <SectionHeading as="h2" className="!text-2xl md:!text-3xl">
               {s.title}
             </SectionHeading>
@@ -442,7 +450,7 @@ export default function ServicePage({ page }) {
         ))}
 
         {/* Cómo lo hacemos: 4 pasos estáticos */}
-        <section aria-labelledby={`${page.id}-how`}>
+        <section aria-labelledby={`${page.id}-how`} data-track-section="pasos">
           <SectionHeading
             as="h2"
             id={`${page.id}-how`}
@@ -474,7 +482,7 @@ export default function ServicePage({ page }) {
         </section>
 
         {/* FAQ */}
-        <section aria-labelledby={`${page.id}-faq`}>
+        <section aria-labelledby={`${page.id}-faq`} data-track-section="faq">
           <SectionHeading
             as="h2"
             id={`${page.id}-faq`}

@@ -8,6 +8,7 @@
 import CookieConsent from "./CookieConsent";
 import AdsConversion from "./AdsConversion";
 import AttributionCapture from "./AttributionCapture";
+import EngagementEvents from "./EngagementEvents";
 import ActionBar from "./ActionBar";
 import MobileNav from "./MobileNav";
 import MainNav from "./MainNav";
@@ -198,6 +199,9 @@ export default function SiteShell({ locale = "es", children }) {
 
         {/* Atribución (gclid, utm_*) para importar ventas a Google Ads */}
         <AttributionCapture />
+
+        {/* Eventos de comportamiento sin cookies para Vercel Analytics */}
+        <EngagementEvents />
 
         {/* Barra inferior móvil + botón flotante de WhatsApp en escritorio */}
         <ActionBar />

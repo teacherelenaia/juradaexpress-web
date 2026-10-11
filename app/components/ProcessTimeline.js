@@ -32,7 +32,7 @@ export default function ProcessTimeline({ steps }) {
   }, [drawn]);
 
   return (
-    <div ref={ref} data-drawn={drawn} className="mt-10">
+    <div ref={ref} data-drawn={drawn} data-track-section="pasos" className="mt-10">
       <ol className="relative grid gap-8 md:grid-cols-4 md:gap-6">
         {/* Línea horizontal (escritorio): a la altura del centro del marcador */}
         <div

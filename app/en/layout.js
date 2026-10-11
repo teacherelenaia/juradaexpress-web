@@ -3,7 +3,7 @@
 // Root layout de la versión en inglés (/en/*): <html lang="en"> servido
 // estáticamente, mismo SiteShell (cabecera, footer y JSON-LD) localizado.
 import "../globals.css";
-import { Analytics } from "@vercel/analytics/next";
+import VercelAnalytics from "../components/VercelAnalytics";
 import SiteShell from "../components/SiteShell";
 import { fontClassName } from "../fonts";
 
@@ -57,7 +57,7 @@ export default function RootLayoutEn({ children }) {
       </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
         <SiteShell locale="en">{children}</SiteShell>
-        <Analytics />
+        <VercelAnalytics />
       </body>
     </html>
   );

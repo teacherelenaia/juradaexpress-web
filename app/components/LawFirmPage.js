@@ -132,7 +132,7 @@ export default function LawFirmPage({ page }) {
 
       <div className="mt-14 space-y-12 md:mt-16">
         {/* 1. Cómo funciona: 4 pasos */}
-        <section aria-labelledby={`${page.id}-how`}>
+        <section aria-labelledby={`${page.id}-how`} data-track-section="pasos">
           <SectionHeading as="h2" id={`${page.id}-how`} className={H2}>
             {page.how.title}
           </SectionHeading>
@@ -175,7 +175,7 @@ export default function LawFirmPage({ page }) {
         </section>
 
         {/* 3. Precios fijos en dólares */}
-        <section aria-labelledby={`${page.id}-prices`}>
+        <section aria-labelledby={`${page.id}-prices`} data-track-section="precios">
           <SectionHeading as="h2" id={`${page.id}-prices`} className={H2}>
             {page.prices.title}
           </SectionHeading>
@@ -250,7 +250,7 @@ export default function LawFirmPage({ page }) {
         <QuoteCalculator locale="en" firmMode className="!px-0 !py-0" />
 
         {/* 6. FAQ */}
-        <section aria-labelledby={`${page.id}-faq`}>
+        <section aria-labelledby={`${page.id}-faq`} data-track-section="faq">
           <SectionHeading as="h2" id={`${page.id}-faq`} className={H2}>
             {T.faq}
           </SectionHeading>

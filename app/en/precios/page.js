@@ -31,7 +31,10 @@ export default function Page() {
         applies the exchange rate.
       </p>
 
-      <div className="mt-6 overflow-hidden rounded-xl ring-1 ring-stone-200">
+      <div
+        className="mt-6 overflow-hidden rounded-xl ring-1 ring-stone-200"
+        data-track-section="precios"
+      >
         <table className="w-full text-sm tabular-nums">
           <thead className="bg-stone-50 text-left text-slate-600">
             <tr>

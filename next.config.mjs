@@ -1,5 +1,10 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  // Carpeta de salida. Solo la cambia el proyecto «produccion» de Playwright
+  // (tests/eventos-vercel.spec.mjs), que construye en .next-test para no
+  // pisar la carpeta .next que usa `next dev` en paralelo. Sin la variable,
+  // .next como siempre (Vercel, npm run build, npm start).
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   images: {
     // AVIF primero, WebP como respaldo. next/image negocia por Accept.
     formats: ["image/avif", "image/webp"],

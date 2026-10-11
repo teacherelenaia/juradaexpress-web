@@ -303,7 +303,7 @@ export default function UsDocPage({ doc }) {
         </section>
 
         {/* Cómo lo hago: 4 pasos */}
-        <section aria-labelledby={`${doc.id}-how`}>
+        <section aria-labelledby={`${doc.id}-how`} data-track-section="pasos">
           <SectionHeading as="h2" id={`${doc.id}-how`} className="!text-2xl md:!text-3xl">
             {T.how}
           </SectionHeading>
@@ -393,7 +393,7 @@ export default function UsDocPage({ doc }) {
         </aside>
 
         {/* FAQ */}
-        <section aria-labelledby={`${doc.id}-faq`}>
+        <section aria-labelledby={`${doc.id}-faq`} data-track-section="faq">
           <SectionHeading as="h2" id={`${doc.id}-faq`} className="!text-2xl md:!text-3xl">
             {T.faq}
           </SectionHeading>
