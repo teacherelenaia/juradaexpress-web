@@ -44,6 +44,11 @@ import {
 const PATH_ES = "/traductor-jurado-ingles";
 const PATH_EN = "/en/sworn-english-translator";
 
+// Párrafo citable completo de la versión inglesa (era el `lead` hasta el
+// 15/10/2026). Sigue en la página, como primer párrafo de la sección
+// «overview», para ChatGPT y Perplexity; la entradilla ahora es corta.
+const LEAD_EN_FULL = `I'm ${PERSON_NAME}, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs in ${SINCE} under no. ${MAEC_NUMBER}, an appointment in force for ${yearsOfExperience()} years. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 working hours, and you receive the PDF with a qualified electronic signature under Spain's Order AUC/213/2025 the same day if the document reaches me before ${SAME_DAY_CUTOFF} Madrid time (up to ${SAME_DAY_MAX_PAGES} pages). The most common documents cost from €${MIN_PRICE}, VAT included; long documents are €${PRICE_PER_PAGE} per page with a minimum of €${MIN_DOC_PRICE} per document.`;
+
 // Ficha de documento que corresponde a cada línea del catálogo (para
 // enlazar la tabla de precios con las fichas existentes).
 const FICHA_OF = {
@@ -94,6 +99,31 @@ const perPage = (locale) =>
   locale === "en"
     ? `${eur(PRICE_PER_PAGE, locale)} per page, minimum ${eur(MIN_DOC_PRICE, locale)}`
     : `${eur(PRICE_PER_PAGE, locale)} por página, mínimo ${eur(MIN_DOC_PRICE, locale)}`;
+
+// Precios a la vista en la cabecera de la versión inglesa (15/10/2026,
+// landing de Google Ads): cuatro documentos habituales y el precio por
+// página, leídos de content/documents.js y content/site.js. Los pinta
+// ServicePage bajo la entradilla (campo `priceChips`).
+const CHIP_LABELS_EN = {
+  "partida-nacimiento": "Birth certificate",
+  "certificado-matrimonio": "Marriage certificate",
+  "antecedentes-penales": "Criminal record",
+  "permiso-conducir": "Driving licence",
+};
+const priceChipsEn = () => ({
+  items: [
+    ...Object.entries(CHIP_LABELS_EN).map(([id, label]) => ({
+      label,
+      price: eur(priceOf(id), "en"),
+    })),
+    {
+      label: "Long documents",
+      price: `${eur(PRICE_PER_PAGE, "en")}/page (min. ${eur(MIN_DOC_PRICE, "en")})`,
+    },
+  ],
+  note: "VAT included",
+  more: { label: "All prices", href: "/en/precios" },
+});
 
 // Tabla 1: precio por documento (los estándar de una página).
 function priceTable(locale) {
@@ -518,19 +548,31 @@ export const en = {
   metaTitle: `Sworn English translator online | From €${MIN_PRICE}, same-day signed PDF`,
   metaDescription: `Sworn Spanish-English translation from €${MIN_PRICE} per document or €${PRICE_PER_PAGE} per page, VAT included. Qualified e-signature, same-day PDF. MAEC translator no. ${MAEC_NUMBER}.`,
   h1: "Sworn English translator online: officially valid Spanish-English sworn translation",
-  lead: `I'm ${PERSON_NAME}, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs in ${SINCE} under no. ${MAEC_NUMBER}, an appointment in force for ${yearsOfExperience()} years. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 working hours, and you receive the PDF with a qualified electronic signature under Spain's Order AUC/213/2025 the same day if the document reaches me before ${SAME_DAY_CUTOFF} Madrid time (up to ${SAME_DAY_MAX_PAGES} pages). The most common documents cost from €${MIN_PRICE}, VAT included; long documents are €${PRICE_PER_PAGE} per page with a minimum of €${MIN_DOC_PRICE} per document.`,
+  // Entradilla corta (15/10/2026): la página recibe el tráfico de Google
+  // Ads y los visitantes leían el párrafo largo sin llegar al precio ni a
+  // los botones. Dos frases; el párrafo citable completo sigue en la
+  // sección «overview», justo debajo de la calculadora.
+  lead: `I'm ${PERSON_NAME}, sworn English translator appointed by Spain's Ministry of Foreign Affairs (no. ${MAEC_NUMBER}). Send me a photo of your document and I'll reply with a fixed price within 2 working hours; signed PDF the same day if it reaches me before ${SAME_DAY_CUTOFF} Madrid time.`,
+  priceChips: priceChipsEn(),
+  hideHeroImageMobile: true,
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Sworn translator signing and stamping a sworn English translation",
   },
   whatsapp:
     "https://wa.me/34685891214?text=Hi%20Elena%2C%20I%20need%20a%20sworn%20English-Spanish%20translation%20%28I%27ll%20send%20the%20document%20for%20a%20quote%29",
-  whatsappLabel: "Send my document on WhatsApp",
+  whatsappLabel: "Send a photo on WhatsApp · price in 2 h",
+  quoteCta: { label: "Get a quote online", href: "#calculadora" },
   serviceName: "Sworn English translation online",
   serviceType: "Sworn Spanish ⇆ English translation",
   priceFrom: MIN_PRICE,
   areaServed: [{ "@type": "Country", name: "ES" }, "Worldwide"],
   sections: [
+    {
+      id: "overview",
+      title: "Sworn English translation online, step by step",
+      body: [LEAD_EN_FULL],
+    },
     {
       id: "what",
       title: "What is a sworn translation?",

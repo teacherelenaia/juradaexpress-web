@@ -106,3 +106,31 @@ for (const p of PAGES) {
     expect(faq.mainEntity.length).toBeGreaterThanOrEqual(8);
   });
 }
+
+// Landing de anuncios EN (15/10/2026): la entradilla es corta, pero el
+// párrafo largo que citan ChatGPT y Perplexity sigue entero en el HTML
+// (sección «overview»), y la cabecera lleva los precios y los dos botones.
+test("/en/sworn-english-translator: entradilla corta, párrafo largo y precios en la cabecera", async ({ page }) => {
+  const res = await page.goto("/en/sworn-english-translator");
+  const html = await res.text();
+  expect(
+    html.includes(
+      "I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 working hours"
+    )
+  ).toBe(true);
+  expect(html.includes("The most common documents cost from €35, VAT included; long documents are €20 per page with a minimum of €35 per document.")).toBe(true);
+
+  const header = page.locator("main header");
+  await expect(header).toContainText("Send me a photo of your document");
+  const chips = header.locator('[data-track-section="cabecera_precios"]');
+  await expect(chips).toContainText("Birth certificate €35");
+  await expect(chips).toContainText("Driving licence €40");
+  await expect(chips).toContainText("Long documents €20/page (min. €35)");
+  await expect(chips).toContainText("VAT included");
+  await expect(chips.locator('a[href="/en/precios"]')).toHaveText("All prices");
+  await expect(header.locator('a[href^="https://wa.me/"]')).toHaveText(
+    "Send a photo on WhatsApp · price in 2 h"
+  );
+  await expect(header.locator('a[href="#calculadora"]')).toHaveText("Get a quote online");
+  await expect(page.locator("#calculadora")).toHaveCount(1);
+});

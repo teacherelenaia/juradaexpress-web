@@ -32,6 +32,13 @@
 // es la Person de Elena con su credencial, no la organización),
 // `offerCatalog` (un Offer por fila de precios, con UnitPriceSpecification
 // cuando el precio es por página) y `howTo` (HowTo con los 4 pasos).
+//
+// Landing de anuncios (15/10/2026, versión EN del traductor de inglés):
+// `priceChips` ({ items: [{ label, price }], note, more: { label, href } })
+// pinta una fila de documento · precio bajo la entradilla, con el mismo
+// estilo que la franja `trust` y data-track-section="cabecera_precios";
+// `hideHeroImageMobile` oculta la foto de la cabecera por debajo de `md`
+// para que los precios y la calculadora suban una pantalla en el móvil.
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
@@ -362,6 +369,44 @@ export default function ServicePage({ page }) {
             className={`${page.trust ? "order-4 mt-6 md:order-3 md:mt-5" : "order-3 mt-5"} max-w-[68ch] text-lg text-slate-700 [&_a]:text-brand-navy [&_a]:underline [&_a]:underline-offset-2 [&_strong]:font-semibold [&_strong]:text-slate-900`}
             dangerouslySetInnerHTML={{ __html: page.lead }}
           />
+          {/* Precios a la vista (landing de anuncios): documento · precio,
+              en el mismo orden que la entradilla y justo debajo de ella */}
+          {page.priceChips ? (
+            <div
+              className={`${page.trust ? "order-4 md:order-3" : "order-3"} mt-5`}
+              data-track-section="cabecera_precios"
+            >
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm leading-snug text-slate-700 sm:flex sm:flex-wrap sm:gap-x-2">
+                {page.priceChips.items.map((c, i) => (
+                  <li key={c.label} className="flex items-baseline gap-2">
+                    <span>
+                      {c.label}{" "}
+                      <span className="whitespace-nowrap font-semibold text-slate-900">
+                        {c.price}
+                      </span>
+                    </span>
+                    {i < page.priceChips.items.length - 1 ? (
+                      <span className="hidden text-stone-400 sm:inline" aria-hidden="true">
+                        ·
+                      </span>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-2 text-xs text-slate-500">
+                {page.priceChips.note}
+                {page.priceChips.more ? (
+                  <>
+                    {" "}
+                    <span aria-hidden="true">·</span>{" "}
+                    <a href={page.priceChips.more.href} className="link">
+                      {page.priceChips.more.label}
+                    </a>
+                  </>
+                ) : null}
+              </p>
+            </div>
+          ) : null}
           <div
             className={`${page.trust ? "order-3 mt-5 md:order-4 md:mt-7" : "order-4 mt-7"} flex flex-wrap gap-3`}
           >
@@ -413,12 +458,14 @@ export default function ServicePage({ page }) {
             </p>
           ) : null}
         </div>
-        <figure className="relative aspect-[4/3] overflow-hidden rounded-xl shadow">
+        <figure
+          className={`${page.hideHeroImageMobile ? "hidden md:block " : ""}relative aspect-[4/3] overflow-hidden rounded-xl shadow`}
+        >
           <Image
             src={page.image.src}
             alt={page.image.alt}
             fill
-            priority
+            priority={!page.hideHeroImageMobile}
             sizes="(min-width: 768px) 480px, 100vw"
             className="object-cover"
           />
