@@ -39,6 +39,9 @@
 // estilo que la franja `trust` y data-track-section="cabecera_precios";
 // `hideHeroImageMobile` oculta la foto de la cabecera por debajo de `md`
 // para que los precios y la calculadora suban una pantalla en el móvil.
+//
+// `sections[].trackSection` (17/10/2026): nombre propio de la sección en los
+// eventos section_view (p. ej. usa_mas_pedidos en la página de EE. UU.).
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
@@ -483,7 +486,7 @@ export default function ServicePage({ page }) {
           <section
             key={s.title}
             id={s.id}
-            data-track-section={TRACKED_SECTIONS[s.id]}
+            data-track-section={s.trackSection || TRACKED_SECTIONS[s.id]}
           >
             <SectionHeading as="h2" className="!text-2xl md:!text-3xl">
               {s.title}

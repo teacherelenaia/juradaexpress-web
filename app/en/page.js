@@ -11,18 +11,32 @@ import ProcessVideo from "../components/ProcessVideo";
 import FollowUs from "../components/FollowUs";
 import { SectionHeading } from "../components/ui";
 import { DOCUMENTS, MIN_PRICE } from "../../content/documents";
-import { SINCE, yearsOfExperience } from "../../content/persona";
+import { SINCE, yearsOfExperience, MAEC_NUMBER } from "../../content/persona";
 import {
   WHATSAPP_URL_EN,
   LARGE_PROJECT_CAPACITY,
   TIMEZONE_NOTE,
+  SAME_DAY_CUTOFF,
 } from "../../content/site";
+import {
+  US_VISA_PRICES,
+  US_VISA_LINKS,
+  WHATSAPP_US_VISA,
+  FBI_PRICE,
+  VISA_PACK_PRICE,
+  FBI_PATH_EN,
+  NLV_CHECKLIST_PATH_EN,
+} from "../../content/us-visas";
+
+// Meta description (17/10/2026): names the FBI check and visa documents so
+// the page answers US visa applicants on Bing/ChatGPT. Title unchanged.
+const DESCRIPTION = `Sworn Spanish-English translation from €${MIN_PRICE}: FBI checks, birth certificates and visa documents for Spain. Signed PDF same day. Foreign Ministry no. ${MAEC_NUMBER}.`;
 
 export const metadata = {
   // Explicit suffix; the root template applies to /en. The real minimum
   // price comes from content/documents.js so the title never drifts.
   title: { absolute: `Sworn Spanish-English Translation Online from €${MIN_PRICE} | Jurada Express` },
-  description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF the same day (up to 10 pages). Foreign Ministry appointee no. 7310. 100% online.`,
+  description: DESCRIPTION,
   alternates: {
     canonical: "https://juradaexpress.es/en",
     languages: {
@@ -33,7 +47,7 @@ export const metadata = {
   },
   openGraph: {
     title: `Sworn Spanish-English Translation Online from €${MIN_PRICE} | Jurada Express`,
-    description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF the same day (up to 10 pages). Foreign Ministry appointee no. 7310. 100% online.`,
+    description: DESCRIPTION,
     url: "https://juradaexpress.es/en",
     siteName: "Jurada Express",
     type: "website",
@@ -53,7 +67,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: `Sworn Spanish-English Translation Online from €${MIN_PRICE} | Jurada Express`,
-    description: `Sworn Spanish-English translation from €${MIN_PRICE} per document, signed PDF the same day (up to 10 pages). Foreign Ministry appointee no. 7310. 100% online.`,
+    description: DESCRIPTION,
     images: ["https://juradaexpress.es/og-home-en.png"],
   },
 };
@@ -75,6 +89,13 @@ const COMMON_DOCUMENTS = [
     price: priceOf("antecedentes-penales"),
     time: "Same day (up to 10 pages)",
     href: "/traduccion-jurada-certificado-penales",
+  },
+  {
+    name: "FBI background check (apostilled)",
+    for: "Spanish visas (non-lucrative, student, digital nomad)",
+    price: priceOf("antecedentes-penales"),
+    time: "Same day (up to 10 pages)",
+    href: FBI_PATH_EN,
   },
   {
     name: "Marriage certificate",
@@ -140,6 +161,18 @@ const FAQ = [
   {
     q: "Do you provide certified translations for USCIS?",
     a: "Yes. I deliver the complete English translation with the certification of accuracy and competence that USCIS requires (8 CFR § 103.2(b)(3)), signed, dated and with my contact details, one certificate per document. No notary is needed.",
+  },
+  // US visa applicants (17/10/2026). `link` is shown under the answer and
+  // left out of the JSON-LD text.
+  {
+    q: "Can you translate my FBI background check for a Spanish visa?",
+    a: `Yes. I do the sworn translation of the FBI Identity History Summary and of its US Department of State apostille for €${FBI_PRICE}, delivered as a signed PDF the same day if it reaches me before ${SAME_DAY_CUTOFF} Madrid time. Spanish consulates in the United States accept it.`,
+    link: { label: "FBI background check translation for your Spanish visa", href: FBI_PATH_EN },
+  },
+  {
+    q: "Which documents need a sworn translation for Spain's non-lucrative visa?",
+    a: `Usually the apostilled FBI background check, the medical certificate if it is in English, birth and marriage certificates if your family travels with you, and bank or pension letters depending on the consulate. The Spain Visa Pack covers up to 4 documents for €${VISA_PACK_PRICE}.`,
+    link: { label: "Non-lucrative visa: document checklist", href: NLV_CHECKLIST_PATH_EN },
   },
   {
     q: "How long does a complete digital nomad visa file take?",
@@ -286,6 +319,72 @@ export default function Page() {
                 charged in euros to any international card.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* US VISA APPLICANTS (17/10/2026) — same style as the nomad section */}
+      <section
+        id="us-visas"
+        data-track-section="portada_visados_us"
+        className="mx-auto max-w-6xl px-4 pt-16 md:pt-20"
+      >
+        <div className="max-w-[68ch]">
+          <SectionHeading>Applying for a Spanish visa from the United States?</SectionHeading>
+          <p className="mt-4 text-slate-600">
+            I translate your FBI background check (Identity History Summary)
+            with its US Department of State apostille, birth and marriage
+            certificates and medical certificates for Spain&apos;s
+            non-lucrative, student and digital nomad visas. It is a sworn
+            translation by a translator appointed by Spain&apos;s Foreign
+            Ministry (no. {MAEC_NUMBER}), accepted by Spanish consulates in the
+            United States. You get a signed PDF the same day if your documents
+            reach me before {SAME_DAY_CUTOFF} Madrid time, a paper copy by
+            courier if your consulate asks for one, and you pay with your US
+            card.
+          </p>
+          <ul className="mt-6 grid gap-2 text-slate-700">
+            {US_VISA_PRICES.map((p) => (
+              <li key={p.label} className="flex gap-3">
+                <span
+                  className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold-500"
+                  aria-hidden="true"
+                />
+                <span>
+                  {p.label}:{" "}
+                  <span className="font-semibold tabular-nums text-slate-900">
+                    {p.price}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ul>
+          <ul className="mt-6 grid gap-1">
+            {US_VISA_LINKS.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} className="link inline-block py-1">
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <TrackedLink
+              label="us_visas_whatsapp_en"
+              href={WHATSAPP_US_VISA}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              WhatsApp
+            </TrackedLink>
+            <TrackedLink
+              label="us_visas_quote_en"
+              href="#calculadora"
+              className="btn btn-secondary"
+            >
+              Get a quote online
+            </TrackedLink>
           </div>
         </div>
       </section>
@@ -599,7 +698,17 @@ export default function Page() {
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
               </summary>
-              <p className="mt-2 max-w-[68ch] text-sm text-slate-600">{f.a}</p>
+              <p className="mt-2 max-w-[68ch] text-sm text-slate-600">
+                {f.a}
+                {f.link ? (
+                  <>
+                    {" "}
+                    <a href={f.link.href} className="link">
+                      {f.link.label}
+                    </a>
+                  </>
+                ) : null}
+              </p>
             </details>
           ))}
         </div>
