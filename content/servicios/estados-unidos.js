@@ -5,6 +5,7 @@
 // de vivienda) y españoles con trámites en EEUU. Fuente:
 // docs/BRIEF-INTERNACIONAL-2026-09.md, punto 2.3.
 import { TIMEZONE_NOTE, INTERNATIONAL_SHIPPING } from "../site";
+import { US_VISA_PRICES, US_VISA_LINKS, USA_PATH_EN } from "../us-visas";
 
 const PATH_ES = "/traduccion-jurada-estados-unidos";
 const PATH_EN = "/en/sworn-translation-usa-spain";
@@ -184,6 +185,25 @@ export const en = {
   price: null,
   areaServed: [{ "@type": "Country", name: "US" }, { "@type": "Country", name: "ES" }],
   sections: [
+    // Bloque para solicitantes de visado (17/10/2026): precios y enlaces a
+    // las páginas del FBI, los checklists y los visados (content/us-visas.js).
+    {
+      id: "most-requested",
+      trackSection: "usa_mas_pedidos",
+      title: "Most requested by US visa applicants",
+      body: [
+        {
+          list: US_VISA_PRICES.map(
+            (p) => `${p.label}: <strong>${p.price}</strong>`
+          ),
+        },
+        {
+          list: US_VISA_LINKS.filter((l) => l.href !== USA_PATH_EN).map(
+            (l) => `<a href="${l.href}">${l.label}</a>`
+          ),
+        },
+      ],
+    },
     {
       id: "direction",
       title: "Which direction do you need?",
