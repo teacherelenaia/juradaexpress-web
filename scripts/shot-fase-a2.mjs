@@ -1,8 +1,8 @@
-// scripts/shot-fase-a2.mjs — capturas de la portada ES/EN (Fase A2) a
-// 390×844 y 1440×900: hero, trámites rápidos y «Por qué trabajar
-// directamente con Elena», más la página entera. También comprueba que el
-// H1 es único y contiene «traducción jurada» / «sworn translation», y que
-// todas las URL internas enlazadas en la portada responden 200.
+// scripts/shot-fase-a2.mjs — capturas del hero de la portada ES/EN (Fase
+// A2) a 390×844 y 1440×900; solo el hero, sin página entera. También
+// comprueba que el H1 es único y contiene «traducción jurada» / «sworn
+// translation», y que todas las URL internas enlazadas en la portada
+// responden 200.
 //   node scripts/shot-fase-a2.mjs http://127.0.0.1:3000 docs/capturas/fase-a2
 import { chromium } from "@playwright/test";
 import { mkdirSync } from "node:fs";
@@ -12,15 +12,19 @@ const [, , base = "http://127.0.0.1:3000", outDir = "docs/capturas/fase-a2"] =
 mkdirSync(outDir, { recursive: true });
 
 const PAGES = [
-  { path: "/", name: "es", h1: /traducción jurada/i, why: "Por qué trabajar directamente con Elena" },
-  { path: "/en", name: "en", h1: /sworn translation/i, why: "Why work directly with Elena" },
+  { path: "/", name: "es", h1: /traducción jurada/i },
+  { path: "/en", name: "en", h1: /sworn translation/i },
 ];
 
-const browser = await chromium.launch();
+// PLAYWRIGHT_CHROMIUM_PATH (opcional): ruta a un Chromium ya instalado, para
+// entornos sin los navegadores de la versión exacta de @playwright/test.
+const browser = await chromium.launch({
+  executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH || undefined,
+});
 let failures = 0;
 const checked = new Map();
 
-for (const { path, name, h1, why } of PAGES) {
+for (const { path, name, h1 } of PAGES) {
   for (const [w, h] of [
     [390, 844],
     [1440, 900],
@@ -44,19 +48,11 @@ for (const { path, name, h1, why } of PAGES) {
       console.log(`✓ ${path}@${w}: h1 «${h1s[0]}»`);
     }
 
-    // Capturas por sección.
-    const shots = [
-      ["hero", "main > section:first-of-type"],
-      ["tramites", '[data-track-section="tramites_rapidos"]'],
-      ["por-que", `section:has(h2:text-is("${why}"))`],
-    ];
-    for (const [label, sel] of shots) {
-      const el = page.locator(sel).first();
-      await el.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(400);
-      await el.screenshot({ path: `${outDir}/${name}-${label}-${w}.png` });
-    }
-    await page.screenshot({ path: `${outDir}/${name}-full-${w}.png`, fullPage: true });
+    // Captura del hero (solo el hero: nada de página entera).
+    const hero = page.locator("main > section:first-of-type").first();
+    await hero.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(400);
+    await hero.screenshot({ path: `${outDir}/${name}-hero-${w}.png` });
 
     // Enlaces internos de la portada → 200 (una vez por URL).
     if (w === 1440) {

@@ -34,6 +34,7 @@ import {
   TIMEZONE_NOTE,
   HERO_H1,
   HERO_SUB,
+  HERO_PHOTO,
   DELIVERY_PROMISE,
   PRICE_PER_PAGE,
   MIN_DOC_PRICE,
@@ -203,32 +204,16 @@ const PHOTO_ALT = "Elena Peñaranda Ortega, traductora jurada de inglés";
 export default function Page() {
   return (
     <main>
-      {/* HERO — texto a la izquierda, foto de Elena a la derecha */}
+      {/* HERO — texto a la izquierda; a la derecha la foto de Elena cuando
+          la haya (content/site.js → HERO_PHOTO) y, mientras no, la foto de
+          marca de la mano firmando con el sello, con la línea de
+          nombramiento debajo */}
       <section className="mx-auto max-w-6xl px-4 pb-14 pt-10 md:pb-20 md:pt-16">
-        <div className="grid items-center gap-8 md:grid-cols-[1.15fr,0.85fr] md:gap-12">
-          {/* Foto cuadrada en móvil (arriba), retrato en escritorio */}
-          <figure className="md:hidden">
-            <Image
-              src="/elena-penaranda-sq.jpg"
-              alt={PHOTO_ALT}
-              width={160}
-              height={160}
-              priority
-              className="h-40 w-40 rounded-xl object-cover"
-            />
-            <figcaption className="mt-3 text-sm text-slate-600">
-              {PERSON_NAME} · Traductora-Intérprete Jurada de Inglés ·{" "}
-              <a
-                href={MAEC_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link whitespace-nowrap"
-              >
-                MAEC nº {MAEC_NUMBER}
-              </a>
-            </figcaption>
-          </figure>
-
+        <div
+          className={`grid items-center gap-8 md:gap-12 ${
+            HERO_PHOTO ? "md:grid-cols-[1.15fr,0.85fr]" : "md:grid-cols-2"
+          }`}
+        >
           <div>
             <h1 className="font-display text-balance text-display font-semibold text-slate-900">
               {HERO_H1.es}
@@ -272,19 +257,39 @@ export default function Page() {
             </p>
           </div>
 
-          <figure className="relative hidden md:block">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-[380px] overflow-hidden rounded-xl shadow-lg">
-              <Image
-                src="/elena-penaranda.jpg"
-                alt={PHOTO_ALT}
-                fill
-                priority
-                sizes="(min-width: 768px) 380px, 100vw"
-                className="object-cover"
-              />
-              <HeroSeal className="absolute -bottom-2 -left-2 h-24 w-24" />
-            </div>
-            <figcaption className="mx-auto mt-4 max-w-[380px] text-sm text-slate-600">
+          <figure>
+            {HERO_PHOTO ? (
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-[380px] overflow-hidden rounded-xl shadow-lg">
+                <Image
+                  src={HERO_PHOTO}
+                  alt={PHOTO_ALT}
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 380px, 100vw"
+                  className="object-cover"
+                />
+                <HeroSeal className="absolute -bottom-2 -left-2 h-24 w-24" />
+              </div>
+            ) : (
+              <div className="relative">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
+                  <Image
+                    src="/fotos/hero-firma.jpg"
+                    alt="Mano firmando una traducción jurada con pluma sobre el documento"
+                    fill
+                    priority
+                    sizes="(min-width: 768px) 560px, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <HeroSeal className="absolute -bottom-6 -left-4 h-32 w-32 md:-left-8 md:h-40 md:w-40" />
+              </div>
+            )}
+            <figcaption
+              className={`text-sm text-slate-600 ${
+                HERO_PHOTO ? "mx-auto mt-4 max-w-[380px]" : "mt-9"
+              }`}
+            >
               {PERSON_NAME} · Traductora-Intérprete Jurada de Inglés ·{" "}
               <a
                 href={MAEC_URL}
@@ -603,13 +608,22 @@ export default function Page() {
       {/* SOBRE MÍ — corto: la biografía completa está en /sobre-mi */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
         <div className="grid items-center gap-8 md:grid-cols-[auto,1fr]">
-          <Image
-            src="/elena-penaranda-sq.jpg"
-            alt={PHOTO_ALT}
-            width={112}
-            height={112}
-            className="mx-auto h-28 w-28 rounded-xl object-cover md:mx-0"
-          />
+          {HERO_PHOTO ? (
+            <Image
+              src={HERO_PHOTO}
+              alt={PHOTO_ALT}
+              width={112}
+              height={112}
+              className="mx-auto h-28 w-28 rounded-xl object-cover md:mx-0"
+            />
+          ) : (
+            <div
+              className="mx-auto flex h-28 w-28 shrink-0 items-center justify-center rounded-xl bg-stone-100 font-display text-3xl font-semibold tracking-tight text-brand-navy md:mx-0"
+              aria-hidden="true"
+            >
+              E.P.
+            </div>
+          )}
           <div>
             <SectionHeading>Sobre mí</SectionHeading>
             <p className="mt-4 max-w-[68ch] text-lg text-slate-600">

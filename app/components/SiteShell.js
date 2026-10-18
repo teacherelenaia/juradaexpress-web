@@ -15,6 +15,8 @@ import MainNav from "./MainNav";
 import LanguageSwitcher from "./LanguageSwitcher";
 import HeaderActions from "./HeaderActions";
 import SocialIcons from "./SocialIcons";
+import TrustStrip from "./TrustStrip";
+import GlobalTrustStrip from "./GlobalTrustStrip";
 import {
   INSTAGRAM_URL,
   FACEBOOK_URL,
@@ -242,6 +244,14 @@ export default function SiteShell({ locale = "es", children }) {
             </div>
           </div>
         </header>
+
+        {/* Franja de confianza bajo la cabecera en todas las páginas
+            públicas (18/10/2026): nota y reseñas de Google, MAEC, plazo, pago
+            y garantía. GlobalTrustStrip la oculta en las portadas (ya la
+            llevan bajo el hero) y en aviso legal, privacidad y cookies. */}
+        <GlobalTrustStrip>
+          <TrustStrip locale={locale} />
+        </GlobalTrustStrip>
 
         {/* Contenido */}
         <div id="contenido">{children}</div>

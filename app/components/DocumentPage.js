@@ -5,9 +5,10 @@
 // por»), FAQ propia y schema Service + BreadcrumbList (+ FAQPage). Los
 // datos viven en content/fichas.js.
 import TrackedLink from "./TrackedLink";
+import QuotePromise from "./QuotePromise";
 import { SectionHeading } from "./ui";
 import { IconCheck } from "./Icons";
-import { WHATSAPP_URL } from "../../content/site";
+import { FIXED_PRICE_NOTE } from "../../content/site";
 
 const BASE = "https://juradaexpress.es";
 
@@ -87,6 +88,12 @@ export default function DocumentPage({ ficha }) {
           <dt className="text-sm text-slate-500">Precio</dt>
           <dd className="mt-1 font-semibold tabular-nums text-slate-900">
             {priceText}
+            {/* Solo con precio fijo: qué incluye y cuándo se entrega */}
+            {ficha.price != null ? (
+              <span className="mt-1 block text-xs font-normal text-slate-500">
+                {FIXED_PRICE_NOTE.es}
+              </span>
+            ) : null}
           </dd>
         </div>
         <div>
@@ -168,6 +175,7 @@ export default function DocumentPage({ ficha }) {
           WhatsApp
         </TrackedLink>
       </div>
+      <QuotePromise locale="es" className="mt-3 max-w-[60ch]" />
 
       {/* FAQ propia */}
       <SectionHeading as="h2" className="mt-12 !text-2xl md:!text-3xl">

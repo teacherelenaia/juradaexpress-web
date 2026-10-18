@@ -2,8 +2,11 @@
 //
 // «Precio por documento, no por página» + tabla «Traductora jurada directa
 // o agencia online» (Fase A, 18/10/2026). Se muestra en la home ES/EN
-// después de «Cómo funciona». Cifras de content/documents.js y
-// content/site.js; sin tarjetas ni iconos, solo texto y una tabla.
+// después de «Cómo funciona» y, con `embedded`, dentro de /precios y
+// /en/precios tras la tabla de precios (caja redondeada dentro del <main>
+// de la página, sin el enlace «Ver todos los precios»). Cifras de
+// content/documents.js y content/site.js; sin tarjetas ni iconos, solo
+// texto y una tabla.
 import { DOCUMENTS, MIN_PRICE } from "../../content/documents";
 import {
   PRICE_PER_PAGE,
@@ -91,15 +94,29 @@ const COPY = {
   },
 };
 
-export default function PricePerDocument({ locale = "es", className = "" }) {
+export default function PricePerDocument({
+  locale = "es",
+  className = "",
+  embedded = false,
+}) {
   const t = COPY[locale] || COPY.es;
   return (
     <section
       data-track-section="precio_documento"
-      className={`bg-stone-50 ${className}`}
+      className={`bg-stone-50 ${
+        embedded ? "rounded-xl ring-1 ring-stone-200" : ""
+      } ${className}`}
     >
-      <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-        <SectionHeading>{t.heading}</SectionHeading>
+      <div
+        className={
+          embedded
+            ? "px-6 py-10 md:px-8"
+            : "mx-auto max-w-6xl px-4 py-16 md:py-20"
+        }
+      >
+        <SectionHeading className={embedded ? "!text-2xl md:!text-3xl" : ""}>
+          {t.heading}
+        </SectionHeading>
         <p className="mt-4 max-w-[68ch] text-slate-600">{t.intro}</p>
 
         <div className="mt-10 overflow-x-auto">
@@ -135,11 +152,13 @@ export default function PricePerDocument({ locale = "es", className = "" }) {
           </table>
         </div>
 
-        <p className="mt-6">
-          <a href={t.href} className="link">
-            {t.link} →
-          </a>
-        </p>
+        {embedded ? null : (
+          <p className="mt-6">
+            <a href={t.href} className="link">
+              {t.link} →
+            </a>
+          </p>
+        )}
       </div>
     </section>
   );

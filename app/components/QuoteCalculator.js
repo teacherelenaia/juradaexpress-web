@@ -41,6 +41,7 @@ import { DOCUMENTS } from "../../content/documents";
 import { PAPER_DELIVERY_SPAIN, URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES, TURNAROUND } from "../../content/site";
 import { toUsd, US_SHIPPING_USD } from "../../content/usd";
 import { SectionHeading } from "./ui";
+import QuotePromise from "./QuotePromise";
 import { IconUpload, IconFileText } from "./Icons";
 import { trackAdsConversion } from "./AdsConversion";
 import { getAttribution } from "../lib/attribution";
@@ -248,7 +249,6 @@ const FIRM_COPY = {
   title: "Order form for law firms",
   intro:
     "Pick the document, set the pages and attach the scan. I confirm the fixed price in US dollars and the delivery date within 2 working hours, and the order goes on your firm's monthly invoice.",
-  pagesHint: `From 1 to 20. Up to ${SAME_DAY_MAX_PAGES} pages are delivered the same day; longer files get a written deadline before I start.`,
   deliveryPaper: "PDF + paper copy couriered to the US",
   paperNote: `+ courier: flat $${US_SHIPPING_USD} to any US address.`,
   disclaimer: "Fixed price once I see the document; nothing is invoiced without your approval.",
@@ -1229,6 +1229,8 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
           >
             {status === "sending" ? t.sending : t.submit}
           </button>
+          {/* Promesa de plazo (content/site.js → DELIVERY_PROMISE) bajo el botón */}
+          <QuotePromise locale={locale} className="max-w-[60ch]" />
 
           <div aria-live="polite" className="text-sm text-slate-600">
             {statusText ? (

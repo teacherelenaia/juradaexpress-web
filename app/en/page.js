@@ -36,6 +36,7 @@ import {
   SAME_DAY_MAX_PAGES,
   HERO_H1,
   HERO_SUB,
+  HERO_PHOTO,
   DELIVERY_PROMISE,
   PRICE_PER_PAGE,
   MIN_DOC_PRICE,
@@ -225,32 +226,15 @@ const PHOTO_ALT = "Elena Peñaranda Ortega, sworn English translator";
 export default function Page() {
   return (
     <main>
-      {/* HERO — text on the left, Elena's photo on the right */}
+      {/* HERO — text on the left; on the right Elena's photo once there is
+          one (content/site.js → HERO_PHOTO) and, until then, the brand photo
+          of the hand signing with the seal, with the appointment line below */}
       <section className="mx-auto max-w-6xl px-4 pb-14 pt-10 md:pb-20 md:pt-16">
-        <div className="grid items-center gap-8 md:grid-cols-[1.15fr,0.85fr] md:gap-12">
-          {/* Square photo on mobile (top), portrait on desktop */}
-          <figure className="md:hidden">
-            <Image
-              src="/elena-penaranda-sq.jpg"
-              alt={PHOTO_ALT}
-              width={160}
-              height={160}
-              priority
-              className="h-40 w-40 rounded-xl object-cover"
-            />
-            <figcaption className="mt-3 text-sm text-slate-600">
-              {PERSON_NAME} · Sworn Translator-Interpreter of English ·{" "}
-              <a
-                href={MAEC_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link whitespace-nowrap"
-              >
-                MAEC no. {MAEC_NUMBER}
-              </a>
-            </figcaption>
-          </figure>
-
+        <div
+          className={`grid items-center gap-8 md:gap-12 ${
+            HERO_PHOTO ? "md:grid-cols-[1.15fr,0.85fr]" : "md:grid-cols-2"
+          }`}
+        >
           <div>
             <h1 className="font-display text-balance text-display font-semibold text-slate-900">
               {HERO_H1.en}
@@ -293,19 +277,39 @@ export default function Page() {
             </p>
           </div>
 
-          <figure className="relative hidden md:block">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-[380px] overflow-hidden rounded-xl shadow-lg">
-              <Image
-                src="/elena-penaranda.jpg"
-                alt={PHOTO_ALT}
-                fill
-                priority
-                sizes="(min-width: 768px) 380px, 100vw"
-                className="object-cover"
-              />
-              <HeroSeal className="absolute -bottom-2 -left-2 h-24 w-24" />
-            </div>
-            <figcaption className="mx-auto mt-4 max-w-[380px] text-sm text-slate-600">
+          <figure>
+            {HERO_PHOTO ? (
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-[380px] overflow-hidden rounded-xl shadow-lg">
+                <Image
+                  src={HERO_PHOTO}
+                  alt={PHOTO_ALT}
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 380px, 100vw"
+                  className="object-cover"
+                />
+                <HeroSeal className="absolute -bottom-2 -left-2 h-24 w-24" />
+              </div>
+            ) : (
+              <div className="relative">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
+                  <Image
+                    src="/fotos/hero-firma.jpg"
+                    alt="Hand signing a sworn translation with a pen on the document"
+                    fill
+                    priority
+                    sizes="(min-width: 768px) 560px, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <HeroSeal className="absolute -bottom-6 -left-4 h-32 w-32 md:-left-8 md:h-40 md:w-40" />
+              </div>
+            )}
+            <figcaption
+              className={`text-sm text-slate-600 ${
+                HERO_PHOTO ? "mx-auto mt-4 max-w-[380px]" : "mt-9"
+              }`}
+            >
               {PERSON_NAME} · Sworn Translator-Interpreter of English ·{" "}
               <a
                 href={MAEC_URL}
@@ -691,13 +695,22 @@ export default function Page() {
       <section className="bg-stone-50">
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <div className="grid items-center gap-8 md:grid-cols-[auto,1fr]">
-            <Image
-              src="/elena-penaranda-sq.jpg"
-              alt={PHOTO_ALT}
-              width={112}
-              height={112}
-              className="mx-auto h-28 w-28 rounded-xl object-cover md:mx-0"
-            />
+            {HERO_PHOTO ? (
+              <Image
+                src={HERO_PHOTO}
+                alt={PHOTO_ALT}
+                width={112}
+                height={112}
+                className="mx-auto h-28 w-28 rounded-xl object-cover md:mx-0"
+              />
+            ) : (
+              <div
+                className="mx-auto flex h-28 w-28 shrink-0 items-center justify-center rounded-xl bg-stone-100 font-display text-3xl font-semibold tracking-tight text-brand-navy md:mx-0"
+                aria-hidden="true"
+              >
+                E.P.
+              </div>
+            )}
             <div>
               <SectionHeading>About me</SectionHeading>
               <p className="mt-4 max-w-[68ch] text-lg text-slate-600">
