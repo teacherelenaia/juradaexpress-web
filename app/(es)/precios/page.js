@@ -1,8 +1,10 @@
 // app/precios/page.js
-import { DNV_PACK_PRICE } from "../../../content/site";
+import { DNV_PACK_PRICE, DELIVERY_PROMISE_SHORT } from "../../../content/site";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { packOffers } from "../../../content/packs";
 import PacksSection from "../../components/PacksSection";
+import PricePerDocument from "../../components/PricePerDocument";
+import QuotePromise from "../../components/QuotePromise";
 
 const certPrice = DOCUMENTS.find((d) => d.id === "partida-nacimiento")?.price;
 
@@ -54,7 +56,7 @@ export default function Page() {
             <tr>
               <td className="p-3">Permiso de conducir</td>
               <td className="p-3">40 €</td>
-              <td className="p-3">24 h</td>
+              <td className="p-3">En el día (hasta 10 págs.)</td>
             </tr>
             <tr className="bg-stone-50/50">
               <td className="p-3">Certificado de empresa / nóminas</td>
@@ -64,7 +66,7 @@ export default function Page() {
             <tr>
               <td className="p-3">Contratos y notariales</td>
               <td className="p-3">Presupuesto cerrado en menos de 2 h</td>
-              <td className="p-3">Según extensión</td>
+              <td className="p-3">{DELIVERY_PROMISE_SHORT.es}</td>
             </tr>
             <tr className="bg-stone-50/50">
               <td className="p-3">
@@ -106,15 +108,20 @@ export default function Page() {
           WhatsApp inmediato
         </a>
       </div>
+      {/* Promesa de plazo (content/site.js → DELIVERY_PROMISE) bajo los botones */}
+      <QuotePromise locale="es" className="mt-3 max-w-[60ch]" />
 
       <p className="mt-8 text-sm text-slate-500">
-        * Entrega en el día para documentos de hasta 10 páginas, sin recargo. Más de 10 páginas: plazo cerrado por escrito antes de empezar, normalmente 24-72 h; entregar en el día más de 10 páginas lleva un recargo del 30 %.
+        * Entregar en el día más de 10 páginas lleva un recargo del 30 %.
       </p>
       <p className="mt-2 text-sm text-slate-500">
         Todos los precios son en euros (€), IVA incluido. Se cobran en euros con
         tarjeta internacional a través de Stripe; si pagas desde fuera de la zona
         euro, tu banco aplica el cambio.
       </p>
+
+      {/* Precio por documento, no por página + tabla directa vs agencia */}
+      <PricePerDocument locale="es" embedded className="mt-10" />
 
       <PacksSection locale="es" />
 

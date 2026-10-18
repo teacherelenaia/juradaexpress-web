@@ -8,6 +8,7 @@
 // BreadcrumbList). Los datos viven en content/paises.js.
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
+import QuotePromise from "./QuotePromise";
 import { SectionHeading } from "./ui";
 import { SERVICE_COUNTRIES, EXTRA_AREA_SERVED } from "../../content/site";
 
@@ -200,6 +201,7 @@ export default function CountryHubPage({ page }) {
               {t.quote}
             </TrackedLink>
           </div>
+          <QuotePromise locale={page.locale} className="mt-3 max-w-[60ch]" />
         </div>
         <figure className="relative aspect-[4/3] overflow-hidden rounded-xl shadow">
           <Image

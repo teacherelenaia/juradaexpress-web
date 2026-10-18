@@ -270,7 +270,6 @@ export const es = {
     facts: [
       `${PACK.name.es}: ${PACK.price} € (${PACK.includes.es.toLowerCase().replace(/\.$/, "")})`,
       `${PACK_FAMILY.name.es}: ${PACK_FAMILY.price} € (${PACK_FAMILY.includes.es.toLowerCase().replace(/\.$/, "")})`,
-      "PDF firmado en el día",
     ],
     whatsapp: wa("Hola Elena, estoy preparando el visado no lucrativo y necesito traducir mis documentos"),
     whatsappLabel: "Enviar los documentos por WhatsApp",
@@ -511,7 +510,6 @@ export const en = {
     facts: [
       `${PACK.name.en}: €${PACK.price} (${PACK.includes.en.toLowerCase().replace(/\.$/, "")})`,
       `${PACK_FAMILY.name.en}: €${PACK_FAMILY.price} (${PACK_FAMILY.includes.en.toLowerCase().replace(/\.$/, "")})`,
-      "Signed PDF the same day",
     ],
     whatsapp: wa("Hi Elena, I am preparing my non-lucrative visa and need my documents translated"),
     whatsappLabel: "Send my documents on WhatsApp",

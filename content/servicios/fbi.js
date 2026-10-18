@@ -58,7 +58,7 @@ export const es = {
   metaTitle: `Traducción jurada del certificado del FBI para visado de España | ${PRICE} €, PDF en el día`,
   metaDescription: `Traducción jurada del certificado del FBI para tu visado de España: ${PRICE} € (unos ${PRICE_USD} $), PDF firmado en el día, traductora jurada nº ${MAEC_NUMBER} del MAEC.`,
   h1: "Traducción jurada del certificado de antecedentes del FBI para tu visado de España",
-  lead: `Si vives en Estados Unidos y pides un visado de España (no lucrativo, nómada digital, estudios, trabajo) o la nacionalidad española, el consulado te pide el certificado de antecedentes del FBI, el <em>Identity History Summary</em>, con apostilla federal y traducción jurada al español. Soy Elena Peñaranda Ortega, traductora jurada nº ${MAEC_NUMBER} nombrada por el Ministerio de Asuntos Exteriores de España, y traduzco el certificado del FBI por ${PRICE} € (unos ${PRICE_USD} $), en PDF firmado digitalmente el mismo día si me llega antes de las 15:00, hora de Madrid, y en 24 horas en cualquier caso. El PDF vale en el consulado y después en España; si necesitas papel, lo envío por mensajería a cualquier dirección de Estados Unidos por ${US_SHIPPING_USD} $.`,
+  lead: `Si vives en Estados Unidos y pides un visado de España (no lucrativo, nómada digital, estudios, trabajo) o la nacionalidad española, el consulado te pide el certificado de antecedentes del FBI, el <em>Identity History Summary</em>, con apostilla federal y traducción jurada al español. Soy Elena Peñaranda Ortega, traductora jurada nº ${MAEC_NUMBER} nombrada por el Ministerio de Asuntos Exteriores de España, y traduzco el certificado del FBI por ${PRICE} € (unos ${PRICE_USD} $), en PDF firmado digitalmente el mismo día si me llega antes de las 18:00, hora de Madrid, y a primera hora del día siguiente si llega más tarde. El PDF vale en el consulado y después en España; si necesitas papel, lo envío por mensajería a cualquier dirección de Estados Unidos por ${US_SHIPPING_USD} $.`,
   image: {
     src: "/fotos/pasaporte-eeuu.jpg",
     alt: "Pasaporte de Estados Unidos sobre una mesa junto a documentos oficiales, como los del expediente de visado de España",
@@ -107,7 +107,7 @@ export const es = {
               ],
               [
                 "Plazo",
-                "PDF firmado el mismo día si recibo el documento antes de las 15:00, hora de Madrid (9:00 en Nueva York, 6:00 en Los Ángeles); en 24 horas en cualquier caso.",
+                "PDF firmado el mismo día si recibo el documento antes de las 18:00, hora de Madrid (12:00 en Nueva York, 9:00 en Los Ángeles); si llega más tarde, a primera hora del día siguiente.",
               ],
               [
                 "Formato",
@@ -175,7 +175,7 @@ export const es = {
     },
     {
       t: "PDF por email, papel opcional",
-      d: `PDF firmado el mismo día si llega antes de las 15:00, hora de Madrid, y en 24 horas en cualquier caso. Copia en papel por mensajería a Estados Unidos por ${US_SHIPPING_USD} $ si la pides.`,
+      d: `PDF firmado el mismo día si llega antes de las 18:00, hora de Madrid, y a primera hora del día siguiente si llega más tarde. Copia en papel por mensajería a Estados Unidos por ${US_SHIPPING_USD} $ si la pides.`,
     },
   ],
   faq: [
@@ -193,7 +193,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda la traducción?",
-      a: "El certificado del FBI tiene entre una y tres páginas. Si me llega antes de las 15:00, hora de Madrid (9:00 en Nueva York), tienes el PDF firmado el mismo día; si no, en 24 horas. El plazo queda confirmado por escrito con el presupuesto.",
+      a: "El certificado del FBI tiene entre una y tres páginas. Si me llega antes de las 18:00, hora de Madrid (12:00 en Nueva York), tienes el PDF firmado el mismo día; si no, a primera hora del día siguiente. El plazo queda confirmado por escrito con el presupuesto.",
     },
     {
       q: "¿Cómo pago desde Estados Unidos?",
@@ -214,7 +214,7 @@ export const es = {
   ],
   cta: {
     title: "Mándame el certificado del FBI apostillado",
-    text: "Por WhatsApp o desde la calculadora: en menos de dos horas tienes el precio cerrado y el plazo por escrito, y el PDF firmado el mismo día si llega antes de las 15:00, hora de Madrid.",
+    text: "Por WhatsApp o desde la calculadora: en menos de dos horas tienes el precio cerrado y el plazo por escrito, y el PDF firmado el mismo día si llega antes de las 18:00, hora de Madrid.",
   },
   related: [
     { href: "/documentos-visado-no-lucrativo-espana", label: "Guía: documentos del visado no lucrativo" },
@@ -239,7 +239,7 @@ export const en = {
   metaTitle: "FBI Background Check Translation for Spain Visa | Sworn, Same-Day PDF",
   metaDescription: `Sworn translation of your FBI background check for a Spanish visa: €${PRICE} (about $${PRICE_USD}), signed PDF the same day, by MAEC sworn translator No. ${MAEC_NUMBER}.`,
   h1: "FBI background check: sworn translation for your Spanish visa",
-  lead: `Spanish consulates in the United States ask for your FBI Identity History Summary (the FBI background check) with a federal apostille and a sworn translation into Spanish for most long-stay visas: non-lucrative, digital nomad, student and work. I am Elena Peñaranda Ortega, sworn translator No. ${MAEC_NUMBER} appointed by Spain's Ministry of Foreign Affairs, and I translate the FBI check for €${PRICE} (about $${PRICE_USD}), delivered as a digitally signed PDF the same day if it reaches me before 3 pm Madrid time, and within 24 hours in any case. The PDF is valid at the consulate and later in Spain; a paper copy can be couriered to any US address for $${US_SHIPPING_USD}.`,
+  lead: `Spanish consulates in the United States ask for your FBI Identity History Summary (the FBI background check) with a federal apostille and a sworn translation into Spanish for most long-stay visas: non-lucrative, digital nomad, student and work. I am Elena Peñaranda Ortega, sworn translator No. ${MAEC_NUMBER} appointed by Spain's Ministry of Foreign Affairs, and I translate the FBI check for €${PRICE} (about $${PRICE_USD}), delivered as a digitally signed PDF the same day if it reaches me before 3 pm Madrid time, and first thing the next morning if it arrives later. The PDF is valid at the consulate and later in Spain; a paper copy can be couriered to any US address for $${US_SHIPPING_USD}.`,
   image: {
     src: "/fotos/pasaporte-eeuu.jpg",
     alt: "US passport on a desk next to official documents, as in a Spanish visa application from the United States",
@@ -286,7 +286,7 @@ export const en = {
               ],
               [
                 "Turnaround",
-                "Signed PDF the same day if I receive the document before 3 pm Madrid time (9 am in New York, 6 am in Los Angeles); within 24 hours in any case.",
+                "Signed PDF the same day if I receive the document before 3 pm Madrid time (9 am in New York, 6 am in Los Angeles); later than that, first thing the next morning.",
               ],
               [
                 "Format",
@@ -354,7 +354,7 @@ export const en = {
     },
     {
       t: "PDF by email, paper optional",
-      d: `Signed PDF the same day if it arrives before 3 pm Madrid time, within 24 hours in any case. Paper copy couriered to the US for $${US_SHIPPING_USD} on request.`,
+      d: `Signed PDF the same day if it arrives before 3 pm Madrid time, otherwise first thing the next morning. Paper copy couriered to the US for $${US_SHIPPING_USD} on request.`,
     },
   ],
   faq: [
@@ -372,7 +372,7 @@ export const en = {
     },
     {
       q: "How long does the translation take?",
-      a: "An FBI check runs to one to three pages. If it reaches me before 3 pm Madrid time (9 am in New York) you have the signed PDF the same day; otherwise within 24 hours. The deadline is confirmed in writing with the quote.",
+      a: "An FBI check runs to one to three pages. If it reaches me before 3 pm Madrid time (9 am in New York) you have the signed PDF the same day; otherwise first thing the next morning. The deadline is confirmed in writing with the quote.",
     },
     {
       q: "How do I pay from the United States?",

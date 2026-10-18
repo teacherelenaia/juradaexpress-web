@@ -111,6 +111,13 @@ export default function Reviews({ locale = "es", className = "" }) {
                 </p>
                 <footer className="mt-auto pt-4 text-sm text-slate-600">
                   <span className="font-medium text-slate-900">{r.name}</span>
+                  {/* Trámite (content/reviews.js → procedure), solo si Elena
+                      lo ha rellenado; nunca se deduce del texto. */}
+                  {r.procedure?.[locale] ? (
+                    <span className="mt-0.5 block text-slate-700">
+                      {r.procedure[locale]}
+                    </span>
+                  ) : null}
                   <span className="mt-0.5 block text-slate-500">
                     {r.source} ·{" "}
                     {new Date(r.date).toLocaleDateString(t.locale, {

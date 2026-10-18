@@ -332,7 +332,6 @@ export const es = {
     facts: [
       `Permiso de conducir: ${LICENCE_PRICE} €, IVA incluido`,
       `${PACK.name.es}: ${PACK.price} € (${PACK.includes.es.toLowerCase().replace(/\.$/, "")})`,
-      "PDF firmado en el día",
     ],
     whatsapp: wa("Hola Elena, necesito traducir mi permiso de conducir para canjearlo en la DGT"),
     whatsappLabel: "Enviar el permiso por WhatsApp",
@@ -657,7 +656,6 @@ export const en = {
     facts: [
       `Driving licence: €${LICENCE_PRICE}, VAT included`,
       `${PACK.name.en}: €${PACK.price} (${PACK.includes.en.toLowerCase().replace(/\.$/, "")})`,
-      "Signed PDF the same day",
     ],
     whatsapp: wa("Hi Elena, I need my driving licence translated to exchange it at the DGT"),
     whatsappLabel: "Send my licence on WhatsApp",

@@ -316,7 +316,6 @@ export const es = {
     facts: [
       `${PACK.name.es}: ${PACK.price} €, IVA incluido (${PACK.includes.es.toLowerCase().replace(/\.$/, "")})`,
       "Precio cerrado en menos de 2 horas laborables",
-      "PDF firmado en el día",
     ],
     whatsapp: wa("Hola Elena, estoy preparando el visado de nómada digital y necesito traducir mis documentos"),
     whatsappLabel: "Enviar los documentos por WhatsApp",
@@ -600,7 +599,6 @@ export const en = {
     facts: [
       `${PACK.name.en}: €${PACK.price}, VAT included (${PACK.includes.en.toLowerCase().replace(/\.$/, "")})`,
       "Fixed price within 2 working hours",
-      "Signed PDF the same day",
     ],
     whatsapp: wa("Hi Elena, I am preparing my digital nomad visa and need my documents translated"),
     whatsappLabel: "Send my documents on WhatsApp",

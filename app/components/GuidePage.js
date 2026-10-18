@@ -19,6 +19,7 @@
 // (mismos campos: metaTitle, metaDescription, alternates, image).
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
+import QuotePromise from "./QuotePromise";
 import { SectionHeading } from "./ui";
 import { Block } from "./ServicePage";
 import { personRef, ORGANIZATION_ID } from "../../content/persona";
@@ -305,6 +306,7 @@ export default function GuidePage({ page }) {
               </a>
             ))}
           </div>
+          <QuotePromise locale={page.locale} className="mt-3 max-w-[60ch]" />
         </section>
 
         {/* Fuentes oficiales con fecha de consulta */}

@@ -31,12 +31,22 @@ export default function ProcessTimeline({ steps }) {
     return () => io.disconnect();
   }, [drawn]);
 
+  // Tres o cuatro pasos (Fase A2, 18/10/2026: la home pasa a tres). La
+  // línea horizontal va del centro de la primera columna al de la última.
+  const three = steps.length === 3;
+
   return (
     <div ref={ref} data-drawn={drawn} data-track-section="pasos" className="mt-10">
-      <ol className="relative grid gap-8 md:grid-cols-4 md:gap-6">
+      <ol
+        className={`relative grid gap-8 md:gap-6 ${
+          three ? "md:grid-cols-3" : "md:grid-cols-4"
+        }`}
+      >
         {/* Línea horizontal (escritorio): a la altura del centro del marcador */}
         <div
-          className="timeline-line absolute left-[12.5%] right-[12.5%] top-[22px] hidden h-0.5 bg-brand-gold-500 md:block"
+          className={`timeline-line absolute top-[22px] hidden h-0.5 bg-brand-gold-500 md:block ${
+            three ? "left-[16.67%] right-[16.67%]" : "left-[12.5%] right-[12.5%]"
+          }`}
           aria-hidden="true"
         />
         {/* Línea vertical (móvil) */}

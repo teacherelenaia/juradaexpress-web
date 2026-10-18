@@ -147,7 +147,7 @@ export default function MobileNav() {
                 : "text-slate-100 hover:bg-white/10 hover:text-brand-gold-300"
             }`}
           >
-            {english ? "International" : "Internacional"}
+            {english ? "International clients" : "Clientes internacionales"}
             <svg
               width="18"
               height="18"

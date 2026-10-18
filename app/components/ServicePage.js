@@ -45,6 +45,7 @@
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
+import QuotePromise from "./QuotePromise";
 import QuoteCalculator from "./QuoteCalculator";
 import { PackGrid } from "./PacksSection";
 
@@ -442,6 +443,11 @@ export default function ServicePage({ page }) {
               </>
             )}
           </div>
+          {/* Promesa de plazo (content/site.js → DELIVERY_PROMISE) bajo los botones */}
+          <QuotePromise
+            locale={page.locale}
+            className={`${page.trust ? "order-3 md:order-4" : "order-4"} mt-3 max-w-[60ch]`}
+          />
           {/* Garantías (content/site.js → GUARANTEES), solo si la página las pide */}
           {page.guarantees ? (
             <Guarantees locale={page.locale} className="order-5 mt-6" />
@@ -603,6 +609,7 @@ export default function ServicePage({ page }) {
               </>
             )}
           </div>
+          <QuotePromise locale={page.locale} className="mt-3 max-w-[60ch]" />
 
           <h3 className="mt-8 text-base font-semibold text-slate-900">
             {t.related}

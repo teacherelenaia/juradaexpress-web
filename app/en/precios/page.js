@@ -1,8 +1,10 @@
 // app/en/precios/page.js
-import { DNV_PACK_PRICE } from "../../../content/site";
+import { DNV_PACK_PRICE, DELIVERY_PROMISE_SHORT } from "../../../content/site";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { packOffers } from "../../../content/packs";
 import PacksSection from "../../components/PacksSection";
+import PricePerDocument from "../../components/PricePerDocument";
+import QuotePromise from "../../components/QuotePromise";
 
 const certPrice = DOCUMENTS.find((d) => d.id === "partida-nacimiento")?.price;
 
@@ -57,7 +59,7 @@ export default function Page() {
             <tr>
               <td className="p-3">Driving licence</td>
               <td className="p-3">€40</td>
-              <td className="p-3">24h</td>
+              <td className="p-3">Same day (up to 10 pages)</td>
             </tr>
             <tr className="bg-stone-50/50">
               <td className="p-3">Employer certificates / payslips</td>
@@ -67,7 +69,7 @@ export default function Page() {
             <tr>
               <td className="p-3">Contracts and notarial documents</td>
               <td className="p-3">Fixed quote within 2 hours</td>
-              <td className="p-3">Depends on length</td>
+              <td className="p-3">{DELIVERY_PROMISE_SHORT.en}</td>
             </tr>
             <tr className="bg-stone-50/50">
               <td className="p-3">
@@ -110,13 +112,15 @@ export default function Page() {
           WhatsApp
         </a>
       </div>
+      {/* Delivery promise (content/site.js → DELIVERY_PROMISE) under the buttons */}
+      <QuotePromise locale="en" className="mt-3 max-w-[60ch]" />
 
       <p className="mt-8 text-sm text-slate-500">
-        * Same-day delivery for documents of up to 10 pages, no surcharge.
-        Longer files get a written deadline before work starts, normally
-        24-72 hours; same-day delivery of more than 10 pages carries a 30%
-        surcharge.
+        * Same-day delivery of more than 10 pages carries a 30% surcharge.
       </p>
+
+      {/* Price per document, not per page + direct vs agency table */}
+      <PricePerDocument locale="en" embedded className="mt-10" />
 
       <PacksSection locale="en" />
 

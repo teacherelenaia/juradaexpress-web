@@ -10,6 +10,7 @@
 // nombra el organismo, no promete requisitos concretos de cada oficina. El campo `updated` (última revisión de la
 // ficha) se muestra en la página y alimenta lastModified en app/sitemap.js.
 import { DOCUMENTS } from "./documents";
+import { DELIVERY_PROMISE_SHORT } from "./site";
 
 const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
 
@@ -165,7 +166,7 @@ export const FICHAS = [
     faq: [
       {
         q: "¿Traduces el ACRO Police Certificate?",
-        a: "Sí, es de los documentos que más traduzco para expedientes de residencia de británicos. En 24 h lo tienes firmado y sellado.",
+        a: "Sí, es de los documentos que más traduzco para expedientes de residencia de británicos. Lo tienes firmado y sellado en el día si llega antes de las 18:00.",
       },
       {
         q: "¿Cuánto tarda en caducar?",
@@ -254,7 +255,7 @@ export const FICHAS = [
       "Contratos de compraventa, poderes notariales, escrituras de constitución, estatutos: son documentos largos y técnicos donde un matiz mal traducido puede costar caro. Los traduzco con terminología jurídica precisa y te entrego un documento con la misma estructura que el original, firmado y sellado.",
     price: null,
     priceNote: "presupuesto cerrado en menos de 2 h",
-    time: "Según extensión (te doy fecha exacta con el presupuesto)",
+    time: `${DELIVERY_PROMISE_SHORT.es} (fecha exacta con el presupuesto)`,
     updated: "2026-09-26",
     tramites: [
       "Compraventa de vivienda ante notario",
@@ -417,11 +418,11 @@ export const FICHAS = [
     name: "Traducción jurada del permiso de conducir",
     title: "Traducción Jurada del Permiso de Conducir – Español-Inglés",
     description:
-      "Traducción jurada del permiso de conducir británico o español para el canje en la DGT o la DVLA. Desde 40 €, entrega en 24 h, normalmente sin apostilla.",
+      "Traducción jurada del permiso de conducir británico o español para el canje en la DGT o la DVLA. Desde 40 €, entrega en el día, normalmente sin apostilla.",
     intro:
-      "Desde el acuerdo posterior al Brexit, los residentes británicos pueden canjear su permiso en la DGT — y en ese expediente aparece a menudo la traducción jurada del permiso o de los certificados de la DVLA. Es un documento corto: lo tienes traducido, firmado y sellado en 24 horas.",
+      "Desde el acuerdo posterior al Brexit, los residentes británicos pueden canjear su permiso en la DGT — y en ese expediente aparece a menudo la traducción jurada del permiso o de los certificados de la DVLA. Es un documento corto: lo tienes traducido, firmado y sellado en el día si llega antes de las 18:00.",
     price: priceOf("permiso-conducir"),
-    time: "24 h",
+    time: DELIVERY_PROMISE_SHORT.es,
     updated: "2026-09-26",
     tramites: [
       "Canje del permiso británico en la DGT",
@@ -528,12 +529,12 @@ export const FICHAS = [
     name: "Traducción jurada de DNI o pasaporte",
     title: "Traducción Jurada de DNI y Pasaporte – Español-Inglés",
     description:
-      "Traducción jurada del DNI, NIE o pasaporte para notarías, bancos, herencias y trámites en el extranjero. Presupuesto en menos de 2 h, entrega en 24 h.",
+      "Traducción jurada del DNI, NIE o pasaporte para notarías, bancos, herencias y trámites en el extranjero. Presupuesto en menos de 2 h, entrega en el día.",
     intro:
-      "El DNI o el pasaporte se traducen menos veces de las que se piden: muchos organismos aceptan el documento tal cual. Pero cuando una notaría, un banco extranjero o un expediente de herencia exige la traducción jurada del documento de identidad, la resuelvo en 24 horas — y si veo que en tu caso no hace falta, te lo digo antes de cobrar.",
+      "El DNI o el pasaporte se traducen menos veces de las que se piden: muchos organismos aceptan el documento tal cual. Pero cuando una notaría, un banco extranjero o un expediente de herencia exige la traducción jurada del documento de identidad, la resuelvo en el día — y si veo que en tu caso no hace falta, te lo digo antes de cobrar.",
     price: null,
     priceNote: "presupuesto cerrado en menos de 2 h",
-    time: "24 h",
+    time: DELIVERY_PROMISE_SHORT.es,
     updated: "2026-09-26",
     tramites: [
       "Poderes y escrituras ante notario extranjero",
@@ -563,7 +564,7 @@ export const FICHAS = [
       },
       {
         q: "¿Traduces también el NIE o el TIE?",
-        a: "Sí, tanto el certificado de NIE en papel como la tarjeta TIE, con el mismo formato de entrega en 24 horas.",
+        a: "Sí, tanto el certificado de NIE en papel como la tarjeta TIE, con el mismo plazo: en el día si llega antes de las 18:00.",
       },
       {
         q: "¿Es seguro enviarte mi documento de identidad?",
@@ -588,7 +589,7 @@ export const FICHAS = [
       "Las herencias con bienes o familiares en los dos países generan un expediente completo: testamento, certificado de defunción, últimas voluntades, el grant of probate británico, poderes… Traduzco el conjunto con terminología sucesoria precisa y coherente entre documentos, que es lo que la notaría necesita para no devolverte nada.",
     price: null,
     priceNote: "presupuesto cerrado en menos de 2 h",
-    time: "Según extensión (fecha exacta con el presupuesto)",
+    time: `${DELIVERY_PROMISE_SHORT.es} (fecha exacta con el presupuesto)`,
     updated: "2026-09-26",
     tramites: [
       "Aceptación y adjudicación de herencias ante notario",

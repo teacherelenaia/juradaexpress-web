@@ -41,6 +41,7 @@ import { DOCUMENTS } from "../../content/documents";
 import { PAPER_DELIVERY_SPAIN, URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES, TURNAROUND } from "../../content/site";
 import { toUsd, US_SHIPPING_USD } from "../../content/usd";
 import { SectionHeading } from "./ui";
+import QuotePromise from "./QuotePromise";
 import { IconUpload, IconFileText } from "./Icons";
 import { trackAdsConversion } from "./AdsConversion";
 import { getAttribution } from "../lib/attribution";
@@ -111,7 +112,7 @@ const COPY = {
     privacyLink: "política de privacidad",
     privacyTail:
       "y acepto que Elena Peñaranda Ortega trate mis datos y los documentos adjuntos solo para preparar el presupuesto.",
-    submit: "Enviar y recibir presupuesto",
+    submit: "Enviar y recibir mi precio cerrado",
     sending: "Enviando…",
     uploading: (pct) => `Subiendo archivos… ${pct} %. No cierres esta página.`,
     sendingSummary: "Enviando tu solicitud…",
@@ -199,7 +200,7 @@ const COPY = {
     privacyLink: "privacy policy",
     privacyTail:
       "and I agree that Elena Peñaranda Ortega processes my details and the attached documents only to prepare the quote.",
-    submit: "Send and get my quote",
+    submit: "Send and get my fixed price",
     sending: "Sending…",
     uploading: (pct) => `Uploading files… ${pct}%. Please keep this page open.`,
     sendingSummary: "Sending your request…",
@@ -248,7 +249,6 @@ const FIRM_COPY = {
   title: "Order form for law firms",
   intro:
     "Pick the document, set the pages and attach the scan. I confirm the fixed price in US dollars and the delivery date within 2 working hours, and the order goes on your firm's monthly invoice.",
-  pagesHint: `From 1 to 20. Up to ${SAME_DAY_MAX_PAGES} pages are delivered the same day; longer files get a written deadline before I start.`,
   deliveryPaper: "PDF + paper copy couriered to the US",
   paperNote: `+ courier: flat $${US_SHIPPING_USD} to any US address.`,
   disclaimer: "Fixed price once I see the document; nothing is invoiced without your approval.",
@@ -503,6 +503,29 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
   // { emailed: [nombre], pending: [{ name, reason }] } tras el envío
   const [result, setResult] = useState(null);
   const [waUrl, setWaUrl] = useState("");
+
+  // Preselección por URL (Fase A2, 18/10/2026): `?doc=<id>` con un id de
+  // content/documents.js, tanto en la query (/?doc=partida-nacimiento) como
+  // dentro del hash (/#calculadora?doc=partida-nacimiento, que es como
+  // enlazan las páginas de documento). En el segundo caso el navegador no
+  // encuentra el ancla, así que se desplaza aquí a mano.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const { search, hash } = window.location;
+    const fromHash = hash.includes("?") ? hash.slice(hash.indexOf("?")) : "";
+    const id =
+      new URLSearchParams(search).get("doc") ||
+      new URLSearchParams(fromHash).get("doc");
+    if (id && DOCUMENTS.some((d) => d.id === id)) setDocumentId(id);
+    if (fromHash && hash.startsWith("#calculadora")) {
+      // Tras la hidratación el navegador aún puede restaurar el scroll a 0;
+      // se espera un instante para que el desplazamiento no se pierda.
+      const timer = setTimeout(() => {
+        document.getElementById("calculadora")?.scrollIntoView();
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const doc = DOCUMENTS.find((d) => d.id === documentId) || DOCUMENTS[0];
   const urgent = urgency === "urgent";
@@ -1206,6 +1229,8 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
           >
             {status === "sending" ? t.sending : t.submit}
           </button>
+          {/* Promesa de plazo (content/site.js → DELIVERY_PROMISE) bajo el botón */}
+          <QuotePromise locale={locale} className="max-w-[60ch]" />
 
           <div aria-live="polite" className="text-sm text-slate-600">
             {statusText ? (

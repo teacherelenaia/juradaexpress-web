@@ -2,6 +2,7 @@
 import TrackedLink from "../../components/TrackedLink";
 import { SectionHeading } from "../../components/ui";
 import { DOCUMENTS } from "../../../content/documents";
+import { DELIVERY_PROMISE_SHORT } from "../../../content/site";
 
 export const metadata = {
   title: "Sworn translation for British residents in Spain — procedure by procedure",
@@ -49,7 +50,7 @@ const PROCEDURES = [
     apostille:
       "Apostille: yes for powers of attorney signed before a UK notary; not for private contracts.",
     price: null,
-    time: "Depends on length — fixed quote within 2 hours",
+    time: `${DELIVERY_PROMISE_SHORT.en} — fixed quote within 2 hours`,
     href: "/traduccion-jurada-contrato-escritura",
   },
   {
@@ -65,7 +66,7 @@ const PROCEDURES = [
     docs: "Under the post-Brexit agreement, the DGT may ask for a sworn translation of your licence or of DVLA certificates.",
     apostille: "Apostille: usually not.",
     price: priceOf("permiso-conducir"),
-    time: "24h",
+    time: DELIVERY_PROMISE_SHORT.en,
     href: "/en/documentos",
     guide: {
       href: "/en/exchange-driving-licence-spain-dgt-by-country",

@@ -20,11 +20,21 @@ export const WHATSAPP_URL_EN =
 export const MAEC_LIST_URL =
   "https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Buscador-STIJ.aspx";
 
-// Tres garantías cortas (FASE 1 SEO, 27/09/2026) que se muestran bajo el
-// chip de precio del hero de la home ES/EN, en /traductor-jurado-ingles
-// (y su versión /en) y en las landings de ciudad. Las pinta
-// app/components/Guarantees.js. `icon` es el nombre de un icono de
+// Garantía de corrección en una línea (18/10/2026): la pinta la franja de
+// confianza (app/components/TrustStrip.js) en todas las páginas públicas,
+// junto a la nota y el número de reseñas de Google.
+export const GUARANTEE_SHORT = {
+  es: "Si la rechazan por un error mío, la corrijo gratis",
+  en: "If it’s rejected because of my mistake, I fix it free",
+};
+
+// Dos garantías cortas (FASE 1 SEO, 27/09/2026) que se muestran bajo el
+// botón de presupuesto de /traductor-jurado-ingles (y su versión /en), de
+// las landings de ciudad y de las landings de documento para EE. UU. Las
+// pinta app/components/Guarantees.js. `icon` es el nombre de un icono de
 // app/components/Icons.js; `href` (opcional) convierte el texto en enlace.
+// La garantía de plazo que había aquí la sustituye QuotePromise
+// (DELIVERY_PROMISE), que va justo debajo de los mismos botones.
 export const GUARANTEES = {
   es: [
     {
@@ -40,11 +50,6 @@ export const GUARANTEES = {
       icon: "refresh",
       text: "Si el organismo la rechaza por un error mío, la corrijo gratis",
     },
-    {
-      id: "plazo",
-      icon: "clock",
-      text: "Entrega en el día hasta 10 páginas, plazo por escrito antes de cobrar",
-    },
   ],
   en: [
     {
@@ -59,11 +64,6 @@ export const GUARANTEES = {
       id: "correccion",
       icon: "refresh",
       text: "If the authority rejects it because of my mistake, I fix it for free",
-    },
-    {
-      id: "plazo",
-      icon: "clock",
-      text: "Same-day delivery up to 10 pages, deadline in writing before you pay",
     },
   ],
 };
@@ -182,21 +182,77 @@ export const PRICE_PER_PAGE = 20;
 // mínimo.
 export const MIN_DOC_PRICE = MIN_PRICE;
 
-// Hora de corte para la entrega en el día (misma regla que la landing del
-// FBI): documento recibido antes de esta hora de Madrid, PDF el mismo día;
-// después, en 24 horas.
-export const SAME_DAY_CUTOFF = "15:00";
+// Hora de corte para la entrega en el día (Fase A, revisión de Elena del
+// 18/10/2026): una sola promesa de plazo en toda la web. Documento recibido
+// antes de esta hora de Madrid, PDF firmado el mismo día; después, a primera
+// hora del día siguiente. La hora se publica por idioma (18:00 en las
+// páginas ES, 3 pm en las EN); si cambia, se cambia solo aquí.
+export const SAME_DAY_CUTOFF = { es: "18:00", en: "3 pm" };
+
+// La promesa completa (DELIVERY_PROMISE) va bajo todos los botones
+// principales de presupuesto (QuotePromise: home, fichas de documento,
+// landings de servicio, ciudad, país y EE. UU., guías, /precios y la
+// calculadora) y en la FAQ «¿Cuándo la tengo?»; la primera frase sola
+// (DELIVERY_PROMISE_SHORT) donde solo cabe una línea (celdas de tabla,
+// fichas de documento).
+export const DELIVERY_PROMISE = {
+  es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}. Si llega más tarde, lo tienes a primera hora del día siguiente. Más de ${SAME_DAY_MAX_PAGES} páginas: plazo cerrado por escrito antes de empezar, normalmente 24-72 h.`,
+  en: `Same day up to ${SAME_DAY_MAX_PAGES} pages if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time. Later than that, first thing the next morning. Over ${SAME_DAY_MAX_PAGES} pages: a written deadline before work starts, normally 24-72 hours.`,
+};
+export const DELIVERY_PROMISE_SHORT = {
+  es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}`,
+  en: `Same day up to ${SAME_DAY_MAX_PAGES} pages if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time`,
+};
+
 export const TURNAROUND = {
   es: {
     short: `en el día (hasta ${SAME_DAY_MAX_PAGES} páginas)`,
-    long: `Los documentos de hasta ${SAME_DAY_MAX_PAGES} páginas se entregan en el día, en PDF firmado y sin recargo; los más largos tienen plazo cerrado por escrito antes de empezar, normalmente 24-72 h.`,
+    long: DELIVERY_PROMISE.es,
     urgent: `más de ${SAME_DAY_MAX_PAGES} páginas en el día`,
   },
   en: {
     short: `the same day (up to ${SAME_DAY_MAX_PAGES} pages)`,
-    long: `Documents of up to ${SAME_DAY_MAX_PAGES} pages are delivered the same day as a signed PDF, with no surcharge; longer files get a written deadline before work starts, normally 24-72 hours.`,
+    long: DELIVERY_PROMISE.en,
     urgent: `more than ${SAME_DAY_MAX_PAGES} pages the same day`,
   },
+};
+
+// Nota junto al precio de las fichas de documento con precio fijo
+// (app/components/DocumentPage.js, 18/10/2026). Solo se muestra cuando la
+// ficha tiene cifra; con «presupuesto cerrado en menos de 2 h» no aparece.
+export const FIXED_PRICE_NOTE = {
+  es: "Precio por documento completo, apostilla incluida. Entrega en el día.",
+  en: "Price per complete document, apostille included. Same-day delivery.",
+};
+
+// Foto de Elena para el hero de la home ES/EN (18/10/2026). Mientras sea
+// null, el hero muestra la foto de marca de siempre (la mano firmando con
+// el sello, /fotos/hero-firma.jpg) con la línea «Elena Peñaranda Ortega ·
+// Traductora-Intérprete Jurada de Inglés · MAEC nº 7310» debajo. Cuando
+// haya foto real, poner aquí la ruta (p. ej. "/fotos/elena-penaranda.jpg",
+// retrato 4:5, mínimo 760×950 px) y el hero la usará sin tocar nada más.
+export const HERO_PHOTO = null;
+
+// Trustpilot (Fase A, 18/10/2026): el perfil no se enlaza todavía. Cuando
+// Elena lo active, poner SHOW_TRUSTPILOT en true y la URL en TRUSTPILOT_URL;
+// mientras esté en false, ni la franja de confianza, ni llms.txt, ni el
+// sameAs del JSON-LD lo mencionan.
+export const SHOW_TRUSTPILOT = false;
+export const TRUSTPILOT_URL = null;
+
+// H1 y subtítulo del hero de la home (Fase A2, informe CRO del
+// 18/10/2026). Se publica la opción A (plazo). Para probar otra, basta con
+// cambiar la constante; el componente no se toca. Las tres opciones:
+//   A (plazo):    «Tu traducción jurada, firmada y entregada hoy»
+//   B (persona):  «Habla con la traductora que firma tu documento»
+//   C (garantía): «Traducción jurada con validez oficial o te la corrijo gratis»
+export const HERO_H1 = {
+  es: "Tu traducción jurada, firmada y entregada hoy",
+  en: "Your sworn translation, signed and delivered today",
+};
+export const HERO_SUB = {
+  es: `Soy Elena, traductora jurada de inglés (MAEC nº 7310). Mándame el documento y en menos de 2 horas tienes precio y plazo por escrito. Desde ${MIN_PRICE} € por documento, en el día hasta ${SAME_DAY_MAX_PAGES} páginas.`,
+  en: `I'm Elena, sworn English translator (Spanish Foreign Ministry no. 7310). Send me the document and within 2 hours you have the price and deadline in writing. From €${MIN_PRICE} per document, same day up to ${SAME_DAY_MAX_PAGES} pages.`,
 };
 
 // Capacidad confirmada por Elena el 07/09/2026. Si algún día no puede

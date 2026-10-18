@@ -16,6 +16,7 @@
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
+import QuotePromise from "./QuotePromise";
 import { SectionHeading } from "./ui";
 import { US_SHIPPING_USD, MIN_PRICE_USD, RATE_NOTE } from "../../content/us-docs";
 import { LAW_FIRMS_ROUTE } from "../../content/servicios/routes";
@@ -237,6 +238,7 @@ export default function UsDocPage({ doc }) {
               {T.calculator}
             </TrackedLink>
           </div>
+          <QuotePromise locale="en" className="mt-3 max-w-[60ch]" />
           <Guarantees locale="en" className="mt-6" />
         </div>
         <figure className="relative aspect-[4/3] overflow-hidden rounded-xl shadow md:sticky md:top-24">
@@ -437,6 +439,7 @@ export default function UsDocPage({ doc }) {
               {T.prices}
             </a>
           </div>
+          <QuotePromise locale="en" className="mt-3 max-w-[60ch]" />
 
           <h3 className="mt-8 text-base font-semibold text-slate-900">{T.related}</h3>
           <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
