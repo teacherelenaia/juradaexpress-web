@@ -336,7 +336,7 @@ export const posts = [
     slug: "traduccion-jurada-permiso-conducir",
     title: "Traducción jurada del permiso de conducir: cuándo hace falta y cuánto cuesta",
     excerpt:
-      "Canje del permiso británico en la DGT tras el Brexit: cuándo te pedirán traducción jurada del carnet de conducir, precio desde 40 € y entrega en 24 h.",
+      "Canje del permiso británico en la DGT tras el Brexit: cuándo te pedirán traducción jurada del carnet de conducir, precio desde 40 € y entrega en el día.",
     date: "2026-08-04",
     updated: "2026-08-04",
     author: "Elena Peñaranda Ortega",

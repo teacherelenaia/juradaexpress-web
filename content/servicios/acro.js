@@ -54,7 +54,7 @@ export const es = {
   metaTitle: `Traducción jurada del certificado ACRO del Reino Unido para visado de España | ${PRICE} €`,
   metaDescription: `Traducción jurada del certificado ACRO del Reino Unido para tu visado de España: ${PRICE} €, PDF firmado en el día, traductora jurada nº ${MAEC_NUMBER} del MAEC.`,
   h1: "Traducción jurada del ACRO Police Certificate del Reino Unido para tu visado de España",
-  lead: `Si has vivido en el Reino Unido y pides un visado de España, una autorización de residencia o la nacionalidad española, te piden el certificado de antecedentes penales británico, el <em>ACRO Police Certificate</em>, con apostilla del FCDO y traducción jurada al español. Soy Elena Peñaranda Ortega, traductora jurada nº ${MAEC_NUMBER} nombrada por el Ministerio de Asuntos Exteriores de España, y traduzco el certificado ACRO por ${PRICE} €, en PDF firmado digitalmente el mismo día si me llega antes de las 15:00, hora de Madrid (14:00 en el Reino Unido), y en 24 horas en cualquier caso. El PDF vale en el consulado y después ante extranjería; si necesitas papel, lo envío por mensajería al Reino Unido o a España.`,
+  lead: `Si has vivido en el Reino Unido y pides un visado de España, una autorización de residencia o la nacionalidad española, te piden el certificado de antecedentes penales británico, el <em>ACRO Police Certificate</em>, con apostilla del FCDO y traducción jurada al español. Soy Elena Peñaranda Ortega, traductora jurada nº ${MAEC_NUMBER} nombrada por el Ministerio de Asuntos Exteriores de España, y traduzco el certificado ACRO por ${PRICE} €, en PDF firmado digitalmente el mismo día si me llega antes de las 18:00, hora de Madrid (17:00 en el Reino Unido), y a primera hora del día siguiente si llega más tarde. El PDF vale en el consulado y después ante extranjería; si necesitas papel, lo envío por mensajería al Reino Unido o a España.`,
   image: {
     src: "/fotos/escritorio-documentos.jpg",
     alt: "Escritorio con documentos oficiales y un pasaporte, como los de un expediente de visado de España preparado desde el Reino Unido",
@@ -103,7 +103,7 @@ export const es = {
               ],
               [
                 "Plazo",
-                "PDF firmado el mismo día si recibo el documento antes de las 15:00, hora de Madrid (14:00 en el Reino Unido); en 24 horas en cualquier caso.",
+                "PDF firmado el mismo día si recibo el documento antes de las 18:00, hora de Madrid (17:00 en el Reino Unido); si llega más tarde, a primera hora del día siguiente.",
               ],
               [
                 "Formato",
@@ -170,7 +170,7 @@ export const es = {
     },
     {
       t: "PDF por email, papel opcional",
-      d: "PDF firmado el mismo día si llega antes de las 15:00, hora de Madrid, y en 24 horas en cualquier caso. Copia en papel por mensajería al Reino Unido o a España si la pides.",
+      d: "PDF firmado el mismo día si llega antes de las 18:00, hora de Madrid, y a primera hora del día siguiente si llega más tarde. Copia en papel por mensajería al Reino Unido o a España si la pides.",
     },
   ],
   faq: [
@@ -188,7 +188,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda la traducción?",
-      a: "El certificado ACRO tiene una o dos páginas, más la apostilla. Si me llega antes de las 15:00, hora de Madrid (14:00 en el Reino Unido), tienes el PDF firmado el mismo día; si no, en 24 horas. El plazo queda confirmado por escrito con el presupuesto.",
+      a: "El certificado ACRO tiene una o dos páginas, más la apostilla. Si me llega antes de las 18:00, hora de Madrid (17:00 en el Reino Unido), tienes el PDF firmado el mismo día; si no, a primera hora del día siguiente. El plazo queda confirmado por escrito con el presupuesto.",
     },
     {
       q: "¿Cómo pago desde el Reino Unido?",
@@ -209,7 +209,7 @@ export const es = {
   ],
   cta: {
     title: "Mándame el certificado ACRO apostillado",
-    text: "Por WhatsApp o desde la calculadora: en menos de dos horas tienes el precio cerrado y el plazo por escrito, y el PDF firmado el mismo día si llega antes de las 15:00, hora de Madrid.",
+    text: "Por WhatsApp o desde la calculadora: en menos de dos horas tienes el precio cerrado y el plazo por escrito, y el PDF firmado el mismo día si llega antes de las 18:00, hora de Madrid.",
   },
   related: [
     { href: "/documentos-visado-no-lucrativo-espana", label: "Guía: documentos del visado no lucrativo" },
@@ -234,7 +234,7 @@ export const en = {
   metaTitle: "ACRO Police Certificate Translation for Spain Visa | Sworn, Same-Day PDF",
   metaDescription: `Sworn translation of your UK ACRO police certificate for a Spanish visa: €${PRICE}, signed PDF the same day, apostille included if required. MAEC No. ${MAEC_NUMBER}.`,
   h1: "ACRO police certificate: sworn translation for your Spanish visa",
-  lead: `Spanish consulates in the UK ask for your ACRO Police Certificate with an FCDO apostille and a sworn translation into Spanish for most long-stay visas: non-lucrative, digital nomad, student and work. The same certificate comes up later for residence and citizenship applications in Spain. I am Elena Peñaranda Ortega, sworn translator No. ${MAEC_NUMBER} appointed by Spain's Ministry of Foreign Affairs, and I translate the ACRO certificate for €${PRICE}, delivered as a digitally signed PDF the same day if it reaches me before 3 pm Madrid time (2 pm in the UK), and within 24 hours in any case. The PDF is valid at the consulate and later in Spain; a paper copy can be couriered to the UK or to any Spanish address.`,
+  lead: `Spanish consulates in the UK ask for your ACRO Police Certificate with an FCDO apostille and a sworn translation into Spanish for most long-stay visas: non-lucrative, digital nomad, student and work. The same certificate comes up later for residence and citizenship applications in Spain. I am Elena Peñaranda Ortega, sworn translator No. ${MAEC_NUMBER} appointed by Spain's Ministry of Foreign Affairs, and I translate the ACRO certificate for €${PRICE}, delivered as a digitally signed PDF the same day if it reaches me before 3 pm Madrid time (2 pm in the UK), and first thing the next morning if it arrives later. The PDF is valid at the consulate and later in Spain; a paper copy can be couriered to the UK or to any Spanish address.`,
   image: {
     src: "/fotos/escritorio-documentos.jpg",
     alt: "Desk with official documents and a passport, as in a Spanish visa application prepared from the UK",
@@ -281,7 +281,7 @@ export const en = {
               ],
               [
                 "Turnaround",
-                "Signed PDF the same day if I receive the document before 3 pm Madrid time (2 pm in the UK); within 24 hours in any case.",
+                "Signed PDF the same day if I receive the document before 3 pm Madrid time (2 pm in the UK); later than that, first thing the next morning.",
               ],
               [
                 "Format",
@@ -348,7 +348,7 @@ export const en = {
     },
     {
       t: "PDF by email, paper optional",
-      d: "Signed PDF the same day if it arrives before 3 pm Madrid time, within 24 hours in any case. Paper copy couriered to the UK or to Spain on request.",
+      d: "Signed PDF the same day if it arrives before 3 pm Madrid time, otherwise first thing the next morning. Paper copy couriered to the UK or to Spain on request.",
     },
   ],
   faq: [
@@ -366,7 +366,7 @@ export const en = {
     },
     {
       q: "How long does the translation take?",
-      a: "An ACRO certificate runs to one or two pages plus the apostille. If it reaches me before 3 pm Madrid time (2 pm in the UK) you have the signed PDF the same day; otherwise within 24 hours. The deadline is confirmed in writing with the quote.",
+      a: "An ACRO certificate runs to one or two pages plus the apostille. If it reaches me before 3 pm Madrid time (2 pm in the UK) you have the signed PDF the same day; otherwise first thing the next morning. The deadline is confirmed in writing with the quote.",
     },
     {
       q: "How do I pay from the UK?",

@@ -15,7 +15,7 @@
 // página publica ahora esos mismos datos en texto plano y en el JSON-LD:
 // precio por documento y por página (PRICE_PER_PAGE) con IVA incluido,
 // firma electrónica cualificada (Orden AUC/213/2025) y cómo comprobarla,
-// regla de las 15:00 (SAME_DAY_CUTOFF), pasos con tiempos, qué incluye el
+// regla de las 18:00 / 3 pm (SAME_DAY_CUTOFF por idioma), pasos con tiempos, qué incluye el
 // precio, ficha de la traductora y OfferCatalog con un Offer por fila.
 import { DOCUMENTS, MIN_PRICE } from "../documents";
 import {
@@ -47,7 +47,7 @@ const PATH_EN = "/en/sworn-english-translator";
 // Párrafo citable completo de la versión inglesa (era el `lead` hasta el
 // 15/10/2026). Sigue en la página, como primer párrafo de la sección
 // «overview», para ChatGPT y Perplexity; la entradilla ahora es corta.
-const LEAD_EN_FULL = `I'm ${PERSON_NAME}, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs in ${SINCE} under no. ${MAEC_NUMBER}, an appointment in force for ${yearsOfExperience()} years. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 working hours, and you receive the PDF with a qualified electronic signature under Spain's Order AUC/213/2025 the same day if the document reaches me before ${SAME_DAY_CUTOFF} Madrid time (up to ${SAME_DAY_MAX_PAGES} pages). The most common documents cost from €${MIN_PRICE}, VAT included; long documents are €${PRICE_PER_PAGE} per page with a minimum of €${MIN_DOC_PRICE} per document.`;
+const LEAD_EN_FULL = `I'm ${PERSON_NAME}, Sworn Translator-Interpreter of English appointed by Spain's Ministry of Foreign Affairs in ${SINCE} under no. ${MAEC_NUMBER}, an appointment in force for ${yearsOfExperience()} years. I translate, sign and stamp documents from English into Spanish and from Spanish into English so that they are accepted by any official body: Spanish immigration offices, the Civil Registry, universities, notaries, the Home Office, USCIS or IRCC. Everything happens online: you send me a scan, I send you a fixed quote within 2 working hours, and you receive the PDF with a qualified electronic signature under Spain's Order AUC/213/2025 the same day if the document reaches me before ${SAME_DAY_CUTOFF.en} Madrid time (up to ${SAME_DAY_MAX_PAGES} pages). The most common documents cost from €${MIN_PRICE}, VAT included; long documents are €${PRICE_PER_PAGE} per page with a minimum of €${MIN_DOC_PRICE} per document.`;
 
 // Ficha de documento que corresponde a cada línea del catálogo (para
 // enlazar la tabla de precios con las fichas existentes).
@@ -313,7 +313,7 @@ export const es = {
   metaTitle: `Traductor jurado de inglés online | Desde ${MIN_PRICE} €, PDF en el día`,
   metaDescription: `Traducción jurada español-inglés desde ${MIN_PRICE} € por documento o ${PRICE_PER_PAGE} € por página, IVA incluido. PDF con firma cualificada en el día. Traductora MAEC nº ${MAEC_NUMBER}.`,
   h1: "Traductor jurado de inglés online: traducción jurada español-inglés con validez oficial",
-  lead: `Soy ${PERSON_NAME}, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores en ${SINCE} con el nº ${MAEC_NUMBER}: ${yearsOfExperience()} años de nombramiento vigente. Traduzco, firmo y sello personalmente documentos del español al inglés y del inglés al español para que tengan validez ante cualquier organismo oficial: Extranjería, Registro Civil, universidades, notarías, Home Office, USCIS o IRCC. Todo el proceso es online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas laborables y recibes el PDF con firma electrónica cualificada, conforme a la Orden AUC/213/2025, el mismo día si el documento llega antes de las ${SAME_DAY_CUTOFF}, hora de Madrid (hasta ${SAME_DAY_MAX_PAGES} páginas). Los documentos habituales cuestan desde ${MIN_PRICE} €, IVA incluido; los largos, ${PRICE_PER_PAGE} € por página con un mínimo de ${MIN_DOC_PRICE} € por documento.`,
+  lead: `Soy ${PERSON_NAME}, Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio de Asuntos Exteriores en ${SINCE} con el nº ${MAEC_NUMBER}: ${yearsOfExperience()} años de nombramiento vigente. Traduzco, firmo y sello personalmente documentos del español al inglés y del inglés al español para que tengan validez ante cualquier organismo oficial: Extranjería, Registro Civil, universidades, notarías, Home Office, USCIS o IRCC. Todo el proceso es online: me envías el documento escaneado, te doy precio cerrado en menos de 2 horas laborables y recibes el PDF con firma electrónica cualificada, conforme a la Orden AUC/213/2025, el mismo día si el documento llega antes de las ${SAME_DAY_CUTOFF.es}, hora de Madrid (hasta ${SAME_DAY_MAX_PAGES} páginas). Los documentos habituales cuestan desde ${MIN_PRICE} €, IVA incluido; los largos, ${PRICE_PER_PAGE} € por página con un mínimo de ${MIN_DOC_PRICE} € por documento.`,
   image: {
     src: "/fotos/certificacion-firma.jpg",
     alt: "Traductora jurada firmando y sellando una traducción jurada de inglés",
@@ -423,7 +423,7 @@ export const es = {
       title: `Plazos: PDF firmado en el día hasta ${SAME_DAY_MAX_PAGES} páginas`,
       body: [
         `<strong>Presupuesto en menos de 2 horas laborables.</strong> ${TIMEZONE_NOTE.es}: dentro de ese horario, te respondo con precio cerrado y plazo por escrito en menos de dos horas; si escribes fuera de él, a primera hora del día siguiente.`,
-        `<strong>Traducción firmada el mismo día.</strong> Un documento de hasta ${SAME_DAY_MAX_PAGES} páginas (un certificado, un título, un permiso de conducir, un contrato breve) que me llega antes de las <strong>${SAME_DAY_CUTOFF}, hora de Madrid</strong>, lo tienes en PDF firmado ese mismo día, sin recargo; si llega después de esa hora, en 24 horas. Si tiene más de ${SAME_DAY_MAX_PAGES} páginas, te doy un plazo cerrado por escrito antes de empezar, normalmente de 24 a 72 horas, y ese plazo es el que cumplo. Si necesitas más de ${SAME_DAY_MAX_PAGES} páginas en el día, lo hago con un recargo del 30 %: dímelo al pedir presupuesto y te confirmo si llego.`,
+        `<strong>Traducción firmada el mismo día.</strong> Un documento de hasta ${SAME_DAY_MAX_PAGES} páginas (un certificado, un título, un permiso de conducir, un contrato breve) que me llega antes de las <strong>${SAME_DAY_CUTOFF.es}, hora de Madrid</strong>, lo tienes en PDF firmado ese mismo día, sin recargo; si llega después de esa hora, a primera hora del día siguiente. Si tiene más de ${SAME_DAY_MAX_PAGES} páginas, te doy un plazo cerrado por escrito antes de empezar, normalmente de 24 a 72 horas, y ese plazo es el que cumplo. Si necesitas más de ${SAME_DAY_MAX_PAGES} páginas en el día, lo hago con un recargo del 30 %: dímelo al pedir presupuesto y te confirmo si llego.`,
         "<strong>Si tienes cita con fecha</strong> (Extranjería, consulado, notaría, universidad), dime la fecha al pedir presupuesto y te confirmo por escrito que llegas.",
         `Para lotes grandes y expedientes de varios documentos, acordamos un calendario por escrito${LARGE_PROJECT_CAPACITY ? `; puedo asumir ${LARGE_PROJECT_CAPACITY.es}` : ""}. Si me escribes desde el Reino Unido, Irlanda o América, ten en cuenta el horario de Madrid para calcular cuándo recibirás la respuesta.`,
       ],
@@ -473,7 +473,7 @@ export const es = {
     {
       t: "Traducción jurada",
       d: "Traduzco, certifico, firmo y sello personalmente. Ningún texto pasa por terceros.",
-      time: `Firmada el mismo día hasta ${SAME_DAY_MAX_PAGES} páginas si llega antes de las ${SAME_DAY_CUTOFF}; si no, en 24 horas.`,
+      time: `Firmada el mismo día hasta ${SAME_DAY_MAX_PAGES} páginas si llega antes de las ${SAME_DAY_CUTOFF.es}; si no, a primera hora del día siguiente.`,
     },
     {
       t: "Entrega",
@@ -512,7 +512,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda?",
-      a: `Hasta ${SAME_DAY_MAX_PAGES} páginas, PDF firmado el mismo día si el documento llega antes de las ${SAME_DAY_CUTOFF}, hora de Madrid, y en 24 horas si llega después; más de ${SAME_DAY_MAX_PAGES} páginas, plazo cerrado por escrito antes de empezar (normalmente 24-72 h). Si tienes una cita con fecha, dímelo al pedir presupuesto y te confirmo por escrito que llegas. Los lotes grandes tienen su propio calendario.`,
+      a: `Hasta ${SAME_DAY_MAX_PAGES} páginas, PDF firmado el mismo día si el documento llega antes de las ${SAME_DAY_CUTOFF.es}, hora de Madrid, y a primera hora del día siguiente si llega después; más de ${SAME_DAY_MAX_PAGES} páginas, plazo cerrado por escrito antes de empezar (normalmente 24-72 h). Si tienes una cita con fecha, dímelo al pedir presupuesto y te confirmo por escrito que llegas. Los lotes grandes tienen su propio calendario.`,
     },
     {
       q: "¿Traduces también del inglés al español?",
@@ -552,7 +552,7 @@ export const en = {
   // Ads y los visitantes leían el párrafo largo sin llegar al precio ni a
   // los botones. Dos frases; el párrafo citable completo sigue en la
   // sección «overview», justo debajo de la calculadora.
-  lead: `I'm ${PERSON_NAME}, sworn English translator appointed by Spain's Ministry of Foreign Affairs (no. ${MAEC_NUMBER}). Send me a photo of your document and I'll reply with a fixed price within 2 working hours; signed PDF the same day if it reaches me before ${SAME_DAY_CUTOFF} Madrid time.`,
+  lead: `I'm ${PERSON_NAME}, sworn English translator appointed by Spain's Ministry of Foreign Affairs (no. ${MAEC_NUMBER}). Send me a photo of your document and I'll reply with a fixed price within 2 working hours; signed PDF the same day if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time.`,
   priceChips: priceChipsEn(),
   hideHeroImageMobile: true,
   image: {
@@ -670,7 +670,7 @@ export const en = {
       title: `Turnaround: signed PDF the same day for up to ${SAME_DAY_MAX_PAGES} pages`,
       body: [
         `<strong>Quote within 2 working hours.</strong> ${TIMEZONE_NOTE.en}: within those hours you get a fixed price and a written deadline in under two hours; if you write outside them, first thing the next working day.`,
-        `<strong>Translation signed the same day.</strong> A document of up to ${SAME_DAY_MAX_PAGES} pages (a certificate, a degree, a driving licence, a short contract) that reaches me before <strong>${SAME_DAY_CUTOFF} Madrid time</strong> (3 pm) is delivered as a signed PDF that same day, with no surcharge; if it arrives after that time, within 24 hours. If it runs to more than ${SAME_DAY_MAX_PAGES} pages, you get a written deadline before work starts, normally 24 to 72 hours, and that is the deadline I keep. If you need more than ${SAME_DAY_MAX_PAGES} pages the same day, I can do it with a 30% surcharge: tell me when you ask for the quote and I will confirm whether I can make it.`,
+        `<strong>Translation signed the same day.</strong> A document of up to ${SAME_DAY_MAX_PAGES} pages (a certificate, a degree, a driving licence, a short contract) that reaches me before <strong>${SAME_DAY_CUTOFF.en} Madrid time</strong> is delivered as a signed PDF that same day, with no surcharge; if it arrives after that time, first thing the next morning. If it runs to more than ${SAME_DAY_MAX_PAGES} pages, you get a written deadline before work starts, normally 24 to 72 hours, and that is the deadline I keep. If you need more than ${SAME_DAY_MAX_PAGES} pages the same day, I can do it with a 30% surcharge: tell me when you ask for the quote and I will confirm whether I can make it.`,
         "<strong>If you have a dated appointment</strong> (immigration office, consulate, notary, university), tell me the date when you ask for the quote and I will confirm in writing that you will make it.",
         `For large batches and multi-document files we agree a schedule in writing${LARGE_PROJECT_CAPACITY ? `; I can take on ${LARGE_PROJECT_CAPACITY.en}` : ""}. If you are writing from the UK, Ireland or the Americas, bear Madrid time in mind when working out when you will hear back.`,
       ],
@@ -720,7 +720,7 @@ export const en = {
     {
       t: "Sworn translation",
       d: "I translate, certify, sign and stamp it personally. No text is passed on to third parties.",
-      time: `Signed the same day for up to ${SAME_DAY_MAX_PAGES} pages if it arrives before ${SAME_DAY_CUTOFF} Madrid time; otherwise within 24 hours.`,
+      time: `Signed the same day for up to ${SAME_DAY_MAX_PAGES} pages if it arrives before ${SAME_DAY_CUTOFF.en} Madrid time; otherwise first thing the next morning.`,
     },
     {
       t: "Delivery",
@@ -759,7 +759,7 @@ export const en = {
     },
     {
       q: "How long does it take?",
-      a: `Up to ${SAME_DAY_MAX_PAGES} pages, signed PDF the same day if the document reaches me before ${SAME_DAY_CUTOFF} Madrid time, and within 24 hours if it arrives later; more than ${SAME_DAY_MAX_PAGES} pages, written deadline before work starts (normally 24-72 hours). If you have a dated appointment, tell me when asking for the quote and I will confirm in writing that you will make it. Large batches get their own schedule.`,
+      a: `Up to ${SAME_DAY_MAX_PAGES} pages, signed PDF the same day if the document reaches me before ${SAME_DAY_CUTOFF.en} Madrid time, and first thing the next morning if it arrives later; more than ${SAME_DAY_MAX_PAGES} pages, written deadline before work starts (normally 24-72 hours). If you have a dated appointment, tell me when asking for the quote and I will confirm in writing that you will make it. Large batches get their own schedule.`,
     },
     {
       q: "Do you also translate from English into Spanish?",

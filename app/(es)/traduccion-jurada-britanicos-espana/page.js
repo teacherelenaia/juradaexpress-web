@@ -2,6 +2,7 @@
 import TrackedLink from "../../components/TrackedLink";
 import { SectionHeading } from "../../components/ui";
 import { DOCUMENTS } from "../../../content/documents";
+import { DELIVERY_PROMISE_SHORT } from "../../../content/site";
 
 export const metadata = {
   title: "Traducción jurada para británicos en España — guía por trámite",
@@ -48,7 +49,7 @@ const TRAMITES = [
     apostille:
       "Apostilla: sí en poderes otorgados ante notario británico; en contratos privados, no.",
     price: null,
-    time: "Según extensión — presupuesto cerrado en menos de 2 h",
+    time: `${DELIVERY_PROMISE_SHORT.es} — presupuesto cerrado en menos de 2 h`,
     href: "/traduccion-jurada-contrato-escritura",
   },
   {
@@ -64,7 +65,7 @@ const TRAMITES = [
     docs: "Tras el acuerdo posterior al Brexit, la DGT puede pedir traducción jurada del permiso o de certificados de la DVLA.",
     apostille: "Apostilla: normalmente no.",
     price: priceOf("permiso-conducir"),
-    time: "24 h",
+    time: DELIVERY_PROMISE_SHORT.es,
     href: "/documentos",
     guide: {
       href: "/canje-permiso-conducir-dgt-por-paises",

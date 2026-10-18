@@ -182,21 +182,59 @@ export const PRICE_PER_PAGE = 20;
 // mínimo.
 export const MIN_DOC_PRICE = MIN_PRICE;
 
-// Hora de corte para la entrega en el día (misma regla que la landing del
-// FBI): documento recibido antes de esta hora de Madrid, PDF el mismo día;
-// después, en 24 horas.
-export const SAME_DAY_CUTOFF = "15:00";
+// Hora de corte para la entrega en el día (Fase A, revisión de Elena del
+// 18/10/2026): una sola promesa de plazo en toda la web. Documento recibido
+// antes de esta hora de Madrid, PDF firmado el mismo día; después, a primera
+// hora del día siguiente. La hora se publica por idioma (18:00 en las
+// páginas ES, 3 pm en las EN); si cambia, se cambia solo aquí.
+export const SAME_DAY_CUTOFF = { es: "18:00", en: "3 pm" };
+
+// La promesa completa (DELIVERY_PROMISE) va bajo el botón principal del hero
+// y del cierre de la home (QuotePromise), en la FAQ «¿Cuándo la tengo?» y en
+// /precios; la primera frase sola (DELIVERY_PROMISE_SHORT) donde solo cabe
+// una línea (celdas de tabla, fichas de documento).
+export const DELIVERY_PROMISE = {
+  es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}. Si llega más tarde, lo tienes a primera hora del día siguiente. Más de ${SAME_DAY_MAX_PAGES} páginas: plazo cerrado por escrito antes de empezar, normalmente 24-72 h.`,
+  en: `Same day up to ${SAME_DAY_MAX_PAGES} pages if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time. Later than that, first thing the next morning. Over ${SAME_DAY_MAX_PAGES} pages: a written deadline before work starts, normally 24-72 hours.`,
+};
+export const DELIVERY_PROMISE_SHORT = {
+  es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}`,
+  en: `Same day up to ${SAME_DAY_MAX_PAGES} pages if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time`,
+};
+
 export const TURNAROUND = {
   es: {
     short: `en el día (hasta ${SAME_DAY_MAX_PAGES} páginas)`,
-    long: `Los documentos de hasta ${SAME_DAY_MAX_PAGES} páginas se entregan en el día, en PDF firmado y sin recargo; los más largos tienen plazo cerrado por escrito antes de empezar, normalmente 24-72 h.`,
+    long: DELIVERY_PROMISE.es,
     urgent: `más de ${SAME_DAY_MAX_PAGES} páginas en el día`,
   },
   en: {
     short: `the same day (up to ${SAME_DAY_MAX_PAGES} pages)`,
-    long: `Documents of up to ${SAME_DAY_MAX_PAGES} pages are delivered the same day as a signed PDF, with no surcharge; longer files get a written deadline before work starts, normally 24-72 hours.`,
+    long: DELIVERY_PROMISE.en,
     urgent: `more than ${SAME_DAY_MAX_PAGES} pages the same day`,
   },
+};
+
+// Trustpilot (Fase A, 18/10/2026): el perfil no se enlaza todavía. Cuando
+// Elena lo active, poner SHOW_TRUSTPILOT en true y la URL en TRUSTPILOT_URL;
+// mientras esté en false, ni la franja de confianza, ni llms.txt, ni el
+// sameAs del JSON-LD lo mencionan.
+export const SHOW_TRUSTPILOT = false;
+export const TRUSTPILOT_URL = null;
+
+// H1 y subtítulo del hero de la home (Fase A2, informe CRO del
+// 18/10/2026). Se publica la opción A (plazo). Para probar otra, basta con
+// cambiar la constante; el componente no se toca. Las tres opciones:
+//   A (plazo):    «Tu traducción jurada, firmada y entregada hoy»
+//   B (persona):  «Habla con la traductora que firma tu documento»
+//   C (garantía): «Traducción jurada con validez oficial o te la corrijo gratis»
+export const HERO_H1 = {
+  es: "Tu traducción jurada, firmada y entregada hoy",
+  en: "Your sworn translation, signed and delivered today",
+};
+export const HERO_SUB = {
+  es: `Soy Elena, traductora jurada de inglés (MAEC nº 7310). Mándame el documento y en menos de 2 horas tienes precio y plazo por escrito. Desde ${MIN_PRICE} € por documento, en el día hasta ${SAME_DAY_MAX_PAGES} páginas.`,
+  en: `I'm Elena, sworn English translator (Spanish Foreign Ministry no. 7310). Send me the document and within 2 hours you have the price and deadline in writing. From €${MIN_PRICE} per document, same day up to ${SAME_DAY_MAX_PAGES} pages.`,
 };
 
 // Capacidad confirmada por Elena el 07/09/2026. Si algún día no puede

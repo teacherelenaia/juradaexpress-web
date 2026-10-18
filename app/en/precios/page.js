@@ -1,5 +1,5 @@
 // app/en/precios/page.js
-import { DNV_PACK_PRICE } from "../../../content/site";
+import { DNV_PACK_PRICE, DELIVERY_PROMISE, DELIVERY_PROMISE_SHORT } from "../../../content/site";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { packOffers } from "../../../content/packs";
 import PacksSection from "../../components/PacksSection";
@@ -57,7 +57,7 @@ export default function Page() {
             <tr>
               <td className="p-3">Driving licence</td>
               <td className="p-3">€40</td>
-              <td className="p-3">24h</td>
+              <td className="p-3">Same day (up to 10 pages)</td>
             </tr>
             <tr className="bg-stone-50/50">
               <td className="p-3">Employer certificates / payslips</td>
@@ -67,7 +67,7 @@ export default function Page() {
             <tr>
               <td className="p-3">Contracts and notarial documents</td>
               <td className="p-3">Fixed quote within 2 hours</td>
-              <td className="p-3">Depends on length</td>
+              <td className="p-3">{DELIVERY_PROMISE_SHORT.en}</td>
             </tr>
             <tr className="bg-stone-50/50">
               <td className="p-3">
@@ -112,10 +112,8 @@ export default function Page() {
       </div>
 
       <p className="mt-8 text-sm text-slate-500">
-        * Same-day delivery for documents of up to 10 pages, no surcharge.
-        Longer files get a written deadline before work starts, normally
-        24-72 hours; same-day delivery of more than 10 pages carries a 30%
-        surcharge.
+        * {DELIVERY_PROMISE.en} Same-day delivery of more than 10 pages
+        carries a 30% surcharge.
       </p>
 
       <PacksSection locale="en" />

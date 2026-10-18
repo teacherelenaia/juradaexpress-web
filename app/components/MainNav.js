@@ -6,6 +6,11 @@
 // subrayado dorado de la página activa se dibuja con clip-path en 180 ms
 // (ver .nav-underline en globals.css).
 //
+// Fase A2 (18/10/2026): el desplegable se llama "Clientes internacionales"
+// (EN "International clients"), el mismo nombre que su bloque del pie, y
+// agrupa en un solo menú "Servicios", "Por país" y "Documentos para USCIS".
+// Ninguna URL cambia.
+//
 // FASE 2.6 / 2B.3 (encargo internacional): el ítem "Internacional" es un
 // desplegable en dos columnas, "Servicios" (nómada digital, USCIS,
 // urgentes) y "Por país" (Reino Unido, Estados Unidos, India, Irlanda,
@@ -28,7 +33,7 @@ const LINKS_ES = [
   { href: "/", label: "Inicio" },
   { href: "/precios", label: "Precios" },
   { href: "/documentos", label: "Documentos" },
-  { menu: "internacional", label: "Internacional" },
+  { menu: "internacional", label: "Clientes internacionales" },
   { href: "/blog", label: "Blog" },
   { href: "/contacto", label: "Contacto" },
 ];
@@ -37,7 +42,7 @@ const LINKS_EN = [
   { href: "/en", label: "Home" },
   { href: "/en/precios", label: "Pricing" },
   { href: "/en/documentos", label: "Documents" },
-  { menu: "internacional", label: "International" },
+  { menu: "internacional", label: "International clients" },
   { href: "/en/blog", label: "Blog" },
   { href: "/en/contacto", label: "Contact" },
 ];

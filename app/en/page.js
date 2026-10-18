@@ -1,22 +1,44 @@
 // app/en/page.js
+//
+// English home (Fase A2, 18/10/2026): Elena as the visible face. Order: hero
+// with photo and a single primary button → trust strip → quick documents →
+// calculator → why work with Elena → how it works (3 steps) → price per
+// document + direct vs agency table → reviews → US visas → digital nomad →
+// UK → large projects → about (short) → FAQ by objection → closing →
+// follow us. No section is removed: they are reordered, and the hero, quick
+// documents, process, reviews, FAQ and closing are rewritten. Hero copy
+// lives in content/site.js (HERO_H1, HERO_SUB, DELIVERY_PROMISE).
 import Image from "next/image";
 import TrackedLink from "../components/TrackedLink";
 import Reviews from "../components/Reviews";
 import TrustStrip from "../components/TrustStrip";
 import HeroSeal from "../components/HeroSeal";
-import Guarantees from "../components/Guarantees";
+import QuotePromise from "../components/QuotePromise";
 import QuoteCalculator from "../components/QuoteCalculator";
 import ProcessTimeline from "../components/ProcessTimeline";
 import ProcessVideo from "../components/ProcessVideo";
+import PricePerDocument from "../components/PricePerDocument";
 import FollowUs from "../components/FollowUs";
+import { IconWhatsApp } from "../components/Icons";
 import { SectionHeading } from "../components/ui";
 import { DOCUMENTS, MIN_PRICE } from "../../content/documents";
-import { SINCE, yearsOfExperience, MAEC_NUMBER } from "../../content/persona";
+import {
+  SINCE,
+  MAEC_NUMBER,
+  MAEC_URL,
+  PERSON_NAME,
+} from "../../content/persona";
 import {
   WHATSAPP_URL_EN,
   LARGE_PROJECT_CAPACITY,
   TIMEZONE_NOTE,
   SAME_DAY_CUTOFF,
+  SAME_DAY_MAX_PAGES,
+  HERO_H1,
+  HERO_SUB,
+  DELIVERY_PROMISE,
+  PRICE_PER_PAGE,
+  MIN_DOC_PRICE,
 } from "../../content/site";
 import {
   US_VISA_PRICES,
@@ -75,55 +97,61 @@ export const metadata = {
 // Real prices from the catalogue (content/documents.js): single source.
 const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
 
-const COMMON_DOCUMENTS = [
+// Quick documents: six entries with a fixed price and same-day delivery.
+// The FBI check keeps its own entry because it is the top US query.
+const QUICK_DOCUMENTS = [
   {
+    id: "partida-nacimiento",
     name: "Birth certificate",
-    for: "Citizenship, marriage, NIE and Civil Registry",
-    price: priceOf("partida-nacimiento"),
-    time: "Same day (up to 10 pages)",
+    cta: (p) => `Translate my birth certificate from €${p}`,
     href: "/traduccion-jurada-partida-nacimiento",
   },
   {
-    name: "Criminal record certificate",
-    for: "Immigration, visas and job offers",
-    price: priceOf("antecedentes-penales"),
-    time: "Same day (up to 10 pages)",
-    href: "/traduccion-jurada-certificado-penales",
-  },
-  {
+    id: "antecedentes-penales",
     name: "FBI background check (apostilled)",
-    for: "Spanish visas (non-lucrative, student, digital nomad)",
-    price: priceOf("antecedentes-penales"),
-    time: "Same day (up to 10 pages)",
+    cta: (p) => `Translate my FBI check from €${p}`,
     href: FBI_PATH_EN,
   },
   {
+    id: "antecedentes-penales",
+    name: "Criminal record certificate",
+    cta: (p) => `Translate my criminal record certificate from €${p}`,
+    href: "/traduccion-jurada-certificado-penales",
+  },
+  {
+    id: "certificado-matrimonio",
     name: "Marriage certificate",
-    for: "Civil Registry, residency and pensions",
-    price: priceOf("certificado-matrimonio"),
-    time: "Same day (up to 10 pages)",
+    cta: (p) => `Translate my marriage certificate from €${p}`,
     href: "/traduccion-jurada-certificado-matrimonio",
   },
   {
+    id: "titulo-universitario",
     name: "University degree",
-    for: "UCAS, recognition of qualifications, professional bodies",
-    price: priceOf("titulo-universitario"),
-    time: "Same day (up to 10 pages)",
+    cta: (p) => `Translate my degree from €${p}`,
     href: "/traduccion-jurada-titulo-universitario",
   },
   {
-    name: "Contract or deed",
-    for: "Notary, property purchase and business",
-    price: null,
-    time: "Depends on length",
-    href: "/traduccion-jurada-contrato-escritura",
+    id: null,
+    name: "Any other document",
+    detail: "Driving licence, contract, passport, will, medical certificate…",
+    cta: () => "Get a fixed price for another document",
+    href: "/en/documentos",
+  },
+].map((d) => ({ ...d, price: d.id ? priceOf(d.id) : null }));
+
+// Why work directly with Elena: three arguments, text only.
+const WHY_ELENA = [
+  {
+    t: "You talk to the person who signs",
+    d: "No agency, no queue: I answer you myself on WhatsApp or by email, 9:00 to 20:00 Madrid time. I translate, sign and stamp every document; nothing is passed on to anyone.",
   },
   {
-    name: "Any other document",
-    for: "Pick yours in the catalogue and get a quote",
-    price: null,
-    time: "Same day (up to 10 pages)",
-    href: "/en/documentos",
+    t: "Fixed price before you pay",
+    d: "I tell you what it costs and when you will have it, in writing. Per document, not per page, and no surcharges afterwards.",
+  },
+  {
+    t: "Free correction if the mistake is mine",
+    d: "If an authority rejects the translation because of an error in my work, I fix it at no cost. You never pay twice for my mistake.",
   },
 ];
 
@@ -141,32 +169,42 @@ const WHATSAPP_DNV =
 const WHATSAPP_LARGE =
   "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%20have%20a%20large%20sworn%20translation%20project%20and%20need%20a%20fixed%20quote%20and%20deadline";
 
+// FAQ ordered by objection (Fase A2): validity → deadline → price → format →
+// guarantee → paying from abroad → USCIS → FBI → non-lucrative → nomad.
+// `link` is shown under the answer and left out of the JSON-LD text.
 const FAQ = [
   {
-    q: "Is a sworn translation valid throughout Spain?",
-    a: "Yes. Sworn translations signed and stamped by an officially appointed sworn translator are valid before official bodies anywhere in Spain.",
+    q: "Will my translation be accepted?",
+    a: `Yes. I am a sworn translator-interpreter appointed by Spain's Ministry of Foreign Affairs (no. ${MAEC_NUMBER}, verifiable on its official register). Sworn translations signed and stamped by an officially appointed sworn translator are valid before official bodies anywhere in Spain: immigration offices, civil registries, universities, notaries, courts and Spanish consulates abroad. The PDF carries a qualified electronic signature and is as valid as paper.`,
   },
   {
-    q: "Do you deliver on paper and digitally?",
-    a: "Yes. We deliver a digitally signed PDF and, if you need it, a physical copy shipped to your address.",
+    q: "When will I have it?",
+    a: `${DELIVERY_PROMISE.en} Same-day delivery of more than ${SAME_DAY_MAX_PAGES} pages carries a 30% surcharge.`,
   },
   {
-    q: "Can I get my translation the same day?",
-    a: "Yes, for documents of up to 10 pages, with no surcharge. Longer files get a written deadline before work starts, normally 24-72 hours; same-day delivery of more than 10 pages carries a 30% surcharge.",
+    q: "How much does it cost exactly?",
+    a: `From €${MIN_PRICE} per document, VAT included: birth certificate, marriage certificate and criminal record certificate, €${priceOf("partida-nacimiento")}; driving licence, €${priceOf("permiso-conducir")}; university degree, €${priceOf("titulo-universitario")}. Long documents (contracts, deeds, transcripts) are priced at €${PRICE_PER_PAGE} per page with a minimum of €${MIN_DOC_PRICE} per document. You get the exact price in writing before you pay, and there are no surcharges afterwards.`,
   },
   {
-    q: "Do you work with clients outside Spain?",
-    a: "Yes. I work with clients in the United States, India, the United Kingdom, Ireland, Canada, Australia and any other country: sending the document, paying by card and receiving the signed PDF work the same way from anywhere, and paper copies are couriered if you need them.",
+    q: "PDF or paper?",
+    a: "Both. You always receive the digitally signed PDF, which is valid before any official body; if you need paper, I courier it to your address in Spain or in any other country (the courier cost is stated in the quote).",
   },
   {
-    q: "Do you provide certified translations for USCIS?",
+    q: "What if it gets rejected?",
+    a: "If an authority rejects the translation because of my mistake, I fix it free and resend the PDF. If the problem lies in the original document (a missing apostille, an expired certificate), I tell you before I start so you never pay twice.",
+  },
+  {
+    q: "Can I pay from outside Spain?",
+    a: "Yes. I work with clients in the United States, India, the United Kingdom, Ireland, Canada, Australia and any other country: sending the document, paying by international card and receiving the signed PDF work the same way from anywhere, and paper copies are couriered if you need them.",
+  },
+  {
+    q: "Do you translate for USCIS?",
     a: "Yes. I deliver the complete English translation with the certification of accuracy and competence that USCIS requires (8 CFR § 103.2(b)(3)), signed, dated and with my contact details, one certificate per document. No notary is needed.",
   },
-  // US visa applicants (17/10/2026). `link` is shown under the answer and
-  // left out of the JSON-LD text.
+  // US visa applicants (17/10/2026).
   {
     q: "Can you translate my FBI background check for a Spanish visa?",
-    a: `Yes. I do the sworn translation of the FBI Identity History Summary and of its US Department of State apostille for €${FBI_PRICE}, delivered as a signed PDF the same day if it reaches me before ${SAME_DAY_CUTOFF} Madrid time. Spanish consulates in the United States accept it.`,
+    a: `Yes. I do the sworn translation of the FBI Identity History Summary and of its US Department of State apostille for €${FBI_PRICE}, delivered as a signed PDF the same day if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time. Spanish consulates in the United States accept it.`,
     link: { label: "FBI background check translation for your Spanish visa", href: FBI_PATH_EN },
   },
   {
@@ -177,214 +215,326 @@ const FAQ = [
   {
     q: "How long does a complete digital nomad visa file take?",
     a: LARGE_PROJECT_CAPACITY
-      ? `You get a single fixed deadline in writing before I start; documents of up to 10 pages are delivered the same day and I can handle ${LARGE_PROJECT_CAPACITY.en}, so a complete file is usually ready within a few days.`
-      : "You get a single fixed deadline in writing before I start; documents of up to 10 pages are delivered the same day.",
+      ? `You get a single fixed deadline in writing before I start; documents of up to ${SAME_DAY_MAX_PAGES} pages are delivered the same day and I can handle ${LARGE_PROJECT_CAPACITY.en}, so a complete file is usually ready within a few days.`
+      : `You get a single fixed deadline in writing before I start; documents of up to ${SAME_DAY_MAX_PAGES} pages are delivered the same day.`,
   },
 ];
+
+const PHOTO_ALT = "Elena Peñaranda Ortega, sworn English translator";
 
 export default function Page() {
   return (
     <main>
-      {/* HERO */}
-      <section className="mx-auto max-w-6xl px-4 pb-16 pt-12 md:pb-20 md:pt-16">
-        <div className="grid items-center gap-10 md:grid-cols-2">
+      {/* HERO — text on the left, Elena's photo on the right */}
+      <section className="mx-auto max-w-6xl px-4 pb-14 pt-10 md:pb-20 md:pt-16">
+        <div className="grid items-center gap-8 md:grid-cols-[1.15fr,0.85fr] md:gap-12">
+          {/* Square photo on mobile (top), portrait on desktop */}
+          <figure className="md:hidden">
+            <Image
+              src="/elena-penaranda-sq.jpg"
+              alt={PHOTO_ALT}
+              width={160}
+              height={160}
+              priority
+              className="h-40 w-40 rounded-xl object-cover"
+            />
+            <figcaption className="mt-3 text-sm text-slate-600">
+              {PERSON_NAME} · Sworn Translator-Interpreter of English ·{" "}
+              <a
+                href={MAEC_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link whitespace-nowrap"
+              >
+                MAEC no. {MAEC_NUMBER}
+              </a>
+            </figcaption>
+          </figure>
+
           <div>
             <h1 className="font-display text-balance text-display font-semibold text-slate-900">
-              Sworn{" "}
-              <em className="font-display italic text-brand-gold-700">
-                Spanish ⇆ English
-              </em>{" "}
-              translation, officially valid, the same day
+              {HERO_H1.en}
             </h1>
-            <p className="mt-5 text-xl text-slate-700">
-              Officially valid · Same day up to 10 pages · Clients in Spain, the
-              UK, the USA, India and any country
+            <p className="mt-5 max-w-[60ch] text-xl text-slate-700">
+              {HERO_SUB.en}
             </p>
-            <p className="mt-4">
-              <span className="inline-flex flex-wrap items-center gap-x-2 rounded-full bg-brand-gold-50 px-3.5 py-1.5 text-sm font-medium text-brand-navy ring-1 ring-brand-gold-200">
-                <span className="tabular-nums">From €{MIN_PRICE} per document</span>
-                <span className="text-brand-gold-700" aria-hidden="true">
-                  ·
-                </span>
-                <span>Fixed quote in under 2 hours</span>
-              </span>
-            </p>
-            <Guarantees locale="en" className="mt-4" />
-            <p className="mt-3 max-w-[68ch] text-base text-slate-600">
-              I'm a{" "}
-              <a href="/en/sworn-english-translator" className="link">
-                sworn English translator
-              </a>{" "}
-              appointed by Spain's Foreign Ministry in {SINCE}, with{" "}
-              {yearsOfExperience()} years of experience. The whole process is
-              digital: you send me a scan of the document, pay by card from
-              any country and receive the translation as a signed PDF the
-              same day for documents of up to 10 pages. I also provide certified translations
-              for USCIS.
+            <p className="mt-4 max-w-[68ch] text-base text-slate-600">
+              Officially valid sworn Spanish-English translation. The whole
+              process is digital: you send me a scan of the document, pay by
+              card from any country and receive the signed PDF. I also provide{" "}
+              <a href="/en/certified-translation-uscis" className="link">
+                certified translations for USCIS
+              </a>
+              .
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-7">
               <TrackedLink
                 label="hero_quote_en"
-                href="/en/documentos"
-                className="btn btn-primary"
+                href="#calculadora"
+                className="btn btn-gold"
               >
-                Request a quote
+                Get a quote in 2 hours
               </TrackedLink>
+              <QuotePromise locale="en" className="mt-3 max-w-[60ch]" />
               <TrackedLink
                 label="hero_whatsapp_en"
                 href={WHATSAPP_URL_EN}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-secondary"
+                className="link-nav mt-4 inline-flex min-h-[44px] items-center gap-2 font-medium text-brand-navy"
               >
-                WhatsApp
+                <IconWhatsApp className="h-5 w-5 text-brand-gold-700" />
+                Message Elena on WhatsApp
               </TrackedLink>
             </div>
+            <p className="mt-3 text-sm text-slate-600">
+              If an authority rejects it because of my mistake, I fix it free.
+            </p>
           </div>
 
-          <div className="relative">
-            <figure className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
+          <figure className="relative hidden md:block">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[380px] overflow-hidden rounded-xl shadow-lg">
               <Image
-                src="/fotos/hero-firma.jpg"
-                alt="Hand signing a sworn translation with a pen on the document"
+                src="/elena-penaranda.jpg"
+                alt={PHOTO_ALT}
                 fill
                 priority
-                sizes="(min-width: 768px) 560px, 100vw"
+                sizes="(min-width: 768px) 380px, 100vw"
                 className="object-cover"
               />
-            </figure>
-            <HeroSeal className="absolute -bottom-6 -left-4 h-32 w-32 md:-left-8 md:h-40 md:w-40" />
-          </div>
+              <HeroSeal className="absolute -bottom-2 -left-2 h-24 w-24" />
+            </div>
+            <figcaption className="mx-auto mt-4 max-w-[380px] text-sm text-slate-600">
+              {PERSON_NAME} · Sworn Translator-Interpreter of English ·{" "}
+              <a
+                href={MAEC_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link whitespace-nowrap"
+                aria-label="MAEC no. 7310: check the appointment on the Ministry's official register (opens in a new tab)"
+              >
+                MAEC no. {MAEC_NUMBER}
+              </a>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
       {/* TRUST STRIP — four facts, no icons, no cards */}
       <TrustStrip locale="en" />
 
-      {/* CALCULADORA — precio orientativo al instante + subida de documento */}
-      <QuoteCalculator locale="en" />
+      {/* QUICK DOCUMENTS — six entries, 3×2 grid, no cards */}
+      <section
+        className="mx-auto max-w-6xl px-4 py-16 md:py-20"
+        data-track-section="tramites_rapidos"
+      >
+        <SectionHeading>
+          Quick documents: fixed price and same-day delivery
+        </SectionHeading>
+        <p className="mt-3 max-w-[68ch] text-slate-600">
+          The documents I translate most often, with prices from and
+          turnaround. Each has its own page with requirements, apostille and
+          examples.
+        </p>
+        <ul className="mt-8 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
+          {QUICK_DOCUMENTS.map((doc) => (
+            <li
+              key={doc.name}
+              className="border-t border-stone-200 py-5"
+            >
+              <h3 className="font-medium text-slate-900">{doc.name}</h3>
+              <p className="mt-1 text-sm text-slate-600">
+                {doc.price != null ? (
+                  <>
+                    <span className="font-semibold tabular-nums text-slate-900">
+                      from €{doc.price}
+                    </span>{" "}
+                    · same day
+                  </>
+                ) : (
+                  <>
+                    {doc.detail}{" "}
+                    <span className="font-semibold text-slate-900">
+                      fixed price within 2 hours
+                    </span>
+                  </>
+                )}
+              </p>
+              <a href={doc.href} className="link mt-2 inline-block py-1">
+                {doc.cta(doc.price)}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6">
+          <a href="/en/documentos" className="link">
+            See all documents →
+          </a>
+        </p>
+        <p className="mt-4 text-sm text-slate-500">
+          Document guides are currently in Spanish; quotes and the whole
+          service are available in English. Prices are in euros and charged
+          in euros to any international card.
+        </p>
+      </section>
 
-      {/* MOST COMMON DOCUMENTS — editorial list, image on the left */}
-      <section className="bg-stone-50">
+      {/* CALCULATOR — same component; moved down */}
+      <QuoteCalculator locale="en" className="!pt-0" />
+
+      {/* WHY WORK DIRECTLY WITH ELENA — three blocks, text only */}
+      <section className="bg-stone-50" data-track-section="por_que_elena">
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <div className="grid items-start gap-10 md:grid-cols-[minmax(0,380px),1fr]">
+          <SectionHeading>Why work directly with Elena</SectionHeading>
+          <dl className="mt-8 grid gap-8 md:grid-cols-3 md:gap-10">
+            {WHY_ELENA.map((w) => (
+              <div key={w.t} className="border-t border-brand-gold-500 pt-4">
+                <dt className="text-lg font-semibold text-slate-900">{w.t}</dt>
+                <dd className="mt-2 text-slate-600">{w.d}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-10 max-w-[68ch] text-slate-700">
+            I&apos;m {PERSON_NAME}, a sworn translator-interpreter of English
+            appointed by Spain&apos;s Ministry of Foreign Affairs in {SINCE}{" "}
+            (no. {MAEC_NUMBER}; you can check it on{" "}
+            <a
+              href={MAEC_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link"
+            >
+              the Ministry&apos;s official register
+            </a>
+            ). I translate, sign and stamp every document myself; nothing is
+            passed on to anyone. When you write to me, I am the one who
+            answers: on WhatsApp or by email, 9:00 to 20:00 Madrid time. You
+            get the price and the deadline in writing before I charge you
+            anything, and if an authority rejects the translation because of
+            my mistake, I fix it free. Since {SINCE} I have been translating
+            the documents people rebuild their lives with: birth certificates,
+            criminal record checks, degrees, visas. I treat them as what they
+            are to you, a procedure that cannot fail.
+          </p>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS — three numbered steps, no icons */}
+      <section>
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="order-2 md:order-1">
-              <div className="relative hidden aspect-[3/4] overflow-hidden rounded-xl shadow md:block">
+              <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-64">
                 <Image
-                  src="/fotos/foto-documentos.jpg"
-                  alt="Passport and travel documents on a laptop — sworn document translation"
+                  src="/fotos/proceso-despacho.jpg"
+                  alt="Sworn translator working on the document at her desk"
                   fill
-                  sizes="380px"
+                  sizes="(min-width: 768px) 480px, 100vw"
                   className="object-cover"
                 />
               </div>
+              <ProcessVideo className="mt-4 aspect-video" />
             </div>
             <div className="order-1 md:order-2">
-              <SectionHeading>Most commonly translated documents</SectionHeading>
+              <SectionHeading>How it works</SectionHeading>
               <p className="mt-3 max-w-[68ch] text-slate-600">
-                Every document has its own requirements. These are the ones I
-                translate most often, with prices from and typical turnaround.
-              </p>
-              <ul className="mt-8 grid gap-x-10 lg:grid-cols-2">
-                {COMMON_DOCUMENTS.map((doc) => (
-                  <li
-                    key={doc.name}
-                    className="border-b border-stone-200 py-4"
-                  >
-                    <a href={doc.href} className="group block no-underline">
-                      <div className="flex items-baseline justify-between gap-3">
-                        <span className="font-medium text-brand-navy group-hover:text-brand-gold-700">
-                          {doc.name}
-                        </span>
-                        <span className="shrink-0 text-sm font-semibold tabular-nums text-slate-900">
-                          {doc.price != null ? `from €${doc.price}` : "on quote"}
-                        </span>
-                      </div>
-                      <div className="mt-1 flex items-baseline justify-between gap-3">
-                        <span className="text-sm text-slate-600">
-                          {doc.for}
-                        </span>
-                        <span className="shrink-0 text-xs text-slate-500">
-                          {doc.time}
-                        </span>
-                      </div>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-4 text-sm text-slate-500">
-                Document guides are currently in Spanish; quotes and the whole
-                service are available in English. Prices are in euros and
-                charged in euros to any international card.
+                The whole process is 100% digital: whether you&apos;re in Spain
+                or on another continent, sending your documents, getting your
+                quote, paying by card and receiving your translation work
+                exactly the same way.
               </p>
             </div>
           </div>
+
+          <ProcessTimeline
+            steps={[
+              {
+                t: "Send the document",
+                d: "Scanned or photographed, through the calculator, on WhatsApp or by email. PDF, JPG, PNG or HEIC all work.",
+              },
+              {
+                t: "Get the price and deadline in writing within 2 hours",
+                d: "With the link to pay by card or Apple Pay. Nothing is charged until you approve it.",
+              },
+              {
+                t: "Receive the signed PDF",
+                d: `Same day up to ${SAME_DAY_MAX_PAGES} pages. If you need paper, I send it by courier.`,
+              },
+            ]}
+          />
         </div>
       </section>
+
+      {/* PRICE PER DOCUMENT + DIRECT VS AGENCY TABLE (Fase A) */}
+      <PricePerDocument locale="en" />
+
+      {/* REVIEWS — four reviews from content/reviews.js, with procedure and month */}
+      <Reviews locale="en" className="!bg-white" />
 
       {/* US VISA APPLICANTS (17/10/2026) — same style as the nomad section */}
       <section
         id="us-visas"
         data-track-section="portada_visados_us"
-        className="mx-auto max-w-6xl px-4 pt-16 md:pt-20"
+        className="bg-stone-50"
       >
-        <div className="max-w-[68ch]">
-          <SectionHeading>Applying for a Spanish visa from the United States?</SectionHeading>
-          <p className="mt-4 text-slate-600">
-            I translate your FBI background check (Identity History Summary)
-            with its US Department of State apostille, birth and marriage
-            certificates and medical certificates for Spain&apos;s
-            non-lucrative, student and digital nomad visas. It is a sworn
-            translation by a translator appointed by Spain&apos;s Foreign
-            Ministry (no. {MAEC_NUMBER}), accepted by Spanish consulates in the
-            United States. You get a signed PDF the same day if your documents
-            reach me before {SAME_DAY_CUTOFF} Madrid time, a paper copy by
-            courier if your consulate asks for one, and you pay with your US
-            card.
-          </p>
-          <ul className="mt-6 grid gap-2 text-slate-700">
-            {US_VISA_PRICES.map((p) => (
-              <li key={p.label} className="flex gap-3">
-                <span
-                  className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold-500"
-                  aria-hidden="true"
-                />
-                <span>
-                  {p.label}:{" "}
-                  <span className="font-semibold tabular-nums text-slate-900">
-                    {p.price}
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <div className="max-w-[68ch]">
+            <SectionHeading>Applying for a Spanish visa from the United States?</SectionHeading>
+            <p className="mt-4 text-slate-600">
+              I translate your FBI background check (Identity History Summary)
+              with its US Department of State apostille, birth and marriage
+              certificates and medical certificates for Spain&apos;s
+              non-lucrative, student and digital nomad visas. It is a sworn
+              translation by a translator appointed by Spain&apos;s Foreign
+              Ministry (no. {MAEC_NUMBER}), accepted by Spanish consulates in the
+              United States. You get a signed PDF the same day if your documents
+              reach me before {SAME_DAY_CUTOFF.en} Madrid time, a paper copy by
+              courier if your consulate asks for one, and you pay with your US
+              card.
+            </p>
+            <ul className="mt-6 grid gap-2 text-slate-700">
+              {US_VISA_PRICES.map((p) => (
+                <li key={p.label} className="flex gap-3">
+                  <span
+                    className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold-500"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    {p.label}:{" "}
+                    <span className="font-semibold tabular-nums text-slate-900">
+                      {p.price}
+                    </span>
                   </span>
-                </span>
-              </li>
-            ))}
-          </ul>
-          <ul className="mt-6 grid gap-1">
-            {US_VISA_LINKS.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} className="link inline-block py-1">
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <TrackedLink
-              label="us_visas_whatsapp_en"
-              href={WHATSAPP_US_VISA}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              WhatsApp
-            </TrackedLink>
-            <TrackedLink
-              label="us_visas_quote_en"
-              href="#calculadora"
-              className="btn btn-secondary"
-            >
-              Get a quote online
-            </TrackedLink>
+                </li>
+              ))}
+            </ul>
+            <ul className="mt-6 grid gap-1">
+              {US_VISA_LINKS.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="link inline-block py-1">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <TrackedLink
+                label="us_visas_whatsapp_en"
+                href={WHATSAPP_US_VISA}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                WhatsApp
+              </TrackedLink>
+              <TrackedLink
+                label="us_visas_quote_en"
+                href="#calculadora"
+                className="btn btn-secondary"
+              >
+                Get a quote online
+              </TrackedLink>
+            </div>
           </div>
         </div>
       </section>
@@ -499,58 +649,8 @@ export default function Page() {
         </div>
       </section>
 
-      {/* HOW IT WORKS — timeline (the home's single animated moment) */}
-      <section>
-        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div className="order-2 md:order-1">
-              <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-64">
-                <Image
-                  src="/fotos/proceso-despacho.jpg"
-                  alt="Sworn translator working on the document at her desk"
-                  fill
-                  sizes="(min-width: 768px) 480px, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <ProcessVideo className="mt-4 aspect-video" />
-            </div>
-            <div className="order-1 md:order-2">
-              <SectionHeading>How it works</SectionHeading>
-              <p className="mt-3 max-w-[68ch] text-slate-600">
-                The whole process is 100% digital: whether you&apos;re in Spain
-                or on another continent, sending your documents, getting your
-                quote, paying by card and receiving your translation work
-                exactly the same way.
-              </p>
-            </div>
-          </div>
-
-          <ProcessTimeline
-            steps={[
-              {
-                t: "Send",
-                d: "Send me a scan or photo of your document by email or WhatsApp.",
-              },
-              {
-                t: "Quote",
-                d: "You get a fixed price and a real delivery time within 2 hours.",
-              },
-              {
-                t: "Sworn translation",
-                d: "I translate, sign and stamp your document personally.",
-              },
-              {
-                t: "Same-day delivery (up to 10 pages)",
-                d: "A digitally signed PDF and, if you need it, paper by courier.",
-              },
-            ]}
-          />
-        </div>
-      </section>
-
       {/* LARGE PROJECTS, SHORT DEADLINES */}
-      <section className="bg-stone-50">
+      <section>
         <div className="mx-auto max-w-6xl px-4 py-14 md:py-16">
           <div className="grid gap-8 md:grid-cols-[1.4fr,1fr] md:items-center">
             <div>
@@ -587,96 +687,49 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ABOUT ME */}
-      <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-        <div className="grid items-center gap-8 md:grid-cols-[auto,1fr]">
-          <div
-            className="mx-auto flex h-28 w-28 shrink-0 items-center justify-center rounded-xl bg-stone-100 font-display text-3xl font-semibold tracking-tight text-brand-navy md:mx-0"
-            aria-hidden="true"
-          >
-            E.P.
-          </div>
-          <div>
-            <SectionHeading>About me</SectionHeading>
-            <p className="mt-4 max-w-[68ch] text-lg text-slate-600">
-              I&apos;m <strong className="text-brand-navy">Elena Peñaranda Ortega</strong>,
-              a Sworn Translator-Interpreter for English appointed by the
-              Spanish Ministry of Foreign Affairs, European Union and
-              Cooperation under{" "}
-              <a
-                href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Buscador-STIJ.aspx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link"
-              >
-                accreditation no. 7310
-              </a>{" "}
-              since {SINCE}. I personally translate, sign and stamp every sworn
-              translation, guaranteeing its validity before any official body
-              in Spain.
-            </p>
-            <p className="mt-4 max-w-[68ch] text-slate-600">
-              I also provide certified translations for USCIS and work with
-              clients in the United States, India, the United Kingdom,
-              Ireland, Canada and Australia through the same digital process.{" "}
-              {TIMEZONE_NOTE.en}.
-            </p>
-            <p className="mt-4">
-              <a href="/en/about" className="link">
-                Find out how I work and why my signature is trusted →
-              </a>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* REVIEWS — only rendered when content/reviews.js holds real reviews */}
-      <Reviews locale="en" />
-
-      {/* FINAL CTA */}
-      <section className="mx-auto max-w-6xl px-4 pb-16 pt-16 md:pb-20 md:pt-20">
-        <div
-          data-surface="navy"
-          className="rounded-xl bg-brand-navy p-8 text-white md:p-12"
-        >
-          <div className="grid items-center gap-8 md:grid-cols-[1.2fr,0.8fr]">
+      {/* ABOUT ME — short: the full biography lives in /en/about */}
+      <section className="bg-stone-50">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <div className="grid items-center gap-8 md:grid-cols-[auto,1fr]">
+            <Image
+              src="/elena-penaranda-sq.jpg"
+              alt={PHOTO_ALT}
+              width={112}
+              height={112}
+              className="mx-auto h-28 w-28 rounded-xl object-cover md:mx-0"
+            />
             <div>
-              <SectionHeading light>Shall we get started?</SectionHeading>
-              <p className="mt-2 text-brand-navy-100">
-                Send me your document and I&apos;ll reply with a quote and delivery time.
+              <SectionHeading>About me</SectionHeading>
+              <p className="mt-4 max-w-[68ch] text-lg text-slate-600">
+                I&apos;m <strong className="text-brand-navy">{PERSON_NAME}</strong>,
+                a Sworn Translator-Interpreter for English appointed by the
+                Spanish Ministry of Foreign Affairs, European Union and
+                Cooperation under{" "}
+                <a
+                  href={MAEC_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link"
+                >
+                  accreditation no. {MAEC_NUMBER}
+                </a>{" "}
+                since {SINCE}. I also provide certified translations for USCIS
+                and work with clients in the United States, India, the United
+                Kingdom, Ireland, Canada and Australia through the same digital
+                process. {TIMEZONE_NOTE.en}.
               </p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <TrackedLink
-                  label="cta_quote_final_en"
-                  href="/en/documentos"
-                  className="btn btn-light"
-                >
-                  Request a quote
-                </TrackedLink>
-                <TrackedLink
-                  label="cta_pricing_final_en"
-                  href="/en/precios"
-                  className="btn btn-outline-light"
-                >
-                  See pricing
-                </TrackedLink>
-              </div>
-            </div>
-            <div className="relative h-48 w-full overflow-hidden rounded-xl shadow-lg md:h-56">
-              <Image
-                src="/docs-real.jpg"
-                alt="Official certificates stacked, ready for sworn translation"
-                fill
-                sizes="(min-width: 768px) 360px, 100vw"
-                className="object-cover"
-              />
+              <p className="mt-4">
+                <a href="/en/about" className="link">
+                  Read my story →
+                </a>
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* FAQ + JSON-LD */}
-      <section className="mx-auto max-w-6xl px-4 pb-20" data-track-section="faq">
+      <section className="mx-auto max-w-6xl px-4 pb-16 pt-16" data-track-section="faq">
         <SectionHeading>Frequently asked questions</SectionHeading>
         <div className="mt-8 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200">
           {FAQ.map((f, idx) => (
@@ -727,6 +780,51 @@ export default function Page() {
             }),
           }}
         />
+      </section>
+
+      {/* CLOSING */}
+      <section className="mx-auto max-w-6xl px-4 pb-16 md:pb-20">
+        <div
+          data-surface="navy"
+          className="rounded-xl bg-brand-navy p-8 text-white md:p-12"
+        >
+          <div className="grid items-center gap-8 md:grid-cols-[1.2fr,0.8fr]">
+            <div>
+              <SectionHeading light>
+                Send me your document and you have your deadline today
+              </SectionHeading>
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <TrackedLink
+                  label="cta_quote_final_en"
+                  href="#calculadora"
+                  className="btn btn-gold"
+                >
+                  Get a quote in 2 hours
+                </TrackedLink>
+                <TrackedLink
+                  label="cta_whatsapp_final_en"
+                  href={WHATSAPP_URL_EN}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-nav inline-flex min-h-[44px] items-center gap-2 font-medium text-white"
+                >
+                  <IconWhatsApp className="h-5 w-5 text-brand-gold-300" />
+                  Message Elena on WhatsApp
+                </TrackedLink>
+              </div>
+              <QuotePromise locale="en" light className="mt-4 max-w-[60ch]" />
+            </div>
+            <div className="relative h-48 w-full overflow-hidden rounded-xl shadow-lg md:h-56">
+              <Image
+                src="/docs-real.jpg"
+                alt="Official certificates stacked, ready for sworn translation"
+                fill
+                sizes="(min-width: 768px) 360px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* FOLLOW US */}

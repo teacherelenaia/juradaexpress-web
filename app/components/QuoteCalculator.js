@@ -111,7 +111,7 @@ const COPY = {
     privacyLink: "política de privacidad",
     privacyTail:
       "y acepto que Elena Peñaranda Ortega trate mis datos y los documentos adjuntos solo para preparar el presupuesto.",
-    submit: "Enviar y recibir presupuesto",
+    submit: "Enviar y recibir mi precio cerrado",
     sending: "Enviando…",
     uploading: (pct) => `Subiendo archivos… ${pct} %. No cierres esta página.`,
     sendingSummary: "Enviando tu solicitud…",
@@ -199,7 +199,7 @@ const COPY = {
     privacyLink: "privacy policy",
     privacyTail:
       "and I agree that Elena Peñaranda Ortega processes my details and the attached documents only to prepare the quote.",
-    submit: "Send and get my quote",
+    submit: "Send and get my fixed price",
     sending: "Sending…",
     uploading: (pct) => `Uploading files… ${pct}%. Please keep this page open.`,
     sendingSummary: "Sending your request…",
@@ -503,6 +503,29 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
   // { emailed: [nombre], pending: [{ name, reason }] } tras el envío
   const [result, setResult] = useState(null);
   const [waUrl, setWaUrl] = useState("");
+
+  // Preselección por URL (Fase A2, 18/10/2026): `?doc=<id>` con un id de
+  // content/documents.js, tanto en la query (/?doc=partida-nacimiento) como
+  // dentro del hash (/#calculadora?doc=partida-nacimiento, que es como
+  // enlazan las páginas de documento). En el segundo caso el navegador no
+  // encuentra el ancla, así que se desplaza aquí a mano.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const { search, hash } = window.location;
+    const fromHash = hash.includes("?") ? hash.slice(hash.indexOf("?")) : "";
+    const id =
+      new URLSearchParams(search).get("doc") ||
+      new URLSearchParams(fromHash).get("doc");
+    if (id && DOCUMENTS.some((d) => d.id === id)) setDocumentId(id);
+    if (fromHash && hash.startsWith("#calculadora")) {
+      // Tras la hidratación el navegador aún puede restaurar el scroll a 0;
+      // se espera un instante para que el desplazamiento no se pierda.
+      const timer = setTimeout(() => {
+        document.getElementById("calculadora")?.scrollIntoView();
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const doc = DOCUMENTS.find((d) => d.id === documentId) || DOCUMENTS[0];
   const urgent = urgency === "urgent";

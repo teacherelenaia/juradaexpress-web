@@ -17,7 +17,14 @@
 //     rating: 5,                              // opcional, 1-5
 //     lang:   "es",                           // opcional: "es" | "en"
 //     url:    "https://…",                    // opcional: enlace a la reseña
+//     procedure: { es: "…", en: "…" },        // opcional: el trámite
 //   }
+//
+// `procedure` (Fase A2, 18/10/2026): el trámite al que corresponde la
+// reseña («Partida de nacimiento para nacionalidad»), en los dos idiomas.
+// Lo rellena Elena a mano cuando lo sabe con certeza por el encargo; si
+// está vacío, la home muestra solo el nombre y el mes. NUNCA se deduce del
+// texto de la reseña ni se inventa.
 //
 // Reglas:
 // - Solo reseñas publicadas realmente por el cliente en la fuente indicada
@@ -42,6 +49,7 @@ export const REVIEWS = [
     source: "Google",
     rating: 5,
     lang: "en",
+    procedure: { es: "", en: "" },
     text: "Incredibly fast and efficient service. You also make the process very easy. Thankyou",
   },
   {
@@ -50,6 +58,7 @@ export const REVIEWS = [
     source: "Google",
     rating: 5,
     lang: "en",
+    procedure: { es: "", en: "" },
     text: "Great service,fast and she translates everything for a very good price and nearly instantly. I would 100% recommend her service.",
   },
   {
@@ -58,6 +67,7 @@ export const REVIEWS = [
     source: "Google",
     rating: 5,
     lang: "en",
+    procedure: { es: "", en: "" },
     text: "Elena did an amazing job! She responded immediately to my request and did the translation of a few documents within 1,5 hours. I‘m so happy I found her, it‘s a flawless service! Thank you very much!",
   },
   {
@@ -66,6 +76,7 @@ export const REVIEWS = [
     source: "Google",
     rating: 5,
     lang: "en",
+    procedure: { es: "", en: "" },
     text: "Speedy responses and great service provided thank you",
   },
   // Leídas el 07/09/2026. Matt Marson y Emilia Crawley aparecían en Maps el
@@ -77,6 +88,7 @@ export const REVIEWS = [
     source: "Google",
     rating: 5,
     lang: "es",
+    procedure: { es: "", en: "" },
     text: "Un trabajo impecable y rápido. Muy contenta",
   },
   {
@@ -85,6 +97,7 @@ export const REVIEWS = [
     source: "Google",
     rating: 5,
     lang: "en",
+    procedure: { es: "", en: "" },
     text: "Elena was a joy to work with, the translated documents were provided within a couple of hours of getting in touch with her. Excellent job and wouldn't hesitate to use Elena again!",
   },
   {
@@ -93,6 +106,7 @@ export const REVIEWS = [
     source: "Google",
     rating: 5,
     lang: "es",
+    procedure: { es: "", en: "" },
     text: "No puedo estar más agradecida por el trabajo y, sobre todo, por la implicación de esta traductora. Tuve varios problemas con la Embajada relacionados con la traducción de los certificados de nacimiento de mis hijos y ella no solo realizó su trabajo de manera impecable, sino que se involucró muchísimo hasta conseguir solucionar todos los problemas.\n\nLo que más valoro es que en todo momento sentí que se lo tomaba como si fuera un problema suyo personal. Estuvo pendiente de cada detalle, buscó soluciones y consiguió resolverlo todo súper rápido, con una profesionalidad y una cercanía increíbles.\n\nEn una situación que para mí era muy importante y bastante estresante, encontrar a alguien que se implique de esta manera marca una diferencia enorme.\n\n100% recomendable. Profesional, rápida, atenta y, sobre todo, una persona que realmente se preocupa por sus clientes. Muchísimas gracias por toda la ayuda y por haberlo solucionado todo. 🙏❤️",
   },
   {
@@ -101,6 +115,7 @@ export const REVIEWS = [
     source: "Google",
     rating: 5,
     lang: "es",
+    procedure: { es: "", en: "" },
     text: "¡Todo genial! Elena es una gran profesional, muy cercana y muy rápida. Me ayudó con todos los procesos que tenían que ver con mi caso y, en cada paso del mismo, me fue aconsejando, cosa que no me ha pasado antes. La volveré a contratar sin duda. 5/5",
   },
   {
@@ -109,6 +124,7 @@ export const REVIEWS = [
     source: "Google",
     rating: 5,
     lang: "en",
+    procedure: { es: "", en: "" },
     text: "Impressive service, good price and swift transaction. The document was translated very quickly. First class service!",
   },
   {
@@ -117,6 +133,7 @@ export const REVIEWS = [
     source: "Google",
     rating: 5,
     lang: "es",
+    procedure: { es: "", en: "" },
     text: "Excelente profesional y totalmente recomendable. Desde el primer momento destaca por su atención cercana, rapidez y profesionalidad. Además de dominar perfectamente el idioma, conoce a la perfección los procedimientos y requisitos de la traducción jurada, algo fundamental cuando se trata de documentación oficial.\n\nEl trabajo ha sido impecable, tanto por la calidad de la traducción como por el cuidado de todos los detalles y la orientación durante el proceso. Da mucha tranquilidad contar con una traductora jurada que no solo conoce el idioma, sino también los trámites y procedimientos necesarios para que la documentación sea válida.\n\nProfesionalidad, conocimiento y una atención excelente. Sin duda, repetiría y la recomendaría al 100 %.",
   },
   {
@@ -125,6 +142,7 @@ export const REVIEWS = [
     source: "Google",
     rating: 5,
     lang: "en",
+    procedure: { es: "", en: "" },
     text: "Elena has been so incredibly responsive and helpful with my recent request for a translation of my marriage certificate and apostille.\nHer communication is clear and concise , her command of English language is perfect and I found her help to be invaluable.\nI will definitely continue to use Elena for any future translations and recommend her services. Thank you so much Elena .",
   },
 ];

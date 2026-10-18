@@ -1,21 +1,43 @@
 // app/page.js
+//
+// Portada ES (Fase A2, 18/10/2026): Elena como cara visible. Orden: hero con
+// foto y un solo botón principal → franja de confianza → trámites rápidos →
+// calculadora → por qué trabajar con Elena → cómo funciona (3 pasos) →
+// precio por documento + tabla directa vs agencia → opiniones → nómada
+// digital → británicos → proyectos grandes → sobre mí (corto) → FAQ por
+// objeción → cierre → síguenos. Ninguna sección se elimina: se reordenan y
+// se reescriben hero, trámites, proceso, opiniones, FAQ y cierre. Los textos
+// del hero viven en content/site.js (HERO_H1, HERO_SUB, DELIVERY_PROMISE).
 import Image from "next/image";
 import TrackedLink from "../components/TrackedLink";
 import Reviews from "../components/Reviews";
 import TrustStrip from "../components/TrustStrip";
 import HeroSeal from "../components/HeroSeal";
-import Guarantees from "../components/Guarantees";
+import QuotePromise from "../components/QuotePromise";
 import QuoteCalculator from "../components/QuoteCalculator";
 import ProcessTimeline from "../components/ProcessTimeline";
 import ProcessVideo from "../components/ProcessVideo";
+import PricePerDocument from "../components/PricePerDocument";
 import FollowUs from "../components/FollowUs";
+import { IconWhatsApp } from "../components/Icons";
 import { SectionHeading } from "../components/ui";
 import { DOCUMENTS, MIN_PRICE } from "../../content/documents";
-import { SINCE, yearsOfExperience } from "../../content/persona";
+import {
+  SINCE,
+  MAEC_URL,
+  MAEC_NUMBER,
+  PERSON_NAME,
+} from "../../content/persona";
 import {
   WHATSAPP_URL,
   LARGE_PROJECT_CAPACITY,
   TIMEZONE_NOTE,
+  HERO_H1,
+  HERO_SUB,
+  DELIVERY_PROMISE,
+  PRICE_PER_PAGE,
+  MIN_DOC_PRICE,
+  SAME_DAY_MAX_PAGES,
 } from "../../content/site";
 
 export const metadata = {
@@ -64,48 +86,61 @@ export const metadata = {
 // Precios reales desde el catálogo (content/documents.js): una sola fuente.
 const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
 
-const COMMON_DOCUMENTS = [
+// Trámites rápidos: seis entradas con precio cerrado y entrega en el día.
+// `cta` es el texto descriptivo del enlace (el precio se lee del catálogo).
+const QUICK_DOCUMENTS = [
   {
+    id: "partida-nacimiento",
     name: "Partida de nacimiento",
-    for: "Nacionalidad, matrimonio, NIE y Registro Civil",
-    price: priceOf("partida-nacimiento"),
-    time: "En el día (hasta 10 págs.)",
+    cta: (p) => `Traducir mi partida de nacimiento desde ${p} €`,
     href: "/traduccion-jurada-partida-nacimiento",
   },
   {
+    id: "antecedentes-penales",
     name: "Certificado de antecedentes penales",
-    for: "Extranjería, visados y ofertas de empleo",
-    price: priceOf("antecedentes-penales"),
-    time: "En el día (hasta 10 págs.)",
+    cta: (p) => `Traducir mis antecedentes penales desde ${p} €`,
     href: "/traduccion-jurada-certificado-penales",
   },
   {
+    id: "certificado-matrimonio",
     name: "Certificado de matrimonio",
-    for: "Registro Civil, residencia y pensiones",
-    price: priceOf("certificado-matrimonio"),
-    time: "En el día (hasta 10 págs.)",
+    cta: (p) => `Traducir mi certificado de matrimonio desde ${p} €`,
     href: "/traduccion-jurada-certificado-matrimonio",
   },
   {
+    id: "titulo-universitario",
     name: "Título universitario",
-    for: "UCAS, homologación y colegiación profesional",
-    price: priceOf("titulo-universitario"),
-    time: "En el día (hasta 10 págs.)",
+    cta: (p) => `Traducir mi título universitario desde ${p} €`,
     href: "/traduccion-jurada-titulo-universitario",
   },
   {
-    name: "Contrato o escritura",
-    for: "Notaría, compraventa de vivienda y empresa",
-    price: null,
-    time: "Según extensión",
-    href: "/traduccion-jurada-contrato-escritura",
+    id: "permiso-conducir",
+    name: "Permiso de conducir",
+    cta: (p) => `Traducir mi permiso de conducir desde ${p} €`,
+    href: "/traduccion-jurada-permiso-conducir",
   },
   {
-    name: "Cualquier otro documento",
-    for: "Elige el tuyo en el catálogo y pide presupuesto",
-    price: null,
-    time: "En el día (hasta 10 págs.)",
+    id: null,
+    name: "Otro documento",
+    detail: "Contrato, DNI, testamento, certificado médico…",
+    cta: () => "Pedir precio cerrado para otro documento",
     href: "/documentos",
+  },
+].map((d) => ({ ...d, price: d.id ? priceOf(d.id) : null }));
+
+// Por qué trabajar directamente con Elena: tres argumentos, solo texto.
+const WHY_ELENA = [
+  {
+    t: "Hablas con quien firma",
+    d: "No hay agencia ni cola: te contesto yo por WhatsApp o email, de 9:00 a 20:00. Cada traducción la hago, la firmo y la sello yo, sin pasarla a nadie.",
+  },
+  {
+    t: "Precio cerrado antes de pagar",
+    d: "Te digo cuánto cuesta y cuándo lo tienes por escrito. Por documento, no por página, y sin recargos después.",
+  },
+  {
+    t: "Corrijo gratis si hay un error mío",
+    d: "Si un organismo rechaza la traducción por un fallo de mi trabajo, la corrijo sin coste. No pagas dos veces por mi error.",
   },
 ];
 
@@ -123,287 +158,243 @@ const WHATSAPP_DNV =
 const WHATSAPP_LARGE =
   "https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20tengo%20un%20proyecto%20grande%20de%20traducci%C3%B3n%20jurada%20y%20necesito%20presupuesto%20y%20plazo%20cerrados";
 
+// FAQ ordenada por objeción (Fase A2): validez → plazo → precio → formato →
+// garantía → pago desde fuera → USCIS → nómada digital. El JSON-LD FAQPage
+// se genera de esta misma lista.
 const FAQ = [
   {
-    q: "¿La traducción jurada es válida en todo el territorio?",
-    a: "Sí. Las traducciones juradas firmadas y selladas por traductor jurado son válidas ante organismos oficiales.",
+    q: "¿Me aceptarán la traducción?",
+    a: `Sí. Soy traductora-intérprete jurada nombrada por el Ministerio de Asuntos Exteriores (nº ${MAEC_NUMBER}, comprobable en su buscador oficial). Las traducciones juradas firmadas y selladas por traductor jurado son válidas ante organismos oficiales: Extranjería, Registro Civil, universidades, notarías, juzgados y consulados. El PDF lleva firma electrónica cualificada y vale igual que el papel.`,
   },
   {
-    q: "¿Entregáis en papel y digital?",
-    a: "Sí. Entregamos PDF firmado digitalmente y, si lo necesitas, envío físico a tu dirección.",
+    q: "¿Cuándo la tengo?",
+    a: `${DELIVERY_PROMISE.es} Entregar en el día más de ${SAME_DAY_MAX_PAGES} páginas lleva un recargo del 30 %.`,
   },
   {
-    q: "¿Puedo tener la traducción en el día?",
-    a: "Sí, hasta 10 páginas y sin recargo. Los expedientes más largos tienen plazo cerrado por escrito antes de empezar, normalmente 24-72 h; entregar en el día más de 10 páginas lleva un recargo del 30 %.",
+    q: "¿Cuánto cuesta exactamente?",
+    a: `Desde ${MIN_PRICE} € por documento, IVA incluido: partida de nacimiento, certificado de matrimonio y antecedentes penales, ${priceOf("partida-nacimiento")} €; permiso de conducir, ${priceOf("permiso-conducir")} €; título universitario, ${priceOf("titulo-universitario")} €. Los documentos largos (contratos, escrituras, expedientes) van a ${PRICE_PER_PAGE} € por página con un mínimo de ${MIN_DOC_PRICE} € por documento. Te doy el precio exacto por escrito antes de pagar y no hay recargos después.`,
   },
   {
-    q: "¿Trabajas con clientes fuera de España?",
-    a: "Sí. Atiendo a clientes de Estados Unidos, India, Reino Unido, Irlanda, Canadá, Australia y cualquier otro país: el envío del documento, el pago con tarjeta y la entrega en PDF firmado funcionan igual desde cualquier lugar, y el papel llega por mensajería si lo necesitas.",
+    q: "¿PDF o papel?",
+    a: "Las dos cosas. Entrego siempre el PDF firmado digitalmente, que vale ante cualquier organismo; si lo necesitas en papel, te lo envío por mensajería a tu dirección, en España o en cualquier país (el coste del transportista se indica en el presupuesto).",
   },
   {
-    q: "¿Haces traducciones certificadas para USCIS?",
+    q: "¿Qué pasa si me la rechazan?",
+    a: "Si un organismo rechaza la traducción por un error mío, la corrijo gratis y te reenvío el PDF. Si el problema está en el documento original (una apostilla que falta, un certificado caducado), te lo digo antes de empezar para que no pagues dos veces.",
+  },
+  {
+    q: "¿Puedo pagar desde fuera de España?",
+    a: "Sí. Atiendo a clientes de Estados Unidos, India, Reino Unido, Irlanda, Canadá, Australia y cualquier otro país: el envío del documento, el pago con tarjeta internacional y la entrega en PDF firmado funcionan igual desde cualquier lugar, y el papel llega por mensajería si lo necesitas.",
+  },
+  {
+    q: "¿Traduces para USCIS?",
     a: "Sí. Entrego la traducción completa al inglés con la certificación de exactitud y competencia que exige USCIS (8 CFR § 103.2(b)(3)), firmada, fechada y con mis datos de contacto, un certificado por documento. No hace falta notario.",
   },
   {
     q: "¿Cuánto tardas en traducir un expediente completo de nómada digital?",
     a: LARGE_PROJECT_CAPACITY
-      ? `Te doy un plazo único cerrado por escrito antes de empezar; los documentos de hasta 10 páginas salen en el día y puedo asumir ${LARGE_PROJECT_CAPACITY.es}, así que un expediente completo suele estar listo en pocos días.`
-      : "Te doy un plazo único cerrado por escrito antes de empezar; los documentos de hasta 10 páginas salen en el día.",
+      ? `Te doy un plazo único cerrado por escrito antes de empezar; los documentos de hasta ${SAME_DAY_MAX_PAGES} páginas salen en el día y puedo asumir ${LARGE_PROJECT_CAPACITY.es}, así que un expediente completo suele estar listo en pocos días.`
+      : `Te doy un plazo único cerrado por escrito antes de empezar; los documentos de hasta ${SAME_DAY_MAX_PAGES} páginas salen en el día.`,
   },
 ];
+
+const PHOTO_ALT = "Elena Peñaranda Ortega, traductora jurada de inglés";
 
 export default function Page() {
   return (
     <main>
-      {/* HERO */}
-      <section className="mx-auto max-w-6xl px-4 pb-16 pt-12 md:pb-20 md:pt-16">
-        <div className="grid items-center gap-10 md:grid-cols-2">
+      {/* HERO — texto a la izquierda, foto de Elena a la derecha */}
+      <section className="mx-auto max-w-6xl px-4 pb-14 pt-10 md:pb-20 md:pt-16">
+        <div className="grid items-center gap-8 md:grid-cols-[1.15fr,0.85fr] md:gap-12">
+          {/* Foto cuadrada en móvil (arriba), retrato en escritorio */}
+          <figure className="md:hidden">
+            <Image
+              src="/elena-penaranda-sq.jpg"
+              alt={PHOTO_ALT}
+              width={160}
+              height={160}
+              priority
+              className="h-40 w-40 rounded-xl object-cover"
+            />
+            <figcaption className="mt-3 text-sm text-slate-600">
+              {PERSON_NAME} · Traductora-Intérprete Jurada de Inglés ·{" "}
+              <a
+                href={MAEC_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link whitespace-nowrap"
+              >
+                MAEC nº {MAEC_NUMBER}
+              </a>
+            </figcaption>
+          </figure>
+
           <div>
             <h1 className="font-display text-balance text-display font-semibold text-slate-900">
-              Traducción jurada{" "}
-              <em className="font-display italic text-brand-gold-700">
-                Español ⇆ Inglés
-              </em>{" "}
-              con validez oficial, en el día
+              {HERO_H1.es}
             </h1>
-            <p className="mt-5 text-xl text-slate-700">
-              Validez oficial · En el día hasta 10 páginas · Clientes en España, Reino
-              Unido, EE. UU., India y cualquier país
+            <p className="mt-5 max-w-[60ch] text-xl text-slate-700">
+              {HERO_SUB.es}
             </p>
-            <p className="mt-4">
-              <span className="inline-flex flex-wrap items-center gap-x-2 rounded-full bg-brand-gold-50 px-3.5 py-1.5 text-sm font-medium text-brand-navy ring-1 ring-brand-gold-200">
-                <span className="tabular-nums">Desde {MIN_PRICE} € por documento</span>
-                <span className="text-brand-gold-700" aria-hidden="true">
-                  ·
-                </span>
-                <span>Presupuesto cerrado en menos de 2 h</span>
-              </span>
-            </p>
-            <Guarantees locale="es" className="mt-4" />
-            <p className="mt-3 max-w-[68ch] text-base text-slate-600">
-              Soy{" "}
-              <a href="/traductor-jurado-ingles" className="link">
-                traductora jurada de inglés
-              </a>{" "}
-              nombrada por el MAEC en {SINCE}, con {yearsOfExperience()} años
-              de experiencia. Todo el proceso es digital: me envías el
-              documento escaneado, pagas con tarjeta desde cualquier país y
-              recibes la traducción en PDF firmado en el día si no pasa de
-              10 páginas. También hago traducción certificada para USCIS.
+            <p className="mt-4 max-w-[68ch] text-base text-slate-600">
+              Traducción jurada español-inglés con validez oficial. Todo el
+              proceso es digital: me envías el documento escaneado, pagas con
+              tarjeta desde cualquier país y recibes el PDF firmado. También
+              hago{" "}
+              <a href="/traduccion-certificada-uscis" className="link">
+                traducción certificada para USCIS
+              </a>
+              .
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-7">
               <TrackedLink
                 label="hero_presupuesto"
-                href="/documentos"
-                className="btn btn-primary"
+                href="#calculadora"
+                className="btn btn-gold"
               >
-                Pedir presupuesto
+                Pedir presupuesto en 2 horas
               </TrackedLink>
+              <QuotePromise locale="es" className="mt-3 max-w-[60ch]" />
               <TrackedLink
                 label="hero_whatsapp"
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-secondary"
+                className="link-nav mt-4 inline-flex min-h-[44px] items-center gap-2 font-medium text-brand-navy"
               >
-                WhatsApp
+                <IconWhatsApp className="h-5 w-5 text-brand-gold-700" />
+                Escribir a Elena por WhatsApp
               </TrackedLink>
             </div>
+            <p className="mt-3 text-sm text-slate-600">
+              Si el organismo la rechaza por un error mío, la corrijo gratis.
+            </p>
           </div>
 
-          <div className="relative">
-            <figure className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
+          <figure className="relative hidden md:block">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[380px] overflow-hidden rounded-xl shadow-lg">
               <Image
-                src="/fotos/hero-firma.jpg"
-                alt="Mano firmando una traducción jurada con pluma sobre el documento"
+                src="/elena-penaranda.jpg"
+                alt={PHOTO_ALT}
                 fill
                 priority
-                sizes="(min-width: 768px) 560px, 100vw"
+                sizes="(min-width: 768px) 380px, 100vw"
                 className="object-cover"
               />
-            </figure>
-            <HeroSeal className="absolute -bottom-6 -left-4 h-32 w-32 md:-left-8 md:h-40 md:w-40" />
-          </div>
+              <HeroSeal className="absolute -bottom-2 -left-2 h-24 w-24" />
+            </div>
+            <figcaption className="mx-auto mt-4 max-w-[380px] text-sm text-slate-600">
+              {PERSON_NAME} · Traductora-Intérprete Jurada de Inglés ·{" "}
+              <a
+                href={MAEC_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link whitespace-nowrap"
+                aria-label="MAEC nº 7310: comprobar el nombramiento en el buscador oficial del MAEC (se abre en una pestaña nueva)"
+              >
+                MAEC nº {MAEC_NUMBER}
+              </a>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
       {/* FRANJA DE CONFIANZA — cuatro hechos, sin iconos ni tarjetas */}
       <TrustStrip locale="es" />
 
-      {/* CALCULADORA — precio orientativo al instante + subida de documento */}
-      <QuoteCalculator locale="es" />
+      {/* TRÁMITES RÁPIDOS — seis entradas, rejilla 3×2, sin tarjetas */}
+      <section
+        className="mx-auto max-w-6xl px-4 py-16 md:py-20"
+        data-track-section="tramites_rapidos"
+      >
+        <SectionHeading>
+          Trámites rápidos: precio cerrado y entrega en el día
+        </SectionHeading>
+        <p className="mt-3 max-w-[68ch] text-slate-600">
+          Los documentos que más traduzco, con su precio desde y su plazo.
+          Cada uno tiene su página con requisitos, apostilla y ejemplos.
+        </p>
+        <ul className="mt-8 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
+          {QUICK_DOCUMENTS.map((doc) => (
+            <li
+              key={doc.name}
+              className="border-t border-stone-200 py-5"
+            >
+              <h3 className="font-medium text-slate-900">{doc.name}</h3>
+              <p className="mt-1 text-sm text-slate-600">
+                {doc.price != null ? (
+                  <>
+                    <span className="font-semibold tabular-nums text-slate-900">
+                      desde {doc.price} €
+                    </span>{" "}
+                    · en el día
+                  </>
+                ) : (
+                  <>
+                    {doc.detail}{" "}
+                    <span className="font-semibold text-slate-900">
+                      precio cerrado en menos de 2 h
+                    </span>
+                  </>
+                )}
+              </p>
+              <a href={doc.href} className="link mt-2 inline-block py-1">
+                {doc.cta(doc.price)}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6">
+          <a href="/documentos" className="link">
+            Ver todos los documentos →
+          </a>
+        </p>
+      </section>
 
-      {/* DOCUMENTOS MÁS HABITUALES — lista editorial, imagen a la izquierda */}
-      <section className="bg-stone-50">
+      {/* CALCULADORA — mismo componente; baja de posición */}
+      <QuoteCalculator locale="es" className="!pt-0" />
+
+      {/* POR QUÉ TRABAJAR DIRECTAMENTE CON ELENA — tres bloques, solo texto */}
+      <section
+        className="bg-stone-50"
+        data-track-section="por_que_elena"
+      >
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <div className="grid items-start gap-10 md:grid-cols-[minmax(0,380px),1fr]">
-            <div className="order-2 md:order-1">
-              <div className="relative hidden aspect-[3/4] overflow-hidden rounded-xl shadow md:block">
-                <Image
-                  src="/fotos/foto-documentos.jpg"
-                  alt="Pasaporte y documentos de viaje sobre un portátil — traducción jurada de documentos"
-                  fill
-                  sizes="380px"
-                  className="object-cover"
-                />
+          <SectionHeading>Por qué trabajar directamente con Elena</SectionHeading>
+          <dl className="mt-8 grid gap-8 md:grid-cols-3 md:gap-10">
+            {WHY_ELENA.map((w) => (
+              <div key={w.t} className="border-t border-brand-gold-500 pt-4">
+                <dt className="text-lg font-semibold text-slate-900">{w.t}</dt>
+                <dd className="mt-2 text-slate-600">{w.d}</dd>
               </div>
-            </div>
-            <div className="order-1 md:order-2">
-              <SectionHeading>Documentos más habituales</SectionHeading>
-              <p className="mt-3 max-w-[68ch] text-slate-600">
-                Cada documento tiene sus requisitos. Estos son los que traduzco
-                con más frecuencia, con su precio desde y su plazo habitual.
-              </p>
-              <ul className="mt-8 grid gap-x-10 lg:grid-cols-2">
-                {COMMON_DOCUMENTS.map((doc) => (
-                  <li
-                    key={doc.name}
-                    className="border-b border-stone-200 py-4"
-                  >
-                    <a href={doc.href} className="group block no-underline">
-                      <div className="flex items-baseline justify-between gap-3">
-                        <span className="font-medium text-brand-navy group-hover:text-brand-gold-700">
-                          {doc.name}
-                        </span>
-                        <span className="shrink-0 text-sm font-semibold tabular-nums text-slate-900">
-                          {doc.price != null
-                            ? `desde ${doc.price} €`
-                            : "presupuesto"}
-                        </span>
-                      </div>
-                      <div className="mt-1 flex items-baseline justify-between gap-3">
-                        <span className="text-sm text-slate-600">
-                          {doc.for}
-                        </span>
-                        <span className="shrink-0 text-xs text-slate-500">
-                          {doc.time}
-                        </span>
-                      </div>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+            ))}
+          </dl>
+          <p className="mt-10 max-w-[68ch] text-slate-700">
+            Soy {PERSON_NAME}, traductora-intérprete jurada de inglés nombrada
+            por el Ministerio de Asuntos Exteriores en {SINCE} (nº{" "}
+            {MAEC_NUMBER}, puedes comprobarlo en{" "}
+            <a
+              href={MAEC_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link"
+            >
+              su buscador oficial
+            </a>
+            ). Cada traducción la hago, la firmo y la sello yo, sin pasarla a
+            nadie. Cuando me escribes, me respondes a mí: por WhatsApp o por
+            email, de 9:00 a 20:00. Te digo el precio y el plazo por escrito
+            antes de cobrarte nada, y si un organismo rechaza la traducción por
+            un error mío, la corrijo gratis. Desde {SINCE} traduzco los
+            documentos con los que la gente rehace su vida: partidas de
+            nacimiento, antecedentes penales, títulos, visados. Los trato como
+            lo que son para ti, un trámite que no puede fallar.
+          </p>
         </div>
       </section>
 
-      {/* VISADO DE NÓMADA DIGITAL — imagen a la izquierda */}
-      <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-        <div className="grid items-center gap-10 md:grid-cols-[minmax(0,380px),1fr]">
-          <div className="relative hidden aspect-[3/4] overflow-hidden rounded-xl shadow md:block">
-            <Image
-              src="/fotos/expediente-nomada.jpg"
-              alt="Manos revisando un formulario oficial sobre una carpeta de documentos — expediente de visado de nómada digital"
-              fill
-              sizes="380px"
-              className="object-cover"
-            />
-          </div>
-          <div>
-            <SectionHeading>
-              ¿Vas a pedir el visado de nómada digital?
-            </SectionHeading>
-            <p className="mt-4 max-w-[68ch] text-slate-600">
-              El expediente de la autorización de residencia para teletrabajo
-              internacional (Ley 28/2022) reúne muchos documentos de distintos
-              países, y casi todos tienen que llegar al consulado o a la UGE
-              en español. La mayoría de las denegaciones vienen de traducciones
-              que no son juradas o de apostillas que faltan, no del fondo del
-              caso. Yo reviso tu lista completa, te digo qué documento
-              necesita apostilla y traduzco todo el lote con un solo plazo,
-              ordenado y nombrado para subirlo a la plataforma.
-            </p>
-            <ul className="mt-6 grid max-w-[68ch] gap-2 text-slate-700 sm:grid-cols-1">
-              {DNV_DOCUMENTS.map((d) => (
-                <li key={d} className="flex gap-3">
-                  <span
-                    className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold-500"
-                    aria-hidden="true"
-                  />
-                  <span>{d}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <TrackedLink
-                label="dnv_guia"
-                href="/traduccion-jurada-visado-nomada-digital"
-                className="btn btn-primary"
-              >
-                Ver qué documentos necesitas
-              </TrackedLink>
-              <TrackedLink
-                label="dnv_whatsapp"
-                href={WHATSAPP_DNV}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary"
-              >
-                WhatsApp
-              </TrackedLink>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* REINO UNIDO — imagen a la derecha */}
-      <section className="bg-stone-50">
-        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div>
-              <SectionHeading>
-                ¿Resides en España siendo británico/a?
-              </SectionHeading>
-              <p className="mt-4 max-w-[68ch] text-slate-600">
-                Te ayudo con la traducción jurada de tus documentos para el
-                NIE, la tarjeta de residencia, el empadronamiento, la compra
-                de una vivienda o cualquier otro trámite tras el Brexit.
-                Documentos en regla, sin sorpresas, para que puedas
-                centrarte en instalarte.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <TrackedLink
-                  label="uk_guia"
-                  href="/traduccion-jurada-britanicos-espana"
-                  className="btn btn-primary"
-                >
-                  Guía trámite a trámite
-                </TrackedLink>
-                <TrackedLink
-                  label="uk_whatsapp"
-                  href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20soy%20brit%C3%A1nico%2Fa%20y%20necesito%20traducci%C3%B3n%20jurada%20para%20un%20tr%C3%A1mite%20en%20Espa%C3%B1a"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-secondary"
-                >
-                  WhatsApp
-                </TrackedLink>
-              </div>
-              <p className="mt-6 max-w-[68ch] text-sm text-slate-600">
-                Si vienes de Estados Unidos, India, Irlanda, Canadá o
-                Australia,{" "}
-                <a href="/traduccion-jurada-por-paises" className="link">
-                  tienes tu propia guía
-                </a>
-                .
-              </p>
-            </div>
-            <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-72">
-              <Image
-                src="/fotos/escritorio-documentos.jpg"
-                alt="Mano escribiendo en un cuaderno junto a un portátil, preparando la documentación de un trámite en España"
-                fill
-                sizes="(min-width: 768px) 480px, 100vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CÓMO TRABAJAMOS — línea temporal (momento animado único) */}
+      {/* CÓMO FUNCIONA — tres pasos numerados, sin iconos */}
       <section>
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <div className="grid items-center gap-8 md:grid-cols-2">
@@ -422,9 +413,9 @@ export default function Page() {
               <ProcessVideo className="mt-4 aspect-video" />
             </div>
             <div className="order-1 md:order-2">
-              <SectionHeading>¿Cómo trabajamos?</SectionHeading>
+              <SectionHeading>Cómo funciona</SectionHeading>
               <p className="mt-3 max-w-[68ch] text-slate-600">
-                Todo el proceso es 100% digital: da igual si estás en Murcia,
+                Todo el proceso es 100 % digital: da igual si estás en Murcia,
                 en cualquier otro punto de España o en otro continente. El
                 envío, el presupuesto, el pago con tarjeta y la entrega
                 funcionan igual.
@@ -435,23 +426,139 @@ export default function Page() {
           <ProcessTimeline
             steps={[
               {
-                t: "Envío",
-                d: "Me mandas el documento escaneado por email o WhatsApp.",
+                t: "Envía el documento",
+                d: "Escaneado o fotografiado, por la calculadora, por WhatsApp o por email. Vale PDF, JPG, PNG o HEIC.",
               },
               {
-                t: "Presupuesto",
-                d: "Te doy precio cerrado y plazo real en menos de 2 horas.",
+                t: "Recibe precio y plazo por escrito en menos de 2 horas",
+                d: "Con el enlace para pagar con tarjeta o Apple Pay. Nada se cobra antes de que lo apruebes.",
               },
               {
-                t: "Traducción jurada",
-                d: "Traduzco, firmo y sello personalmente tu documento.",
-              },
-              {
-                t: "Entrega en el día (hasta 10 páginas)",
-                d: "PDF firmado digitalmente y, si lo necesitas, papel por mensajería.",
+                t: "Recibe el PDF firmado",
+                d: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas. Si lo necesitas en papel, te lo envío por mensajería.`,
               },
             ]}
           />
+        </div>
+      </section>
+
+      {/* PRECIO POR DOCUMENTO + TABLA DIRECTA VS AGENCIA (Fase A) */}
+      <PricePerDocument locale="es" />
+
+      {/* OPINIONES — cuatro reseñas de content/reviews.js, con trámite y mes */}
+      <Reviews locale="es" className="!bg-white" />
+
+      {/* VISADO DE NÓMADA DIGITAL — imagen a la izquierda */}
+      <section className="bg-stone-50">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <div className="grid items-center gap-10 md:grid-cols-[minmax(0,380px),1fr]">
+            <div className="relative hidden aspect-[3/4] overflow-hidden rounded-xl shadow md:block">
+              <Image
+                src="/fotos/expediente-nomada.jpg"
+                alt="Manos revisando un formulario oficial sobre una carpeta de documentos — expediente de visado de nómada digital"
+                fill
+                sizes="380px"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <SectionHeading>
+                ¿Vas a pedir el visado de nómada digital?
+              </SectionHeading>
+              <p className="mt-4 max-w-[68ch] text-slate-600">
+                El expediente de la autorización de residencia para teletrabajo
+                internacional (Ley 28/2022) reúne muchos documentos de distintos
+                países, y casi todos tienen que llegar al consulado o a la UGE
+                en español. La mayoría de las denegaciones vienen de traducciones
+                que no son juradas o de apostillas que faltan, no del fondo del
+                caso. Yo reviso tu lista completa, te digo qué documento
+                necesita apostilla y traduzco todo el lote con un solo plazo,
+                ordenado y nombrado para subirlo a la plataforma.
+              </p>
+              <ul className="mt-6 grid max-w-[68ch] gap-2 text-slate-700 sm:grid-cols-1">
+                {DNV_DOCUMENTS.map((d) => (
+                  <li key={d} className="flex gap-3">
+                    <span
+                      className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold-500"
+                      aria-hidden="true"
+                    />
+                    <span>{d}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <TrackedLink
+                  label="dnv_guia"
+                  href="/traduccion-jurada-visado-nomada-digital"
+                  className="btn btn-primary"
+                >
+                  Ver qué documentos necesitas
+                </TrackedLink>
+                <TrackedLink
+                  label="dnv_whatsapp"
+                  href={WHATSAPP_DNV}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                >
+                  WhatsApp
+                </TrackedLink>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* REINO UNIDO — imagen a la derecha */}
+      <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+        <div className="grid items-center gap-8 md:grid-cols-2">
+          <div>
+            <SectionHeading>
+              ¿Resides en España siendo británico/a?
+            </SectionHeading>
+            <p className="mt-4 max-w-[68ch] text-slate-600">
+              Te ayudo con la traducción jurada de tus documentos para el
+              NIE, la tarjeta de residencia, el empadronamiento, la compra
+              de una vivienda o cualquier otro trámite tras el Brexit.
+              Documentos en regla, sin sorpresas, para que puedas
+              centrarte en instalarte.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <TrackedLink
+                label="uk_guia"
+                href="/traduccion-jurada-britanicos-espana"
+                className="btn btn-primary"
+              >
+                Guía trámite a trámite
+              </TrackedLink>
+              <TrackedLink
+                label="uk_whatsapp"
+                href="https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20soy%20brit%C3%A1nico%2Fa%20y%20necesito%20traducci%C3%B3n%20jurada%20para%20un%20tr%C3%A1mite%20en%20Espa%C3%B1a"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+              >
+                WhatsApp
+              </TrackedLink>
+            </div>
+            <p className="mt-6 max-w-[68ch] text-sm text-slate-600">
+              Si vienes de Estados Unidos, India, Irlanda, Canadá o
+              Australia,{" "}
+              <a href="/traduccion-jurada-por-paises" className="link">
+                tienes tu propia guía
+              </a>
+              .
+            </p>
+          </div>
+          <div className="relative h-56 w-full overflow-hidden rounded-xl shadow md:h-72">
+            <Image
+              src="/fotos/escritorio-documentos.jpg"
+              alt="Mano escribiendo en un cuaderno junto a un portátil, preparando la documentación de un trámite en España"
+              fill
+              sizes="(min-width: 768px) 480px, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 
@@ -493,95 +600,46 @@ export default function Page() {
         </div>
       </section>
 
-      {/* SOBRE MÍ */}
+      {/* SOBRE MÍ — corto: la biografía completa está en /sobre-mi */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:py-20">
         <div className="grid items-center gap-8 md:grid-cols-[auto,1fr]">
-          <div
-            className="mx-auto flex h-28 w-28 shrink-0 items-center justify-center rounded-xl bg-stone-100 font-display text-3xl font-semibold tracking-tight text-brand-navy md:mx-0"
-            aria-hidden="true"
-          >
-            E.P.
-          </div>
+          <Image
+            src="/elena-penaranda-sq.jpg"
+            alt={PHOTO_ALT}
+            width={112}
+            height={112}
+            className="mx-auto h-28 w-28 rounded-xl object-cover md:mx-0"
+          />
           <div>
             <SectionHeading>Sobre mí</SectionHeading>
             <p className="mt-4 max-w-[68ch] text-lg text-slate-600">
-              Soy <strong className="text-brand-navy">Elena Peñaranda Ortega</strong>,
+              Soy <strong className="text-brand-navy">{PERSON_NAME}</strong>,
               Traductora-Intérprete Jurada de Inglés nombrada por el Ministerio
               de Asuntos Exteriores, Unión Europea y Cooperación con el{" "}
               <a
-                href="https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Buscador-STIJ.aspx"
+                href={MAEC_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link"
               >
-                nº de acreditación 7310
+                nº de acreditación {MAEC_NUMBER}
               </a>{" "}
-              desde {SINCE}. Cada traducción jurada la realizo, firmo y sello
-              personalmente, garantizando su validez ante cualquier organismo
-              oficial.
-            </p>
-            <p className="mt-4 max-w-[68ch] text-slate-600">
-              También hago traducciones certificadas para USCIS y atiendo a
-              clientes de Estados Unidos, India, Reino Unido, Irlanda, Canadá
-              o Australia con el mismo proceso digital.{" "}
+              desde {SINCE}. También hago traducciones certificadas para USCIS
+              y atiendo a clientes de Estados Unidos, India, Reino Unido,
+              Irlanda, Canadá o Australia con el mismo proceso digital.{" "}
               {TIMEZONE_NOTE.es}.
             </p>
             <p className="mt-4">
               <a href="/sobre-mi" className="link">
-                Conoce cómo trabajo y por qué puedes confiar en mi firma →
+                Conoce mi trayectoria →
               </a>
             </p>
           </div>
         </div>
       </section>
 
-      {/* OPINIONES — solo se renderiza si content/reviews.js tiene reseñas reales */}
-      <Reviews locale="es" />
-
-      {/* CTA FINAL */}
-      <section className="mx-auto max-w-6xl px-4 pb-16 pt-16 md:pb-20 md:pt-20">
-        <div
-          data-surface="navy"
-          className="rounded-xl bg-brand-navy p-8 text-white md:p-12"
-        >
-          <div className="grid items-center gap-8 md:grid-cols-[1.2fr,0.8fr]">
-            <div>
-              <SectionHeading light>¿Empezamos?</SectionHeading>
-              <p className="mt-2 text-brand-navy-100">
-                Envíame el documento y te respondo con presupuesto y plazo.
-              </p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <TrackedLink
-                  label="cta_presupuesto_final"
-                  href="/documentos"
-                  className="btn btn-light"
-                >
-                  Pedir presupuesto
-                </TrackedLink>
-                <TrackedLink
-                  label="cta_precios_final"
-                  href="/precios"
-                  className="btn btn-outline-light"
-                >
-                  Ver precios
-                </TrackedLink>
-              </div>
-            </div>
-            <div className="relative h-48 w-full overflow-hidden rounded-xl shadow-lg md:h-56">
-              <Image
-                src="/docs-real.jpg"
-                alt="Certificados oficiales apilados listos para su traducción jurada"
-                fill
-                sizes="(min-width: 768px) 360px, 100vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* FAQ + JSON-LD */}
-      <section className="mx-auto max-w-6xl px-4 pb-20" data-track-section="faq">
+      <section className="mx-auto max-w-6xl px-4 pb-16" data-track-section="faq">
         <SectionHeading>Preguntas frecuentes</SectionHeading>
         <div className="mt-8 divide-y divide-stone-200 rounded-xl bg-white ring-1 ring-stone-200">
           {FAQ.map((f, idx) => (
@@ -622,6 +680,51 @@ export default function Page() {
             }),
           }}
         />
+      </section>
+
+      {/* CIERRE */}
+      <section className="mx-auto max-w-6xl px-4 pb-16 md:pb-20">
+        <div
+          data-surface="navy"
+          className="rounded-xl bg-brand-navy p-8 text-white md:p-12"
+        >
+          <div className="grid items-center gap-8 md:grid-cols-[1.2fr,0.8fr]">
+            <div>
+              <SectionHeading light>
+                Mándame tu documento y hoy tienes el plazo
+              </SectionHeading>
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <TrackedLink
+                  label="cta_presupuesto_final"
+                  href="#calculadora"
+                  className="btn btn-gold"
+                >
+                  Pedir presupuesto en 2 horas
+                </TrackedLink>
+                <TrackedLink
+                  label="cta_whatsapp_final"
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-nav inline-flex min-h-[44px] items-center gap-2 font-medium text-white"
+                >
+                  <IconWhatsApp className="h-5 w-5 text-brand-gold-300" />
+                  Escribir a Elena por WhatsApp
+                </TrackedLink>
+              </div>
+              <QuotePromise locale="es" light className="mt-4 max-w-[60ch]" />
+            </div>
+            <div className="relative h-48 w-full overflow-hidden rounded-xl shadow-lg md:h-56">
+              <Image
+                src="/docs-real.jpg"
+                alt="Certificados oficiales apilados listos para su traducción jurada"
+                fill
+                sizes="(min-width: 768px) 360px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* SÍGUENOS */}

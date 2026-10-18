@@ -17,8 +17,8 @@ import { mkdirSync } from "node:fs";
 const [, , base = "http://localhost:3000", outDir] = process.argv;
 const PATH = "/en/for-immigration-law-firms";
 const LOCALES = [
-  { id: "es", home: "/", menu: "Internacional", group: "Documentos para USCIS (en inglés)", label: "Despachos de inmigración EE. UU. (EN)", footer: "Despachos EE. UU.", hreflang: "en", open: "Abrir menú" },
-  { id: "en", home: "/en", menu: "International", group: "Spanish documents for USCIS", label: "For immigration law firms", footer: "For law firms", hreflang: null, open: "Open menu" },
+  { id: "es", home: "/", menu: "Clientes internacionales", group: "Documentos para USCIS (en inglés)", label: "Despachos de inmigración EE. UU. (EN)", footer: "Despachos EE. UU.", hreflang: "en", open: "Abrir menú" },
+  { id: "en", home: "/en", menu: "International clients", group: "Spanish documents for USCIS", label: "For immigration law firms", footer: "For law firms", hreflang: null, open: "Open menu" },
 ];
 
 let failed = 0;
