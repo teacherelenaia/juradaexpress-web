@@ -46,6 +46,7 @@ import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES } from "../../../content/site";
 import { toUsd, US_SHIPPING_USD } from "../../../content/usd";
 import { sourceLabel } from "../../../content/sources";
+import { notifyCrm } from "../../lib/crm";
 
 export const runtime = "nodejs";
 // Descargar de Blob y enviar emails con adjuntos grandes puede tardar.
@@ -347,6 +348,25 @@ export async function POST(req) {
       `Archivos en este email: ${files.length ? files.map((f) => f.name).join(", ") : "ninguno"}`,
       `Lote: ${part}`
     );
+  }
+
+  // CRM (20/10/2026): el resumen va también directo al CRM de Elena, con el
+  // mismo texto que el email para que lo lea igual. Los lotes de archivos no.
+  if (isSummary) {
+    const fileNames = [
+      ...blobs.map((b) => b.name),
+      ...filesEmail.map((f) => f.name),
+      ...filesWhatsApp.map((f) => f.name),
+    ];
+    await notifyCrm({
+      origen: "web",
+      subject: `${firmMode ? `[LAW FIRM] ${firm || "sin nombre"}` : "Presupuesto web"} · ${docName} · ${email || phone || name || "sin contacto"}`,
+      mensaje_cliente: `Nueva solicitud desde la calculadora de juradaexpress.es\n\n${lines.join("\n")}`,
+      nombre: name,
+      email,
+      telefono: phone,
+      adjuntos: fileNames,
+    });
   }
 
   const directAttachments = await Promise.all(
