@@ -26,13 +26,23 @@ Si el cliente borra la línea antes de enviar el mensaje, el email del punto 2 s
 
 ### 2. El email que recibe Elena
 
-Con cada referencia nueva llega un email a `QUOTE_TO_EMAIL` (por defecto info@juradaexpress.es) con el asunto `WhatsApp desde anuncio · JX-ABC123` y este contenido:
+Con cada referencia nueva llega un email a `QUOTE_TO_EMAIL` (por defecto info@juradaexpress.es). Desde el 25/10/2026 el asunto dice de dónde viene la visita:
+
+| Asunto | Cuándo |
+| --- | --- |
+| `WhatsApp desde Google Ads · JX-ABC123` | La visita trae `gclid`, `gbraid` o `wbraid`, o `utm_source=google` con `utm_medium=cpc` |
+| `WhatsApp desde ChatGPT · JX-ABC123` | Primera página de la visita con `utm_source=chatgpt.com` o con referrer `chatgpt.com` |
+| `WhatsApp desde la web · JX-ABC123` | Cualquier otra campaña (otro `utm_source`) |
+
+Hasta el 25/10/2026 todos llegaban como `WhatsApp desde anuncio · JX-ABC123`, también los de ChatGPT. Contenido:
 
 ```
-Alguien ha pulsado el botón de WhatsApp de la web viniendo de un anuncio.
+Alguien ha pulsado el botón de WhatsApp de la web. Origen: Google Ads.
 
 Referencia: JX-ABC123 (la verás al final de su mensaje de WhatsApp)
+gclid: …
 Campaña: visados
+Fuente: utm_source=google · utm_medium=cpc · referrer=www.google.com
 Página: /en/sworn-translations-spanish-visas?gclid=…
 Fecha: 09/10/2026 18:42 (hora de Madrid)
 
@@ -60,7 +70,7 @@ Sin `BLOB_READ_WRITE_TOKEN` el email se manda igualmente pero no hay control de 
 
 Cuando un WhatsApp con referencia termina en venta:
 
-1. Busca en el correo el email `WhatsApp desde anuncio · JX-ABC123` y copia el `gclid` de la última línea.
+1. Busca en el correo el email `WhatsApp desde Google Ads · JX-ABC123` y copia el `gclid` (línea «gclid:» o la última línea).
 2. Prepara una hoja con la plantilla de Google (Objetivos → Conversiones → Importaciones → «Conversiones de clics» → descargar plantilla) y rellena una fila por venta:
    - **Google Click ID**: el gclid del email.
    - **Conversion Name**: `Compra en la web (Stripe)` o el nombre exacto de la acción de conversión offline que se cree para estas ventas (debe existir en Google Ads antes de importar).
@@ -70,6 +80,14 @@ Cuando un WhatsApp con referencia termina en venta:
 3. En Google Ads: Objetivos → Conversiones → Importaciones → «Subir archivo», elige la hoja y pulsa «Vista previa» y después «Aplicar».
 
 El gclid caduca a los 90 días del clic: conviene importar las ventas cada semana. Si el email trae `gbraid` o `wbraid` en lugar de `gclid` (clics desde iOS), Google Ads solo acepta importarlos con las conversiones mejoradas para clientes potenciales, no por la plantilla de Google Click ID.
+
+### 5. La conversión «Clic en WhatsApp» en Google Ads
+
+Desde el 25/10/2026 la etiqueta de Google Ads se carga en todas las páginas desde el principio (modo de consentimiento **avanzado**): todo denegado por defecto y `consent update` a concedido cuando el visitante acepta. Antes no se cargaba hasta aceptar, así que quien rechazaba o no tocaba el aviso no contaba nada (del 18 al 24/10, 1 conversión en Ads frente a 5 emails de anuncio). Ahora:
+
+- Un único listener delegado en `document` (`AdsConversion.js`) dispara la conversión en cualquier enlace de WhatsApp de cualquier página ES o EN, una vez por clic, con `transport_type: 'beacon'`.
+- Sin consentimiento, Google no escribe cookies: recibe un ping sin cookies (`ads_data_redaction`, `url_passthrough`) que usa para modelar conversiones. Con consentimiento, va con cookies como antes.
+- La personalización de anuncios (`ad_personalization`) sigue denegada siempre.
 
 ### Dónde está el código
 

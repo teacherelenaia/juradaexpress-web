@@ -2,13 +2,15 @@
 
 // app/components/CookieConsent.js
 // Consentimiento de cookies + carga condicional de GA4 (solo tras aceptar).
-// AdsConversion.js lee la misma clave de localStorage y escucha el evento
-// CONSENT_EVENT para cargar la etiqueta de Google Ads solo con permiso.
-// Modo de consentimiento v2 (08/10/2026): los root layouts fijan el
-// `consent default` (todo denegado) antes de cualquier script; aquí se
-// envía el `consent update` al aceptar (y al cargar si ya estaba aceptado)
-// o al rechazar. La personalización de anuncios sigue denegada siempre.
-// La tarjeta es compacta, en la esquina inferior izquierda (máx. 420 px),
+// Modo de consentimiento v2 (08/10/2026; avanzado desde el 25/10/2026): los
+// root layouts fijan el `consent default` (todo denegado) antes de
+// cualquier script y AdsConversion.js carga la etiqueta de Google Ads en
+// todas las páginas; aquí se envía el `consent update` al aceptar (y al
+// cargar si ya estaba aceptado) o al rechazar. Hasta aceptar, Google no
+// escribe cookies. La personalización de anuncios sigue denegada siempre
+// (ni el aviso ni la política de cookies la mencionan).
+// «Aceptar» y «Rechazar» tienen el mismo estilo y ancho (mismo peso, como
+// pide la guía de cookies de la AEPD). La tarjeta es compacta, en la esquina inferior izquierda (máx. 420 px),
 // no a ancho completo, y enlaza con la política de cookies. En móvil se
 // coloca por encima de la barra de acciones fija.
 import { useEffect, useState } from "react";
@@ -137,14 +139,14 @@ export default function CookieConsent() {
             <button
               type="button"
               onClick={() => choose("accepted")}
-              className="btn btn-primary min-h-0 flex-1 px-4 py-2 text-sm"
+              className="btn btn-secondary min-h-0 flex-1 px-4 py-2 text-sm"
             >
               {t.accept}
             </button>
             <button
               type="button"
               onClick={() => choose("rejected")}
-              className="btn btn-ghost min-h-0 px-4 py-2 text-sm"
+              className="btn btn-secondary min-h-0 flex-1 px-4 py-2 text-sm"
             >
               {t.reject}
             </button>

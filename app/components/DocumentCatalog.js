@@ -2,7 +2,7 @@
 
 // app/components/DocumentCatalog.js
 import { useEffect, useRef, useState } from "react";
-import { trackAdsConversion } from "./AdsConversion";
+import { setAdsUserData, trackAdsConversion } from "./AdsConversion";
 import { DOCUMENTS } from "../../content/documents";
 import {
   IconFileText,
@@ -206,6 +206,8 @@ export default function DocumentCatalog() {
       });
       const data = await res.json();
       if (data.success) {
+        // Conversiones mejoradas (solo con consentimiento) y conversión.
+        setAdsUserData({ email: form.Email.value });
         trackAdsConversion("presupuesto_formulario");
         setStatus("sent");
         setSelectedIds([]);

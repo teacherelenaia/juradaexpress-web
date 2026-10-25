@@ -43,7 +43,7 @@ import { toUsd, US_SHIPPING_USD } from "../../content/usd";
 import { SectionHeading } from "./ui";
 import QuotePromise from "./QuotePromise";
 import { IconUpload, IconFileText } from "./Icons";
-import { trackAdsConversion } from "./AdsConversion";
+import { setAdsUserData, trackAdsConversion } from "./AdsConversion";
 import { getAttribution } from "../lib/attribution";
 import { appendWaOrigin } from "../lib/waOrigin";
 import { trackEngagement } from "../lib/engagement";
@@ -661,7 +661,10 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
     setWaUrl("");
     setProgress(files.length ? 0 : null);
 
-    // 1. Conversión de Google Ads (solo con etiqueta y consentimiento).
+    // 1. Conversión de Google Ads (con etiqueta; sin consentimiento va como
+    // ping sin cookies). Antes, el email para las conversiones mejoradas
+    // (solo con consentimiento; setAdsUserData lo comprueba).
+    if (email.trim()) setAdsUserData({ email });
     trackAdsConversion("calculadora_presupuesto");
 
     // 2. Espera a las compresiones en curso.
