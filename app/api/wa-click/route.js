@@ -15,7 +15,11 @@
 //      escribir ni a avisar (idempotente).
 //   3. Se avisa por email a Elena (Resend, app/lib/resend.js) con la
 //      referencia, la campaña, la página, la fecha y los datos para
-//      importar la venta a Google Ads (gclid, etc.).
+//      importar la venta a Google Ads (gclid, etc.). El asunto dice el
+//      origen (25/10/2026): «WhatsApp desde Google Ads · JX-…» (gclid,
+//      gbraid, wbraid o utm_source=google + utm_medium=cpc), «WhatsApp
+//      desde ChatGPT · JX-…» (utm_source=chatgpt.com o referrer
+//      chatgpt.com) o «WhatsApp desde la web · JX-…».
 //   4. Responde 204 siempre: el beacon no espera nada y ningún error llega
 //      al navegador (todo en try/catch, errores a console.error).
 import { BlobNotFoundError, head, put } from "@vercel/blob";
@@ -146,22 +150,62 @@ function campaignName(attr) {
   return "(sin nombre)";
 }
 
+// Origen del clic para el asunto (25/10/2026), con los parámetros de la
+// primera visita de la sesión (campos de primer nivel) y, para Google Ads,
+// también los del último toque: si hay identificador de clic, el aviso es
+// de Google Ads aunque la visita empezara en otro sitio.
+const isGoogleAds = (t) =>
+  Boolean(
+    t &&
+      (t.gclid ||
+        t.gbraid ||
+        t.wbraid ||
+        (t.utm.source.toLowerCase() === "google" && t.utm.medium.toLowerCase() === "cpc"))
+  );
+const isChatGpt = (t) =>
+  Boolean(
+    t &&
+      (/^chatgpt(\.com)?$/i.test(t.utm.source) ||
+        /(^|\.)chatgpt\.com$/i.test(t.referrer))
+  );
+
+function clickOrigin(attr) {
+  if (isGoogleAds(attr) || isGoogleAds(attr.last)) return "google_ads";
+  if (isChatGpt(attr)) return "chatgpt";
+  return "web";
+}
+
+const ORIGIN = {
+  google_ads: { subject: "WhatsApp desde Google Ads", label: "Google Ads" },
+  chatgpt: { subject: "WhatsApp desde ChatGPT", label: "ChatGPT" },
+  web: { subject: "WhatsApp desde la web", label: "la web (otra fuente)" },
+};
+
+function emailSubject(ref, attr) {
+  return `${ORIGIN[clickOrigin(attr)].subject} · ${ref}`;
+}
+
 function emailText({ ref, page, attribution, when }) {
   const a = attribution;
   const first = a.gclid || a.gbraid || a.wbraid ? a : a.last || a;
   const { year, month, day, hour, minute } = madridParts(when);
+  const origin = ORIGIN[clickOrigin(a)];
   return [
-    "Alguien ha pulsado el botón de WhatsApp de la web viniendo de un anuncio.",
+    `Alguien ha pulsado el botón de WhatsApp de la web. Origen: ${origin.label}.`,
     "",
     `Referencia: ${ref} (la verás al final de su mensaje de WhatsApp)`,
+    first.gclid ? `gclid: ${first.gclid}` : null,
     `Campaña: ${campaignName(a)}`,
+    `Fuente: utm_source=${a.utm.source || "-"} · utm_medium=${a.utm.medium || "-"} · referrer=${a.referrer || "-"}`,
     `Página: ${page || "(desconocida)"}`,
     `Fecha: ${day}/${month}/${year} ${hour}:${minute} (hora de Madrid)`,
     "",
     "Datos para Google Ads (importación de conversiones offline):",
     `gclid=${first.gclid} · gbraid=${first.gbraid} · wbraid=${first.wbraid} · landing=${first.landing} · primer toque=${a.ts}`,
     "",
-  ].join("\n");
+  ]
+    .filter((line) => line !== null)
+    .join("\n");
 }
 
 export async function POST(req) {
@@ -186,7 +230,7 @@ export async function POST(req) {
     if (!mail) return noContent();
     const ok = await sendResendEmail({
       ...mail,
-      subject: `WhatsApp desde anuncio · ${click.ref}`,
+      subject: emailSubject(click.ref, click.attribution),
       text: emailText({ ...click, when }),
     });
     if (!ok) console.error("[wa-click] email no enviado", click.ref);
