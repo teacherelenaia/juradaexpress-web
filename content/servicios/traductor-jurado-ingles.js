@@ -15,7 +15,7 @@
 // página publica ahora esos mismos datos en texto plano y en el JSON-LD:
 // precio por documento y por página (PRICE_PER_PAGE) con IVA incluido,
 // firma electrónica cualificada (Orden AUC/213/2025) y cómo comprobarla,
-// regla de las 18:00 / 3 pm (SAME_DAY_CUTOFF por idioma), pasos con tiempos, qué incluye el
+// regla de las 18:00 / 6 pm (SAME_DAY_CUTOFF por idioma), pasos con tiempos, qué incluye el
 // precio, ficha de la traductora y OfferCatalog con un Offer por fila.
 import { DOCUMENTS, MIN_PRICE } from "../documents";
 import {

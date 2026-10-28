@@ -185,9 +185,10 @@ export const MIN_DOC_PRICE = MIN_PRICE;
 // Hora de corte para la entrega en el día (Fase A, revisión de Elena del
 // 18/10/2026): una sola promesa de plazo en toda la web. Documento recibido
 // antes de esta hora de Madrid, PDF firmado el mismo día; después, a primera
-// hora del día siguiente. La hora se publica por idioma (18:00 en las
-// páginas ES, 3 pm en las EN); si cambia, se cambia solo aquí.
-export const SAME_DAY_CUTOFF = { es: "18:00", en: "3 pm" };
+// hora del día siguiente. 28/10/2026 (Elena): misma hora en ES y EN, las
+// 18:00 de Madrid (antes las páginas EN decían 3 pm). Si cambia, se cambia
+// solo aquí (y en las conversiones horarias de fbi.js y acro.js).
+export const SAME_DAY_CUTOFF = { es: "18:00", en: "6 pm" };
 
 // La promesa completa (DELIVERY_PROMISE) va bajo todos los botones
 // principales de presupuesto (QuotePromise: home, fichas de documento,
@@ -270,4 +271,24 @@ export const USCIS_PAPER_COPY = true;
 // Tarifa del expediente de visado de nómada digital (Digital Nomad Visa
 // Pack, content/packs.js; fijada el 08/10/2026). Si se pone en null, la web
 // vuelve a decir "presupuesto cerrado en menos de 2 h".
+// 28/10/2026 (Elena): el precio cubre hasta DNV_PACK_MAX_DOCUMENTS
+// documentos y DNV_PACK_MAX_PAGES páginas en total; cada página adicional,
+// PRICE_PER_PAGE. Los documentos que no necesitan traducción jurada (copia
+// del pasaporte) no cuentan. Ninguna página debe citar el precio sin estos
+// límites: usar DNV_PACK_PRICE_TEXT y DNV_PACK_NOTE.
 export const DNV_PACK_PRICE = 189;
+export const DNV_PACK_MAX_DOCUMENTS = 5;
+export const DNV_PACK_MAX_PAGES = 10;
+export const DNV_PACK_PRICE_TEXT = {
+  es: `Precio: paquete visado de nómada digital, ${DNV_PACK_PRICE} € hasta ${DNV_PACK_MAX_DOCUMENTS} documentos y un máximo de ${DNV_PACK_MAX_PAGES} páginas en total. Cada página adicional, ${PRICE_PER_PAGE} €. Te doy el precio cerrado del lote por escrito antes de empezar y se paga en euros con tarjeta internacional.`,
+  en: `Price: digital nomad visa package, €${DNV_PACK_PRICE} for up to ${DNV_PACK_MAX_DOCUMENTS} documents and a maximum of ${DNV_PACK_MAX_PAGES} pages in total. Each additional page, €${PRICE_PER_PAGE}. You get a fixed price for the whole batch in writing before I start, paid in euros by international card.`,
+};
+export const DNV_PACK_NOTE = {
+  es: "Los documentos que no necesitan traducción jurada para el consulado o la UGE, como la copia del pasaporte, no cuentan para el paquete. Si tu expediente es más largo, te digo el precio exacto al revisarlo.",
+  en: "Documents that don’t need a sworn translation for the consulate or the UGE, such as a passport copy, don’t count towards the package. If your file is longer, I’ll give you the exact price when I review it.",
+};
+// Versión corta para tablas y fichas de precio.
+export const DNV_PACK_LIMITS = {
+  es: `hasta ${DNV_PACK_MAX_DOCUMENTS} documentos y ${DNV_PACK_MAX_PAGES} páginas en total; página adicional, ${PRICE_PER_PAGE} €`,
+  en: `up to ${DNV_PACK_MAX_DOCUMENTS} documents and ${DNV_PACK_MAX_PAGES} pages in total; extra page, €${PRICE_PER_PAGE}`,
+};

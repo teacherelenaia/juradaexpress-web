@@ -5,7 +5,7 @@
 // que los motores de respuesta extraen de la competencia tienen que estar
 // en texto plano y en el JSON-LD. Comprueba que las dos páginas cargan con
 // su H1 y que aparecen el IVA incluido, la firma electrónica cualificada,
-// la hora de corte (18:00 en ES, 3 pm en EN; content/site.js →
+// la hora de corte (18:00 en ES, 6 pm en EN; content/site.js →
 // SAME_DAY_CUTOFF), el precio por página y la ficha de la traductora;
 // y que el JSON-LD parsea y contiene Service con provider Person (nº 7310),
 // OfferCatalog con un Offer por documento y otro por página
@@ -38,7 +38,7 @@ const PAGES = [
       "VAT included",
       "qualified electronic signature",
       "Order AUC/213/2025",
-      "3 pm",
+      "6 pm",
       "€20 per page, minimum €35",
       "minimum €35 per document",
       "I do not charge per word",

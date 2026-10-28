@@ -1,5 +1,5 @@
 // app/precios/page.js
-import { DNV_PACK_PRICE, DELIVERY_PROMISE_SHORT } from "../../../content/site";
+import { DNV_PACK_PRICE, DNV_PACK_LIMITS, DELIVERY_PROMISE_SHORT } from "../../../content/site";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { packOffers } from "../../../content/packs";
 import PacksSection from "../../components/PacksSection";
@@ -85,10 +85,12 @@ export default function Page() {
                 <a href="/traduccion-jurada-visado-nomada-digital" className="link">
                   Expediente visado nómada digital
                 </a>{" "}
-                (lote completo)
+                (paquete)
               </td>
               <td className="p-3">
-                {DNV_PACK_PRICE != null ? `${DNV_PACK_PRICE} €` : "Presupuesto cerrado en menos de 2 h"}
+                {DNV_PACK_PRICE != null
+                  ? `${DNV_PACK_PRICE} € (${DNV_PACK_LIMITS.es})`
+                  : "Presupuesto cerrado en menos de 2 h"}
               </td>
               <td className="p-3">Plazo único por escrito</td>
             </tr>
