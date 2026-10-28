@@ -19,7 +19,7 @@
 // menciona»). Lo que ninguna fuente dice, no se escribe: por eso la fila
 // del certificado médico dice que no aparece en las listas.
 import { PACKS } from "../packs";
-import { SAME_DAY_MAX_PAGES } from "../site";
+import { SAME_DAY_MAX_PAGES, DNV_PACK_LIMITS, DNV_PACK_NOTE } from "../site";
 import { guideById } from "./routes";
 
 const ROUTE = guideById("nomada-digital-documentos");
@@ -314,7 +314,9 @@ export const es = {
       `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el Ministerio de Asuntos Exteriores (nº 7310): mis traducciones cumplen la regla de la UGE-CE y las de los consulados. Traduzco el lote completo con un solo precio cerrado y un solo plazo por escrito, apostillas incluidas, y te digo antes de empezar qué documento necesita apostilla. Cada documento llega en PDF con firma electrónica cualificada, el mismo día hasta ${SAME_DAY_MAX_PAGES} páginas.`,
     ],
     facts: [
-      `${PACK.name.es}: ${PACK.price} €, IVA incluido (${PACK.includes.es.toLowerCase().replace(/\.$/, "")})`,
+      // 28/10/2026: precio con los límites del paquete (content/site.js).
+      `${PACK.name.es}: ${PACK.price} €, IVA incluido, ${DNV_PACK_LIMITS.es}`,
+      DNV_PACK_NOTE.es,
       "Precio cerrado en menos de 2 horas laborables",
     ],
     whatsapp: wa("Hola Elena, estoy preparando el visado de nómada digital y necesito traducir mis documentos"),
@@ -597,7 +599,8 @@ export const en = {
       `I am Elena Peñaranda Ortega, sworn translator of English appointed by Spain's Ministry of Foreign Affairs (no. 7310): my translations meet the UGE-CE rule and the consulates'. I translate the whole batch with a single fixed price and a single written deadline, apostilles included, and I tell you before starting which document needs an apostille. Each document arrives as a PDF with a qualified electronic signature, the same day for up to ${SAME_DAY_MAX_PAGES} pages.`,
     ],
     facts: [
-      `${PACK.name.en}: €${PACK.price}, VAT included (${PACK.includes.en.toLowerCase().replace(/\.$/, "")})`,
+      `${PACK.name.en}: €${PACK.price}, VAT included, ${DNV_PACK_LIMITS.en}`,
+      DNV_PACK_NOTE.en,
       "Fixed price within 2 working hours",
     ],
     whatsapp: wa("Hi Elena, I am preparing my digital nomad visa and need my documents translated"),

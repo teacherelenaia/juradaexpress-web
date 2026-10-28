@@ -5,19 +5,27 @@
 // Ley 28/2022). Fuente de la verdad: docs/BRIEF-INTERNACIONAL-2026-09.md,
 // punto 0.4. La web NO afirma umbrales de ingresos, tasas ni plazos
 // administrativos: para eso remite al consulado o a un abogado.
-import { DNV_PACK_PRICE, LARGE_PROJECT_CAPACITY } from "../site";
+import {
+  DNV_PACK_PRICE,
+  DNV_PACK_PRICE_TEXT,
+  DNV_PACK_NOTE,
+  DNV_PACK_LIMITS,
+  LARGE_PROJECT_CAPACITY,
+} from "../site";
 
 const PATH_ES = "/traduccion-jurada-visado-nomada-digital";
 const PATH_EN = "/en/sworn-translation-spain-digital-nomad-visa";
 
+// Precio del paquete con sus límites (5 documentos, 10 páginas, 20 € por
+// página adicional) y la aclaración de debajo: content/site.js (28/10/2026).
 const priceEs =
   DNV_PACK_PRICE != null
-    ? `${DNV_PACK_PRICE} €`
-    : "presupuesto cerrado en menos de 2 h";
+    ? DNV_PACK_PRICE_TEXT.es
+    : "Precio: presupuesto cerrado en menos de 2 h, en euros y con pago con tarjeta internacional.";
 const priceEn =
   DNV_PACK_PRICE != null
-    ? `€${DNV_PACK_PRICE}`
-    : "a fixed quote within 2 hours";
+    ? DNV_PACK_PRICE_TEXT.en
+    : "Price: a fixed quote within 2 hours, charged in euros to any international card.";
 
 export const es = {
   id: "dnv",
@@ -40,6 +48,8 @@ export const es = {
   serviceName: "Traducción jurada del expediente de visado de nómada digital",
   serviceType: "Traducción jurada inglés-español",
   price: DNV_PACK_PRICE,
+  priceDescription:
+    DNV_PACK_PRICE != null ? `Paquete visado de nómada digital: ${DNV_PACK_LIMITS.es}` : undefined,
   sections: [
     {
       id: "expediente",
@@ -158,7 +168,11 @@ export const es = {
         `Recibes <strong>un PDF firmado digitalmente por cada documento</strong>, con la misma numeración que me enviaste, más un índice del expediente. La firma electrónica se verifica con un clic y es válida para la presentación telemática; si el consulado te pide papel, te envío los originales sellados por mensajería a España o a tu país (coste del transportista en el presupuesto).`,
         `Plazo: los documentos de hasta 10 páginas salen en el día; el expediente completo lleva un único plazo cerrado por escrito antes de empezar${
           LARGE_PROJECT_CAPACITY ? ` (puedo asumir ${LARGE_PROJECT_CAPACITY.es})` : ""
-        }. Precio: ${priceEs}, por documento y por lote, en euros y con pago con tarjeta internacional. Los precios orientativos por documento están en la <a href="/precios">página de precios</a>.`,
+        }.`,
+        priceEs,
+        DNV_PACK_PRICE != null
+          ? `${DNV_PACK_NOTE.es} Los precios orientativos por documento están en la <a href="/precios">página de precios</a>.`
+          : 'Los precios orientativos por documento están en la <a href="/precios">página de precios</a>.',
       ],
     },
   ],
@@ -241,6 +255,8 @@ export const en = {
   serviceName: "Sworn translation of digital nomad visa files for Spain",
   serviceType: "Sworn English-Spanish translation",
   price: DNV_PACK_PRICE,
+  priceDescription:
+    DNV_PACK_PRICE != null ? `Digital nomad visa package: ${DNV_PACK_LIMITS.en}` : undefined,
   sections: [
     {
       id: "file",
@@ -359,7 +375,11 @@ export const en = {
         "You receive <strong>one digitally signed PDF per document</strong>, numbered like the files you sent me, plus an index of the file. The electronic signature can be verified in one click and is valid for online submission; if the consulate asks for paper, I courier the stamped originals to Spain or to your country (courier cost stated in the quote).",
         `Timing: documents of up to 10 pages are delivered the same day; the complete file gets a single deadline confirmed in writing before I start${
           LARGE_PROJECT_CAPACITY ? ` (I can handle ${LARGE_PROJECT_CAPACITY.en})` : ""
-        }. Price: ${priceEn}, per document and for the batch, in euros, charged in euros to any international card. Indicative prices per document are on the <a href="/en/precios">pricing page</a>.`,
+        }.`,
+        priceEn,
+        DNV_PACK_PRICE != null
+          ? `${DNV_PACK_NOTE.en} Indicative prices per document are on the <a href="/en/precios">pricing page</a>.`
+          : 'Indicative prices per document are on the <a href="/en/precios">pricing page</a>.',
       ],
     },
   ],

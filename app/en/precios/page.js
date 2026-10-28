@@ -1,5 +1,5 @@
 // app/en/precios/page.js
-import { DNV_PACK_PRICE, DELIVERY_PROMISE_SHORT } from "../../../content/site";
+import { DNV_PACK_PRICE, DNV_PACK_LIMITS, DELIVERY_PROMISE_SHORT } from "../../../content/site";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { packOffers } from "../../../content/packs";
 import PacksSection from "../../components/PacksSection";
@@ -88,10 +88,12 @@ export default function Page() {
                 <a href="/en/sworn-translation-spain-digital-nomad-visa" className="link">
                   Digital nomad visa file
                 </a>{" "}
-                (complete batch)
+                (package)
               </td>
               <td className="p-3">
-                {DNV_PACK_PRICE != null ? `€${DNV_PACK_PRICE}` : "Fixed quote within 2 hours"}
+                {DNV_PACK_PRICE != null
+                  ? `€${DNV_PACK_PRICE} (${DNV_PACK_LIMITS.en})`
+                  : "Fixed quote within 2 hours"}
               </td>
               <td className="p-3">Single deadline in writing</td>
             </tr>

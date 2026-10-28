@@ -679,6 +679,9 @@ export default function ServicePage({ page }) {
                   "@type": "Offer",
                   priceCurrency: "EUR",
                   ...(page.price != null ? { price: page.price } : {}),
+                  // Qué cubre ese precio (p. ej. límites del paquete de
+                  // nómada digital, content/site.js → DNV_PACK_LIMITS).
+                  ...(page.priceDescription ? { description: page.priceDescription } : {}),
                   // "desde X €": precio mínimo real del catálogo, no un
                   // precio fijo (content/documents.js → MIN_PRICE).
                   ...(page.priceFrom != null

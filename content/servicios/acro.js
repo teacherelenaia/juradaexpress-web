@@ -234,7 +234,7 @@ export const en = {
   metaTitle: "ACRO Police Certificate Translation for Spain Visa | Sworn, Same-Day PDF",
   metaDescription: `Sworn translation of your UK ACRO police certificate for a Spanish visa: €${PRICE}, signed PDF the same day, apostille included if required. MAEC No. ${MAEC_NUMBER}.`,
   h1: "ACRO police certificate: sworn translation for your Spanish visa",
-  lead: `Spanish consulates in the UK ask for your ACRO Police Certificate with an FCDO apostille and a sworn translation into Spanish for most long-stay visas: non-lucrative, digital nomad, student and work. The same certificate comes up later for residence and citizenship applications in Spain. I am Elena Peñaranda Ortega, sworn translator No. ${MAEC_NUMBER} appointed by Spain's Ministry of Foreign Affairs, and I translate the ACRO certificate for €${PRICE}, delivered as a digitally signed PDF the same day if it reaches me before 3 pm Madrid time (2 pm in the UK), and first thing the next morning if it arrives later. The PDF is valid at the consulate and later in Spain; a paper copy can be couriered to the UK or to any Spanish address.`,
+  lead: `Spanish consulates in the UK ask for your ACRO Police Certificate with an FCDO apostille and a sworn translation into Spanish for most long-stay visas: non-lucrative, digital nomad, student and work. The same certificate comes up later for residence and citizenship applications in Spain. I am Elena Peñaranda Ortega, sworn translator No. ${MAEC_NUMBER} appointed by Spain's Ministry of Foreign Affairs, and I translate the ACRO certificate for €${PRICE}, delivered as a digitally signed PDF the same day if it reaches me before 6 pm Madrid time (5 pm in the UK), and first thing the next morning if it arrives later. The PDF is valid at the consulate and later in Spain; a paper copy can be couriered to the UK or to any Spanish address.`,
   image: {
     src: "/fotos/escritorio-documentos.jpg",
     alt: "Desk with official documents and a passport, as in a Spanish visa application prepared from the UK",
@@ -281,7 +281,7 @@ export const en = {
               ],
               [
                 "Turnaround",
-                "Signed PDF the same day if I receive the document before 3 pm Madrid time (2 pm in the UK); later than that, first thing the next morning.",
+                "Signed PDF the same day if I receive the document before 6 pm Madrid time (5 pm in the UK); later than that, first thing the next morning.",
               ],
               [
                 "Format",
@@ -348,7 +348,7 @@ export const en = {
     },
     {
       t: "PDF by email, paper optional",
-      d: "Signed PDF the same day if it arrives before 3 pm Madrid time, otherwise first thing the next morning. Paper copy couriered to the UK or to Spain on request.",
+      d: "Signed PDF the same day if it arrives before 6 pm Madrid time, otherwise first thing the next morning. Paper copy couriered to the UK or to Spain on request.",
     },
   ],
   faq: [
@@ -366,7 +366,7 @@ export const en = {
     },
     {
       q: "How long does the translation take?",
-      a: "An ACRO certificate runs to one or two pages plus the apostille. If it reaches me before 3 pm Madrid time (2 pm in the UK) you have the signed PDF the same day; otherwise first thing the next morning. The deadline is confirmed in writing with the quote.",
+      a: "An ACRO certificate runs to one or two pages plus the apostille. If it reaches me before 6 pm Madrid time (5 pm in the UK) you have the signed PDF the same day; otherwise first thing the next morning. The deadline is confirmed in writing with the quote.",
     },
     {
       q: "How do I pay from the UK?",
@@ -387,7 +387,7 @@ export const en = {
   ],
   cta: {
     title: "Send me your apostilled ACRO certificate",
-    text: "On WhatsApp or through the calculator: you get the fixed price and the delivery time in writing within two hours, and the signed PDF the same day if it arrives before 3 pm Madrid time.",
+    text: "On WhatsApp or through the calculator: you get the fixed price and the delivery time in writing within two hours, and the signed PDF the same day if it arrives before 6 pm Madrid time.",
   },
   related: [
     { href: "/en/spain-non-lucrative-visa-documents-checklist", label: "Guide: non-lucrative visa documents checklist" },

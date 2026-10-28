@@ -8,7 +8,12 @@
 //
 // Cada pack: id, name (ES/EN), includes (ES/EN), documents (número máximo
 // de documentos) y price (euros, IVA incluido).
-import { PRICE_PER_PAGE } from "./site";
+import {
+  PRICE_PER_PAGE,
+  DNV_PACK_PRICE,
+  DNV_PACK_MAX_DOCUMENTS,
+  DNV_PACK_MAX_PAGES,
+} from "./site";
 
 export const PACKS = [
   {
@@ -35,11 +40,13 @@ export const PACKS = [
     id: "nomad",
     name: { es: "Digital Nomad Visa Pack", en: "Digital Nomad Visa Pack" },
     includes: {
-      es: "Hasta 6 documentos de hasta 2 páginas: carta de la empresa o del cliente, antecedentes penales, título, certificado del seguro, prueba de ingresos y certificado de relación; los contratos largos, por página.",
-      en: "Up to 6 documents of up to 2 pages: employer or client letter, police check, degree, insurance certificate, proof of income and relationship certificate; long contracts by the page.",
+      // 28/10/2026 (Elena): hasta 5 documentos y 10 páginas en total; cada
+      // página adicional a PRICE_PER_PAGE (content/site.js).
+      es: `Hasta ${DNV_PACK_MAX_DOCUMENTS} documentos y un máximo de ${DNV_PACK_MAX_PAGES} páginas en total: carta de la empresa o del cliente, antecedentes penales, título, certificado del seguro, prueba de ingresos o certificado de relación. Cada página adicional, ${PRICE_PER_PAGE} €. La copia del pasaporte y los documentos que no necesitan traducción jurada no cuentan para el paquete.`,
+      en: `Up to ${DNV_PACK_MAX_DOCUMENTS} documents and a maximum of ${DNV_PACK_MAX_PAGES} pages in total: employer or client letter, police check, degree, insurance certificate, proof of income or relationship certificate. Each additional page, €${PRICE_PER_PAGE}. A passport copy and other documents that don’t need a sworn translation don’t count towards the package.`,
     },
-    documents: 6,
-    price: 189,
+    documents: DNV_PACK_MAX_DOCUMENTS,
+    price: DNV_PACK_PRICE,
   },
   {
     id: "ireland-uk",
