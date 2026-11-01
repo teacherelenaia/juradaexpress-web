@@ -71,7 +71,7 @@ test("/en: bloque de visados US visible con precios", async ({ page }) => {
   await expect(block.locator("h2")).toHaveText(
     "Applying for a Spanish visa from the United States?"
   );
-  for (const price of ["€35 (about $40)", "€129 (about $140)", "€229 (about $250)"]) {
+  for (const price of ["€35 (about $40)", "€129 (about $140)", "€299 (about $330)"]) {
     await expect(block).toContainText(price);
   }
   const wa = block.locator('a[href^="https://wa.me/"]').first();

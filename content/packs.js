@@ -34,7 +34,8 @@ export const PACKS = [
       en: "Up to 8 documents: the above for two adults plus marriage certificate and children's birth certificates.",
     },
     documents: 8,
-    price: 229,
+    // 01/11/2026: subida de 229 € a 299 € (IVA incluido), por encima del pack de nómada digital (249 €)
+    price: 299,
   },
   {
     id: "nomad",
