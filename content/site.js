@@ -276,7 +276,8 @@ export const USCIS_PAPER_COPY = true;
 // PRICE_PER_PAGE. Los documentos que no necesitan traducción jurada (copia
 // del pasaporte) no cuentan. Ninguna página debe citar el precio sin estos
 // límites: usar DNV_PACK_PRICE_TEXT y DNV_PACK_NOTE.
-export const DNV_PACK_PRICE = 189;
+// 01/11/2026: subida de 189 € a 249 € (IVA incluido); los límites no cambian.
+export const DNV_PACK_PRICE = 249;
 export const DNV_PACK_MAX_DOCUMENTS = 5;
 export const DNV_PACK_MAX_PAGES = 10;
 export const DNV_PACK_PRICE_TEXT = {
