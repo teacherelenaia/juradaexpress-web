@@ -8,11 +8,17 @@
 // (info@juradaexpress.es) con el cliente, lo pagado y el enlace al pago en
 // Stripe; «Responder» contesta directamente al cliente.
 //
+// Redirección de los Payment Links (02/11/2026): con `payment_link.created`
+// se pone a cada enlace nuevo la redirección a /gracias o /en/thank-you
+// (regla en app/lib/paymentLinkRedirect.mjs) para que el cliente vuelva a la
+// web y cuente la conversión de Google Ads. Este evento no manda correo.
+//
 // Requiere en Vercel: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET (whsec_… del
 // endpoint creado en Stripe), RESEND_API_KEY, QUOTE_FROM_EMAIL y,
 // opcionalmente, QUOTE_TO_EMAIL.
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
+import { ensurePaymentLinkRedirect } from "../../lib/paymentLinkRedirect.mjs";
 
 export const runtime = "nodejs";
 
@@ -74,6 +80,22 @@ export async function POST(req) {
     event = stripe.webhooks.constructEvent(raw, req.headers.get("stripe-signature"), secret);
   } catch {
     return NextResponse.json({ error: "bad-signature" }, { status: 400 });
+  }
+
+  if (event.type === "payment_link.created") {
+    const link = event.data.object;
+    try {
+      // Se lee el enlace actual (no la foto del evento): si es un reintento
+      // o Elena ya le ha puesto otra redirección, no se toca.
+      const current = await stripe.paymentLinks.retrieve(link.id);
+      const result = await ensurePaymentLinkRedirect(stripe, current);
+      if (result.changed) console.log(`stripe-webhook: ${link.id} → ${result.url} (${result.reason})`);
+      return NextResponse.json({ received: true, payment_link: link.id, ...result });
+    } catch (err) {
+      console.error("stripe-webhook payment_link error:", link?.id, err?.message);
+      // 500 → Stripe reintenta; al reintentar, si ya tiene redirect no se toca.
+      return NextResponse.json({ error: "payment-link-update-failed" }, { status: 500 });
+    }
   }
 
   if (!PAID_EVENTS.has(event.type)) {
