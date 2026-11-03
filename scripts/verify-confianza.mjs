@@ -2,8 +2,8 @@
 //
 // Comprueba, sobre todas las URL de /sitemap.xml, que cada página pública
 // (todas menos aviso legal, privacidad y cookies) lleva la franja de
-// confianza: el número de reseñas de Google (GOOGLE_REVIEW_COUNT de
-// content/site.js, «51 reseñas» / «51 reviews») y la garantía de corrección
+// confianza: el número de reseñas de Google (googleReviews.count de
+// content/site.js, p. ej. «65 reseñas» / «65 reviews») y la garantía de corrección
 // (GUARANTEE_SHORT, «Si la rechazan por un error mío, la corrijo gratis» /
 // «If it’s rejected because of my mistake, I fix it free»). Las tres páginas
 // legales deben NO llevarla, y las portadas la llevan una sola vez. Al final
@@ -22,7 +22,7 @@ const BASE = (arg("base") || "http://127.0.0.1:3000").replace(/\/$/, "");
 // content/site.js importa "./documents" sin extensión (lo resuelve Next, no
 // Node), así que las constantes se leen del archivo con una expresión regular.
 const site = readFileSync(new URL("../content/site.js", import.meta.url), "utf8");
-const REVIEW_COUNT = Number(site.match(/GOOGLE_REVIEW_COUNT = (\d+)/)[1]);
+const REVIEW_COUNT = Number(site.match(/googleReviews = \{ count: (\d+)/)[1]);
 const guaranteeBlock = site.match(/GUARANTEE_SHORT = \{([\s\S]*?)\};/)[1];
 const GUARANTEE = {
   es: guaranteeBlock.match(/es: "([^"]+)"/)[1],

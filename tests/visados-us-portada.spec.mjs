@@ -7,10 +7,20 @@
 //     preguntas nuevas.
 //   - /en/sworn-translation-usa-spain enlaza, desde el bloque «Most
 //     requested by US visa applicants», a las cuatro páginas de visado.
-//   - aggregateRating.reviewCount del JSON-LD es 51.
+//   - aggregateRating.reviewCount del JSON-LD coincide con
+//     googleReviews.count de content/site.js.
 //
 //   npm test                       (levanta next dev en el puerto 3311)
+import { readFileSync } from "node:fs";
 import { test, expect } from "@playwright/test";
+
+// content/site.js no se puede importar desde Node (importa sin extensión),
+// así que el recuento se lee con una expresión regular.
+const REVIEW_COUNT = Number(
+  readFileSync(new URL("../content/site.js", import.meta.url), "utf8").match(
+    /googleReviews = \{ count: (\d+)/
+  )[1]
+);
 
 const LINKS = [
   "/en/fbi-background-check-translation-spain",
@@ -59,7 +69,7 @@ test("/en: FBI, non-lucrative, enlaces, FAQ y reseñas", async ({ request }) => 
 
   const ratings = findKey(blocks, "aggregateRating");
   expect(ratings.length).toBeGreaterThan(0);
-  for (const r of ratings) expect(Number(r.reviewCount)).toBe(51);
+  for (const r of ratings) expect(Number(r.reviewCount)).toBe(REVIEW_COUNT);
 
   const desc = html.match(/<meta name="description" content="([^"]*)"/)?.[1] || "";
   expect(desc).toContain("FBI");

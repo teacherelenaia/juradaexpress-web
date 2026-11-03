@@ -96,13 +96,26 @@ export const PROCESS_VIDEO = null;
 // Encargo internacional (docs/BRIEF-INTERNACIONAL-2026-09.md)
 // ---------------------------------------------------------------------------
 
-// Valoración pública de la ficha de Google Business. Google no ofrece API
-// gratuita para leerla: ACTUALIZAR A MANO cuando cambie (leído en Google
-// Maps el 16/10/2026: 5,0 estrellas · 51 reseñas; antes, 49 a 15/10/2026, 41 a 12/10/2026, 35 a
-// 08/10/2026, 24 a 26/09/2026 y 7 a 07/09/2026). Se usa en la franja de confianza de la home, en la cabecera
-// de Opiniones y en aggregateRating del JSON-LD.
-export const GOOGLE_RATING = 5.0;
-export const GOOGLE_REVIEW_COUNT = 51;
+// Recuentos de reseñas: ÚNICO sitio que hay que tocar cuando cambien.
+// Google y Trustpilot no ofrecen API gratuita para leerlos: ACTUALIZAR A
+// MANO. Google, leído el 03/11/2026: 5,0 · 65 reseñas (antes, 51 a
+// 16/10/2026, 49 a 15/10/2026, 41 a 12/10/2026, 35 a 08/10/2026, 24 a
+// 26/09/2026 y 7 a 07/09/2026).
+// googleReviews alimenta la franja de confianza, la cabecera de Opiniones,
+// las páginas de servicio, /llms.txt y el aggregateRating del JSON-LD.
+// trustpilotReviews queda guardado para cuando se active SHOW_TRUSTPILOT
+// (más abajo); hoy no se muestra en ninguna parte de la web.
+export const googleReviews = { count: 65, rating: 5.0, checkedAt: "2026-11-03" };
+export const trustpilotReviews = {
+  count: 7,
+  rating: 5.0, // las 7 reseñas son de cinco estrellas
+  trustScore: 4.3, // TrustScore que publica Trustpilot
+  url: "https://es.trustpilot.com/review/juradaexpress.es",
+  checkedAt: "2026-11-03",
+};
+// Alias que usan los componentes y el JSON-LD; leen de googleReviews.
+export const GOOGLE_RATING = googleReviews.rating;
+export const GOOGLE_REVIEW_COUNT = googleReviews.count;
 
 // Países desde los que Elena atiende con más frecuencia. El último elemento
 // es deliberadamente abierto: el servicio es 100 % online y no excluye a
