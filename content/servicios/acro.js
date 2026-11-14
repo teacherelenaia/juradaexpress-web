@@ -14,7 +14,7 @@
 // (content/site.js → INTERNATIONAL_SHIPPING): se indica en el presupuesto.
 import { DOCUMENTS } from "../documents";
 import { MAEC_NUMBER, SINCE } from "../persona";
-import { MAEC_LIST_URL } from "../site";
+import { MAEC_LIST_URL, PRICE_PER_PAGE } from "../site";
 import { REVIEW_TEXT } from "../reviews";
 
 const PATH_ES = "/traduccion-jurada-acro-reino-unido";
@@ -91,7 +91,7 @@ export const es = {
             rows: [
               [
                 "Precio",
-                `${PRICE} € por el ACRO Police Certificate de hasta 2 páginas. Si tu consulado o la Oficina de Extranjería exigen traducir también la apostilla, cuenta como una página más al mismo precio por página; ves el total antes de pagar.`,
+                `${PRICE} € por el ACRO Police Certificate de hasta 2 páginas. Si tu consulado o la Oficina de Extranjería exigen traducir también la apostilla, cuenta como una página más dentro de esas 2; cada página por encima, ${PRICE_PER_PAGE} €. Ves el total antes de pagar.`,
               ],
               [
                 "Plazo",
@@ -268,7 +268,7 @@ export const en = {
             rows: [
               [
                 "Price",
-                `€${PRICE} for the ACRO Police Certificate of up to 2 pages. If your consulate or the immigration office requires the apostille page translated too, it counts as one extra page at the same per-page rate; you see the total before you pay.`,
+                `€${PRICE} for the ACRO Police Certificate of up to 2 pages. If your consulate or the immigration office requires the apostille page translated too, it counts as one more page within those 2; each page beyond that is €${PRICE_PER_PAGE}. You see the total before you pay.`,
               ],
               [
                 "Turnaround",

@@ -15,6 +15,7 @@ import { EXTRA_PAGE_PRICE, packPrice, PACKS_COPY } from "../packs";
 import { MIN_PRICE } from "../documents";
 import { MAEC_LIST_URL, URGENCY_TEXT } from "../site";
 import { REVIEW_TEXT } from "../reviews";
+import { apostilleFaq, signedPdfFaq, morePagesFaq } from "../faqComunes";
 
 const PATH_ES = "/traduccion-jurada-visados-espana";
 const PATH_EN = "/en/sworn-translations-spanish-visas";
@@ -185,10 +186,6 @@ export const es = {
   ],
   faq: [
     {
-      q: "¿El consulado español acepta una traducción firmada digitalmente?",
-      a: "Sí. Desde el 8 de marzo de 2025, la Orden AUC/213/2025 regula las traducciones juradas con firma electrónica cualificada; el PDF firmado tiene la misma validez que una copia en papel sellada. Algunos consulados siguen pidiendo papel para las citas presenciales, así que revisa las instrucciones de tu cita; si hace falta, te envío la copia en papel por mensajería.",
-    },
-    {
       q: "¿El certificado de antecedentes del FBI necesita apostilla antes de traducirlo?",
       a: "Sí. El Identity History Summary del FBI debe apostillarse en el Departamento de Estado de EE. UU., en Washington, antes de presentarlo, y yo traduzco la versión apostillada. Que la página de la apostilla se traduzca o no depende de tu consulado.",
     },
@@ -216,6 +213,9 @@ export const es = {
       q: "¿La traducción sigue siendo válida cuando llegue a España?",
       a: "Sí. Esa es la principal ventaja de una traducción jurada de España: sirve para el visado y, después, para la tarjeta de residencia, el ayuntamiento, el Registro Civil y cualquier organismo español.",
     },
+    apostilleFaq("es"),
+    signedPdfFaq("es"),
+    morePagesFaq("es"),
   ],
   cta: {
     title: "Envíame la lista de requisitos de tu consulado",
@@ -392,10 +392,6 @@ export const en = {
   ],
   faq: [
     {
-      q: "Does the Spanish consulate accept a digitally signed translation?",
-      a: "Yes. Since 8 March 2025, Spain's Order AUC/213/2025 regulates sworn translations with a qualified electronic signature; the signed PDF has the same validity as a stamped paper copy. Some consulates still ask for paper for in-person appointments, so check your appointment instructions; if needed, I send the paper copy by courier.",
-    },
-    {
       q: "Does the FBI background check need an apostille before translation?",
       a: "Yes. The FBI Identity History Summary must be apostilled by the US Department of State in Washington before you submit it, and I translate the apostilled version. Whether the apostille page itself is translated depends on your consulate.",
     },
@@ -423,6 +419,9 @@ export const en = {
       q: "Is the translation valid after I arrive in Spain?",
       a: "Yes. That is the main advantage of a sworn translation from Spain: it works for the visa and later for your residence card, the town hall, the civil registry and any Spanish authority.",
     },
+    apostilleFaq("en"),
+    signedPdfFaq("en"),
+    morePagesFaq("en"),
   ],
   cta: {
     title: "Send me your consulate's checklist",

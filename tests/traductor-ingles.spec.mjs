@@ -63,9 +63,10 @@ for (const p of PAGES) {
       main.locator('dl a[href*="exteriores.gob.es"][href*="Buscador-STIJ"]')
     ).toHaveCount(1);
 
-    // Reseñas junto a las garantías, con enlace a la ficha de Google Maps.
+    // Reseñas junto a las garantías, con enlace a la sección de opiniones
+    // de la portada (desde el 14/11/2026; antes, a la ficha de Google Maps).
     await expect(
-      main.locator('header a[href*="google.com/maps"]')
+      main.locator('header a[href$="#opiniones"]')
     ).toHaveCount(1);
 
     // JSON-LD de la página.

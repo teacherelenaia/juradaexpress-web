@@ -173,6 +173,27 @@ export function Block({ block, page }) {
       />
     );
   }
+  // Pasos numerados (14/11/2026, «Cómo comprobar mi firma»).
+  if (block.steps) {
+    return (
+      <ol className="max-w-[68ch] space-y-2 text-slate-700">
+        {block.steps.map((item, i) => (
+          <li key={i} className="flex gap-3">
+            <span
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-navy text-xs font-semibold text-white"
+              aria-hidden="true"
+            >
+              {i + 1}
+            </span>
+            <span
+              className="[&_a]:text-brand-navy [&_a]:underline [&_a]:underline-offset-2"
+              dangerouslySetInnerHTML={{ __html: item }}
+            />
+          </li>
+        ))}
+      </ol>
+    );
+  }
   if (block.list) {
     return (
       <ul className="max-w-[68ch] space-y-2 text-slate-700">

@@ -23,6 +23,11 @@ import {
   LINKEDIN_URL,
   GOOGLE_BUSINESS_URL,
   TRUSTPILOT_URL,
+  PROZ_URL,
+  BING_PLACES_URL,
+  BUSINESS_ADDRESS,
+  BUSINESS_GEO,
+  OPENING_HOURS,
   SERVICE_COUNTRIES,
   EXTRA_AREA_SERVED,
 } from "../../content/site";
@@ -381,11 +386,9 @@ export default function SiteShell({ locale = "es", children }) {
                 image: "https://juradaexpress.es/fotos/hero-firma.jpg",
                 description:
                   "Traducción jurada español-inglés con validez oficial y traducción certificada para USCIS, 100 % online, para clientes de España, Reino Unido, Estados Unidos, India y cualquier país.",
-                address: {
-                  "@type": "PostalAddress",
-                  addressRegion: "Murcia",
-                  addressCountry: "ES",
-                },
+                // Dirección, coordenadas y horario (14/11/2026): content/site.js.
+                address: { "@type": "PostalAddress", ...BUSINESS_ADDRESS },
+                geo: { "@type": "GeoCoordinates", ...BUSINESS_GEO },
                 areaServed: [
                   ...SERVICE_COUNTRIES.filter((c) => c.code).map((c) => ({
                     "@type": "Country",
@@ -446,18 +449,12 @@ export default function SiteShell({ locale = "es", children }) {
                 priceRange: "€€",
                 founder: personRef(locale),
                 employee: { "@id": PERSON_ID },
-                openingHoursSpecification: {
+                openingHoursSpecification: OPENING_HOURS.map((h) => ({
                   "@type": "OpeningHoursSpecification",
-                  dayOfWeek: [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                  ],
-                  opens: "09:00",
-                  closes: "20:00",
-                },
+                  dayOfWeek: h.days,
+                  opens: h.opens,
+                  closes: h.closes,
+                })),
                 sameAs: [
                   "https://wa.me/34685891214",
                   INSTAGRAM_URL,
@@ -465,6 +462,8 @@ export default function SiteShell({ locale = "es", children }) {
                   LINKEDIN_URL,
                   GOOGLE_BUSINESS_URL,
                   TRUSTPILOT_URL,
+                  PROZ_URL,
+                  BING_PLACES_URL,
                 ].filter(Boolean),
                 },
                 ],

@@ -4,6 +4,12 @@
 // /sitemap.xml. Falla (exit 1) si alguna mide menos de 110 o más de 155
 // caracteres, si falta, o si dos páginas comparten la misma description.
 //
+// Desde el 14/11/2026 comprueba también el <title> (que exista y no se
+// repita) y que ninguna página que no sea la portada lleve el og:title, el
+// og:description o el og:url de la portada de su idioma (pasaba en las
+// páginas legales y otras 21 en español, que heredaban el openGraph del
+// layout).
+//
 //   node scripts/check-meta.mjs                  build + start propios
 //   node scripts/check-meta.mjs --base=URL       usa un servidor ya levantado
 //   node scripts/check-meta.mjs --json=ruta.json guarda el listado completo
@@ -63,6 +69,20 @@ function metaDescription(html) {
   return content == null ? null : decode(content);
 }
 
+function metaProperty(html, prop) {
+  const tag = html.match(new RegExp(`<meta\\b[^>]*\\bproperty="${prop}"[^>]*>`, "i"))?.[0];
+  const content = tag?.match(/\bcontent="([^"]*)"/i)?.[1];
+  return content == null ? null : decode(content);
+}
+
+function pageTitle(html) {
+  const t = html.match(/<title>([^<]*)<\/title>/i)?.[1];
+  return t == null ? null : decode(t).trim();
+}
+
+const HOMES = new Set(["/", "/en"]);
+const homeOf = (path) => (path === "/en" || path.startsWith("/en/") ? "/en" : "/");
+
 async function main() {
   let server;
   try {
@@ -85,12 +105,17 @@ async function main() {
     const rows = [];
     for (const path of paths) {
       const res = await fetch(`${BASE}${path}`);
-      const description = res.ok ? metaDescription(await res.text()) : null;
+      const html = res.ok ? await res.text() : "";
+      const description = res.ok ? metaDescription(html) : null;
       rows.push({
         url: path,
         status: res.status,
         length: description == null ? 0 : [...description].length,
         description,
+        title: pageTitle(html),
+        ogTitle: metaProperty(html, "og:title"),
+        ogDescription: metaProperty(html, "og:description"),
+        ogUrl: metaProperty(html, "og:url"),
       });
     }
 
@@ -100,8 +125,25 @@ async function main() {
       seen.set(r.description, [...(seen.get(r.description) || []), r.url]);
     }
 
+    const titles = new Map();
+    for (const r of rows) {
+      if (r.title) titles.set(r.title, [...(titles.get(r.title) || []), r.url]);
+    }
+    const homes = Object.fromEntries(rows.filter((r) => HOMES.has(r.url)).map((r) => [r.url, r]));
+
     for (const r of rows) {
       r.errors = [];
+      if (!r.title) r.errors.push("sin <title>");
+      else {
+        const sameTitle = titles.get(r.title).filter((u) => u !== r.url);
+        if (sameTitle.length) r.errors.push(`title duplicado con ${sameTitle.join(", ")}`);
+      }
+      const home = homes[homeOf(r.url)];
+      if (home && !HOMES.has(r.url)) {
+        if (r.ogTitle && r.ogTitle === home.ogTitle) r.errors.push("og:title de la portada");
+        if (r.ogDescription && r.ogDescription === home.ogDescription) r.errors.push("og:description de la portada");
+        if (r.ogUrl && r.ogUrl === home.ogUrl) r.errors.push("og:url de la portada");
+      }
       if (r.description == null) r.errors.push(`sin description (HTTP ${r.status})`);
       else {
         if (r.length < MIN) r.errors.push(`corta (${r.length} < ${MIN})`);
@@ -119,7 +161,7 @@ async function main() {
       if (r.description) console.log(`    ${r.description}`);
     }
     console.log(
-      `\n${rows.length} URL comprobadas, ${failed.length} fuera de ${MIN}–${MAX} o duplicadas.`
+      `\n${rows.length} URL comprobadas, ${failed.length} con errores (description fuera de ${MIN}–${MAX} o duplicada, title ausente o duplicado, Open Graph de la portada).`
     );
     process.exitCode = failed.length ? 1 : 0;
   } finally {

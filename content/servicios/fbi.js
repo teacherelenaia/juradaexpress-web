@@ -16,8 +16,10 @@
 import { DOCUMENTS } from "../documents";
 import { toUsd, US_SHIPPING_USD } from "../usd";
 import { MAEC_NUMBER, SINCE } from "../persona";
-import { MAEC_LIST_URL } from "../site";
+import { MAEC_LIST_URL, PRICE_PER_PAGE } from "../site";
 import { REVIEW_TEXT } from "../reviews";
+import { apostilleFaq, signedPdfFaq, morePagesFaq } from "../faqComunes";
+import { verifySignatureSection, verifySignatureFaq } from "../signature";
 
 const PATH_ES = "/traduccion-jurada-antecedentes-fbi";
 const PATH_EN = "/en/fbi-background-check-translation-spain";
@@ -95,7 +97,7 @@ export const es = {
             rows: [
               [
                 "Precio",
-                `${PRICE} € (unos ${PRICE_USD} $) por el Identity History Summary de hasta 2 páginas. Si tu consulado exige traducir también la apostilla, cuenta como una página más al mismo precio por página; ves el total antes de pagar.`,
+                `${PRICE} € (unos ${PRICE_USD} $) por el Identity History Summary de hasta 2 páginas. Si tu consulado exige traducir también la apostilla, cuenta como una página más dentro de esas 2; cada página por encima, ${PRICE_PER_PAGE} €. Ves el total antes de pagar.`,
               ],
               [
                 "Plazo",
@@ -180,20 +182,12 @@ export const es = {
       a: "Puede aceptarse en algunos consulados para la solicitud del visado; las administraciones españolas no la aceptan cuando llegues. Si solo vas a traducir el certificado una vez, que sea una traducción jurada.",
     },
     {
-      q: "¿Se traduce también la apostilla?",
-      a: "Depende del consulado. El de Miami, por ejemplo, indica que las apostillas no se traducen; otros piden todas las páginas en español. Si el tuyo lo exige, traduzco la apostilla como una página más y va en el mismo PDF.",
-    },
-    {
       q: "¿Cuánto tarda la traducción?",
       a: "El certificado del FBI tiene entre una y tres páginas. Si me llega antes de las 18:00, hora de Madrid (12:00 en Nueva York), tienes el PDF firmado el mismo día; si no, a primera hora del día siguiente. El plazo queda confirmado por escrito con el presupuesto.",
     },
     {
       q: "¿Cómo pago desde Estados Unidos?",
       a: "Con tarjeta a través de Stripe, en dólares o en euros, o por Wise. El precio que apruebas es el que pagas; no hace falta cuenta bancaria en España ni transferencia internacional.",
-    },
-    {
-      q: "¿Necesito la copia en papel o basta con el PDF?",
-      a: `El PDF lleva firma electrónica cualificada y equivale legalmente al original en papel sellado. La mayoría de los consulados lo aceptan; algunos siguen pidiendo papel en las citas presenciales, así que revisa las instrucciones de tu cita. Si necesitas papel, lo envío por mensajería a cualquier dirección de Estados Unidos por ${US_SHIPPING_USD} $, normalmente en tres a cinco días laborables.`,
     },
     {
       q: "¿Vale para el consulado de Nueva York, Los Ángeles, Miami, Chicago, Houston, Washington, San Francisco o Boston?",
@@ -203,6 +197,9 @@ export const es = {
       q: "¿Cuánto tiempo es válido el certificado del FBI?",
       a: "La mayoría de los consulados piden que el Identity History Summary tenga menos de 90 días en la fecha de la solicitud, contados desde la emisión (algunos, desde la apostilla). La traducción jurada no caduca, así que pide primero el certificado, apostíllalo y mándamelo al final.",
     },
+    apostilleFaq("es"),
+    signedPdfFaq("es"),
+    morePagesFaq("es"),
   ],
   cta: {
     title: "Mándame el certificado del FBI apostillado",
@@ -273,7 +270,7 @@ export const en = {
             rows: [
               [
                 "Price",
-                `€${PRICE} (about $${PRICE_USD}) for the FBI Identity History Summary of up to 2 pages. If your consulate requires the apostille page translated too, it counts as one extra page at the same per-page rate; you see the total before you pay.`,
+                `€${PRICE} (about $${PRICE_USD}) for the FBI Identity History Summary of up to 2 pages. If your consulate requires the apostille page translated too, it counts as one more page within those 2; each page beyond that is €${PRICE_PER_PAGE}. You see the total before you pay.`,
               ],
               [
                 "Turnaround",
@@ -328,6 +325,7 @@ export const en = {
         "My translation reproduces the whole document: the FBI letterhead, the result, the seal, the signature block and, if your consulate requires it, the apostille, each element labelled so the officer can match it to the original. It carries my certification, signature and stamp on every page and the qualified electronic signature on the PDF.",
       ],
     },
+    verifySignatureSection("en"),
   ],
   howTitle: "How to order the translation",
   steps: [
@@ -358,20 +356,12 @@ export const en = {
       a: "It may be accepted at some consulates for the visa application; Spanish authorities do not accept it once you arrive. If you are only going to translate the certificate once, make it a sworn translation.",
     },
     {
-      q: "Does the apostille page need to be translated?",
-      a: "It depends on the consulate. Miami, for example, states that apostilles are not translated; others ask for every page in Spanish. If yours requires it, I translate the apostille as one extra page and it goes in the same PDF.",
-    },
-    {
       q: "How long does the translation take?",
       a: "An FBI check runs to one to three pages. If it reaches me before 6 pm Madrid time (12 noon in New York) you have the signed PDF the same day; otherwise first thing the next morning. The deadline is confirmed in writing with the quote.",
     },
     {
       q: "How do I pay from the United States?",
       a: "By card through Stripe, in US dollars or euros, or through Wise. The price you approve is the price you pay; no Spanish bank account or international transfer is needed.",
-    },
-    {
-      q: "Do I need the paper copy, or is the PDF enough?",
-      a: `The PDF carries a qualified electronic signature and is legally equivalent to the stamped paper original in Spain. Most consulates accept it; some still ask for paper at in-person appointments, so check your appointment instructions. If you need paper, I courier it to any US address for $${US_SHIPPING_USD}, usually within three to five working days.`,
     },
     {
       q: "Is the translation accepted at the Spanish consulate in New York, Los Angeles, Miami, Chicago, Houston, Washington, San Francisco or Boston?",
@@ -381,6 +371,10 @@ export const en = {
       q: "How long is the FBI check valid?",
       a: "Most consulates want the Identity History Summary to be under 90 days old on the application date, counted from issue (some count from the apostille date). The sworn translation itself does not expire, so order the FBI check first, apostille it, and send it to me last.",
     },
+    apostilleFaq("en"),
+    signedPdfFaq("en"),
+    morePagesFaq("en"),
+    verifySignatureFaq("en"),
   ],
   cta: {
     title: "Send me your apostilled FBI check",

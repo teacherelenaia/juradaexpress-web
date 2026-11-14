@@ -12,6 +12,7 @@ import {
   DNV_PACK_LIMITS,
   URGENCY_TEXT,
 } from "../site";
+import { apostilleFaq, signedPdfFaq, morePagesFaq } from "../faqComunes";
 
 const PATH_ES = "/traduccion-jurada-visado-nomada-digital";
 const PATH_EN = "/en/sworn-translation-spain-digital-nomad-visa";
@@ -209,10 +210,9 @@ export const es = {
       q: "¿Cuánto tarda un expediente completo?",
       a: `Hasta 10 páginas, en el día; más de 10 páginas, en 24 horas. ${URGENCY_TEXT.es.sooner}`,
     },
-    {
-      q: "¿Vale el PDF firmado para la presentación en el consulado?",
-      a: "Para la presentación telemática, sí: el PDF lleva mi firma electrónica verificable. Si tu consulado exige papel, te envío los originales sellados por mensajería.",
-    },
+    apostilleFaq("es"),
+    signedPdfFaq("es"),
+    morePagesFaq("es"),
   ],
   cta: {
     title: "Envíame tu lista y te digo qué falta",
@@ -412,10 +412,9 @@ export const en = {
       q: "How long does a complete file take?",
       a: `Up to 10 pages, the same day; over 10 pages, within 24 hours. ${URGENCY_TEXT.en.sooner}`,
     },
-    {
-      q: "Is the signed PDF accepted by the consulate?",
-      a: "For online submission, yes: the PDF carries my verifiable electronic signature. If your consulate insists on paper, I courier the stamped originals to you.",
-    },
+    apostilleFaq("en"),
+    signedPdfFaq("en"),
+    morePagesFaq("en"),
   ],
   cta: {
     title: "Send me your list and I will tell you what is missing",

@@ -7,6 +7,7 @@
 import { USCIS_PAPER_COPY, INTERNATIONAL_SHIPPING } from "../site";
 import { DOCUMENTS } from "../documents";
 import { US_DOC_ROUTES, LAW_FIRMS_ROUTE } from "./routes";
+import { US_SHIPPING_USD } from "../usd";
 
 const PATH_ES = "/traduccion-certificada-uscis";
 const PATH_EN = "/en/certified-translation-uscis";
@@ -181,6 +182,10 @@ export const es = {
     {
       q: "¿Puedo pagar con una tarjeta de Estados Unidos?",
       a: "Sí. El pago es con tarjeta internacional a través de Stripe; el importe se cobra en euros y tu banco aplica el cambio a dólares.",
+    },
+    {
+      q: "¿USCIS acepta el PDF firmado?",
+      a: `Sí. USCIS acepta la traducción completa en PDF con la certificación de exactitud y competencia firmada y fechada, como pide la 8 CFR § 103.2(b)(3), sin notario ni apostilla. Si quieres además una copia en papel, te la envío por mensajería a Estados Unidos por ${US_SHIPPING_USD} $.`,
     },
   ],
   cta: {
@@ -371,6 +376,10 @@ export const en = {
     {
       q: "Can I pay with a US card?",
       a: "Yes. Payment is by international card through Stripe; the amount is charged in euros and your bank converts it to dollars.",
+    },
+    {
+      q: "Does USCIS accept the signed PDF?",
+      a: `Yes. USCIS accepts the complete translation as a PDF with the signed and dated certification of accuracy and competence required by 8 CFR § 103.2(b)(3), with no notary and no apostille. If you also want a paper copy, I courier it to any US address for $${US_SHIPPING_USD}.`,
     },
   ],
   cta: {

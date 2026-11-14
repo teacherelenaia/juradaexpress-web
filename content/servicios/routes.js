@@ -12,7 +12,7 @@ export const SERVICE_ROUTES = [
     en: "/en/sworn-english-translator",
     labelEs: "Traductor jurado de inglés",
     labelEn: "Sworn English translator",
-    lastModified: "2026-10-10",
+    lastModified: "2026-11-14",
   },
   {
     // Landing de la campaña 1 de Google Ads (08/10/2026): cabecera reducida
@@ -22,7 +22,7 @@ export const SERVICE_ROUTES = [
     en: "/en/sworn-translations-spanish-visas",
     labelEs: "Visados de España",
     labelEn: "Spanish visas",
-    lastModified: "2026-10-08",
+    lastModified: "2026-11-14",
     landing: true,
   },
   {
@@ -34,7 +34,7 @@ export const SERVICE_ROUTES = [
     en: "/en/fbi-background-check-translation-spain",
     labelEs: "Certificado del FBI",
     labelEn: "FBI background check",
-    lastModified: "2026-10-10",
+    lastModified: "2026-11-14",
     landing: true,
   },
   {
@@ -43,7 +43,7 @@ export const SERVICE_ROUTES = [
     en: "/en/acro-police-certificate-translation-spain",
     labelEs: "Certificado ACRO (Reino Unido)",
     labelEn: "ACRO police certificate",
-    lastModified: "2026-10-10",
+    lastModified: "2026-11-14",
     landing: true,
   },
   {
@@ -52,6 +52,7 @@ export const SERVICE_ROUTES = [
     en: "/en/sworn-translation-spain-digital-nomad-visa",
     labelEs: "Visado de nómada digital",
     labelEn: "Digital nomad visa",
+    lastModified: "2026-11-14",
   },
   {
     id: "uscis",
@@ -59,6 +60,7 @@ export const SERVICE_ROUTES = [
     en: "/en/certified-translation-uscis",
     labelEs: "Traducción certificada para USCIS",
     labelEn: "Certified translation for USCIS",
+    lastModified: "2026-11-14",
   },
   {
     id: "urgente",
