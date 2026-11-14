@@ -119,9 +119,6 @@ export default function Page() {
       <QuotePromise locale="es" className="mt-3 max-w-[60ch]" />
 
       <p className="mt-8 text-sm text-slate-500">
-        * Más de 10 páginas: en 24 horas. {URGENCY_TEXT.es.sooner}
-      </p>
-      <p className="mt-2 text-sm text-slate-500">
         Todos los precios son en euros (€), IVA incluido. Se cobran en euros con
         tarjeta internacional a través de Stripe; si pagas desde fuera de la zona
         euro, tu banco aplica el cambio.

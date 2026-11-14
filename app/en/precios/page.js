@@ -122,9 +122,6 @@ export default function Page() {
       {/* Delivery promise (content/site.js → DELIVERY_PROMISE) under the buttons */}
       <QuotePromise locale="en" className="mt-3 max-w-[60ch]" />
 
-      <p className="mt-8 text-sm text-slate-500">
-        * Over 10 pages: within 24 hours. {URGENCY_TEXT.en.sooner}
-      </p>
 
       {/* Price per document, not per page + direct vs agency table */}
       <PricePerDocument locale="en" embedded className="mt-10" />

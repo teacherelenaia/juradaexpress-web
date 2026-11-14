@@ -4,6 +4,7 @@
 // móvil, barra de acciones y footer no dupliquen URLs.
 import { MIN_PRICE } from "./documents";
 import { REVIEW_STATS, TRUSTPILOT_URL } from "./reviews";
+import { PRICE_PER_PAGE, URGENCY_SURCHARGE, FIXED_PRICE_MAX_PAGES } from "./pricing";
 
 export const PHONE_DISPLAY = "685 891 214";
 export const PHONE_TEL = "+34685891214";
@@ -163,7 +164,7 @@ export const PAPER_DELIVERY_SPAIN = {
 // Los textos de urgencia de toda la web salen de URGENCY_TEXT.
 export const SAME_DAY_MAX_PAGES = 10;
 export const OVER_LIMIT_HOURS = 24;
-export const URGENCY_SURCHARGE = 0.3;
+// URGENCY_SURCHARGE vive en content/pricing.js (se reexporta más abajo).
 const URGENCY_PCT = Math.round(URGENCY_SURCHARGE * 100);
 export const URGENCY_TEXT = {
   es: {
@@ -189,7 +190,9 @@ export const URGENCY_TEXT = {
 // OfferCatalog del JSON-LD. Una página es una cara del documento original;
 // la apostilla cuenta como página si hay que traducirla. Si cambia, se
 // cambia solo aquí. [[CONFIRMAR con Elena antes de fusionar]]
-export const PRICE_PER_PAGE = 20;
+// PRICE_PER_PAGE vive en content/pricing.js (cálculo de la calculadora);
+// se reexporta desde aquí.
+export { PRICE_PER_PAGE, URGENCY_SURCHARGE, FIXED_PRICE_MAX_PAGES };
 
 // Mínimo por documento de los documentos largos (regla de Elena,
 // 10/10/2026): 20 € por página con un mínimo de MIN_DOC_PRICE por

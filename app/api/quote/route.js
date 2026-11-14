@@ -44,6 +44,7 @@ import { get, del } from "@vercel/blob";
 import { resendConfig, sendResendEmail } from "../../lib/resend";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES, OVER_LIMIT_HOURS } from "../../../content/site";
+import { basePrice, estimatePrice } from "../../../content/pricing";
 import { toUsd, US_SHIPPING_USD } from "../../../content/usd";
 import { sourceLabel } from "../../../content/sources";
 import { notifyCrm } from "../../lib/crm";
@@ -200,12 +201,10 @@ function attributionLine(attr) {
 
 // La estimación se recalcula aquí a partir del catálogo: nunca se confía
 // en el importe que manda el navegador.
+// Mismo cálculo que la calculadora (content/pricing.js); con urgencia, el
+// recargo MÁXIMO, y el importe exacto se confirma por escrito.
 function estimate(doc, pages, urgent) {
-  if (!doc || doc.price == null) return null;
-  const base = doc.price * pages;
-  // Urgencia = antes del plazo normal; se estima con el recargo MÁXIMO
-  // (hasta URGENCY_SURCHARGE) y el importe exacto se confirma por escrito.
-  return Math.round(urgent ? base * (1 + URGENCY_SURCHARGE) : base);
+  return estimatePrice(doc, pages, urgent);
 }
 
 export async function POST(req) {
@@ -284,8 +283,8 @@ export async function POST(req) {
   const docName = doc ? doc.name : "(documento no indicado)";
   const isSummary = !part;
   const estimateLine = firmMode
-    ? doc && doc.price != null
-      ? `${toUsd(doc.price) * pages} $ (tarifa de despacho en dólares)`
+    ? doc
+      ? `${toUsd(basePrice(doc, pages))} $ (tarifa de despacho en dólares)`
       : `presupuesto en menos de 2 h (catálogo desde ${toUsd(MIN_PRICE)} $)`
     : price != null
     ? `${price} €`
