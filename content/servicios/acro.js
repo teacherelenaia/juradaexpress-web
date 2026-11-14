@@ -14,25 +14,18 @@
 // (content/site.js → INTERNATIONAL_SHIPPING): se indica en el presupuesto.
 import { DOCUMENTS } from "../documents";
 import { MAEC_NUMBER, SINCE } from "../persona";
-import {
-  GOOGLE_BUSINESS_URL,
-  GOOGLE_RATING,
-  GOOGLE_REVIEW_COUNT,
-  MAEC_LIST_URL,
-} from "../site";
+import { MAEC_LIST_URL } from "../site";
+import { REVIEW_TEXT } from "../reviews";
 
 const PATH_ES = "/traduccion-jurada-acro-reino-unido";
 const PATH_EN = "/en/acro-police-certificate-translation-spain";
 
 const PRICE = DOCUMENTS.find((d) => d.id === "antecedentes-penales").price;
 
-const fiveStar = GOOGLE_RATING >= 5;
-const reviewsEn = fiveStar
-  ? `${GOOGLE_REVIEW_COUNT} five-star Google reviews`
-  : `${GOOGLE_RATING.toLocaleString("en-GB", { minimumFractionDigits: 1 })} on Google · ${GOOGLE_REVIEW_COUNT} reviews`;
-const reviewsEs = fiveStar
-  ? `${GOOGLE_REVIEW_COUNT} reseñas de cinco estrellas en Google`
-  : `${GOOGLE_RATING.toLocaleString("es-ES", { minimumFractionDigits: 1 })} en Google · ${GOOGLE_REVIEW_COUNT} reseñas`;
+// «N reseñas de cinco estrellas en Google y Trustpilot»: recuento y
+// texto de content/reviews.js (REVIEW_STATS); enlaza a /#opiniones.
+const reviewsEn = REVIEW_TEXT.en.totalLong;
+const reviewsEs = REVIEW_TEXT.es.totalLong;
 
 const CONSULADOS_URL = "https://www.exteriores.gob.es/Consulados/";
 const ACRO_URL = "https://www.acro.police.uk/police-certificates";
@@ -67,8 +60,7 @@ export const es = {
     },
     {
       text: reviewsEs,
-      href: GOOGLE_BUSINESS_URL,
-      label: "Ver las reseñas en la ficha de Google Business",
+      href: REVIEW_TEXT.es.href,
     },
     { text: `${PRICE} € por certificado` },
     { text: "PDF firmado en el día" },
@@ -247,8 +239,7 @@ export const en = {
     },
     {
       text: reviewsEn,
-      href: GOOGLE_BUSINESS_URL,
-      label: "See the reviews on the Google Business profile",
+      href: REVIEW_TEXT.en.href,
     },
     { text: `€${PRICE} per certificate` },
     { text: "Same-day signed PDF" },

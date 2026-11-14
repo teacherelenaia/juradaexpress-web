@@ -11,14 +11,10 @@
 // para eso remite al consulado o a un abogado de extranjería. Los precios
 // salen de content/packs.js (packs visa, visa-family y nomad, más
 // EXTRA_PAGE_PRICE) y de content/documents.js (MIN_PRICE, "desde 35 €").
-import { EXTRA_PAGE_PRICE } from "../packs";
+import { EXTRA_PAGE_PRICE, packPrice } from "../packs";
 import { MIN_PRICE } from "../documents";
-import {
-  GOOGLE_BUSINESS_URL,
-  GOOGLE_RATING,
-  GOOGLE_REVIEW_COUNT,
-  MAEC_LIST_URL,
-} from "../site";
+import { MAEC_LIST_URL } from "../site";
+import { REVIEW_TEXT } from "../reviews";
 
 const PATH_ES = "/traduccion-jurada-visados-espana";
 const PATH_EN = "/en/sworn-translations-spanish-visas";
@@ -26,15 +22,10 @@ const PATH_EN = "/en/sworn-translations-spanish-visas";
 // Packs que se muestran en la página (ids de content/packs.js).
 const PACK_IDS = ["visa", "visa-family", "nomad"];
 
-// "65 five-star Google reviews": solo si la nota es 5,0; si baja, el texto
-// pasa a "4,9 en Google · 65 reseñas" sin tocar la página.
-const fiveStar = GOOGLE_RATING >= 5;
-const reviewsEn = fiveStar
-  ? `${GOOGLE_REVIEW_COUNT} five-star Google reviews`
-  : `${GOOGLE_RATING.toLocaleString("en-GB", { minimumFractionDigits: 1 })} on Google · ${GOOGLE_REVIEW_COUNT} reviews`;
-const reviewsEs = fiveStar
-  ? `${GOOGLE_REVIEW_COUNT} reseñas de cinco estrellas en Google`
-  : `${GOOGLE_RATING.toLocaleString("es-ES", { minimumFractionDigits: 1 })} en Google · ${GOOGLE_REVIEW_COUNT} reseñas`;
+// «N reseñas de cinco estrellas en Google y Trustpilot»: recuento y
+// texto de content/reviews.js (REVIEW_STATS); enlaza a /#opiniones.
+const reviewsEn = REVIEW_TEXT.en.totalLong;
+const reviewsEs = REVIEW_TEXT.es.totalLong;
 
 const CONSULADOS_URL = "https://www.exteriores.gob.es/Consulados/";
 
@@ -47,7 +38,7 @@ export const es = {
   crumb: "Visados de España",
   metaTitle: `Traducción jurada para visados de España desde ${MIN_PRICE} € | Jurada Express`,
   metaDescription:
-    "Traductora jurada nº 7310 del MAEC. Antecedentes del FBI, certificado médico y partidas traducidos para tu visado de España. PDF en el día, desde 129 €.",
+    `Traductora jurada nº 7310 del MAEC. Antecedentes del FBI, certificado médico y partidas traducidos para tu visado de España. PDF en el día, desde ${packPrice("visa")} €.`,
   h1: "Traducción jurada para tu visado de España",
   lead:
     "La traducción jurada es la versión en español de tus documentos, firmada y certificada por una traductora nombrada por el Ministerio de Asuntos Exteriores de España, y es lo que los consulados españoles piden con cada documento extranjero del expediente de visado: el certificado de antecedentes del FBI, el certificado médico, la prueba de ingresos y las partidas de nacimiento y el certificado de matrimonio de tu familia. Soy Elena Peñaranda Ortega, traductora jurada nº 7310 desde 2009, y traduzco expedientes de visado completos procedentes de Estados Unidos, Reino Unido, Canadá y Australia con un único precio cerrado y un único plazo por escrito. Los documentos de hasta 10 páginas se entregan el mismo día en PDF firmado digitalmente.",
@@ -63,8 +54,7 @@ export const es = {
     },
     {
       text: reviewsEs,
-      href: GOOGLE_BUSINESS_URL,
-      label: "Ver las reseñas en la ficha de Google Business",
+      href: REVIEW_TEXT.es.href,
     },
     { text: "Entrega en el día hasta 10 páginas" },
     { text: "Presupuestos antes de las 9:00, hora española" },
@@ -256,7 +246,7 @@ export const en = {
   crumb: "Spanish visas",
   metaTitle: `Sworn Translations for Spanish Visas from €${MIN_PRICE} | Jurada Express`,
   metaDescription:
-    "Sworn translator No. 7310 (Spain's Foreign Ministry). FBI check, medical and birth certificates translated for your Spanish visa. Same-day PDF, from €129.",
+    `Sworn translator No. 7310 (Spain's Foreign Ministry). FBI check, medical and birth certificates translated for your Spanish visa. Same-day PDF, from €${packPrice("visa")}.`,
   h1: "Sworn translations for your Spanish visa application",
   lead:
     "A sworn translation is the Spanish-language version of your documents, signed and certified by a translator appointed by Spain's Ministry of Foreign Affairs, and it is what Spanish consulates ask for with every foreign document in a visa file: the FBI background check, the medical certificate, proof of income, and your family's birth and marriage certificates. I am Elena Peñaranda Ortega, sworn translator No. 7310 since 2009, and I translate complete visa files from the United States, the UK, Canada and Australia with one fixed price and one written deadline. Documents of up to 10 pages are delivered the same day as a digitally signed PDF.",
@@ -272,8 +262,7 @@ export const en = {
     },
     {
       text: reviewsEn,
-      href: GOOGLE_BUSINESS_URL,
-      label: "See the reviews on the Google Business profile",
+      href: REVIEW_TEXT.en.href,
     },
     { text: "Same-day delivery up to 10 pages" },
     { text: "Quotes before 9 am Spanish time" },

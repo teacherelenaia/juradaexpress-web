@@ -28,8 +28,6 @@ import {
 import {
   EMAIL,
   GOOGLE_BUSINESS_URL,
-  GOOGLE_RATING,
-  GOOGLE_REVIEW_COUNT,
   INTERNATIONAL_SHIPPING,
   LARGE_PROJECT_CAPACITY,
   MIN_DOC_PRICE,
@@ -40,6 +38,7 @@ import {
   SAME_DAY_MAX_PAGES,
   TIMEZONE_NOTE,
 } from "../site";
+import { REVIEW_TEXT, TOTAL_REVIEWS, TRUSTPILOT_URL } from "../reviews";
 
 const PATH_ES = "/traductor-jurado-ingles";
 const PATH_EN = "/en/sworn-english-translator";
@@ -221,29 +220,21 @@ function offerCatalog(locale) {
   };
 }
 
-// Nota y número de reseñas de la ficha de Google (content/site.js), con
-// enlace a Maps. Sin reseñas publicables, no se muestra nada.
+// Número de reseñas de Google y Trustpilot (content/reviews.js →
+// REVIEW_STATS), con enlace a la sección de opiniones de la portada. Sin
+// reseñas, no se muestra nada.
 function reviews(locale) {
-  if (!(GOOGLE_RATING > 0 && GOOGLE_REVIEW_COUNT > 0)) return undefined;
-  const en = locale === "en";
-  const rating = GOOGLE_RATING.toLocaleString(en ? "en-GB" : "es-ES", {
-    minimumFractionDigits: 1,
-  });
-  return {
-    text: en
-      ? `${rating} on Google · ${GOOGLE_REVIEW_COUNT} reviews`
-      : `${rating} en Google · ${GOOGLE_REVIEW_COUNT} reseñas`,
-    href: GOOGLE_BUSINESS_URL,
-    label: en
-      ? "See the reviews on the Google Business profile (opens in a new tab)"
-      : "Ver las reseñas en la ficha de Google Business (se abre en una pestaña nueva)",
-  };
+  if (!(TOTAL_REVIEWS > 0)) return undefined;
+  const r = REVIEW_TEXT[locale] || REVIEW_TEXT.es;
+  return { text: r.totalLong, href: r.href };
 }
 
 const maecLink = (label) =>
   `<a href="${MAEC_URL}" target="_blank" rel="noopener noreferrer">${label}</a>`;
 const mapsLink = (label) =>
   `<a href="${GOOGLE_BUSINESS_URL}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+const trustpilotLink = (label) =>
+  `<a href="${TRUSTPILOT_URL}" target="_blank" rel="noopener noreferrer">${label}</a>`;
 const contactLine = `<a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a> · <a href="mailto:${EMAIL}">${EMAIL}</a>`;
 
 // Ficha de la traductora en texto plano: los datos que un organismo (o un
@@ -291,8 +282,8 @@ function translatorSheet(locale) {
   if (r) {
     rows.push(
       en
-        ? ["Reviews", `${r.text} · ${mapsLink("see the Google profile")}`]
-        : ["Reseñas", `${r.text} · ${mapsLink("ver la ficha de Google")}`]
+        ? ["Reviews", `${r.text} · ${mapsLink("Google profile")} · ${trustpilotLink("Trustpilot profile")}`]
+        : ["Reseñas", `${r.text} · ${mapsLink("ficha de Google")} · ${trustpilotLink("perfil de Trustpilot")}`]
     );
   }
   return { dl: rows };

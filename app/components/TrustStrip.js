@@ -4,25 +4,23 @@
 // de cinco hechos en Manrope 500, sin iconos ni tarjetas. En la home va bajo
 // el hero; en el resto de páginas públicas la pinta SiteShell bajo la
 // cabecera (GlobalTrustStrip la oculta en las portadas y en las páginas
-// legales). El dato de Google y la garantía salen de content/site.js; si
-// no hay reseñas publicables, el dato de Google se sustituye por
-// "Traducciones válidas ante organismos oficiales".
+// legales). El dato de reseñas («N reseñas de 5 estrellas en Google y
+// Trustpilot») sale de content/reviews.js → REVIEW_STATS y enlaza a la
+// sección de opiniones de la portada (/#opiniones, /en#opiniones); la
+// garantía, de content/site.js. Si no hay reseñas publicables, el dato se
+// sustituye por "Traducciones válidas ante organismos oficiales".
+import { GUARANTEE_SHORT } from "../../content/site";
 import {
-  GOOGLE_BUSINESS_URL,
-  GOOGLE_RATING,
-  GOOGLE_REVIEW_COUNT,
-  GUARANTEE_SHORT,
-} from "../../content/site";
-import { getPublishableReviews } from "../../content/reviews";
+  getPublishableReviews,
+  REVIEW_TEXT,
+  TOTAL_REVIEWS,
+} from "../../content/reviews";
 import { MAEC_URL, MAEC_NUMBER, SINCE } from "../../content/persona";
 
 const COPY = {
   es: {
     maec: `Traductora jurada desde ${SINCE} · MAEC nº ${MAEC_NUMBER}`,
     maecLabel: "Comprobar el nombramiento en el listado oficial del MAEC",
-    google: (rating, count) =>
-      `${rating.toLocaleString("es-ES", { minimumFractionDigits: 1 })} en Google · ${count} reseñas`,
-    googleLabel: "Ver las reseñas en la ficha de Google Business",
     noReviews: "Traducciones válidas ante organismos oficiales",
     delivery: "Entrega en el día (hasta 10 págs.) · PDF firmado",
     payment: "Pago con tarjeta internacional",
@@ -32,9 +30,6 @@ const COPY = {
   en: {
     maec: `Sworn translator since ${SINCE} · MAEC no. ${MAEC_NUMBER}`,
     maecLabel: "Check the appointment on the Ministry's official register",
-    google: (rating, count) =>
-      `${rating.toLocaleString("en-GB", { minimumFractionDigits: 1 })} on Google · ${count} reviews`,
-    googleLabel: "See the reviews on the Google Business profile",
     noReviews: "Translations accepted by official bodies",
     delivery: "Same day (up to 10 pages) · signed PDF",
     payment: "International card payments",
@@ -45,10 +40,8 @@ const COPY = {
 
 export default function TrustStrip({ locale = "es", className = "" }) {
   const t = COPY[locale] || COPY.es;
-  const hasReviews =
-    getPublishableReviews().length > 0 &&
-    GOOGLE_RATING > 0 &&
-    GOOGLE_REVIEW_COUNT > 0;
+  const r = REVIEW_TEXT[locale] || REVIEW_TEXT.es;
+  const hasReviews = getPublishableReviews().length > 0 && TOTAL_REVIEWS > 0;
 
   const facts = [
     {
@@ -59,10 +52,10 @@ export default function TrustStrip({ locale = "es", className = "" }) {
     },
     hasReviews
       ? {
-          key: "google",
-          text: t.google(GOOGLE_RATING, GOOGLE_REVIEW_COUNT),
-          href: GOOGLE_BUSINESS_URL,
-          label: t.googleLabel,
+          key: "reviews",
+          text: r.total,
+          href: r.href,
+          internal: true,
         }
       : { key: "valid", text: t.noReviews },
     { key: "delivery", text: t.delivery },
@@ -83,8 +76,9 @@ export default function TrustStrip({ locale = "es", className = "" }) {
             {f.href ? (
               <a
                 href={f.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(f.internal
+                  ? {}
+                  : { target: "_blank", rel: "noopener noreferrer" })}
                 aria-label={f.label}
                 className="link-nav inline-block min-h-[44px] py-2.5 text-slate-700 md:py-0 md:min-h-0"
               >

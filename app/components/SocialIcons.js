@@ -1,7 +1,13 @@
 // app/components/SocialIcons.js
-// Iconos de Instagram, Facebook y LinkedIn. Solo se muestran los perfiles
-// con URL definida en content/site.js.
-import { INSTAGRAM_URL, FACEBOOK_URL, LINKEDIN_URL } from "../../content/site";
+// Iconos de Instagram, Facebook, LinkedIn y Trustpilot (desde el
+// 14/11/2026). Solo se muestran los perfiles con URL definida en
+// content/site.js. El de Trustpilot es un SVG propio (sin TrustBox).
+import {
+  INSTAGRAM_URL,
+  FACEBOOK_URL,
+  LINKEDIN_URL,
+  TRUSTPILOT_URL,
+} from "../../content/site";
 
 const IconInstagram = (props) => (
   <svg
@@ -53,6 +59,21 @@ const IconLinkedIn = (props) => (
   </svg>
 );
 
+// Estrella de Trustpilot en trazo, con el mismo grosor que los otros iconos.
+const IconTrustpilot = (props) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="M12 3l2.47 6.03 6.53.48-4.99 4.23 1.56 6.36L12 16.67 6.43 20.1l1.56-6.36L3 9.51l6.53-.48z" />
+  </svg>
+);
+
 export default function SocialIcons({ className = "", iconClassName = "h-5 w-5" }) {
   const profiles = [
     INSTAGRAM_URL && {
@@ -69,6 +90,11 @@ export default function SocialIcons({ className = "", iconClassName = "h-5 w-5" 
       href: LINKEDIN_URL,
       label: "LinkedIn",
       Icon: IconLinkedIn,
+    },
+    TRUSTPILOT_URL && {
+      href: TRUSTPILOT_URL,
+      label: "Opiniones de Jurada Express en Trustpilot",
+      Icon: IconTrustpilot,
     },
   ].filter(Boolean);
 
