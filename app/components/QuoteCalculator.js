@@ -55,7 +55,7 @@ import QuotePromise from "./QuotePromise";
 import { IconUpload, IconFileText } from "./Icons";
 import { setAdsUserData, trackAdsConversion } from "./AdsConversion";
 import { getAttribution } from "../lib/attribution";
-import { appendWaOrigin } from "../lib/waOrigin";
+import { appendWaOrigin, WA_REF_KEY, WA_REF_RE } from "../lib/waOrigin";
 import { trackEngagement } from "../lib/engagement";
 import { SOURCE_OPTIONS } from "../../content/sources";
 
@@ -522,6 +522,10 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
   // idle | sending | sent (todo recibido o sin archivos) | attach (ningún
   // archivo recibido) | partial (algunos no) | failed (no llegó la solicitud)
   const [status, setStatus] = useState("idle");
+  // Envío doble (14/11/2026): el botón se desactiva al pasar a «sending»,
+  // pero un doble toque o Intro+clic llegan antes de que React repinte y
+  // mandaban la solicitud dos veces. Este ref lo corta en el acto.
+  const submittingRef = useRef(false);
   // { emailed: [nombre], pending: [{ name, reason }] } tras el envío
   const [result, setResult] = useState(null);
   const [waUrl, setWaUrl] = useState("");
@@ -654,6 +658,7 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (submittingRef.current) return;
     // Evento sin cookies (Vercel Analytics): se registra el intento de envío,
     // termine o no en solicitud enviada.
     trackEngagement("cta_click", { cta: "calculadora_enviar" });
@@ -676,6 +681,7 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
       return;
     }
     setPrivacyError("");
+    submittingRef.current = true;
     setStatus("sending");
     setResult(null);
     setWaUrl("");
@@ -744,6 +750,14 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
       // importar después la venta a Google Ads junto con el email.
       fd.append("source", source);
       fd.append("attribution", JSON.stringify(getAttribution() || {}));
+      // Referencia JX de la misma visita, si ya pulsó WhatsApp (sirve para
+      // contar a la misma persona una sola vez en el resumen semanal).
+      try {
+        const ref = sessionStorage.getItem(WA_REF_KEY) || "";
+        if (WA_REF_RE.test(ref)) fd.append("ref", ref);
+      } catch {
+        /* sin storage */
+      }
       if (firmMode) {
         fd.append("firmMode", "1");
         fd.append("firm", firm);
@@ -803,6 +817,7 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
     //    emergentes que dejen esta página en segundo plano).
     setWaUrl(buildWhatsApp(emailedNames, pendingNames));
     setResult({ emailed: emailedNames, pending: failed, summaryOk });
+    submittingRef.current = false;
     if (!summaryOk && emailedNames.length === 0) setStatus("failed");
     else if (files.length === 0 || failed.length === 0) setStatus("sent");
     else if (emailedNames.length === 0) setStatus("attach");

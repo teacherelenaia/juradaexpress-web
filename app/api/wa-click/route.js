@@ -9,7 +9,7 @@
 //
 // Aquí:
 //   1. Se valida todo (ref /^JX-[A-Z0-9]{6}$/, campos recortados, cuerpo de
-//      4 KB como máximo) y se descarta lo que no se reconoce.
+//      6 KB como máximo) y se descarta lo que no se reconoce.
 //   2. Se guarda un JSON en Vercel Blob (privado) en
 //      wa-clicks/AAAA/MM/JX-ABC123.json. Si ya existe, no se vuelve a
 //      escribir ni a avisar (idempotente).
@@ -19,93 +19,27 @@
 //      origen (25/10/2026): «WhatsApp desde Google Ads · JX-…» (gclid,
 //      gbraid, wbraid o utm_source=google + utm_medium=cpc), «WhatsApp
 //      desde ChatGPT · JX-…» (utm_source=chatgpt.com o referrer
-//      chatgpt.com) o «WhatsApp desde la web · JX-…».
+//      chatgpt.com) o «WhatsApp desde la web · JX-…». Desde el 14/11/2026
+//      el de Google Ads lleva campaña y palabra clave («WhatsApp desde
+//      Google Ads · EN · sworn translator spain · JX-…») y el cuerpo, las
+//      líneas «Campaña» y «Palabra clave» (app/lib/waNotice.js).
+//   3b. Se guarda la referencia con su atribución en refs/ y el contacto
+//      en contactos/ (app/lib/contactLog.js) para el aviso de pago y el
+//      resumen semanal.
 //   4. Responde 204 siempre: el beacon no espera nada y ningún error llega
 //      al navegador (todo en try/catch, errores a console.error).
 import { BlobNotFoundError, head, put } from "@vercel/blob";
 import { resendConfig, sendResendEmail } from "../../lib/resend";
+import { parseBody, madridParts, emailSubject, emailText } from "../../lib/waNotice";
+import { adsInfo, clickOrigin } from "../../lib/adsCampaign";
+import { attributionRecord, logContact, saveRef } from "../../lib/contactLog";
 
 export const runtime = "nodejs";
 
-const MAX_BODY_BYTES = 4 * 1024;
-const REF_RE = /^JX-[A-Z0-9]{6}$/;
-const ATTR_KEYS = ["gclid", "gbraid", "wbraid", "landing", "referrer", "ts"];
-const UTM_KEYS = ["source", "medium", "campaign", "term", "content"];
+const MAX_BODY_BYTES = 6 * 1024;
 const BLOB_PREFIX = "wa-clicks";
-const TIME_ZONE = "Europe/Madrid";
 
 const noContent = () => new Response(null, { status: 204 });
-
-function clean(value, max = 200) {
-  return String(value ?? "")
-    .replace(/[\r\n\t]+/g, " ")
-    .trim()
-    .slice(0, max);
-}
-
-// Un toque de atribución con solo los campos conocidos y acotados.
-function touchOf(data) {
-  if (!data || typeof data !== "object" || Array.isArray(data)) return null;
-  const out = {};
-  for (const k of ATTR_KEYS) out[k] = clean(data[k]);
-  out.utm = {};
-  const utm = data.utm && typeof data.utm === "object" ? data.utm : {};
-  for (const k of UTM_KEYS) out.utm[k] = clean(utm[k]);
-  return out;
-}
-
-function attributionOf(data) {
-  const first = touchOf(data);
-  if (!first) return null;
-  const last = touchOf(data && data.last);
-  if (last) first.last = last;
-  return first;
-}
-
-const hasCampaign = (t) =>
-  Boolean(t && (t.gclid || t.gbraid || t.wbraid || (t.utm && t.utm.source)));
-
-function parseBody(raw) {
-  let data;
-  try {
-    data = JSON.parse(raw);
-  } catch {
-    return null;
-  }
-  if (!data || typeof data !== "object" || Array.isArray(data)) return null;
-  const ref = clean(data.ref, 20);
-  if (!REF_RE.test(ref)) return null;
-  const attribution = attributionOf(data.attribution);
-  if (!attribution) return null;
-  if (!hasCampaign(attribution) && !hasCampaign(attribution.last)) return null;
-  return {
-    ref,
-    lang: clean(data.lang, 5) === "en" ? "en" : "es",
-    page: clean(data.page, 200),
-    attribution,
-  };
-}
-
-// Partes de fecha en hora de Madrid.
-function madridParts(date) {
-  const parts = new Intl.DateTimeFormat("es-ES", {
-    timeZone: TIME_ZONE,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }).formatToParts(date);
-  const get = (type) => parts.find((p) => p.type === type)?.value || "";
-  return {
-    year: get("year"),
-    month: get("month"),
-    day: get("day"),
-    hour: get("hour") === "24" ? "00" : get("hour"),
-    minute: get("minute"),
-  };
-}
 
 // Guarda el clic en Blob. Devuelve "saved", "exists" o "skipped" (sin token
 // o error): en los dos últimos casos el email se manda igualmente salvo
@@ -142,72 +76,6 @@ async function storeClick(pathname, record) {
   }
 }
 
-function campaignName(attr) {
-  const touches = [attr, attr.last].filter(Boolean);
-  for (const t of touches) if (t.utm.campaign) return t.utm.campaign;
-  for (const t of touches) if (t.gclid || t.gbraid || t.wbraid) return "Google Ads";
-  for (const t of touches) if (t.utm.source) return t.utm.source;
-  return "(sin nombre)";
-}
-
-// Origen del clic para el asunto (25/10/2026), con los parámetros de la
-// primera visita de la sesión (campos de primer nivel) y, para Google Ads,
-// también los del último toque: si hay identificador de clic, el aviso es
-// de Google Ads aunque la visita empezara en otro sitio.
-const isGoogleAds = (t) =>
-  Boolean(
-    t &&
-      (t.gclid ||
-        t.gbraid ||
-        t.wbraid ||
-        (t.utm.source.toLowerCase() === "google" && t.utm.medium.toLowerCase() === "cpc"))
-  );
-const isChatGpt = (t) =>
-  Boolean(
-    t &&
-      (/^chatgpt(\.com)?$/i.test(t.utm.source) ||
-        /(^|\.)chatgpt\.com$/i.test(t.referrer))
-  );
-
-function clickOrigin(attr) {
-  if (isGoogleAds(attr) || isGoogleAds(attr.last)) return "google_ads";
-  if (isChatGpt(attr)) return "chatgpt";
-  return "web";
-}
-
-const ORIGIN = {
-  google_ads: { subject: "WhatsApp desde Google Ads", label: "Google Ads" },
-  chatgpt: { subject: "WhatsApp desde ChatGPT", label: "ChatGPT" },
-  web: { subject: "WhatsApp desde la web", label: "la web (otra fuente)" },
-};
-
-function emailSubject(ref, attr) {
-  return `${ORIGIN[clickOrigin(attr)].subject} · ${ref}`;
-}
-
-function emailText({ ref, page, attribution, when }) {
-  const a = attribution;
-  const first = a.gclid || a.gbraid || a.wbraid ? a : a.last || a;
-  const { year, month, day, hour, minute } = madridParts(when);
-  const origin = ORIGIN[clickOrigin(a)];
-  return [
-    `Alguien ha pulsado el botón de WhatsApp de la web. Origen: ${origin.label}.`,
-    "",
-    `Referencia: ${ref} (la verás al final de su mensaje de WhatsApp)`,
-    first.gclid ? `gclid: ${first.gclid}` : null,
-    `Campaña: ${campaignName(a)}`,
-    `Fuente: utm_source=${a.utm.source || "-"} · utm_medium=${a.utm.medium || "-"} · referrer=${a.referrer || "-"}`,
-    `Página: ${page || "(desconocida)"}`,
-    `Fecha: ${day}/${month}/${year} ${hour}:${minute} (hora de Madrid)`,
-    "",
-    "Datos para Google Ads (importación de conversiones offline):",
-    `gclid=${first.gclid} · gbraid=${first.gbraid} · wbraid=${first.wbraid} · landing=${first.landing} · primer toque=${a.ts}`,
-    "",
-  ]
-    .filter((line) => line !== null)
-    .join("\n");
-}
-
 export async function POST(req) {
   try {
     const declared = Number(req.headers.get("content-length") || 0);
@@ -225,6 +93,29 @@ export async function POST(req) {
 
     const stored = await storeClick(pathname, record);
     if (stored === "exists") return noContent();
+
+    // Referencia con su atribución (para el aviso de pago) y contacto para
+    // el resumen semanal (14/11/2026). Sin token de Blob no se guarda nada.
+    const origin = clickOrigin(click.attribution);
+    const attrRecord = attributionRecord({
+      origin,
+      info: adsInfo(click.attribution),
+      attr: click.attribution,
+    });
+    await Promise.all([
+      saveRef(click.ref, { fecha: when.toISOString(), canal: "whatsapp", ...attrRecord }),
+      logContact({
+        canal: "whatsapp",
+        id: click.ref,
+        when,
+        record: {
+          ref: click.ref,
+          origen: origin,
+          campana: attrRecord.campana,
+          palabraClave: attrRecord.palabraClave,
+        },
+      }),
+    ]);
 
     const mail = resendConfig();
     if (!mail) return noContent();

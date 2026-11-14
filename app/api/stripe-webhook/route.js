@@ -13,12 +13,19 @@
 // (regla en app/lib/paymentLinkRedirect.mjs) para que el cliente vuelva a la
 // web y cuente la conversión de Google Ads. Este evento no manda correo.
 //
+// Origen del cliente (14/11/2026): si el pago trae en los datos adicionales
+// `ref` con una referencia JX, el correo dice de qué aviso viene
+// («Origen del cliente: Google Ads · EN · sworn translator spain»), con la
+// atribución guardada en refs/ (app/lib/paymentOrigin.js).
+//
 // Requiere en Vercel: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET (whsec_… del
 // endpoint creado en Stripe), RESEND_API_KEY, QUOTE_FROM_EMAIL y,
 // opcionalmente, QUOTE_TO_EMAIL.
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
 import { ensurePaymentLinkRedirect } from "../../lib/paymentLinkRedirect.mjs";
+import { paymentRef, originLineFor } from "../../lib/paymentOrigin";
+import { loadRef } from "../../lib/contactLog";
 
 export const runtime = "nodejs";
 
@@ -128,6 +135,19 @@ export async function POST(req) {
   const paymentUrl = session.payment_intent
     ? `https://dashboard.stripe.com/payments/${session.payment_intent}`
     : `https://dashboard.stripe.com/checkout/sessions/${session.id}`;
+  // Origen del cliente (14/11/2026): `ref` de los datos adicionales → aviso
+  // guardado en refs/ (app/lib/contactLog.js).
+  const ref = paymentRef(session);
+  let refRecord = null;
+  if (/^jx-/i.test(ref)) {
+    try {
+      refRecord = await loadRef(ref.toUpperCase());
+    } catch {
+      refRecord = null;
+    }
+  }
+  const originLine = originLineFor(ref, refRecord);
+
   const when = new Date((session.created || Date.now() / 1000) * 1000).toLocaleString("es-ES", {
     timeZone: "Europe/Madrid",
   });
@@ -138,6 +158,7 @@ export async function POST(req) {
     `Importe: ${money(session.amount_total, session.currency)}`,
     `Fecha: ${when}`,
     `Origen: ${origin}`,
+    originLine,
     "",
     "Conceptos:",
     ...items,

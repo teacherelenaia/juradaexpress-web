@@ -47,7 +47,10 @@ export function hasCampaign(attr) {
   if (!attr) return false;
   const touches = [attr, attr.last].filter(Boolean);
   return touches.some(
-    (t) => Boolean(t.gclid || t.gbraid || t.wbraid || (t.utm && t.utm.source))
+    (t) =>
+      Boolean(
+        t.gclid || t.gbraid || t.wbraid || (t.utm && t.utm.source) || (t.ads && t.ads.campaignid)
+      )
   );
 }
 
