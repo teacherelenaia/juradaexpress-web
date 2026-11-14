@@ -186,3 +186,27 @@ Con `--dry-run` muestra la lista sin enviar nada. Respuestas de IndexNow: 200 o 
 - `app/indexnow-key/route.js` y la reescritura de `next.config.mjs`: sirven `/<clave>.txt`.
 - `scripts/indexnow.mjs`: envío a mano (`npm run indexnow`).
 - `.github/workflows/indexnow.yml`: llamada automática tras cada push a `main`.
+
+## Campaña y palabra clave en los avisos y resumen semanal (14/11/2026)
+
+Desde el 14/11/2026 la cuenta de Google Ads añade a la URL final el sufijo `kw={keyword}&mt={matchtype}&ag={adgroupid}`, y Google añade `gad_campaignid`. La web los guarda en el primer toque (`ads` en `app/lib/attribution.js`) y los avisos los traducen con `app/lib/adsCampaign.js`:
+
+| gad_campaignid | En los avisos |
+| --- | --- |
+| 24339671482 | EN (Extranjeros en España) |
+| 24363650778 | ES (Documentos España) |
+| 24333703631 | Marca |
+| otro | el número tal cual |
+
+`mt`: e = exacta, p = frase, b = amplia.
+
+- **WhatsApp**: asunto `WhatsApp desde Google Ads · EN · sworn translator spain · JX-ABC123` y, en el cuerpo, «Campaña: EN» y «Palabra clave: sworn translator spain (frase)». Si falta la campaña o la palabra clave, ese tramo no aparece. La línea «Datos para Google Ads (importación de conversiones offline)» no cambia.
+- **Calculadora**: asunto `Presupuesto web · Google Ads · EN · Partida de nacimiento · correo@cliente` (origen Google Ads, ChatGPT o Web, con la misma regla que WhatsApp), y en el cuerpo «Origen», «Campaña» y «Palabra clave». Una solicitud idéntica que llegue en los 10 minutos siguientes (doble clic, reintento) no se vuelve a mandar ni al correo ni al CRM.
+- **Pago recibido**: si el pago trae en los datos adicionales `ref` con una referencia JX, el correo añade «Origen del cliente: Google Ads · EN · sworn translator spain (JX-…)». Con `ref` vacío, «sin-ref» o «calculadora», lo dice en esa misma línea.
+- **Resumen semanal**: los sábados a las 8:00 (Madrid) llega `Resumen semanal de contactos · 14–20 nov` con la semana de sábado a viernes anterior: contactos por origen (Google Ads por campaña y palabra clave), WhatsApp y calculadora por separado, personas distintas, pagos con `ref` por origen (euros y dólares aparte) y número de pagos sin `ref`.
+
+Dónde se guarda (Vercel Blob privado, el mismo almacén): `refs/JX-ABC123.json` (referencia con su atribución, para el aviso de pago), `contactos/AAAA-MM-DD/…` (un archivo por contacto, sin datos personales: el email de la calculadora va como huella), `avisos/presupuesto/…` (huellas contra el envío doble) y `resumenes/…` (marca de resumen enviado).
+
+### Landings sin gad_campaignid (_gl y gclid solamente)
+
+Sin consentimiento de cookies la atribución vive solo en `sessionStorage`, que es de la pestaña. Si el visitante abre un enlace interior en una pestaña nueva o pulsa «Abrir en el navegador» desde la app de Google, la página nueva empieza sin nada guardado y su URL solo trae lo que añade Google a los enlaces (`url_passthrough`: `_gl` y `gclid`), no `gad_campaignid` ni el sufijo. Desde el 14/11/2026 la web añade esos cuatro parámetros (y el identificador de clic, si falta) a los enlaces internos en el momento de abrirlos, solo sin consentimiento y solo en enlaces del propio dominio. Además, la URL de entrada ya no se corta a 200 caracteres (ahora 600), y una página posterior con los parámetros completos rellena los que falten en el primer toque.

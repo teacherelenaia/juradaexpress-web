@@ -34,6 +34,15 @@
 // (referencia de cliente/asunto). Asunto: «[LAW FIRM] <despacho> ·
 // <documento> · <contacto>»; la estimación va en dólares y sin urgencia.
 //
+// Origen y campaña (14/11/2026): el origen se clasifica con la misma regla
+// que los avisos de WhatsApp (app/lib/adsCampaign.js) y va en el asunto:
+// «Presupuesto web · Google Ads · EN · Partida de nacimiento · correo@…»
+// (sin campaña, ese tramo no aparece; ChatGPT y web solo llevan el origen). El cuerpo lleva «Origen», «Campaña» y «Palabra clave».
+// Cada resumen se registra en Blob para el resumen semanal
+// (app/lib/contactLog.js) y deja una huella para no mandar dos veces la
+// misma solicitud (doble clic, reintento del navegador): si llega otra
+// idéntica en los 10 minutos siguientes, no se manda ni al correo ni al CRM.
+//
 // Sin RESEND_API_KEY responde { ok: true, emailed: false }: la calculadora
 // sigue funcionando y, como los archivos NO han llegado por email, el
 // resumen de WhatsApp y la pantalla de confirmación piden al cliente que
@@ -48,6 +57,17 @@ import { estimatePrice, firmPriceUsd } from "../../../content/pricing";
 import { toUsd, US_SHIPPING_USD } from "../../../content/usd";
 import { sourceLabel } from "../../../content/sources";
 import { notifyCrm } from "../../lib/crm";
+import { attributionOf as parseAttribution } from "../../lib/waNotice";
+import { adsInfo, campaignLines, clickOrigin } from "../../lib/adsCampaign";
+import {
+  attributionRecord,
+  logContact,
+  personHash,
+  putJson,
+  blobExists,
+  shortHash,
+  REF_RE,
+} from "../../lib/contactLog";
 
 export const runtime = "nodejs";
 // Descargar de Blob y enviar emails con adjuntos grandes puede tardar.
@@ -164,10 +184,8 @@ function fileList(raw) {
     .filter((item) => item.name);
 }
 
-// Atribución que manda el navegador (JSON). Solo se acepta un objeto y
-// cada valor se recorta a 200 caracteres.
-const ATTR_KEYS = ["gclid", "gbraid", "wbraid", "landing", "referrer", "ts"];
-const UTM_KEYS = ["source", "medium", "campaign", "term", "content"];
+// Atribución que manda el navegador (JSON): primer toque, último toque y
+// datos de anuncio, saneados como en el aviso de WhatsApp.
 function attributionOf(raw) {
   let data;
   try {
@@ -175,13 +193,16 @@ function attributionOf(raw) {
   } catch {
     return null;
   }
-  if (!data || typeof data !== "object" || Array.isArray(data)) return null;
-  const out = {};
-  for (const k of ATTR_KEYS) out[k] = clean(data[k], 200);
-  out.utm = {};
-  const utm = data.utm && typeof data.utm === "object" ? data.utm : {};
-  for (const k of UTM_KEYS) out.utm[k] = clean(utm[k], 200);
-  return out;
+  return parseAttribution(data);
+}
+
+// Etiqueta del origen en el asunto y el cuerpo de la calculadora.
+const QUOTE_ORIGIN = { google_ads: "Google Ads", chatgpt: "ChatGPT", web: "Web" };
+
+// Huella de una solicitud para detectar el envío doble: mismos datos del
+// formulario (sin archivos de Blob, que cambian de URL en cada subida).
+function quoteFingerprint(fields, bucket) {
+  return shortHash(`${bucket}|${JSON.stringify(fields)}`, 24);
 }
 
 // «Atribución: gclid=… · landing=… · referrer=… · utm=source/medium/campaign»
@@ -242,6 +263,10 @@ export async function POST(req) {
   const filesEmail = fileList(fd.get("filesEmail")); // irán en lotes directos aparte
   const filesWhatsApp = fileList(fd.get("filesWhatsApp"));
   const blobs = blobList(fd.get("blobs")); // ya subidos a Vercel Blob
+  const waRefRaw = clean(fd.get("ref"), 20); // referencia JX de la sesión, si la hay
+  const waRef = REF_RE.test(waRefRaw) ? waRefRaw : "";
+  const origin = clickOrigin(attribution);
+  const ads = origin === "google_ads" ? adsInfo(attribution) : null;
 
   const files = fd
     .getAll("files")
@@ -253,6 +278,33 @@ export async function POST(req) {
     if (f.size > MAX_FILE_BYTES) return json({ ok: false, error: "file-too-large" }, 413);
     if (!ALLOWED_TYPES.has(f.type) && !ALLOWED_EXT.test(f.name || "")) {
       return json({ ok: false, error: "file-type" }, 400);
+    }
+  }
+
+  // Envío doble (14/11/2026): solo el resumen. La huella se crea antes de
+  // enviar nada; si ya existe (otra petición idéntica en este tramo de 10
+  // minutos o en el anterior), esta no manda correo ni avisa al CRM. Los
+  // archivos de esta segunda subida se borran: ya llegaron con la primera.
+  if (!part) {
+    const fields = {
+      firmMode, firm, reference, locale, doc: doc ? doc.id : "", pages, urgent, paper,
+      name, email: emailRaw.toLowerCase(), phone, source,
+      files: [...blobs.map((b) => b.name), ...filesEmail.map((f) => f.name), ...filesWhatsApp.map((f) => f.name)],
+    };
+    const bucket = Math.floor(Date.now() / (10 * 60 * 1000));
+    const previous = quoteFingerprint(fields, bucket - 1);
+    const current = quoteFingerprint(fields, bucket);
+    const dupPrev = await blobExists(`avisos/presupuesto/${previous}.json`);
+    const created = dupPrev ? "exists" : await putJson(`avisos/presupuesto/${current}.json`, { at: new Date().toISOString() });
+    if (created === "exists") {
+      if (blobs.length) {
+        try {
+          await del(blobs.map((b) => b.url));
+        } catch {
+          /* nada */
+        }
+      }
+      return json({ ok: true, emailed: true, duplicate: true, files: 0, blobsEmailed: blobs.map((b) => b.url) });
     }
   }
 
@@ -282,6 +334,15 @@ export async function POST(req) {
   const price = estimate(doc, pages, urgent);
   const docName = doc ? doc.name : "(documento no indicado)";
   const isSummary = !part;
+  // Asunto (14/11/2026): «Presupuesto web · <origen>[ · <campaña>] ·
+  // <documento> · <email>» (la palabra clave va en el cuerpo). Sin email: teléfono o nombre. El de
+  // los despachos no cambia.
+  function quoteSubject() {
+    const contact = email || phone || name || "sin contacto";
+    if (firmMode) return `[LAW FIRM] ${firm || "sin nombre"} · ${docName} · ${contact}`;
+    const campaign = ads && ads.campaign ? [ads.campaign] : [];
+    return ["Presupuesto web", QUOTE_ORIGIN[origin], ...campaign, docName, contact].join(" · ");
+  }
   const estimateLine = firmMode
     ? firmPriceUsd(doc, pages) != null
       ? `${firmPriceUsd(doc, pages)} $ (tarifa de despacho en dólares)`
@@ -314,7 +375,10 @@ export async function POST(req) {
     `Teléfono: ${phone || "(no indicado)"}`,
     `Cómo nos ha conocido: ${sourceLabel(source, "es") || "(no indicado)"}`,
     `Atribución: ${attributionLine(attribution)}`,
-  ];
+    `Origen: ${QUOTE_ORIGIN[origin]}`,
+    ...(ads ? campaignLines(ads) : []),
+    waRef ? `Referencia de WhatsApp de la misma visita: ${waRef}` : null,
+  ].filter((l) => l !== null);
   const extraLots = Math.max(0, blobGroups.length - 1);
   if (isSummary) {
     if (!blobs.length && !filesEmail.length && !filesWhatsApp.length) {
@@ -357,6 +421,23 @@ export async function POST(req) {
 
   // CRM (20/10/2026): el resumen va también directo al CRM de Elena, con el
   // mismo texto que el email para que lo lea igual. Los lotes de archivos no.
+  // Contacto para el resumen semanal (sin datos personales: el email va
+  // como huella para contar personas distintas).
+  if (isSummary && !firmMode) {
+    const rec = attributionRecord({ origin, info: ads, attr: attribution });
+    await logContact({
+      canal: "calculadora",
+      id: shortHash(`${email || phone || name}|${Date.now()}`, 12),
+      record: {
+        ref: waRef,
+        origen: origin,
+        campana: rec.campana,
+        palabraClave: rec.palabraClave,
+        persona: personHash(email),
+      },
+    });
+  }
+
   if (isSummary) {
     const fileNames = [
       ...blobs.map((b) => b.name),
@@ -365,7 +446,7 @@ export async function POST(req) {
     ];
     await notifyCrm({
       origen: "web",
-      subject: `${firmMode ? `[LAW FIRM] ${firm || "sin nombre"}` : "Presupuesto web"} · ${docName} · ${email || phone || name || "sin contacto"}`,
+      subject: quoteSubject(),
       mensaje_cliente: `Nueva solicitud desde la calculadora de juradaexpress.es\n\n${lines.join("\n")}`,
       nombre: name,
       email,
@@ -385,10 +466,7 @@ export async function POST(req) {
   // cliente no dejó email se usa el teléfono o el nombre para distinguir
   // solicitudes en la bandeja. Los emails de archivos llevan el mismo asunto
   // más « · archivos (i/n)».
-  const contact = email || phone || name || "sin contacto";
-  const baseSubject = firmMode
-    ? `[LAW FIRM] ${firm || "sin nombre"} · ${docName} · ${contact}`
-    : `Presupuesto web · ${docName} · ${contact}`;
+  const baseSubject = quoteSubject();
 
   function send(subject, heading, attachments) {
     return sendResendEmail({
