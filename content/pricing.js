@@ -19,10 +19,12 @@
 // contrato 12 páginas = 240 €; contrato 12 páginas urgente = 312 €
 // (tests/precio-calculadora.spec.mjs).
 //
-// Sin dependencias salvo content/documents.js (con extensión explícita), para
+// Sin dependencias salvo content/documents.js y content/usd.js (con extensión
+// explícita), para
 // que los tests de Node puedan importarlo. content/site.js reexporta
 // PRICE_PER_PAGE y URGENCY_SURCHARGE desde aquí.
 import { MIN_PRICE } from "./documents.js";
+import { toUsd } from "./usd.js";
 
 // Precio por página de los documentos largos y de las páginas por encima
 // del precio fijo, en euros, IVA incluido (10/10/2026).
@@ -42,6 +44,19 @@ export function basePrice(doc, pages) {
     return doc.price + Math.max(0, n - FIXED_PRICE_MAX_PAGES) * PRICE_PER_PAGE;
   }
   return Math.max(MIN_DOC, n * PRICE_PER_PAGE);
+}
+
+/**
+ * Formulario de despachos (EE. UU.), en dólares y sin urgencia (14/11/2026):
+ * solo los documentos con precio fijo llevan estimación, el precio fijo en
+ * dólares hasta FIXED_PRICE_MAX_PAGES páginas más unos $20 por página extra
+ * (toUsd(PRICE_PER_PAGE)). Los que no tienen precio fijo devuelven null y
+ * el formulario dice «Fixed quote in 2 hours», como la tabla de la página.
+ */
+export function firmPriceUsd(doc, pages) {
+  if (!doc || doc.price == null) return null;
+  const n = Math.max(1, Math.floor(Number(pages) || 1));
+  return toUsd(doc.price) + Math.max(0, n - FIXED_PRICE_MAX_PAGES) * toUsd(PRICE_PER_PAGE);
 }
 
 /** Precio orientativo en euros; con `urgent`, el recargo máximo incluido. */

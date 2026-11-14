@@ -44,7 +44,7 @@ import { get, del } from "@vercel/blob";
 import { resendConfig, sendResendEmail } from "../../lib/resend";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES, OVER_LIMIT_HOURS } from "../../../content/site";
-import { basePrice, estimatePrice } from "../../../content/pricing";
+import { estimatePrice, firmPriceUsd } from "../../../content/pricing";
 import { toUsd, US_SHIPPING_USD } from "../../../content/usd";
 import { sourceLabel } from "../../../content/sources";
 import { notifyCrm } from "../../lib/crm";
@@ -283,8 +283,8 @@ export async function POST(req) {
   const docName = doc ? doc.name : "(documento no indicado)";
   const isSummary = !part;
   const estimateLine = firmMode
-    ? doc
-      ? `${toUsd(basePrice(doc, pages))} $ (tarifa de despacho en dólares)`
+    ? firmPriceUsd(doc, pages) != null
+      ? `${firmPriceUsd(doc, pages)} $ (tarifa de despacho en dólares)`
       : `presupuesto en menos de 2 h (catálogo desde ${toUsd(MIN_PRICE)} $)`
     : price != null
     ? `${price} €`

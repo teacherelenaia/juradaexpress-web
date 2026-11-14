@@ -48,7 +48,7 @@ import {
   FIXED_PRICE_MAX_PAGES,
   MIN_DOC_PRICE,
 } from "../../content/site";
-import { basePrice, estimatePrice } from "../../content/pricing";
+import { estimatePrice, firmPriceUsd } from "../../content/pricing";
 import { toUsd, US_SHIPPING_USD } from "../../content/usd";
 import { SectionHeading } from "./ui";
 import QuotePromise from "./QuotePromise";
@@ -267,6 +267,9 @@ const FIRM_COPY = {
     "Pick the document, set the pages and attach the scan. I confirm the fixed price in US dollars and the delivery date within 2 working hours, and the order goes on your firm's monthly invoice.",
   deliveryPaper: "PDF + paper copy couriered to the US",
   paperNote: `+ courier: flat $${US_SHIPPING_USD} to any US address.`,
+  // Igual que la tabla de precios de la página (content/law-firms.js).
+  quoteOnly: "Fixed quote in 2 hours",
+  fixedNote: `Fixed price up to ${FIXED_PRICE_MAX_PAGES} pages; each extra page, about $${toUsd(PRICE_PER_PAGE)}.`,
   disclaimer: "Fixed price once I see the document; nothing is invoiced without your approval.",
   files: "Attach the document",
   firm: "Firm name",
@@ -548,11 +551,11 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
 
   const doc = DOCUMENTS.find((d) => d.id === documentId) || DOCUMENTS[0];
   const urgent = urgency === "urgent";
-  // Modo despacho: el mismo cálculo en dólares (toUsd), sin recargo de urgencia.
+  // Modo despacho: dólares, sin urgencia; sin precio fijo, sin estimación.
   const price = useMemo(
     () =>
       firmMode
-        ? toUsd(basePrice(doc, pages))
+        ? firmPriceUsd(doc, pages)
         : estimatePrice(doc, pages, urgent),
     [firmMode, doc, pages, urgent]
   );
@@ -969,7 +972,7 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
             <p className="mt-1 font-display text-3xl font-semibold tabular-nums text-brand-navy">
               {price != null ? money(price) : t.quoteOnly}
             </p>
-            {!firmMode && price != null ? (
+            {price != null ? (
               <p className="mt-1 text-xs text-slate-500">
                 {doc.price != null ? t.fixedNote : t.perPageNote}
               </p>

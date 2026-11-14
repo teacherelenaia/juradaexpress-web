@@ -12,7 +12,7 @@
 //   npm test
 import { test, expect } from "@playwright/test";
 import { DOCUMENTS } from "../content/documents.js";
-import { estimatePrice } from "../content/pricing.js";
+import { estimatePrice, firmPriceUsd } from "../content/pricing.js";
 
 const doc = (id) => DOCUMENTS.find((d) => d.id === id);
 
@@ -29,6 +29,20 @@ const CASES = [
 for (const c of CASES) {
   test(`precio: ${c.id}, ${c.pages} pág.${c.urgent ? ", urgente" : ""} = ${c.eur} €`, () => {
     expect(estimatePrice(doc(c.id), c.pages, c.urgent)).toBe(c.eur);
+  });
+}
+
+// Formulario de despachos: precio fijo en dólares + unos $20 por página
+// extra; sin precio fijo, sin estimación («Fixed quote in 2 hours»).
+const FIRM_CASES = [
+  { id: "partida-nacimiento", pages: 1, usd: 40 },
+  { id: "partida-nacimiento", pages: 2, usd: 40 },
+  { id: "partida-nacimiento", pages: 4, usd: 80 },
+  { id: "contrato-escritura", pages: 12, usd: null },
+];
+for (const c of FIRM_CASES) {
+  test(`despachos: ${c.id}, ${c.pages} pág. = ${c.usd == null ? "sin estimación" : "$" + c.usd}`, () => {
+    expect(firmPriceUsd(doc(c.id), c.pages)).toBe(c.usd);
   });
 }
 
