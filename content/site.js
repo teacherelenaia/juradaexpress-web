@@ -89,6 +89,43 @@ export const GOOGLE_BUSINESS_URL = REVIEW_STATS.google.url;
 // recuentos viven en content/reviews.js → REVIEW_STATS.
 export { TRUSTPILOT_URL };
 
+// Dirección y coordenadas del despacho de Murcia (14/11/2026), para el
+// JSON-LD (ProfessionalService y Person). El servicio es online; en el
+// despacho solo se recoge con cita previa.
+export const BUSINESS_ADDRESS = {
+  streetAddress: "Carril de los Leales, 10",
+  addressLocality: "Murcia",
+  postalCode: "30009",
+  addressRegion: "Región de Murcia",
+  addressCountry: "ES",
+};
+export const BUSINESS_GEO = { latitude: 37.978291, longitude: -1.1565849 };
+
+// Horario (14/11/2026): lunes a viernes 9:00-20:00 y sábados 9:00-14:00,
+// hora peninsular. Lo usa el JSON-LD (openingHoursSpecification).
+export const OPENING_HOURS = [
+  { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "20:00" },
+  { days: ["Saturday"], opens: "09:00", closes: "14:00" },
+];
+
+// Perfil de ProZ.com de Elena (sameAs del JSON-LD).
+export const PROZ_URL = "https://www.proz.com/profile/4772590";
+// Ficha de Bing Places. [[TODO: poner la URL pública de la ficha cuando
+// Elena la tenga; mientras sea null no se añade al sameAs]]
+export const BING_PLACES_URL = null;
+
+// Firma de las traducciones (confirmado por Elena el 14/11/2026): PDF con
+// firma electrónica cualificada (Orden AUC/213/2025) con certificado
+// cualificado de la FNMT, comprobable en VALIDe. Lo usan /llms.txt, el
+// bloque «Cómo comprobar mi firma» (app/components/VerifySignature.js) y
+// las preguntas frecuentes sobre la firma.
+export const VALIDE_URL = "https://valide.redsara.es";
+export const SIGNATURE_ORDER = "Orden AUC/213/2025";
+export const SIGNATURE_CERT = {
+  es: "certificado cualificado de la FNMT",
+  en: "qualified certificate issued by Spain's FNMT",
+};
+
 // Vídeo opcional de la sección "Cómo trabajamos" (ver sección 6 de la
 // auditoría). Déjalo en null hasta tener un clip real (10-15 s, < 1,5 MB):
 //   export const PROCESS_VIDEO = {

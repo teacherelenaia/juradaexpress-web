@@ -15,6 +15,9 @@ import {
   LINKEDIN_URL,
   GOOGLE_BUSINESS_URL,
   MAEC_LIST_URL,
+  PROZ_URL,
+  BING_PLACES_URL,
+  BUSINESS_ADDRESS,
 } from "./site";
 
 const BASE = "https://juradaexpress.es";
@@ -117,12 +120,7 @@ export function personJsonLd(locale = "es") {
     email: EMAIL,
     telephone: PHONE_TEL,
     knowsLanguage: ["es", "en"],
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Murcia",
-      addressRegion: "Murcia",
-      addressCountry: "ES",
-    },
+    address: { "@type": "PostalAddress", ...BUSINESS_ADDRESS },
     hasCredential: {
       "@type": "EducationalOccupationalCredential",
       name: CREDENTIAL_NAME[l],
@@ -150,6 +148,8 @@ export function personJsonLd(locale = "es") {
       FACEBOOK_URL,
       LINKEDIN_URL,
       GOOGLE_BUSINESS_URL,
+      PROZ_URL,
+      BING_PLACES_URL,
     ].filter(Boolean),
   };
 }

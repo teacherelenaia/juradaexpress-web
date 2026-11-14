@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getAllPosts } from "../../../content/posts";
 
 export const metadata = {
-  title: "Blog",
+  title: "Blog de traducción jurada",
   description:
     "Consejos prácticos sobre traducción jurada: precios, plazos, apostilla y cómo preparar tus documentos para cada trámite.",
   alternates: {

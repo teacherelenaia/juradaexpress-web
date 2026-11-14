@@ -7,6 +7,7 @@
 import { USCIS_PAPER_COPY, INTERNATIONAL_SHIPPING } from "../site";
 import { DOCUMENTS } from "../documents";
 import { US_DOC_ROUTES, LAW_FIRMS_ROUTE } from "./routes";
+import { apostilleFaq, signedPdfFaq, morePagesFaq } from "../faqComunes";
 
 const PATH_ES = "/traduccion-certificada-uscis";
 const PATH_EN = "/en/certified-translation-uscis";
@@ -182,6 +183,9 @@ export const es = {
       q: "¿Puedo pagar con una tarjeta de Estados Unidos?",
       a: "Sí. El pago es con tarjeta internacional a través de Stripe; el importe se cobra en euros y tu banco aplica el cambio a dólares.",
     },
+    apostilleFaq("es"),
+    signedPdfFaq("es"),
+    morePagesFaq("es"),
   ],
   cta: {
     title: "¿Necesitas una traducción certificada para USCIS?",
@@ -372,6 +376,9 @@ export const en = {
       q: "Can I pay with a US card?",
       a: "Yes. Payment is by international card through Stripe; the amount is charged in euros and your bank converts it to dollars.",
     },
+    apostilleFaq("en"),
+    signedPdfFaq("en"),
+    morePagesFaq("en"),
   ],
   cta: {
     title: "Need a certified translation for USCIS?",

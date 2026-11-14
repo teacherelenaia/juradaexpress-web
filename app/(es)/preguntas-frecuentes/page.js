@@ -1,5 +1,7 @@
 // app/preguntas-frecuentes/page.js
 import { DELIVERY_PROMISE } from "../../../content/site";
+import { verifySignatureFaq } from "../../../content/signature";
+import VerifySignature from "../../components/VerifySignature";
 export const metadata = {
   title: "Preguntas Frecuentes — Traducción Jurada en Murcia",
   description:
@@ -47,6 +49,7 @@ const faqs = [
     q: "¿La traducción jurada lleva firma y sello?",
     a: "Sí. Toda traducción jurada va firmada y sellada por un traductor jurado nombrado por el Ministerio de Asuntos Exteriores, lo que le da validez oficial.",
   },
+  verifySignatureFaq("es"),
 ];
 
 export default function Page() {
@@ -86,6 +89,8 @@ export default function Page() {
           </details>
         ))}
       </div>
+
+      <VerifySignature locale="es" className="mt-10" />
 
       <script
         type="application/ld+json"

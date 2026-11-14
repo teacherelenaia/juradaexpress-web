@@ -21,11 +21,12 @@ export const metadata = {
   description:
     "Traductora jurada de inglés desde 2009 (MAEC nº 7310). Traducción jurada español-inglés desde 35 €, PDF firmado en el día (hasta 10 páginas), 100 % online.",
   alternates: { canonical: "https://juradaexpress.es/" },
+  // Sin title, description ni url en openGraph y twitter (14/11/2026): si
+  // se fijan aquí, toda página sin openGraph propio hereda los de la
+  // portada (og:title, og:url…; pasaba en /aviso-legal, /politica-*,
+  // /precios, las fichas de documento y otras 20). Sin ellos, Next usa el
+  // title y la description de cada página, como en el layout inglés.
   openGraph: {
-    title: "Traducción Jurada de Inglés Online desde 35 € | Jurada Express",
-    description:
-      "Traductora jurada de inglés desde 2009 (MAEC nº 7310). Traducción jurada español-inglés desde 35 €, PDF firmado en el día (hasta 10 páginas), 100 % online.",
-    url: "https://juradaexpress.es/",
     siteName: "Jurada Express",
     type: "website",
     locale: "es_ES",
@@ -40,9 +41,6 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Traducción Jurada de Inglés Online desde 35 € | Jurada Express",
-    description:
-      "Traductora jurada de inglés desde 2009 (MAEC nº 7310). Traducción jurada español-inglés desde 35 €, PDF firmado en el día (hasta 10 páginas), 100 % online.",
     images: ["https://juradaexpress.es/fotos/hero-firma.jpg"],
   },
   verification: {

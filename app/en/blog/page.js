@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getAllPostsEn } from "../../../content/posts.en";
 
 export const metadata = {
-  title: "Blog",
+  title: "Sworn translation blog",
   description:
     "Practical guides on sworn translation for Spain: NIE and residency paperwork, property purchases, prices and turnaround times.",
   alternates: {

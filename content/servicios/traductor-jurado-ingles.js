@@ -41,6 +41,7 @@ import {
   URGENCY_TEXT,
 } from "../site";
 import { REVIEW_TEXT, TOTAL_REVIEWS, TRUSTPILOT_URL } from "../reviews";
+import { verifySignatureSection, verifySignatureFaq } from "../signature";
 
 const PATH_ES = "/traductor-jurado-ingles";
 const PATH_EN = "/en/sworn-english-translator";
@@ -426,11 +427,12 @@ export const es = {
       title: "Validez: firma cualificada o papel, y cuándo hace falta apostilla",
       body: [
         "<strong>PDF con firma electrónica cualificada, conforme a la Orden AUC/213/2025.</strong> Es lo que entrego por defecto. La Oficina de Interpretación de Lenguas del MAEC admitió en 2020 que las traducciones juradas se firmen electrónicamente, y la Administración española (Extranjería, Registros Civiles, universidades, Seguridad Social, Hacienda) acepta el PDF con firma cualificada de forma generalizada, sobre todo en los trámites que se presentan por sede electrónica. El documento se puede reenviar tantas veces como haga falta sin perder validez.",
-        "<strong>Cómo comprobar la firma del PDF.</strong> Abre el PDF en Adobe Acrobat Reader o en el visor de tu navegador y pulsa en el panel de firmas. Verás que el certificado está emitido por un prestador cualificado de servicios de confianza y que el documento no se ha modificado desde que lo firmé. Es la misma comprobación que hace el funcionario que recibe la traducción, y puedes hacerla tú antes de presentarla.",
+        "<strong>Cómo comprobar la firma del PDF.</strong> Abre el PDF en Adobe Acrobat Reader o en el visor de tu navegador y pulsa en el panel de firmas. Verás que el certificado es cualificado, emitido por la FNMT, y que el documento no se ha modificado desde que lo firmé. También puedes comprobarlo en VALIDe, como explico más abajo. Es la misma comprobación que hace el funcionario que recibe la traducción, y puedes hacerla tú antes de presentarla.",
         "<strong>Papel con firma manuscrita y sello.</strong> Algunos organismos, notarías o registros siguen pidiendo el original en papel, y fuera de la Unión Europea es más frecuente. En ese caso imprimo la traducción, la firmo y sello a mano y te la envío por mensajería: al día siguiente de la entrega digital en Murcia y en uno o dos días laborables en el resto de España. Puedes pedir las dos versiones a la vez; la traducción es la misma.",
         '<strong>Apostilla.</strong> La apostilla de La Haya no es parte de la traducción: es un sello que legaliza el <em>documento original</em> para que surta efecto en otro país, y se tramita antes de traducir, en el país que emitió el documento (en el Reino Unido, la Legalisation Office del FCDO; en España, notarios, colegios notariales, Ministerio de Justicia o Tribunales Superiores de Justicia según el documento). Si el documento la lleva, la traduzco también. Entre Estados de la UE, el Reglamento (UE) 2016/1191 exime de apostilla a muchos documentos públicos (nacimiento, matrimonio, penales…), pero un documento británico o estadounidense normalmente sí la necesita para España. Lo explico documento a documento en <a href="/blog/que-es-la-apostilla-de-la-haya">qué es la apostilla y cuándo la necesitas</a>, y si no estás seguro, me lo preguntas antes de tramitarla.',
       ],
     },
+    verifySignatureSection("es"),
     {
       id: "organismos",
       title: "Organismos que aceptan mis traducciones juradas",
@@ -511,6 +513,7 @@ export const es = {
       q: "¿Traduces también del inglés al español?",
       a: "Sí, en los dos sentidos: documentos británicos, irlandeses, estadounidenses, canadienses, australianos o indios para trámites en España, y documentos españoles al inglés para el Home Office, USCIS, IRCC, universidades o empleadores en el extranjero.",
     },
+    verifySignatureFaq("es"),
   ],
   cta: {
     title: "¿Te traduzco tu documento?",
@@ -673,11 +676,12 @@ export const en = {
       title: "Validity: qualified signature or paper, and when you need an apostille",
       body: [
         "<strong>PDF with a qualified electronic signature under Spain's Order AUC/213/2025.</strong> This is what I deliver by default. In 2020 the MAEC's Office of Language Interpretation confirmed that sworn translations may be signed electronically, and the Spanish authorities (immigration, civil registries, universities, social security, tax office) accept the PDF with a qualified signature as a matter of course, especially for procedures filed online. The document can be forwarded as many times as needed without losing validity.",
-        "<strong>How to check the signature on the PDF.</strong> Open the PDF in Adobe Acrobat Reader or in your browser's viewer and click on the signature panel. You will see that the certificate was issued by a qualified trust service provider and that the document has not been modified since I signed it. It is the same check the official receiving the translation makes, and you can make it yourself before filing.",
+        "<strong>How to check the signature on the PDF.</strong> Open the PDF in Adobe Acrobat Reader or in your browser's viewer and click on the signature panel. You will see that the certificate is qualified, issued by Spain's FNMT, and that the document has not been modified since I signed it. You can also check it on VALIDe, as explained below. It is the same check the official receiving the translation makes, and you can make it yourself before filing.",
         "<strong>Paper with handwritten signature and stamp.</strong> Some bodies, notaries or registries still ask for a paper original, and this is more common outside the EU. In that case I print the translation, sign and stamp it by hand and courier it to you: the day after digital delivery in Murcia and within one or two working days elsewhere in Spain; abroad, the courier cost is stated in the quote. You can ask for both versions at once; the translation is the same.",
         '<strong>Apostille.</strong> The Hague apostille is not part of the translation: it is a stamp that legalises the <em>original document</em> so that it takes effect in another country, and it is obtained before translating, in the country that issued the document (in the UK, the FCDO Legalisation Office; in the US, the Secretary of State of the issuing state or the US Department of State). If the document carries one, I translate it too. Between EU Member States, Regulation (EU) 2016/1191 exempts many public documents (birth, marriage, criminal records…) from the apostille, but a British or American document normally does need one for Spain. If in doubt, ask me before applying for it.',
       ],
     },
+    verifySignatureSection("en"),
     {
       id: "bodies",
       title: "Bodies that accept my sworn translations",
@@ -758,6 +762,7 @@ export const en = {
       q: "Do you also translate from English into Spanish?",
       a: "Yes, both ways: British, Irish, American, Canadian, Australian or Indian documents for procedures in Spain, and Spanish documents into English for the Home Office, USCIS, IRCC, universities or employers abroad.",
     },
+    verifySignatureFaq("en"),
   ],
   cta: {
     title: "Shall I translate your document?",
