@@ -288,7 +288,8 @@ export const DNV_PACK_MAX_PAGES = 10;
 //   price      euros, IVA incluido. En /en se añade «approx. $X» con toUsd
 //              (content/usd.js: € × 1,10 redondeado a 5 $).
 //   separately precio de esos documentos sueltos, para la línea de
-//              referencia bajo el precio: { min, max } o { from }; null =
+//              referencia bajo el precio: { upTo } (cifra alta, «hasta») o
+//              { from } («desde»); null =
 //              sin referencia (nómada digital).
 //
 // 14/11/2026: Spain Visa Pack 129 → 149 €, Irlanda / Reino Unido 169 →
@@ -304,7 +305,7 @@ export const PACKS = [
     },
     documents: 4,
     price: 149,
-    separately: { min: 140, max: 180 },
+    separately: { upTo: 180 },
   },
   {
     id: "visa-family",
@@ -316,7 +317,7 @@ export const PACKS = [
     documents: 8,
     // 01/11/2026: subida de 229 € a 299 € (IVA incluido).
     price: 299,
-    separately: { min: 280, max: 360 },
+    separately: { upTo: 360 },
   },
   {
     id: "nomad",
@@ -351,7 +352,7 @@ export const PACKS = [
     },
     documents: 2,
     price: 79,
-    separately: { min: 75, max: 85 },
+    separately: { upTo: 85 },
   },
 ];
 

@@ -132,10 +132,11 @@ export const REVIEW_TEXT = {
 export const REVIEWS = [
   // Trustpilot, leídas el 14/11/2026 en
   // https://es.trustpilot.com/review/juradaexpress.es (todos los idiomas).
-  // Nombre tal como aparece en Trustpilot (también en minúsculas o
-  // mayúsculas), fecha de la reseña, título y texto sin editar.
+  // Nombre como aparece en Trustpilot salvo «Valentina Mollá Sagredo»,
+  // que Elena pidió con mayúsculas (14/11/2026); fecha de la reseña,
+  // título y texto sin editar.
   {
-    name: "valentina mollá sagredo",
+    name: "Valentina Mollá Sagredo",
     date: "2026-10-22",
     source: "trustpilot",
     rating: 5,
@@ -303,7 +304,7 @@ export const REVIEWS = [
 // "Ver las N en Google" / "Ver las N en Trustpilot" (REVIEW_STATS). Cada
 // entrada es [nombre, fuente]; si deja de existir en REVIEWS, se ignora.
 export const FEATURED_REVIEWS = [
-  ["valentina mollá sagredo", "trustpilot"],
+  ["Valentina Mollá Sagredo", "trustpilot"],
   ["Ona Montes Vivancos", "google"],
   ["Maria", "trustpilot"],
   ["Paul Capelle", "google"],

@@ -28,7 +28,7 @@ export const PACKS_COPY = {
       "Incluye revisión de la lista de tu consulado, los mismos nombres y fechas en todos los documentos y un solo plazo de entrega.",
     // Línea de referencia bajo el precio (pack.separately).
     separatelyLabel: "Por separado:",
-    separately: (s) => (s.from != null ? `desde ${s.from} €` : `${s.min}–${s.max} €`),
+    separately: (s) => (s.from != null ? `desde ${s.from} €` : `hasta ${s.upTo} €`),
     intro:
       "Precio cerrado para los lotes de documentos más habituales. Si tu trámite pide algo distinto, te lo presupuesto al ver los documentos.",
     documents: (n) => `Hasta ${n} documentos`,
@@ -52,7 +52,7 @@ export const PACKS_COPY = {
     includedFree:
       "Includes a check against your consulate’s list, the same names and dates across every document and a single delivery deadline.",
     separatelyLabel: "Separately:",
-    separately: (s) => (s.from != null ? `from €${s.from}` : `€${s.min}–${s.max}`),
+    separately: (s) => (s.from != null ? `from €${s.from}` : `up to €${s.upTo}`),
     intro:
       "Fixed price for the most common document batches. If your procedure asks for something different, I quote it once I see the documents.",
     documents: (n) => `Up to ${n} documents`,
