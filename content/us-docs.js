@@ -111,7 +111,7 @@ const FAQ_SHARED = {
   },
   time: {
     q: "How fast can you deliver?",
-    a: "Documents of up to 10 pages are translated, certified and delivered the same working day (Spain time); larger files get a written deadline before I start, normally 24-72 hours. No surcharge.",
+    a: "Documents of up to 10 pages are translated, certified and delivered the same working day (Spain time); larger files, within 24 hours. No surcharge for that standard turnaround; if you need it sooner, message me: depending on volume, an urgency surcharge of up to 30% may apply.",
   },
   apostille: {
     q: "Does USCIS require an apostille on my Spanish document?",

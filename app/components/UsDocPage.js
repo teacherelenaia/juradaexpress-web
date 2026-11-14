@@ -20,7 +20,8 @@ import QuotePromise from "./QuotePromise";
 import { SectionHeading } from "./ui";
 import { US_SHIPPING_USD, MIN_PRICE_USD, RATE_NOTE } from "../../content/us-docs";
 import { LAW_FIRMS_ROUTE } from "../../content/servicios/routes";
-import { GOOGLE_BUSINESS_URL, GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from "../../content/site";
+import { TOTAL_REVIEWS } from "../../content/reviews";
+import { ReviewBadges } from "./Reviews";
 
 const BASE = "https://juradaexpress.es";
 
@@ -192,7 +193,7 @@ function PriceCard({ doc }) {
 
 export default function UsDocPage({ doc }) {
   const url = `${BASE}${doc.path}`;
-  const showRating = GOOGLE_RATING > 0 && GOOGLE_REVIEW_COUNT > 0;
+  const showRating = TOTAL_REVIEWS > 0;
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:py-16">
@@ -337,24 +338,7 @@ export default function UsDocPage({ doc }) {
                 </SectionHeading>
                 <p className="mt-3 max-w-[68ch] text-slate-600">{T.reviewsIntro}</p>
               </div>
-              {showRating && GOOGLE_BUSINESS_URL ? (
-                <a
-                  href={GOOGLE_BUSINESS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link-nav inline-flex min-h-[44px] shrink-0 items-center gap-2 font-medium text-slate-900"
-                >
-                  <Stars
-                    rating={Math.round(GOOGLE_RATING)}
-                    label={`Rating: ${GOOGLE_RATING} out of 5 stars`}
-                    size={18}
-                  />
-                  <span>
-                    {GOOGLE_RATING.toLocaleString("en-US", { minimumFractionDigits: 1 })} ·{" "}
-                    {GOOGLE_REVIEW_COUNT} reviews on Google
-                  </span>
-                </a>
-              ) : null}
+              {showRating ? <ReviewBadges locale="en" className="shrink-0" /> : null}
             </div>
             <div className="mt-6 grid gap-6 md:grid-cols-2">
               {doc.reviews.map((r) => (

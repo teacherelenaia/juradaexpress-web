@@ -4,17 +4,25 @@
 // particulares con expedientes completos y para empresas, despachos y
 // gestorías. Fuente: docs/BRIEF-INTERNACIONAL-2026-09.md, punto 2.5.
 // Capacidad confirmada por Elena: LARGE_PROJECT_CAPACITY (content/site.js).
-import { LARGE_PROJECT_CAPACITY } from "../site";
+// Plazos (14/11/2026): hasta 10 páginas en el día; más, en 24 h; en esta
+// página, «24 h o según volumen» para lotes (más de LARGE_PROJECT_CAPACITY
+// se presupuesta aparte). Urgencia: URGENCY_TEXT (content/site.js).
+import {
+  LARGE_PROJECT_CAPACITY,
+  SAME_DAY_MAX_PAGES,
+  OVER_LIMIT_HOURS,
+  URGENCY_TEXT,
+} from "../site";
 
 const PATH_ES = "/traduccion-jurada-urgente-grandes-volumenes";
 const PATH_EN = "/en/urgent-sworn-translation-large-projects";
 
 const capEs = LARGE_PROJECT_CAPACITY
-  ? `Puedo asumir <strong>${LARGE_PROJECT_CAPACITY.es}</strong>; para volúmenes mayores o urgencias fuera de ese margen, pídeme información y te cierro plazo por escrito.`
-  : "Para volúmenes grandes o urgencias, pídeme información y te cierro plazo por escrito.";
+  ? `Puedo asumir <strong>${LARGE_PROJECT_CAPACITY.es}</strong>; los volúmenes mayores se presupuestan aparte, con el plazo por escrito.`
+  : "Los volúmenes muy grandes se presupuestan aparte, con el plazo por escrito.";
 const capEn = LARGE_PROJECT_CAPACITY
-  ? `I can handle <strong>${LARGE_PROJECT_CAPACITY.en}</strong>; for larger volumes or rush jobs beyond that, ask me and I will confirm a deadline in writing.`
-  : "For large volumes or rush jobs, ask me and I will confirm a deadline in writing.";
+  ? `I can handle <strong>${LARGE_PROJECT_CAPACITY.en}</strong>; larger volumes are quoted separately, with the deadline in writing.`
+  : "Very large volumes are quoted separately, with the deadline in writing.";
 
 export const es = {
   id: "urgente",
@@ -75,9 +83,9 @@ export const es = {
       title: "¿Cuánto volumen puedes asumir y en qué plazo?",
       body: [
         capEs,
-        "Un documento de hasta 10 páginas sale en el día, sin recargo. Para un lote, el plazo depende del número de páginas, del formato (los escaneos en mala calidad se tardan más en preparar) y de si hay que esperar apostillas. Por eso no publico un plazo genérico: lo calculo con tu carpeta delante y te lo doy por escrito, y ese es el que se cumple.",
+        `Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día y sin recargo. Más de ${SAME_DAY_MAX_PAGES} páginas: en ${OVER_LIMIT_HOURS} h o según volumen; con tu carpeta delante te confirmo la fecha por escrito, y es la que se cumple.`,
         {
-          note: "Si tu urgencia es real (una cita en el consulado mañana, un plazo judicial), dímelo en el primer mensaje con la fecha exacta. Te digo en menos de 2 horas si llego y a qué precio, sin recargos escondidos.",
+          note: `Si tu urgencia es real (una cita en el consulado mañana, un plazo judicial), dímelo en el primer mensaje con la fecha exacta. ${URGENCY_TEXT.es.sooner} El importe exacto te lo confirmo por escrito antes de empezar, sin recargos escondidos.`,
         },
       ],
     },
@@ -123,7 +131,7 @@ export const es = {
   faq: [
     {
       q: "¿Cobras recargo por urgencia?",
-      a: "Depende del plazo y del volumen. Si hay recargo, aparece desglosado en el presupuesto antes de que confirmes; nunca después.",
+      a: `Solo si necesitas la entrega antes del plazo normal (en el día hasta ${SAME_DAY_MAX_PAGES} páginas; más, en ${OVER_LIMIT_HOURS} h): según el volumen, un recargo de urgencia de hasta el 30 %, a consultar. Aparece desglosado en el presupuesto antes de que confirmes; nunca después.`,
     },
     {
       q: "¿Puedes entregar parte del lote antes?",
@@ -135,9 +143,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda un expediente completo de nómada digital?",
-      a: LARGE_PROJECT_CAPACITY
-        ? `Te doy un plazo único por escrito antes de empezar; los documentos de hasta 10 páginas, en el día. Con una capacidad de ${LARGE_PROJECT_CAPACITY.es}, la mayoría de los expedientes están listos en pocos días.`
-        : "Te doy un plazo único por escrito antes de empezar; los documentos de hasta 10 páginas, en el día.",
+      a: `Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; si el expediente tiene más, en ${OVER_LIMIT_HOURS} horas, con un único precio cerrado para todo el lote. ${URGENCY_TEXT.es.sooner}`,
     },
     {
       q: "¿Trabajas con clientes fuera de España?",
@@ -217,9 +223,9 @@ export const en = {
       title: "How much volume can you take on, and how fast?",
       body: [
         capEn,
-        "A document of up to 10 pages is delivered the same day, with no surcharge. For a batch, the deadline depends on the number of pages, the format (poor-quality scans take longer to prepare) and whether apostilles are still pending. That is why I do not publish a generic turnaround: I calculate it with your folder in front of me, confirm it in writing, and that is the deadline I keep.",
+        `Up to ${SAME_DAY_MAX_PAGES} pages, the same day and with no surcharge. Over ${SAME_DAY_MAX_PAGES} pages: within ${OVER_LIMIT_HOURS} hours or depending on volume; with your folder in front of me I confirm the date in writing, and that is the deadline I keep.`,
         {
-          note: "If your deadline is real (a consulate appointment tomorrow, a court filing), tell me in your first message with the exact date. Within 2 hours I tell you whether I can make it and at what price, with no hidden surcharges.",
+          note: `If your deadline is real (a consulate appointment tomorrow, a court filing), tell me in your first message with the exact date. ${URGENCY_TEXT.en.sooner} I confirm the exact amount in writing before I start, with no hidden surcharges.`,
         },
       ],
     },
@@ -265,7 +271,7 @@ export const en = {
   faq: [
     {
       q: "Do you charge a rush fee?",
-      a: "It depends on the deadline and the volume. If there is a surcharge, it is itemised in the quote before you confirm; never afterwards.",
+      a: `Only if you need delivery faster than standard (same day up to ${SAME_DAY_MAX_PAGES} pages; more, within ${OVER_LIMIT_HOURS} hours): depending on volume, an urgency surcharge of up to 30%, on request. It is itemised in the quote before you confirm; never afterwards.`,
     },
     {
       q: "Can you deliver part of the batch earlier?",
@@ -277,9 +283,7 @@ export const en = {
     },
     {
       q: "How long does a complete digital nomad visa file take?",
-      a: LARGE_PROJECT_CAPACITY
-        ? `You get a single deadline in writing before I start; documents of up to 10 pages are delivered the same day. With a capacity of ${LARGE_PROJECT_CAPACITY.en}, most files are ready within a few days.`
-        : "You get a single deadline in writing before I start; documents of up to 10 pages are delivered the same day.",
+      a: `Up to ${SAME_DAY_MAX_PAGES} pages, the same day; if the file runs to more, within ${OVER_LIMIT_HOURS} hours, with one fixed price for the whole batch. ${URGENCY_TEXT.en.sooner}`,
     },
     {
       q: "Do you work with clients outside Spain?",

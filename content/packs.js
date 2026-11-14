@@ -2,74 +2,23 @@
 //
 // Paquetes por trámite (08/10/2026): precio cerrado por lote de documentos
 // habituales de un mismo trámite. Se muestran en /precios y /en/precios
-// (sección «Paquetes por trámite» con un Offer por pack en el JSON-LD). El
-// pack de nómada digital usa el mismo precio que DNV_PACK_PRICE en
-// content/site.js (la landing de nómada digital lo lee de ahí).
+// (sección «Paquetes por trámite» con un Offer por pack en el JSON-LD) y en
+// las páginas de visados.
 //
-// Cada pack: id, name (ES/EN), includes (ES/EN), documents (número máximo
-// de documentos) y price (euros, IVA incluido).
+// 14/11/2026: los datos de cada pack (nombre, documentos incluidos, precio
+// y rango «por separado») viven en content/site.js → PACKS, la única
+// fuente. Este archivo los reexporta y añade los textos de la sección.
 import {
   PRICE_PER_PAGE,
-  DNV_PACK_PRICE,
-  DNV_PACK_MAX_DOCUMENTS,
-  DNV_PACK_MAX_PAGES,
+  PACKS,
+  getPack,
+  packPrice,
+  packLimits,
+  SAME_DAY_MAX_PAGES,
+  URGENCY_TEXT,
 } from "./site";
 
-export const PACKS = [
-  {
-    id: "visa",
-    name: { es: "Spain Visa Pack", en: "Spain Visa Pack" },
-    includes: {
-      es: "Hasta 4 documentos de hasta 2 páginas: FBI o antecedentes penales, certificado médico, partida de nacimiento o matrimonio, y las apostillas solo si tu consulado exige traducirlas.",
-      en: "Up to 4 documents of up to 2 pages: FBI or police check, medical certificate, birth or marriage certificate, and apostilles only if your consulate requires them translated.",
-    },
-    documents: 4,
-    price: 129,
-  },
-  {
-    id: "visa-family",
-    name: { es: "Spain Visa Family Pack", en: "Spain Visa Family Pack" },
-    includes: {
-      es: "Hasta 8 documentos: lo anterior para dos adultos, más certificado de matrimonio y partidas de los hijos.",
-      en: "Up to 8 documents: the above for two adults plus marriage certificate and children's birth certificates.",
-    },
-    documents: 8,
-    // 01/11/2026: subida de 229 € a 299 € (IVA incluido), por encima del pack de nómada digital (249 €)
-    price: 299,
-  },
-  {
-    id: "nomad",
-    name: { es: "Digital Nomad Visa Pack", en: "Digital Nomad Visa Pack" },
-    includes: {
-      // 28/10/2026 (Elena): hasta 5 documentos y 10 páginas en total; cada
-      // página adicional a PRICE_PER_PAGE (content/site.js).
-      es: `Hasta ${DNV_PACK_MAX_DOCUMENTS} documentos y un máximo de ${DNV_PACK_MAX_PAGES} páginas en total: carta de la empresa o del cliente, antecedentes penales, título, certificado del seguro, prueba de ingresos o certificado de relación. Cada página adicional, ${PRICE_PER_PAGE} €. La copia del pasaporte y los documentos que no necesitan traducción jurada no cuentan para el paquete.`,
-      en: `Up to ${DNV_PACK_MAX_DOCUMENTS} documents and a maximum of ${DNV_PACK_MAX_PAGES} pages in total: employer or client letter, police check, degree, insurance certificate, proof of income or relationship certificate. Each additional page, €${PRICE_PER_PAGE}. A passport copy and other documents that don’t need a sworn translation don’t count towards the package.`,
-    },
-    documents: DNV_PACK_MAX_DOCUMENTS,
-    price: DNV_PACK_PRICE,
-  },
-  {
-    id: "ireland-uk",
-    name: { es: "Pack Irlanda / Reino Unido", en: "Ireland / UK Pack" },
-    includes: {
-      es: "Hasta 6 documentos: título, expediente, antecedentes penales, certificado de delitos sexuales y dos referencias laborales.",
-      en: "Up to 6 documents: degree, transcript, police check, sexual offences certificate and two employer references.",
-    },
-    documents: 6,
-    price: 169,
-  },
-  {
-    id: "driving",
-    name: { es: "Driving Licence Pack", en: "Driving Licence Pack" },
-    includes: {
-      es: "Carné por las dos caras y certificado o historial de la autoridad emisora.",
-      en: "Licence (both sides) and the issuing authority's certificate or driving record.",
-    },
-    documents: 2,
-    price: 69,
-  },
-];
+export { PACKS, getPack, packPrice, packLimits };
 
 // Página adicional (extractos bancarios, pólizas o contratos) dentro del
 // mismo plazo del pack, en euros: la misma cifra que el precio por página
@@ -79,11 +28,21 @@ export const EXTRA_PAGE_PRICE = PRICE_PER_PAGE;
 export const PACKS_COPY = {
   es: {
     title: "Paquetes por trámite",
+    // Garantía bajo el título (14/11/2026).
+    guarantee:
+      "Si tus documentos por separado suman menos que el pack, pagas la suma. Un pack nunca te cuesta más.",
+    // Lo que va incluido sin coste en todas las tarjetas.
+    includedFree:
+      "Incluye revisión de la lista de tu consulado, los mismos nombres y fechas en todos los documentos y un solo plazo de entrega.",
+    // Línea de referencia bajo el precio (pack.separately).
+    separatelyLabel: "Por separado:",
+    separately: (s) => (s.from != null ? `desde ${s.from} €` : `hasta ${s.upTo} €`),
     intro:
       "Precio cerrado para los lotes de documentos más habituales. Si tu trámite pide algo distinto, te lo presupuesto al ver los documentos.",
-    documents: (n) => `Hasta ${n} documentos`,
-    extraPage: `Páginas adicionales de extractos bancarios, pólizas o contratos: ${EXTRA_PAGE_PRICE} € por página, dentro del mismo plazo.`,
-    note: "Cada documento adicional fuera del paquete, a tarifa normal. Recargo de urgencia del 30 % igual que en el resto de tarifas.",
+    documents: (n, pages) => `Hasta ${n} documentos · ${pages} páginas`,
+    // Bajo el título, junto a la garantía (14/11/2026).
+    pageLimit: `Todos los packs tienen un límite de páginas; cada página adicional, ${EXTRA_PAGE_PRICE} €.`,
+    note: `Cada documento adicional fuera del paquete, a tarifa normal. Plazo: en el día hasta ${SAME_DAY_MAX_PAGES} páginas; ${URGENCY_TEXT.es.overLimit}. Igual que en el resto de tarifas, ${URGENCY_TEXT.es.surcharge}.`,
     order: "Pedir este pack",
     orderHref: "/documentos",
     whatsapp: "WhatsApp",
@@ -97,11 +56,17 @@ export const PACKS_COPY = {
   },
   en: {
     title: "Packs by procedure",
+    guarantee:
+      "If your documents cost less separately, you pay the lower amount. A pack never costs you more.",
+    includedFree:
+      "Includes a check against your consulate’s list, the same names and dates across every document and a single delivery deadline.",
+    separatelyLabel: "Separately:",
+    separately: (s) => (s.from != null ? `from €${s.from}` : `up to €${s.upTo}`),
     intro:
       "Fixed price for the most common document batches. If your procedure asks for something different, I quote it once I see the documents.",
-    documents: (n) => `Up to ${n} documents`,
-    extraPage: `Extra pages of bank statements, insurance policies or contracts: €${EXTRA_PAGE_PRICE} per page, within the same deadline.`,
-    note: "Each additional document outside the pack is charged at the normal rate. 30% urgency surcharge, as with all other rates.",
+    documents: (n, pages) => `Up to ${n} documents · ${pages} pages`,
+    pageLimit: `Every pack has a page limit; each extra page, €${EXTRA_PAGE_PRICE}.`,
+    note: `Each additional document outside the pack is charged at the normal rate. Turnaround: same day up to ${SAME_DAY_MAX_PAGES} pages; ${URGENCY_TEXT.en.overLimit}. As with all other rates, ${URGENCY_TEXT.en.surcharge}.`,
     order: "Order this pack",
     orderHref: "/en/documentos",
     whatsapp: "WhatsApp",
@@ -136,7 +101,7 @@ export function packOffers(locale = "es", { ids, base: baseUrl } = {}) {
     "@type": "Offer",
     "@id": `${base}#pack-${p.id}`,
     name: p.name[locale] || p.name.es,
-    description: p.includes[locale] || p.includes.es,
+    description: `${packLimits(p, locale)}. ${p.includes[locale] || p.includes.es}`,
     price: p.price,
     priceCurrency: "EUR",
     url: `${base}#pack-${p.id}`,

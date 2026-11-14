@@ -1,5 +1,10 @@
 // app/en/precios/page.js
-import { DNV_PACK_PRICE, DNV_PACK_LIMITS, DELIVERY_PROMISE_SHORT } from "../../../content/site";
+import {
+  DNV_PACK_PRICE,
+  DNV_PACK_LIMITS,
+  DELIVERY_PROMISE_SHORT,
+  URGENCY_TEXT,
+} from "../../../content/site";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { packOffers } from "../../../content/packs";
 import PacksSection from "../../components/PacksSection";
@@ -69,7 +74,7 @@ export default function Page() {
             <tr>
               <td className="p-3">Contracts and notarial documents</td>
               <td className="p-3">Fixed quote within 2 hours</td>
-              <td className="p-3">{DELIVERY_PROMISE_SHORT.en}</td>
+              <td className="p-3">{`${DELIVERY_PROMISE_SHORT.en}; ${URGENCY_TEXT.en.overLimit}`}</td>
             </tr>
             <tr className="bg-stone-50/50">
               <td className="p-3">
@@ -95,7 +100,7 @@ export default function Page() {
                   ? `€${DNV_PACK_PRICE} (${DNV_PACK_LIMITS.en})`
                   : "Fixed quote within 2 hours"}
               </td>
-              <td className="p-3">Single deadline in writing</td>
+              <td className="p-3">Same day (up to 10 pages)</td>
             </tr>
           </tbody>
         </table>
@@ -117,9 +122,6 @@ export default function Page() {
       {/* Delivery promise (content/site.js → DELIVERY_PROMISE) under the buttons */}
       <QuotePromise locale="en" className="mt-3 max-w-[60ch]" />
 
-      <p className="mt-8 text-sm text-slate-500">
-        * Same-day delivery of more than 10 pages carries a 30% surcharge.
-      </p>
 
       {/* Price per document, not per page + direct vs agency table */}
       <PricePerDocument locale="en" embedded className="mt-10" />

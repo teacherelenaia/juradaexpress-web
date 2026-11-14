@@ -2,8 +2,9 @@
 //
 // Comprueba, sobre todas las URL de /sitemap.xml, que cada página pública
 // (todas menos aviso legal, privacidad y cookies) lleva la franja de
-// confianza: el número de reseñas de Google (googleReviews.count de
-// content/site.js, p. ej. «65 reseñas» / «65 reviews») y la garantía de corrección
+// confianza: el número total de reseñas (REVIEW_STATS de content/reviews.js:
+// Google + Trustpilot, «N reseñas de 5 estrellas…» / «N five-star reviews…»)
+// y la garantía de corrección
 // (GUARANTEE_SHORT, «Si la rechazan por un error mío, la corrijo gratis» /
 // «If it’s rejected because of my mistake, I fix it free»). Las tres páginas
 // legales deben NO llevarla, y las portadas la llevan una sola vez. Al final
@@ -22,7 +23,10 @@ const BASE = (arg("base") || "http://127.0.0.1:3000").replace(/\/$/, "");
 // content/site.js importa "./documents" sin extensión (lo resuelve Next, no
 // Node), así que las constantes se leen del archivo con una expresión regular.
 const site = readFileSync(new URL("../content/site.js", import.meta.url), "utf8");
-const REVIEW_COUNT = Number(site.match(/googleReviews = \{ count: (\d+)/)[1]);
+const reviewsSrc = readFileSync(new URL("../content/reviews.js", import.meta.url), "utf8");
+const REVIEW_COUNT =
+  Number(reviewsSrc.match(/google: \{[^}]*count: (\d+)/)[1]) +
+  Number(reviewsSrc.match(/trustpilot: \{[^}]*count: (\d+)/)[1]);
 const guaranteeBlock = site.match(/GUARANTEE_SHORT = \{([\s\S]*?)\};/)[1];
 const GUARANTEE = {
   es: guaranteeBlock.match(/es: "([^"]+)"/)[1],
@@ -71,7 +75,7 @@ for (const path of paths) {
   }
   const html = decode(await res.text());
   const en = path === "/en" || path.startsWith("/en/");
-  const reviews = en ? `${REVIEW_COUNT} reviews` : `${REVIEW_COUNT} reseñas`;
+  const reviews = en ? `${REVIEW_COUNT} five-star reviews` : `${REVIEW_COUNT} reseñas`;
   const guarantee = GUARANTEE[en ? "en" : "es"];
   // Solo la franja (TrustStrip, un <section>): las landings de ACRO, FBI y
   // visados llevan además su propia fila de hechos (<ul>) bajo el H1.
@@ -95,6 +99,17 @@ const leftovers = execSync('git grep -I -l "FOTO PENDIENTE" -- . ":!node_modules
 }).trim();
 if (leftovers) fail(`«FOTO PENDIENTE» sigue en: ${leftovers.split("\n").join(", ")}`);
 if (!leftovers) console.log("Sin «FOTO PENDIENTE» en el repo.");
+
+// Política de plazos del 14/11/2026: ningún archivo de TEXTO de app/,
+// content/ ni public/ puede citar plazos o recargos antiguos. -I salta los
+// binarios (p. ej. public/fotos/maec-listado-7310.png, cuyo contenido
+// binario puede coincidir por azar con estos patrones).
+const oldTurnaround = execSync(
+  'git grep -I -n -E "24-72|24 a 72|\\b48 ?h\\b|más de 10 páginas en el día \\(\\+30" -- app content public || true',
+  { encoding: "utf8" }
+).trim();
+if (oldTurnaround) fail(`Plazos o recargos antiguos:\n${oldTurnaround}`);
+else console.log("Sin plazos antiguos (24-72 h, 48 h, «+30 %» por más de 10 páginas en el día).");
 
 console.log(failures ? `${failures} fallos.` : "Todo correcto.");
 process.exit(failures ? 1 : 0);

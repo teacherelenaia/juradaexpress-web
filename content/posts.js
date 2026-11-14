@@ -71,7 +71,7 @@ export const posts = [
         <li><strong>Extensión del documento:</strong> un título universitario simple (una página) cuesta menos que un expediente académico completo con notas de varios cursos.</li>
         <li><strong>Complejidad del contenido:</strong> nombres de asignaturas, calificaciones y terminología académica específica pueden requerir más tiempo de traducción.</li>
         <li><strong>Idioma:</strong> en la combinación español-inglés, al haber muchos traductores jurados acreditados, los precios suelen ser más ajustados que en idiomas menos comunes.</li>
-        <li><strong>Urgencia:</strong> la entrega en el día de documentos de hasta 10 páginas no tiene recargo; entregar en el día más de 10 páginas sí lo tiene (30 %).</li>
+        <li><strong>Plazo y urgencia:</strong> hasta 10 páginas, en el día y sin recargo; más de 10 páginas, en 24 horas. Si lo necesitas antes, según el volumen puede llevar un recargo de urgencia de hasta el 30 %, a consultar.</li>
       </ul>
       <h2>Precio orientativo</h2>
       <p>Para un título universitario estándar (una página), el precio habitual se sitúa entre <strong>45€ y 60€</strong>. Si necesitas también el expediente académico completo con todas las asignaturas, el precio depende del número de páginas y se calcula con presupuesto cerrado tras ver el documento.</p>
@@ -197,7 +197,7 @@ export const posts = [
       </ul>
 
       <h2>¿Cuánto se tarda en traducir estos documentos?</h2>
-      <p>Con el documento ya apostillado y en buena calidad de escaneo, la entrega es <strong>en el día para documentos de hasta 10 páginas</strong>. Si el expediente académico es más extenso (varios cursos con muchas asignaturas), te doy un plazo por escrito antes de empezar, normalmente 24-72 h.</p>
+      <p>Con el documento ya apostillado y en buena calidad de escaneo, la entrega es <strong>en el día para documentos de hasta 10 páginas</strong>. Si el expediente académico es más extenso (varios cursos con muchas asignaturas), lo tienes en 24 horas.</p>
 
       <p>
         ¿Tienes tus documentos listos y quieres presupuesto? Escríbenos por
@@ -686,9 +686,9 @@ export const posts = [
           <tr><td><a href="/traduccion-jurada-permiso-conducir">Permiso de conducir</a>, DNI, pasaporte</td><td>En el día</td></tr>
           <tr><td><a href="/traduccion-jurada-partida-nacimiento">Certificados</a> (nacimiento, matrimonio, penales)</td><td>En el día (hasta 10 págs.)</td></tr>
           <tr><td><a href="/traduccion-jurada-titulo-universitario">Título universitario</a></td><td>En el día (hasta 10 págs.)</td></tr>
-          <tr><td>Expediente académico</td><td>2-4 días laborables, según páginas</td></tr>
-          <tr><td><a href="/traduccion-jurada-contrato-escritura">Contratos y escrituras</a></td><td>Fecha exacta con el presupuesto</td></tr>
-          <tr><td>Expedientes completos (herencias, visados)</td><td>Se planifica el lote entero</td></tr>
+          <tr><td>Expediente académico</td><td>En el día hasta 10 páginas; más, en 24 h</td></tr>
+          <tr><td><a href="/traduccion-jurada-contrato-escritura">Contratos y escrituras</a></td><td>En el día hasta 10 páginas; más, en 24 h</td></tr>
+          <tr><td>Expedientes completos (herencias, visados)</td><td>En el día hasta 10 páginas; más, en 24 h</td></tr>
         </tbody>
       </table></div>
       <p>El plazo cuenta desde que confirmas el presupuesto, y el presupuesto lo tienes en <strong>menos de 2 horas</strong> en horario laboral. La entrega digital (PDF firmado) llega al momento de terminar; el papel, si lo quieres, al día siguiente por mensajería.</p>
@@ -702,7 +702,7 @@ export const posts = [
       </ul>
 
       <h2>¿Y si lo necesito para ya?</h2>
-      <p>Las urgencias existen y las atiendo cuando el calendario lo permite: un documento de hasta 10 páginas sale en el día sin recargo. Lo que no hago es prometer plazos imposibles: si tu documento son 40 páginas para mañana, te lo diré claramente y buscaremos la alternativa real — entrega por fases, priorizar el documento que abre el trámite, o confirmar con el organismo si acepta la presentación parcial.</p>
+      <p>Un documento de hasta 10 páginas sale en el día sin recargo, y uno de más de 10 páginas, en 24 horas. Si lo necesitas antes, escríbeme: según el volumen puede llevar un recargo de urgencia de hasta el 30 %, y te confirmo el importe exacto por escrito antes de empezar. Lo que no hago es prometer plazos imposibles: si no llego, te lo diré claramente y buscaremos la alternativa real — entrega por fases, priorizar el documento que abre el trámite, o confirmar con el organismo si acepta la presentación parcial.</p>
 
       <h2>La regla de oro</h2>
       <p>Traduce cuando tengas el documento definitivo (¡y apostillado, si toca!), pero pide presupuesto en cuanto sepas qué te van a pedir: así el hueco en calendario queda reservado y los plazos dejan de ser una incógnita.</p>
@@ -818,7 +818,7 @@ export const posts = [
         <li>Nombra los archivos con orden: <em>01-antecedentes-penales.pdf</em>, <em>02-contrato.pdf</em>… Te devuelvo las traducciones con la misma numeración y un índice.</li>
         <li>Dime en qué consulado presentas la solicitud (o si es ante la UGE) y la fecha de tu cita.</li>
       </ol>
-      <p>Con eso te contesto en menos de 2 horas laborables con la revisión de la lista, el precio cerrado del lote y un único plazo de entrega por escrito. Los documentos de hasta 10 páginas salen en el día; un expediente completo suele estar listo en pocos días. Si vienes de <a href="/traduccion-jurada-estados-unidos">Estados Unidos</a> o de <a href="/traduccion-jurada-india">India</a>, tienes una guía propia con las particularidades de tu país.</p>
+      <p>Con eso te contesto en menos de 2 horas laborables con la revisión de la lista, el precio cerrado del lote y un único plazo de entrega por escrito. Los documentos de hasta 10 páginas salen en el día; un expediente completo de más de 10 páginas, en 24 horas. Si vienes de <a href="/traduccion-jurada-estados-unidos">Estados Unidos</a> o de <a href="/traduccion-jurada-india">India</a>, tienes una guía propia con las particularidades de tu país.</p>
 
       <h2>¿Vale la traducción en PDF para el consulado?</h2>
       <p>Para la presentación telemática, sí: cada traducción lleva mi firma electrónica, verificable con un clic, y mi sello de traductora jurada nº 7310, comprobable en el listado oficial del Ministerio de Asuntos Exteriores. Si tu consulado exige papel, te envío los originales sellados por mensajería a España o a tu país.</p>
@@ -941,7 +941,7 @@ export const posts = [
       <p>Si me envías un documento sin apostilla y el consulado la exige, te lo digo antes de empezar. Tienes más sobre la apostilla en general en <a href="/blog/que-es-la-apostilla-de-la-haya">qué es la apostilla de La Haya</a>.</p>
 
       <h2>¿Cuánto tarda y cómo se paga desde India?</h2>
-      <p>Un documento de hasta 10 páginas está traducido en el día; un expediente completo de visado de estudios (con transcripts largos) lleva un único plazo cerrado por escrito que te doy en menos de 2 horas laborables. Mi horario es de 9:00 a 20:00, hora peninsular española, entre 3 horas y media y 4 horas y media por detrás de India: si me escribes a media mañana, te contesto a primera hora de mi jornada. El pago es con tarjeta india (Visa, Mastercard o RuPay internacional) a través de Stripe, en euros; si tu tarjeta tiene bloqueados los pagos internacionales, actívalos en la app del banco antes de pagar. Recibes un PDF firmado digitalmente, válido para el consulado y para la plataforma de visados; si te exigen papel, lo envío por mensajería a India.</p>
+      <p>Un documento de hasta 10 páginas está traducido en el día; un expediente completo de visado de estudios (con transcripts largos) de más de 10 páginas, en 24 horas. Mi horario es de 9:00 a 20:00, hora peninsular española, entre 3 horas y media y 4 horas y media por detrás de India: si me escribes a media mañana, te contesto a primera hora de mi jornada. El pago es con tarjeta india (Visa, Mastercard o RuPay internacional) a través de Stripe, en euros; si tu tarjeta tiene bloqueados los pagos internacionales, actívalos en la app del banco antes de pagar. Recibes un PDF firmado digitalmente, válido para el consulado y para la plataforma de visados; si te exigen papel, lo envío por mensajería a India.</p>
 
       <h2>¿Y los documentos españoles para usarlos en India?</h2>
       <p>El camino inverso también existe: certificados españoles de nacimiento o matrimonio, títulos, antecedentes penales o documentos de empresa que hay que presentar ante una administración, universidad o empleador en India. Los traduzco al inglés con mi firma y sello, y cuando el organismo indio lo pide, el original se apostilla antes en España.</p>
@@ -1002,7 +1002,7 @@ export const posts = [
       </ol>
 
       <h2>Cuánto margen dejar</h2>
-      <p>No te doy plazos de las administraciones extranjeras, porque cambian y dependen de cada oficina. Lo que sí controlo es mi parte: la traducción de un expediente completo de emigración lleva un plazo cerrado por escrito antes de empezar, y con los lotes urgentes trabajo como cuento en <a href="/traduccion-jurada-urgente-grandes-volumenes">urgentes y grandes volúmenes</a>. Lo que más retrasa un expediente no es la traducción, sino descubrir tarde que un certificado necesitaba apostilla.</p>
+      <p>No te doy plazos de las administraciones extranjeras, porque cambian y dependen de cada oficina. Lo que sí controlo es mi parte: la traducción de un expediente completo de emigración está lista en el día hasta 10 páginas y en 24 horas si es más largo, y con los lotes urgentes trabajo como cuento en <a href="/traduccion-jurada-urgente-grandes-volumenes">urgentes y grandes volúmenes</a>. Lo que más retrasa un expediente no es la traducción, sino descubrir tarde que un certificado necesitaba apostilla.</p>
       <p>
         ¿Te vas? Envíame la lista de documentos por
         <a href="https://wa.me/34685891214?text=Hola%20Elena%2C%20me%20voy%20de%20Espa%C3%B1a%20y%20necesito%20traducir%20mis%20documentos%20al%20ingl%C3%A9s%20%28te%20digo%20el%20pa%C3%ADs%20y%20el%20tr%C3%A1mite%29">WhatsApp</a>

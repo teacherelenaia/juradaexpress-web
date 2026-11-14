@@ -47,7 +47,7 @@ import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
 import QuotePromise from "./QuotePromise";
 import QuoteCalculator from "./QuoteCalculator";
-import { PackGrid } from "./PacksSection";
+import { PackGrid, PackGuarantee } from "./PacksSection";
 
 // Secciones de contenido (content/servicios/*.js) que cuentan como «precios»
 // en los eventos section_view de Vercel Analytics (app/lib/engagement.js).
@@ -286,12 +286,15 @@ export function Block({ block, page }) {
   }
   if (block.packs) {
     return (
-      <PackGrid
-        ids={block.packs}
-        locale={page.locale}
-        orderHref={page.primaryCta ? page.primaryCta.href : undefined}
-        className="mt-6"
-      />
+      <>
+        <PackGuarantee locale={page.locale} className="mt-4" />
+        <PackGrid
+          ids={block.packs}
+          locale={page.locale}
+          orderHref={page.primaryCta ? page.primaryCta.href : undefined}
+          className="mt-6"
+        />
+      </>
     );
   }
   if (block.note) {
@@ -350,8 +353,9 @@ export default function ServicePage({ page }) {
                   {f.href ? (
                     <a
                       href={f.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      {...(f.href.startsWith("/")
+                        ? {}
+                        : { target: "_blank", rel: "noopener noreferrer" })}
                       aria-label={f.label}
                       className="link-nav inline-block py-1 text-slate-700 sm:py-0"
                     >
@@ -452,13 +456,15 @@ export default function ServicePage({ page }) {
           {page.guarantees ? (
             <Guarantees locale={page.locale} className="order-5 mt-6" />
           ) : null}
-          {/* Nota y número de reseñas con enlace a la ficha de Google Maps */}
+          {/* Número de reseñas (content/reviews.js) con enlace a la sección
+              de opiniones de la portada */}
           {page.reviews ? (
             <p className="order-6 mt-3 text-sm font-medium text-slate-700">
               <a
                 href={page.reviews.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(page.reviews.href.startsWith("/")
+                  ? {}
+                  : { target: "_blank", rel: "noopener noreferrer" })}
                 aria-label={page.reviews.label}
                 className="link-nav text-slate-700"
               >

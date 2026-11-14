@@ -7,20 +7,27 @@
 //     preguntas nuevas.
 //   - /en/sworn-translation-usa-spain enlaza, desde el bloque «Most
 //     requested by US visa applicants», a las cuatro páginas de visado.
-//   - aggregateRating.reviewCount del JSON-LD coincide con
-//     googleReviews.count de content/site.js.
+//   - el JSON-LD no lleva aggregateRating (14/11/2026: las directrices de
+//     Google no permiten marcar valoraciones de otras webs) y el sameAs
+//     incluye Trustpilot; la franja muestra el total de REVIEW_STATS
+//     (content/reviews.js: Google + Trustpilot).
 //
 //   npm test                       (levanta next dev en el puerto 3311)
 import { readFileSync } from "node:fs";
 import { test, expect } from "@playwright/test";
 
-// content/site.js no se puede importar desde Node (importa sin extensión),
-// así que el recuento se lee con una expresión regular.
-const REVIEW_COUNT = Number(
-  readFileSync(new URL("../content/site.js", import.meta.url), "utf8").match(
-    /googleReviews = \{ count: (\d+)/
-  )[1]
-);
+// content/reviews.js y content/site.js se leen con expresiones regulares
+// (los archivos de content/ importan sin extensión y no se cargan desde
+// Node). El precio del pack sale de content/site.js → PACKS.
+const reviewsSrc = readFileSync(new URL("../content/reviews.js", import.meta.url), "utf8");
+const REVIEW_COUNT =
+  Number(reviewsSrc.match(/google: \{[^}]*count: (\d+)/)[1]) +
+  Number(reviewsSrc.match(/trustpilot: \{[^}]*count: (\d+)/)[1]);
+const siteSrc = readFileSync(new URL("../content/site.js", import.meta.url), "utf8");
+const packEur = (id) =>
+  Number(siteSrc.match(new RegExp(`id: "${id}",[\\s\\S]*?price: (\\d+)`))[1]);
+const usd = (eur) => Math.round((eur * 1.1) / 5) * 5;
+const packText = (id) => `€${packEur(id)} (about $${usd(packEur(id))})`;
 
 const LINKS = [
   "/en/fbi-background-check-translation-spain",
@@ -67,9 +74,13 @@ test("/en: FBI, non-lucrative, enlaces, FAQ y reseñas", async ({ request }) => 
     "Which documents need a sworn translation for Spain's non-lucrative visa?"
   );
 
-  const ratings = findKey(blocks, "aggregateRating");
-  expect(ratings.length).toBeGreaterThan(0);
-  for (const r of ratings) expect(Number(r.reviewCount)).toBe(REVIEW_COUNT);
+  expect(findKey(blocks, "aggregateRating")).toHaveLength(0);
+  expect(findKey(blocks, "sameAs").flat()).toContain(
+    "https://es.trustpilot.com/review/juradaexpress.es"
+  );
+  expect(html).toContain(`${REVIEW_COUNT} five-star reviews on Google and Trustpilot`);
+  expect(html).toContain('href="/en#opiniones"');
+  expect(html).toContain('id="opiniones"');
 
   const desc = html.match(/<meta name="description" content="([^"]*)"/)?.[1] || "";
   expect(desc).toContain("FBI");
@@ -81,7 +92,7 @@ test("/en: bloque de visados US visible con precios", async ({ page }) => {
   await expect(block.locator("h2")).toHaveText(
     "Applying for a Spanish visa from the United States?"
   );
-  for (const price of ["€35 (about $40)", "€129 (about $140)", "€299 (about $330)"]) {
+  for (const price of ["€35 (about $40)", packText("visa"), packText("visa-family")]) {
     await expect(block).toContainText(price);
   }
   const wa = block.locator('a[href^="https://wa.me/"]').first();
@@ -100,5 +111,5 @@ test("/en/sworn-translation-usa-spain: bloque «Most requested»", async ({ requ
   // El bloque va antes de «Which direction do you need?».
   expect(start).toBeLessThan(html.indexOf("Which direction do you need?"));
   for (const href of LINKS.slice(0, 4)) expect(html).toContain(`href="${href}"`);
-  expect(html).toContain("€129 (about $140)");
+  expect(html).toContain(packText("visa"));
 });

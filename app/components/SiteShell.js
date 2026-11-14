@@ -22,21 +22,16 @@ import {
   FACEBOOK_URL,
   LINKEDIN_URL,
   GOOGLE_BUSINESS_URL,
-  GOOGLE_RATING,
-  GOOGLE_REVIEW_COUNT,
+  TRUSTPILOT_URL,
   SERVICE_COUNTRIES,
   EXTRA_AREA_SERVED,
 } from "../../content/site";
-import { getPublishableReviews } from "../../content/reviews";
 import { personJsonLd, personRef, PERSON_ID } from "../../content/persona";
 import {
   SERVICE_ROUTES,
   INTERNATIONAL_MENU,
   LAW_FIRMS_ROUTE,
 } from "../../content/servicios/routes";
-
-// aggregateRating solo si hay reseñas publicables (se lee en build).
-const PUBLISHED_REVIEWS = getPublishableReviews().length;
 
 // Las cuatro líneas de servicio del catálogo (JSON-LD hasOfferCatalog).
 const SERVICE_LINES = [
@@ -445,19 +440,9 @@ export default function SiteShell({ locale = "es", children }) {
                     priceCurrency: "EUR",
                   })),
                 },
-                ...(PUBLISHED_REVIEWS > 0 &&
-                GOOGLE_RATING > 0 &&
-                GOOGLE_REVIEW_COUNT > 0
-                  ? {
-                      aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: GOOGLE_RATING,
-                        bestRating: 5,
-                        worstRating: 1,
-                        reviewCount: GOOGLE_REVIEW_COUNT,
-                      },
-                    }
-                  : {}),
+                // Sin aggregateRating (14/11/2026): las directrices de Google
+                // no permiten marcar valoraciones recogidas en otras webs
+                // (Google Business, Trustpilot). Las fichas van en sameAs.
                 priceRange: "€€",
                 founder: personRef(locale),
                 employee: { "@id": PERSON_ID },
@@ -479,6 +464,7 @@ export default function SiteShell({ locale = "es", children }) {
                   FACEBOOK_URL,
                   LINKEDIN_URL,
                   GOOGLE_BUSINESS_URL,
+                  TRUSTPILOT_URL,
                 ].filter(Boolean),
                 },
                 ],

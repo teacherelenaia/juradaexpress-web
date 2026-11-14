@@ -16,12 +16,8 @@
 import { DOCUMENTS } from "../documents";
 import { toUsd, US_SHIPPING_USD } from "../usd";
 import { MAEC_NUMBER, SINCE } from "../persona";
-import {
-  GOOGLE_BUSINESS_URL,
-  GOOGLE_RATING,
-  GOOGLE_REVIEW_COUNT,
-  MAEC_LIST_URL,
-} from "../site";
+import { MAEC_LIST_URL } from "../site";
+import { REVIEW_TEXT } from "../reviews";
 
 const PATH_ES = "/traduccion-jurada-antecedentes-fbi";
 const PATH_EN = "/en/fbi-background-check-translation-spain";
@@ -30,13 +26,10 @@ const PATH_EN = "/en/fbi-background-check-translation-spain";
 const PRICE = DOCUMENTS.find((d) => d.id === "antecedentes-penales").price;
 const PRICE_USD = toUsd(PRICE);
 
-const fiveStar = GOOGLE_RATING >= 5;
-const reviewsEn = fiveStar
-  ? `${GOOGLE_REVIEW_COUNT} five-star Google reviews`
-  : `${GOOGLE_RATING.toLocaleString("en-GB", { minimumFractionDigits: 1 })} on Google · ${GOOGLE_REVIEW_COUNT} reviews`;
-const reviewsEs = fiveStar
-  ? `${GOOGLE_REVIEW_COUNT} reseñas de cinco estrellas en Google`
-  : `${GOOGLE_RATING.toLocaleString("es-ES", { minimumFractionDigits: 1 })} en Google · ${GOOGLE_REVIEW_COUNT} reseñas`;
+// «N reseñas de cinco estrellas en Google y Trustpilot»: recuento y
+// texto de content/reviews.js (REVIEW_STATS); enlaza a /#opiniones.
+const reviewsEn = REVIEW_TEXT.en.totalLong;
+const reviewsEs = REVIEW_TEXT.es.totalLong;
 
 const CONSULADOS_URL = "https://www.exteriores.gob.es/Consulados/";
 const FBI_URL = "https://www.fbi.gov/how-we-can-help-you/more-fbi-services-and-information/identity-history-summary-checks";
@@ -71,8 +64,7 @@ export const es = {
     },
     {
       text: reviewsEs,
-      href: GOOGLE_BUSINESS_URL,
-      label: "Ver las reseñas en la ficha de Google Business",
+      href: REVIEW_TEXT.es.href,
     },
     { text: `${PRICE} € (unos ${PRICE_USD} $) por certificado` },
     { text: "PDF firmado en el día" },
@@ -252,8 +244,7 @@ export const en = {
     },
     {
       text: reviewsEn,
-      href: GOOGLE_BUSINESS_URL,
-      label: "See the reviews on the Google Business profile",
+      href: REVIEW_TEXT.en.href,
     },
     { text: `€${PRICE} (about $${PRICE_USD}) per certificate` },
     { text: "Same-day signed PDF" },

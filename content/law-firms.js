@@ -77,7 +77,7 @@ export const LAW_FIRMS = {
       },
       {
         t: "Signed PDF the same day",
-        d: "Files of up to 10 pages come back the same working day, each with its own certification page. Longer files get a written deadline before I start.",
+        d: "Files of up to 10 pages come back the same working day, each with its own certification page. Longer files, within 24 hours.",
       },
       {
         t: "Paper copy if you need it",
@@ -140,7 +140,7 @@ export const LAW_FIRMS = {
     },
     {
       q: "What is the turnaround?",
-      a: "Documents of up to 10 pages are translated, certified and delivered the same working day, Spain time. Larger files get a written deadline before I start, normally 24-72 hours. An order sent from the US in the afternoon is under way first thing the next morning in Spain.",
+      a: "Documents of up to 10 pages are translated, certified and delivered the same working day, Spain time. Larger files: within 24 hours. Need it sooner? Message me: depending on volume, an urgency surcharge of up to 30% may apply. An order sent from the US in the afternoon is under way first thing the next morning in Spain.",
     },
     {
       q: "Who signs the certification?",

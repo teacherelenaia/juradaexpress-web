@@ -34,12 +34,15 @@ import {
   TIMEZONE_NOTE,
   SAME_DAY_CUTOFF,
   SAME_DAY_MAX_PAGES,
+  OVER_LIMIT_HOURS,
+  URGENCY_TEXT,
   HERO_H1,
   HERO_SUB,
   HERO_PHOTO,
   DELIVERY_PROMISE,
   PRICE_PER_PAGE,
   MIN_DOC_PRICE,
+  packLimits,
 } from "../../content/site";
 import {
   US_VISA_PRICES,
@@ -180,7 +183,7 @@ const FAQ = [
   },
   {
     q: "When will I have it?",
-    a: `${DELIVERY_PROMISE.en} Same-day delivery of more than ${SAME_DAY_MAX_PAGES} pages carries a 30% surcharge.`,
+    a: DELIVERY_PROMISE.en,
   },
   {
     q: "How much does it cost exactly?",
@@ -210,14 +213,12 @@ const FAQ = [
   },
   {
     q: "Which documents need a sworn translation for Spain's non-lucrative visa?",
-    a: `Usually the apostilled FBI background check, the medical certificate if it is in English, birth and marriage certificates if your family travels with you, and bank or pension letters depending on the consulate. The Spain Visa Pack covers up to 4 documents for €${VISA_PACK_PRICE}.`,
+    a: `Usually the apostilled FBI background check, the medical certificate if it is in English, birth and marriage certificates if your family travels with you, and bank or pension letters depending on the consulate. The Spain Visa Pack costs €${VISA_PACK_PRICE}, ${packLimits("visa", "en")}.`,
     link: { label: "Non-lucrative visa: document checklist", href: NLV_CHECKLIST_PATH_EN },
   },
   {
     q: "How long does a complete digital nomad visa file take?",
-    a: LARGE_PROJECT_CAPACITY
-      ? `You get a single fixed deadline in writing before I start; documents of up to ${SAME_DAY_MAX_PAGES} pages are delivered the same day and I can handle ${LARGE_PROJECT_CAPACITY.en}, so a complete file is usually ready within a few days.`
-      : `You get a single fixed deadline in writing before I start; documents of up to ${SAME_DAY_MAX_PAGES} pages are delivered the same day.`,
+    a: `Up to ${SAME_DAY_MAX_PAGES} pages, the same day; if the file runs to more than ${SAME_DAY_MAX_PAGES} pages, you get it within ${OVER_LIMIT_HOURS} hours, with one fixed price for the whole batch. ${URGENCY_TEXT.en.sooner}`,
   },
 ];
 
@@ -666,8 +667,8 @@ export default function Page() {
                 when I finish you receive every document as a signed PDF, in
                 order and clearly named so you know what each file is.
                 {LARGE_PROJECT_CAPACITY
-                  ? ` I can handle ${LARGE_PROJECT_CAPACITY.en}; for larger volumes or rush jobs, ask me and I will confirm a deadline in writing.`
-                  : " For large volumes or rush jobs, ask me and I will confirm a deadline in writing."}
+                  ? ` Up to ${SAME_DAY_MAX_PAGES} pages, the same day; over ${SAME_DAY_MAX_PAGES}, within ${OVER_LIMIT_HOURS} hours. I can handle ${LARGE_PROJECT_CAPACITY.en}; beyond that volume, I confirm a deadline in writing. ${URGENCY_TEXT.en.sooner}`
+                  : ` Up to ${SAME_DAY_MAX_PAGES} pages, the same day; over ${SAME_DAY_MAX_PAGES}, within ${OVER_LIMIT_HOURS} hours. ${URGENCY_TEXT.en.sooner}`}
               </p>
             </div>
             <div className="flex flex-col items-start gap-4">

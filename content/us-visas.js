@@ -9,13 +9,12 @@
 // el bloque «Most requested by US visa applicants» de la página de EE. UU.
 //
 // Precios leídos del catálogo (content/documents.js) y de los packs
-// (content/packs.js); dólares con toUsd (content/usd.js). Sin cifras a mano.
+// (content/site.js → PACKS, vía content/packs.js); dólares con toUsd (content/usd.js). Sin cifras a mano.
 import { DOCUMENTS } from "./documents";
-import { PACKS } from "./packs";
+import { packPrice, getPack } from "./packs";
 import { toUsd } from "./usd";
 
 const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
-const packPrice = (id) => PACKS.find((p) => p.id === id)?.price ?? null;
 
 export const FBI_PRICE = priceOf("antecedentes-penales");
 export const BIRTH_PRICE = priceOf("partida-nacimiento");
@@ -29,11 +28,11 @@ export const US_VISA_PRICES = [
   { label: "FBI background check + apostille", price: eurUsd(FBI_PRICE) },
   { label: "Birth or marriage certificate", price: eur(BIRTH_PRICE) },
   {
-    label: "Spain Visa Pack, up to 4 documents",
+    label: `Spain Visa Pack, up to ${getPack("visa").documents} documents · ${getPack("visa").pages} pages`,
     price: eurUsd(VISA_PACK_PRICE),
   },
   {
-    label: "Spain Visa Family Pack, up to 8 documents",
+    label: `Spain Visa Family Pack, up to ${getPack("visa-family").documents} documents · ${getPack("visa-family").pages} pages`,
     price: eurUsd(VISA_FAMILY_PACK_PRICE),
   },
 ];

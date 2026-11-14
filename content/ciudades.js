@@ -173,7 +173,7 @@ export const CIUDADES = [
       },
       {
         q: "Necesito la traducción para una cita en Extranjería esta semana, ¿llegas?",
-        a: "Dímelo al pedir presupuesto con la fecha de la cita. Los documentos de hasta 10 páginas salen en el día; si es más largo te doy el plazo por escrito antes de empezar, y solo acepto el encargo si llego.",
+        a: "Dímelo al pedir presupuesto con la fecha de la cita. Los documentos de hasta 10 páginas salen en el día; si es más largo, en 24 horas, y si tu cita es antes te digo por escrito si llego.",
       },
     ],
     whatsapp:

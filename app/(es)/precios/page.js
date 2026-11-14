@@ -1,5 +1,10 @@
 // app/precios/page.js
-import { DNV_PACK_PRICE, DNV_PACK_LIMITS, DELIVERY_PROMISE_SHORT } from "../../../content/site";
+import {
+  DNV_PACK_PRICE,
+  DNV_PACK_LIMITS,
+  DELIVERY_PROMISE_SHORT,
+  URGENCY_TEXT,
+} from "../../../content/site";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { packOffers } from "../../../content/packs";
 import PacksSection from "../../components/PacksSection";
@@ -66,7 +71,7 @@ export default function Page() {
             <tr>
               <td className="p-3">Contratos y notariales</td>
               <td className="p-3">Presupuesto cerrado en menos de 2 h</td>
-              <td className="p-3">{DELIVERY_PROMISE_SHORT.es}</td>
+              <td className="p-3">{`${DELIVERY_PROMISE_SHORT.es}; ${URGENCY_TEXT.es.overLimit}`}</td>
             </tr>
             <tr className="bg-stone-50/50">
               <td className="p-3">
@@ -92,7 +97,7 @@ export default function Page() {
                   ? `${DNV_PACK_PRICE} € (${DNV_PACK_LIMITS.es})`
                   : "Presupuesto cerrado en menos de 2 h"}
               </td>
-              <td className="p-3">Plazo único por escrito</td>
+              <td className="p-3">En el día (hasta 10 págs.)</td>
             </tr>
           </tbody>
         </table>
@@ -114,9 +119,6 @@ export default function Page() {
       <QuotePromise locale="es" className="mt-3 max-w-[60ch]" />
 
       <p className="mt-8 text-sm text-slate-500">
-        * Entregar en el día más de 10 páginas lleva un recargo del 30 %.
-      </p>
-      <p className="mt-2 text-sm text-slate-500">
         Todos los precios son en euros (€), IVA incluido. Se cobran en euros con
         tarjeta internacional a través de Stripe; si pagas desde fuera de la zona
         euro, tu banco aplica el cambio.

@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: "¿Puedo tener la traducción en el día?",
-    a: `${DELIVERY_PROMISE.es} Entregar en el día más de 10 páginas lleva un recargo del 30 %.`,
+    a: DELIVERY_PROMISE.es,
   },
   {
     q: "¿Qué documentos puedo traducir de forma jurada?",

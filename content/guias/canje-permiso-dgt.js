@@ -16,7 +16,7 @@
 // (Filipinas). La tabla de convenios de la DGT estaba actualizada a
 // 26/06/2026. Precios de la oferta: content/documents.js y content/packs.js.
 import { DOCUMENTS } from "../documents";
-import { PACKS } from "../packs";
+import { PACKS, packLimits } from "../packs";
 import { SAME_DAY_MAX_PAGES } from "../site";
 import { guideById } from "./routes";
 
@@ -331,7 +331,7 @@ export const es = {
     ],
     facts: [
       `Permiso de conducir: ${LICENCE_PRICE} €, IVA incluido`,
-      `${PACK.name.es}: ${PACK.price} € (${PACK.includes.es.toLowerCase().replace(/\.$/, "")})`,
+      `${PACK.name.es}: ${PACK.price} €, ${packLimits(PACK, "es")} (${PACK.includes.es.toLowerCase().replace(/\.$/, "")})`,
     ],
     whatsapp: wa("Hola Elena, necesito traducir mi permiso de conducir para canjearlo en la DGT"),
     whatsappLabel: "Enviar el permiso por WhatsApp",
@@ -655,7 +655,7 @@ export const en = {
     ],
     facts: [
       `Driving licence: €${LICENCE_PRICE}, VAT included`,
-      `${PACK.name.en}: €${PACK.price} (${PACK.includes.en.toLowerCase().replace(/\.$/, "")})`,
+      `${PACK.name.en}: €${PACK.price}, ${packLimits(PACK, "en")} (${PACK.includes.en.toLowerCase().replace(/\.$/, "")})`,
     ],
     whatsapp: wa("Hi Elena, I need my driving licence translated to exchange it at the DGT"),
     whatsappLabel: "Send my licence on WhatsApp",

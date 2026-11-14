@@ -3,6 +3,8 @@
 // Datos de contacto y redes en un único sitio, para que header, panel
 // móvil, barra de acciones y footer no dupliquen URLs.
 import { MIN_PRICE } from "./documents";
+import { REVIEW_STATS, TRUSTPILOT_URL } from "./reviews";
+import { PRICE_PER_PAGE, URGENCY_SURCHARGE, FIXED_PRICE_MAX_PAGES } from "./pricing";
 
 export const PHONE_DISPLAY = "685 891 214";
 export const PHONE_TEL = "+34685891214";
@@ -77,11 +79,15 @@ export const LINKEDIN_URL =
   "https://www.linkedin.com/in/elena-penaranda-sworn-translator";
 
 // Ficha de Google Business "Jurada Express" (place_id verificado en Maps
-// el 26/08/2026). Cuando Google verifique el perfil, se puede sustituir
-// por el enlace corto g.page/r/… si se prefiere; ambos apuntan a la misma
-// ficha y aparecen en el sameAs del JSON-LD.
-export const GOOGLE_BUSINESS_URL =
-  "https://www.google.com/maps/place/?q=place_id:ChIJPXZn2WGBYw0ROKmS0IqD-rk";
+// el 26/08/2026). La URL vive en content/reviews.js → REVIEW_STATS (fuente
+// única de reseñas) y se reexporta aquí porque el sameAs del JSON-LD y
+// varios enlaces la importan de este archivo.
+export const GOOGLE_BUSINESS_URL = REVIEW_STATS.google.url;
+
+// Perfil de Trustpilot (activo desde el 14/11/2026): pie de página
+// (SocialIcons), sameAs del JSON-LD y sección «Opiniones». La URL y los
+// recuentos viven en content/reviews.js → REVIEW_STATS.
+export { TRUSTPILOT_URL };
 
 // Vídeo opcional de la sección "Cómo trabajamos" (ver sección 6 de la
 // auditoría). Déjalo en null hasta tener un clip real (10-15 s, < 1,5 MB):
@@ -96,26 +102,8 @@ export const PROCESS_VIDEO = null;
 // Encargo internacional (docs/BRIEF-INTERNACIONAL-2026-09.md)
 // ---------------------------------------------------------------------------
 
-// Recuentos de reseñas: ÚNICO sitio que hay que tocar cuando cambien.
-// Google y Trustpilot no ofrecen API gratuita para leerlos: ACTUALIZAR A
-// MANO. Google, leído el 03/11/2026: 5,0 · 65 reseñas (antes, 51 a
-// 16/10/2026, 49 a 15/10/2026, 41 a 12/10/2026, 35 a 08/10/2026, 24 a
-// 26/09/2026 y 7 a 07/09/2026).
-// googleReviews alimenta la franja de confianza, la cabecera de Opiniones,
-// las páginas de servicio, /llms.txt y el aggregateRating del JSON-LD.
-// trustpilotReviews queda guardado para cuando se active SHOW_TRUSTPILOT
-// (más abajo); hoy no se muestra en ninguna parte de la web.
-export const googleReviews = { count: 65, rating: 5.0, checkedAt: "2026-11-03" };
-export const trustpilotReviews = {
-  count: 7,
-  rating: 5.0, // las 7 reseñas son de cinco estrellas
-  trustScore: 4.3, // TrustScore que publica Trustpilot
-  url: "https://es.trustpilot.com/review/juradaexpress.es",
-  checkedAt: "2026-11-03",
-};
-// Alias que usan los componentes y el JSON-LD; leen de googleReviews.
-export const GOOGLE_RATING = googleReviews.rating;
-export const GOOGLE_REVIEW_COUNT = googleReviews.count;
+// Recuentos de reseñas (Google y Trustpilot): viven en content/reviews.js
+// → REVIEW_STATS / TOTAL_REVIEWS. No escribas aquí ninguna cifra.
 
 // Países desde los que Elena atiende con más frecuencia. El último elemento
 // es deliberadamente abierto: el servicio es 100 % online y no excluye a
@@ -168,13 +156,31 @@ export const PAPER_DELIVERY_SPAIN = {
   },
 };
 
-// Promesa de plazo de toda la web (oferta comercial, 02/10/2026): hasta
-// SAME_DAY_MAX_PAGES páginas, entrega en el día en PDF firmado y sin
-// recargo; más páginas, plazo cerrado por escrito antes de empezar
-// (normalmente 24-72 h). URGENCY_SURCHARGE: recargo del 30 % sobre el
-// precio de catálogo, solo para entregar más de 10 páginas en el día.
+// Política de plazos de Elena (14/11/2026): hasta SAME_DAY_MAX_PAGES
+// páginas, entrega en el día en PDF firmado y sin recargo; más páginas, en
+// OVER_LIMIT_HOURS horas. URGENCY_SURCHARGE es el recargo MÁXIMO de
+// urgencia (hasta el 30 %, a consultar) para entregar antes del plazo
+// normal; el importe exacto depende del volumen y se confirma por escrito.
+// Los textos de urgencia de toda la web salen de URGENCY_TEXT.
 export const SAME_DAY_MAX_PAGES = 10;
-export const URGENCY_SURCHARGE = 0.3;
+export const OVER_LIMIT_HOURS = 24;
+// URGENCY_SURCHARGE vive en content/pricing.js (se reexporta más abajo).
+const URGENCY_PCT = Math.round(URGENCY_SURCHARGE * 100);
+export const URGENCY_TEXT = {
+  es: {
+    // Frase final de la promesa de plazo.
+    sooner: `¿Lo necesitas antes? Escríbeme: según el volumen puede llevar un recargo de urgencia de hasta el ${URGENCY_PCT} %.`,
+    // Para listas de tarifas y notas de precio.
+    surcharge: `recargo de urgencia de hasta el ${URGENCY_PCT} %, a consultar, para entregar antes del plazo normal`,
+    // Más de 10 páginas, en una línea.
+    overLimit: `más de ${SAME_DAY_MAX_PAGES} páginas, en ${OVER_LIMIT_HOURS} h`,
+  },
+  en: {
+    sooner: `Need it sooner? Message me: depending on volume, an urgency surcharge of up to ${URGENCY_PCT}% may apply.`,
+    surcharge: `urgency surcharge of up to ${URGENCY_PCT}%, on request, for delivery faster than standard`,
+    overLimit: `over ${SAME_DAY_MAX_PAGES} pages, within ${OVER_LIMIT_HOURS} hours`,
+  },
+};
 
 // Precio por página de los documentos largos (contratos, escrituras,
 // expedientes de varias páginas, pólizas, extractos), en euros, IVA
@@ -184,7 +190,9 @@ export const URGENCY_SURCHARGE = 0.3;
 // OfferCatalog del JSON-LD. Una página es una cara del documento original;
 // la apostilla cuenta como página si hay que traducirla. Si cambia, se
 // cambia solo aquí. [[CONFIRMAR con Elena antes de fusionar]]
-export const PRICE_PER_PAGE = 20;
+// PRICE_PER_PAGE vive en content/pricing.js (cálculo de la calculadora);
+// se reexporta desde aquí.
+export { PRICE_PER_PAGE, URGENCY_SURCHARGE, FIXED_PRICE_MAX_PAGES };
 
 // Mínimo por documento de los documentos largos (regla de Elena,
 // 10/10/2026): 20 € por página con un mínimo de MIN_DOC_PRICE por
@@ -210,8 +218,8 @@ export const SAME_DAY_CUTOFF = { es: "18:00", en: "6 pm" };
 // (DELIVERY_PROMISE_SHORT) donde solo cabe una línea (celdas de tabla,
 // fichas de documento).
 export const DELIVERY_PROMISE = {
-  es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}. Si llega más tarde, lo tienes a primera hora del día siguiente. Más de ${SAME_DAY_MAX_PAGES} páginas: plazo cerrado por escrito antes de empezar, normalmente 24-72 h.`,
-  en: `Same day up to ${SAME_DAY_MAX_PAGES} pages if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time. Later than that, first thing the next morning. Over ${SAME_DAY_MAX_PAGES} pages: a written deadline before work starts, normally 24-72 hours.`,
+  es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}. Si llega más tarde, lo tienes a primera hora del día siguiente. Más de ${SAME_DAY_MAX_PAGES} páginas: en ${OVER_LIMIT_HOURS} horas. ${URGENCY_TEXT.es.sooner}`,
+  en: `Same day up to ${SAME_DAY_MAX_PAGES} pages if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time. Later than that, first thing the next morning. Over ${SAME_DAY_MAX_PAGES} pages: within ${OVER_LIMIT_HOURS} hours. ${URGENCY_TEXT.en.sooner}`,
 };
 export const DELIVERY_PROMISE_SHORT = {
   es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}`,
@@ -222,12 +230,14 @@ export const TURNAROUND = {
   es: {
     short: `en el día (hasta ${SAME_DAY_MAX_PAGES} páginas)`,
     long: DELIVERY_PROMISE.es,
-    urgent: `más de ${SAME_DAY_MAX_PAGES} páginas en el día`,
+    over: `en ${OVER_LIMIT_HOURS} h (más de ${SAME_DAY_MAX_PAGES} páginas)`,
+    urgent: "antes del plazo normal",
   },
   en: {
     short: `the same day (up to ${SAME_DAY_MAX_PAGES} pages)`,
     long: DELIVERY_PROMISE.en,
-    urgent: `more than ${SAME_DAY_MAX_PAGES} pages the same day`,
+    over: `within ${OVER_LIMIT_HOURS} hours (over ${SAME_DAY_MAX_PAGES} pages)`,
+    urgent: "faster than standard",
   },
 };
 
@@ -246,13 +256,6 @@ export const FIXED_PRICE_NOTE = {
 // haya foto real, poner aquí la ruta (p. ej. "/fotos/elena-penaranda.jpg",
 // retrato 4:5, mínimo 760×950 px) y el hero la usará sin tocar nada más.
 export const HERO_PHOTO = null;
-
-// Trustpilot (Fase A, 18/10/2026): el perfil no se enlaza todavía. Cuando
-// Elena lo active, poner SHOW_TRUSTPILOT en true y la URL en TRUSTPILOT_URL;
-// mientras esté en false, ni la franja de confianza, ni llms.txt, ni el
-// sameAs del JSON-LD lo mencionan.
-export const SHOW_TRUSTPILOT = false;
-export const TRUSTPILOT_URL = null;
 
 // H1 y subtítulo del hero de la home (Fase A2, informe CRO del
 // 18/10/2026). Se publica la opción A (plazo). Para probar otra, basta con
@@ -290,9 +293,121 @@ export const USCIS_PAPER_COPY = true;
 // del pasaporte) no cuentan. Ninguna página debe citar el precio sin estos
 // límites: usar DNV_PACK_PRICE_TEXT y DNV_PACK_NOTE.
 // 01/11/2026: subida de 189 € a 249 € (IVA incluido); los límites no cambian.
-export const DNV_PACK_PRICE = 249;
+// 14/11/2026: el precio vive en PACKS (más abajo, id "nomad").
 export const DNV_PACK_MAX_DOCUMENTS = 5;
 export const DNV_PACK_MAX_PAGES = 10;
+
+// ---------------------------------------------------------------------------
+// Paquetes por trámite: ÚNICO sitio con nombre, documentos incluidos, precio
+// y rango «por separado» de cada pack (14/11/2026). Lo leen las tarjetas de
+// /precios y /en/precios, las páginas de visados y de nómada digital (ES y
+// EN), el texto prellenado de WhatsApp, las meta descriptions, /llms.txt,
+// las guías y content/us-visas.js (vía content/packs.js, que lo reexporta).
+//
+//   id         identificador estable (anclas #pack-<id>, eventos, Offer)
+//   name       { es, en }
+//   includes   { es, en }: qué documentos entran
+//   documents  número máximo de documentos
+//   pages      número máximo de páginas en total (14/11/2026); cada página
+//              adicional, PRICE_PER_PAGE (20 €). La etiqueta de la tarjeta
+//              dice «Hasta X documentos · Y páginas».
+//   price      euros, IVA incluido. En /en se añade «approx. $X» con toUsd
+//              (content/usd.js: € × 1,10 redondeado a 5 $).
+//   separately precio de esos documentos sueltos, para la línea de
+//              referencia bajo el precio: { upTo } (cifra alta, «hasta») o
+//              { from } («desde»); null =
+//              sin referencia (nómada digital).
+//
+// 14/11/2026: Spain Visa Pack 129 → 149 €, Irlanda / Reino Unido 169 →
+// 219 €, Driving Licence 69 → 79 €; Family (299 €) y nómada (249 €) igual.
+// ---------------------------------------------------------------------------
+export const PACKS = [
+  {
+    id: "visa",
+    name: { es: "Spain Visa Pack", en: "Spain Visa Pack" },
+    includes: {
+      es: "FBI o antecedentes penales, certificado médico, partida de nacimiento o matrimonio, y las apostillas solo si tu consulado exige traducirlas.",
+      en: "FBI or police check, medical certificate, birth or marriage certificate, and apostilles only if your consulate requires them translated.",
+    },
+    documents: 4,
+    pages: 8,
+    price: 149,
+    separately: { upTo: 180 },
+  },
+  {
+    id: "visa-family",
+    name: { es: "Spain Visa Family Pack", en: "Spain Visa Family Pack" },
+    includes: {
+      es: "Lo del Spain Visa Pack para dos adultos, más certificado de matrimonio y partidas de los hijos.",
+      en: "The Spain Visa Pack documents for two adults plus marriage certificate and children's birth certificates.",
+    },
+    documents: 8,
+    pages: 16,
+    // 01/11/2026: subida de 229 € a 299 € (IVA incluido).
+    price: 299,
+    separately: { upTo: 360 },
+  },
+  {
+    id: "nomad",
+    name: { es: "Digital Nomad Visa Pack", en: "Digital Nomad Visa Pack" },
+    includes: {
+      // 28/10/2026 (Elena): hasta 5 documentos y 10 páginas en total; cada
+      // página adicional a PRICE_PER_PAGE (límites en documents/pages).
+      es: "Carta de la empresa o del cliente, antecedentes penales, título, certificado del seguro, prueba de ingresos o certificado de relación. La copia del pasaporte y los documentos que no necesitan traducción jurada no cuentan para el paquete.",
+      en: "Employer or client letter, police check, degree, insurance certificate, proof of income or relationship certificate. A passport copy and other documents that don’t need a sworn translation don’t count towards the package.",
+    },
+    documents: DNV_PACK_MAX_DOCUMENTS,
+    pages: DNV_PACK_MAX_PAGES,
+    price: 249,
+    separately: null,
+  },
+  {
+    id: "ireland-uk",
+    name: { es: "Pack Irlanda / Reino Unido", en: "Ireland / UK Pack" },
+    includes: {
+      es: "Título, expediente, antecedentes penales, certificado de delitos sexuales y dos referencias laborales.",
+      en: "Degree, transcript, police check, sexual offences certificate and two employer references.",
+    },
+    documents: 6,
+    pages: 12,
+    price: 219,
+    separately: { from: 235 },
+  },
+  {
+    id: "driving",
+    name: { es: "Driving Licence Pack", en: "Driving Licence Pack" },
+    includes: {
+      es: "Carné por las dos caras y certificado o historial de la autoridad emisora.",
+      en: "Licence (both sides) and the issuing authority's certificate or driving record.",
+    },
+    documents: 2,
+    pages: 4,
+    price: 79,
+    separately: { upTo: 85 },
+  },
+];
+
+/** Pack por id (o undefined). */
+export const getPack = (id) => PACKS.find((p) => p.id === id);
+/** Precio en euros de un pack por id (o null). */
+export const packPrice = (id) => getPack(id)?.price ?? null;
+/**
+ * Límites de un pack en una frase: «hasta 4 documentos y 8 páginas en
+ * total; página adicional, 20 €» / «up to 4 documents and 8 pages in
+ * total; extra page, €20». Acepta el pack o su id.
+ */
+export function packLimits(pack, locale = "es") {
+  const p = typeof pack === "string" ? getPack(pack) : pack;
+  if (!p) return "";
+  return locale === "en"
+    ? `up to ${p.documents} documents and ${p.pages} pages in total; extra page, €${PRICE_PER_PAGE}`
+    : `hasta ${p.documents} documentos y ${p.pages} páginas en total; página adicional, ${PRICE_PER_PAGE} €`;
+}
+
+// Precio del Digital Nomad Visa Pack (alias que usan la landing de nómada
+// digital y /precios). Si el pack desaparece, la web vuelve a decir
+// "presupuesto cerrado en menos de 2 h".
+export const DNV_PACK_PRICE = packPrice("nomad");
 export const DNV_PACK_PRICE_TEXT = {
   es: `Precio: paquete visado de nómada digital, ${DNV_PACK_PRICE} € hasta ${DNV_PACK_MAX_DOCUMENTS} documentos y un máximo de ${DNV_PACK_MAX_PAGES} páginas en total. Cada página adicional, ${PRICE_PER_PAGE} €. Te doy el precio cerrado del lote por escrito antes de empezar y se paga en euros con tarjeta internacional.`,
   en: `Price: digital nomad visa package, €${DNV_PACK_PRICE} for up to ${DNV_PACK_MAX_DOCUMENTS} documents and a maximum of ${DNV_PACK_MAX_PAGES} pages in total. Each additional page, €${PRICE_PER_PAGE}. You get a fixed price for the whole batch in writing before I start, paid in euros by international card.`,
@@ -303,6 +418,6 @@ export const DNV_PACK_NOTE = {
 };
 // Versión corta para tablas y fichas de precio.
 export const DNV_PACK_LIMITS = {
-  es: `hasta ${DNV_PACK_MAX_DOCUMENTS} documentos y ${DNV_PACK_MAX_PAGES} páginas en total; página adicional, ${PRICE_PER_PAGE} €`,
-  en: `up to ${DNV_PACK_MAX_DOCUMENTS} documents and ${DNV_PACK_MAX_PAGES} pages in total; extra page, €${PRICE_PER_PAGE}`,
+  es: packLimits("nomad", "es"),
+  en: packLimits("nomad", "en"),
 };

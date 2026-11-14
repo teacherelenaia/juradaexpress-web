@@ -2,9 +2,12 @@
 //
 // Sección «Paquetes por trámite» de /precios y /en/precios (08/10/2026):
 // una tarjeta por pack de content/packs.js con nombre, qué incluye, precio
-// en euros (en inglés, además «approx. $X» con toUsd) y dos botones: pedir
-// el pack en el catálogo y WhatsApp con texto prellenado. Componente de
-// servidor; estilos de la web (btn, ring-stone-200, font-display).
+// en euros (en inglés, además «approx. $X» con toUsd), la referencia
+// «Por separado: …» en gris y tachada (pack.separately, content/site.js),
+// lo que va incluido sin coste y dos botones: pedir el pack en el catálogo
+// y WhatsApp con texto prellenado. Bajo el título, la garantía «Un pack
+// nunca te cuesta más» (PackGuarantee). Componente de servidor; estilos de
+// la web (btn, ring-stone-200, font-display).
 //
 // `PackCard` y `PackGrid` se exportan para reutilizar las mismas tarjetas
 // en las páginas de servicio (bloque `{ packs: [ids] }` de ServicePage,
@@ -26,7 +29,7 @@ export function PackCard({ pack: p, locale = "es", orderHref }) {
         {name}
       </h3>
       <p className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">
-        {t.documents(p.documents)}
+        {t.documents(p.documents, p.pages)}
       </p>
       <p className="mt-3 text-sm text-slate-600">{includes}</p>
       <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">
@@ -37,7 +40,14 @@ export function PackCard({ pack: p, locale = "es", orderHref }) {
           </span>
         ) : null}
       </p>
-      <div className="mt-5 flex flex-wrap gap-2 pt-1">
+      {p.separately ? (
+        <p className="mt-1 text-sm text-slate-500">
+          {t.separatelyLabel}{" "}
+          <s className="tabular-nums decoration-slate-400">{t.separately(p.separately)}</s>
+        </p>
+      ) : null}
+      <p className="mt-3 text-sm text-slate-700">{t.includedFree}</p>
+      <div className="mt-auto flex flex-wrap gap-2 pt-5">
         <a
           href={orderHref || t.orderHref}
           className="btn btn-primary"
@@ -56,6 +66,20 @@ export function PackCard({ pack: p, locale = "es", orderHref }) {
         </a>
       </div>
     </li>
+  );
+}
+
+// Garantía de los packs (14/11/2026): va bajo el título de la sección de
+// packs en /precios y en las páginas de servicio que muestran packs.
+export function PackGuarantee({ locale = "es", className = "" }) {
+  const t = PACKS_COPY[locale] || PACKS_COPY.es;
+  return (
+    <p
+      className={`max-w-2xl rounded-lg bg-brand-gold-50 px-4 py-3 text-[0.9375rem] font-medium text-slate-900 ring-1 ring-brand-gold-200 ${className}`}
+    >
+      {t.guarantee}
+      <span className="mt-1 block font-normal text-slate-700">{t.pageLimit}</span>
+    </p>
   );
 }
 
@@ -83,6 +107,7 @@ export default function PacksSection({ locale = "es" }) {
       >
         {t.title}
       </h2>
+      <PackGuarantee locale={locale} className="mt-3" />
       <p className="mt-3 max-w-2xl text-slate-600">{t.intro}</p>
       {t.visaPage ? (
         <p className="mt-2 max-w-2xl text-slate-600">
@@ -96,7 +121,6 @@ export default function PacksSection({ locale = "es" }) {
 
       <PackGrid locale={locale} className="mt-6" />
 
-      <p className="mt-6 text-sm text-slate-500">{t.extraPage}</p>
       <p className="mt-2 text-sm text-slate-500">{t.note}</p>
     </section>
   );

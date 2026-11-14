@@ -18,7 +18,7 @@
 // cada año la Ley de Presupuestos y no se ha encontrado la cifra de 2026
 // en una página oficial. Las páginas habituales de cada documento salen
 // de las landings del FBI y del ACRO y de los packs de content/packs.js.
-import { PACKS } from "../packs";
+import { PACKS, packLimits } from "../packs";
 import { SAME_DAY_MAX_PAGES, PRICE_PER_PAGE } from "../site";
 import { guideById } from "./routes";
 
@@ -268,8 +268,8 @@ export const es = {
       `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el Ministerio de Asuntos Exteriores (nº 7310). Traduzco el expediente completo con un solo precio cerrado y un solo plazo por escrito, apostillas incluidas: los documentos habituales con un pack cerrado y los extractos largos a ${PRICE_PER_PAGE} € por página, IVA incluido. Cada documento llega en PDF con firma electrónica cualificada, el mismo día hasta ${SAME_DAY_MAX_PAGES} páginas.`,
     ],
     facts: [
-      `${PACK.name.es}: ${PACK.price} € (${PACK.includes.es.toLowerCase().replace(/\.$/, "")})`,
-      `${PACK_FAMILY.name.es}: ${PACK_FAMILY.price} € (${PACK_FAMILY.includes.es.toLowerCase().replace(/\.$/, "")})`,
+      `${PACK.name.es}: ${PACK.price} €, ${packLimits(PACK, "es")} (${PACK.includes.es.toLowerCase().replace(/\.$/, "")})`,
+      `${PACK_FAMILY.name.es}: ${PACK_FAMILY.price} €, ${packLimits(PACK_FAMILY, "es")} (${PACK_FAMILY.includes.es.toLowerCase().replace(/\.$/, "")})`,
     ],
     whatsapp: wa("Hola Elena, estoy preparando el visado no lucrativo y necesito traducir mis documentos"),
     whatsappLabel: "Enviar los documentos por WhatsApp",
@@ -508,8 +508,8 @@ export const en = {
       `I am Elena Peñaranda Ortega, sworn translator of English appointed by Spain's Ministry of Foreign Affairs (no. 7310). I translate the whole file with a single fixed price and a single written deadline, apostilles included: the usual documents with a fixed pack and long statements at €${PRICE_PER_PAGE} per page, VAT included. Each document arrives as a PDF with a qualified electronic signature, the same day for up to ${SAME_DAY_MAX_PAGES} pages.`,
     ],
     facts: [
-      `${PACK.name.en}: €${PACK.price} (${PACK.includes.en.toLowerCase().replace(/\.$/, "")})`,
-      `${PACK_FAMILY.name.en}: €${PACK_FAMILY.price} (${PACK_FAMILY.includes.en.toLowerCase().replace(/\.$/, "")})`,
+      `${PACK.name.en}: €${PACK.price}, ${packLimits(PACK, "en")} (${PACK.includes.en.toLowerCase().replace(/\.$/, "")})`,
+      `${PACK_FAMILY.name.en}: €${PACK_FAMILY.price}, ${packLimits(PACK_FAMILY, "en")} (${PACK_FAMILY.includes.en.toLowerCase().replace(/\.$/, "")})`,
     ],
     whatsapp: wa("Hi Elena, I am preparing my non-lucrative visa and need my documents translated"),
     whatsappLabel: "Send my documents on WhatsApp",
