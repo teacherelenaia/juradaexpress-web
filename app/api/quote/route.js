@@ -43,7 +43,7 @@ import { NextResponse } from "next/server";
 import { get, del } from "@vercel/blob";
 import { resendConfig, sendResendEmail } from "../../lib/resend";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
-import { URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES } from "../../../content/site";
+import { URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES, OVER_LIMIT_HOURS } from "../../../content/site";
 import { toUsd, US_SHIPPING_USD } from "../../../content/usd";
 import { sourceLabel } from "../../../content/sources";
 import { notifyCrm } from "../../lib/crm";
@@ -203,7 +203,9 @@ function attributionLine(attr) {
 function estimate(doc, pages, urgent) {
   if (!doc || doc.price == null) return null;
   const base = doc.price * pages;
-  return Math.round(urgent && pages > SAME_DAY_MAX_PAGES ? base * (1 + URGENCY_SURCHARGE) : base);
+  // Urgencia = antes del plazo normal; se estima con el recargo MÁXIMO
+  // (hasta URGENCY_SURCHARGE) y el importe exacto se confirma por escrito.
+  return Math.round(urgent ? base * (1 + URGENCY_SURCHARGE) : base);
 }
 
 export async function POST(req) {
@@ -300,7 +302,11 @@ export async function POST(req) {
       : []),
     `Documento: ${docName}`,
     `Páginas: ${pages}`,
-    `Urgencia: ${urgent ? "urgente (más de 10 páginas en el día, +30 %)" : "normal (en el día hasta 10 páginas)"}`,
+    `Urgencia: ${
+      urgent
+        ? `urgente (antes del plazo normal; estimación con el recargo máximo del ${Math.round(URGENCY_SURCHARGE * 100)} %, confirmar importe)`
+        : `normal (en el día hasta ${SAME_DAY_MAX_PAGES} páginas; más, en ${OVER_LIMIT_HOURS} h)`
+    }`,
     `Entrega: ${paper ? paperLine : "PDF firmado"}`,
     `Estimación mostrada: ${estimateLine}`,
     `Idioma de la web: ${locale}`,

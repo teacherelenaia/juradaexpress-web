@@ -38,7 +38,13 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { upload as blobUpload } from "@vercel/blob/client";
 import { DOCUMENTS } from "../../content/documents";
-import { PAPER_DELIVERY_SPAIN, URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES, TURNAROUND } from "../../content/site";
+import {
+  PAPER_DELIVERY_SPAIN,
+  URGENCY_SURCHARGE,
+  SAME_DAY_MAX_PAGES,
+  OVER_LIMIT_HOURS,
+  TURNAROUND,
+} from "../../content/site";
 import { toUsd, US_SHIPPING_USD } from "../../content/usd";
 import { SectionHeading } from "./ui";
 import QuotePromise from "./QuotePromise";
@@ -73,15 +79,16 @@ const COPY = {
     pages: "Número de páginas",
     pagesHint: "De 1 a 20. Si son más, elige 20 y te lo presupuesto al verlo.",
     urgency: "Urgencia",
-    urgencyNormal: `Normal · ${TURNAROUND.es.short}`,
-    urgencyUrgent: `Urgente · ${TURNAROUND.es.urgent} (+${Math.round(URGENCY_SURCHARGE * 100)} %)`,
+    urgencyNormal: `Normal · en el día hasta ${SAME_DAY_MAX_PAGES} páginas; más, en ${OVER_LIMIT_HOURS} h`,
+    urgencyUrgent: `Urgente · ${TURNAROUND.es.urgent} (hasta +${Math.round(URGENCY_SURCHARGE * 100)} %)`,
     delivery: "Entrega",
     deliveryPdf: "PDF firmado (incluido)",
     deliveryPaper: "PDF + papel por mensajería en España",
     estimate: "Precio estimado",
     quoteOnly: "Presupuesto en menos de 2 h",
     perDoc: "por documento",
-    surchargeNote: `Incluye el recargo de urgencia del ${Math.round(URGENCY_SURCHARGE * 100)} %.`,
+    surchargeNote: "Recargo máximo; te confirmo el importe exacto.",
+    overLimitNote: `Más de ${SAME_DAY_MAX_PAGES} páginas: entrega en ${OVER_LIMIT_HOURS} h. Si lo necesitas antes, dímelo al enviar.`,
     disclaimer: "Precio cerrado al ver el documento; nunca cobro sin confirmarlo antes.",
     paperNote: `+ mensajería: ${
       PAPER_DELIVERY_SPAIN.price != null
@@ -138,7 +145,7 @@ const COPY = {
       pages: "Páginas",
       urgency: "Urgencia",
       normal: `normal (${TURNAROUND.es.short})`,
-      urgent: `urgente (${TURNAROUND.es.urgent})`,
+      urgent: `urgente (${TURNAROUND.es.urgent}, recargo de hasta el ${Math.round(URGENCY_SURCHARGE * 100)} %)`,
       delivery: "Entrega",
       pdf: "PDF firmado",
       paper: "PDF + papel por mensajería",
@@ -161,15 +168,16 @@ const COPY = {
     pages: "Number of pages",
     pagesHint: "From 1 to 20. If there are more, choose 20 and I will quote it once I see it.",
     urgency: "Urgency",
-    urgencyNormal: `Standard · ${TURNAROUND.en.short}`,
-    urgencyUrgent: `Urgent · ${TURNAROUND.en.urgent} (+${Math.round(URGENCY_SURCHARGE * 100)}%)`,
+    urgencyNormal: `Standard · same day up to ${SAME_DAY_MAX_PAGES} pages; more, within ${OVER_LIMIT_HOURS} hours`,
+    urgencyUrgent: `Rush · ${TURNAROUND.en.urgent} (up to +${Math.round(URGENCY_SURCHARGE * 100)}%)`,
     delivery: "Delivery",
     deliveryPdf: "Signed PDF (included)",
     deliveryPaper: "PDF + paper copy by courier within Spain",
     estimate: "Estimated price",
     quoteOnly: "Quote within 2 hours",
     perDoc: "per document",
-    surchargeNote: `Includes the ${Math.round(URGENCY_SURCHARGE * 100)}% urgency surcharge.`,
+    surchargeNote: "Maximum surcharge; I’ll confirm the exact amount.",
+    overLimitNote: `Over ${SAME_DAY_MAX_PAGES} pages: delivered within ${OVER_LIMIT_HOURS} hours. If you need it sooner, tell me when you send it.`,
     disclaimer: "Fixed price once I see the document; I never charge without confirming it first.",
     paperNote: `+ courier: ${
       PAPER_DELIVERY_SPAIN.price != null
@@ -226,7 +234,7 @@ const COPY = {
       pages: "Pages",
       urgency: "Urgency",
       normal: `standard (${TURNAROUND.en.short})`,
-      urgent: `urgent (${TURNAROUND.en.urgent})`,
+      urgent: `rush (${TURNAROUND.en.urgent}, surcharge of up to ${Math.round(URGENCY_SURCHARGE * 100)}%)`,
       delivery: "Delivery",
       pdf: "signed PDF",
       paper: "PDF + paper copy by courier",
@@ -281,10 +289,14 @@ function formatKb(bytes) {
   return Math.max(1, Math.round(bytes / 1024));
 }
 
-// El recargo de urgencia solo se aplica a partir de SAME_DAY_MAX_PAGES: hasta
-// esa cifra la entrega en el día ya está incluida en el precio.
+// Urgencia (política del 14/11/2026): entregar antes del plazo normal (en
+// el día hasta SAME_DAY_MAX_PAGES páginas; más, en OVER_LIMIT_HOURS h)
+// puede llevar un recargo de HASTA URGENCY_SURCHARGE, a consultar. La
+// calculadora muestra el máximo con la nota «Recargo máximo; te confirmo
+// el importe exacto». `pages` se mantiene en la firma por compatibilidad.
+// eslint-disable-next-line no-unused-vars
 export function hasUrgencySurcharge(pages, urgent) {
-  return Boolean(urgent) && pages > SAME_DAY_MAX_PAGES;
+  return Boolean(urgent);
 }
 
 export function estimatePrice(doc, pages, urgent) {
@@ -954,6 +966,9 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
             </p>
             {!firmMode && price != null && hasUrgencySurcharge(pages, urgent) ? (
               <p className="mt-1 text-xs text-slate-500">{t.surchargeNote}</p>
+            ) : null}
+            {pages > SAME_DAY_MAX_PAGES && t.overLimitNote ? (
+              <p className="mt-1 text-xs text-slate-600">{t.overLimitNote}</p>
             ) : null}
             {delivery === "paper" ? (
               <p className="mt-1 text-xs text-slate-500">{t.paperNote}</p>

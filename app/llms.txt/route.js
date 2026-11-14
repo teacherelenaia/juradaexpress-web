@@ -7,6 +7,8 @@
 //                        → REVIEW_STATS) con los enlaces a las dos fichas
 //   {{PACK_ES:<id>}}     precio de un pack en formato «149 €»
 //   {{PACK_EN:<id>}}     precio de un pack en formato «€149»
+//   {{PACK_LIMITS_ES:<id>}} / {{PACK_LIMITS_EN:<id>}}  límites del pack
+//                        («hasta 4 documentos y 8 páginas en total; …»)
 //                        (content/site.js → PACKS)
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -15,7 +17,7 @@ import {
   REVIEW_TEXT,
   formatScore,
 } from "../../content/reviews";
-import { packPrice } from "../../content/site";
+import { packPrice, packLimits, getPack } from "../../content/site";
 
 export const dynamic = "force-static";
 
@@ -36,6 +38,10 @@ function reviewsLine() {
 
 function fillPacks(text) {
   return text
+    .replace(/\{\{PACK_LIMITS_(ES|EN):([a-z-]+)\}\}/g, (m, lang, id) => {
+      if (!getPack(id)) throw new Error(`llms.txt: pack desconocido «${id}»`);
+      return packLimits(id, lang.toLowerCase());
+    })
     .replace(/\{\{PACK_ES:([a-z-]+)\}\}/g, (m, id) => {
       const p = packPrice(id);
       if (p == null) throw new Error(`llms.txt: pack desconocido «${id}»`);

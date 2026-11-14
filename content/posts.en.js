@@ -150,7 +150,7 @@ export const postsEn = [
         <li>Name the files in order: <em>01-criminal-record.pdf</em>, <em>02-contract.pdf</em>… I return the translations with the same numbering and an index.</li>
         <li>Tell me which consulate you are applying at (or whether you are filing with the UGE) and your appointment date.</li>
       </ol>
-      <p>With that I reply within 2 working hours with the review of the list, a fixed price for the batch and a single delivery deadline in writing. Documents of up to 10 pages are delivered the same day; a complete file is usually ready within a few days. If you are coming from the <a href="/en/sworn-translation-usa-spain">United States</a> or from <a href="/en/sworn-translation-india-spain">India</a>, you have a guide of your own with the particulars of your country.</p>
+      <p>With that I reply within 2 working hours with the review of the list, a fixed price for the batch and a single delivery deadline in writing. Documents of up to 10 pages are delivered the same day; a complete file of more than 10 pages, within 24 hours. If you are coming from the <a href="/en/sworn-translation-usa-spain">United States</a> or from <a href="/en/sworn-translation-india-spain">India</a>, you have a guide of your own with the particulars of your country.</p>
 
       <h2>Is the PDF translation accepted by the consulate?</h2>
       <p>For online submission, yes: every translation carries my electronic signature, verifiable in one click, and my stamp as sworn translator no. 7310, which can be checked on the official register of Spain's Ministry of Foreign Affairs. If your consulate insists on paper, I courier the stamped originals to Spain or to your country.</p>
@@ -273,7 +273,7 @@ export const postsEn = [
       <p>If you send me a document without an apostille and the consulate requires one, I tell you before I start.</p>
 
       <h2>How long does it take, and how do you pay from India?</h2>
-      <p>A document of up to 10 pages is translated the same day; a complete student visa file (with long transcripts) gets a single deadline confirmed in writing within 2 working hours. My office hours are 9:00 to 20:00 mainland Spain time, three and a half to four and a half hours behind India: if you message me mid-morning, I reply at the start of my working day. Payment is with your Indian card (Visa, Mastercard or international RuPay) through Stripe, in euros; if international payments are blocked on your card, enable them in your banking app before paying. You receive a digitally signed PDF, valid for the consulate and for the visa platform; if paper is required, I courier it to India.</p>
+      <p>A document of up to 10 pages is translated the same day; a complete student visa file (with long transcripts) of more than 10 pages, within 24 hours. My office hours are 9:00 to 20:00 mainland Spain time, three and a half to four and a half hours behind India: if you message me mid-morning, I reply at the start of my working day. Payment is with your Indian card (Visa, Mastercard or international RuPay) through Stripe, in euros; if international payments are blocked on your card, enable them in your banking app before paying. You receive a digitally signed PDF, valid for the consulate and for the visa platform; if paper is required, I courier it to India.</p>
 
       <h2>And Spanish documents for use in India?</h2>
       <p>The reverse route exists too: Spanish birth or marriage certificates, degrees, criminal record certificates or company documents to be presented to an authority, university or employer in India. I translate them into English with my signature and stamp, and when the Indian body requires it, the original is apostilled first in Spain.</p>
@@ -334,7 +334,7 @@ export const postsEn = [
       </ol>
 
       <h2>How much margin to leave</h2>
-      <p>I do not give processing times for foreign authorities, because they change and depend on each office. What I do control is my part: the translation of a complete emigration file comes with a fixed deadline in writing before I start, and I handle urgent batches as described in <a href="/en/urgent-sworn-translation-large-projects">urgent and large projects</a>. What delays a file most is not the translation, but finding out late that a certificate needed an apostille.</p>
+      <p>I do not give processing times for foreign authorities, because they change and depend on each office. What I do control is my part: the translation of a complete emigration file is ready the same day up to 10 pages and within 24 hours if it runs longer, and I handle urgent batches as described in <a href="/en/urgent-sworn-translation-large-projects">urgent and large projects</a>. What delays a file most is not the translation, but finding out late that a certificate needed an apostille.</p>
       <p>
         Leaving? Send me your list of documents on
         <a href="https://wa.me/34685891214?text=Hi%20Elena%2C%20I%27m%20leaving%20Spain%20and%20need%20my%20documents%20translated%20into%20English%20%28I%27ll%20tell%20you%20the%20country%20and%20the%20procedure%29">WhatsApp</a>

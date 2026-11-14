@@ -10,7 +10,7 @@ import {
   DNV_PACK_PRICE_TEXT,
   DNV_PACK_NOTE,
   DNV_PACK_LIMITS,
-  LARGE_PROJECT_CAPACITY,
+  URGENCY_TEXT,
 } from "../site";
 
 const PATH_ES = "/traduccion-jurada-visado-nomada-digital";
@@ -166,9 +166,7 @@ export const es = {
       title: "¿Qué recibes, cuándo y cuánto cuesta?",
       body: [
         `Recibes <strong>un PDF firmado digitalmente por cada documento</strong>, con la misma numeración que me enviaste, más un índice del expediente. La firma electrónica se verifica con un clic y es válida para la presentación telemática; si el consulado te pide papel, te envío los originales sellados por mensajería a España o a tu país (coste del transportista en el presupuesto).`,
-        `Plazo: los documentos de hasta 10 páginas salen en el día; el expediente completo lleva un único plazo cerrado por escrito antes de empezar${
-          LARGE_PROJECT_CAPACITY ? ` (puedo asumir ${LARGE_PROJECT_CAPACITY.es})` : ""
-        }.`,
+        `Plazo: hasta 10 páginas, en el día; si el expediente completo pasa de 10 páginas, en 24 horas. ${URGENCY_TEXT.es.sooner}`,
         priceEs,
         DNV_PACK_PRICE != null
           ? `${DNV_PACK_NOTE.es} Los precios orientativos por documento están en la <a href="/precios">página de precios</a>.`
@@ -209,9 +207,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda un expediente completo?",
-      a: LARGE_PROJECT_CAPACITY
-        ? `Depende del número de páginas: puedo asumir ${LARGE_PROJECT_CAPACITY.es}, así que la mayoría de los expedientes están listos en pocos días. El plazo exacto te lo doy por escrito antes de empezar.`
-        : "Depende del número de páginas. El plazo exacto te lo doy por escrito antes de empezar; los documentos de hasta 10 páginas, en el día.",
+      a: `Hasta 10 páginas, en el día; más de 10 páginas, en 24 horas. ${URGENCY_TEXT.es.sooner}`,
     },
     {
       q: "¿Vale el PDF firmado para la presentación en el consulado?",
@@ -373,9 +369,7 @@ export const en = {
       title: "What do you receive, when, and how much does it cost?",
       body: [
         "You receive <strong>one digitally signed PDF per document</strong>, numbered like the files you sent me, plus an index of the file. The electronic signature can be verified in one click and is valid for online submission; if the consulate asks for paper, I courier the stamped originals to Spain or to your country (courier cost stated in the quote).",
-        `Timing: documents of up to 10 pages are delivered the same day; the complete file gets a single deadline confirmed in writing before I start${
-          LARGE_PROJECT_CAPACITY ? ` (I can handle ${LARGE_PROJECT_CAPACITY.en})` : ""
-        }.`,
+        `Timing: up to 10 pages, the same day; if the complete file runs to more than 10 pages, within 24 hours. ${URGENCY_TEXT.en.sooner}`,
         priceEn,
         DNV_PACK_PRICE != null
           ? `${DNV_PACK_NOTE.en} Indicative prices per document are on the <a href="/en/precios">pricing page</a>.`
@@ -416,9 +410,7 @@ export const en = {
     },
     {
       q: "How long does a complete file take?",
-      a: LARGE_PROJECT_CAPACITY
-        ? `It depends on the number of pages: I can handle ${LARGE_PROJECT_CAPACITY.en}, so most files are ready within a few days. You get the exact deadline in writing before I start.`
-        : "It depends on the number of pages. You get the exact deadline in writing before I start; documents of up to 10 pages are delivered the same day.",
+      a: `Up to 10 pages, the same day; over 10 pages, within 24 hours. ${URGENCY_TEXT.en.sooner}`,
     },
     {
       q: "Is the signed PDF accepted by the consulate?",

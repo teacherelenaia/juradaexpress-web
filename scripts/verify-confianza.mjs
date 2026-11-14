@@ -100,5 +100,16 @@ const leftovers = execSync('git grep -I -l "FOTO PENDIENTE" -- . ":!node_modules
 if (leftovers) fail(`«FOTO PENDIENTE» sigue en: ${leftovers.split("\n").join(", ")}`);
 if (!leftovers) console.log("Sin «FOTO PENDIENTE» en el repo.");
 
+// Política de plazos del 14/11/2026: ningún archivo de TEXTO de app/,
+// content/ ni public/ puede citar plazos o recargos antiguos. -I salta los
+// binarios (p. ej. public/fotos/maec-listado-7310.png, cuyo contenido
+// binario puede coincidir por azar con estos patrones).
+const oldTurnaround = execSync(
+  'git grep -I -n -E "24-72|24 a 72|\\b48 ?h\\b|más de 10 páginas en el día \\(\\+30" -- app content public || true',
+  { encoding: "utf8" }
+).trim();
+if (oldTurnaround) fail(`Plazos o recargos antiguos:\n${oldTurnaround}`);
+else console.log("Sin plazos antiguos (24-72 h, 48 h, «+30 %» por más de 10 páginas en el día).");
+
 console.log(failures ? `${failures} fallos.` : "Todo correcto.");
 process.exit(failures ? 1 : 0);

@@ -8,9 +8,17 @@
 // 14/11/2026: los datos de cada pack (nombre, documentos incluidos, precio
 // y rango «por separado») viven en content/site.js → PACKS, la única
 // fuente. Este archivo los reexporta y añade los textos de la sección.
-import { PRICE_PER_PAGE, PACKS, getPack, packPrice } from "./site";
+import {
+  PRICE_PER_PAGE,
+  PACKS,
+  getPack,
+  packPrice,
+  packLimits,
+  SAME_DAY_MAX_PAGES,
+  URGENCY_TEXT,
+} from "./site";
 
-export { PACKS, getPack, packPrice };
+export { PACKS, getPack, packPrice, packLimits };
 
 // Página adicional (extractos bancarios, pólizas o contratos) dentro del
 // mismo plazo del pack, en euros: la misma cifra que el precio por página
@@ -31,9 +39,10 @@ export const PACKS_COPY = {
     separately: (s) => (s.from != null ? `desde ${s.from} €` : `hasta ${s.upTo} €`),
     intro:
       "Precio cerrado para los lotes de documentos más habituales. Si tu trámite pide algo distinto, te lo presupuesto al ver los documentos.",
-    documents: (n) => `Hasta ${n} documentos`,
-    extraPage: `Páginas adicionales de extractos bancarios, pólizas o contratos: ${EXTRA_PAGE_PRICE} € por página, dentro del mismo plazo.`,
-    note: "Cada documento adicional fuera del paquete, a tarifa normal. Recargo de urgencia del 30 % igual que en el resto de tarifas.",
+    documents: (n, pages) => `Hasta ${n} documentos · ${pages} páginas`,
+    // Bajo el título, junto a la garantía (14/11/2026).
+    pageLimit: `Todos los packs tienen un límite de páginas; cada página adicional, ${EXTRA_PAGE_PRICE} €.`,
+    note: `Cada documento adicional fuera del paquete, a tarifa normal. Plazo: en el día hasta ${SAME_DAY_MAX_PAGES} páginas; ${URGENCY_TEXT.es.overLimit}. Igual que en el resto de tarifas, ${URGENCY_TEXT.es.surcharge}.`,
     order: "Pedir este pack",
     orderHref: "/documentos",
     whatsapp: "WhatsApp",
@@ -55,9 +64,9 @@ export const PACKS_COPY = {
     separately: (s) => (s.from != null ? `from €${s.from}` : `up to €${s.upTo}`),
     intro:
       "Fixed price for the most common document batches. If your procedure asks for something different, I quote it once I see the documents.",
-    documents: (n) => `Up to ${n} documents`,
-    extraPage: `Extra pages of bank statements, insurance policies or contracts: €${EXTRA_PAGE_PRICE} per page, within the same deadline.`,
-    note: "Each additional document outside the pack is charged at the normal rate. 30% urgency surcharge, as with all other rates.",
+    documents: (n, pages) => `Up to ${n} documents · ${pages} pages`,
+    pageLimit: `Every pack has a page limit; each extra page, €${EXTRA_PAGE_PRICE}.`,
+    note: `Each additional document outside the pack is charged at the normal rate. Turnaround: same day up to ${SAME_DAY_MAX_PAGES} pages; ${URGENCY_TEXT.en.overLimit}. As with all other rates, ${URGENCY_TEXT.en.surcharge}.`,
     order: "Order this pack",
     orderHref: "/en/documentos",
     whatsapp: "WhatsApp",
@@ -92,7 +101,7 @@ export function packOffers(locale = "es", { ids, base: baseUrl } = {}) {
     "@type": "Offer",
     "@id": `${base}#pack-${p.id}`,
     name: p.name[locale] || p.name.es,
-    description: p.includes[locale] || p.includes.es,
+    description: `${packLimits(p, locale)}. ${p.includes[locale] || p.includes.es}`,
     price: p.price,
     priceCurrency: "EUR",
     url: `${base}#pack-${p.id}`,

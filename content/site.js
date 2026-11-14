@@ -155,13 +155,31 @@ export const PAPER_DELIVERY_SPAIN = {
   },
 };
 
-// Promesa de plazo de toda la web (oferta comercial, 02/10/2026): hasta
-// SAME_DAY_MAX_PAGES páginas, entrega en el día en PDF firmado y sin
-// recargo; más páginas, plazo cerrado por escrito antes de empezar
-// (normalmente 24-72 h). URGENCY_SURCHARGE: recargo del 30 % sobre el
-// precio de catálogo, solo para entregar más de 10 páginas en el día.
+// Política de plazos de Elena (14/11/2026): hasta SAME_DAY_MAX_PAGES
+// páginas, entrega en el día en PDF firmado y sin recargo; más páginas, en
+// OVER_LIMIT_HOURS horas. URGENCY_SURCHARGE es el recargo MÁXIMO de
+// urgencia (hasta el 30 %, a consultar) para entregar antes del plazo
+// normal; el importe exacto depende del volumen y se confirma por escrito.
+// Los textos de urgencia de toda la web salen de URGENCY_TEXT.
 export const SAME_DAY_MAX_PAGES = 10;
+export const OVER_LIMIT_HOURS = 24;
 export const URGENCY_SURCHARGE = 0.3;
+const URGENCY_PCT = Math.round(URGENCY_SURCHARGE * 100);
+export const URGENCY_TEXT = {
+  es: {
+    // Frase final de la promesa de plazo.
+    sooner: `¿Lo necesitas antes? Escríbeme: según el volumen puede llevar un recargo de urgencia de hasta el ${URGENCY_PCT} %.`,
+    // Para listas de tarifas y notas de precio.
+    surcharge: `recargo de urgencia de hasta el ${URGENCY_PCT} %, a consultar, para entregar antes del plazo normal`,
+    // Más de 10 páginas, en una línea.
+    overLimit: `más de ${SAME_DAY_MAX_PAGES} páginas, en ${OVER_LIMIT_HOURS} h`,
+  },
+  en: {
+    sooner: `Need it sooner? Message me: depending on volume, an urgency surcharge of up to ${URGENCY_PCT}% may apply.`,
+    surcharge: `urgency surcharge of up to ${URGENCY_PCT}%, on request, for delivery faster than standard`,
+    overLimit: `over ${SAME_DAY_MAX_PAGES} pages, within ${OVER_LIMIT_HOURS} hours`,
+  },
+};
 
 // Precio por página de los documentos largos (contratos, escrituras,
 // expedientes de varias páginas, pólizas, extractos), en euros, IVA
@@ -197,8 +215,8 @@ export const SAME_DAY_CUTOFF = { es: "18:00", en: "6 pm" };
 // (DELIVERY_PROMISE_SHORT) donde solo cabe una línea (celdas de tabla,
 // fichas de documento).
 export const DELIVERY_PROMISE = {
-  es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}. Si llega más tarde, lo tienes a primera hora del día siguiente. Más de ${SAME_DAY_MAX_PAGES} páginas: plazo cerrado por escrito antes de empezar, normalmente 24-72 h.`,
-  en: `Same day up to ${SAME_DAY_MAX_PAGES} pages if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time. Later than that, first thing the next morning. Over ${SAME_DAY_MAX_PAGES} pages: a written deadline before work starts, normally 24-72 hours.`,
+  es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}. Si llega más tarde, lo tienes a primera hora del día siguiente. Más de ${SAME_DAY_MAX_PAGES} páginas: en ${OVER_LIMIT_HOURS} horas. ${URGENCY_TEXT.es.sooner}`,
+  en: `Same day up to ${SAME_DAY_MAX_PAGES} pages if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time. Later than that, first thing the next morning. Over ${SAME_DAY_MAX_PAGES} pages: within ${OVER_LIMIT_HOURS} hours. ${URGENCY_TEXT.en.sooner}`,
 };
 export const DELIVERY_PROMISE_SHORT = {
   es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}`,
@@ -209,12 +227,14 @@ export const TURNAROUND = {
   es: {
     short: `en el día (hasta ${SAME_DAY_MAX_PAGES} páginas)`,
     long: DELIVERY_PROMISE.es,
-    urgent: `más de ${SAME_DAY_MAX_PAGES} páginas en el día`,
+    over: `en ${OVER_LIMIT_HOURS} h (más de ${SAME_DAY_MAX_PAGES} páginas)`,
+    urgent: "antes del plazo normal",
   },
   en: {
     short: `the same day (up to ${SAME_DAY_MAX_PAGES} pages)`,
     long: DELIVERY_PROMISE.en,
-    urgent: `more than ${SAME_DAY_MAX_PAGES} pages the same day`,
+    over: `within ${OVER_LIMIT_HOURS} hours (over ${SAME_DAY_MAX_PAGES} pages)`,
+    urgent: "faster than standard",
   },
 };
 
@@ -285,6 +305,9 @@ export const DNV_PACK_MAX_PAGES = 10;
 //   name       { es, en }
 //   includes   { es, en }: qué documentos entran
 //   documents  número máximo de documentos
+//   pages      número máximo de páginas en total (14/11/2026); cada página
+//              adicional, PRICE_PER_PAGE (20 €). La etiqueta de la tarjeta
+//              dice «Hasta X documentos · Y páginas».
 //   price      euros, IVA incluido. En /en se añade «approx. $X» con toUsd
 //              (content/usd.js: € × 1,10 redondeado a 5 $).
 //   separately precio de esos documentos sueltos, para la línea de
@@ -300,10 +323,11 @@ export const PACKS = [
     id: "visa",
     name: { es: "Spain Visa Pack", en: "Spain Visa Pack" },
     includes: {
-      es: "Hasta 4 documentos de hasta 2 páginas: FBI o antecedentes penales, certificado médico, partida de nacimiento o matrimonio, y las apostillas solo si tu consulado exige traducirlas.",
-      en: "Up to 4 documents of up to 2 pages: FBI or police check, medical certificate, birth or marriage certificate, and apostilles only if your consulate requires them translated.",
+      es: "FBI o antecedentes penales, certificado médico, partida de nacimiento o matrimonio, y las apostillas solo si tu consulado exige traducirlas.",
+      en: "FBI or police check, medical certificate, birth or marriage certificate, and apostilles only if your consulate requires them translated.",
     },
     documents: 4,
+    pages: 8,
     price: 149,
     separately: { upTo: 180 },
   },
@@ -311,10 +335,11 @@ export const PACKS = [
     id: "visa-family",
     name: { es: "Spain Visa Family Pack", en: "Spain Visa Family Pack" },
     includes: {
-      es: "Hasta 8 documentos: lo anterior para dos adultos, más certificado de matrimonio y partidas de los hijos.",
-      en: "Up to 8 documents: the above for two adults plus marriage certificate and children's birth certificates.",
+      es: "Lo del Spain Visa Pack para dos adultos, más certificado de matrimonio y partidas de los hijos.",
+      en: "The Spain Visa Pack documents for two adults plus marriage certificate and children's birth certificates.",
     },
     documents: 8,
+    pages: 16,
     // 01/11/2026: subida de 229 € a 299 € (IVA incluido).
     price: 299,
     separately: { upTo: 360 },
@@ -324,11 +349,12 @@ export const PACKS = [
     name: { es: "Digital Nomad Visa Pack", en: "Digital Nomad Visa Pack" },
     includes: {
       // 28/10/2026 (Elena): hasta 5 documentos y 10 páginas en total; cada
-      // página adicional a PRICE_PER_PAGE.
-      es: `Hasta ${DNV_PACK_MAX_DOCUMENTS} documentos y un máximo de ${DNV_PACK_MAX_PAGES} páginas en total: carta de la empresa o del cliente, antecedentes penales, título, certificado del seguro, prueba de ingresos o certificado de relación. Cada página adicional, ${PRICE_PER_PAGE} €. La copia del pasaporte y los documentos que no necesitan traducción jurada no cuentan para el paquete.`,
-      en: `Up to ${DNV_PACK_MAX_DOCUMENTS} documents and a maximum of ${DNV_PACK_MAX_PAGES} pages in total: employer or client letter, police check, degree, insurance certificate, proof of income or relationship certificate. Each additional page, €${PRICE_PER_PAGE}. A passport copy and other documents that don’t need a sworn translation don’t count towards the package.`,
+      // página adicional a PRICE_PER_PAGE (límites en documents/pages).
+      es: "Carta de la empresa o del cliente, antecedentes penales, título, certificado del seguro, prueba de ingresos o certificado de relación. La copia del pasaporte y los documentos que no necesitan traducción jurada no cuentan para el paquete.",
+      en: "Employer or client letter, police check, degree, insurance certificate, proof of income or relationship certificate. A passport copy and other documents that don’t need a sworn translation don’t count towards the package.",
     },
     documents: DNV_PACK_MAX_DOCUMENTS,
+    pages: DNV_PACK_MAX_PAGES,
     price: 249,
     separately: null,
   },
@@ -336,10 +362,11 @@ export const PACKS = [
     id: "ireland-uk",
     name: { es: "Pack Irlanda / Reino Unido", en: "Ireland / UK Pack" },
     includes: {
-      es: "Hasta 6 documentos: título, expediente, antecedentes penales, certificado de delitos sexuales y dos referencias laborales.",
-      en: "Up to 6 documents: degree, transcript, police check, sexual offences certificate and two employer references.",
+      es: "Título, expediente, antecedentes penales, certificado de delitos sexuales y dos referencias laborales.",
+      en: "Degree, transcript, police check, sexual offences certificate and two employer references.",
     },
     documents: 6,
+    pages: 12,
     price: 219,
     separately: { from: 235 },
   },
@@ -351,6 +378,7 @@ export const PACKS = [
       en: "Licence (both sides) and the issuing authority's certificate or driving record.",
     },
     documents: 2,
+    pages: 4,
     price: 79,
     separately: { upTo: 85 },
   },
@@ -360,6 +388,18 @@ export const PACKS = [
 export const getPack = (id) => PACKS.find((p) => p.id === id);
 /** Precio en euros de un pack por id (o null). */
 export const packPrice = (id) => getPack(id)?.price ?? null;
+/**
+ * Límites de un pack en una frase: «hasta 4 documentos y 8 páginas en
+ * total; página adicional, 20 €» / «up to 4 documents and 8 pages in
+ * total; extra page, €20». Acepta el pack o su id.
+ */
+export function packLimits(pack, locale = "es") {
+  const p = typeof pack === "string" ? getPack(pack) : pack;
+  if (!p) return "";
+  return locale === "en"
+    ? `up to ${p.documents} documents and ${p.pages} pages in total; extra page, €${PRICE_PER_PAGE}`
+    : `hasta ${p.documents} documentos y ${p.pages} páginas en total; página adicional, ${PRICE_PER_PAGE} €`;
+}
 
 // Precio del Digital Nomad Visa Pack (alias que usan la landing de nómada
 // digital y /precios). Si el pack desaparece, la web vuelve a decir
@@ -375,6 +415,6 @@ export const DNV_PACK_NOTE = {
 };
 // Versión corta para tablas y fichas de precio.
 export const DNV_PACK_LIMITS = {
-  es: `hasta ${DNV_PACK_MAX_DOCUMENTS} documentos y ${DNV_PACK_MAX_PAGES} páginas en total; página adicional, ${PRICE_PER_PAGE} €`,
-  en: `up to ${DNV_PACK_MAX_DOCUMENTS} documents and ${DNV_PACK_MAX_PAGES} pages in total; extra page, €${PRICE_PER_PAGE}`,
+  es: packLimits("nomad", "es"),
+  en: packLimits("nomad", "en"),
 };

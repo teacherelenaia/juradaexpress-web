@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: "Can I get my translation the same day?",
-    a: `${DELIVERY_PROMISE.en} Same-day delivery of more than 10 pages carries a 30% surcharge.`,
+    a: DELIVERY_PROMISE.en,
   },
   {
     q: "Which documents can be sworn-translated?",

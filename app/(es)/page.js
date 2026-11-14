@@ -39,6 +39,8 @@ import {
   PRICE_PER_PAGE,
   MIN_DOC_PRICE,
   SAME_DAY_MAX_PAGES,
+  OVER_LIMIT_HOURS,
+  URGENCY_TEXT,
 } from "../../content/site";
 
 export const metadata = {
@@ -169,7 +171,7 @@ const FAQ = [
   },
   {
     q: "¿Cuándo la tengo?",
-    a: `${DELIVERY_PROMISE.es} Entregar en el día más de ${SAME_DAY_MAX_PAGES} páginas lleva un recargo del 30 %.`,
+    a: DELIVERY_PROMISE.es,
   },
   {
     q: "¿Cuánto cuesta exactamente?",
@@ -193,9 +195,7 @@ const FAQ = [
   },
   {
     q: "¿Cuánto tardas en traducir un expediente completo de nómada digital?",
-    a: LARGE_PROJECT_CAPACITY
-      ? `Te doy un plazo único cerrado por escrito antes de empezar; los documentos de hasta ${SAME_DAY_MAX_PAGES} páginas salen en el día y puedo asumir ${LARGE_PROJECT_CAPACITY.es}, así que un expediente completo suele estar listo en pocos días.`
-      : `Te doy un plazo único cerrado por escrito antes de empezar; los documentos de hasta ${SAME_DAY_MAX_PAGES} páginas salen en el día.`,
+    a: `Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; si el expediente tiene más de ${SAME_DAY_MAX_PAGES} páginas, lo tienes en ${OVER_LIMIT_HOURS} horas, con un único precio cerrado para todo el lote. ${URGENCY_TEXT.es.sooner}`,
   },
 ];
 
@@ -580,8 +580,8 @@ export default function Page() {
                 terminar recibes cada documento como PDF firmado, ordenado y
                 nombrado para que sepas qué es cada archivo.
                 {LARGE_PROJECT_CAPACITY
-                  ? ` Puedo asumir ${LARGE_PROJECT_CAPACITY.es}; para más volumen o urgencias, pídeme información y te cierro plazo por escrito.`
-                  : " Para volúmenes grandes o urgencias, pídeme información y te cierro plazo por escrito."}
+                  ? ` Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; más de ${SAME_DAY_MAX_PAGES}, en ${OVER_LIMIT_HOURS} horas. Puedo asumir ${LARGE_PROJECT_CAPACITY.es}; por encima de ese volumen, te cierro plazo por escrito. ${URGENCY_TEXT.es.sooner}`
+                  : ` Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; más de ${SAME_DAY_MAX_PAGES}, en ${OVER_LIMIT_HOURS} horas. ${URGENCY_TEXT.es.sooner}`}
               </p>
             </div>
             <div className="flex flex-col items-start gap-4">

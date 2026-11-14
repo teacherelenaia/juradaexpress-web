@@ -11,9 +11,9 @@
 // para eso remite al consulado o a un abogado de extranjería. Los precios
 // salen de content/packs.js (packs visa, visa-family y nomad, más
 // EXTRA_PAGE_PRICE) y de content/documents.js (MIN_PRICE, "desde 35 €").
-import { EXTRA_PAGE_PRICE, packPrice } from "../packs";
+import { EXTRA_PAGE_PRICE, packPrice, PACKS_COPY } from "../packs";
 import { MIN_PRICE } from "../documents";
-import { MAEC_LIST_URL } from "../site";
+import { MAEC_LIST_URL, URGENCY_TEXT } from "../site";
 import { REVIEW_TEXT } from "../reviews";
 
 const PATH_ES = "/traduccion-jurada-visados-espana";
@@ -152,7 +152,7 @@ export const es = {
       body: [
         "La mayoría de los solicitantes necesitan entre tres y ocho documentos, y traducirlos juntos sale más barato y evita incoherencias en nombres y fechas entre un documento y otro. Elige el paquete que corresponde a tu situación; todo lo que se salga de él se presupuesta por documento a la tarifa normal.",
         { packs: PACK_IDS },
-        `Las apostillas solo cuentan como documento cuando tu consulado exige traducirlas. Los extractos bancarios, las pólizas de seguro y los contratos largos se presupuestan a ${EXTRA_PAGE_PRICE} € por página adicional dentro del mismo plazo. La entrega urgente de más de 10 páginas en el mismo día lleva un recargo del 30 %, como en todas mis traducciones.`,
+        `Las apostillas solo cuentan como documento cuando tu consulado exige traducirlas. ${PACKS_COPY.es.pageLimit} Los extractos bancarios, las pólizas de seguro y los contratos largos cuentan por páginas. Plazo: en el día hasta 10 páginas; más de 10, en 24 horas. ${URGENCY_TEXT.es.sooner}`,
       ],
     },
     {
@@ -360,7 +360,7 @@ export const en = {
       body: [
         "Most applicants need between three and eight documents, and translating them together is cheaper and avoids inconsistencies in names and dates between documents. Choose the pack that matches your situation; anything extra is priced per document at the normal rate.",
         { packs: PACK_IDS },
-        `Apostilles only count as a document when your consulate requires them translated. Bank statements, insurance policies and long contracts are priced at €${EXTRA_PAGE_PRICE} per extra page within the same deadline. Urgent delivery of more than 10 pages on the same day carries a 30 % surcharge, as with all my translations.`,
+        `Apostilles only count as a document when your consulate requires them translated. ${PACKS_COPY.en.pageLimit} Bank statements, insurance policies and long contracts count by the page. Turnaround: same day up to 10 pages; over 10, within 24 hours. ${URGENCY_TEXT.en.sooner}`,
       ],
     },
     {

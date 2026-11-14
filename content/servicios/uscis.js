@@ -136,7 +136,7 @@ export const es = {
       id: "entrega",
       title: "¿Cómo se entrega, cuánto tarda y cuánto cuesta?",
       body: [
-        "Me envías el documento escaneado (todas las páginas, sellos incluidos) por WhatsApp o email y te respondo con precio cerrado en menos de 2 horas laborables. Pagas con tarjeta desde Estados Unidos, en euros, a través de Stripe. Los documentos de hasta 10 páginas se entregan en el día, en PDF firmado; los expedientes más largos tienen plazo por escrito antes de empezar (normalmente 24-72 h). Un encargo enviado por la noche en Estados Unidos está en marcha a primera hora de la mañana en España.",
+        "Me envías el documento escaneado (todas las páginas, sellos incluidos) por WhatsApp o email y te respondo con precio cerrado en menos de 2 horas laborables. Pagas con tarjeta desde Estados Unidos, en euros, a través de Stripe. Los documentos de hasta 10 páginas se entregan en el día, en PDF firmado; los de más de 10 páginas, en 24 horas. Un encargo enviado por la noche en Estados Unidos está en marcha a primera hora de la mañana en España.",
         `Precio: ${
           certPrice != null ? `certificados desde ${certPrice} €` : "presupuesto en menos de 2 h"
         }; documentos largos, presupuesto cerrado al ver el documento. Consulta la <a href="/precios">página de precios</a> (en euros).`,
@@ -326,7 +326,7 @@ export const en = {
       id: "delivery",
       title: "How is it delivered, how long does it take and what does it cost?",
       body: [
-        "You send me the scanned document (every page, stamps included) on WhatsApp or by email and I reply with a fixed price within 2 working hours. You pay by card from the United States, in euros, through Stripe. Documents of up to 10 pages are delivered the same day, as a signed PDF; larger files get a written deadline before work starts (normally 24-72 hours). An order sent in the evening in the US is under way first thing in the morning in Spain.",
+        "You send me the scanned document (every page, stamps included) on WhatsApp or by email and I reply with a fixed price within 2 working hours. You pay by card from the United States, in euros, through Stripe. Documents of up to 10 pages are delivered the same day, as a signed PDF; longer ones, within 24 hours. An order sent in the evening in the US is under way first thing in the morning in Spain.",
         `Price: ${
           certPrice != null ? `certificates from €${certPrice}` : "a quote within 2 hours"
         }; longer documents get a fixed quote once I see them. See the <a href="/en/precios">pricing page</a> (in euros).`,

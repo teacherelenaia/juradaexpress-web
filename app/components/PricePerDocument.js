@@ -12,7 +12,6 @@ import {
   PRICE_PER_PAGE,
   MIN_DOC_PRICE,
   SAME_DAY_MAX_PAGES,
-  SAME_DAY_CUTOFF,
 } from "../../content/site";
 import { MAEC_NUMBER } from "../../content/persona";
 import { SectionHeading } from "./ui";
@@ -44,7 +43,7 @@ const COPY = {
       },
       {
         k: "Plazo",
-        a: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si llega antes de las ${SAME_DAY_CUTOFF.es}`,
+        a: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas; más de ${SAME_DAY_MAX_PAGES}, en 24 h`,
         b: "Según la cola de trabajo de la agencia",
       },
       {
@@ -80,7 +79,7 @@ const COPY = {
       },
       {
         k: "Turnaround",
-        a: `Same day up to ${SAME_DAY_MAX_PAGES} pages if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time`,
+        a: `Same day up to ${SAME_DAY_MAX_PAGES} pages; over ${SAME_DAY_MAX_PAGES}, within 24 hours`,
         b: "Depends on the agency's workload",
       },
       {

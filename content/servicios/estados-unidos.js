@@ -142,7 +142,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda un documento habitual?",
-      a: "Documentos de hasta 10 páginas: en el día desde la confirmación del presupuesto, sin recargo. Expedientes completos: un plazo único cerrado por escrito antes de empezar.",
+      a: "Documentos de hasta 10 páginas: en el día desde la confirmación del presupuesto, sin recargo. Más de 10 páginas: en 24 horas. ¿Lo necesitas antes? Escríbeme: según el volumen puede llevar un recargo de urgencia de hasta el 30 %.",
     },
   ],
   cta: {
@@ -313,7 +313,7 @@ export const en = {
     },
     {
       q: "How long does a standard document take?",
-      a: "Documents of up to 10 pages: the same day from confirmation of the quote, no surcharge. Complete files: a single deadline confirmed in writing before I start.",
+      a: "Documents of up to 10 pages: the same day from confirmation of the quote, no surcharge. Over 10 pages: within 24 hours. Need it sooner? Message me: depending on volume, an urgency surcharge of up to 30% may apply.",
     },
   ],
   cta: {

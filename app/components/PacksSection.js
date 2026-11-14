@@ -29,7 +29,7 @@ export function PackCard({ pack: p, locale = "es", orderHref }) {
         {name}
       </h3>
       <p className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">
-        {t.documents(p.documents)}
+        {t.documents(p.documents, p.pages)}
       </p>
       <p className="mt-3 text-sm text-slate-600">{includes}</p>
       <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">
@@ -78,6 +78,7 @@ export function PackGuarantee({ locale = "es", className = "" }) {
       className={`max-w-2xl rounded-lg bg-brand-gold-50 px-4 py-3 text-[0.9375rem] font-medium text-slate-900 ring-1 ring-brand-gold-200 ${className}`}
     >
       {t.guarantee}
+      <span className="mt-1 block font-normal text-slate-700">{t.pageLimit}</span>
     </p>
   );
 }
@@ -120,7 +121,6 @@ export default function PacksSection({ locale = "es" }) {
 
       <PackGrid locale={locale} className="mt-6" />
 
-      <p className="mt-6 text-sm text-slate-500">{t.extraPage}</p>
       <p className="mt-2 text-sm text-slate-500">{t.note}</p>
     </section>
   );
