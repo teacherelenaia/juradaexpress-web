@@ -136,8 +136,8 @@ const T = {
     en: "Your criminal record with its apostille, the medical certificate if it isn't in Spanish, the family's marriage and birth certificates, and the letters written by you or your company: your employer's letter, your parents' letter if they support you, the contract.",
   },
   parcial: {
-    es: "Tradúcelo entero solo si te lo piden entero. Si tu consulado o la UGE aceptan las páginas donde aparecen el titular, la cuenta y los saldos, traduzco esas y pagas esas.",
-    en: "Translate all of it only if they ask for all of it. If your consulate or the UGE accept the pages showing the account holder, the account and the balances, I translate those and you pay for those.",
+    es: "Tradúcelo entero solo si te lo piden entero. Si tu consulado o la UGE aceptan solo las páginas donde aparecen el titular, la cuenta y los saldos, dímelo: traduzco esas y pagas esas.",
+    en: "Translate all of it only if they ask for all of it. If your consulate or the UGE accept only the pages showing the account holder, the account and the balances, tell me: I translate those and you pay for those.",
   },
   apostillaFbi: {
     es: "La apostilla de los antecedentes del FBI tiene que ser la federal, del Departamento de Estado en Washington. El consulado de Los Ángeles lo dice con todas las letras: la apostilla local no vale. Si la pides mal, pierdes semanas.",
@@ -378,7 +378,7 @@ export const POSTS_EXPEDIENTES_ES = [
       <p>${T.apostillaAntes.es}</p>
 
       <h2>Para despachos y departamentos de personas</h2>
-      <p>Si tramitas varias autorizaciones al mes, trabajo con una tarifa por tipo de documento, una sola fecha por lote y factura al despacho o a la empresa. Envíame el primer expediente y lo vemos.</p>
+      <p>Si me envías expedientes de forma habitual, trabajo con una tarifa por tipo de documento, una sola fecha por lote y factura al despacho o a la empresa. Envíame el primer expediente y lo vemos.</p>
 
       <h2>Precio</h2>
       <p>Hasta 10 páginas, ${N} €. De 11 a 19, nunca más de ${CAP} €. De 20 a 30 páginas, ${PP} € por página. Presupuesto en menos de dos horas, todos los días.</p>
@@ -589,7 +589,7 @@ export const POSTS_EXPEDIENTES_EN = [
       <p>${T.apostillaAntes.en}</p>
 
       <h2>For law firms and HR teams</h2>
-      <p>If you handle several permits a month, I work with a rate per document type, one delivery date per batch and an invoice to the firm or the company. Send me the first file and we'll set it up.</p>
+      <p>If you send me files on a regular basis, I work with a rate per document type, one delivery date per batch and an invoice to the firm or the company. Send me the first file and we'll set it up.</p>
 
       <h2>Price</h2>
       <p>Up to 10 pages, €${N}. From 11 to 19, never more than €${CAP}. From 20 to 30 pages, €${PP} per page. Quotes in under two hours, every day.</p>
