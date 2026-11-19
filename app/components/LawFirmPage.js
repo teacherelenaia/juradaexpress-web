@@ -11,6 +11,7 @@
 // pedido (QuoteCalculator en modo despacho), FAQ (6) y CTA final. JSON-LD
 // Service (areaServed US, priceCurrency USD, audience) + BreadcrumbList +
 // FAQPage. hreflang solo EN (sin par ES).
+import { withFileLink } from "../../content/expediente";
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import QuoteCalculator from "./QuoteCalculator";
@@ -294,7 +295,7 @@ export default function LawFirmPage({ page }) {
 
           <h3 className="mt-8 text-base font-semibold text-slate-900">{T.related}</h3>
           <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            {page.related.map((r) => (
+            {withFileLink(page.related, page.locale || "en", page.path).map((r) => (
               <li key={r.href}>
                 <a href={r.href} className="link">
                   {r.label}

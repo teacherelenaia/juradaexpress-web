@@ -19,7 +19,8 @@
 // en una página oficial. Las páginas habituales de cada documento salen
 // de las landings del FBI y del ACRO y de los packs de content/packs.js.
 import { PACKS, packLimits } from "../packs";
-import { SAME_DAY_MAX_PAGES, PRICE_PER_PAGE } from "../site";
+import { SAME_DAY_MAX_PAGES } from "../site";
+import { FILE_ROUTE, FILE_PER_PAGE } from "../expediente";
 import { guideById } from "./routes";
 
 const ROUTE = guideById("no-lucrativo-documentos");
@@ -265,7 +266,7 @@ export const es = {
     id: "traduccion-jurada",
     title: "Si necesitas traducción jurada para el expediente",
     body: [
-      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el Ministerio de Asuntos Exteriores (nº 7310). Traduzco el expediente completo con un solo precio cerrado y un solo plazo por escrito, apostillas incluidas: los documentos habituales con un pack cerrado y los extractos largos a ${PRICE_PER_PAGE} € por página, IVA incluido. Cada documento llega en PDF con firma electrónica cualificada, el mismo día hasta ${SAME_DAY_MAX_PAGES} páginas.`,
+      `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el Ministerio de Asuntos Exteriores (nº 7310). Traduzco el expediente completo con un solo precio cerrado y un solo plazo por escrito, apostillas incluidas: los documentos habituales con un pack cerrado y, si el expediente es más largo, precio de expediente completo: ${FILE_PER_PAGE} € por página de 20 a 30 páginas, IVA incluido (<a href="${FILE_ROUTE.es}">ejemplos</a>). Cada documento llega en PDF con firma electrónica cualificada, el mismo día hasta ${SAME_DAY_MAX_PAGES} páginas.`,
     ],
     facts: [
       `${PACK.name.es}: ${PACK.price} €, ${packLimits(PACK, "es")} (${PACK.includes.es.toLowerCase().replace(/\.$/, "")})`,
@@ -505,7 +506,7 @@ export const en = {
     id: "sworn-translation",
     title: "If you need sworn translations for the file",
     body: [
-      `I am Elena Peñaranda Ortega, sworn translator of English appointed by Spain's Ministry of Foreign Affairs (no. 7310). I translate the whole file with a single fixed price and a single written deadline, apostilles included: the usual documents with a fixed pack and long statements at €${PRICE_PER_PAGE} per page, VAT included. Each document arrives as a PDF with a qualified electronic signature, the same day for up to ${SAME_DAY_MAX_PAGES} pages.`,
+      `I am Elena Peñaranda Ortega, sworn translator of English appointed by Spain's Ministry of Foreign Affairs (no. 7310). I translate the whole file with a single fixed price and a single written deadline, apostilles included: the usual documents with a fixed pack and, if the file is longer, the full-file price: €${FILE_PER_PAGE} per page for 20 to 30 pages, VAT included (<a href="${FILE_ROUTE.en}">examples</a>). Each document arrives as a PDF with a qualified electronic signature, the same day for up to ${SAME_DAY_MAX_PAGES} pages.`,
     ],
     facts: [
       `${PACK.name.en}: €${PACK.price}, ${packLimits(PACK, "en")} (${PACK.includes.en.toLowerCase().replace(/\.$/, "")})`,

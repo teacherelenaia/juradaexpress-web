@@ -12,12 +12,13 @@ import {
   DNV_PACK_LIMITS,
   URGENCY_TEXT,
 } from "../site";
+import { FILE_ROUTE, filePrice } from "../expediente";
 
 const PATH_ES = "/traduccion-jurada-visado-nomada-digital";
 const PATH_EN = "/en/sworn-translation-spain-digital-nomad-visa";
 
-// Precio del paquete con sus límites (5 documentos, 10 páginas, 20 € por
-// página adicional) y la aclaración de debajo: content/site.js (28/10/2026).
+// Precio del paquete con sus límites (5 documentos, 10 páginas; más largo,
+// precio de expediente completo, 19/11/2026) y la aclaración de debajo: content/site.js (28/10/2026).
 const priceEs =
   DNV_PACK_PRICE != null
     ? DNV_PACK_PRICE_TEXT.es
@@ -158,7 +159,7 @@ export const es = {
             "Dime en qué consulado o si lo presentas ante la UGE y la fecha de tu cita, si ya la tienes.",
           ],
         },
-        "En menos de 2 horas laborables te contesto con la revisión de la lista (qué falta, qué necesita apostilla), el precio cerrado de todo el lote y el plazo único de entrega por escrito.",
+        "En menos de 2 horas (de 9:00 a 23:00, todos los días) te contesto con la revisión de la lista (qué falta, qué necesita apostilla), el precio cerrado de todo el lote y el plazo único de entrega por escrito.",
       ],
     },
     {
@@ -169,7 +170,7 @@ export const es = {
         `Plazo: hasta 10 páginas, en el día; si el expediente completo pasa de 10 páginas, en 24 horas. ${URGENCY_TEXT.es.sooner}`,
         priceEs,
         DNV_PACK_PRICE != null
-          ? `${DNV_PACK_NOTE.es} Los precios orientativos por documento están en la <a href="/precios">página de precios</a>.`
+          ? `${DNV_PACK_NOTE.es} <a href="${FILE_ROUTE.es}">Precios y ejemplos de expediente completo</a> (un expediente típico de nómada digital de 30 páginas, ${filePrice(30)} €). Los precios orientativos por documento están en la <a href="/precios">página de precios</a>.`
           : 'Los precios orientativos por documento están en la <a href="/precios">página de precios</a>.',
       ],
     },
@@ -361,7 +362,7 @@ export const en = {
             "Tell me which consulate you are applying at (or whether you are filing with the UGE) and your appointment date, if you already have one.",
           ],
         },
-        "Within 2 working hours you get my review of the list (what is missing, what needs an apostille), a fixed price for the whole batch and a single delivery deadline in writing.",
+        "Within 2 hours (9:00 to 23:00 Madrid time, every day) you get my review of the list (what is missing, what needs an apostille), a fixed price for the whole batch and a single delivery deadline in writing.",
       ],
     },
     {
@@ -372,7 +373,7 @@ export const en = {
         `Timing: up to 10 pages, the same day; if the complete file runs to more than 10 pages, within 24 hours. ${URGENCY_TEXT.en.sooner}`,
         priceEn,
         DNV_PACK_PRICE != null
-          ? `${DNV_PACK_NOTE.en} Indicative prices per document are on the <a href="/en/precios">pricing page</a>.`
+          ? `${DNV_PACK_NOTE.en} <a href="${FILE_ROUTE.en}">Full visa file prices and examples</a> (a typical 30-page digital nomad file, €${filePrice(30)}). Indicative prices per document are on the <a href="/en/precios">pricing page</a>.`
           : 'Indicative prices per document are on the <a href="/en/precios">pricing page</a>.',
       ],
     },

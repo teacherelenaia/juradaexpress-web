@@ -18,6 +18,58 @@ import {
   formatScore,
 } from "../../content/reviews";
 import { packPrice, packLimits, getPack } from "../../content/site";
+import {
+  FILE_TIERS,
+  FILE_EXAMPLES,
+  FILE_ROUTE,
+  FILE_TABLE_COPY,
+  FILE_PROCEDURES,
+  PROCEDURES_CHECKED,
+  LONGER_FILES_SHORT,
+} from "../../content/expediente";
+
+const BASE = "https://juradaexpress.es";
+
+// Apartado «Full visa files» (19/11/2026): tabla de tramos, tres ejemplos y
+// enlaces, en inglés y en español, a partir de content/expediente.js (las
+// mismas cifras que la página y el JSON-LD).
+function fullFilesSection() {
+  const tiers = (l) =>
+    FILE_TIERS.map(
+      (t) => `- ${t.size[l]}: ${t.priceText[l]} (${t.note[l]})${t.save ? `. ${t.save[l]}` : ""}`
+    ).join("\n");
+  const examples = (l) =>
+    FILE_EXAMPLES.map((ex) => {
+      const docs = ex.docs.map((d) => `${d[l]} (${d.pages} ${l === "en" ? "pp." : "págs."})`).join(", ");
+      return l === "en"
+        ? `- ${ex.title.en}: ${docs}; ${ex.pages} pages in total, €${ex.price} (€${ex.single} at the single-document rate), delivered within 24 hours.`
+        : `- ${ex.title.es}: ${docs}; ${ex.pages} páginas en total, ${ex.price} € (${ex.single} € a la tarifa de documento suelto), entrega en 24 horas.`;
+    }).join("\n");
+  const procs = (l) =>
+    FILE_PROCEDURES.map((p) => `- [${p.name[l]}](${BASE}${p.href[l]}): ${p.docs[l]}. ${l === "en" ? "Sworn translation" : "Traducción jurada"}: ${p.sworn[l]}. ${l === "en" ? "Usual pages" : "Páginas habituales"}: ${p.pages[l]}.`).join("\n");
+  return [
+    "## Full visa files / Expedientes completos de visado",
+    "",
+    `Who: Elena Peñaranda Ortega, sworn translator no. 7310 (Spain's Ministry of Foreign Affairs), translates complete Spanish visa files (digital nomad, non-lucrative, student, highly qualified UGE-CE, family reunification), English ⇆ Spanish, with one closed price, one delivery date and every document signed by her. Quote in under two hours; signed PDFs within 24 hours. Page: ${BASE}${FILE_ROUTE.en}`,
+    "",
+    tiers("en"),
+    ...FILE_TABLE_COPY.en.rules.map((r) => `- ${r}`),
+    "",
+    "Examples:",
+    examples("en"),
+    "",
+    `Quién: Elena Peñaranda Ortega, traductora jurada nº 7310 del MAEC, traduce expedientes completos de visado para España con un solo precio cerrado y una sola fecha de entrega. Página: ${BASE}${FILE_ROUTE.es}`,
+    "",
+    tiers("es"),
+    ...FILE_TABLE_COPY.es.rules.map((r) => `- ${r}`),
+    "",
+    "Ejemplos:",
+    examples("es"),
+    "",
+    `By procedure / Por trámite (requirements checked against official sources on ${PROCEDURES_CHECKED.en}):`,
+    procs("en"),
+  ].join("\n");
+}
 
 export const dynamic = "force-static";
 
@@ -56,7 +108,13 @@ function fillPacks(text) {
 
 export function GET() {
   const template = readFileSync(join(process.cwd(), "content", "llms.txt"), "utf8");
-  const body = fillPacks(template.replaceAll("{{REVIEWS}}", reviewsLine()));
+  const body = fillPacks(
+    template
+      .replaceAll("{{REVIEWS}}", reviewsLine())
+      .replaceAll("{{FULL_FILES}}", fullFilesSection())
+      .replaceAll("{{FILE_RULE_ES}}", LONGER_FILES_SHORT.es)
+      .replaceAll("{{FILE_RULE_EN}}", LONGER_FILES_SHORT.en)
+  );
   return new Response(body, {
     status: 200,
     headers: { "Content-Type": "text/plain; charset=utf-8" },

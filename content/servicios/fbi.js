@@ -13,6 +13,7 @@
 // dólares con toUsd (content/usd.js), envío en papel a EE. UU. con
 // US_SHIPPING_USD. La web no afirma requisitos que dependan de cada
 // consulado: cuando varían, se dice «depende de tu consulado».
+import { FILE_ROUTE, FILE_PER_PAGE } from "../expediente";
 import { DOCUMENTS } from "../documents";
 import { toUsd, US_SHIPPING_USD } from "../usd";
 import { MAEC_NUMBER, SINCE } from "../persona";
@@ -113,6 +114,7 @@ export const es = {
           },
         },
         "Es el precio de catálogo del certificado de antecedentes penales: no hay recargo por Estados Unidos ni por la entrega en el día. El pago es con tarjeta en dólares o en euros a través de Stripe, o por Wise, cuando apruebas el presupuesto por escrito.",
+        `¿Tienes el expediente de visado entero? Mándamelo completo: un solo precio cerrado, ${FILE_PER_PAGE} € por página de 20 a 30 páginas. <a href="${FILE_ROUTE.es}">Precios y ejemplos de expediente completo</a>.`,
       ],
     },
     {
@@ -291,6 +293,7 @@ export const en = {
           },
         },
         "This is the catalogue price for a criminal record certificate: there is no surcharge for the United States or for same-day delivery. Payment is by card in US dollars or euros through Stripe, or through Wise, once you approve the quote in writing.",
+        `Got the whole visa file? Send it to me complete: one closed price, €${FILE_PER_PAGE} per page for 20 to 30 pages. <a href="${FILE_ROUTE.en}">Full visa file prices and examples</a>.`,
       ],
     },
     {

@@ -6,6 +6,7 @@
 // misma página. Comparte el estilo de ServicePage (miga, cabecera con H1 y
 // párrafo citable, FAQ con <details>, CTA y JSON-LD Service + FAQPage +
 // BreadcrumbList). Los datos viven en content/paises.js.
+import { withFileLink } from "../../content/expediente";
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import QuotePromise from "./QuotePromise";
@@ -319,7 +320,7 @@ export default function CountryHubPage({ page }) {
         <section className="rounded-xl bg-stone-50 p-6 ring-1 ring-stone-200 md:p-8">
           <h2 className="text-base font-semibold text-slate-900">{t.related}</h2>
           <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            {page.related.map((r) => (
+            {withFileLink(page.related, page.locale || "en", page.path).map((r) => (
               <li key={r.href}>
                 <a href={r.href} className="link">
                   {r.label}

@@ -47,6 +47,33 @@ export const SERVICE_ROUTES = [
     landing: true,
   },
   {
+    // Expedientes completos de visado (19/11/2026): precios por tamaño de
+    // expediente, ejemplos y tabla por trámite (content/expediente.js).
+    id: "expediente",
+    es: "/traduccion-jurada-expediente-completo-visado",
+    en: "/en/full-visa-file-sworn-translation-spain",
+    labelEs: "Expediente completo de visado",
+    labelEn: "Full visa file",
+    lastModified: "2026-11-19",
+  },
+  {
+    // Páginas por trámite (19/11/2026), misma estructura que nómada digital.
+    id: "estudiante",
+    es: "/traduccion-jurada-visado-estudiante",
+    en: "/en/sworn-translation-spain-student-visa",
+    labelEs: "Visado de estudiante",
+    labelEn: "Student visa",
+    lastModified: "2026-11-19",
+  },
+  {
+    id: "alta-cualificacion",
+    es: "/traduccion-jurada-visado-alta-cualificacion",
+    en: "/en/sworn-translation-spain-highly-qualified-visa",
+    labelEs: "Profesionales altamente cualificados",
+    labelEn: "Highly qualified professionals",
+    lastModified: "2026-11-19",
+  },
+  {
     id: "dnv",
     es: "/traduccion-jurada-visado-nomada-digital",
     en: "/en/sworn-translation-spain-digital-nomad-visa",
@@ -203,7 +230,10 @@ export const INTERNATIONAL_MENU_GROUPS = [
     items: [
       byId("traductor-ingles"),
       byId("visados"),
+      byId("expediente"),
       byId("dnv"),
+      byId("estudiante"),
+      byId("alta-cualificacion"),
       byId("uscis"),
       byId("urgente"),
     ],

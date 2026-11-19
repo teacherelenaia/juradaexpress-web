@@ -42,6 +42,7 @@
 //
 // `sections[].trackSection` (17/10/2026): nombre propio de la sección en los
 // eventos section_view (p. ej. usa_mas_pedidos en la página de EE. UU.).
+import { withFileLink } from "../../content/expediente";
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
@@ -53,7 +54,7 @@ import { PackGrid, PackGuarantee } from "./PacksSection";
 // en los eventos section_view de Vercel Analytics (app/lib/engagement.js).
 const TRACKED_SECTIONS = { precios: "precios", prices: "precios" };
 import { SectionHeading } from "./ui";
-import { SERVICE_COUNTRIES } from "../../content/site";
+import { SERVICE_COUNTRIES, VISA_PACK_IDS } from "../../content/site";
 import { packOffers } from "../../content/packs";
 import { personProviderRef } from "../../content/persona";
 
@@ -95,6 +96,11 @@ const UI = {
 };
 
 export function serviceMetadata(page) {
+  // Título de Open Graph: sin repetir la marca si el metaTitle ya la lleva
+  // (página de visados, 19/11/2026).
+  const ogTitle = page.metaTitle.includes("Jurada Express")
+    ? page.metaTitle
+    : `${page.metaTitle} | Jurada Express`;
   const es = page.alternates.es;
   const en = page.alternates.en;
   return {
@@ -116,7 +122,7 @@ export function serviceMetadata(page) {
         : {}),
     },
     openGraph: {
-      title: `${page.metaTitle} | Jurada Express`,
+      title: ogTitle,
       description: page.metaDescription,
       url: `${BASE}${page.path}`,
       siteName: "Jurada Express",
@@ -136,7 +142,7 @@ export function serviceMetadata(page) {
     // muestran una imagen distinta a la de WhatsApp o LinkedIn).
     twitter: {
       card: "summary_large_image",
-      title: `${page.metaTitle} | Jurada Express`,
+      title: ogTitle,
       description: page.metaDescription,
       images: [`${BASE}${page.image.src}`],
     },
@@ -198,7 +204,12 @@ export function Block({ block, page }) {
         {title ? (
           <h3 className="mb-3 font-semibold text-slate-900">{title}</h3>
         ) : null}
-      <div className="overflow-x-auto rounded-xl ring-1 ring-stone-200">
+      <div
+        className="overflow-x-auto rounded-xl ring-1 ring-stone-200"
+        role="region"
+        tabIndex={0}
+        aria-label={caption || title}
+      >
         <table className="w-full min-w-[640px] text-left text-sm">
           {caption ? <caption className="sr-only">{caption}</caption> : null}
           <thead className="bg-stone-50 text-slate-600">
@@ -287,7 +298,11 @@ export function Block({ block, page }) {
   if (block.packs) {
     return (
       <>
-        <PackGuarantee locale={page.locale} className="mt-4" />
+        <PackGuarantee
+          locale={page.locale}
+          className="mt-4"
+          visaOnly={block.packs.every((id) => VISA_PACK_IDS.includes(id))}
+        />
         <PackGrid
           ids={block.packs}
           locale={page.locale}
@@ -295,6 +310,88 @@ export function Block({ block, page }) {
           className="mt-6"
         />
       </>
+    );
+  }
+  if (block.cta) {
+    // Botones repetidos dentro de la página (expedientes completos,
+    // 19/11/2026): WhatsApp de expediente + botón secundario. `block.cta`
+    // puede traer { whatsapp, whatsappLabel, secondary: { label, href },
+    // id } o ser `true` (usa los de la página).
+    const c = block.cta === true ? {} : block.cta;
+    const secondary = c.secondary || page.quoteCta;
+    const id = c.id || "inline";
+    return (
+      <div className="flex flex-wrap gap-3">
+        <TrackedLink
+          label={`${page.id}_${id}_whatsapp_${page.locale}`}
+          href={c.whatsapp || page.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-primary"
+        >
+          {c.whatsappLabel || page.whatsappLabel || "WhatsApp"}
+        </TrackedLink>
+        {secondary ? (
+          <TrackedLink
+            label={`${page.id}_${id}_secondary_${page.locale}`}
+            href={secondary.href}
+            className="btn btn-secondary"
+          >
+            {secondary.label}
+          </TrackedLink>
+        ) : null}
+      </div>
+    );
+  }
+  if (block.examples) {
+    // Ejemplos de expediente (content/expediente.js → FILE_EXAMPLES): una
+    // tarjeta por trámite con documentos, páginas, precio y plazo.
+    const en = page.locale === "en";
+    return (
+      <div className="grid gap-4 md:grid-cols-3">
+        {block.examples.map((ex) => (
+          <article
+            key={ex.id}
+            className="flex flex-col rounded-xl bg-white p-5 ring-1 ring-stone-200"
+          >
+            <h3 className="font-semibold text-slate-900">{ex.title[page.locale]}</h3>
+            <ul className="mt-3 space-y-1.5 text-sm text-slate-700">
+              {ex.docs.map((d) => (
+                <li key={d.en} className="flex justify-between gap-3">
+                  <span>{d[page.locale]}</span>
+                  <span className="shrink-0 tabular-nums text-slate-500">
+                    {d.pages} {en ? (d.pages === 1 ? "page" : "pages") : d.pages === 1 ? "pág." : "págs."}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <dl className="mt-4 space-y-1 border-t border-stone-200 pt-3 text-sm">
+              <div className="flex justify-between gap-3">
+                <dt className="text-slate-600">{en ? "Total" : "Total"}</dt>
+                <dd className="tabular-nums text-slate-900">
+                  {ex.pages} {en ? "pages" : "páginas"}
+                </dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt className="text-slate-600">{en ? "Full file price" : "Precio del expediente"}</dt>
+                <dd className="text-lg font-semibold tabular-nums text-slate-900">
+                  {en ? `€${ex.price}` : `${ex.price} €`}
+                </dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt className="text-slate-600">{en ? `At €${ex.single / ex.pages}/page (single document)` : `A ${ex.single / ex.pages} €/pág. (documento suelto)`}</dt>
+                <dd className="tabular-nums text-slate-500">
+                  <s>{en ? `€${ex.single}` : `${ex.single} €`}</s>
+                </dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt className="text-slate-600">{en ? "Delivery" : "Entrega"}</dt>
+                <dd className="text-slate-900">{en ? "within 24 hours" : "en 24 horas"}</dd>
+              </div>
+            </dl>
+          </article>
+        ))}
+      </div>
     );
   }
   if (block.note) {
@@ -621,7 +718,7 @@ export default function ServicePage({ page }) {
             {t.related}
           </h3>
           <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            {page.related.map((r) => (
+            {withFileLink(page.related, page.locale || "en", page.path).map((r) => (
               <li key={r.href}>
                 <a href={r.href} className="link">
                   {r.label}
@@ -715,11 +812,21 @@ export default function ServicePage({ page }) {
                           "@type": "Offer",
                           name: o.name,
                           ...(o.description ? { description: o.description } : {}),
-                          price: o.price,
+                          ...(o.price != null ? { price: o.price } : {}),
                           priceCurrency: "EUR",
                           availability: "https://schema.org/InStock",
                           url: `${BASE}${page.path}`,
-                          ...(o.unitText
+                          // Tramo con tope («nunca más de 300 €»).
+                          ...(o.maxPrice != null
+                            ? {
+                                priceSpecification: {
+                                  "@type": "PriceSpecification",
+                                  maxPrice: o.maxPrice,
+                                  priceCurrency: "EUR",
+                                  valueAddedTaxIncluded: true,
+                                },
+                              }
+                            : o.unitText
                             ? {
                                 priceSpecification: {
                                   "@type": "UnitPriceSpecification",

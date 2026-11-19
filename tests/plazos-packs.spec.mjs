@@ -5,8 +5,8 @@
 //   - la promesa de plazo (DELIVERY_PROMISE) dice «Más de 10 páginas: en
 //     24 horas» y termina con la frase de urgencia «de hasta el 30 %»;
 //   - las tarjetas de packs llevan «Hasta X documentos · Y páginas» y la
-//     línea «Todos los packs tienen un límite de páginas; cada página
-//     adicional, 20 €.» (y sus equivalentes en inglés);
+//     línea de límite con el precio de expediente completo (19/11/2026)
+//     (y sus equivalentes en inglés);
 //   - la calculadora ofrece la urgencia «antes del plazo normal (hasta +30 %)».
 // Y, sin servidor, un grep de control sobre los archivos de TEXTO de app/,
 // content/ y public/ (git grep -I, que salta los binarios: así
@@ -53,7 +53,7 @@ test("/precios y /en/precios: límites de páginas de los packs", async ({ reque
     "Hasta 5 documentos · 10 páginas",
     "Hasta 6 documentos · 12 páginas",
     "Hasta 2 documentos · 4 páginas",
-    "Todos los packs tienen un límite de páginas; cada página adicional, 20 €.",
+    "Todos los packs tienen un límite de páginas. Expedientes más largos: precio cerrado por el expediente completo, nunca más de 300 € hasta 19 páginas, y 15 € por página de 20 a 30 páginas.",
   ]) {
     expect(es).toContain(label);
   }
@@ -66,7 +66,7 @@ test("/precios y /en/precios: límites de páginas de los packs", async ({ reque
     "Up to 5 documents · 10 pages",
     "Up to 6 documents · 12 pages",
     "Up to 2 documents · 4 pages",
-    "Every pack has a page limit; each extra page, €20.",
+    "Every pack has a page limit. Longer files: closed price for the whole file, never more than €300 up to 19 pages, and €15 per page from 20 to 30 pages.",
   ]) {
     expect(en).toContain(label);
   }

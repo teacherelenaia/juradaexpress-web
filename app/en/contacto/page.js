@@ -97,7 +97,7 @@ export default function Page() {
         <dl className="mt-6 grid gap-x-8 gap-y-5 text-sm md:grid-cols-2">
           <div>
             <dt className="font-semibold text-slate-900">Office hours</dt>
-            <dd className="mt-1 text-slate-600">{TIMEZONE_NOTE.en}. If you write outside those hours, I reply first thing on the next working day.</dd>
+            <dd className="mt-1 text-slate-600">{TIMEZONE_NOTE.en}. If you write overnight, I reply before 9:00 Madrid time.</dd>
           </div>
           <div>
             <dt className="font-semibold text-slate-900">WhatsApp and phone</dt>

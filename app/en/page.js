@@ -18,6 +18,7 @@ import QuoteCalculator from "../components/QuoteCalculator";
 import ProcessTimeline from "../components/ProcessTimeline";
 import ProcessVideo from "../components/ProcessVideo";
 import PricePerDocument from "../components/PricePerDocument";
+import { FileHomeBlock } from "../components/FileTiers";
 import FollowUs from "../components/FollowUs";
 import { IconWhatsApp } from "../components/Icons";
 import { SectionHeading } from "../components/ui";
@@ -147,7 +148,7 @@ const QUICK_DOCUMENTS = [
 const WHY_ELENA = [
   {
     t: "You talk to the person who signs",
-    d: "No agency, no queue: I answer you myself on WhatsApp or by email, 9:00 to 20:00 Madrid time. I translate, sign and stamp every document; nothing is passed on to anyone.",
+    d: "No agency, no queue: I answer you myself on WhatsApp or by email, every day from 9:00 to 23:00 Madrid time. I translate, sign and stamp every document; nothing is passed on to anyone.",
   },
   {
     t: "Fixed price before you pay",
@@ -413,7 +414,7 @@ export default function Page() {
             </a>
             ). I translate, sign and stamp every document myself; nothing is
             passed on to anyone. When you write to me, I am the one who
-            answers: on WhatsApp or by email, 9:00 to 20:00 Madrid time. You
+            answers: on WhatsApp or by email, every day from 9:00 to 23:00 Madrid time. You
             get the price and the deadline in writing before I charge you
             anything, and if an authority rejects the translation because of
             my mistake, I fix it free. Since {SINCE} I have been translating
@@ -475,6 +476,9 @@ export default function Page() {
 
       {/* REVIEWS — four reviews from content/reviews.js, with procedure and month */}
       <Reviews locale="en" className="!bg-white" />
+
+      {/* EXPEDIENTE COMPLETO DE VISADO (19/11/2026, content/expediente.js) */}
+      <FileHomeBlock locale="en" className="border-t border-stone-200 bg-white" />
 
       {/* US VISA APPLICANTS (17/10/2026) — same style as the nomad section */}
       <section

@@ -174,6 +174,14 @@ export default function Page() {
         </p>
       </div>
 
+      <p className="mt-6 text-sm text-slate-600">
+        ¿Preparas un expediente entero de visado o residencia?{" "}
+        <a href="/traduccion-jurada-expediente-completo-visado" className="link">
+          Un solo precio cerrado por el expediente completo
+        </a>
+        .
+      </p>
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -18,6 +18,7 @@ import QuoteCalculator from "../components/QuoteCalculator";
 import ProcessTimeline from "../components/ProcessTimeline";
 import ProcessVideo from "../components/ProcessVideo";
 import PricePerDocument from "../components/PricePerDocument";
+import { FileHomeBlock } from "../components/FileTiers";
 import FollowUs from "../components/FollowUs";
 import { IconWhatsApp } from "../components/Icons";
 import { SectionHeading } from "../components/ui";
@@ -135,7 +136,7 @@ const QUICK_DOCUMENTS = [
 const WHY_ELENA = [
   {
     t: "Hablas con quien firma",
-    d: "No hay agencia ni cola: te contesto yo por WhatsApp o email, de 9:00 a 20:00. Cada traducción la hago, la firmo y la sello yo, sin pasarla a nadie.",
+    d: "No hay agencia ni cola: te contesto yo por WhatsApp o email, todos los días de 9:00 a 23:00. Cada traducción la hago, la firmo y la sello yo, sin pasarla a nadie.",
   },
   {
     t: "Precio cerrado antes de pagar",
@@ -389,7 +390,7 @@ export default function Page() {
             </a>
             ). Cada traducción la hago, la firmo y la sello yo, sin pasarla a
             nadie. Cuando me escribes, me respondes a mí: por WhatsApp o por
-            email, de 9:00 a 20:00. Te digo el precio y el plazo por escrito
+            email, todos los días de 9:00 a 23:00. Te digo el precio y el plazo por escrito
             antes de cobrarte nada, y si un organismo rechaza la traducción por
             un error mío, la corrijo gratis. Desde {SINCE} traduzco los
             documentos con los que la gente rehace su vida: partidas de
@@ -452,6 +453,9 @@ export default function Page() {
 
       {/* OPINIONES — cuatro reseñas de content/reviews.js, con trámite y mes */}
       <Reviews locale="es" className="!bg-white" />
+
+      {/* EXPEDIENTE COMPLETO DE VISADO (19/11/2026, content/expediente.js) */}
+      <FileHomeBlock locale="es" className="border-t border-stone-200 bg-white" />
 
       {/* VISADO DE NÓMADA DIGITAL — imagen a la izquierda */}
       <section className="bg-stone-50">

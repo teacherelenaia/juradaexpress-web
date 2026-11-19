@@ -167,6 +167,14 @@ export default function Page() {
         </div>
       </div>
 
+      <p className="mt-6 text-sm text-slate-600">
+        Preparing a whole visa or residence file?{" "}
+        <a href="/en/full-visa-file-sworn-translation-spain" className="link">
+          One closed price for the full file
+        </a>
+        .
+      </p>
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

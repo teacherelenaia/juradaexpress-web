@@ -13,6 +13,7 @@ import {
   OVER_LIMIT_HOURS,
   URGENCY_TEXT,
 } from "../site";
+import { filePriceBlocks, FILE_ROUTE } from "../expediente";
 
 const PATH_ES = "/traduccion-jurada-urgente-grandes-volumenes";
 const PATH_EN = "/en/urgent-sworn-translation-large-projects";
@@ -87,6 +88,14 @@ export const es = {
         {
           note: `Si tu urgencia es real (una cita en el consulado mañana, un plazo judicial), dímelo en el primer mensaje con la fecha exacta. ${URGENCY_TEXT.es.sooner} El importe exacto te lo confirmo por escrito antes de empezar, sin recargos escondidos.`,
         },
+      ],
+    },
+    {
+      id: "precios",
+      title: "¿Cuánto cuesta un expediente completo o un lote?",
+      body: [
+        `Precio cerrado por todo el expediente, no página a página. Para expedientes de visado tienes los ejemplos y la tabla por trámite en la <a href="${FILE_ROUTE.es}">página de expediente completo</a>.`,
+        ...filePriceBlocks("es"),
       ],
     },
     {
@@ -227,6 +236,14 @@ export const en = {
         {
           note: `If your deadline is real (a consulate appointment tomorrow, a court filing), tell me in your first message with the exact date. ${URGENCY_TEXT.en.sooner} I confirm the exact amount in writing before I start, with no hidden surcharges.`,
         },
+      ],
+    },
+    {
+      id: "prices",
+      title: "How much does a full file or a batch cost?",
+      body: [
+        `One closed price for the whole file, not page by page. For visa files, the examples and the table by procedure are on the <a href="${FILE_ROUTE.en}">full visa file page</a>.`,
+        ...filePriceBlocks("en"),
       ],
     },
     {

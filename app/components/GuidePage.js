@@ -17,6 +17,7 @@
 // JSON-LD: Article (author → Person de Elena, datePublished,
 // dateModified) + BreadcrumbList + FAQPage. Metadatos con serviceMetadata
 // (mismos campos: metaTitle, metaDescription, alternates, image).
+import { withFileLink } from "../../content/expediente";
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import QuotePromise from "./QuotePromise";
@@ -344,7 +345,7 @@ export default function GuidePage({ page }) {
 
           <h3 className="mt-8 text-base font-semibold text-slate-900">{t.related}</h3>
           <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            {page.related.map((r) => (
+            {withFileLink(page.related, page.locale || "en", page.path).map((r) => (
               <li key={r.href}>
                 <a href={r.href} className="link">
                   {r.label}

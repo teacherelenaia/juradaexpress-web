@@ -10,9 +10,10 @@
 // La web NO afirma umbrales económicos, tasas ni plazos administrativos:
 // para eso remite al consulado o a un abogado de extranjería. Los precios
 // salen de content/packs.js (packs visa, visa-family y nomad, más
-// EXTRA_PAGE_PRICE) y de content/documents.js (MIN_PRICE, "desde 35 €").
-import { EXTRA_PAGE_PRICE, packPrice, PACKS_COPY } from "../packs";
-import { MIN_PRICE } from "../documents";
+// precio de expediente completo de content/expediente.js) y de
+// content/documents.js. «Desde» unificado en 149 € (19/11/2026).
+import { packPrice } from "../packs";
+import { FILE_ROUTE, FILE_PER_PAGE, LONGER_FILES_HTML } from "../expediente";
 import { MAEC_LIST_URL, URGENCY_TEXT } from "../site";
 import { REVIEW_TEXT } from "../reviews";
 
@@ -36,7 +37,7 @@ export const es = {
   alternates: { es: PATH_ES, en: PATH_EN },
   landing: true,
   crumb: "Visados de España",
-  metaTitle: `Traducción jurada para visados de España desde ${MIN_PRICE} € | Jurada Express`,
+  metaTitle: `Traducción jurada para visados de España desde ${packPrice("visa")} € | Jurada Express`,
   metaDescription:
     `Traductora jurada nº 7310 del MAEC. Antecedentes del FBI, certificado médico y partidas traducidos para tu visado de España. PDF en el día, desde ${packPrice("visa")} €.`,
   h1: "Traducción jurada para tu visado de España",
@@ -69,7 +70,7 @@ export const es = {
   whatsappLabel: "WhatsApp",
   serviceName: "Traducción jurada de documentos para visados de España",
   serviceType: "Traducción jurada inglés-español",
-  priceFrom: MIN_PRICE,
+  priceFrom: packPrice("visa"),
   sections: [
     {
       id: "documentos",
@@ -101,7 +102,7 @@ export const es = {
                 "No lucrativo, estudiantes",
                 "No",
                 "Sí, cuando el consulado lo exige",
-                `Páginas adicionales a ${EXTRA_PAGE_PRICE} € por página`,
+                `<a href="${FILE_ROUTE.es}">Expediente completo</a>: ${FILE_PER_PAGE} € por página de 20 a 30 páginas`,
               ],
               [
                 "Certificado del seguro médico privado",
@@ -150,9 +151,9 @@ export const es = {
       id: "paquetes",
       title: "Paquetes de visado: un precio para todo el expediente",
       body: [
-        "La mayoría de los solicitantes necesitan entre tres y ocho documentos, y traducirlos juntos sale más barato y evita incoherencias en nombres y fechas entre un documento y otro. Elige el paquete que corresponde a tu situación; todo lo que se salga de él se presupuesta por documento a la tarifa normal.",
+        "La mayoría de los solicitantes necesitan entre tres y ocho documentos, y traducirlos juntos sale más barato y evita incoherencias en nombres y fechas entre un documento y otro. Elige el paquete que corresponde a tu situación. Si tu expediente es más largo, tiene su propio precio cerrado: mira la <a href='/traduccion-jurada-expediente-completo-visado'>página de expediente completo</a>, con tres ejemplos.",
         { packs: PACK_IDS },
-        `Las apostillas solo cuentan como documento cuando tu consulado exige traducirlas. ${PACKS_COPY.es.pageLimit} Los extractos bancarios, las pólizas de seguro y los contratos largos cuentan por páginas. Plazo: en el día hasta 10 páginas; más de 10, en 24 horas. ${URGENCY_TEXT.es.sooner}`,
+        `Las apostillas solo cuentan como documento cuando tu consulado exige traducirlas. Los extractos bancarios, las pólizas de seguro y los contratos largos cuentan por páginas. ${LONGER_FILES_HTML.es} Plazo: en el día hasta 10 páginas; más de 10, en 24 horas. ${URGENCY_TEXT.es.sooner}`,
       ],
     },
     {
@@ -244,7 +245,7 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   landing: true,
   crumb: "Spanish visas",
-  metaTitle: `Sworn Translations for Spanish Visas from €${MIN_PRICE} | Jurada Express`,
+  metaTitle: `Sworn Translations for Spanish Visas from €${packPrice("visa")} | Jurada Express`,
   metaDescription:
     `Sworn translator No. 7310 (Spain's Foreign Ministry). FBI check, medical and birth certificates translated for your Spanish visa. Same-day PDF, from €${packPrice("visa")}.`,
   h1: "Sworn translations for your Spanish visa application",
@@ -277,7 +278,7 @@ export const en = {
   whatsappLabel: "WhatsApp",
   serviceName: "Sworn translation of documents for Spanish visas",
   serviceType: "Sworn English-Spanish translation",
-  priceFrom: MIN_PRICE,
+  priceFrom: packPrice("visa"),
   sections: [
     {
       id: "documents",
@@ -309,7 +310,7 @@ export const en = {
                 "Non-lucrative, student",
                 "No",
                 "Yes, where the consulate requires it",
-                `Extra pages at €${EXTRA_PAGE_PRICE} per page`,
+                `<a href="${FILE_ROUTE.en}">Full visa file</a>: €${FILE_PER_PAGE} per page for 20 to 30 pages`,
               ],
               [
                 "Private health insurance certificate",
@@ -358,9 +359,9 @@ export const en = {
       id: "packs",
       title: "Visa packs: one price for the whole file",
       body: [
-        "Most applicants need between three and eight documents, and translating them together is cheaper and avoids inconsistencies in names and dates between documents. Choose the pack that matches your situation; anything extra is priced per document at the normal rate.",
+        "Most applicants need between three and eight documents, and translating them together is cheaper and avoids inconsistencies in names and dates between documents. Choose the pack that matches your situation. If your file is longer, it has its own closed price: see the <a href='/en/full-visa-file-sworn-translation-spain'>full visa file page</a>, with three worked examples.",
         { packs: PACK_IDS },
-        `Apostilles only count as a document when your consulate requires them translated. ${PACKS_COPY.en.pageLimit} Bank statements, insurance policies and long contracts count by the page. Turnaround: same day up to 10 pages; over 10, within 24 hours. ${URGENCY_TEXT.en.sooner}`,
+        `Apostilles only count as a document when your consulate requires them translated. Bank statements, insurance policies and long contracts count by the page. ${LONGER_FILES_HTML.en} Turnaround: same day up to 10 pages; over 10, within 24 hours. ${URGENCY_TEXT.en.sooner}`,
       ],
     },
     {
