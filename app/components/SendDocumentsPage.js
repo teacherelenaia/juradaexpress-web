@@ -275,7 +275,7 @@ export default function SendDocumentsPage({ locale = "es" }) {
                 ))}
               </ul>
               <p className="mt-4 text-sm text-slate-700">{t.promise}</p>
-              {fields.email.trim() ? <p className="mt-1 text-sm text-slate-600">{t.okEmail}</p> : null}
+              {result.clientEmailed ? <p className="mt-1 text-sm text-slate-600">{t.okEmail}</p> : null}
             </>
           ) : null}
           <p className="mt-4 text-sm text-slate-600">

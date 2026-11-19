@@ -232,6 +232,7 @@ export async function POST(req) {
   const silent = isProduction() && s.ref === TEST_REF;
   const mail = resendConfig();
   let emailed = false;
+  let clientEmailed = false;
   const sentAttachments = []; // solo estos se pueden borrar de Blob
   if (mail && !silent) {
     const groups = groupBySize(attachments, EMAIL_MAX_BYTES);
@@ -270,7 +271,7 @@ export async function POST(req) {
       });
     }
     if (email && received.length) {
-      await sendResendEmail({
+      clientEmailed = await sendResendEmail({
         from: mail.from,
         apiKey: mail.apiKey,
         to: email,
@@ -309,5 +310,5 @@ export async function POST(req) {
     return json({ ...result, ok: false, error: "email-failed" }, 502);
   }
   if (emailed || silent || !mail) await putJson(printPath, { at: new Date().toISOString() });
-  return json({ ...result, emailed });
+  return json({ ...result, emailed, clientEmailed });
 }

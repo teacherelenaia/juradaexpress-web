@@ -298,6 +298,7 @@ export default function useDocUpload({ persist = false, legacyBlob = null, maxFi
           mode: done.mode,
           token: session.token,
           receipt: done.receipt || "",
+          clientEmailed: Boolean(done.clientEmailed),
           received: done.received || [],
           failed: done.failed || [],
           blobs,

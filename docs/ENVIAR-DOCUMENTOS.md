@@ -173,3 +173,18 @@ Quedan abiertos, de menor riesgo: sin límite de envíos por IP ni captcha (hay
 campo trampa), dos «Documentos de clientes» si los dos primeros envíos
 coinciden en el mismo segundo, y dos archivos distintos con el mismo nombre
 se marcan juntos si uno falla la comprobación.
+
+## 8. Comprobación con el Drive real (19/11/2026)
+
+Con las tres variables `GOOGLE_*` en Vercel y la vista previa redesplegada,
+se subieron desde un navegador (Chromium) a `/enviar-documentos` de la vista
+previa un PDF de 8 MB, una foto de 3,4 MB y un HEIC de 2 MB. Los tres fueron
+directos del navegador a Google (4 trozos intermedios y 3 cierres, sin
+errores ni reserva por Blob) y el servidor los comprobó en Drive (carpeta y
+tamaño) antes de mostrar «Documentos recibidos». Carpeta creada:
+`Documentos de clientes / AAAA-MM-DD Prueba Claude – JX-TEST`.
+
+La primera prueba falló con `invalid_client`: alguna de las variables se
+había pegado con espacios, salto de línea o comillas. El código ahora las
+limpia y, si Google las rechaza, deja en los logs la forma de cada una (no
+el valor) para saber cuál está mal.
