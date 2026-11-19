@@ -18,6 +18,7 @@ import {
 import { MAEC_LIST_URL, GUARANTEE_SHORT, URGENCY_TEXT } from "../site";
 import { packPrice } from "../packs";
 import { REVIEW_TEXT } from "../reviews";
+import { blogPath } from "../posts-expedientes";
 
 const PATH_ES = "/traduccion-jurada-visado-alta-cualificacion";
 const PATH_EN = "/en/sworn-translation-spain-highly-qualified-visa";
@@ -127,6 +128,7 @@ export const es = {
   },
   related: [
     { href: FILE_ROUTE.es, label: "Expediente completo de visado: precios y ejemplos" },
+    { href: blogPath("altaCualificacion", "es"), label: "Blog: documentos y traducción jurada para la UGE-CE" },
     { href: "/traduccion-jurada-visados-espana", label: "Traducción jurada para visados de España" },
     { href: "/traduccion-jurada-urgente-grandes-volumenes", label: "Urgentes y grandes volúmenes" },
     { href: "/traduccion-jurada-titulo-universitario", label: "Título universitario" },
@@ -230,6 +232,7 @@ export const en = {
   },
   related: [
     { href: FILE_ROUTE.en, label: "Full visa file: prices and examples" },
+    { href: blogPath("altaCualificacion", "en"), label: "Blog: UGE-CE documents and sworn translation" },
     { href: "/en/sworn-translations-spanish-visas", label: "Sworn translations for Spanish visas" },
     { href: "/en/urgent-sworn-translation-large-projects", label: "Urgent and large projects" },
     { href: "/en/for-immigration-law-firms", label: "For immigration law firms" },

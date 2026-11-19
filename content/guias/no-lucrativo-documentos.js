@@ -19,6 +19,7 @@
 // en una página oficial. Las páginas habituales de cada documento salen
 // de las landings del FBI y del ACRO y de los packs de content/packs.js.
 import { PACKS, packLimits } from "../packs";
+import { blogPath } from "../posts-expedientes";
 import { SAME_DAY_MAX_PAGES } from "../site";
 import { FILE_ROUTE, FILE_PER_PAGE } from "../expediente";
 import { guideById } from "./routes";
@@ -299,6 +300,7 @@ export const es = {
     { href: "/traduccion-jurada-acro-reino-unido", label: "Certificado ACRO" },
     { href: "/documentos-visado-nomada-digital-espana", label: "Guía: documentos del visado de nómada digital" },
     { href: "/blog/que-es-la-apostilla-de-la-haya", label: "Qué es la apostilla" },
+    { href: blogPath("extractos", "es"), label: "Blog: ¿hay que traducir los extractos bancarios?" },
   ],
   otherLangLabel: "Spain non-lucrative visa documents checklist",
 };
@@ -539,6 +541,7 @@ export const en = {
     { href: "/en/acro-police-certificate-translation-spain", label: "ACRO police certificate" },
     { href: "/en/spain-digital-nomad-visa-documents-checklist", label: "Guide: digital nomad visa documents" },
     { href: "/en/sworn-translation-usa-spain", label: "Coming from the United States" },
+    { href: blogPath("extractos", "en"), label: "Blog: do bank statements need a sworn translation?" },
   ],
   otherLangLabel: "Documentos para el visado no lucrativo de España",
 };

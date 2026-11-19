@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getAllPostsEn, getPostEnBySlug } from "../../../../content/posts.en";
 import { getPostBySlug } from "../../../../content/posts";
 import { WHATSAPP_URL_EN } from "../../../../content/site";
+import { FILE_ROUTE, FILE_WHATSAPP_URL, FILE_WHATSAPP_LABEL } from "../../../../content/expediente";
 import { personRef, ORGANIZATION_ID } from "../../../../content/persona";
 
 const BASE = "https://juradaexpress.es";
@@ -164,7 +165,7 @@ export default function BlogPostPage({ params }) {
       />
 
       {/* Article FAQ (optional `faq` field in content/posts.en.js) */}
-      {post.faq?.length > 0 && (
+      {post.faq?.length > 0 && !post.faqInBody && (
         <section className="mt-12">
           <h2 className="font-display text-2xl font-semibold leading-snug tracking-[-0.02em] text-slate-900">
             Frequently asked questions
@@ -182,7 +183,32 @@ export default function BlogPostPage({ params }) {
         </section>
       )}
 
-      {/* Final CTA */}
+      {/* Final CTA. `cta: "expediente"` → full-visa-file WhatsApp and a link
+          to its page (content/posts-expedientes.js). */}
+      {post.cta === "expediente" ? (
+        <div className="mt-12 rounded-xl bg-brand-navy p-6 text-white md:p-8" data-surface="navy">
+          <h2 className="font-display text-2xl font-semibold leading-snug tracking-[-0.02em] text-white">
+            Got the whole file?
+          </h2>
+          <p className="mt-2 text-brand-navy-100">
+            Send it with your consulate&apos;s checklist and you get one closed
+            price and one delivery date, in writing.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <a
+              href={FILE_WHATSAPP_URL.en}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-light"
+            >
+              {FILE_WHATSAPP_LABEL.en}
+            </a>
+            <a href={FILE_ROUTE.en} className="btn btn-outline-light">
+              Full visa file prices
+            </a>
+          </div>
+        </div>
+      ) : (
       <div className="mt-12 rounded-xl bg-brand-navy p-6 text-white md:p-8" data-surface="navy">
         <h2 className="font-display text-2xl font-semibold leading-snug tracking-[-0.02em] text-white">
           Does your document need a sworn translation?
@@ -205,6 +231,7 @@ export default function BlogPostPage({ params }) {
           </a>
         </div>
       </div>
+      )}
 
       {related.length > 0 && (
         <section className="mt-12">

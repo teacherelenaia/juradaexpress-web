@@ -73,6 +73,7 @@ Guías por trámite con tabla documento a documento, fuentes oficiales enlazadas
 - [Contacto](https://juradaexpress.es/contacto): WhatsApp, email, teléfono y bloque para clientes fuera de España.
 - [Preguntas frecuentes](https://juradaexpress.es/preguntas-frecuentes)
 - [Blog](https://juradaexpress.es/blog): guías sobre apostilla, plazos, visados y documentos.
+{{BLOG_FILES_ES}}
 
 ## Key pages (English)
 
@@ -104,6 +105,7 @@ Guías por trámite con tabla documento a documento, fuentes oficiales enlazadas
 - [About me](https://juradaexpress.es/en/about)
 - [Contact](https://juradaexpress.es/en/contacto)
 - [Blog](https://juradaexpress.es/en/blog)
+{{BLOG_FILES_EN}}
 
 ## Optional
 

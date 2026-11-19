@@ -19,6 +19,7 @@ import {
 import { MAEC_LIST_URL, GUARANTEE_SHORT, URGENCY_TEXT } from "../site";
 import { packPrice } from "../packs";
 import { REVIEW_TEXT } from "../reviews";
+import { blogPath } from "../posts-expedientes";
 
 const PATH_ES = "/traduccion-jurada-visado-estudiante";
 const PATH_EN = "/en/sworn-translation-spain-student-visa";
@@ -137,6 +138,7 @@ export const es = {
   },
   related: [
     { href: FILE_ROUTE.es, label: "Expediente completo de visado: precios y ejemplos" },
+    { href: blogPath("estudiante", "es"), label: "Blog: qué documentos del visado de estudiante llevan traducción jurada" },
     { href: "/traduccion-jurada-visados-espana", label: "Traducción jurada para visados de España" },
     { href: "/traduccion-jurada-antecedentes-fbi", label: "Certificado del FBI" },
     { href: "/traduccion-jurada-acro-reino-unido", label: "Certificado ACRO" },
@@ -253,6 +255,7 @@ export const en = {
   },
   related: [
     { href: FILE_ROUTE.en, label: "Full visa file: prices and examples" },
+    { href: blogPath("estudiante", "en"), label: "Blog: which student visa documents need a sworn translation" },
     { href: "/en/sworn-translations-spanish-visas", label: "Sworn translations for Spanish visas" },
     { href: "/en/fbi-background-check-translation-spain", label: "FBI background check" },
     { href: "/en/acro-police-certificate-translation-spain", label: "ACRO police certificate" },
