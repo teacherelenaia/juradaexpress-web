@@ -28,6 +28,7 @@ import {
   dataLines,
   isExpediente,
 } from "../app/lib/docNotice.js";
+import { limitReason } from "../app/lib/docLimits.js";
 
 const MOCK = process.env.MOCK_DRIVE_URL || "http://127.0.0.1:3399";
 const MB = 1024 * 1024;
@@ -121,6 +122,14 @@ test("expediente: tres archivos o más, o más de 15 MB", () => {
   expect(receivedSubject({ name: "Ana", count: 1, ref: "JX-ABC234", expediente: true })).toBe(
     "Documentos recibidos · expediente · Ana · 1 archivo · JX-ABC234"
   );
+});
+
+test("límite de envíos: 15 por visitante y 300 al día en total", () => {
+  const of = (v, n) => Array.from({ length: n }, (_, i) => `limites/2026-11-20/envios/${v}-${i}.json`);
+  expect(limitReason(of("aaaa", 14), "aaaa").reason).toBe("");
+  expect(limitReason(of("aaaa", 15), "aaaa").reason).toBe("visitor");
+  expect(limitReason(of("aaaa", 15), "bbbb").reason).toBe(""); // otro visitante no se ve afectado
+  expect(limitReason(of("cccc", 300), "bbbb").reason).toBe("global");
 });
 
 test("confirmación al cliente sin enlace a la carpeta y con el plazo", () => {

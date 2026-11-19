@@ -14,7 +14,7 @@
 //
 // Los contadores viven en Vercel Blob. Sin Blob (local) no se aplican.
 import { createHmac } from "node:crypto";
-import { hasBlob, listAll, madridDate, putJson } from "./contactLog";
+import { hasBlob, listAll, madridDate, putJson } from "./contactLog.js";
 
 export const PER_VISITOR_DAY = 15;
 export const GLOBAL_DAY = 300;
@@ -39,6 +39,14 @@ function visitorOf(req) {
   return ip ? hmac(`ip|${ip}`, 16) : "";
 }
 
+// Regla del límite (pura, probada en tests/enviar-documentos.spec.mjs):
+// `paths` son los envíos ya contados hoy; devuelve el motivo del bloqueo.
+export function limitReason(paths, visitor) {
+  const mine = paths.filter((p) => p.includes(`/envios/${visitor}-`)).length;
+  const reason = paths.length >= GLOBAL_DAY ? "global" : mine >= PER_VISITOR_DAY ? "visitor" : "";
+  return { reason, mine };
+}
+
 /**
  * ¿Puede este visitante empezar otro envío hoy? Cuenta el envío si puede.
  * Devuelve "" o el motivo ("visitor" | "global").
@@ -48,11 +56,10 @@ export async function countSubmission(req) {
   const day = madridDate();
   const visitor = visitorOf(req) || "sin-ip";
   const all = await listAll(`limites/${day}/envios/`);
-  if (all.length >= GLOBAL_DAY) return "global";
-  const mine = all.filter((b) => b.pathname.includes(`/envios/${visitor}-`)).length;
+  const { reason, mine } = limitReason(all.map((b) => b.pathname), visitor);
   // Rastro para diagnosticar (sin datos personales: 4 caracteres de la huella).
   console.log("[docLimits] envíos hoy:", `visitante ${visitor.slice(0, 4)}… ${mine}/${PER_VISITOR_DAY}`, `total ${all.length}/${GLOBAL_DAY}`);
-  if (mine >= PER_VISITOR_DAY) return "visitor";
+  if (reason) return reason;
   await putJson(`limites/${day}/envios/${visitor}-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}.json`, {
     at: new Date().toISOString(),
   });
