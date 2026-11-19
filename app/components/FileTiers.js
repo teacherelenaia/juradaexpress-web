@@ -14,6 +14,7 @@ import {
   FILE_WHATSAPP_LABEL,
   FILE_TABLE_COPY,
   FILE_EXAMPLES,
+  STATEMENTS_NOTE_HTML,
   FILE_PER_PAGE,
   fileTableRows,
 } from "../../content/expediente";
@@ -150,6 +151,11 @@ export function FileHomeBlock({ locale = "es", className = "" }) {
               </li>
             ))}
           </ul>
+          {/* Los ejemplos cuentan extractos: nota del brief de Elena (19/11/2026). */}
+          <p
+            className="mt-3 text-sm text-slate-600"
+            dangerouslySetInnerHTML={{ __html: STATEMENTS_NOTE_HTML[locale] }}
+          />
           <div className="mt-7 flex flex-wrap gap-3">
             <TrackedLink
               label={`portada_expediente_whatsapp_${locale}`}

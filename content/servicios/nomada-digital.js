@@ -12,7 +12,7 @@ import {
   DNV_PACK_LIMITS,
   URGENCY_TEXT,
 } from "../site";
-import { FILE_ROUTE, filePrice } from "../expediente";
+import { FILE_ROUTE, filePrice, STATEMENTS_POST, STATEMENTS_NOTE_HTML } from "../expediente";
 
 const PATH_ES = "/traduccion-jurada-visado-nomada-digital";
 const PATH_EN = "/en/sworn-translation-spain-digital-nomad-visa";
@@ -107,7 +107,7 @@ export const es = {
               [
                 "Justificantes de ingresos: nóminas, extractos bancarios, facturas, declaraciones fiscales",
                 "No",
-                "Sí (a veces basta con los de los últimos meses)",
+                `Sí (a veces basta con los de los últimos meses). Los extractos, <a href="${STATEMENTS_POST.es}">según dónde presentes la solicitud</a>`,
                 "Empresa, banco, agencia tributaria",
               ],
               [
@@ -170,7 +170,7 @@ export const es = {
         `Plazo: hasta 10 páginas, en el día; si el expediente completo pasa de 10 páginas, en 24 horas. ${URGENCY_TEXT.es.sooner}`,
         priceEs,
         DNV_PACK_PRICE != null
-          ? `${DNV_PACK_NOTE.es} <a href="${FILE_ROUTE.es}">Precios y ejemplos de expediente completo</a> (un expediente típico de nómada digital de 30 páginas, ${filePrice(30)} €). Los precios orientativos por documento están en la <a href="/precios">página de precios</a>.`
+          ? `${DNV_PACK_NOTE.es} <a href="${FILE_ROUTE.es}">Precios y ejemplos de expediente completo</a> (un expediente típico de nómada digital de 30 páginas, ${filePrice(30)} €). ${STATEMENTS_NOTE_HTML.es} Los precios orientativos por documento están en la <a href="/precios">página de precios</a>.`
           : 'Los precios orientativos por documento están en la <a href="/precios">página de precios</a>.',
       ],
     },
@@ -310,7 +310,7 @@ export const en = {
               [
                 "Proof of income: payslips, bank statements, invoices, tax returns",
                 "No",
-                "Yes (recent months are often enough)",
+                `Yes (recent months are often enough). Bank statements <a href="${STATEMENTS_POST.en}">depend on where you apply</a>`,
                 "Employer, bank, tax authority",
               ],
               [
@@ -373,7 +373,7 @@ export const en = {
         `Timing: up to 10 pages, the same day; if the complete file runs to more than 10 pages, within 24 hours. ${URGENCY_TEXT.en.sooner}`,
         priceEn,
         DNV_PACK_PRICE != null
-          ? `${DNV_PACK_NOTE.en} <a href="${FILE_ROUTE.en}">Full visa file prices and examples</a> (a typical 30-page digital nomad file, €${filePrice(30)}). Indicative prices per document are on the <a href="/en/precios">pricing page</a>.`
+          ? `${DNV_PACK_NOTE.en} <a href="${FILE_ROUTE.en}">Full visa file prices and examples</a> (a typical 30-page digital nomad file, €${filePrice(30)}). ${STATEMENTS_NOTE_HTML.en} Indicative prices per document are on the <a href="/en/precios">pricing page</a>.`
           : 'Indicative prices per document are on the <a href="/en/precios">pricing page</a>.',
       ],
     },

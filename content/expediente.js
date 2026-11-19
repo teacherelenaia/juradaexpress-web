@@ -43,6 +43,44 @@ export function filePrice(pages) {
 /** Lo mismo a tarifa de documento suelto largo (20 € por página). */
 export const singleDocPrice = (pages) => pages * PRICE_PER_PAGE;
 
+// Extractos bancarios (brief de Elena, 19/11/2026): la web dice lo mismo en
+// todas partes. Depende de dónde se presente la solicitud: los consulados de
+// Washington y Los Ángeles indican que no hace falta traducirlos; Londres no
+// lo aclara; ante la UGE, en España, los documentos extranjeros van con
+// traducción jurada. Se enlaza siempre el artículo 2 del blog
+// (content/posts-expedientes.js usa este mismo slug).
+export const STATEMENTS_SLUG = {
+  es: "hay-que-traducir-extractos-bancarios-visado-espana",
+  en: "do-bank-statements-need-sworn-translation-spain-visa",
+};
+export const STATEMENTS_POST = {
+  es: `/blog/${STATEMENTS_SLUG.es}`,
+  en: `/en/blog/${STATEMENTS_SLUG.en}`,
+};
+const STATEMENTS_LINK = {
+  es: `<a href="${STATEMENTS_POST.es}">¿Hay que traducir los extractos bancarios?</a>`,
+  en: `<a href="${STATEMENTS_POST.en}">Do bank statements need a sworn translation?</a>`,
+};
+/** Regla completa, texto plano (FAQ y llms.txt). */
+export const STATEMENTS_RULE = {
+  es: "Los extractos bancarios no siempre se traducen: depende de dónde presentes la solicitud. Los consulados de España en Washington y Los Ángeles indican que no hace falta traducirlos; el de Londres no lo aclara y conviene preguntar; ante la UGE, en España, los documentos extranjeros van traducidos por traductor jurado.",
+  en: "Bank statements are not always translated: it depends on where you apply. Spain's consulates in Washington and Los Angeles state that they don't need translating; the London consulate doesn't say, so ask; with the UGE in Spain, foreign documents go in with a sworn translation.",
+};
+/** Regla completa con enlace al artículo (bloques HTML). */
+export const STATEMENTS_RULE_HTML = {
+  es: `${STATEMENTS_RULE.es} ${STATEMENTS_LINK.es}`,
+  en: `${STATEMENTS_RULE.en} ${STATEMENTS_LINK.en}`,
+};
+/** Nota corta para tablas de páginas y ejemplos que cuentan extractos. */
+export const STATEMENTS_NOTE = {
+  es: "Los extractos no siempre se traducen: depende de dónde presentes la solicitud.",
+  en: "Bank statements are not always translated: it depends on where you apply.",
+};
+export const STATEMENTS_NOTE_HTML = {
+  es: `${STATEMENTS_NOTE.es} ${STATEMENTS_LINK.es}`,
+  en: `${STATEMENTS_NOTE.en} ${STATEMENTS_LINK.en}`,
+};
+
 export const FILE_ROUTE = {
   es: "/traduccion-jurada-expediente-completo-visado",
   en: "/en/full-visa-file-sworn-translation-spain",
@@ -326,8 +364,8 @@ export const FILE_PROCEDURES = [
       en: "Employment contract or employer letter, company activity certificate, degree or experience, payslips and statements, criminal record, insurance, family certificates",
     },
     sworn: {
-      es: "Todos los documentos extranjeros que no estén en español; los públicos, además, apostillados",
-      en: "Every foreign document not in Spanish; public documents also apostilled",
+      es: "Todos los documentos extranjeros que no estén en español; los públicos, además, apostillados. Los extractos, según dónde presentes la solicitud",
+      en: "Every foreign document not in Spanish; public documents also apostilled. Bank statements depend on where you apply",
     },
     pages: { es: "20–30", en: "20–30" },
     source: src(
@@ -344,8 +382,8 @@ export const FILE_PROCEDURES = [
       en: "Proof of means (statements, pensions, investments), criminal record for the last 5 years, medical certificate, insurance, family marriage or birth certificates",
     },
     sworn: {
-      es: "Antecedentes penales y certificado médico (traducción jurada expresa), medios económicos y certificados familiares",
-      en: "Criminal record and medical certificate (sworn translation stated explicitly), proof of means and family certificates",
+      es: "Antecedentes penales y certificado médico (traducción jurada expresa) y certificados familiares. Los extractos, según dónde presentes la solicitud (Washington no los pide traducidos)",
+      en: "Criminal record and medical certificate (sworn translation stated explicitly) and family certificates. Bank statements depend on where you apply (Washington doesn't ask for them translated)",
     },
     pages: { es: "15–30", en: "15–30" },
     source: src(
@@ -362,8 +400,8 @@ export const FILE_PROCEDURES = [
       en: "Admission and proof of fees paid, proof of means, insurance, medical certificate, criminal record (stays over 6 months, adults), parental authorisation for minors",
     },
     sworn: {
-      es: "Antecedentes penales, certificado médico y carta y partida de nacimiento de quien te patrocina; el resto, si no está en español",
-      en: "Criminal record, medical certificate, sponsor letter and birth certificate; the rest, if not in Spanish",
+      es: "Antecedentes penales, certificado médico y carta y partida de nacimiento de quien te patrocina; el resto, si no está en español. Los extractos, según dónde presentes la solicitud (Los Ángeles no los pide traducidos)",
+      en: "Criminal record, medical certificate, sponsor letter and birth certificate; the rest, if not in Spanish. Bank statements depend on where you apply (Los Angeles doesn't ask for them translated)",
     },
     pages: { es: "15–25", en: "15–25" },
     source: [

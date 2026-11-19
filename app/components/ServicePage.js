@@ -235,7 +235,7 @@ export function Block({ block, page }) {
                   ) : (
                     <td
                       key={j}
-                      className="p-3 align-top text-slate-700"
+                      className="p-3 align-top text-slate-700 [&_a]:text-brand-navy [&_a]:underline [&_a]:underline-offset-2"
                       dangerouslySetInnerHTML={{ __html: cell }}
                     />
                   )

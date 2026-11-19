@@ -20,7 +20,7 @@
 //
 // posts.js y posts.en.js importan POSTS_EXPEDIENTES_ES / _EN y los suman a
 // sus listas, así que sitemap, índice del blog y hreflang salen solos.
-import { FILE_ROUTE, FILE_PER_PAGE, FILE_MID_CAP, filePrice, singleDocPrice } from "./expediente";
+import { FILE_ROUTE, FILE_PER_PAGE, FILE_MID_CAP, filePrice, singleDocPrice, STATEMENTS_SLUG } from "./expediente";
 import { packPrice } from "./site";
 import { PRICE_PER_PAGE } from "./pricing";
 
@@ -55,7 +55,7 @@ const ext = (href, text, locale) =>
 
 export const SLUGS = {
   coste: { es: "cuanto-cuesta-traducir-expediente-completo-visado-espana", en: "cost-sworn-translation-full-spain-visa-file" },
-  extractos: { es: "hay-que-traducir-extractos-bancarios-visado-espana", en: "do-bank-statements-need-sworn-translation-spain-visa" },
+  extractos: STATEMENTS_SLUG,
   estudiante: { es: "documentos-visado-estudiante-espana-traduccion-jurada", en: "spain-student-visa-documents-sworn-translation" },
   altaCualificacion: {
     es: "profesional-altamente-cualificado-uge-documentos-traduccion-jurada",

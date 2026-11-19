@@ -26,6 +26,8 @@ import {
   FILE_PROCEDURES,
   PROCEDURES_CHECKED,
   LONGER_FILES_SHORT,
+  STATEMENTS_RULE,
+  STATEMENTS_POST,
 } from "../../content/expediente";
 import { POSTS_EXPEDIENTES_ES, POSTS_EXPEDIENTES_EN, SHORT_ANSWERS, SLUGS } from "../../content/posts-expedientes";
 
@@ -58,6 +60,7 @@ function fullFilesSection() {
     "",
     "Examples:",
     examples("en"),
+    `- ${STATEMENTS_RULE.en} ${BASE}${STATEMENTS_POST.en}`,
     "",
     `Quién: Elena Peñaranda Ortega, traductora jurada nº 7310 del MAEC, traduce expedientes completos de visado para España con un solo precio cerrado y una sola fecha de entrega. Página: ${BASE}${FILE_ROUTE.es}`,
     "",
@@ -66,6 +69,7 @@ function fullFilesSection() {
     "",
     "Ejemplos:",
     examples("es"),
+    `- ${STATEMENTS_RULE.es} ${BASE}${STATEMENTS_POST.es}`,
     "",
     `By procedure / Por trámite (requirements checked against official sources on ${PROCEDURES_CHECKED.en}):`,
     procs("en"),

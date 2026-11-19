@@ -6,6 +6,7 @@
 // del inglés: los documentos en hindi u otra lengua india deben llegar en
 // versión inglesa oficial. La apostilla la emite el MEA.
 import { TIMEZONE_NOTE, INTERNATIONAL_SHIPPING } from "../site";
+import { STATEMENTS_POST } from "../expediente";
 
 const PATH_ES = "/traduccion-jurada-india";
 const PATH_EN = "/en/sworn-translation-india-spain";
@@ -91,8 +92,8 @@ export const es = {
               [
                 "Extractos bancarios, ITR y form 16",
                 "No",
-                "Sí (a veces basta con los últimos meses)",
-                "Se traducen íntegros, incluidos los sellos del banco",
+                `Sí (a veces basta con los últimos meses). Los extractos, <a href="${STATEMENTS_POST.es}">según dónde presentes la solicitud</a>`,
+                "Si te los piden traducidos, con los sellos del banco",
               ],
               [
                 "Affidavits y declaraciones ante notario",
@@ -266,8 +267,8 @@ export const en = {
               [
                 "Bank statements, ITR and Form 16",
                 "No",
-                "Yes (recent months are often enough)",
-                "Translated in full, bank stamps included",
+                `Yes (recent months are often enough). Bank statements <a href="${STATEMENTS_POST.en}">depend on where you apply</a>`,
+                "If they are required in Spanish, bank stamps included",
               ],
               [
                 "Affidavits and notarised declarations",
