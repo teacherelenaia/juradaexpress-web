@@ -18,7 +18,19 @@ export const runtime = "nodejs";
 
 const UPLOAD_PREFIX = "presupuestos/";
 const UPLOAD_MAX_BYTES = 25 * 1024 * 1024;
-const ALLOWED = ["application/pdf", "image/jpeg", "image/png", "image/heic", "image/heif"];
+// 19/11/2026: también DOCX y ZIP (misma lista que /enviar-documentos) y
+// archivos sin tipo (HEIC en Windows/Android llega a veces sin tipo).
+const ALLOWED = [
+  "application/pdf",
+  "image/jpeg",
+  "image/png",
+  "image/heic",
+  "image/heif",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/zip",
+  "application/x-zip-compressed",
+  "application/octet-stream",
+];
 
 export async function POST(request) {
   if (!process.env.BLOB_READ_WRITE_TOKEN) {

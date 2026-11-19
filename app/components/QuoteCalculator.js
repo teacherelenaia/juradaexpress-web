@@ -7,22 +7,17 @@
 // (ES/EN, vía ServicePage). Precios SOLO de content/documents.js; recargo
 // de urgencia y nota de entrega en papel de content/site.js.
 //
-// Archivos (02/10/2026, corrige «no deja adjuntar»):
-//   - Los archivos se suben DIRECTAMENTE desde el navegador a Vercel Blob
-//     (almacén privado, token de un solo uso de /api/quote/upload), sin el
-//     límite de ~4,5 MB por petición de Vercel. Hasta 25 MB por archivo.
-//   - Imágenes: se comprimen en el navegador (lado máx. 2000 px, JPEG < 1,5
-//     MB); si el navegador no puede (HEIC fuera de Safari) se sube el
-//     original. Los PDF se suben tal cual, pesen lo que pesen (≤ 25 MB).
-//   - Si Blob no está disponible, se usa el envío antiguo por lotes de
-//     < 3,5 MB a /api/quote; solo lo que no se pueda enviar se pide por
-//     WhatsApp.
+// Archivos (19/11/2026): misma subida que /enviar-documentos
+// (app/lib/docUploadClient.js + useDocUpload + FileDropList). Con Google
+// Drive conectado, cada archivo va directo del navegador a la carpeta del
+// envío en Drive (por trozos, con reintentos y progreso por archivo) y
+// /api/quote manda el aviso de siempre con el enlace a la carpeta. Sin
+// Drive, como desde el 02/10/2026: directo a Vercel Blob (privado,
+// /api/quote/upload) y /api/quote los adjunta al correo y los borra.
+// Hasta 40 archivos. Lo que no llega se pide por WhatsApp.
 //
-// Al pulsar «Enviar y recibir presupuesto» la subida ocurre EN ESTA
-// PÁGINA, con barra de progreso (antes se abría una pestaña de WhatsApp a
-// la vez y, en el móvil, la pestaña de la web quedaba en segundo plano y el
-// navegador congelaba la subida). /api/quote recibe el resumen + las URL de
-// Blob, adjunta los archivos al email a Elena y los borra del almacén. Al
+// La subida ocurre EN ESTA PÁGINA (sin abrir WhatsApp a la vez: en el
+// móvil la pestaña quedaba en segundo plano y se congelaba la subida). Al
 // terminar se muestra la confirmación y un botón OPCIONAL de WhatsApp.
 // Se exige email o teléfono para poder responder al cliente.
 //
@@ -36,7 +31,6 @@
 // errores asociados con aria-describedby, zona de arrastre operable por
 // teclado (es un <label> del <input type="file">).
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import { upload as blobUpload } from "@vercel/blob/client";
 import { DOCUMENTS } from "../../content/documents";
 import {
   PAPER_DELIVERY_SPAIN,
@@ -54,28 +48,18 @@ import { estimatePrice, firmPriceUsd } from "../../content/pricing";
 import { toUsd, US_SHIPPING_USD } from "../../content/usd";
 import { SectionHeading } from "./ui";
 import QuotePromise from "./QuotePromise";
-import { IconUpload, IconFileText } from "./Icons";
 import { setAdsUserData, trackAdsConversion } from "./AdsConversion";
 import { getAttribution } from "../lib/attribution";
 import { appendWaOrigin, WA_REF_KEY, WA_REF_RE } from "../lib/waOrigin";
 import { trackEngagement } from "../lib/engagement";
 import { SOURCE_OPTIONS } from "../../content/sources";
+import useDocUpload from "./useDocUpload";
+import FileDropList from "./FileDropList";
+import { ACCEPT as DOC_ACCEPT } from "../lib/docUploadClient";
 
 const WHATSAPP_NUMBER = "34685891214";
-const MB = 1024 * 1024;
-const MAX_FILES = 5;
-const MAX_FILE_BYTES = 25 * MB; // tope por archivo (Blob + adjunto de Resend)
-export const BATCH_BYTES = 3.5 * MB; // por petición a /api/quote
-export const DIRECT_MAX_BYTES = 3.5 * MB; // envío de reserva sin Blob
-export const IMAGE_TARGET_BYTES = 1.5 * MB; // cada imagen comprimida pesa menos que esto
-const IMAGE_MAX_SIDE = 2000;
-const IMAGE_QUALITIES = [0.8, 0.7, 0.6, 0.5, 0.4, 0.3];
-const ACCEPT =
-  ".pdf,.jpg,.jpeg,.png,.heic,.heif,application/pdf,image/jpeg,image/png,image/heic,image/heif";
-const TYPE_RE = /\.(pdf|jpe?g|png|heic|heif)$/i;
-const PDF_RE = /\.pdf$/i;
-const ALLOWED_MIME = ["application/pdf", "image/jpeg", "image/png", "image/heic", "image/heif"];
-
+// Sin Drive conectado, la calculadora sube a Blob por su ruta de siempre.
+const LEGACY_BLOB = { handleUploadUrl: "/api/quote/upload", prefix: "presupuestos/" };
 const COPY = {
   es: {
     title: "Calcula tu precio en 10 segundos",
@@ -104,14 +88,6 @@ const COPY = {
         : "se indica en el presupuesto"
     }.`,
     files: "Adjunta el documento (opcional)",
-    dropHint: "Arrastra aquí tus archivos o pulsa para elegirlos",
-    dropSpec: `PDF, JPG, PNG o HEIC · máx. 25 MB por archivo · hasta ${MAX_FILES} archivos`,
-    dropNote: "Las fotos se comprimen en tu navegador antes de enviarse. Puedes hacer foto con el móvil.",
-    remove: "Quitar",
-    filePreparing: "comprimiendo…",
-    fileCompressed: (kb) => `se enviará comprimida (${kb} KB)`,
-    fileWhatsApp: "la adjuntas tú en WhatsApp",
-    fileReady: "lista para enviar",
     reasons: {
       failed: "no se ha podido subir",
     },
@@ -133,9 +109,6 @@ const COPY = {
     sendingSummary: "Enviando tu solicitud…",
     errPrivacy: "Marca la casilla de privacidad para continuar.",
     errContact: "Indica tu email o tu teléfono para poder enviarte el presupuesto.",
-    errCount: `Como máximo ${MAX_FILES} archivos.`,
-    errSize: "supera los 25 MB.",
-    errType: "no es PDF, JPG, PNG ni HEIC.",
     sent: "¡Recibido! Tengo tu solicitud y tus documentos. Te envío precio cerrado y plazo en menos de 2 h. Si quieres, escríbeme también por WhatsApp:",
     sentNoFiles: "¡Recibido! Te envío precio cerrado y plazo en menos de 2 h. Si quieres, escríbeme también por WhatsApp:",
     attach:
@@ -195,14 +168,6 @@ const COPY = {
         : "stated in the quote"
     }.`,
     files: "Attach the document (optional)",
-    dropHint: "Drag your files here or click to choose them",
-    dropSpec: `PDF, JPG, PNG or HEIC · max. 25 MB per file · up to ${MAX_FILES} files`,
-    dropNote: "Photos are compressed in your browser before sending. A phone photo is fine.",
-    remove: "Remove",
-    filePreparing: "compressing…",
-    fileCompressed: (kb) => `will be sent compressed (${kb} KB)`,
-    fileWhatsApp: "you attach it on WhatsApp",
-    fileReady: "ready to send",
     reasons: {
       failed: "could not be uploaded",
     },
@@ -224,9 +189,6 @@ const COPY = {
     sendingSummary: "Sending your request…",
     errPrivacy: "Tick the privacy box to continue.",
     errContact: "Please give your email or phone so I can send you the quote.",
-    errCount: `A maximum of ${MAX_FILES} files.`,
-    errSize: "is larger than 25 MB.",
-    errType: "is not a PDF, JPG, PNG or HEIC.",
     sent: "Received! I have your request and your documents. You will get a fixed price and deadline within 2 hours. You can also message me on WhatsApp:",
     sentNoFiles: "Received! You will get a fixed price and deadline within 2 hours. You can also message me on WhatsApp:",
     attach:
@@ -298,10 +260,6 @@ function formatPrice(n, locale) {
   return locale === "en" ? `€${n}` : `${n} €`;
 }
 
-function formatKb(bytes) {
-  return Math.max(1, Math.round(bytes / 1024));
-}
-
 // Urgencia (política del 14/11/2026): entregar antes del plazo normal (en
 // el día hasta SAME_DAY_MAX_PAGES páginas; hasta OVER_LIMIT_MAX_PAGES, en OVER_LIMIT_HOURS h)
 // puede llevar un recargo de HASTA URGENCY_SURCHARGE, a consultar. La
@@ -335,152 +293,6 @@ export function filesLine(w, total, emailedNames, pendingNames) {
   )}); ${w.attachRest}: ${pendingNames.join(", ")}`;
 }
 
-function isPdf(file) {
-  return file.type === "application/pdf" || PDF_RE.test(file.name || "");
-}
-
-function jpegName(name) {
-  const base = String(name || "imagen").replace(/\.[^.]+$/, "");
-  return `${base || "imagen"}.jpg`;
-}
-
-// Decodifica una imagen: createImageBitmap (respeta la orientación EXIF) y,
-// si falla o no existe, <img> con un object URL. Lanza si el navegador no
-// sabe leer el formato (HEIC fuera de Safari, archivo corrupto…).
-async function decodeImage(file) {
-  if (typeof createImageBitmap === "function") {
-    try {
-      return await createImageBitmap(file, { imageOrientation: "from-image" });
-    } catch {
-      // Seguimos con <img>.
-    }
-  }
-  const url = URL.createObjectURL(file);
-  try {
-    return await new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => reject(new Error("unsupported"));
-      img.src = url;
-    });
-  } finally {
-    URL.revokeObjectURL(url);
-  }
-}
-
-function canvasToBlob(canvas, quality) {
-  return new Promise((resolve) => {
-    try {
-      canvas.toBlob(resolve, "image/jpeg", quality);
-    } catch {
-      resolve(null);
-    }
-  });
-}
-
-// Imagen → JPEG de lado máximo IMAGE_MAX_SIDE y calidad 0,8, bajando la
-// calidad (y, si aún no basta, el tamaño) hasta pesar < IMAGE_TARGET_BYTES.
-export async function compressImage(file) {
-  const img = await decodeImage(file);
-  try {
-    const w = img.naturalWidth || img.width;
-    const h = img.naturalHeight || img.height;
-    if (!w || !h) throw new Error("unsupported");
-    let side = IMAGE_MAX_SIDE;
-    for (let round = 0; round < 3; round++) {
-      const scale = Math.min(1, side / Math.max(w, h));
-      const canvas = document.createElement("canvas");
-      canvas.width = Math.max(1, Math.round(w * scale));
-      canvas.height = Math.max(1, Math.round(h * scale));
-      const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("unsupported");
-      // Fondo blanco: los PNG con transparencia no se vuelven negros en JPEG.
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      for (const quality of IMAGE_QUALITIES) {
-        const blob = await canvasToBlob(canvas, quality);
-        if (blob && blob.size < IMAGE_TARGET_BYTES) return blob;
-      }
-      side = Math.round(side * 0.7);
-    }
-    throw new Error("unsupported");
-  } finally {
-    if (typeof img.close === "function") img.close();
-  }
-}
-
-// Prepara un archivo para subirlo. Los PDF van tal cual; las imágenes se
-// comprimen y, si el navegador no sabe (HEIC fuera de Safari), se sube el
-// original: ya no se manda nada a WhatsApp por tamaño o formato.
-// Devuelve { upload: File }.
-export async function prepareFile(file) {
-  if (isPdf(file)) return { upload: file };
-  // Un JPG que ya cumple el objetivo se envía tal cual, sin recomprimir.
-  if (file.type === "image/jpeg" && file.size < IMAGE_TARGET_BYTES) return { upload: file };
-  try {
-    const blob = await compressImage(file);
-    return {
-      upload: new File([blob], jpegName(file.name), {
-        type: "image/jpeg",
-        lastModified: Date.now(),
-      }),
-    };
-  } catch {
-    return { upload: file };
-  }
-}
-
-function contentTypeOf(file) {
-  if (file.type) return file.type;
-  const n = (file.name || "").toLowerCase();
-  if (n.endsWith(".pdf")) return "application/pdf";
-  if (n.endsWith(".png")) return "image/png";
-  if (n.endsWith(".heic")) return "image/heic";
-  if (n.endsWith(".heif")) return "image/heif";
-  return "image/jpeg";
-}
-
-function safePath(name) {
-  const clean = String(name || "documento")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-zA-Z0-9._-]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(-80);
-  return `presupuestos/${clean || "documento"}`;
-}
-
-// Agrupa las entradas en lotes de < BATCH_BYTES. Cada archivo ya pesa menos
-// (imágenes < 1,5 MB, PDF < 3,5 MB), así que ninguno va por encima solo.
-export function batches(entries) {
-  const out = [];
-  let cur = [];
-  let size = 0;
-  for (const e of entries) {
-    if (cur.length && size + e.upload.size >= BATCH_BYTES) {
-      out.push(cur);
-      cur = [];
-      size = 0;
-    }
-    cur.push(e);
-    size += e.upload.size;
-  }
-  if (cur.length) out.push(cur);
-  return out;
-}
-
-// Señal de aborto con tiempo límite: AbortSignal.timeout si el navegador lo
-// tiene y, si no, un AbortController abortado con setTimeout.
-function timeoutSignal(ms) {
-  if (typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function") {
-    return AbortSignal.timeout(ms);
-  }
-  const controller = new AbortController();
-  setTimeout(() => controller.abort(), ms);
-  return controller.signal;
-}
-
 // POST a /api/quote; devuelve el JSON de respuesta o null si falla.
 async function postQuote(fd) {
   try {
@@ -495,20 +307,15 @@ async function postQuote(fd) {
 export default function QuoteCalculator({ locale = "es", className = "", firmMode = false }) {
   const t = firmMode ? FIRM_COPY : COPY[locale] || COPY.es;
   const uid = useId();
-  const fileInput = useRef(null);
-  // Promesas de preparación por clave de archivo (compresión en curso).
-  const prepRef = useRef(new Map());
-  const keyRef = useRef(0);
+  // Subida común con /enviar-documentos (19/11/2026): app/lib/docUploadClient.js.
+  // Sin Drive conectado, sigue el camino de siempre (Blob + correo de /api/quote).
+  const up = useDocUpload({ legacyBlob: LEGACY_BLOB });
+  const files = up.entries;
 
   const [documentId, setDocumentId] = useState(DOCUMENTS[0].id);
   const [pages, setPages] = useState(1);
   const [urgency, setUrgency] = useState("normal");
   const [delivery, setDelivery] = useState("pdf");
-  // Entradas: { key, file, name, size, state: preparing | email | whatsapp,
-  // upload (File que se sube, ya comprimido) | null, reason }
-  const [files, setFiles] = useState([]);
-  const [fileError, setFileError] = useState("");
-  const [dragActive, setDragActive] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -520,7 +327,6 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
   const [privacy, setPrivacy] = useState(false);
   const [privacyError, setPrivacyError] = useState("");
   const [contactError, setContactError] = useState("");
-  const [progress, setProgress] = useState(null); // % de subida o null
   // idle | sending | sent (todo recibido o sin archivos) | attach (ningún
   // archivo recibido) | partial (algunos no) | failed (no llegó la solicitud)
   const [status, setStatus] = useState("idle");
@@ -566,73 +372,6 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
     [firmMode, doc, pages, urgent]
   );
   const money = (n) => (firmMode ? `$${n}` : formatPrice(n, locale));
-
-  function addFiles(list) {
-    const incoming = Array.from(list || []);
-    if (!incoming.length) return;
-    const errors = [];
-    const next = [...files];
-    const added = [];
-    for (const f of incoming) {
-      if (next.length >= MAX_FILES) {
-        errors.push(t.errCount);
-        break;
-      }
-      if (f.size > MAX_FILE_BYTES) {
-        errors.push(`${f.name} ${t.errSize}`);
-        continue;
-      }
-      if (!TYPE_RE.test(f.name) && !ALLOWED_MIME.includes(f.type)) {
-        errors.push(`${f.name} ${t.errType}`);
-        continue;
-      }
-      if (next.some((x) => x.name === f.name && x.size === f.size)) continue;
-      const entry = {
-        key: ++keyRef.current,
-        file: f,
-        name: f.name,
-        size: f.size,
-        state: "preparing",
-        upload: null,
-        reason: null,
-      };
-      next.push(entry);
-      added.push(entry);
-    }
-    setFiles(next);
-    setFileError(errors.join(" "));
-    if (fileInput.current) fileInput.current.value = "";
-
-    // Preparación (compresión) en segundo plano; la lista se actualiza al
-    // terminar y handleSubmit espera a las que sigan en curso.
-    for (const entry of added) {
-      const promise = prepareFile(entry.file).then((r) => {
-        const done = {
-          ...entry,
-          state: r.upload ? "email" : "whatsapp",
-          upload: r.upload,
-          reason: r.reason || null,
-        };
-        setFiles((prev) => prev.map((e) => (e.key === entry.key ? done : e)));
-        return done;
-      });
-      prepRef.current.set(entry.key, promise);
-    }
-  }
-
-  // Si el cliente eligió archivos antes de que la página terminara de cargar
-  // (móvil lento), React no vio el «change»: se recogen al montar.
-  useEffect(() => {
-    const input = fileInput.current;
-    if (input && input.files && input.files.length) addFiles(input.files);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function removeFile(key) {
-    prepRef.current.delete(key);
-    setFiles(files.filter((e) => e.key !== key));
-    setFileError("");
-  }
 
   function buildWhatsApp(emailedNames, pendingNames) {
     const w = t.wa;
@@ -687,7 +426,6 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
     setStatus("sending");
     setResult(null);
     setWaUrl("");
-    setProgress(files.length ? 0 : null);
 
     // 1. Conversión de Google Ads (con etiqueta; sin consentimiento va como
     // ping sin cookies). Antes, el email para las conversiones mejoradas
@@ -695,46 +433,31 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
     if (email.trim()) setAdsUserData({ email });
     trackAdsConversion("calculadora_presupuesto");
 
-    // 2. Espera a las compresiones en curso.
-    const entries = (
-      await Promise.all(
-        files.map((f) => (f.state === "preparing" ? prepRef.current.get(f.key) || f : f))
-      )
-    ).map((f) => (f.upload ? f : { ...f, upload: f.file }));
-
-    // 3. Subida directa a Vercel Blob, en esta página y con progreso.
-    const totalBytes = entries.reduce((n, f) => n + f.upload.size, 0) || 1;
-    const loaded = new Map();
-    const tick = () => {
-      const sum = [...loaded.values()].reduce((n, x) => n + x, 0);
-      setProgress(Math.min(99, Math.round((sum / totalBytes) * 100)));
-    };
-    const uploaded = []; // { name, url }
-    const direct = []; // envío de reserva (< 3,5 MB) si Blob falla
-    const failed = []; // { name, reason }
-    await Promise.all(
-      entries.map(async (f) => {
-        try {
-          const blob = await blobUpload(safePath(f.upload.name), f.upload, {
-            access: "private",
-            handleUploadUrl: "/api/quote/upload",
-            contentType: contentTypeOf(f.upload),
-            // Sin multipart ni onUploadProgress: con onUploadProgress,
-            // @vercel/blob sube con fetch en streaming en Chrome, que exige
-            // HTTP/2 y se queda en «0 %» tras proxies HTTP/1.1. El tiempo
-            // límite crece con el tamaño del archivo.
-            abortSignal: timeoutSignal(60000 + Math.round(f.upload.size / 25)),
-          });
-          loaded.set(f.key, f.upload.size);
-          tick();
-          uploaded.push({ key: f.key, name: f.name, url: blob.url });
-        } catch {
-          if (f.upload.size < DIRECT_MAX_BYTES) direct.push(f);
-          else failed.push({ name: f.name, reason: "failed" });
-        }
-      })
-    );
-    setProgress(null);
+    // 2. Subida con el motor común (19/11/2026). Con Drive conectado, cada
+    //    archivo va directo a la carpeta del envío en Drive (por trozos, con
+    //    reintentos y progreso por archivo); sin Drive, a Vercel Blob como
+    //    hasta ahora y /api/quote los adjunta al correo.
+    let upRes = null;
+    if (files.length) {
+      upRes = await up.send(
+        {
+          name,
+          email,
+          phone,
+          tramite: docName(doc, "es"),
+          comment: firmMode ? [firm, reference].filter((x) => x.trim()).join(" · ") : "",
+          locale,
+        },
+        { notify: false }
+      );
+    }
+    const uploaded = upRes && upRes.ok && upRes.mode === "blob" ? upRes.blobs : [];
+    // Justificante firmado de lo comprobado en Drive (/api/documentos/finish).
+    const driveToken = upRes && upRes.ok && upRes.mode === "drive" ? upRes.receipt : "";
+    const driveFiles = driveToken ? upRes.received : [];
+    const failed = upRes && upRes.ok
+      ? upRes.failed.map((f) => ({ name: f.name, reason: "failed" }))
+      : files.map((f) => ({ name: f.name, reason: "failed" }));
 
     const baseForm = () => {
       const fd = new FormData();
@@ -775,43 +498,27 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
       return fd;
     };
 
-    // 4. Resumen + URL de Blob: el servidor adjunta los archivos al email.
-    const groups = batches(direct);
+    // 3. Resumen: con Drive, el token del envío (el correo lleva el enlace a
+    //    la carpeta); sin Drive, las URL de Blob (el servidor las adjunta).
     const summary = baseForm();
-    summary.append("blobs", JSON.stringify(uploaded.map((u) => ({ name: u.name, url: u.url }))));
-    summary.append(
-      "filesEmail",
-      JSON.stringify(direct.map((f) => ({ name: f.name, sent: f.upload.name })))
-    );
+    summary.append("blobs", JSON.stringify(uploaded));
+    if (driveToken) summary.append("docs", driveToken);
+    summary.append("filesEmail", "[]");
     summary.append("filesWhatsApp", JSON.stringify(failed));
-    summary.append("lots", String(groups.length));
+    summary.append("lots", "0");
     const data = (await postQuote(summary)) || (await postQuote(summary));
     const summaryOk = !!(data && data.emailed);
 
-    const emailedKeys = new Set();
+    const receivedNames = new Set(driveFiles.map((f) => f.name));
     const okUrls = new Set((data && data.blobsEmailed) || []);
     for (const u of uploaded) {
-      if (okUrls.has(u.url)) emailedKeys.add(u.key);
+      if (okUrls.has(u.url)) receivedNames.add(u.name);
       else failed.push({ name: u.name, reason: "failed" });
     }
 
-    // 5. Reserva: archivos pequeños en lotes de < 3,5 MB directo a /api/quote.
-    await Promise.all(
-      groups.map(async (group, i) => {
-        const fd = baseForm();
-        fd.append("part", `${i + 1}/${groups.length}`);
-        group.forEach((f) => fd.append("files", f.upload, f.upload.name));
-        const ok = await postQuote(fd);
-        for (const f of group) {
-          if (ok && ok.emailed) emailedKeys.add(f.key);
-          else failed.push({ name: f.name, reason: "failed" });
-        }
-      })
-    );
-
     // Mismo orden que la lista de archivos.
     const order = files.map((f) => f.name);
-    const emailedNames = entries.filter((f) => emailedKeys.has(f.key)).map((f) => f.name);
+    const emailedNames = order.filter((n) => receivedNames.has(n));
     failed.sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name));
     const pendingNames = failed.map((p) => p.name);
 
@@ -820,11 +527,20 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
     setWaUrl(buildWhatsApp(emailedNames, pendingNames));
     setResult({ emailed: emailedNames, pending: failed, summaryOk });
     submittingRef.current = false;
-    if (!summaryOk && emailedNames.length === 0) setStatus("failed");
+    // Con Drive los archivos ya están en la carpeta, pero sin el resumen
+    // Elena no se entera: se pide WhatsApp como cuando falla todo.
+    if (!summaryOk && (driveToken || emailedNames.length === 0)) setStatus("failed");
     else if (files.length === 0 || failed.length === 0) setStatus("sent");
     else if (emailedNames.length === 0) setStatus("attach");
     else setStatus("partial");
   }
+
+  // Progreso total de la subida (bytes), o null sin archivos.
+  const totalBytes = files.reduce((n, f) => n + f.size, 0);
+  const progress =
+    status === "sending" && totalBytes
+      ? Math.round((files.reduce((n, f) => n + Math.min(f.progress || 0, f.size), 0) / totalBytes) * 100)
+      : null;
 
   const statusText =
     status === "sent"
@@ -838,20 +554,12 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
       : status === "failed"
       ? t.failed
       : status === "sending"
-      ? progress != null
+      ? progress != null && progress < 100
         ? t.uploading(progress)
         : t.sendingSummary
       : "";
 
-  function fileHint(f) {
-    if (f.state === "preparing") return t.filePreparing;
-    if (f.state === "whatsapp") {
-      const why = t.reasons[f.reason];
-      return why ? `${t.fileWhatsApp} · ${why}` : t.fileWhatsApp;
-    }
-    if (f.upload && f.upload !== f.file) return t.fileCompressed(formatKb(f.upload.size));
-    return t.fileReady;
-  }
+
 
   const labelClass = "text-sm font-medium text-slate-700";
   const fieldClass =
@@ -1010,87 +718,10 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
         {/* Columna 2: archivos, contacto, RGPD y envío */}
         <div className="space-y-5">
           <div>
-            <p className={labelClass} id={`${uid}-files-label`}>
-              {t.files}
-            </p>
-            <label
-              htmlFor={`${uid}-files`}
-              onDragOver={(e) => {
-                e.preventDefault();
-                setDragActive(true);
-              }}
-              onDragLeave={() => setDragActive(false)}
-              onDrop={(e) => {
-                e.preventDefault();
-                setDragActive(false);
-                addFiles(e.dataTransfer.files);
-              }}
-              className={`mt-1 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed px-4 py-8 text-center transition focus-within:ring-2 focus-within:ring-brand-navy ${
-                dragActive ? "border-brand-navy bg-brand-navy-50" : "border-stone-300 bg-white"
-              }`}
-            >
-              <IconUpload className="h-6 w-6 text-brand-navy" />
-              <span className="text-sm font-medium text-slate-700">{t.dropHint}</span>
-              <span className="text-xs text-slate-500">{t.dropSpec}</span>
-              <input
-                ref={fileInput}
-                id={`${uid}-files`}
-                name="files"
-                type="file"
-                multiple
-                accept={ACCEPT}
-                onChange={(e) => addFiles(e.target.files)}
-                aria-labelledby={`${uid}-files-label`}
-                aria-describedby={`${uid}-files-note${fileError ? ` ${uid}-files-error` : ""}`}
-                className="sr-only"
-              />
-            </label>
-            <p id={`${uid}-files-note`} className="mt-1 text-xs text-slate-500">
-              {t.dropNote}
-            </p>
-            {fileError ? (
-              <p id={`${uid}-files-error`} role="alert" className="mt-2 text-sm text-red-700">
-                {fileError}
-              </p>
-            ) : null}
-            {files.length > 0 ? (
-              <ul className="mt-3 space-y-2">
-                {files.map((f) => {
-                  const hint = fileHint(f);
-                  return (
-                    <li
-                      key={f.key}
-                      className="flex items-center justify-between gap-3 rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-stone-200"
-                    >
-                      <span className="flex min-w-0 flex-col text-slate-700">
-                        <span className="flex min-w-0 items-center gap-2">
-                          <IconFileText className="h-4 w-4 shrink-0 text-brand-navy" />
-                          <span className="truncate">{f.name}</span>
-                          <span className="shrink-0 text-xs text-slate-500">{formatKb(f.size)} KB</span>
-                        </span>
-                        {hint ? (
-                          <span
-                            className={`pl-6 text-xs ${
-                              f.state === "whatsapp" ? "text-amber-800" : "text-slate-500"
-                            }`}
-                          >
-                            {hint}
-                          </span>
-                        ) : null}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => removeFile(f.key)}
-                        className="link text-xs"
-                        aria-label={`${t.remove}: ${f.name}`}
-                      >
-                        {t.remove}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            ) : null}
+            <p className={labelClass}>{t.files}</p>
+            <div className="mt-1">
+              <FileDropList up={up} locale={locale} accept={DOC_ACCEPT} disabled={status === "sending"} />
+            </div>
           </div>
 
           <fieldset aria-describedby={`${uid}-contact-hint`}>

@@ -51,8 +51,25 @@ export default function Page() {
           <strong className="text-slate-900">Documents you send for
           translation:</strong>{" "}
           they may contain personal data, including special categories. They
-          are used solely to produce the sworn translation and handled in
-          strict confidence, as the profession's code of conduct requires.
+          are used solely to prepare the quote and produce the sworn
+          translation, and handled in strict confidence, as the profession's
+          code of conduct requires.
+        </li>
+        <li>
+          <strong className="text-slate-900">Where the documents you upload
+          on the website are stored</strong>{" "}
+          (“Send documents” page, price calculator and catalogue form): in a
+          private folder in the translator's Google Drive, one per
+          submission, that only she can access. The folder is not shared
+          with anyone and has no public link. If a file goes through Vercel's
+          temporary storage (when a direct upload to Drive is not possible),
+          that copy is deleted as soon as the file is in Drive or has been
+          emailed to the translator, and in any case within 24 hours. When
+          you send one or two small documents, they also reach the
+          translator's inbox as attachments so the quote can be prepared. To
+          prevent abuse, submissions per connection are counted using a
+          hashed fingerprint of the IP address (not the IP itself), deleted
+          within 48 hours.
         </li>
         <li>
           <strong className="text-slate-900">Online payment (Stripe):</strong>{" "}
@@ -82,8 +99,9 @@ export default function Page() {
       <p className="mt-3 max-w-[68ch] text-slate-600">
         Data is not shared with third parties except where legally required.
         The following providers act as processors: Web3Forms (form
-        delivery), Stripe (payments), Vercel (hosting) and Google (analytics,
-        only with consent). Some of these providers are based in the United
+        delivery), Stripe (payments), Vercel (hosting and temporary file
+        storage), Resend (email delivery) and Google (Google Drive, storage
+        of the documents you send; and analytics, only with consent). Some of these providers are based in the United
         States and operate under the EU-US Data Privacy Framework or standard
         contractual clauses.
       </p>
@@ -91,9 +109,13 @@ export default function Page() {
       <h2 className={H2}>Retention</h2>
       <p className="mt-3 max-w-[68ch] text-slate-600">
         Quote requests that don't become orders are kept for a maximum of
-        one year. Documentation for completed assignments is kept for the
-        periods required by tax law and by a sworn translator's professional
-        obligations, and then securely deleted.
+        one year. Documents you send through the website are stored in
+        Google Drive: if they don't become an order, their folder is deleted
+        3 months after the submission; if you place an order, they are kept
+        for up to 1 year after delivery (in case you need another copy or a
+        correction) and then deleted. Invoices and the data required by tax
+        law and a sworn translator's professional obligations are kept for
+        the legal periods, and then securely deleted.
       </p>
 
       <h2 className={H2}>Your rights</h2>
@@ -116,7 +138,7 @@ export default function Page() {
         ).
       </p>
 
-      <p className="mt-8 text-sm text-slate-500">Last reviewed: August 2026.</p>
+      <p className="mt-8 text-sm text-slate-500">Last reviewed: November 2026.</p>
     </main>
   );
 }

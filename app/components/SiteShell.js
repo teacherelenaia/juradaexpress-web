@@ -217,7 +217,7 @@ export default function SiteShell({ locale = "es", children }) {
           data-surface="navy"
           className="relative sticky top-0 z-40 bg-brand-navy text-slate-100 shadow-sm"
         >
-          <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:gap-3 lg:gap-6">
+          <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 max-[399px]:gap-1.5 sm:gap-3 lg:gap-3 xl:gap-5">
             {/* Logo */}
             <a
               href={t.home}
@@ -234,7 +234,7 @@ export default function SiteShell({ locale = "es", children }) {
                 height="26"
                 className="rounded opacity-90"
               />
-              <span className="max-[339px]:hidden">JuradaExpress</span>
+              <span className="max-[359px]:hidden">JuradaExpress</span>
             </a>
 
             {/* Nav (estado activo con usePathname) */}

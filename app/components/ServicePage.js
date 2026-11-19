@@ -46,6 +46,7 @@ import { withFileLink } from "../../content/expediente";
 import Image from "next/image";
 import TrackedLink from "./TrackedLink";
 import Guarantees from "./Guarantees";
+import SendDocumentsButton from "./SendDocumentsButton";
 import QuotePromise from "./QuotePromise";
 import QuoteCalculator from "./QuoteCalculator";
 import { PackGrid, PackGuarantee } from "./PacksSection";
@@ -405,6 +406,10 @@ export function Block({ block, page }) {
   return null;
 }
 
+// Páginas con botón «Enviar documentos» junto a los de la cabecera:
+// expedientes (urgente) y visados (visados, nómada digital, FBI, ACRO).
+const SEND_DOCS_PAGES = new Set(["urgente", "visados", "dnv", "fbi", "acro"]);
+
 export default function ServicePage({ page }) {
   const t = UI[page.locale] || UI.es;
   const otherHref =
@@ -543,6 +548,10 @@ export default function ServicePage({ page }) {
                 </TrackedLink>
               </>
             )}
+            {/* «Enviar documentos» (19/11/2026) en expedientes y visados. */}
+            {SEND_DOCS_PAGES.has(page.id) ? (
+              <SendDocumentsButton locale={page.locale} className="btn btn-gold" />
+            ) : null}
           </div>
           {/* Promesa de plazo (content/site.js → DELIVERY_PROMISE) bajo los botones */}
           <QuotePromise

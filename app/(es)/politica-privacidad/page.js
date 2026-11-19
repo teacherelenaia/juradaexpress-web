@@ -51,9 +51,25 @@ export default function Page() {
           <strong className="text-slate-900">Documentos que envías para
           traducir:</strong>{" "}
           pueden contener datos personales, incluso de categorías especiales.
-          Se usan exclusivamente para realizar la traducción jurada y se
-          tratan con estricta confidencialidad, como exige la deontología de
-          la profesión.
+          Se usan exclusivamente para preparar el presupuesto y realizar la
+          traducción jurada, y se tratan con estricta confidencialidad, como
+          exige la deontología de la profesión.
+        </li>
+        <li>
+          <strong className="text-slate-900">Dónde se guardan los documentos
+          que subes en la web</strong>{" "}
+          (página «Enviar documentos», calculadora y formulario del
+          catálogo): en una carpeta privada del Google Drive de la
+          traductora, una por envío, a la que solo accede ella. La carpeta
+          no se comparte con nadie ni tiene enlace público. Si el archivo
+          pasa por el almacenamiento temporal de Vercel (cuando la subida
+          directa a Drive no es posible), esa copia se borra en cuanto el
+          archivo está en Drive o se ha enviado por correo a la traductora,
+          y en todo caso en un máximo de 24 horas. Cuando envías uno o dos
+          documentos pequeños, llegan además adjuntos al correo de la
+          traductora para preparar el presupuesto. Para evitar abusos se
+          cuenta el número de envíos por conexión con una huella cifrada de
+          la dirección IP (no la IP), que se borra en 48 horas.
         </li>
         <li>
           <strong className="text-slate-900">Pago online (Stripe):</strong>{" "}
@@ -83,8 +99,10 @@ export default function Page() {
       <p className="mt-3 max-w-[68ch] text-slate-600">
         No se ceden datos a terceros salvo obligación legal. Prestan
         servicios como encargados de tratamiento: Web3Forms (envío del
-        formulario), Stripe (pagos), Vercel (alojamiento) y Google
-        (analítica, solo con consentimiento). Algunos de estos proveedores
+        formulario), Stripe (pagos), Vercel (alojamiento y almacenamiento
+        temporal de archivos), Resend (envío de correos), Google (Google
+        Drive, almacenamiento de los documentos que envías; y analítica,
+        solo con consentimiento). Algunos de estos proveedores
         están en Estados Unidos y operan bajo el Marco de Privacidad de Datos
         UE-EE. UU. o cláusulas contractuales tipo.
       </p>
@@ -92,9 +110,13 @@ export default function Page() {
       <h2 className={H2}>Conservación</h2>
       <p className="mt-3 max-w-[68ch] text-slate-600">
         Las solicitudes de presupuesto no aceptadas se conservan como máximo
-        un año. La documentación de encargos realizados se conserva durante
-        los plazos exigidos por la normativa fiscal y por las obligaciones
-        del traductor jurado, y después se elimina de forma segura.
+        un año. Los documentos que envías por la web se guardan en Google
+        Drive: si no llegan a convertirse en encargo, su carpeta se borra a
+        los 3 meses del envío; si haces el encargo, se conservan hasta 1 año
+        después de la entrega (por si necesitas otra copia o una
+        corrección) y después se eliminan. Las facturas y los datos que
+        exige la normativa fiscal y la del traductor jurado se conservan
+        durante los plazos legales, y después se eliminan de forma segura.
       </p>
 
       <h2 className={H2}>Tus derechos</h2>
@@ -119,7 +141,7 @@ export default function Page() {
       </p>
 
       <p className="mt-8 text-sm text-slate-500">
-        Última revisión: agosto de 2026.
+        Última revisión: noviembre de 2026.
       </p>
     </main>
   );
