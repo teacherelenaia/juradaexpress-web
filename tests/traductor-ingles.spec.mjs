@@ -30,6 +30,7 @@ const PAGES = [
       "Qué incluye el precio y qué no",
     ],
     unit: "página",
+    reviewsHref: "/#opiniones",
   },
   {
     path: "/en/sworn-english-translator",
@@ -46,6 +47,7 @@ const PAGES = [
       "What the price includes and what it does not",
     ],
     unit: "page",
+    reviewsHref: "/en#opiniones",
   },
 ];
 
@@ -63,10 +65,16 @@ for (const p of PAGES) {
       main.locator('dl a[href*="exteriores.gob.es"][href*="Buscador-STIJ"]')
     ).toHaveCount(1);
 
-    // Reseñas junto a las garantías, con enlace a la ficha de Google Maps.
+    // Reseñas junto a las garantías (14/11/2026, reseñas unificadas Google +
+    // Trustpilot): el total enlaza a la sección de opiniones de la portada,
+    // no a Google Maps (content/reviews.js → REVIEW_TEXT.href).
     await expect(
-      main.locator('header a[href*="google.com/maps"]')
+      main.locator(`header a[href="${p.reviewsHref}"]`)
     ).toHaveCount(1);
+    // La ficha de Google y el perfil de Trustpilot siguen enlazados en la
+    // ficha de la traductora.
+    await expect(main.locator('dl a[href*="google.com/maps"]')).toHaveCount(1);
+    await expect(main.locator('dl a[href*="trustpilot.com"]')).toHaveCount(1);
 
     // JSON-LD de la página.
     const scripts = await main
