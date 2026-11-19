@@ -50,6 +50,8 @@ export async function countSubmission(req) {
   const all = await listAll(`limites/${day}/envios/`);
   if (all.length >= GLOBAL_DAY) return "global";
   const mine = all.filter((b) => b.pathname.includes(`/envios/${visitor}-`)).length;
+  // Rastro para diagnosticar (sin datos personales: 4 caracteres de la huella).
+  console.log("[docLimits] envíos hoy:", `visitante ${visitor.slice(0, 4)}… ${mine}/${PER_VISITOR_DAY}`, `total ${all.length}/${GLOBAL_DAY}`);
   if (mine >= PER_VISITOR_DAY) return "visitor";
   await putJson(`limites/${day}/envios/${visitor}-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}.json`, {
     at: new Date().toISOString(),
