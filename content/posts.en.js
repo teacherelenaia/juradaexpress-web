@@ -6,6 +6,7 @@
 // quoted in recent posts ALWAYS come from content/documents.js
 // (eur(id) / MIN_PRICE) so they never drift from the catalogue.
 import { DOCUMENTS, MIN_PRICE } from "./documents";
+import { POSTS_EXPEDIENTES_EN } from "./posts-expedientes";
 
 const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
 const eur = (id) =>
@@ -1026,6 +1027,8 @@ export const postsEn = [
       },
     ],
   },
+  // Full visa file articles (19/11/2026): content/posts-expedientes.js
+  ...POSTS_EXPEDIENTES_EN,
 ];
 
 export function getAllPostsEn() {

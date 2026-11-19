@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "../../../../content/posts";
 import { getPostEnBySlug } from "../../../../content/posts.en";
 import { WHATSAPP_URL } from "../../../../content/site";
+import { FILE_ROUTE, FILE_WHATSAPP_URL, FILE_WHATSAPP_LABEL } from "../../../../content/expediente";
 import { personRef, ORGANIZATION_ID } from "../../../../content/persona";
 
 const BASE = "https://juradaexpress.es";
@@ -171,8 +172,10 @@ export default function BlogPostPage({ params }) {
         <article className="prose prose-slate mt-8">{post.content}</article>
       )}
 
-      {/* FAQ propia del artículo (opcional, campo `faq` en content/posts.js) */}
-      {post.faq?.length > 0 && (
+      {/* FAQ propia del artículo (opcional, campo `faq` en content/posts.js).
+          Con `faqInBody` las preguntas ya están en el cuerpo y solo van al
+          JSON-LD FAQPage. */}
+      {post.faq?.length > 0 && !post.faqInBody && (
         <section className="mt-12">
           <h2 className="font-display text-2xl font-semibold leading-snug tracking-[-0.02em] text-slate-900">
             Preguntas frecuentes
@@ -190,7 +193,32 @@ export default function BlogPostPage({ params }) {
         </section>
       )}
 
-      {/* CTA final */}
+      {/* CTA final. `cta: "expediente"` → WhatsApp de expediente completo y
+          enlace a su página (content/posts-expedientes.js). */}
+      {post.cta === "expediente" ? (
+        <div className="mt-12 rounded-xl bg-brand-navy p-6 text-white md:p-8" data-surface="navy">
+          <h2 className="font-display text-2xl font-semibold leading-snug tracking-[-0.02em] text-white">
+            ¿Tienes el expediente entero?
+          </h2>
+          <p className="mt-2 text-brand-navy-100">
+            Envíamelo con la lista de tu consulado y te doy un solo precio
+            cerrado y una sola fecha, por escrito.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <a
+              href={FILE_WHATSAPP_URL.es}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-light"
+            >
+              {FILE_WHATSAPP_LABEL.es}
+            </a>
+            <a href={FILE_ROUTE.es} className="btn btn-outline-light">
+              Precios del expediente completo
+            </a>
+          </div>
+        </div>
+      ) : (
       <div className="mt-12 rounded-xl bg-brand-navy p-6 text-white md:p-8" data-surface="navy">
         <h2 className="font-display text-2xl font-semibold leading-snug tracking-[-0.02em] text-white">
           ¿Tu documento necesita traducción jurada?
@@ -213,6 +241,7 @@ export default function BlogPostPage({ params }) {
           </a>
         </div>
       </div>
+      )}
 
       {/* Relacionados */}
       {related.length > 0 && (

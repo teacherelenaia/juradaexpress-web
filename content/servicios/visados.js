@@ -13,7 +13,7 @@
 // precio de expediente completo de content/expediente.js) y de
 // content/documents.js. «Desde» unificado en 149 € (19/11/2026).
 import { packPrice } from "../packs";
-import { FILE_ROUTE, FILE_PER_PAGE, LONGER_FILES_HTML } from "../expediente";
+import { FILE_ROUTE, FILE_PER_PAGE, LONGER_FILES_HTML, STATEMENTS_RULE, STATEMENTS_NOTE_HTML } from "../expediente";
 import { MAEC_LIST_URL, URGENCY_TEXT } from "../site";
 import { REVIEW_TEXT } from "../reviews";
 
@@ -153,7 +153,7 @@ export const es = {
       body: [
         "La mayoría de los solicitantes necesitan entre tres y ocho documentos, y traducirlos juntos sale más barato y evita incoherencias en nombres y fechas entre un documento y otro. Elige el paquete que corresponde a tu situación. Si tu expediente es más largo, tiene su propio precio cerrado: mira la <a href='/traduccion-jurada-expediente-completo-visado'>página de expediente completo</a>, con tres ejemplos.",
         { packs: PACK_IDS },
-        `Las apostillas solo cuentan como documento cuando tu consulado exige traducirlas. Los extractos bancarios, las pólizas de seguro y los contratos largos cuentan por páginas. ${LONGER_FILES_HTML.es} Plazo: en el día hasta 10 páginas; más de 10, en 24 horas. ${URGENCY_TEXT.es.sooner}`,
+        `Las apostillas solo cuentan como documento cuando tu consulado exige traducirlas. Los extractos bancarios, las pólizas de seguro y los contratos largos cuentan por páginas. ${STATEMENTS_NOTE_HTML.es} ${LONGER_FILES_HTML.es} Plazo: en el día hasta 10 páginas; más de 10, en 24 horas. ${URGENCY_TEXT.es.sooner}`,
       ],
     },
     {
@@ -199,7 +199,7 @@ export const es = {
     },
     {
       q: "¿Puedes traducir mis extractos bancarios?",
-      a: "Sí. Los extractos se presupuestan por página porque son largos; muchos consulados aceptan los de los últimos tres a seis meses, y puedo traducir solo las páginas que necesitas, con una nota de lo que se ha omitido.",
+      a: `Sí, si tu consulado los pide traducidos. ${STATEMENTS_RULE.es} Los extractos se presupuestan por página porque son largos; muchos consulados aceptan los de los últimos tres a seis meses, y puedo traducir solo las páginas que necesitas, con una nota de lo que se ha omitido.`,
     },
     {
       q: "¿Traduces documentos para los consulados de España en todas las ciudades de Estados Unidos?",
@@ -361,7 +361,7 @@ export const en = {
       body: [
         "Most applicants need between three and eight documents, and translating them together is cheaper and avoids inconsistencies in names and dates between documents. Choose the pack that matches your situation. If your file is longer, it has its own closed price: see the <a href='/en/full-visa-file-sworn-translation-spain'>full visa file page</a>, with three worked examples.",
         { packs: PACK_IDS },
-        `Apostilles only count as a document when your consulate requires them translated. Bank statements, insurance policies and long contracts count by the page. ${LONGER_FILES_HTML.en} Turnaround: same day up to 10 pages; over 10, within 24 hours. ${URGENCY_TEXT.en.sooner}`,
+        `Apostilles only count as a document when your consulate requires them translated. Bank statements, insurance policies and long contracts count by the page. ${STATEMENTS_NOTE_HTML.en} ${LONGER_FILES_HTML.en} Turnaround: same day up to 10 pages; over 10, within 24 hours. ${URGENCY_TEXT.en.sooner}`,
       ],
     },
     {
@@ -406,7 +406,7 @@ export const en = {
     },
     {
       q: "Can you translate my bank statements?",
-      a: "Yes. Statements are priced per page because they are long; many consulates accept the last three to six months, and I can translate only the pages you need, with a note of what was omitted.",
+      a: `Yes, if your consulate wants them translated. ${STATEMENTS_RULE.en} Statements are priced per page because they are long; many consulates accept the last three to six months, and I can translate only the pages you need, with a note of what was omitted.`,
     },
     {
       q: "Do you translate documents for the Spanish consulates in all US cities?",

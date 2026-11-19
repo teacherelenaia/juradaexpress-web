@@ -7,6 +7,7 @@
 // recientes salen SIEMPRE de content/documents.js (eur(id) / MIN_PRICE),
 // para que nunca se desincronicen del catálogo.
 import { DOCUMENTS, MIN_PRICE } from "./documents";
+import { POSTS_EXPEDIENTES_ES } from "./posts-expedientes";
 
 const priceOf = (id) => DOCUMENTS.find((d) => d.id === id)?.price ?? null;
 const eur = (id) =>
@@ -1453,6 +1454,8 @@ export const posts = [
       },
     ],
   },
+  // Expedientes de visado (19/11/2026): content/posts-expedientes.js
+  ...POSTS_EXPEDIENTES_ES,
 ];
 
 // Helpers sencillos

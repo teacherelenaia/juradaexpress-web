@@ -19,6 +19,8 @@
 // en una página oficial. Las páginas habituales de cada documento salen
 // de las landings del FBI y del ACRO y de los packs de content/packs.js.
 import { PACKS, packLimits } from "../packs";
+import { blogPath } from "../posts-expedientes";
+import { STATEMENTS_RULE, STATEMENTS_RULE_HTML, STATEMENTS_NOTE, STATEMENTS_NOTE_HTML, STATEMENTS_POST } from "../expediente";
 import { SAME_DAY_MAX_PAGES } from "../site";
 import { FILE_ROUTE, FILE_PER_PAGE } from "../expediente";
 import { guideById } from "./routes";
@@ -80,7 +82,7 @@ export const es = {
   image: { src: IMAGE.src, alt: IMAGE.alt.es },
   lead: [
     "Necesitas el formulario de visado nacional y el impreso EX-01 de autorización de residencia, una foto, el pasaporte, la prueba de medios económicos (el 400 % del IPREM para ti y el 100 % más por cada familiar a tu cargo, durante el primer año), un seguro de enfermedad con una aseguradora autorizada en España, el certificado de antecedentes penales de los países donde has vivido los últimos cinco años (el del FBI si vives en Estados Unidos, el ACRO si vives en el Reino Unido), un certificado médico conforme al Reglamento Sanitario Internacional de 2005, la prueba de que resides en la demarcación del consulado y el justificante de la tasa. Si vienen familiares, sus certificados de matrimonio, pareja o nacimiento.",
-    "La regla de los consulados de Londres, Nueva York, Washington y Los Ángeles es la misma y está escrita en su página: todos los documentos extranjeros se presentan legalizados o apostillados y, si no están en español, con su traducción; Nueva York concreta que debe ser una traducción oficial. Eso afecta al certificado de antecedentes, al certificado médico, a los certificados del registro civil y a los documentos económicos que no estén en español. La tabla sale de esas cuatro páginas oficiales, consultadas el 10 de octubre de 2026 y enlazadas al final, y añade cuántas páginas suele tener cada documento para que calcules el coste de la traducción.",
+    `La regla de los consulados de Londres, Nueva York, Washington y Los Ángeles es la misma y está escrita en su página: todos los documentos extranjeros se presentan legalizados o apostillados y, si no están en español, con su traducción; Nueva York concreta que debe ser una traducción oficial. Eso afecta al certificado de antecedentes, al certificado médico y a los certificados del registro civil. Los extractos bancarios son la excepción: Washington y Los Ángeles indican que no hace falta traducirlos, Londres no lo aclara y conviene preguntar, y ante la UGE, en España, van traducidos (<a href="${STATEMENTS_POST.es}">¿hay que traducir los extractos bancarios?</a>). La tabla sale de esas cuatro páginas oficiales, consultadas el 10 de octubre de 2026 y enlazadas al final, y añade cuántas páginas suele tener cada documento para que calcules el coste de la traducción.`,
   ],
   table: {
     id: "tabla",
@@ -126,8 +128,8 @@ export const es = {
         "Prueba de medios económicos: extractos o certificados bancarios, pensiones, rentas de alquiler, inversiones",
         "Tu banco, la administración que paga la pensión, tus inquilinos o gestores",
         "La regla general dice «todos los documentos extranjeros». Un extracto bancario no es documento público: pregunta a tu consulado si lo quiere apostillado o notarizado.",
-        TRAD_ES,
-        "Varias páginas por mes de extracto; una carta de pensión, 1 o 2. Se traducen por página, y se puede traducir solo lo necesario",
+        `Depende de dónde presentes la solicitud: Washington y Los Ángeles indican que los extractos no hace falta traducirlos; Londres no lo aclara. <a href="${STATEMENTS_POST.es}">¿Hay que traducir los extractos bancarios?</a>`,
+        `Varias páginas por mes de extracto; una carta de pensión, 1 o 2. Se traducen por página, y se puede traducir solo lo necesario. ${STATEMENTS_NOTE_HTML.es}`,
         "Mínimo: 400 % del IPREM para el titular más 100 % del IPREM por cada familiar a cargo, para el primer año, o una fuente periódica de ingresos. Nueva York pide, para cuentas en el extranjero, el nombre y domicilio del banco, la identificación de la cuenta, la fecha de apertura, el saldo a 31 de diciembre del año anterior y el saldo medio del último año.",
       ],
       [
@@ -180,7 +182,7 @@ export const es = {
       ],
     ],
     after:
-      "El consulado puede pedir documentos o datos adicionales y convocarte a una entrevista. Con los packs de visado el precio es cerrado por lote; los extractos y pólizas largos van por página.",
+      `El consulado puede pedir documentos o datos adicionales y convocarte a una entrevista. Con los packs de visado el precio es cerrado por lote; los extractos y pólizas largos van por página. ${STATEMENTS_RULE_HTML.es}`,
   },
   sections: [
     {
@@ -197,7 +199,7 @@ export const es = {
       title: "Cuánto dinero hay que acreditar: el 400 % del IPREM",
       body: [
         `Los cuatro consulados piden medios suficientes para el año inicial de residencia, o una fuente periódica de ingresos, por una cantidad mínima equivalente al <strong>400 % del IPREM</strong> para el titular, más el <strong>100 % del IPREM</strong> por cada familiar a cargo. El IPREM es el Indicador Público de Renta de Efectos Múltiples, creado por el ${ext(SRC.iprem, "Real Decreto-ley 3/2004")}; su cuantía la fija cada año la Ley de Presupuestos Generales del Estado, así que comprueba la cifra vigente en la fecha de tu solicitud en lugar de fiarte de una cantidad en euros publicada en una web.`,
-        "Vale cualquier documento que pruebe los medios: extractos y certificados bancarios, cartas de pensión, rentas, inversiones. Nueva York detalla lo que debe constar en la información de cuentas en el extranjero: nombre y domicilio del banco, identificación de la cuenta, fecha de apertura, saldo a 31 de diciembre del año anterior y saldo medio del último año. Los extractos son los documentos más largos del expediente: se traducen por página y puedes traducir solo las páginas necesarias.",
+        `Vale cualquier documento que pruebe los medios: extractos y certificados bancarios, cartas de pensión, rentas, inversiones. Nueva York detalla lo que debe constar en la información de cuentas en el extranjero: nombre y domicilio del banco, identificación de la cuenta, fecha de apertura, saldo a 31 de diciembre del año anterior y saldo medio del último año. Los extractos son los documentos más largos del expediente; si te los piden traducidos, se traducen por página y puedes traducir solo las páginas necesarias. ${STATEMENTS_RULE_HTML.es}`,
       ],
     },
     {
@@ -239,7 +241,7 @@ export const es = {
     },
     {
       q: "¿Qué documentos llevan traducción jurada?",
-      a: "Todos los documentos extranjeros que no estén en español, según la página de los cuatro consulados; Nueva York concreta «traducción oficial al español». En la práctica: el certificado de antecedentes, el certificado médico, los certificados del registro civil de los familiares y los extractos, cartas de pensión o certificados bancarios en inglés.",
+      a: `Todos los documentos extranjeros que no estén en español, según la página de los cuatro consulados; Nueva York concreta «traducción oficial al español». En la práctica: el certificado de antecedentes, el certificado médico, los certificados del registro civil de los familiares y las cartas de pensión o certificados bancarios en inglés. ${STATEMENTS_RULE.es}`,
     },
     {
       q: "¿Cuánto dinero tengo que acreditar?",
@@ -251,7 +253,7 @@ export const es = {
     },
     {
       q: "¿Cuántas páginas tendré que traducir?",
-      a: "Lo habitual: el certificado del FBI, de una a tres páginas; el ACRO, hasta dos; el certificado médico, una; cada certificado de matrimonio o nacimiento, una o dos; la apostilla, una página más si tu consulado la quiere traducida. Los extractos bancarios son lo más largo: varias páginas por mes, y se pueden traducir solo las necesarias.",
+      a: `Lo habitual: el certificado del FBI, de una a tres páginas; el ACRO, hasta dos; el certificado médico, una; cada certificado de matrimonio o nacimiento, una o dos; la apostilla, una página más si tu consulado la quiere traducida. Los extractos bancarios son lo más largo: varias páginas por mes, y se pueden traducir solo las necesarias. ${STATEMENTS_NOTE.es}`,
     },
     {
       q: "¿Cuánto tarda el consulado?",
@@ -299,6 +301,7 @@ export const es = {
     { href: "/traduccion-jurada-acro-reino-unido", label: "Certificado ACRO" },
     { href: "/documentos-visado-nomada-digital-espana", label: "Guía: documentos del visado de nómada digital" },
     { href: "/blog/que-es-la-apostilla-de-la-haya", label: "Qué es la apostilla" },
+    { href: blogPath("extractos", "es"), label: "Blog: ¿hay que traducir los extractos bancarios?" },
   ],
   otherLangLabel: "Spain non-lucrative visa documents checklist",
 };
@@ -327,7 +330,7 @@ export const en = {
   image: { src: IMAGE.src, alt: IMAGE.alt.en },
   lead: [
     "You need the national visa application form and the EX-01 residence authorisation form, a photo, your passport, proof of financial means (400% of the IPREM for you and a further 100% for each dependent family member, for the first year), health insurance with an insurer authorised in Spain, the criminal record certificate from the countries where you have lived in the last five years (the FBI check if you live in the United States, the ACRO certificate if you live in the UK), a medical certificate under the 2005 International Health Regulations, proof that you live in the consulate's district and the fee receipt. If family members come with you, their marriage, partnership or birth certificates.",
-    "The rule of the London, New York, Washington and Los Angeles consulates is the same and is written on their page: all foreign documents are filed legalised or apostilled and, if they are not in Spanish, with their translation; New York specifies that it must be an official translation. That covers the criminal record certificate, the medical certificate, the civil registry certificates and any financial documents that are not in Spanish. The table comes from those four official pages, consulted on 10 October 2026 and linked at the end, and adds how many pages each document usually has so that you can work out the cost of the translation.",
+    `The rule of the London, New York, Washington and Los Angeles consulates is the same and is written on their page: all foreign documents are filed legalised or apostilled and, if they are not in Spanish, with their translation; New York specifies that it must be an official translation. That covers the criminal record certificate, the medical certificate and the civil registry certificates. Bank statements are the exception: Washington and Los Angeles state that they don't need translating, London doesn't say so ask, and with the UGE in Spain they are translated (<a href="${STATEMENTS_POST.en}">do bank statements need a sworn translation?</a>). The table comes from those four official pages, consulted on 10 October 2026 and linked at the end, and adds how many pages each document usually has so that you can work out the cost of the translation.`,
   ],
   table: {
     id: "table",
@@ -366,8 +369,8 @@ export const en = {
         "Proof of financial means: bank statements or certificates, pensions, rental income, investments",
         "Your bank, the body paying the pension, your tenants or managers",
         "The general rule says \"all foreign documents\". A bank statement is not a public document: ask your consulate whether it wants it apostilled or notarised.",
-        TRANS_EN,
-        "Several pages per month of statements; a pension letter, 1 or 2. Translated per page, and only what is needed",
+        `It depends on where you apply: Washington and Los Angeles state that bank statements don't need translating; London doesn't say. <a href="${STATEMENTS_POST.en}">Do bank statements need a sworn translation?</a>`,
+        `Several pages per month of statements; a pension letter, 1 or 2. Translated per page, and only what is needed. ${STATEMENTS_NOTE_HTML.en}`,
         "Minimum: 400% of the IPREM for the applicant plus 100% of the IPREM for each dependent family member, for the first year, or a regular source of income. New York asks, for accounts abroad, for the bank's name and address, the account identification, the opening date, the balance at 31 December of the previous year and the average balance over the last year.",
       ],
       [
@@ -420,7 +423,7 @@ export const en = {
       ],
     ],
     after:
-      "The consulate may ask for additional documents or information and call you to an interview. With the visa packs the price is fixed per batch; long statements and policies are priced per page.",
+      `The consulate may ask for additional documents or information and call you to an interview. With the visa packs the price is fixed per batch; long statements and policies are priced per page. ${STATEMENTS_RULE_HTML.en}`,
   },
   sections: [
     {
@@ -437,7 +440,7 @@ export const en = {
       title: "How much money you have to prove: 400% of the IPREM",
       body: [
         `All four consulates ask for sufficient means for the initial year of residence, or a regular source of income, of a minimum amount equivalent to <strong>400% of the IPREM</strong> for the applicant, plus <strong>100% of the IPREM</strong> for each dependent family member. The IPREM is Spain's Public Multiple-Effect Income Indicator, created by ${ext(SRC.iprem, "Royal Decree-Law 3/2004")}; its amount is set every year by the General State Budget Act, so check the figure in force on your application date rather than relying on a euro amount published on a website.`,
-        "Any document proving the means is valid: bank statements and certificates, pension letters, rental income, investments. New York details what the information on accounts abroad must include: the bank's name and address, the account identification, the opening date, the balance at 31 December of the previous year and the average balance over the last year. Statements are the longest documents in the file: they are translated per page and you can translate only the pages you need.",
+        `Any document proving the means is valid: bank statements and certificates, pension letters, rental income, investments. New York details what the information on accounts abroad must include: the bank's name and address, the account identification, the opening date, the balance at 31 December of the previous year and the average balance over the last year. Statements are the longest documents in the file; if they are required in Spanish, they are translated per page and you can translate only the pages you need. ${STATEMENTS_RULE_HTML.en}`,
       ],
     },
     {
@@ -479,7 +482,7 @@ export const en = {
     },
     {
       q: "Which documents need a sworn translation?",
-      a: "Every foreign document that is not in Spanish, according to the page of all four consulates; New York specifies an \"official translation into Spanish\". In practice: the criminal record certificate, the medical certificate, the family members' civil registry certificates and any statements, pension letters or bank certificates in English.",
+      a: `Every foreign document that is not in Spanish, according to the page of all four consulates; New York specifies an \"official translation into Spanish\". In practice: the criminal record certificate, the medical certificate, the family members' civil registry certificates and any pension letters or bank certificates in English. ${STATEMENTS_RULE.en}`,
     },
     {
       q: "How much money do I have to prove?",
@@ -491,7 +494,7 @@ export const en = {
     },
     {
       q: "How many pages will I have to translate?",
-      a: "Usually: the FBI check, one to three pages; the ACRO certificate, up to two; the medical certificate, one; each marriage or birth certificate, one or two; the apostille, one more page if your consulate wants it translated. Bank statements are the longest: several pages per month, and only the necessary ones need translating.",
+      a: `Usually: the FBI check, one to three pages; the ACRO certificate, up to two; the medical certificate, one; each marriage or birth certificate, one or two; the apostille, one more page if your consulate wants it translated. Bank statements are the longest: several pages per month, and only the necessary ones need translating. ${STATEMENTS_NOTE.en}`,
     },
     {
       q: "How long does the consulate take?",
@@ -539,6 +542,7 @@ export const en = {
     { href: "/en/acro-police-certificate-translation-spain", label: "ACRO police certificate" },
     { href: "/en/spain-digital-nomad-visa-documents-checklist", label: "Guide: digital nomad visa documents" },
     { href: "/en/sworn-translation-usa-spain", label: "Coming from the United States" },
+    { href: blogPath("extractos", "en"), label: "Blog: do bank statements need a sworn translation?" },
   ],
   otherLangLabel: "Documentos para el visado no lucrativo de España",
 };

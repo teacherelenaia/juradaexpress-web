@@ -15,10 +15,15 @@ import {
   filePriceBlocks,
   fileOffers,
   fileWhatsAppFor,
+  STATEMENTS_RULE,
+  STATEMENTS_RULE_HTML,
+  STATEMENTS_NOTE_HTML,
+  STATEMENTS_POST,
 } from "../expediente";
 import { MAEC_LIST_URL, GUARANTEE_SHORT, URGENCY_TEXT } from "../site";
 import { packPrice } from "../packs";
 import { REVIEW_TEXT } from "../reviews";
+import { blogPath } from "../posts-expedientes";
 
 const PATH_ES = "/traduccion-jurada-visado-estudiante";
 const PATH_EN = "/en/sworn-translation-spain-student-visa";
@@ -38,7 +43,7 @@ export const es = {
   metaTitle: "Traducción jurada para el visado de estudiante en España",
   metaDescription: `Traductora jurada nº 7310. Qué documentos del visado de estudiante llevan traducción jurada y precio del expediente: ${FILE_PER_PAGE} €/pág. de 20 a 30 páginas.`,
   h1: "Traducción jurada para el visado de estudiante en España",
-  lead: `Para el visado de estudiante (estancia por estudios), todo documento extranjero que no esté en español se presenta con traducción jurada: antecedentes penales, certificado médico, medios económicos y la carta de quien te mantiene. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y traduzco tu expediente entero con un solo precio cerrado: un expediente típico de ${EX.pages} páginas cuesta ${EX.price} €, con entrega en 24 horas.`,
+  lead: `Para el visado de estudiante (estancia por estudios), todo documento extranjero que no esté en español se presenta con traducción jurada: antecedentes penales, certificado médico y la carta de quien te mantiene. Los extractos bancarios, <a href="${STATEMENTS_POST.es}">según dónde presentes la solicitud</a>. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y traduzco tu expediente entero con un solo precio cerrado: un expediente típico de ${EX.pages} páginas cuesta ${EX.price} €, con entrega en 24 horas.`,
   image: {
     src: "/fotos/expediente-documentos.jpg",
     alt: "Carpeta con los documentos de un expediente de visado de estudiante sobre una mesa",
@@ -68,7 +73,7 @@ export const es = {
             head: ["Documento", "¿Apostilla?", "¿Traducción jurada?", "Páginas habituales"],
             rows: [
               ["Carta de admisión del centro y justificante del pago de la matrícula", "No", "Sí, si no está en español", "1–3"],
-              ["Medios económicos: extractos bancarios (el consulado de Londres pide 6 meses) o becas", "No", "Sí", "6–18"],
+              ["Medios económicos: extractos bancarios (el consulado de Londres pide 6 meses) o becas", "No", `Becas, sí. Extractos: <a href="${STATEMENTS_POST.es}">según dónde presentes la solicitud</a>`, "6–18"],
               ["Carta de quien te mantiene, ante notario, y su partida de nacimiento", "Sí", "Sí", "2–4"],
               ['<a href="/traduccion-jurada-certificado-penales">Antecedentes penales</a> de los últimos 5 años (estancias de más de 6 meses, mayores de edad)', "Sí", "Sí", "1–3"],
               ['<a href="/traduccion-jurada-certificado-medico">Certificado médico</a> (Reglamento Sanitario Internacional de 2005), si pides el visado desde fuera de España', "Según el consulado", "Sí", "1–2"],
@@ -80,6 +85,7 @@ export const es = {
           },
         },
         `Requisitos contrastados el ${PROCEDURES_CHECKED.es} con la <a href="${HOJA1}" ${ext}>Hoja 1 del Ministerio de Inclusión</a> y la <a href="${LONDON}" ${ext}>página de visado de estudios del consulado en Londres</a>. Tu consulado puede pedir algo más: mándame su lista.`,
+        { note: STATEMENTS_RULE_HTML.es },
         { note: "Los importes de medios económicos y las tasas los fija la administración y cambian. No los publico aquí: confírmalos con tu consulado. Yo me ocupo de los documentos y la traducción." },
       ],
     },
@@ -87,7 +93,7 @@ export const es = {
       id: "precios",
       title: "¿Cuánto cuesta traducir el expediente de estudiante?",
       body: [
-        `Un expediente típico (admisión, medios económicos, antecedentes penales, título) suma ${EX.pages} páginas: ${EX.price} € en vez de ${EX.single} € como documentos sueltos, entrega en 24 horas.`,
+        `Un expediente típico (admisión, medios económicos, antecedentes penales, título) suma ${EX.pages} páginas: ${EX.price} € en vez de ${EX.single} € como documentos sueltos, entrega en 24 horas. ${STATEMENTS_NOTE_HTML.es}`,
         ...filePriceBlocks("es"),
         { cta: { id: "precios" } },
       ],
@@ -124,7 +130,7 @@ export const es = {
     },
     {
       q: "¿Hay que traducir los extractos bancarios?",
-      a: "Sí, si no están en español. Cada página cuenta para el total del expediente; si tu consulado no pide el extracto completo, traduzco solo las páginas necesarias con una nota de lo omitido.",
+      a: `${STATEMENTS_RULE.es} Si te los piden traducidos, cada página cuenta para el total del expediente; si tu consulado no pide el extracto completo, traduzco solo las páginas necesarias con una nota de lo omitido.`,
     },
     {
       q: "¿Vale la traducción después, ya en España?",
@@ -137,6 +143,7 @@ export const es = {
   },
   related: [
     { href: FILE_ROUTE.es, label: "Expediente completo de visado: precios y ejemplos" },
+    { href: blogPath("estudiante", "es"), label: "Blog: qué documentos del visado de estudiante llevan traducción jurada" },
     { href: "/traduccion-jurada-visados-espana", label: "Traducción jurada para visados de España" },
     { href: "/traduccion-jurada-antecedentes-fbi", label: "Certificado del FBI" },
     { href: "/traduccion-jurada-acro-reino-unido", label: "Certificado ACRO" },
@@ -154,7 +161,7 @@ export const en = {
   metaTitle: "Sworn translation for a Spanish student visa",
   metaDescription: `Sworn translator no. 7310. Which Spanish student visa documents need a sworn translation, and the full file price: €${FILE_PER_PAGE}/page for 20–30 pages.`,
   h1: "Sworn translation for a Spanish student visa",
-  lead: `For a Spanish student visa (student stay), every foreign document not in Spanish is submitted with a sworn translation: criminal record, medical certificate, proof of means and your sponsor's letter. I'm Elena Peñaranda Ortega, sworn translator no. 7310, and I translate your whole file at one closed price: a typical ${EX.pages}-page file costs €${EX.price}, delivered within 24 hours.`,
+  lead: `For a Spanish student visa (student stay), every foreign document not in Spanish is submitted with a sworn translation: criminal record, medical certificate and your sponsor's letter. Bank statements <a href="${STATEMENTS_POST.en}">depend on where you apply</a>. I'm Elena Peñaranda Ortega, sworn translator no. 7310, and I translate your whole file at one closed price: a typical ${EX.pages}-page file costs €${EX.price}, delivered within 24 hours.`,
   image: {
     src: "/fotos/expediente-documentos.jpg",
     alt: "Folder with the documents of a student visa file on a desk",
@@ -184,7 +191,7 @@ export const en = {
             head: ["Document", "Apostille?", "Sworn translation?", "Usual pages"],
             rows: [
               ["Admission letter and proof that enrolment fees are paid", "No", "Yes, if not in Spanish", "1–3"],
-              ["Proof of means: bank statements (the London consulate asks for 6 months) or scholarships", "No", "Yes", "6–18"],
+              ["Proof of means: bank statements (the London consulate asks for 6 months) or scholarships", "No", `Scholarships, yes. Statements: <a href="${STATEMENTS_POST.en}">depends on where you apply</a>`, "6–18"],
               ["Notarised sponsor letter and the sponsor's birth certificate", "Yes", "Yes", "2–4"],
               ['<a href="/en/fbi-background-check-translation-spain">Criminal record</a> for the last 5 years (stays over 6 months, adults)', "Yes", "Yes", "1–3"],
               ["Medical certificate (2005 International Health Regulations), if you apply from outside Spain", "Depends on the consulate", "Yes", "1–2"],
@@ -196,6 +203,7 @@ export const en = {
           },
         },
         `Requirements checked on ${PROCEDURES_CHECKED.en} against <a href="${HOJA1}" ${ext}>Information sheet 1 of Spain's Ministry of Inclusion</a> and the <a href="${LONDON}" ${ext}>London consulate's student visa page</a>. Your consulate may ask for more: send me its checklist.`,
+        { note: STATEMENTS_RULE_HTML.en },
         { note: "Financial thresholds and fees are set by the Spanish administration and change. I don't publish them here: confirm them with your consulate. I take care of the documents and the translation." },
       ],
     },
@@ -203,7 +211,7 @@ export const en = {
       id: "prices",
       title: "How much does a student visa file cost?",
       body: [
-        `A typical file (admission, proof of means, criminal record, degree) comes to ${EX.pages} pages: €${EX.price} instead of €${EX.single} as single documents, delivered within 24 hours.`,
+        `A typical file (admission, proof of means, criminal record, degree) comes to ${EX.pages} pages: €${EX.price} instead of €${EX.single} as single documents, delivered within 24 hours. ${STATEMENTS_NOTE_HTML.en}`,
         ...filePriceBlocks("en"),
         { cta: { id: "prices" } },
       ],
@@ -240,7 +248,7 @@ export const en = {
     },
     {
       q: "Do bank statements have to be translated?",
-      a: "Yes, if they are not in Spanish. Every page counts towards the file total; if your consulate doesn't need the full statement, I translate only the pages required, with a note of what was left out.",
+      a: `${STATEMENTS_RULE.en} If they are required, every page counts towards the file total; if your consulate doesn't need the full statement, I translate only the pages required, with a note of what was left out.`,
     },
     {
       q: "Is the translation still valid once I'm in Spain?",
@@ -253,6 +261,7 @@ export const en = {
   },
   related: [
     { href: FILE_ROUTE.en, label: "Full visa file: prices and examples" },
+    { href: blogPath("estudiante", "en"), label: "Blog: which student visa documents need a sworn translation" },
     { href: "/en/sworn-translations-spanish-visas", label: "Sworn translations for Spanish visas" },
     { href: "/en/fbi-background-check-translation-spain", label: "FBI background check" },
     { href: "/en/acro-police-certificate-translation-spain", label: "ACRO police certificate" },

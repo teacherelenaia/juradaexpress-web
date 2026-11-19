@@ -26,7 +26,10 @@ import {
   FILE_PROCEDURES,
   PROCEDURES_CHECKED,
   LONGER_FILES_SHORT,
+  STATEMENTS_RULE,
+  STATEMENTS_POST,
 } from "../../content/expediente";
+import { POSTS_EXPEDIENTES_ES, POSTS_EXPEDIENTES_EN, SHORT_ANSWERS, SLUGS } from "../../content/posts-expedientes";
 
 const BASE = "https://juradaexpress.es";
 
@@ -57,6 +60,7 @@ function fullFilesSection() {
     "",
     "Examples:",
     examples("en"),
+    `- ${STATEMENTS_RULE.en} ${BASE}${STATEMENTS_POST.en}`,
     "",
     `Quién: Elena Peñaranda Ortega, traductora jurada nº 7310 del MAEC, traduce expedientes completos de visado para España con un solo precio cerrado y una sola fecha de entrega. Página: ${BASE}${FILE_ROUTE.es}`,
     "",
@@ -65,10 +69,25 @@ function fullFilesSection() {
     "",
     "Ejemplos:",
     examples("es"),
+    `- ${STATEMENTS_RULE.es} ${BASE}${STATEMENTS_POST.es}`,
     "",
     `By procedure / Por trámite (requirements checked against official sources on ${PROCEDURES_CHECKED.en}):`,
     procs("en"),
   ].join("\n");
+}
+
+// Artículos de expedientes de visado (19/11/2026): una línea por artículo,
+// bajo el enlace al blog, con su respuesta corta (el primer párrafo).
+function blogFilesLines(locale) {
+  const posts = locale === "en" ? POSTS_EXPEDIENTES_EN : POSTS_EXPEDIENTES_ES;
+  const prefix = locale === "en" ? `${BASE}/en/blog/` : `${BASE}/blog/`;
+  return Object.keys(SLUGS)
+    .map((key) => {
+      const post = posts.find((p) => p.slug === SLUGS[key][locale]);
+      if (!post) throw new Error(`llms.txt: falta el artículo «${key}» (${locale})`);
+      return `- [${post.title}](${prefix}${post.slug}): ${SHORT_ANSWERS[key][locale]}`;
+    })
+    .join("\n");
 }
 
 export const dynamic = "force-static";
@@ -114,6 +133,8 @@ export function GET() {
       .replaceAll("{{FULL_FILES}}", fullFilesSection())
       .replaceAll("{{FILE_RULE_ES}}", LONGER_FILES_SHORT.es)
       .replaceAll("{{FILE_RULE_EN}}", LONGER_FILES_SHORT.en)
+      .replaceAll("{{BLOG_FILES_ES}}", blogFilesLines("es"))
+      .replaceAll("{{BLOG_FILES_EN}}", blogFilesLines("en"))
   );
   return new Response(body, {
     status: 200,

@@ -27,10 +27,13 @@ import {
   singleDocPrice,
   procedureTable,
   PROCEDURES_CHECKED,
+  STATEMENTS_RULE,
+  STATEMENTS_NOTE_HTML,
 } from "../expediente";
 import { MAEC_LIST_URL, GUARANTEE_SHORT, URGENCY_TEXT, PRICE_PER_PAGE } from "../site";
 import { packPrice } from "../packs";
 import { REVIEW_TEXT } from "../reviews";
+import { blogPath } from "../posts-expedientes";
 
 const PATH_ES = FILE_ROUTE.es;
 const PATH_EN = FILE_ROUTE.en;
@@ -104,6 +107,9 @@ export const es = {
         `Expedientes típicos, sin datos de ningún cliente. Las páginas son las del original, apostillas incluidas; el precio tachado son esas mismas páginas a ${PRICE_PER_PAGE} € como documento suelto.`,
         { examples: FILE_EXAMPLES },
         `El de nómada digital: ${NOMAD.pages} páginas, ${NOMAD.price} € en vez de ${NOMAD.single} € a la tarifa de documento suelto. Te ahorras ${NOMAD.single - NOMAD.price} €.`,
+        // Nota del brief de blog (19/11/2026): los consulados de Washington y
+        // Los Ángeles no piden traducidos los extractos.
+        `Los extractos no siempre se traducen: <a href="${blogPath("extractos", "es")}">depende de dónde presentes la solicitud</a>. Si tu consulado no los pide traducidos, tu expediente será más corto y más barato.`,
         { cta: { id: "ejemplos" } },
       ],
     },
@@ -127,6 +133,7 @@ export const es = {
       body: [
         `Documentos habituales de cada visado o autorización, cuáles llevan traducción jurada y cuántas páginas suelen sumar. Requisitos contrastados con la fuente oficial el ${PROCEDURES_CHECKED.es}; tu consulado puede pedir algo más, así que mándame su lista.`,
         { table: procedureTable("es") },
+        { note: STATEMENTS_NOTE_HTML.es },
       ],
     },
     {
@@ -180,7 +187,7 @@ export const es = {
     },
     {
       q: "¿Hay que traducir los extractos bancarios enteros?",
-      a: `Depende del consulado: muchos piden los últimos 3 a 6 meses. Si tu consulado no exige el extracto completo, puedo traducir solo las páginas que necesitas, con una nota de lo omitido. Cada página cuenta para el total del expediente: de ${FILE_PER_PAGE_MIN} a ${FILE_PER_PAGE_MAX} páginas, a ${FILE_PER_PAGE} €.`,
+      a: `${STATEMENTS_RULE.es} Si te los piden, muchos consulados quieren los últimos 3 a 6 meses. Si tu consulado no exige el extracto completo, puedo traducir solo las páginas que necesitas, con una nota de lo omitido. Cada página cuenta para el total del expediente: de ${FILE_PER_PAGE_MIN} a ${FILE_PER_PAGE_MAX} páginas, a ${FILE_PER_PAGE} €.`,
     },
     {
       q: "¿Puedo pagar en dólares o en libras?",
@@ -208,6 +215,8 @@ export const es = {
     text: "Por WhatsApp o por email, con el trámite y el consulado. En menos de dos horas tienes un solo precio y una sola fecha por escrito.",
   },
   related: [
+    { href: blogPath("coste", "es"), label: "Blog: cuánto cuesta traducir un expediente completo de visado" },
+    { href: blogPath("extractos", "es"), label: "Blog: ¿hay que traducir los extractos bancarios?" },
     { href: "/traduccion-jurada-visados-espana", label: "Traducción jurada para visados de España" },
     { href: "/traduccion-jurada-visado-nomada-digital", label: "Visado de nómada digital" },
     { href: "/traduccion-jurada-visado-estudiante", label: "Visado de estudiante" },
@@ -288,6 +297,7 @@ export const en = {
         `Typical files, with no client's details. Page counts are for the originals, apostilles included; the struck-through price is the same pages at the €${PRICE_PER_PAGE} single-document rate.`,
         { examples: FILE_EXAMPLES },
         `The digital nomad file: ${NOMAD.pages} pages, €${NOMAD.price} instead of €${NOMAD.single} at the single-document rate. You save €${NOMAD.single - NOMAD.price}.`,
+        `Bank statements are not always translated: <a href="${blogPath("extractos", "en")}">it depends on where you apply</a>. If your consulate doesn't ask for them in Spanish, your file is shorter and cheaper.`,
         { cta: { id: "examples" } },
       ],
     },
@@ -311,6 +321,7 @@ export const en = {
       body: [
         `Usual documents for each visa or permit, which ones need a sworn translation and how many pages they usually add up to. Requirements checked against the official source on ${PROCEDURES_CHECKED.en}; your consulate may ask for more, so send me its checklist.`,
         { table: procedureTable("en") },
+        { note: STATEMENTS_NOTE_HTML.en },
       ],
     },
     {
@@ -364,7 +375,7 @@ export const en = {
     },
     {
       q: "Do bank statements have to be translated in full?",
-      a: `It depends on the consulate: many ask for the last 3 to 6 months. If yours doesn't require the full statement, I can translate only the pages you need, with a note of what was left out. Every page counts towards the file total: €${FILE_PER_PAGE} per page from ${FILE_PER_PAGE_MIN} to ${FILE_PER_PAGE_MAX} pages.`,
+      a: `${STATEMENTS_RULE.en} If they are required, many consulates want the last 3 to 6 months. If yours doesn't require the full statement, I can translate only the pages you need, with a note of what was left out. Every page counts towards the file total: €${FILE_PER_PAGE} per page from ${FILE_PER_PAGE_MIN} to ${FILE_PER_PAGE_MAX} pages.`,
     },
     {
       q: "Can I pay in US dollars or pounds?",
@@ -392,6 +403,8 @@ export const en = {
     text: "On WhatsApp or by email, with the procedure and the consulate. In under two hours you have one price and one delivery date in writing.",
   },
   related: [
+    { href: blogPath("coste", "en"), label: "Blog: how much a full Spain visa file costs to translate" },
+    { href: blogPath("extractos", "en"), label: "Blog: do bank statements need a sworn translation?" },
     { href: "/en/sworn-translations-spanish-visas", label: "Sworn translations for Spanish visas" },
     { href: "/en/sworn-translation-spain-digital-nomad-visa", label: "Digital nomad visa" },
     { href: "/en/sworn-translation-spain-student-visa", label: "Student visa" },
