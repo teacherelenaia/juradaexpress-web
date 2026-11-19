@@ -5,6 +5,7 @@
 import { MIN_PRICE } from "./documents";
 import { REVIEW_STATS, TRUSTPILOT_URL } from "./reviews";
 import { PRICE_PER_PAGE, URGENCY_SURCHARGE, FIXED_PRICE_MAX_PAGES } from "./pricing";
+import { LONGER_FILES_SHORT, LONGER_FILES } from "./expediente";
 
 export const PHONE_DISPLAY = "685 891 214";
 export const PHONE_TEL = "+34685891214";
@@ -125,9 +126,20 @@ export const EXTRA_AREA_SERVED = ["NZ", "ZA", "GI", "PK", "NG", "PH"];
 
 // Horario de atención con referencia horaria explícita (los clientes de
 // EEUU, India o Australia necesitan saber a qué hora escriben).
+// 19/11/2026 (Elena): presupuesta y entrega todos los días, sábados y
+// domingos incluidos; de 9:00 a 23:00 (hora de Madrid) el presupuesto de un
+// expediente sale en menos de 2 horas y lo que llega de noche se contesta
+// antes de las 9:00. Mismo dato en openingHoursSpecification (SiteShell) y
+// en /llms.txt.
+export const OPENING_HOURS = { opens: "09:00", closes: "23:00" };
 export const TIMEZONE_NOTE = {
-  es: "Horario de atención de 9:00 a 20:00, hora peninsular española (CET/CEST)",
-  en: "Office hours 9:00 to 20:00, mainland Spain time (CET/CEST)",
+  es: "Atiendo todos los días, sábados y domingos incluidos, de 9:00 a 23:00, hora peninsular española (CET/CEST)",
+  en: "I work every day, weekends included, from 9:00 to 23:00 mainland Spain time (CET/CEST)",
+};
+// Lo que pasa fuera de ese horario, en una frase.
+export const AFTER_HOURS_NOTE = {
+  es: "Si me escribes de noche, te contesto antes de las 9:00",
+  en: "If you write overnight, I reply before 9:00 Madrid time",
 };
 
 // Envío en papel fuera de España. Sin tarifa fija publicada: el coste del
@@ -391,17 +403,28 @@ export const PACKS = [
 export const getPack = (id) => PACKS.find((p) => p.id === id);
 /** Precio en euros de un pack por id (o null). */
 export const packPrice = (id) => getPack(id)?.price ?? null;
+// Packs de visado (19/11/2026): por encima de su límite ya no se cobra
+// «página adicional, 20 €», sino el precio de expediente completo
+// (content/expediente.js → LONGER_FILES). Los demás packs (Irlanda / Reino
+// Unido, permiso de conducir) siguen con la página adicional.
+export const VISA_PACK_IDS = ["visa", "visa-family", "nomad"];
+export const isVisaPack = (p) => VISA_PACK_IDS.includes(typeof p === "string" ? p : p?.id);
+
 /**
- * Límites de un pack en una frase: «hasta 4 documentos y 8 páginas en
- * total; página adicional, 20 €» / «up to 4 documents and 8 pages in
- * total; extra page, €20». Acepta el pack o su id.
+ * Límites de un pack en una frase. Packs de visado: «hasta 4 documentos y
+ * 8 páginas en total; expediente más largo, precio cerrado: nunca más de
+ * 300 € hasta 19 páginas y 15 € por página de 20 a 30». Resto: «…; página
+ * adicional, 20 €». Acepta el pack o su id.
  */
 export function packLimits(pack, locale = "es") {
   const p = typeof pack === "string" ? getPack(pack) : pack;
   if (!p) return "";
-  return locale === "en"
-    ? `up to ${p.documents} documents and ${p.pages} pages in total; extra page, €${PRICE_PER_PAGE}`
-    : `hasta ${p.documents} documentos y ${p.pages} páginas en total; página adicional, ${PRICE_PER_PAGE} €`;
+  const en = locale === "en";
+  const base = en
+    ? `up to ${p.documents} documents and ${p.pages} pages in total`
+    : `hasta ${p.documents} documentos y ${p.pages} páginas en total`;
+  if (isVisaPack(p)) return `${base}; ${LONGER_FILES_SHORT[en ? "en" : "es"]}`;
+  return en ? `${base}; extra page, €${PRICE_PER_PAGE}` : `${base}; página adicional, ${PRICE_PER_PAGE} €`;
 }
 
 // Precio del Digital Nomad Visa Pack (alias que usan la landing de nómada
@@ -409,12 +432,12 @@ export function packLimits(pack, locale = "es") {
 // "presupuesto cerrado en menos de 2 h".
 export const DNV_PACK_PRICE = packPrice("nomad");
 export const DNV_PACK_PRICE_TEXT = {
-  es: `Precio: paquete visado de nómada digital, ${DNV_PACK_PRICE} € hasta ${DNV_PACK_MAX_DOCUMENTS} documentos y un máximo de ${DNV_PACK_MAX_PAGES} páginas en total. Cada página adicional, ${PRICE_PER_PAGE} €. Te doy el precio cerrado del lote por escrito antes de empezar y se paga en euros con tarjeta internacional.`,
-  en: `Price: digital nomad visa package, €${DNV_PACK_PRICE} for up to ${DNV_PACK_MAX_DOCUMENTS} documents and a maximum of ${DNV_PACK_MAX_PAGES} pages in total. Each additional page, €${PRICE_PER_PAGE}. You get a fixed price for the whole batch in writing before I start, paid in euros by international card.`,
+  es: `Precio: paquete visado de nómada digital, ${DNV_PACK_PRICE} € hasta ${DNV_PACK_MAX_DOCUMENTS} documentos y un máximo de ${DNV_PACK_MAX_PAGES} páginas en total. ${LONGER_FILES.es}. Te doy el precio cerrado del lote por escrito antes de empezar y se paga en euros con tarjeta internacional.`,
+  en: `Price: digital nomad visa package, €${DNV_PACK_PRICE} for up to ${DNV_PACK_MAX_DOCUMENTS} documents and a maximum of ${DNV_PACK_MAX_PAGES} pages in total. ${LONGER_FILES.en}. You get a fixed price for the whole batch in writing before I start, paid in euros by international card.`,
 };
 export const DNV_PACK_NOTE = {
-  es: "Los documentos que no necesitan traducción jurada para el consulado o la UGE, como la copia del pasaporte, no cuentan para el paquete. Si tu expediente es más largo, te digo el precio exacto al revisarlo.",
-  en: "Documents that don’t need a sworn translation for the consulate or the UGE, such as a passport copy, don’t count towards the package. If your file is longer, I’ll give you the exact price when I review it.",
+  es: "Los documentos que no necesitan traducción jurada para el consulado o la UGE, como la copia del pasaporte, no cuentan para el paquete. Si tu expediente es más largo, te doy el precio cerrado del expediente completo al revisarlo.",
+  en: "Documents that don’t need a sworn translation for the consulate or the UGE, such as a passport copy, don’t count towards the package. If your file is longer, I’ll give you the closed price for the whole file when I review it.",
 };
 // Versión corta para tablas y fichas de precio.
 export const DNV_PACK_LIMITS = {

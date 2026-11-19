@@ -8,6 +8,7 @@
 // 14/11/2026: los datos de cada pack (nombre, documentos incluidos, precio
 // y rango «por separado») viven en content/site.js → PACKS, la única
 // fuente. Este archivo los reexporta y añade los textos de la sección.
+import { LONGER_FILES, FILE_ROUTE } from "./expediente";
 import {
   PRICE_PER_PAGE,
   PACKS,
@@ -41,7 +42,11 @@ export const PACKS_COPY = {
       "Precio cerrado para los lotes de documentos más habituales. Si tu trámite pide algo distinto, te lo presupuesto al ver los documentos.",
     documents: (n, pages) => `Hasta ${n} documentos · ${pages} páginas`,
     // Bajo el título, junto a la garantía (14/11/2026).
-    pageLimit: `Todos los packs tienen un límite de páginas; cada página adicional, ${EXTRA_PAGE_PRICE} €.`,
+    // 19/11/2026: los packs de visado ya no cobran la página adicional a
+    // 20 €; por encima del límite, precio de expediente completo.
+    pageLimit: `Todos los packs tienen un límite de páginas. ${LONGER_FILES.es}. En los packs de Irlanda / Reino Unido y de permiso de conducir, cada página adicional, ${EXTRA_PAGE_PRICE} €.`,
+    pageLimitVisa: `Todos los packs tienen un límite de páginas. ${LONGER_FILES.es}.`,
+    fileLink: { label: "Precios y ejemplos de expediente completo", href: FILE_ROUTE.es },
     note: `Cada documento adicional fuera del paquete, a tarifa normal. Plazo: en el día hasta ${SAME_DAY_MAX_PAGES} páginas; ${URGENCY_TEXT.es.overLimit}. Igual que en el resto de tarifas, ${URGENCY_TEXT.es.surcharge}.`,
     order: "Pedir este pack",
     orderHref: "/documentos",
@@ -65,7 +70,9 @@ export const PACKS_COPY = {
     intro:
       "Fixed price for the most common document batches. If your procedure asks for something different, I quote it once I see the documents.",
     documents: (n, pages) => `Up to ${n} documents · ${pages} pages`,
-    pageLimit: `Every pack has a page limit; each extra page, €${EXTRA_PAGE_PRICE}.`,
+    pageLimit: `Every pack has a page limit. ${LONGER_FILES.en}. In the Ireland / UK and Driving Licence packs, each extra page is €${EXTRA_PAGE_PRICE}.`,
+    pageLimitVisa: `Every pack has a page limit. ${LONGER_FILES.en}.`,
+    fileLink: { label: "Full visa file prices and examples", href: FILE_ROUTE.en },
     note: `Each additional document outside the pack is charged at the normal rate. Turnaround: same day up to ${SAME_DAY_MAX_PAGES} pages; ${URGENCY_TEXT.en.overLimit}. As with all other rates, ${URGENCY_TEXT.en.surcharge}.`,
     order: "Order this pack",
     orderHref: "/en/documentos",

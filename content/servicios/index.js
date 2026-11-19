@@ -6,6 +6,9 @@ import * as visados from "./visados";
 import * as fbi from "./fbi";
 import * as acro from "./acro";
 import * as nomadaDigital from "./nomada-digital";
+import * as expediente from "./expediente";
+import * as estudiante from "./estudiante";
+import * as altaCualificacion from "./alta-cualificacion";
 import * as uscis from "./uscis";
 import * as estadosUnidos from "./estados-unidos";
 import * as india from "./india";
@@ -22,7 +25,10 @@ export const SERVICE_PAGES = [
   visados,
   fbi,
   acro,
+  expediente,
   nomadaDigital,
+  estudiante,
+  altaCualificacion,
   uscis,
   estadosUnidos,
   india,

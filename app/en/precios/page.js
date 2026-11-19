@@ -8,6 +8,8 @@ import {
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
 import { packOffers } from "../../../content/packs";
 import PacksSection from "../../components/PacksSection";
+import { FileTiersSection } from "../../components/FileTiers";
+import { FILE_ROUTE, FILE_PER_PAGE, filePerPageOffer } from "../../../content/expediente";
 import PricePerDocument from "../../components/PricePerDocument";
 import QuotePromise from "../../components/QuotePromise";
 
@@ -102,6 +104,16 @@ export default function Page() {
               </td>
               <td className="p-3">Same day (up to 10 pages)</td>
             </tr>
+            <tr className="bg-stone-50/50">
+              <td className="p-3">
+                <a href={FILE_ROUTE.en} className="link">
+                  Full visa file
+                </a>{" "}
+                (20 to 30 pages)
+              </td>
+              <td className="p-3">{`€${FILE_PER_PAGE} per page; 11 to 19 pages, never more than €300`}</td>
+              <td className="p-3">Within 24 hours</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -128,6 +140,9 @@ export default function Page() {
 
       <PacksSection locale="en" />
 
+      {/* Expediente completo de visado (19/11/2026, content/expediente.js) */}
+      <FileTiersSection locale="en" className="mt-14" />
+
       {/* JSON-LD: one Offer per pack (content/packs.js) */}
       <script
         type="application/ld+json"
@@ -137,7 +152,7 @@ export default function Page() {
             "@type": "OfferCatalog",
             name: "Sworn translation packs by procedure",
             url: "https://juradaexpress.es/en/precios#packs",
-            itemListElement: packOffers("en"),
+            itemListElement: [...packOffers("en"), filePerPageOffer("en")],
           }),
         }}
       />

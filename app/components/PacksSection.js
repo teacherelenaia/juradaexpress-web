@@ -71,14 +71,21 @@ export function PackCard({ pack: p, locale = "es", orderHref }) {
 
 // Garantía de los packs (14/11/2026): va bajo el título de la sección de
 // packs en /precios y en las páginas de servicio que muestran packs.
-export function PackGuarantee({ locale = "es", className = "" }) {
+// `visaOnly` (19/11/2026): en las páginas que solo muestran packs de visado,
+// la línea de límite no menciona la página adicional de los otros packs.
+export function PackGuarantee({ locale = "es", className = "", visaOnly = false }) {
   const t = PACKS_COPY[locale] || PACKS_COPY.es;
   return (
     <p
       className={`max-w-2xl rounded-lg bg-brand-gold-50 px-4 py-3 text-[0.9375rem] font-medium text-slate-900 ring-1 ring-brand-gold-200 ${className}`}
     >
       {t.guarantee}
-      <span className="mt-1 block font-normal text-slate-700">{t.pageLimit}</span>
+      <span className="mt-1 block font-normal text-slate-700">
+        {visaOnly ? t.pageLimitVisa : t.pageLimit}{" "}
+        <a href={t.fileLink.href} className="link">
+          {t.fileLink.label}
+        </a>
+      </span>
     </p>
   );
 }

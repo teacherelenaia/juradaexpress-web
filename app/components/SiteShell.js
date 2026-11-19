@@ -25,6 +25,7 @@ import {
   TRUSTPILOT_URL,
   SERVICE_COUNTRIES,
   EXTRA_AREA_SERVED,
+  OPENING_HOURS,
 } from "../../content/site";
 import { personJsonLd, personRef, PERSON_ID } from "../../content/persona";
 import {
@@ -113,6 +114,10 @@ const FOOTER = {
       { href: "/sobre-mi", label: "Sobre mí" },
       { href: "/preguntas-frecuentes", label: "Preguntas frecuentes" },
       {
+        href: SERVICE_ROUTES.find((r) => r.id === "expediente").es,
+        label: "Expediente completo de visado",
+      },
+      {
         href: SERVICE_ROUTES.find((r) => r.id === "urgente").es,
         label: "Urgentes y grandes volúmenes",
       },
@@ -155,6 +160,10 @@ const FOOTER = {
       { href: "/en/contacto", label: "Contact" },
       { href: "/en/about", label: "About me" },
       { href: "/en/preguntas-frecuentes", label: "FAQ" },
+      {
+        href: SERVICE_ROUTES.find((r) => r.id === "expediente").en,
+        label: "Full visa file",
+      },
       {
         href: SERVICE_ROUTES.find((r) => r.id === "urgente").en,
         label: "Urgent and large projects",
@@ -448,15 +457,18 @@ export default function SiteShell({ locale = "es", children }) {
                 employee: { "@id": PERSON_ID },
                 openingHoursSpecification: {
                   "@type": "OpeningHoursSpecification",
+                  // Todos los días (content/site.js → OPENING_HOURS, 19/11/2026).
                   dayOfWeek: [
                     "Monday",
                     "Tuesday",
                     "Wednesday",
                     "Thursday",
                     "Friday",
+                    "Saturday",
+                    "Sunday",
                   ],
-                  opens: "09:00",
-                  closes: "20:00",
+                  opens: OPENING_HOURS.opens,
+                  closes: OPENING_HOURS.closes,
                 },
                 sameAs: [
                   "https://wa.me/34685891214",
