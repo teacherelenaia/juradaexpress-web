@@ -3,6 +3,9 @@
 // app/components/DocumentCatalog.js
 import { useEffect, useRef, useState } from "react";
 import { setAdsUserData, trackAdsConversion } from "./AdsConversion";
+import useDocUpload from "./useDocUpload";
+import FileDropList from "./FileDropList";
+import { ACCEPT } from "../lib/docUploadClient";
 import { DOCUMENTS } from "../../content/documents";
 import {
   IconFileText,
@@ -14,7 +17,6 @@ import {
   IconBriefcase,
   IconEdit,
   IconHelpCircle,
-  IconUpload,
 } from "./Icons";
 
 const ICONS = {
@@ -33,23 +35,20 @@ function formatPrice(price) {
   return price != null ? `${price} €` : "Pendiente de presupuestar";
 }
 
-// Los adjuntos por email son función de pago en Web3Forms. Por ahora el
-// archivo solo se muestra como vista previa en la página: no se envía.
-// Ver nota junto al formulario y al dropzone.
-const MAX_FILE_BYTES = 20 * 1024 * 1024;
+// Documentos (19/11/2026): antes el archivo solo se mostraba en la página
+// y NO se enviaba (los adjuntos son de pago en Web3Forms). Ahora se suben
+// con el mismo motor que /enviar-documentos (useDocUpload): llegan a la
+// carpeta de Drive del envío y Elena recibe «Documentos recibidos · …».
 const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
 export default function DocumentCatalog() {
   const [selectedIds, setSelectedIds] = useState([]);
-  const [file, setFile] = useState(null);
-  const [fileNotice, setFileNotice] = useState("");
-  const [dragActive, setDragActive] = useState(false);
+  const up = useDocUpload();
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error | config-missing
   const [fieldErrors, setFieldErrors] = useState({}); // { Nombre, Email, privacidad }
   const [payStatus, setPayStatus] = useState("idle"); // idle | redirecting | error
 
   const formRef = useRef(null);
-  const fileInputRef = useRef(null);
   const prevCountRef = useRef(0);
 
   const selectedDocs = DOCUMENTS.filter((d) => selectedIds.includes(d.id));
@@ -71,29 +70,6 @@ export default function DocumentCatalog() {
     );
   }
 
-  function handleFiles(fileList) {
-    const incoming = Array.from(fileList);
-    if (incoming.length === 0) return;
-    const chosen = incoming[0];
-
-    if (chosen.size > MAX_FILE_BYTES) {
-      setFileNotice("Ese archivo pesa demasiado. Envíanoslo por WhatsApp o email.");
-      return;
-    }
-
-    setFile(chosen);
-    setFileNotice(
-      incoming.length > 1
-        ? "Solo se muestra el primer archivo aquí. Puedes enviarnos el resto por WhatsApp o email cuando te contactemos."
-        : ""
-    );
-  }
-
-  function removeFile() {
-    setFile(null);
-    setFileNotice("");
-  }
-
   async function handlePayOnline() {
     setPayStatus("redirecting");
     try {
@@ -111,12 +87,6 @@ export default function DocumentCatalog() {
     } catch (err) {
       setPayStatus("error");
     }
-  }
-
-  function handleDrop(e) {
-    e.preventDefault();
-    setDragActive(false);
-    if (e.dataTransfer.files?.length) handleFiles(e.dataTransfer.files);
   }
 
   // Validación inline (sin alert()): devuelve el mapa de errores por campo.
@@ -171,6 +141,26 @@ export default function DocumentCatalog() {
     }
 
     setStatus("sending");
+    // Documentos: se suben antes del aviso (llegan a Drive con su propio
+    // aviso a Elena) y el aviso del formulario dice cuántos han llegado.
+    let docLine = "No adjuntó ningún archivo en la web";
+    if (up.entries.length) {
+      const r = await up.send(
+        {
+          name: form.Nombre.value.trim(),
+          email: form.Email.value.trim(),
+          phone: form["Teléfono"].value.trim(),
+          tramite: selectedDocs.map((d) => d.name).join(", ").slice(0, 120),
+          comment: "",
+          locale: "es",
+        },
+        { notify: true }
+      );
+      docLine = r.ok
+        ? `${r.received.length} recibidos (referencia ${r.ref}; aviso aparte «Documentos recibidos»)` +
+          (r.failed.length ? `; NO llegaron: ${r.failed.map((f) => f.name).join(", ")}` : "")
+        : `No se pudieron subir (${up.entries.map((e) => e.name).join(", ")}): pedir por WhatsApp/email`;
+    }
     // FormData(form) captura Nombre/Email/Teléfono/botcheck por su atributo name.
     const fd = new FormData(form);
     fd.delete("botcheck");
@@ -192,12 +182,7 @@ export default function DocumentCatalog() {
         ? `${pricedTotal} € (parcial) + pendiente de presupuestar`
         : "A presupuestar"
     );
-    fd.append(
-      "Archivo preparado por el cliente",
-      file
-        ? `${file.name} (${Math.round(file.size / 1024)} KB) — pendiente de recibir, pedir por WhatsApp/email`
-        : "No adjuntó ningún archivo en la web"
-    );
+    fd.append("Documentos", docLine);
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -211,8 +196,7 @@ export default function DocumentCatalog() {
         trackAdsConversion("presupuesto_formulario");
         setStatus("sent");
         setSelectedIds([]);
-        setFile(null);
-        setFileNotice("");
+        up.reset();
         form.reset();
       } else {
         setStatus("error");
@@ -429,68 +413,13 @@ export default function DocumentCatalog() {
 
             {/* Dropzone */}
             <div>
-              <label className="text-sm font-medium text-slate-700">
-                Documento a traducir{" "}
-                <span className="text-slate-400">(opcional aquí)</span>
-              </label>
-              <div
-                onDragOver={(e) => {
-                  e.preventDefault();
-                  setDragActive(true);
-                }}
-                onDragLeave={() => setDragActive(false)}
-                onDrop={handleDrop}
-                onClick={() => fileInputRef.current?.click()}
-                role="button"
-                tabIndex={0}
-                className={`mt-1 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed px-4 py-8 text-center transition ${
-                  dragActive
-                    ? "border-brand-gold bg-brand-gold-50"
-                    : "border-stone-300 bg-white hover:border-brand-navy-300"
-                }`}
-              >
-                <IconUpload className="h-6 w-6 text-brand-navy-300" />
-                <p className="text-sm text-slate-600">
-                  Arrastra tu archivo aquí o haz clic para seleccionarlo
-                </p>
-                <p className="text-xs text-slate-400">PDF, JPG, PNG o Word</p>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
-                  className="hidden"
-                  onChange={(e) => e.target.files && handleFiles(e.target.files)}
-                />
-              </div>
-
-              {file && (
-                <div className="mt-3 flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-stone-200">
-                  <span className="truncate text-slate-700">
-                    {file.name}{" "}
-                    <span className="text-slate-400">
-                      ({Math.round(file.size / 1024)} KB)
-                    </span>
-                  </span>
-                  <button
-                    type="button"
-                    onClick={removeFile}
-                    className="ml-2 shrink-0 text-slate-400 hover:text-brand-gold-700"
-                    aria-label={`Quitar ${file.name}`}
-                  >
-                    ✕
-                  </button>
-                </div>
-              )}
-
-              {fileNotice && (
-                <p className="mt-2 text-xs text-brand-gold-700">{fileNotice}</p>
-              )}
-
-              <p className="mt-2 text-xs text-slate-500">
-                De momento este archivo no se envía automáticamente por email:
-                solo nos avisa de que lo tienes listo. Te lo pediremos por
-                WhatsApp o email en cuanto confirmemos tu presupuesto.
+              <p className="text-sm font-medium text-slate-700">
+                Documentos a traducir{" "}
+                <span className="text-slate-400">(opcional)</span>
               </p>
+              <div className="mt-1">
+                <FileDropList up={up} locale="es" accept={ACCEPT} disabled={status === "sending"} />
+              </div>
             </div>
 
             {/* Nota horario/pago */}

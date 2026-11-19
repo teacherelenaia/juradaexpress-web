@@ -131,6 +131,16 @@ export default function MobileNav() {
               </a>
             );
           })}
+          {/* «Enviar documentos» (19/11/2026), con texto: en la cabecera
+              del móvil solo cabe el icono. */}
+          <a
+            href={english ? "/en/send-documents" : "/enviar-documentos"}
+            tabIndex={open ? undefined : -1}
+            onClick={() => setOpen(false)}
+            className="rounded-lg px-3 py-3 font-medium text-brand-gold-300 no-underline hover:bg-white/10"
+          >
+            {english ? "Send documents" : "Enviar documentos"}
+          </a>
           {/* Acordeón Internacional (FASE 2B.3): misma jerarquía que el
               desplegable de escritorio, dos grupos. Oculto en landings. */}
           {landing ? null : (

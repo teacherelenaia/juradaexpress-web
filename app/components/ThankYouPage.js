@@ -8,6 +8,7 @@
 // importe real. Nada de eso se muestra en pantalla. Las tres son noindex y
 // no están en el sitemap.
 import { IconCheck } from "./Icons";
+import SendDocumentsButton from "./SendDocumentsButton";
 import PurchaseConversion from "./PurchaseConversion";
 import { retrievePurchase, sessionIdFrom } from "../lib/stripePurchase";
 
@@ -17,7 +18,7 @@ const COPY = {
     lead:
       "Te contactaremos en menos de 2 horas (horario laboral) con la confirmación y el plazo de entrega.",
     note:
-      "Si tienes que enviarnos el documento a traducir y no lo has hecho aún, puedes hacerlo por WhatsApp o respondiendo al email de confirmación.",
+      "Si aún no me has enviado los documentos a traducir, súbelos aquí de una vez; también puedes mandarlos por WhatsApp o respondiendo al email de confirmación.",
     wa: "Escribir por WhatsApp",
     waHref:
       "https://wa.me/34685891214?text=Hola%20Jurada%20Express,%20acabo%20de%20realizar%20un%20pago%20online%20y%20quiero%20enviaros%20el%20documento",
@@ -29,7 +30,7 @@ const COPY = {
     lead:
       "We will contact you within 2 hours (office hours) with the confirmation and the delivery time.",
     note:
-      "If you still need to send us the document to translate, you can do it by WhatsApp or by replying to the confirmation email.",
+      "If you haven't sent me the documents to translate yet, upload them all here in one go; you can also send them on WhatsApp or by replying to the confirmation email.",
     wa: "Message us on WhatsApp",
     waHref:
       "https://wa.me/34685891214?text=Hi%20Jurada%20Express,%20I%20have%20just%20paid%20online%20and%20would%20like%20to%20send%20you%20the%20document",
@@ -61,6 +62,7 @@ export default async function ThankYouPage({ searchParams, locale = "es" }) {
       <p className="mt-2 text-sm text-slate-500">{t.note}</p>
 
       <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <SendDocumentsButton locale={locale} className="btn btn-gold" />
         <a href={t.waHref} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
           {t.wa}
         </a>

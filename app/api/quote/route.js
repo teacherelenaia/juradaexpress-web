@@ -59,6 +59,9 @@ import { sourceLabel } from "../../../content/sources";
 import { notifyCrm } from "../../lib/crm";
 import { attributionOf as parseAttribution } from "../../lib/waNotice";
 import { adsInfo, campaignLines, clickOrigin } from "../../lib/adsCampaign";
+import { verify as verifyDocs } from "../../lib/docSubmission";
+import { folderUrl } from "../../lib/googleDrive";
+import { sizeText } from "../../lib/docNotice";
 import {
   attributionRecord,
   logContact,
@@ -73,7 +76,8 @@ export const runtime = "nodejs";
 // Descargar de Blob y enviar emails con adjuntos grandes puede tardar.
 export const maxDuration = 60;
 
-const MAX_FILES = 5;
+// 19/11/2026: de 5 a 40 (con 5, la sexta foto de un expediente se perdía).
+const MAX_FILES = 40;
 const MAX_FILE_BYTES = 25 * 1024 * 1024;
 // Resend admite 40 MB por email contando el base64 (+33 %): ~25 MB reales.
 const EMAIL_MAX_BYTES = 25 * 1024 * 1024;
@@ -184,6 +188,25 @@ function fileList(raw) {
     .filter((item) => item.name);
 }
 
+// Archivos ya en Drive (JSON [{ name, size, pages }]), saneados.
+function docFileList(raw) {
+  let list;
+  try {
+    list = JSON.parse(String(raw ?? ""));
+  } catch {
+    return [];
+  }
+  if (!Array.isArray(list)) return [];
+  return list
+    .slice(0, MAX_FILES)
+    .map((item) => ({
+      name: clean(item && item.name, 180),
+      size: Math.max(0, Number(item && item.size) || 0),
+      pages: Math.max(0, parseInt(item && item.pages, 10) || 0) || null,
+    }))
+    .filter((item) => item.name);
+}
+
 // Atribución que manda el navegador (JSON): primer toque, último toque y
 // datos de anuncio, saneados como en el aviso de WhatsApp.
 function attributionOf(raw) {
@@ -263,6 +286,11 @@ export async function POST(req) {
   const filesEmail = fileList(fd.get("filesEmail")); // irán en lotes directos aparte
   const filesWhatsApp = fileList(fd.get("filesWhatsApp"));
   const blobs = blobList(fd.get("blobs")); // ya subidos a Vercel Blob
+  // Con Google Drive (19/11/2026): token firmado del envío y lista de
+  // archivos ya comprobados en la carpeta por /api/documentos/finish.
+  const docsSession = verifyDocs(clean(fd.get("docs"), 4000), "s");
+  const driveFolder = docsSession && docsSession.mode === "drive" && docsSession.folderId ? docsSession.folderId : "";
+  const driveFiles = driveFolder ? docFileList(fd.get("docFiles")) : [];
   const waRefRaw = clean(fd.get("ref"), 20); // referencia JX de la sesión, si la hay
   const waRef = REF_RE.test(waRefRaw) ? waRefRaw : "";
   const origin = clickOrigin(attribution);
@@ -289,7 +317,12 @@ export async function POST(req) {
     const fields = {
       firmMode, firm, reference, locale, doc: doc ? doc.id : "", pages, urgent, paper,
       name, email: emailRaw.toLowerCase(), phone, source,
-      files: [...blobs.map((b) => b.name), ...filesEmail.map((f) => f.name), ...filesWhatsApp.map((f) => f.name)],
+      files: [
+        ...blobs.map((b) => b.name),
+        ...driveFiles.map((f) => f.name),
+        ...filesEmail.map((f) => f.name),
+        ...filesWhatsApp.map((f) => f.name),
+      ],
     };
     const bucket = Math.floor(Date.now() / (10 * 60 * 1000));
     const previous = quoteFingerprint(fields, bucket - 1);
@@ -381,8 +414,15 @@ export async function POST(req) {
   ].filter((l) => l !== null);
   const extraLots = Math.max(0, blobGroups.length - 1);
   if (isSummary) {
-    if (!blobs.length && !filesEmail.length && !filesWhatsApp.length) {
+    if (!blobs.length && !driveFiles.length && !filesEmail.length && !filesWhatsApp.length) {
       lines.push("Archivos: ninguno");
+    }
+    if (driveFolder) {
+      lines.push(
+        `Documentos en Google Drive (${driveFiles.length}): ${folderUrl(driveFolder)}`,
+        ...driveFiles.map((f) => `• ${f.name} (${sizeText(f.size)}${f.pages ? `, ${f.pages} pág.` : ""})`),
+        `Referencia del envío: ${docsSession.ref}`
+      );
     }
     if (blobGroups.length) {
       lines.push(`Archivos adjuntos a este email: ${blobGroups[0].map((b) => b.name).join(", ")}`);
@@ -441,6 +481,7 @@ export async function POST(req) {
   if (isSummary) {
     const fileNames = [
       ...blobs.map((b) => b.name),
+      ...driveFiles.map((f) => f.name),
       ...filesEmail.map((f) => f.name),
       ...filesWhatsApp.map((f) => f.name),
     ];

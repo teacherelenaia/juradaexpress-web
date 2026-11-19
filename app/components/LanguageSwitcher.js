@@ -23,6 +23,7 @@ const ES_TO_EN = {
   "/politica-privacidad": "/en/privacy-policy",
   "/como-funciona": "/en/how-it-works",
   "/blog": "/en/blog",
+  "/enviar-documentos": "/en/send-documents",
 };
 
 const EN_TO_ES = Object.fromEntries(

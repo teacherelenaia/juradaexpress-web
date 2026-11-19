@@ -6,6 +6,7 @@
 import { usePathname } from "next/navigation";
 import { isEnglishPath } from "./MainNav";
 import { PHONE_DISPLAY, PHONE_TEL } from "../../content/site";
+import { IconUpload } from "./Icons";
 
 export default function HeaderActions() {
   const pathname = usePathname() || "/";
@@ -20,16 +21,29 @@ export default function HeaderActions() {
       >
         {english ? `+34 ${PHONE_DISPLAY}` : PHONE_DISPLAY}
       </a>
+      {/* «Enviar documentos» (19/11/2026): en toda la web, como icono de
+          subida con nombre accesible y title (con texto no cabe junto al
+          menú en el contenedor de 1152 px). */}
+      <a
+        href={english ? "/en/send-documents" : "/enviar-documentos"}
+        className="btn btn-quiet-light btn-sm px-2.5 max-[399px]:px-2"
+        aria-label={english ? "Send documents" : "Enviar documentos"}
+        title={english ? "Send documents" : "Enviar documentos"}
+        data-cta="enviar_documentos_cabecera"
+      >
+        <IconUpload className="h-4 w-4" />
+      </a>
       <a
         href={english ? "/en/documentos" : "/documentos"}
-        className="btn btn-gold btn-sm max-sm:px-3"
+        className="btn btn-gold btn-sm max-sm:px-3 max-[399px]:px-2.5"
       >
-        {/* En móviles de menos de 380 px la etiqueta completa no cabe junto al
+        {/* En móviles de menos de 430 px (antes 380; 19/11/2026, para que
+            quepa el botón «Enviar documentos») la etiqueta completa no cabe junto al
             logo y el botón del menú: se acorta, sin ocultar el botón. */}
-        <span className="max-[379px]:hidden">
+        <span className="max-[429px]:hidden">
           {english ? "Request a quote" : "Pedir presupuesto"}
         </span>
-        <span className="min-[380px]:hidden">
+        <span className="min-[430px]:hidden">
           {english ? "Get a quote" : "Presupuesto"}
         </span>
       </a>

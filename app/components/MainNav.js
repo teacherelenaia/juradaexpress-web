@@ -244,7 +244,7 @@ export default function MainNav() {
   return (
     <nav
       aria-label={english ? "Main navigation" : "Navegación principal"}
-      className="hidden items-center gap-5 lg:flex xl:gap-6"
+      className="hidden items-center gap-3 text-[15px] lg:flex xl:gap-4 xl:text-base"
     >
       {links.map((l) => {
         if (l.menu) {

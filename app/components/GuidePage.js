@@ -23,6 +23,7 @@ import QuotePromise from "./QuotePromise";
 import { SectionHeading } from "./ui";
 import { Block } from "./ServicePage";
 import { personRef, ORGANIZATION_ID } from "../../content/persona";
+import SendDocumentsButton from "./SendDocumentsButton";
 
 const BASE = "https://juradaexpress.es";
 
@@ -195,6 +196,10 @@ export default function GuidePage({ page }) {
                 dangerouslySetInnerHTML={{ __html: p }}
               />
             ))}
+          </div>
+          {/* «Enviar documentos» (19/11/2026): las guías son de visados. */}
+          <div className="mt-6">
+            <SendDocumentsButton locale={page.locale} className="btn btn-gold" />
           </div>
         </div>
         <figure className="relative aspect-[4/3] overflow-hidden rounded-xl shadow">
