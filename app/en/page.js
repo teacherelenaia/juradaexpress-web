@@ -35,7 +35,7 @@ import {
   TIMEZONE_NOTE,
   SAME_DAY_CUTOFF,
   SAME_DAY_MAX_PAGES,
-  OVER_LIMIT_HOURS,
+  OVER_LIMIT_TEXT,
   URGENCY_TEXT,
   HERO_H1,
   HERO_SUB,
@@ -219,7 +219,7 @@ const FAQ = [
   },
   {
     q: "How long does a complete digital nomad visa file take?",
-    a: `Up to ${SAME_DAY_MAX_PAGES} pages, the same day; if the file runs to more than ${SAME_DAY_MAX_PAGES} pages, you get it within ${OVER_LIMIT_HOURS} hours, with one fixed price for the whole batch. ${URGENCY_TEXT.en.sooner}`,
+    a: `Up to ${SAME_DAY_MAX_PAGES} pages, the same day; ${OVER_LIMIT_TEXT.en.short}, with one fixed price for the whole batch. ${URGENCY_TEXT.en.sooner}`,
   },
 ];
 
@@ -671,8 +671,8 @@ export default function Page() {
                 when I finish you receive every document as a signed PDF, in
                 order and clearly named so you know what each file is.
                 {LARGE_PROJECT_CAPACITY
-                  ? ` Up to ${SAME_DAY_MAX_PAGES} pages, the same day; over ${SAME_DAY_MAX_PAGES}, within ${OVER_LIMIT_HOURS} hours. I can handle ${LARGE_PROJECT_CAPACITY.en}; beyond that volume, I confirm a deadline in writing. ${URGENCY_TEXT.en.sooner}`
-                  : ` Up to ${SAME_DAY_MAX_PAGES} pages, the same day; over ${SAME_DAY_MAX_PAGES}, within ${OVER_LIMIT_HOURS} hours. ${URGENCY_TEXT.en.sooner}`}
+                  ? ` Up to ${SAME_DAY_MAX_PAGES} pages, the same day; ${OVER_LIMIT_TEXT.en.short}. I can handle ${LARGE_PROJECT_CAPACITY.en}; beyond that volume, I confirm a deadline in writing. ${URGENCY_TEXT.en.sooner}`
+                  : ` Up to ${SAME_DAY_MAX_PAGES} pages, the same day; ${OVER_LIMIT_TEXT.en.short}. ${URGENCY_TEXT.en.sooner}`}
               </p>
             </div>
             <div className="flex flex-col items-start gap-4">

@@ -2,8 +2,8 @@
 //
 // Política de plazos de Elena (14/11/2026) y límites de páginas de los packs.
 // Comprueba en el HTML servido que:
-//   - la promesa de plazo (DELIVERY_PROMISE) dice «Más de 10 páginas: en
-//     24 horas» y termina con la frase de urgencia «de hasta el 30 %»;
+//   - la promesa de plazo (DELIVERY_PROMISE) dice «De 11 a 30 páginas: en
+//     24 horas. Expedientes más largos: en la fecha…» (19/11/2026) y termina con la frase de urgencia «de hasta el 30 %»;
 //   - las tarjetas de packs llevan «Hasta X documentos · Y páginas» y la
 //     línea de límite con el precio de expediente completo (19/11/2026)
 //     (y sus equivalentes en inglés);
@@ -31,8 +31,8 @@ const PAGES = {
 };
 
 const PROMISE = {
-  es: "Más de 10 páginas: en 24 horas. ¿Lo necesitas antes? Escríbeme: según el volumen puede llevar un recargo de urgencia de hasta el 30 %.",
-  en: "Over 10 pages: within 24 hours. Need it sooner? Message me: depending on volume, an urgency surcharge of up to 30% may apply.",
+  es: "De 11 a 30 páginas: en 24 horas. Expedientes más largos: en la fecha que te confirmo por escrito. ¿Lo necesitas antes? Escríbeme: según el volumen puede llevar un recargo de urgencia de hasta el 30 %.",
+  en: "Over 10 pages and up to 30: within 24 hours. Longer files: on the date I confirm in writing. Need it sooner? Message me: depending on volume, an urgency surcharge of up to 30% may apply.",
 };
 
 for (const locale of ["es", "en"]) {

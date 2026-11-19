@@ -52,7 +52,7 @@ import { NextResponse } from "next/server";
 import { get, del } from "@vercel/blob";
 import { resendConfig, sendResendEmail } from "../../lib/resend";
 import { DOCUMENTS, MIN_PRICE } from "../../../content/documents";
-import { URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES, OVER_LIMIT_HOURS } from "../../../content/site";
+import { URGENCY_SURCHARGE, SAME_DAY_MAX_PAGES, OVER_LIMIT_TEXT } from "../../../content/site";
 import { estimatePrice, firmPriceUsd } from "../../../content/pricing";
 import { toUsd, US_SHIPPING_USD } from "../../../content/usd";
 import { sourceLabel } from "../../../content/sources";
@@ -365,7 +365,7 @@ export async function POST(req) {
     `Urgencia: ${
       urgent
         ? `urgente (antes del plazo normal; estimación con el recargo máximo del ${Math.round(URGENCY_SURCHARGE * 100)} %, confirmar importe)`
-        : `normal (en el día hasta ${SAME_DAY_MAX_PAGES} páginas; más, en ${OVER_LIMIT_HOURS} h)`
+        : `normal (en el día hasta ${SAME_DAY_MAX_PAGES} páginas; ${OVER_LIMIT_TEXT.es.short})`
     }`,
     `Entrega: ${paper ? paperLine : "PDF firmado"}`,
     `Estimación mostrada: ${estimateLine}`,

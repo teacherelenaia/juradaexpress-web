@@ -10,7 +10,7 @@
 import {
   LARGE_PROJECT_CAPACITY,
   SAME_DAY_MAX_PAGES,
-  OVER_LIMIT_HOURS,
+  OVER_LIMIT_TEXT,
   URGENCY_TEXT,
 } from "../site";
 import { filePriceBlocks, FILE_ROUTE } from "../expediente";
@@ -84,7 +84,7 @@ export const es = {
       title: "¿Cuánto volumen puedes asumir y en qué plazo?",
       body: [
         capEs,
-        `Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día y sin recargo. Más de ${SAME_DAY_MAX_PAGES} páginas: en ${OVER_LIMIT_HOURS} h o según volumen; con tu carpeta delante te confirmo la fecha por escrito, y es la que se cumple.`,
+        `Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día y sin recargo. ${OVER_LIMIT_TEXT.es.sentence} Con tu carpeta delante te confirmo la fecha por escrito, y es la que se cumple.`,
         {
           note: `Si tu urgencia es real (una cita en el consulado mañana, un plazo judicial), dímelo en el primer mensaje con la fecha exacta. ${URGENCY_TEXT.es.sooner} El importe exacto te lo confirmo por escrito antes de empezar, sin recargos escondidos.`,
         },
@@ -140,7 +140,7 @@ export const es = {
   faq: [
     {
       q: "¿Cobras recargo por urgencia?",
-      a: `Solo si necesitas la entrega antes del plazo normal (en el día hasta ${SAME_DAY_MAX_PAGES} páginas; más, en ${OVER_LIMIT_HOURS} h): según el volumen, un recargo de urgencia de hasta el 30 %, a consultar. Aparece desglosado en el presupuesto antes de que confirmes; nunca después.`,
+      a: `Solo si necesitas la entrega antes del plazo normal (en el día hasta ${SAME_DAY_MAX_PAGES} páginas; ${OVER_LIMIT_TEXT.es.short}): según el volumen, un recargo de urgencia de hasta el 30 %, a consultar. Aparece desglosado en el presupuesto antes de que confirmes; nunca después.`,
     },
     {
       q: "¿Puedes entregar parte del lote antes?",
@@ -152,7 +152,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda un expediente completo de nómada digital?",
-      a: `Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; si el expediente tiene más, en ${OVER_LIMIT_HOURS} horas, con un único precio cerrado para todo el lote. ${URGENCY_TEXT.es.sooner}`,
+      a: `Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; ${OVER_LIMIT_TEXT.es.short}, con un único precio cerrado para todo el lote. ${URGENCY_TEXT.es.sooner}`,
     },
     {
       q: "¿Trabajas con clientes fuera de España?",
@@ -232,7 +232,7 @@ export const en = {
       title: "How much volume can you take on, and how fast?",
       body: [
         capEn,
-        `Up to ${SAME_DAY_MAX_PAGES} pages, the same day and with no surcharge. Over ${SAME_DAY_MAX_PAGES} pages: within ${OVER_LIMIT_HOURS} hours or depending on volume; with your folder in front of me I confirm the date in writing, and that is the deadline I keep.`,
+        `Up to ${SAME_DAY_MAX_PAGES} pages, the same day and with no surcharge. ${OVER_LIMIT_TEXT.en.sentence} With your folder in front of me I confirm the date in writing, and that is the deadline I keep.`,
         {
           note: `If your deadline is real (a consulate appointment tomorrow, a court filing), tell me in your first message with the exact date. ${URGENCY_TEXT.en.sooner} I confirm the exact amount in writing before I start, with no hidden surcharges.`,
         },
@@ -288,7 +288,7 @@ export const en = {
   faq: [
     {
       q: "Do you charge a rush fee?",
-      a: `Only if you need delivery faster than standard (same day up to ${SAME_DAY_MAX_PAGES} pages; more, within ${OVER_LIMIT_HOURS} hours): depending on volume, an urgency surcharge of up to 30%, on request. It is itemised in the quote before you confirm; never afterwards.`,
+      a: `Only if you need delivery faster than standard (same day up to ${SAME_DAY_MAX_PAGES} pages; ${OVER_LIMIT_TEXT.en.short}): depending on volume, an urgency surcharge of up to 30%, on request. It is itemised in the quote before you confirm; never afterwards.`,
     },
     {
       q: "Can you deliver part of the batch earlier?",
@@ -300,7 +300,7 @@ export const en = {
     },
     {
       q: "How long does a complete digital nomad visa file take?",
-      a: `Up to ${SAME_DAY_MAX_PAGES} pages, the same day; if the file runs to more, within ${OVER_LIMIT_HOURS} hours, with one fixed price for the whole batch. ${URGENCY_TEXT.en.sooner}`,
+      a: `Up to ${SAME_DAY_MAX_PAGES} pages, the same day; ${OVER_LIMIT_TEXT.en.short}, with one fixed price for the whole batch. ${URGENCY_TEXT.en.sooner}`,
     },
     {
       q: "Do you work with clients outside Spain?",

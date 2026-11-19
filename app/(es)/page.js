@@ -40,7 +40,7 @@ import {
   PRICE_PER_PAGE,
   MIN_DOC_PRICE,
   SAME_DAY_MAX_PAGES,
-  OVER_LIMIT_HOURS,
+  OVER_LIMIT_TEXT,
   URGENCY_TEXT,
 } from "../../content/site";
 
@@ -196,7 +196,7 @@ const FAQ = [
   },
   {
     q: "¿Cuánto tardas en traducir un expediente completo de nómada digital?",
-    a: `Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; si el expediente tiene más de ${SAME_DAY_MAX_PAGES} páginas, lo tienes en ${OVER_LIMIT_HOURS} horas, con un único precio cerrado para todo el lote. ${URGENCY_TEXT.es.sooner}`,
+    a: `Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; ${OVER_LIMIT_TEXT.es.short}, con un único precio cerrado para todo el lote. ${URGENCY_TEXT.es.sooner}`,
   },
 ];
 
@@ -584,8 +584,8 @@ export default function Page() {
                 terminar recibes cada documento como PDF firmado, ordenado y
                 nombrado para que sepas qué es cada archivo.
                 {LARGE_PROJECT_CAPACITY
-                  ? ` Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; más de ${SAME_DAY_MAX_PAGES}, en ${OVER_LIMIT_HOURS} horas. Puedo asumir ${LARGE_PROJECT_CAPACITY.es}; por encima de ese volumen, te cierro plazo por escrito. ${URGENCY_TEXT.es.sooner}`
-                  : ` Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; más de ${SAME_DAY_MAX_PAGES}, en ${OVER_LIMIT_HOURS} horas. ${URGENCY_TEXT.es.sooner}`}
+                  ? ` Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; ${OVER_LIMIT_TEXT.es.short}. Puedo asumir ${LARGE_PROJECT_CAPACITY.es}; por encima de ese volumen, te cierro plazo por escrito. ${URGENCY_TEXT.es.sooner}`
+                  : ` Hasta ${SAME_DAY_MAX_PAGES} páginas, en el día; ${OVER_LIMIT_TEXT.es.short}. ${URGENCY_TEXT.es.sooner}`}
               </p>
             </div>
             <div className="flex flex-col items-start gap-4">

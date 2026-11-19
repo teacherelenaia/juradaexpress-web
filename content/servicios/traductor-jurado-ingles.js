@@ -36,7 +36,7 @@ import {
   PRICE_PER_PAGE,
   SAME_DAY_CUTOFF,
   SAME_DAY_MAX_PAGES,
-  OVER_LIMIT_HOURS,
+  OVER_LIMIT_TEXT,
   TIMEZONE_NOTE,
   URGENCY_TEXT,
 } from "../site";
@@ -416,7 +416,7 @@ export const es = {
       title: `Plazos: PDF firmado en el día hasta ${SAME_DAY_MAX_PAGES} páginas`,
       body: [
         `<strong>Presupuesto en menos de 2 horas laborables.</strong> ${TIMEZONE_NOTE.es}: dentro de ese horario, te respondo con precio cerrado y plazo por escrito en menos de dos horas; si escribes fuera de él, a primera hora del día siguiente.`,
-        `<strong>Traducción firmada el mismo día.</strong> Un documento de hasta ${SAME_DAY_MAX_PAGES} páginas (un certificado, un título, un permiso de conducir, un contrato breve) que me llega antes de las <strong>${SAME_DAY_CUTOFF.es}, hora de Madrid</strong>, lo tienes en PDF firmado ese mismo día, sin recargo; si llega después de esa hora, a primera hora del día siguiente. Si tiene más de ${SAME_DAY_MAX_PAGES} páginas, lo tienes en ${OVER_LIMIT_HOURS} horas. ${URGENCY_TEXT.es.sooner}`,
+        `<strong>Traducción firmada el mismo día.</strong> Un documento de hasta ${SAME_DAY_MAX_PAGES} páginas (un certificado, un título, un permiso de conducir, un contrato breve) que me llega antes de las <strong>${SAME_DAY_CUTOFF.es}, hora de Madrid</strong>, lo tienes en PDF firmado ese mismo día, sin recargo; si llega después de esa hora, a primera hora del día siguiente. ${OVER_LIMIT_TEXT.es.sentence} ${URGENCY_TEXT.es.sooner}`,
         "<strong>Si tienes cita con fecha</strong> (Extranjería, consulado, notaría, universidad), dime la fecha al pedir presupuesto y te confirmo por escrito que llegas.",
         `Para lotes grandes y expedientes de varios documentos, acordamos un calendario por escrito${LARGE_PROJECT_CAPACITY ? `; puedo asumir ${LARGE_PROJECT_CAPACITY.es}` : ""}. Si me escribes desde el Reino Unido, Irlanda o América, ten en cuenta el horario de Madrid para calcular cuándo recibirás la respuesta.`,
       ],
@@ -505,7 +505,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda?",
-      a: `Hasta ${SAME_DAY_MAX_PAGES} páginas, PDF firmado el mismo día si el documento llega antes de las ${SAME_DAY_CUTOFF.es}, hora de Madrid, y a primera hora del día siguiente si llega después; más de ${SAME_DAY_MAX_PAGES} páginas, en ${OVER_LIMIT_HOURS} horas. ${URGENCY_TEXT.es.sooner} Si tienes una cita con fecha, dímelo al pedir presupuesto y te confirmo por escrito que llegas. Los lotes grandes tienen su propio calendario.`,
+      a: `Hasta ${SAME_DAY_MAX_PAGES} páginas, PDF firmado el mismo día si el documento llega antes de las ${SAME_DAY_CUTOFF.es}, hora de Madrid, y a primera hora del día siguiente si llega después; ${OVER_LIMIT_TEXT.es.short}. ${URGENCY_TEXT.es.sooner} Si tienes una cita con fecha, dímelo al pedir presupuesto y te confirmo por escrito que llegas. Los lotes grandes tienen su propio calendario.`,
     },
     {
       q: "¿Traduces también del inglés al español?",
@@ -663,7 +663,7 @@ export const en = {
       title: `Turnaround: signed PDF the same day for up to ${SAME_DAY_MAX_PAGES} pages`,
       body: [
         `<strong>Quote within 2 working hours.</strong> ${TIMEZONE_NOTE.en}: within those hours you get a fixed price and a written deadline in under two hours; if you write outside them, first thing the next working day.`,
-        `<strong>Translation signed the same day.</strong> A document of up to ${SAME_DAY_MAX_PAGES} pages (a certificate, a degree, a driving licence, a short contract) that reaches me before <strong>${SAME_DAY_CUTOFF.en} Madrid time</strong> is delivered as a signed PDF that same day, with no surcharge; if it arrives after that time, first thing the next morning. If it runs to more than ${SAME_DAY_MAX_PAGES} pages, you get it within ${OVER_LIMIT_HOURS} hours. ${URGENCY_TEXT.en.sooner}`,
+        `<strong>Translation signed the same day.</strong> A document of up to ${SAME_DAY_MAX_PAGES} pages (a certificate, a degree, a driving licence, a short contract) that reaches me before <strong>${SAME_DAY_CUTOFF.en} Madrid time</strong> is delivered as a signed PDF that same day, with no surcharge; if it arrives after that time, first thing the next morning. ${OVER_LIMIT_TEXT.en.sentence} ${URGENCY_TEXT.en.sooner}`,
         "<strong>If you have a dated appointment</strong> (immigration office, consulate, notary, university), tell me the date when you ask for the quote and I will confirm in writing that you will make it.",
         `For large batches and multi-document files we agree a schedule in writing${LARGE_PROJECT_CAPACITY ? `; I can take on ${LARGE_PROJECT_CAPACITY.en}` : ""}. If you are writing from the UK, Ireland or the Americas, bear Madrid time in mind when working out when you will hear back.`,
       ],
@@ -752,7 +752,7 @@ export const en = {
     },
     {
       q: "How long does it take?",
-      a: `Up to ${SAME_DAY_MAX_PAGES} pages, signed PDF the same day if the document reaches me before ${SAME_DAY_CUTOFF.en} Madrid time, and first thing the next morning if it arrives later; more than ${SAME_DAY_MAX_PAGES} pages, within ${OVER_LIMIT_HOURS} hours. ${URGENCY_TEXT.en.sooner} If you have a dated appointment, tell me when asking for the quote and I will confirm in writing that you will make it. Large batches get their own schedule.`,
+      a: `Up to ${SAME_DAY_MAX_PAGES} pages, signed PDF the same day if the document reaches me before ${SAME_DAY_CUTOFF.en} Madrid time, and first thing the next morning if it arrives later; ${OVER_LIMIT_TEXT.en.short}. ${URGENCY_TEXT.en.sooner} If you have a dated appointment, tell me when asking for the quote and I will confirm in writing that you will make it. Large batches get their own schedule.`,
     },
     {
       q: "Do you also translate from English into Spanish?",
