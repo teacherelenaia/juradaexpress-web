@@ -51,8 +51,9 @@ export function mimeOf(name, type) {
   return MIME_BY_EXT[ext] || "application/octet-stream";
 }
 
-export function allowedFile(name, type) {
-  return ALLOWED_EXT.test(String(name || "")) || ALLOWED_MIME.has(String(type || ""));
+// La extensión manda (un «x.exe» con tipo application/pdf no pasa).
+export function allowedFile(name) {
+  return ALLOWED_EXT.test(String(name || ""));
 }
 
 // Nombre de archivo tal cual lo eligió el cliente, sin barras ni controles.
@@ -130,7 +131,9 @@ export function sign(payload) {
   return `${body}.${mac}`;
 }
 
-export function verify(token, kind) {
+// `graceMs`: acepta tokens caducados hace menos de ese tiempo (para
+// reconocer un envío anterior del mismo navegador y añadir a su carpeta).
+export function verify(token, kind, { graceMs = 0 } = {}) {
   const [body, mac] = String(token || "").split(".");
   if (!body || !mac) return null;
   let key;
@@ -150,7 +153,7 @@ export function verify(token, kind) {
     return null;
   }
   if (!data || data.k !== kind) return null;
-  if (typeof data.exp !== "number" || Date.now() > data.exp) return null;
+  if (typeof data.exp !== "number" || Date.now() > data.exp + graceMs) return null;
   return data;
 }
 

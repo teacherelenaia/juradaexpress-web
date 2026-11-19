@@ -152,18 +152,18 @@ export async function rootFolderId() {
 }
 
 /**
- * Carpeta del envío con esa referencia. Si ya existe y es del mismo
- * contacto (huella `contactKey`), se reutiliza; si existe pero es de otro
- * contacto, devuelve { conflict: true } para que se genere otra referencia.
+ * Carpeta del envío con esa referencia. Si ya existe, se reutiliza solo con
+ * `mayAppend` (el navegador demostró que es suya con un token firmado) y el
+ * mismo contacto; si no, { conflict: true } y se genera otra referencia.
  */
-export async function findOrCreateSubmissionFolder({ ref, name, contactKey, date }) {
+export async function findOrCreateSubmissionFolder({ ref, name, contactKey, date, mayAppend = true }) {
   const parent = await rootFolderId();
   const found = await findOne(
     `mimeType='${FOLDER_MIME}' and '${q(parent)}' in parents and appProperties has { key='jxRef' and value='${q(ref)}' }`
   );
   if (found) {
     const owner = found.appProperties && found.appProperties.jxContact;
-    if (owner && contactKey && owner !== contactKey) return { conflict: true };
+    if (!mayAppend || (owner && contactKey && owner !== contactKey)) return { conflict: true };
     return { id: found.id, created: false };
   }
   const label = String(name || "Sin nombre").replace(/[/\\]+/g, " ").trim().slice(0, 80) || "Sin nombre";

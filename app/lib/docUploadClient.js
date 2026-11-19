@@ -45,7 +45,7 @@ export const fileKey = (f) => `${f.name}|${f.size}|${f.lastModified || 0}`;
 /** Código de error al elegir el archivo, o "" si vale. */
 export function checkFile(file, limits = DEFAULT_LIMITS) {
   if (!file || !file.size) return "empty";
-  if (!EXT_RE.test(file.name || "") && !MIME_OK.has(file.type)) return "type";
+  if (!EXT_RE.test(file.name || "")) return "type";
   if (file.size > limits.maxBytes) return "size";
   return "";
 }
@@ -215,10 +215,17 @@ async function uploadDrive(file, ctx, state, onProgress, save) {
     if (res.status === 308) {
       attempts = 0;
       const m = res.range && /bytes=0-(\d+)/.exec(res.range);
-      // Si el navegador no puede leer «Range», Google ha guardado el trozo
-      // entero (los trozos son múltiplos de 256 KB); si no, lo confirma el
-      // servidor en el siguiente error.
-      state.offset = m ? Number(m[1]) + 1 : end;
+      if (m) state.offset = Number(m[1]) + 1;
+      else {
+        // Google no expone «Range» al navegador (CORS) y lo omite si no ha
+        // guardado nada: se pregunta al servidor cuántos bytes tiene.
+        try {
+          const id = await askStatus();
+          if (id) return id;
+        } catch {
+          state.offset = start; // se repite el trozo: nunca se salta bytes
+        }
+      }
       save();
       onProgress(state.offset);
       continue;

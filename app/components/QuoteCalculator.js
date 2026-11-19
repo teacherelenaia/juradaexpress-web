@@ -450,7 +450,8 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
       );
     }
     const uploaded = upRes && upRes.ok && upRes.mode === "blob" ? upRes.blobs : [];
-    const driveToken = upRes && upRes.ok && upRes.mode === "drive" ? upRes.token : "";
+    // Justificante firmado de lo comprobado en Drive (/api/documentos/finish).
+    const driveToken = upRes && upRes.ok && upRes.mode === "drive" ? upRes.receipt : "";
     const driveFiles = driveToken ? upRes.received : [];
     const failed = upRes && upRes.ok
       ? upRes.failed.map((f) => ({ name: f.name, reason: "failed" }))
@@ -499,13 +500,7 @@ export default function QuoteCalculator({ locale = "es", className = "", firmMod
     //    la carpeta); sin Drive, las URL de Blob (el servidor las adjunta).
     const summary = baseForm();
     summary.append("blobs", JSON.stringify(uploaded));
-    if (driveToken) {
-      summary.append("docs", driveToken);
-      summary.append(
-        "docFiles",
-        JSON.stringify(driveFiles.map((f) => ({ name: f.name, size: f.size, pages: f.pages || null })))
-      );
-    }
+    if (driveToken) summary.append("docs", driveToken);
     summary.append("filesEmail", "[]");
     summary.append("filesWhatsApp", JSON.stringify(failed));
     summary.append("lots", "0");

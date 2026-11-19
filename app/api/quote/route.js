@@ -81,6 +81,7 @@ const MAX_FILES = 40;
 const MAX_FILE_BYTES = 25 * 1024 * 1024;
 // Resend admite 40 MB por email contando el base64 (+33 %): ~25 MB reales.
 const EMAIL_MAX_BYTES = 25 * 1024 * 1024;
+const BLOB_TOTAL_BYTES = 100 * 1024 * 1024;
 const ALLOWED_TYPES = new Set(["application/pdf", "image/jpeg", "image/png", "image/heic", "image/heif"]);
 const ALLOWED_EXT = /\.(pdf|jpe?g|png|heic|heif)$/i;
 
@@ -288,9 +289,12 @@ export async function POST(req) {
   const blobs = blobList(fd.get("blobs")); // ya subidos a Vercel Blob
   // Con Google Drive (19/11/2026): token firmado del envío y lista de
   // archivos ya comprobados en la carpeta por /api/documentos/finish.
-  const docsSession = verifyDocs(clean(fd.get("docs"), 4000), "s");
-  const driveFolder = docsSession && docsSession.mode === "drive" && docsSession.folderId ? docsSession.folderId : "";
-  const driveFiles = driveFolder ? docFileList(fd.get("docFiles")) : [];
+  // Solo cuenta el justificante FIRMADO de /api/documentos/finish (lo
+  // comprobado en Drive), no una lista que mande el navegador.
+  const docsReceipt = verifyDocs(String(fd.get("docs") ?? "").slice(0, 20000), "r");
+  const docsSession = docsReceipt;
+  const driveFolder = docsReceipt && docsReceipt.folderId ? docsReceipt.folderId : "";
+  const driveFiles = driveFolder ? docFileList(JSON.stringify(docsReceipt.files || [])) : [];
   const waRefRaw = clean(fd.get("ref"), 20); // referencia JX de la sesión, si la hay
   const waRef = REF_RE.test(waRefRaw) ? waRefRaw : "";
   const origin = clickOrigin(attribution);
@@ -330,14 +334,13 @@ export async function POST(req) {
     const dupPrev = await blobExists(`avisos/presupuesto/${previous}.json`);
     const created = dupPrev ? "exists" : await putJson(`avisos/presupuesto/${current}.json`, { at: new Date().toISOString() });
     if (created === "exists") {
-      if (blobs.length) {
-        try {
-          await del(blobs.map((b) => b.url));
-        } catch {
-          /* nada */
-        }
-      }
-      return json({ ok: true, emailed: true, duplicate: true, files: 0, blobsEmailed: blobs.map((b) => b.url) });
+      // 19/11/2026: antes se BORRABAN aquí los archivos y se respondía que
+      // habían llegado. Si la primera petición se había cortado (función de
+      // 60 s agotada con muchos archivos), el reintento del navegador caía
+      // aquí y los documentos se perdían sin llegar a Elena. Ahora no se
+      // borra nada y no se da ningún archivo por enviado: el cliente ve
+      // cuáles mandar por WhatsApp.
+      return json({ ok: true, emailed: true, duplicate: true, files: 0, blobsEmailed: [] });
     }
   }
 
@@ -350,10 +353,15 @@ export async function POST(req) {
   // se puede leer, se avisa en el email y el navegador lo pide por WhatsApp.
   const blobItems = [];
   const blobFailed = [];
+  // Tope total por solicitud (19/11/2026, con 40 archivos): lo que pase de
+  // BLOB_TOTAL_BYTES no se descarga y se pide por WhatsApp.
+  let blobTotal = 0;
   await Promise.all(
     blobs.map(async (b) => {
       try {
         const buf = await readBlob(b.url);
+        if (blobTotal + buf.length > BLOB_TOTAL_BYTES) throw new Error("total");
+        blobTotal += buf.length;
         blobItems.push({ ...b, bytes: buf.length, content: buf.toString("base64") });
       } catch {
         blobFailed.push(b);

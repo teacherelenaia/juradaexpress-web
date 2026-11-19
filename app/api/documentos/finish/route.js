@@ -21,7 +21,7 @@ import { folderUrl, getFile, uploadStatus, writeNote } from "../../../lib/google
 import { resendConfig, sendResendEmail } from "../../../lib/resend";
 import { notifyCrm } from "../../../lib/crm";
 import { attributionOf, madridParts } from "../../../lib/waNotice";
-import { putJson, shortHash } from "../../../lib/contactLog";
+import { blobExists, putJson, shortHash } from "../../../lib/contactLog";
 import { blobUrlOk, groupBySize, readBlob } from "../../../lib/docBlob";
 import {
   EMAIL_RE,
@@ -31,6 +31,7 @@ import {
   cleanFileName,
   cleanMultiline,
   isProduction,
+  sign,
   verify,
 } from "../../../lib/docSubmission";
 import {
@@ -73,7 +74,7 @@ async function verifyDrive(item, s) {
     let id = item.driveId;
     if (!id && item.fileToken) {
       const f = verify(item.fileToken, "f");
-      if (f && f.sid === s.sid) {
+      if (f && f.ref === s.ref && f.folderId === s.folderId) {
         const st = await uploadStatus(f.url, f.size);
         if (st.done && st.file) id = st.file.id;
       }
@@ -140,11 +141,22 @@ export async function POST(req) {
   const order = items.map((i) => i.name);
   const byOrder = (a, b) => order.indexOf(a.name) - order.indexOf(b.name);
 
-  // Sin Drive: descarga de Blob para adjuntar.
+  // Sin Drive: descarga de Blob para adjuntar, con tope TOTAL comprobado
+  // aquí (no solo en el navegador): lo que pase del tope no se descarga.
   const attachments = [];
   if (blobItems.length) {
+    let total = 0;
+    const cap = limits.maxTotal || limits.maxBytes;
+    const accepted = [];
+    for (const it of blobItems) {
+      if (total + it.size > cap || it.size > limits.maxBytes) failed.push({ ...it, reason: "size" });
+      else {
+        total += it.size;
+        accepted.push(it);
+      }
+    }
     await Promise.all(
-      blobItems.map(async (it) => {
+      accepted.map(async (it) => {
         try {
           const buf = await readBlob(get, it.blobUrl, limits.maxBytes);
           attachments.push({ it, bytes: buf.length, content: buf.toString("base64") });
@@ -187,12 +199,19 @@ export async function POST(req) {
     }
   }
 
+  const receivedList = received.map((f) => ({ name: f.name, size: f.size, pages: f.pages }));
   const result = {
     ok: true,
     ref: s.ref,
     mode: s.mode,
-    received: received.map((f) => ({ name: f.name, size: f.size, pages: f.pages })),
+    received: receivedList,
     failed: failed.map((f) => ({ name: f.name, reason: f.reason })),
+    // Justificante firmado de lo COMPROBADO en Drive: /api/quote solo
+    // lista en su aviso los archivos que vienen aquí.
+    receipt:
+      s.mode === "drive"
+        ? sign({ k: "r", ref: s.ref, folderId: s.folderId, files: receivedList, exp: Date.now() + 24 * 3600 * 1000 })
+        : "",
   };
   if (!notify) return json(result);
 
@@ -201,7 +220,10 @@ export async function POST(req) {
     `${s.sid}|${received.map((f) => `${f.name}:${f.size}`).join(",")}|${failed.map((f) => f.name).join(",")}`,
     24
   );
-  if ((await putJson(`avisos/documentos/${print}.json`, { at: new Date().toISOString() })) === "exists") {
+  // La huella se escribe DESPUÉS de que salga el correo: si el correo falla
+  // y el navegador reintenta, el reintento vuelve a intentar el envío.
+  const printPath = `avisos/documentos/${print}.json`;
+  if ((await blobExists(printPath)) === true) {
     return json({ ...result, duplicate: true });
   }
 
@@ -210,6 +232,7 @@ export async function POST(req) {
   const silent = isProduction() && s.ref === TEST_REF;
   const mail = resendConfig();
   let emailed = false;
+  const sentAttachments = []; // solo estos se pueden borrar de Blob
   if (mail && !silent) {
     const groups = groupBySize(attachments, EMAIL_MAX_BYTES);
     const subject = receivedSubject({ name, count: received.length, ref: s.ref, test });
@@ -223,14 +246,16 @@ export async function POST(req) {
         text,
         attachments: (groups[0] || []).map(toAtt),
       });
+      if (emailed) sentAttachments.push(...(groups[0] || []));
       for (let i = 1; i < groups.length; i++) {
-        await sendResendEmail({
+        const ok = await sendResendEmail({
           ...mail,
           replyTo: email || "",
           subject: `${subject} · archivos (${i}/${groups.length - 1})`,
           text: `Más archivos del envío ${s.ref}:\n${groups[i].map((a) => `• ${a.it.name}`).join("\n")}`,
           attachments: groups[i].map(toAtt),
         });
+        if (ok) sentAttachments.push(...groups[i]);
       }
     }
     // Sin rastro no hay diagnóstico: cada fallo de correo queda en los logs.
@@ -267,17 +292,22 @@ export async function POST(req) {
     });
   }
 
-  // Sin Drive: los archivos ya van en el correo; se borran de Blob.
-  if (attachments.length && (emailed || silent)) {
+  // Sin Drive: se borran de Blob SOLO los archivos cuyo correo ha salido
+  // (en una prueba silenciosa, todos). Los demás los limpia
+  // /api/documentos/cleanup al día siguiente.
+  const toDelete = silent ? attachments : sentAttachments;
+  if (toDelete.length) {
     try {
-      await del(attachments.map((a) => a.it.blobUrl));
+      await del(toDelete.map((a) => a.it.blobUrl));
     } catch (err) {
       console.error("[documentos/finish] del", err?.message);
     }
   }
-  if (s.mode === "blob" && attachments.length && !emailed && !silent) {
-    // Sin correo, los archivos no han llegado a ningún sitio útil.
+  if (s.mode === "blob" && attachments.length && sentAttachments.length < attachments.length && !silent) {
+    // Algún archivo no ha llegado a ningún sitio útil: sin huella, para que
+    // el reintento del navegador vuelva a intentarlo.
     return json({ ...result, ok: false, error: "email-failed" }, 502);
   }
+  if (emailed || silent || !mail) await putJson(printPath, { at: new Date().toISOString() });
   return json({ ...result, emailed });
 }

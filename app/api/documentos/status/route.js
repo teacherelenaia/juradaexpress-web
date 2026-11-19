@@ -23,7 +23,9 @@ export async function POST(req) {
   }
   const s = verify(body.token, "s");
   const f = verify(body.fileToken, "f");
-  if (!s || !f || f.sid !== s.sid) return json({ ok: false, error: "expired" }, 401);
+  // El archivo es del mismo envío (misma referencia y carpeta), aunque el
+  // navegador haya abierto otra sesión tras recargar la página.
+  if (!s || !f || f.ref !== s.ref || f.folderId !== s.folderId) return json({ ok: false, error: "expired" }, 401);
   try {
     const st = await uploadStatus(f.url, f.size);
     return json({

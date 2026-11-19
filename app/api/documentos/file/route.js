@@ -39,7 +39,7 @@ export async function POST(req) {
   const size = Number(body.size);
   if (!Number.isFinite(size) || size <= 0) return json({ ok: false, error: "empty" }, 400);
   if (size > LIMITS.drive.maxBytes) return json({ ok: false, error: "size" }, 413);
-  if (!allowedFile(name, body.type)) return json({ ok: false, error: "type" }, 415);
+  if (!allowedFile(name)) return json({ ok: false, error: "type" }, 415);
 
   const mimeType = mimeOf(name, body.type);
   try {
@@ -54,6 +54,8 @@ export async function POST(req) {
     const fileToken = sign({
       k: "f",
       sid: s.sid,
+      ref: s.ref,
+      folderId: s.folderId,
       url: uploadUrl,
       name,
       size,

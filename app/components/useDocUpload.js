@@ -165,13 +165,17 @@ export default function useDocUpload({ persist = false, legacyBlob = null, maxFi
           session = await api("/api/documentos/start", {
             ...fields,
             privacy: true,
-            ref: (store.current.session && store.current.session.ref) || store.current.ref || sessionRef(),
+            // Token firmado del envío anterior (aunque haya caducado): es lo
+            // único que permite añadir a la misma carpeta.
+            prevToken: (store.current.session && store.current.session.token) || store.current.prevToken || "",
+            ref: sessionRef(),
           });
         } catch (err) {
           return { ok: false, error: (err && err.code) || "network" };
         }
         store.current.session = { token: session.token, ref: session.ref, mode: session.mode, exp: Date.now() + 6 * 864e5 };
         store.current.ref = session.ref;
+        store.current.prevToken = session.token;
         save();
 
         const legacy = session.mode === "blob" && legacyBlob;
@@ -293,6 +297,7 @@ export default function useDocUpload({ persist = false, legacyBlob = null, maxFi
           ref: done.ref,
           mode: done.mode,
           token: session.token,
+          receipt: done.receipt || "",
           received: done.received || [],
           failed: done.failed || [],
           blobs,
@@ -308,9 +313,9 @@ export default function useDocUpload({ persist = false, legacyBlob = null, maxFi
     setEntries([]);
     setRejected([]);
     if (persist) {
-      const ref = store.current.ref;
+      const { ref, prevToken } = store.current;
       clearStore();
-      store.current = { session: null, ref, files: {}, fields: null };
+      store.current = { session: null, ref, prevToken, files: {}, fields: null };
       save();
     }
   }, [persist, save]);

@@ -106,6 +106,8 @@ archivos en un Drive personal.
 6. **Carpeta madre.** No hay que crearla ni compartirla: en el primer envío
    la web crea **«Documentos de clientes»** en la raíz de tu Mi unidad. Puedes
    moverla donde quieras dentro de tu Drive (la web la sigue encontrando).
+   No uses `GOOGLE_DRIVE_PARENT_ID` con una carpeta creada a mano: con el
+   permiso `drive.file` la web no puede escribir en ella.
 7. **Probar en preview.** Abre la URL de preview del PR →
    `/enviar-documentos` y sube archivos de prueba. En preview todo va a la
    carpeta `… – JX-TEST` y no se manda ningún aviso (el correo solo está
@@ -125,7 +127,13 @@ paso 4 y actualiza `GOOGLE_REFRESH_TOKEN`.
   enlace» no existe en el código). La confirmación al cliente no incluye el
   enlace a la carpeta.
 - Copia intermedia (Vercel Blob) borrada en cuanto el archivo está en Drive o
-  en el correo.
+  en el correo. **Pendiente de decidir:** una limpieza automática diaria de lo
+  que pudiera quedar en Blob por un fallo (subida abandonada, correo que no
+  salió) con más de 24 h. No está incluida: borra datos de producción y
+  necesita el visto bueno de Elena.
+- Solo se puede añadir a una carpeta existente desde el mismo navegador que
+  la creó (token firmado); saber la referencia y el correo de otro cliente no
+  basta.
 - **Conservación propuesta** (escrita en la política, a confirmar): carpetas
   de envíos que no acaban en encargo, se borran a los **3 meses**; con
   encargo, se conservan **1 año** desde la entrega. El borrado lo hace Elena
@@ -139,3 +147,29 @@ paso 4 y actualiza `GOOGLE_REFRESH_TOKEN`.
 (`tests/mock-drive.mjs`): PDF de 8 MB + diez fotos de 3,4 MB + HEIC, cortes de
 red y errores 503 a mitad de subida, mensajes de error, recuperación tras
 recargar y la calculadora. Instrucciones en la cabecera del archivo.
+
+## 7. Revisión de seguridad (antes de abrir el PR)
+
+Una revisión independiente del código encontró, y se corrigieron:
+
+- Reintento tras un correo fallido que daba el envío por «duplicado» y
+  perdía los archivos (la huella ahora se guarda después del correo).
+- Borrado de archivos de Blob aunque su correo no hubiera salido (ahora solo
+  se borran los enviados).
+- `/api/quote`: un reintento tras una función cortada borraba los archivos y
+  respondía «recibido» (ya existía en `main`); ahora no borra nada y pide
+  por WhatsApp lo que no llegó. Tope de 100 MB por solicitud en el servidor.
+- Escribir en la carpeta de otro cliente conociendo su referencia y su
+  correo (ahora hace falta el token firmado del envío anterior).
+- Reanudación tras recargar la página (los tokens de archivo ahora van
+  ligados a la referencia y la carpeta, no a la sesión).
+- Si Google no deja leer «Range», el navegador pregunta al servidor en vez de
+  suponer cuántos bytes se guardaron.
+- La lista de archivos del aviso de la calculadora sale de un justificante
+  firmado por el servidor tras comprobar Drive.
+- Solo se aceptan archivos por su extensión (PDF, JPG, PNG, HEIC, DOCX, ZIP).
+
+Quedan abiertos, de menor riesgo: sin límite de envíos por IP ni captcha (hay
+campo trampa), dos «Documentos de clientes» si los dos primeros envíos
+coinciden en el mismo segundo, y dos archivos distintos con el mismo nombre
+se marcan juntos si uno falla la comprobación.

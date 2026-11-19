@@ -215,7 +215,11 @@ test.describe("de punta a punta con Drive simulado", () => {
     await calc.locator("input[id$='-privacy']").check();
     await calc.getByRole("button", { name: /Enviar/ }).click();
     await expect.poll(() => quoteBody.includes('name="docs"'), { timeout: 90_000 }).toBe(true);
-    expect(quoteBody).toContain("antecedentes-8MB.pdf");
+    // `docs` es el justificante firmado de lo comprobado en Drive.
+    const token = /name="docs"\r\n\r\n([^\r\n]+)/.exec(quoteBody)[1];
+    const receipt = JSON.parse(Buffer.from(token.split(".")[0], "base64url").toString("utf8"));
+    expect(receipt.k).toBe("r");
+    expect(receipt.files.map((f) => f.name).sort()).toEqual(["IMG_1001.jpg", "antecedentes-8MB.pdf"]);
     const files = await state();
     expect(files.find((f) => f.name === "antecedentes-8MB.pdf")).toBeTruthy();
     expect(files.find((f) => f.name === "IMG_1001.jpg")).toBeTruthy();
