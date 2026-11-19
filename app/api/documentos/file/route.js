@@ -7,6 +7,7 @@
 // pasan por esta función (sin el límite de 4,5 MB de Vercel).
 import { NextResponse } from "next/server";
 import { createUploadSession } from "../../../lib/googleDrive";
+import { fileMark, reserveSession } from "../../../lib/docLimits";
 import {
   LIMITS,
   TOKEN_TTL_MS,
@@ -40,6 +41,14 @@ export async function POST(req) {
   if (!Number.isFinite(size) || size <= 0) return json({ ok: false, error: "empty" }, 400);
   if (size > LIMITS.drive.maxBytes) return json({ ok: false, error: "size" }, 413);
   if (!allowedFile(name)) return json({ ok: false, error: "type" }, 415);
+
+  // Solo archivos declarados al empezar (tope total por envío) y con un
+  // número limitado de sesiones por archivo.
+  const idx = Number.isInteger(body.idx) ? body.idx : -1;
+  if (!Array.isArray(s.files) || s.files[idx] !== fileMark(name, size)) {
+    return json({ ok: false, error: "not-declared" }, 403);
+  }
+  if (!(await reserveSession(s.sid, idx))) return json({ ok: false, error: "rate" }, 429);
 
   const mimeType = mimeOf(name, body.type);
   try {

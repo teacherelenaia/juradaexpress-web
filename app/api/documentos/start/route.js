@@ -24,7 +24,10 @@ import {
   TEST_REF,
   sign,
   verify,
+  allowedFile,
+  cleanFileName,
 } from "../../../lib/docSubmission";
+import { countSubmission, fileMark } from "../../../lib/docLimits";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -58,6 +61,30 @@ export async function POST(req) {
 
   const mode = modeNow();
   if (mode === "none") return json({ ok: false, error: "storage-not-configured" }, 503);
+
+  // Lista de archivos declarada (20/11/2026): tope de número, de tamaño por
+  // archivo y TOTAL por envío. Solo se abrirán sesiones para estos archivos.
+  const limits = LIMITS[mode];
+  const declared = Array.isArray(body.files) ? body.files : [];
+  if (declared.length > limits.maxFiles) return json({ ok: false, error: "count", ...limits }, 413);
+  const manifest = [];
+  let total = 0;
+  for (const f of declared) {
+    const fname = cleanFileName(f && f.name);
+    const size = Number(f && f.size);
+    if (!Number.isFinite(size) || size <= 0 || !allowedFile(fname)) return json({ ok: false, error: "bad-request" }, 400);
+    if (size > limits.maxBytes) return json({ ok: false, error: "size", ...limits }, 413);
+    total += size;
+    manifest.push(fileMark(fname, size));
+  }
+  if (limits.maxTotal && total > limits.maxTotal) return json({ ok: false, error: "total", ...limits }, 413);
+
+  // Envíos por visitante y día (antes de crear nada en Drive).
+  const blocked = await countSubmission(req);
+  if (blocked) {
+    console.error("[documentos/start] límite de envíos", blocked);
+    return json({ ok: false, error: "rate" }, 429);
+  }
 
   const contact = contactKey(email, phone);
   // Referencia (revisión del 19/11/2026): solo se reutiliza una carpeta si
@@ -100,6 +127,7 @@ export async function POST(req) {
     appended,
     contact,
     locale,
+    files: manifest,
     iat: now,
     exp: now + TOKEN_TTL_MS,
   });

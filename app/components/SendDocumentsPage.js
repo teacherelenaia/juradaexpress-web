@@ -80,13 +80,17 @@ const COPY = {
     errPrivacy: "Marca la casilla para poder recibir tus documentos.",
     errFiles: "Añade al menos un documento.",
     errMissing: "Hay archivos que no terminaron de subir antes de recargar la página: vuelve a elegirlos o quítalos de la lista.",
-    errTotal: "En total pesan más de 100 MB. Envíalos en dos tandas.",
+    errTotal: (mb) => `En total pesan más de ${mb} MB, que es el máximo por envío. Envíalos en dos tandas.`,
+    errRate:
+      "Hoy ya se han hecho muchos envíos desde tu conexión y no puedo recibir más por aquí. Mándamelos por WhatsApp (+34 685 891 214) o a info@juradaexpress.es.",
     errStart:
       "No se ha podido empezar el envío (sin conexión o el servicio no responde). Tus datos y archivos siguen aquí: pulsa «Enviar documentos» otra vez en un momento o usa WhatsApp o correo.",
     okTitle: "Documentos recibidos",
     okLead: (n) => (n === 1 ? "Ha llegado este documento:" : `Han llegado estos ${n} documentos:`),
     okRef: "Tu referencia",
     okEmail: "Te he enviado un correo de confirmación.",
+    okWa: "Avisar por WhatsApp",
+    okWaText: (n, ref) => `Acabo de subir ${n} ${n === 1 ? "documento" : "documentos"}, referencia ${ref}`,
     partialTitle: "Algunos documentos no han llegado",
     partialLead:
       "Los que ves marcados en rojo no han llegado después de varios intentos. Puedes reintentarlo o mandármelos por WhatsApp o correo, con la referencia ya escrita:",
@@ -130,13 +134,17 @@ const COPY = {
     errPrivacy: "Please tick the box so I can receive your documents.",
     errFiles: "Add at least one document.",
     errMissing: "Some files had not finished uploading before the page reloaded: choose them again or remove them from the list.",
-    errTotal: "Together they are over 100 MB. Please send them in two batches.",
+    errTotal: (mb) => `Together they are over ${mb} MB, the limit per submission. Please send them in two batches.`,
+    errRate:
+      "Too many submissions have been made from your connection today, so I can't receive more here. Please send them on WhatsApp (+34 685 891 214) or to info@juradaexpress.es.",
     errStart:
       "The upload could not start (no connection or the service is not responding). Your details and files are still here: press “Send documents” again in a moment or use WhatsApp or email.",
     okTitle: "Documents received",
     okLead: (n) => (n === 1 ? "This document has arrived:" : `These ${n} documents have arrived:`),
     okRef: "Your reference",
     okEmail: "I have sent you a confirmation email.",
+    okWa: "Let me know on WhatsApp",
+    okWaText: (n, ref) => `I have just uploaded ${n} ${n === 1 ? "document" : "documents"}, reference ${ref}`,
     partialTitle: "Some documents have not arrived",
     partialLead:
       "The ones marked in red did not arrive after several attempts. You can retry or send them to me on WhatsApp or by email, with the reference already filled in:",
@@ -216,7 +224,8 @@ export default function SendDocumentsPage({ locale = "es" }) {
     );
     if (!r.ok) {
       setPhase("form");
-      setErrors({ form: r.error === "total" ? t.errTotal : t.errStart });
+      const maxMb = Math.round((up.limits.maxTotal || 300 * 1024 * 1024) / (1024 * 1024));
+      setErrors({ form: r.error === "total" ? t.errTotal(maxMb) : r.error === "rate" ? t.errRate : t.errStart });
       return;
     }
     if (r.received.length) {
@@ -276,6 +285,16 @@ export default function SendDocumentsPage({ locale = "es" }) {
               </ul>
               <p className="mt-4 text-sm text-slate-700">{t.promise}</p>
               {result.clientEmailed ? <p className="mt-1 text-sm text-slate-600">{t.okEmail}</p> : null}
+              {/* Botón de WhatsApp con el mensaje ya escrito (20/11/2026). */}
+              <a
+                className="btn btn-primary mt-5 inline-flex"
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.okWaText(result.received.length, ref))}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="doc-wa"
+              >
+                <IconWhatsApp className="h-5 w-5" /> {t.okWa}
+              </a>
             </>
           ) : null}
           <p className="mt-4 text-sm text-slate-600">

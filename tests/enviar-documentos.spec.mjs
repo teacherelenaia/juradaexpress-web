@@ -25,6 +25,8 @@ import {
   receivedText,
   clientText,
   noteText,
+  dataLines,
+  isExpediente,
 } from "../app/lib/docNotice.js";
 
 const MOCK = process.env.MOCK_DRIVE_URL || "http://127.0.0.1:3399";
@@ -71,12 +73,54 @@ test("cuerpo del aviso: carpeta, archivos con tamaño y páginas, contacto y ori
     page: "/enviar-documentos",
   });
   expect(text).toContain("Carpeta de Drive: https://drive.google.com/drive/folders/abc");
+  expect(text).toContain("Adjuntos: ninguno (no se pudieron adjuntar");
   expect(text).toContain("• pasaporte.pdf (8 MB, 3 pág.)");
   expect(text).toContain("foto.heic — se cortó la conexión");
   expect(text).toContain("Origen: Google Ads");
   expect(text).toContain("Campaña: EN");
   expect(text).toContain("Palabra clave: sworn translator spain (frase)");
   expect(text).toContain("Trámite: Visado no lucrativo");
+});
+
+test("datos en líneas fijas y en el mismo orden, con o sin datos", () => {
+  const full = dataLines({
+    name: "Ana Pérez",
+    email: "ana@example.com",
+    phone: "+34 600 000 000",
+    tramite: "Visado no lucrativo",
+    ref: "JX-ABC234",
+    received: [
+      { name: "pasaporte.pdf", size: 1000, pages: 3 },
+      { name: "foto.jpg", size: 1000 },
+    ],
+  });
+  expect(full).toEqual([
+    "Nombre: Ana Pérez",
+    "Correo: ana@example.com",
+    "Teléfono: +34 600 000 000",
+    "Trámite: Visado no lucrativo",
+    "Número de archivos: 2",
+    "Páginas: 4",
+    "Referencia JX: JX-ABC234",
+  ]);
+  const empty = dataLines({ name: "", email: "", phone: "", tramite: "", ref: "JX-ABC234", received: [{ name: "a.zip", size: 5 }] });
+  expect(empty.map((l) => l.split(":")[0])).toEqual(full.map((l) => l.split(":")[0]));
+  expect(empty[5]).toBe("Páginas: no disponible");
+  // El cuerpo del aviso EMPIEZA por ese bloque.
+  const body = receivedText({ name: "Ana", email: "", phone: "", tramite: "", ref: "JX-ABC234", received: [], failed: [], attribution: null });
+  expect(body.split("\n").slice(0, 7).map((l) => l.split(":")[0])).toEqual(full.map((l) => l.split(":")[0]));
+});
+
+test("expediente: tres archivos o más, o más de 15 MB", () => {
+  const f = (mb) => ({ name: "a.pdf", size: mb * MB });
+  expect(isExpediente([f(1)])).toBe(false);
+  expect(isExpediente([f(7), f(8)])).toBe(false); // 15 MB justos: con adjuntos
+  expect(isExpediente([f(8), f(8)])).toBe(true);
+  expect(isExpediente([f(16)])).toBe(true);
+  expect(isExpediente([f(1), f(1), f(1)])).toBe(true);
+  expect(receivedSubject({ name: "Ana", count: 1, ref: "JX-ABC234", expediente: true })).toBe(
+    "Documentos recibidos · expediente · Ana · 1 archivo · JX-ABC234"
+  );
 });
 
 test("confirmación al cliente sin enlace a la carpeta y con el plazo", () => {
@@ -200,6 +244,90 @@ test.describe("de punta a punta con Drive simulado", () => {
     await expect(page.getByLabel("Nombre")).toHaveValue("Prueba Claude");
     await expect(page.getByLabel("Comentario")).toHaveValue("Lo necesito el lunes");
     await expect(page.getByText("He recuperado lo que habías escrito")).toBeVisible();
+  });
+
+  const mails = async () => (await fetch(`${MOCK}/__mails`)).json();
+
+  test("uno o dos archivos pequeños: el aviso lleva los adjuntos, el enlace y Reply-To del cliente", async ({ page }) => {
+    test.setTimeout(120_000);
+    await page.goto("/enviar-documentos");
+    await fill(page);
+    await page.getByLabel("WhatsApp o teléfono").fill("+34 600 000 000");
+    await page.getByLabel("¿Para qué trámite es?").selectOption("Visado no lucrativo");
+    await page.getByTestId("doc-files").setInputFiles([path.join(dir, "IMG_1001.jpg"), path.join(dir, "antecedentes-8MB.pdf")]);
+    await page.getByTestId("doc-submit").click();
+    await expect(page.getByTestId("doc-result")).toContainText("Documentos recibidos", { timeout: 90_000 });
+    // Botón de WhatsApp con el mensaje ya escrito.
+    const href = await page.getByTestId("doc-wa").getAttribute("href");
+    expect(decodeURIComponent(href)).toContain("Acabo de subir 2 documentos, referencia JX-TEST");
+    const all = await mails();
+    const m = all.find((x) => x.subject.includes("Documentos recibidos"));
+    expect(m.subject).toBe("[PRUEBA] Documentos recibidos · Prueba Claude · 2 archivos · JX-TEST");
+    expect(m.reply_to).toBe("prueba@example.com");
+    expect(m.attachments.map((a) => a.filename).sort()).toEqual(["IMG_1001.jpg", "antecedentes-8MB.pdf"]);
+    expect(m.attachments.find((a) => a.filename === "antecedentes-8MB.pdf").bytes).toBe(8 * MB);
+    expect(m.text.split("\n").slice(0, 7)).toEqual([
+      "Nombre: Prueba Claude",
+      "Correo: prueba@example.com",
+      "Teléfono: +34 600 000 000",
+      "Trámite: Visado no lucrativo",
+      "Número de archivos: 2",
+      "Páginas: 4",
+      "Referencia JX: JX-TEST",
+    ]);
+    expect(m.text).toContain("Carpeta de Drive: https://drive.google.com/drive/folders/");
+    expect(m.text).toContain("Adjuntos: 2 en este correo");
+    // Confirmación al cliente, sin adjuntos ni enlace a la carpeta.
+    const c = all.find((x) => x.subject.startsWith("Hemos recibido"));
+    expect(c.to).toEqual(["prueba@example.com"]);
+    expect(c.attachments).toEqual([]);
+  });
+
+  test("tres archivos: «expediente» en el asunto y solo el enlace, sin adjuntos", async ({ page }) => {
+    test.setTimeout(120_000);
+    await page.goto("/en/send-documents");
+    await page.getByLabel("Name").fill("Prueba Claude");
+    await page.getByLabel("Email").fill("prueba@example.com");
+    await page.getByTestId("doc-privacy").check();
+    await page.getByTestId("doc-files").setInputFiles(["IMG_1001.jpg", "IMG_1002.jpg", "IMG_2000.HEIC"].map((n) => path.join(dir, n)));
+    await page.getByTestId("doc-submit").click();
+    await expect(page.getByTestId("doc-result")).toContainText("Documents received", { timeout: 90_000 });
+    expect(decodeURIComponent(await page.getByTestId("doc-wa").getAttribute("href"))).toContain(
+      "I have just uploaded 3 documents, reference JX-TEST"
+    );
+    const m = (await mails()).find((x) => x.subject.includes("Documentos recibidos"));
+    expect(m.subject).toBe("[PRUEBA] Documentos recibidos · expediente · Prueba Claude · 3 archivos · JX-TEST");
+    expect(m.attachments).toEqual([]);
+    expect(m.text).toContain("Adjuntos: ninguno (expediente: están en la carpeta de Drive)");
+    expect(m.text).toContain("Páginas: 3");
+  });
+
+  test("dos archivos que pasan de 15 MB: expediente sin adjuntos", async ({ page }) => {
+    test.setTimeout(120_000);
+    writeFile("grande-9MB.pdf", 9 * MB, "%PDF-1.4\n");
+    await page.goto("/enviar-documentos");
+    await fill(page);
+    await page.getByTestId("doc-files").setInputFiles([path.join(dir, "grande-9MB.pdf"), path.join(dir, "antecedentes-8MB.pdf")]);
+    await page.getByTestId("doc-submit").click();
+    await expect(page.getByTestId("doc-result")).toContainText("Documentos recibidos", { timeout: 90_000 });
+    const m = (await mails()).find((x) => x.subject.includes("Documentos recibidos"));
+    expect(m.subject).toContain("· expediente ·");
+    expect(m.attachments).toEqual([]);
+  });
+
+  test("tope total por envío: el servidor rechaza más de 300 MB y archivos no declarados", async ({ request }) => {
+    const base = { name: "Prueba", email: "prueba@example.com", privacy: true, locale: "es" };
+    const big = await request.post("/api/documentos/start", {
+      data: { ...base, files: Array.from({ length: 7 }, (_, i) => ({ name: `f${i}.pdf`, size: 49 * MB })) },
+    });
+    expect(big.status()).toBe(413);
+    expect((await big.json()).error).toBe("total");
+    const ok = await request.post("/api/documentos/start", { data: { ...base, files: [{ name: "a.pdf", size: 1000 }] } });
+    const { token } = await ok.json();
+    const other = await request.post("/api/documentos/file", { data: { token, name: "otro.pdf", size: 49 * MB, type: "application/pdf", idx: 0 } });
+    expect(other.status()).toBe(403);
+    const good = await request.post("/api/documentos/file", { data: { token, name: "a.pdf", size: 1000, type: "application/pdf", idx: 0 } });
+    expect(good.status()).toBe(200);
   });
 
   test("la calculadora sube por el mismo sistema y manda la carpeta a /api/quote", async ({ page }) => {

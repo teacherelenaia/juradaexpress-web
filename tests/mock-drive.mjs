@@ -18,6 +18,7 @@ const BASE = `http://127.0.0.1:${PORT}`;
 let files = [];
 let sessions = new Map();
 let control = { cut: 0, fail503: 0 };
+let mails = []; // correos recibidos por el Resend simulado (/resend)
 
 const read = (req) =>
   new Promise((resolve, reject) => {
@@ -79,10 +80,23 @@ const server = http.createServer(async (req, res) => {
   }
   try {
     if (p === "/__state") return send(res, 200, files.map(meta));
+    if (p === "/__mails") return send(res, 200, mails);
+    if (p === "/resend" && req.method === "POST") {
+      const m = JSON.parse((await read(req)).toString());
+      mails.push({
+        to: m.to,
+        reply_to: m.reply_to || "",
+        subject: m.subject,
+        text: m.text,
+        attachments: (m.attachments || []).map((a) => ({ filename: a.filename, bytes: Buffer.from(a.content, "base64").length })),
+      });
+      return send(res, 200, { id: "mock" });
+    }
     if (p === "/__control") {
       const c = JSON.parse((await read(req)).toString() || "{}");
       if (c.reset) {
         files = [];
+        mails = [];
         sessions = new Map();
         control = { cut: 0, fail503: 0 };
       }

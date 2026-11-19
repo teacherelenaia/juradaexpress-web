@@ -64,7 +64,12 @@ export default function Page() {
           no se comparte con nadie ni tiene enlace público. Si el archivo
           pasa por el almacenamiento temporal de Vercel (cuando la subida
           directa a Drive no es posible), esa copia se borra en cuanto el
-          archivo está en Drive o se ha enviado por correo a la traductora.
+          archivo está en Drive o se ha enviado por correo a la traductora,
+          y en todo caso en un máximo de 24 horas. Cuando envías uno o dos
+          documentos pequeños, llegan además adjuntos al correo de la
+          traductora para preparar el presupuesto. Para evitar abusos se
+          cuenta el número de envíos por conexión con una huella cifrada de
+          la dirección IP (no la IP), que se borra en 48 horas.
         </li>
         <li>
           <strong className="text-slate-900">Pago online (Stripe):</strong>{" "}

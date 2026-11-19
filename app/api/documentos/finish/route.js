@@ -17,7 +17,7 @@
 // Un mismo envío no avisa dos veces (doble clic, reintento): huella en Blob.
 import { NextResponse } from "next/server";
 import { get, del } from "@vercel/blob";
-import { folderUrl, getFile, uploadStatus, writeNote } from "../../../lib/googleDrive";
+import { downloadFile, folderUrl, getFile, uploadStatus, writeNote } from "../../../lib/googleDrive";
 import { resendConfig, sendResendEmail } from "../../../lib/resend";
 import { notifyCrm } from "../../../lib/crm";
 import { attributionOf, madridParts } from "../../../lib/waNotice";
@@ -39,6 +39,8 @@ import {
   clientText,
   failedSubject,
   failedText,
+  isExpediente,
+  ATTACH_MAX_BYTES,
   noteText,
   receivedSubject,
   receivedText,
@@ -68,7 +70,8 @@ function fileItems(raw, max) {
   }));
 }
 
-// ¿Está el archivo en Drive, en la carpeta del envío y completo?
+// ¿Está el archivo en Drive, en la carpeta del envío y completo? Devuelve
+// su id comprobado o "".
 async function verifyDrive(item, s) {
   try {
     let id = item.driveId;
@@ -79,15 +82,15 @@ async function verifyDrive(item, s) {
         if (st.done && st.file) id = st.file.id;
       }
     }
-    if (!id) return false;
+    if (!id) return "";
     const file = await getFile(id);
-    if (!file || file.trashed) return false;
-    if (!Array.isArray(file.parents) || !file.parents.includes(s.folderId)) return false;
-    if (item.size && Number(file.size) !== item.size) return false;
-    return true;
+    if (!file || file.trashed) return "";
+    if (!Array.isArray(file.parents) || !file.parents.includes(s.folderId)) return "";
+    if (item.size && Number(file.size) !== item.size) return "";
+    return id;
   } catch (err) {
     console.error("[documentos/finish] verify", err?.message);
-    return false;
+    return "";
   }
 }
 
@@ -129,7 +132,8 @@ export async function POST(req) {
         return;
       }
       if (s.mode === "drive") {
-        if (await verifyDrive(it, s)) received.push(it);
+        const id = await verifyDrive(it, s);
+        if (id) received.push({ ...it, driveId: id });
         else failed.push({ ...it, reason: "not-verified" });
       } else if (blobUrlOk(it.blobUrl, s.ref)) {
         blobItems.push(it);
@@ -172,6 +176,23 @@ export async function POST(req) {
   failed.sort(byOrder);
   attachments.sort((a, b) => byOrder(a.it, b.it));
 
+  // Envío pequeño con Drive (1-2 archivos y hasta 15 MB): los archivos van
+  // ADEMÁS adjuntos al aviso. Si la descarga falla, el aviso sale igual con
+  // el enlace y lo dice en «Adjuntos:».
+  const expediente = isExpediente(received);
+  const driveAttachments = [];
+  if (notify && s.mode === "drive" && received.length && !expediente) {
+    try {
+      for (const f of received) {
+        const buf = await downloadFile(f.driveId, ATTACH_MAX_BYTES);
+        driveAttachments.push({ filename: f.name, content: buf.toString("base64") });
+      }
+    } catch (err) {
+      console.error("[documentos/finish] adjuntar desde Drive", s.ref, err?.message);
+      driveAttachments.length = 0;
+    }
+  }
+
   const folderLink = s.mode === "drive" && s.folderId ? folderUrl(s.folderId) : "";
   const data = {
     ref: s.ref,
@@ -188,6 +209,8 @@ export async function POST(req) {
     folderUrl: folderLink,
     appended: Boolean(s.appended),
     when: madridWhen(),
+    // Sin Drive todos los archivos van adjuntos (repartidos si pesan mucho).
+    attached: s.mode === "drive" ? driveAttachments.length : attachments.length,
   };
 
   // 2. Nota en la carpeta (no bloquea el envío si falla).
@@ -236,7 +259,7 @@ export async function POST(req) {
   const sentAttachments = []; // solo estos se pueden borrar de Blob
   if (mail && !silent) {
     const groups = groupBySize(attachments, EMAIL_MAX_BYTES);
-    const subject = receivedSubject({ name, count: received.length, ref: s.ref, test });
+    const subject = receivedSubject({ name, count: received.length, ref: s.ref, test, expediente });
     const text = receivedText(data);
     const toAtt = (a) => ({ filename: a.it.name, content: a.content });
     if (received.length || !failed.length) {
@@ -245,7 +268,7 @@ export async function POST(req) {
         replyTo: email || "",
         subject,
         text,
-        attachments: (groups[0] || []).map(toAtt),
+        attachments: s.mode === "drive" ? driveAttachments : (groups[0] || []).map(toAtt),
       });
       if (emailed) sentAttachments.push(...(groups[0] || []));
       for (let i = 1; i < groups.length; i++) {
@@ -284,7 +307,7 @@ export async function POST(req) {
   if (!silent && !test) {
     await notifyCrm({
       origen: "web",
-      subject: receivedSubject({ name, count: received.length, ref: s.ref }),
+      subject: receivedSubject({ name, count: received.length, ref: s.ref, expediente }),
       mensaje_cliente: `Documentos enviados desde juradaexpress.es\n\n${receivedText(data)}`,
       nombre: name,
       email,

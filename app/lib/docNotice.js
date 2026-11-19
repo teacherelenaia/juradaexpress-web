@@ -10,8 +10,55 @@ import { adsInfo, campaignLines, clickOrigin } from "./adsCampaign.js";
 
 const MB = 1024 * 1024;
 const ORIGIN = { google_ads: "Google Ads", chatgpt: "ChatGPT", web: "Web" };
-// A partir de este número de archivos el asunto lleva «expediente».
+// «Expediente» (20/11/2026): tres archivos o más, o más de 15 MB en total.
+// El asunto lleva la palabra y el correo NO lleva adjuntos (solo el enlace
+// a Drive). Por debajo (1-2 archivos y hasta 15 MB), los archivos van
+// además adjuntos: el agente de WhatsApp de Setty lee el correo de Elena y
+// presupuesta los documentos sueltos, pero no puede abrir carpetas de Drive.
 export const EXPEDIENTE_MIN_FILES = 3;
+export const ATTACH_MAX_BYTES = 15 * MB;
+
+export function isExpediente(files) {
+  const list = Array.isArray(files) ? files : [];
+  const total = list.reduce((n, f) => n + (Number(f.size) || 0), 0);
+  return list.length >= EXPEDIENTE_MIN_FILES || total > ATTACH_MAX_BYTES;
+}
+
+// Páginas de un archivo: las contadas del PDF; una foto cuenta como una.
+function pagesOf(f) {
+  if (f.pages) return Number(f.pages);
+  return /\.(jpe?g|png|heic|heif)$/i.test(f.name || "") ? 1 : 0;
+}
+
+// Total de páginas, o "" si algún archivo no se puede contar (DOCX, ZIP,
+// PDF protegido).
+export function totalPages(files) {
+  let sum = 0;
+  for (const f of files || []) {
+    const n = pagesOf(f);
+    if (!n) return "";
+    sum += n;
+  }
+  return sum ? String(sum) : "";
+}
+
+/**
+ * Bloque de datos del aviso, pensado para leerlo una máquina: una línea por
+ * dato, SIEMPRE las mismas y en el mismo orden, con «Etiqueta: valor». El
+ * cliente al que hay que contestar es este (también va en Reply-To), no el
+ * remitente del correo. Sin dato: «no indicado» / «no disponible».
+ */
+export function dataLines(d) {
+  return [
+    `Nombre: ${d.name || "no indicado"}`,
+    `Correo: ${d.email || "no indicado"}`,
+    `Teléfono: ${d.phone || "no indicado"}`,
+    `Trámite: ${d.tramite || "no indicado"}`,
+    `Número de archivos: ${d.received.length}`,
+    `Páginas: ${totalPages(d.received) || "no disponible"}`,
+    `Referencia JX: ${d.ref}`,
+  ];
+}
 
 export function sizeText(bytes) {
   const n = Number(bytes) || 0;
@@ -28,11 +75,12 @@ function fileLine(f, locale = "es") {
 const contactOf = (d) => [d.email, d.phone].filter(Boolean).join(" · ") || "sin contacto";
 
 // «Documentos recibidos · [expediente · ]Nombre · N archivos · JX-XXXXXX»
-export function receivedSubject({ name, count, ref, test = false }) {
+export function receivedSubject({ name, count, ref, test = false, expediente }) {
   const n = Number(count) || 0;
+  const exp = expediente === undefined ? n >= EXPEDIENTE_MIN_FILES : expediente;
   return [
     test ? "[PRUEBA] Documentos recibidos" : "Documentos recibidos",
-    ...(n >= EXPEDIENTE_MIN_FILES ? ["expediente"] : []),
+    ...(exp ? ["expediente"] : []),
     name || "Sin nombre",
     `${n} ${n === 1 ? "archivo" : "archivos"}`,
     ref,
@@ -66,10 +114,26 @@ const FAIL_REASON = {
 };
 export const failReason = (code) => FAIL_REASON[code] || "error desconocido";
 
-/** Cuerpo del aviso a Elena. */
+/**
+ * Cuerpo del aviso a Elena. Empieza por el bloque de datos en líneas fijas
+ * (dataLines); después, carpeta, adjuntos, lista de archivos y origen.
+ * `d.attached`: número de archivos adjuntos a ESTE correo.
+ */
 export function receivedText(d) {
+  const attached = Number(d.attached) || 0;
   const lines = [
-    d.folderUrl ? `Carpeta de Drive: ${d.folderUrl}` : "Archivos adjuntos a este correo (Drive no está conectado).",
+    ...dataLines(d),
+    "",
+    `Carpeta de Drive: ${d.folderUrl || "no disponible (Drive no está conectado)"}`,
+    `Adjuntos: ${
+      attached
+        ? `${attached} en este correo`
+        : isExpediente(d.received)
+        ? "ninguno (expediente: están en la carpeta de Drive)"
+        : d.received.length
+        ? "ninguno (no se pudieron adjuntar: están en la carpeta de Drive)"
+        : "ninguno"
+    }`,
     "",
     `Archivos recibidos (${d.received.length}):`,
     ...(d.received.length ? d.received.map((f) => fileLine(f)) : ["(ninguno)"]),
@@ -83,11 +147,6 @@ export function receivedText(d) {
   }
   lines.push(
     "",
-    `Referencia: ${d.ref}`,
-    `Nombre: ${d.name || "(no indicado)"}`,
-    `Email: ${d.email || "(no indicado)"}`,
-    `WhatsApp / teléfono: ${d.phone || "(no indicado)"}`,
-    `Trámite: ${d.tramite || "(no indicado)"}`,
     `Comentario: ${d.comment ? `\n${d.comment}` : "(ninguno)"}`,
     "",
     ...originLines(d.attribution),

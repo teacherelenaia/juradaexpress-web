@@ -159,12 +159,18 @@ export default function useDocUpload({ persist = false, legacyBlob = null, maxFi
     async (fields, { notify = true, page = "" } = {}) => {
       setBusy(true);
       try {
+        // Lo que se va a subir ahora. Se declara al servidor al empezar: así
+        // aplica el tope total por envío y solo acepta estos archivos.
+        const queue = entriesRef.current.filter((e) => e.file && (e.status === "ready" || e.status === "failed"));
+        const totalBytes = queue.reduce((n, e) => n + e.size, 0);
+        if (limits.maxTotal && totalBytes > limits.maxTotal) return { ok: false, error: "total" };
         // 1. Sesión (misma referencia si ya había una).
         let session;
         try {
           session = await api("/api/documentos/start", {
             ...fields,
             privacy: true,
+            files: queue.map((e) => ({ name: e.name, size: e.size })),
             // Token firmado del envío anterior (aunque haya caducado): es lo
             // único que permite añadir a la misma carpeta.
             prevToken: (store.current.session && store.current.session.token) || store.current.prevToken || "",
@@ -187,13 +193,9 @@ export default function useDocUpload({ persist = false, legacyBlob = null, maxFi
           blobUploadUrl: legacy ? legacyBlob.handleUploadUrl : "/api/documentos/blob",
           blobPrefix: legacy ? legacyBlob.prefix : `documentos/${session.ref}/`,
           blobPayload: legacy ? undefined : session.token,
+          indexOf: (file) => queue.findIndex((e) => e.file === file),
         };
         // 2. Subidas (3 a la vez); un fallo no para a los demás.
-        const queue = entriesRef.current.filter((e) => e.file && (e.status === "ready" || e.status === "failed"));
-        if (session.mode === "blob" && session.maxTotal) {
-          const total = queue.reduce((n, e) => n + e.size, 0);
-          if (total > session.maxTotal) return { ok: false, error: "total", ref: session.ref };
-        }
         const results = new Map();
         let i = 0;
         const worker = async () => {
@@ -307,7 +309,7 @@ export default function useDocUpload({ persist = false, legacyBlob = null, maxFi
         setBusy(false);
       }
     },
-    [legacyBlob, save, update]
+    [legacyBlob, limits, save, update]
   );
 
   const reset = useCallback(() => {

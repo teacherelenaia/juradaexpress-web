@@ -64,7 +64,12 @@ export default function Page() {
           with anyone and has no public link. If a file goes through Vercel's
           temporary storage (when a direct upload to Drive is not possible),
           that copy is deleted as soon as the file is in Drive or has been
-          emailed to the translator.
+          emailed to the translator, and in any case within 24 hours. When
+          you send one or two small documents, they also reach the
+          translator's inbox as attachments so the quote can be prepared. To
+          prevent abuse, submissions per connection are counted using a
+          hashed fingerprint of the IP address (not the IP itself), deleted
+          within 48 hours.
         </li>
         <li>
           <strong className="text-slate-900">Online payment (Stripe):</strong>{" "}

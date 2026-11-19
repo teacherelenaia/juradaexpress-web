@@ -58,7 +58,9 @@ con 40 archivos en vez de 5.
 
 ## 3. Límites (a confirmar con Elena)
 
-- 50 MB por archivo y 40 archivos por envío (con Drive).
+- 50 MB por archivo, 40 archivos y **300 MB en total por envío** (con Drive).
+- **15 envíos por visitante y día** (por dirección IP) y 300 envíos al día
+  en total. Al pasarse, la página pide mandarlos por WhatsApp o correo.
 - Sin Drive conectado: 25 MB por archivo y 100 MB por envío (límite del correo).
 - Formatos: PDF, JPG, PNG, HEIC, DOCX y ZIP.
 - Se cambian en `app/lib/docSubmission.js` (`LIMITS`).
@@ -127,10 +129,10 @@ paso 4 y actualiza `GOOGLE_REFRESH_TOKEN`.
   enlace» no existe en el código). La confirmación al cliente no incluye el
   enlace a la carpeta.
 - Copia intermedia (Vercel Blob) borrada en cuanto el archivo está en Drive o
-  en el correo. **Pendiente de decidir:** una limpieza automática diaria de lo
-  que pudiera quedar en Blob por un fallo (subida abandonada, correo que no
-  salió) con más de 24 h. No está incluida: borra datos de producción y
-  necesita el visto bueno de Elena.
+  en el correo. Además, una **limpieza diaria** (Vercel Cron, 04:17 UTC,
+  `/api/documentos/cleanup`, aprobada por Elena) borra lo que haya quedado
+  por un fallo con más de 24 h en `documentos/` y `presupuestos/`, y los
+  contadores de envíos (`limites/`) de más de 48 h. No toca nada más.
 - Solo se puede añadir a una carpeta existente desde el mismo navegador que
   la creó (token firmado); saber la referencia y el correo de otro cliente no
   basta.
@@ -169,8 +171,8 @@ Una revisión independiente del código encontró, y se corrigieron:
   firmado por el servidor tras comprobar Drive.
 - Solo se aceptan archivos por su extensión (PDF, JPG, PNG, HEIC, DOCX, ZIP).
 
-Quedan abiertos, de menor riesgo: sin límite de envíos por IP ni captcha (hay
-campo trampa), dos «Documentos de clientes» si los dos primeros envíos
+Quedan abiertos, de menor riesgo: sin captcha (hay campo trampa y, desde el
+20/11, límite de envíos por visitante y tope total por envío), dos «Documentos de clientes» si los dos primeros envíos
 coinciden en el mismo segundo, y dos archivos distintos con el mismo nombre
 se marcan juntos si uno falla la comprobación.
 
@@ -188,3 +190,51 @@ La primera prueba falló con `invalid_client`: alguna de las variables se
 había pegado con espacios, salto de línea o comillas. El código ahora las
 limpia y, si Google las rechaza, deja en los logs la forma de cada una (no
 el valor) para saber cuál está mal.
+
+## 9. Cambios del 20/11/2026 (antes de fusionar)
+
+**Correo «Documentos recibidos», pensado para que lo lea el agente de
+WhatsApp de Setty:**
+
+- Empieza SIEMPRE por estas siete líneas, en este orden, con «Etiqueta: valor»:
+
+  ```
+  Nombre: …
+  Correo: …
+  Teléfono: …
+  Trámite: …
+  Número de archivos: …
+  Páginas: …
+  Referencia JX: JX-XXXXXX
+  ```
+
+  Sin dato: `no indicado`. `Páginas` es la suma de las páginas de los PDF más
+  una por foto; si algún archivo no se puede contar (DOCX, ZIP, PDF
+  protegido): `no disponible`. Después van `Carpeta de Drive:`, `Adjuntos:`,
+  la lista de archivos, el comentario y el origen.
+- El cliente al que hay que contestar es el del cuerpo; su correo va también
+  en `Reply-To` (el remitente es presupuestos@juradaexpress.es).
+- **Uno o dos archivos y hasta 15 MB en total:** van adjuntos al correo,
+  además del enlace a la carpeta (`Adjuntos: N en este correo`).
+- **Tres archivos o más, o más de 15 MB:** solo el enlace y «expediente» en
+  el asunto (`Adjuntos: ninguno (expediente: …)`).
+
+**Límites contra el abuso:** el navegador declara la lista de archivos al
+empezar; el servidor rechaza el envío si pasa de 300 MB y solo abre subidas
+para esos archivos (tres intentos por archivo). 15 envíos por visitante y
+día. De la IP solo se guarda una huella con sal, 48 h.
+
+**Pantalla final:** botón «Avisar por WhatsApp» con el mensaje «Acabo de
+subir N documentos, referencia JX-XXXXXX» (en inglés en `/en`).
+
+**Cómo probar los dos correos**
+
+- *Antes de fusionar (recomendado):* en Vercel, marca también **Preview** en
+  `RESEND_API_KEY`, `QUOTE_FROM_EMAIL` y `QUOTE_TO_EMAIL` y redespliega la
+  vista previa. Los avisos de la vista previa llegan con `[PRUEBA]` delante
+  del asunto y referencia JX-TEST, y no van al CRM.
+- *En producción, tras fusionar:* en `juradaexpress.es/enviar-documentos`,
+  (1) envía **un** PDF pequeño → correo con el PDF adjunto y el enlace;
+  (2) envía **tres** archivos → correo con «expediente» en el asunto y sin
+  adjuntos. Son envíos reales: llegan a info@, al CRM y la confirmación al
+  correo que pongas. Borra después las dos carpetas de Drive.

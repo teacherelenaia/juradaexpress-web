@@ -11,6 +11,11 @@
 
 export const DEFAULT_TO_EMAIL = "info@juradaexpress.es";
 
+// Solo pruebas (tests/enviar-documentos.spec.mjs): RESEND_MOCK_URL apunta a
+// un receptor simulado. En producción se ignora siempre.
+const RESEND_URL =
+  (process.env.VERCEL_ENV !== "production" && process.env.RESEND_MOCK_URL) || "https://api.resend.com/emails";
+
 // Configuración leída del entorno o null si falta la clave o el remitente.
 export function resendConfig() {
   const apiKey = process.env.RESEND_API_KEY;
@@ -35,7 +40,7 @@ export async function sendResendEmail({
   attachments,
 }) {
   try {
-    const res = await fetch("https://api.resend.com/emails", {
+    const res = await fetch(RESEND_URL, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,

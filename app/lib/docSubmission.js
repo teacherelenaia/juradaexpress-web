@@ -12,8 +12,9 @@ import { createHash, createHmac, randomInt, timingSafeEqual } from "node:crypto"
 
 export const MB = 1024 * 1024;
 export const LIMITS = {
-  // Drive: lo que propuso Elena (a confirmar).
-  drive: { maxFiles: 40, maxBytes: 50 * MB },
+  // Drive: 50 MB por archivo, 40 archivos y 300 MB por envío (20/11/2026:
+  // sin tope total, 40 × 50 MB serían 2 GB de una vez).
+  drive: { maxFiles: 40, maxBytes: 50 * MB, maxTotal: 300 * MB },
   // Sin Drive conectado, los archivos van adjuntos al correo: Resend admite
   // ~25 MB reales por mensaje, así que no se puede pasar de ahí.
   // Total por envío: un correo por cada 25 MB y la función tiene 60 s.

@@ -22,7 +22,7 @@
 import { upload as blobUpload } from "@vercel/blob/client";
 
 export const MB = 1024 * 1024;
-export const DEFAULT_LIMITS = { mode: "drive", maxFiles: 40, maxBytes: 50 * MB };
+export const DEFAULT_LIMITS = { mode: "drive", maxFiles: 40, maxBytes: 50 * MB, maxTotal: 300 * MB };
 export const CHUNK_BYTES = 2 * MB; // múltiplo de 256 KB (exigencia de Google)
 export const ACCEPT =
   ".pdf,.jpg,.jpeg,.png,.heic,.heif,.docx,.zip,application/pdf,image/jpeg,image/png,image/heic,image/heif,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/zip";
@@ -110,7 +110,8 @@ export async function api(path, body, { retries = 3 } = {}) {
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok !== false) return data;
       last = data.error || (res.status >= 500 ? "server" : "bad-request");
-      if (res.status < 500 && res.status !== 429) throw new UploadError(last);
+      // «rate» (límite de envíos) no se arregla reintentando.
+      if (last === "rate" || (res.status < 500 && res.status !== 429)) throw new UploadError(last);
     } catch (err) {
       if (err instanceof UploadError) throw err;
       last = "network";
@@ -161,7 +162,13 @@ function putChunk(url, blob, headers, onProgress, timeoutMs) {
 async function uploadDrive(file, ctx, state, onProgress, save) {
   const size = file.size;
   const newSession = async () => {
-    const r = await api("/api/documentos/file", { token: ctx.token, name: file.name, size, type: file.type });
+    const r = await api("/api/documentos/file", {
+      token: ctx.token,
+      name: file.name,
+      size,
+      type: file.type,
+      idx: ctx.indexOf ? ctx.indexOf(file) : -1, // posición en la lista declarada al empezar
+    });
     state.uploadUrl = r.uploadUrl;
     state.fileToken = r.fileToken;
     state.offset = 0;
@@ -306,6 +313,7 @@ export async function uploadFile(file, ctx, state, onProgress, save) {
       return { driveId };
     } catch (err) {
       const code = err && err.code;
+      // «rate» y «not-declared» (límites) nunca van a la reserva.
       if (!ctx.blobFallback || !["drive-unreachable", "server", "network"].includes(code)) throw err;
       if (code === "network" && state.offset > 0) throw err; // Google sí respondía: no es el navegador
       // Reserva: Blob y copia a Drive en el servidor (que borra la copia).

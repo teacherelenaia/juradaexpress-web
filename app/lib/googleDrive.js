@@ -277,6 +277,17 @@ export async function getFile(id) {
   return jsonOrThrow(res, "get");
 }
 
+/** Descarga el contenido de un archivo (para adjuntarlo a un correo). */
+export async function downloadFile(id, maxBytes) {
+  const res = await driveFetch(`${API}/files/${encodeURIComponent(id)}?alt=media`, {
+    signal: AbortSignal.timeout(30_000),
+  });
+  if (!res.ok) throw new Error(`drive-download:${res.status}`);
+  const buf = Buffer.from(await res.arrayBuffer());
+  if (buf.length > maxBytes) throw new Error("drive-download:too-large");
+  return buf;
+}
+
 /**
  * Nota de texto con los datos del formulario. Si ya existe en la carpeta
  * (envío anterior con la misma referencia), se le añade el texto nuevo.

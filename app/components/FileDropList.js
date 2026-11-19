@@ -18,7 +18,9 @@ export const FILE_COPY = {
     choose: "elígelos",
     camera: "Hacer una foto",
     spec: (l) =>
-      `PDF, JPG, PNG, HEIC, DOCX o ZIP · hasta ${Math.round(l.maxBytes / MB)} MB por archivo · hasta ${l.maxFiles} archivos`,
+      `PDF, JPG, PNG, HEIC, DOCX o ZIP · hasta ${Math.round(l.maxBytes / MB)} MB por archivo · hasta ${l.maxFiles} archivos${
+        l.maxTotal ? ` y ${Math.round(l.maxTotal / MB)} MB en total` : ""
+      }`,
     remove: (n) => `Quitar ${n}`,
     status: {
       ready: "listo para enviar",
@@ -38,6 +40,8 @@ export const FILE_COPY = {
       server: "No se pudo guardar. Pulsa «Reintentar» o mándamelo por WhatsApp o correo.",
       "not-verified": "No se pudo comprobar que haya llegado completo. Pulsa «Reintentar».",
       expired: "La sesión de subida caducó. Pulsa «Reintentar».",
+      rate: "Se ha alcanzado el límite de intentos para este archivo. Mándamelo por WhatsApp o correo.",
+      "not-declared": "Este archivo no estaba en el envío. Vuelve a pulsar «Enviar documentos».",
       "drive-unreachable": "Tu navegador no consigue conectar con el almacenamiento. Pulsa «Reintentar» o usa WhatsApp o correo.",
     },
   },
@@ -46,7 +50,9 @@ export const FILE_COPY = {
     choose: "choose them",
     camera: "Take a photo",
     spec: (l) =>
-      `PDF, JPG, PNG, HEIC, DOCX or ZIP · up to ${Math.round(l.maxBytes / MB)} MB per file · up to ${l.maxFiles} files`,
+      `PDF, JPG, PNG, HEIC, DOCX or ZIP · up to ${Math.round(l.maxBytes / MB)} MB per file · up to ${l.maxFiles} files${
+        l.maxTotal ? ` and ${Math.round(l.maxTotal / MB)} MB in total` : ""
+      }`,
     remove: (n) => `Remove ${n}`,
     status: {
       ready: "ready to send",
@@ -66,6 +72,8 @@ export const FILE_COPY = {
       server: "It could not be saved. Press “Retry” or send it to me on WhatsApp or by email.",
       "not-verified": "We could not confirm it arrived complete. Press “Retry”.",
       expired: "The upload session expired. Press “Retry”.",
+      rate: "The retry limit for this file has been reached. Please send it on WhatsApp or by email.",
+      "not-declared": "This file was not part of the submission. Press “Send documents” again.",
       "drive-unreachable": "Your browser cannot reach the storage service. Press “Retry” or use WhatsApp or email.",
     },
   },
