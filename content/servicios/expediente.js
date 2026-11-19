@@ -44,8 +44,8 @@ export const es = {
   path: PATH_ES,
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Expediente completo de visado",
-  metaTitle: `Traducción jurada de expediente completo de visado, ${FILE_PER_PAGE} €/pág.`,
-  metaDescription: `Traductora jurada nº 7310 del MAEC. Tu expediente de visado entero con un solo precio cerrado: ${FILE_PER_PAGE} € por página de 20 a 30 páginas (30 págs., ${P30} €). Entrega en 24 h.`,
+  metaTitle: `Traducción jurada de expediente de visado, ${FILE_PER_PAGE} €/pág.`,
+  metaDescription: `Traductora jurada nº 7310. Tu expediente de visado entero a precio cerrado: ${FILE_PER_PAGE} €/pág. de 20 a 30 páginas (30 págs., ${P30} €), entrega en 24 h.`,
   h1: `Traducción jurada de tu expediente completo de visado para España: un solo precio cerrado, desde ${FILE_PER_PAGE} € por página`,
   lead:
     "Mándame el expediente entero. Un solo precio cerrado en menos de dos horas, una sola fecha de entrega y todos los documentos firmados por la misma traductora jurada.",
@@ -79,7 +79,7 @@ export const es = {
       id: "resumen",
       title: "¿Quién traduce el expediente completo de tu visado y cuánto cuesta?",
       body: [
-        `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el Ministerio de Asuntos Exteriores con el nº 7310, y traduzco expedientes completos de visado para España (nómada digital, no lucrativo, estudiante, alta cualificación y reagrupación familiar) del inglés al español, o del español al inglés, con un solo precio cerrado. Un expediente de ${FILE_PER_PAGE_MIN} a ${FILE_PER_PAGE_MAX} páginas cuesta ${FILE_PER_PAGE} € por página, IVA incluido (30 páginas, ${P30} €), y uno de 11 a ${FILE_MID_MAX_PAGES} páginas, nunca más de ${FILE_MID_CAP} €. El presupuesto te llega en menos de dos horas y los PDF firmados, en 24 horas.`,
+        `Soy Elena Peñaranda Ortega, traductora jurada de inglés nombrada por el Ministerio de Asuntos Exteriores con el nº 7310, y traduzco expedientes completos de visado para España (nómada digital, no lucrativo, estudiante, alta cualificación y reagrupación familiar) del inglés al español, o del español al inglés, con un solo precio cerrado. Un expediente de ${FILE_PER_PAGE_MIN} a ${FILE_PER_PAGE_MAX} páginas cuesta ${FILE_PER_PAGE} € por página, IVA incluido (30 páginas, ${P30} €), y uno de 11 a ${FILE_MID_MAX_PAGES} páginas, nunca más de ${FILE_MID_CAP} €. El presupuesto te llega en menos de dos horas y los PDF firmados, en 24 horas hasta 30 páginas; con más, en la fecha que te confirmo por escrito.`,
       ],
     },
     {
@@ -152,7 +152,7 @@ export const es = {
       ],
     },
   ],
-  howTitle: "Cómo enviarlo, en tres pasos",
+  howTitle: "Cómo traducir tu expediente completo, en tres pasos",
   steps: [
     {
       t: "Me mandas la carpeta",
@@ -166,7 +166,7 @@ export const es = {
     {
       t: "Pagas y recibes los PDF",
       d: "Un PDF firmado por documento, numerado como tu carpeta.",
-      time: "En 24 horas",
+      time: "En 24 horas hasta 30 páginas",
     },
   ],
   faq: [
@@ -229,7 +229,7 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Full visa file",
   metaTitle: `Full Spain visa file sworn translation from €${FILE_PER_PAGE}/page`,
-  metaDescription: `Sworn translator no. 7310 (Spain's Foreign Ministry). Your whole visa file at one closed price: €${FILE_PER_PAGE} per page for 20–30 pages (30 pages, €${P30}). Delivered in 24 h.`,
+  metaDescription: `Sworn translator no. 7310. Your whole Spain visa file at one closed price: €${FILE_PER_PAGE}/page for 20–30 pages (30 pages, €${P30}), delivered in 24 h.`,
   h1: `Sworn translation of your full Spain visa file: one closed price, from €${FILE_PER_PAGE} per page`,
   lead:
     "Send me the whole file. One closed price in under two hours, one delivery date, every document signed by the same sworn translator.",
@@ -263,7 +263,7 @@ export const en = {
       id: "summary",
       title: "Who translates your full visa file, and how much does it cost?",
       body: [
-        `I'm Elena Peñaranda Ortega, sworn English translator appointed by Spain's Ministry of Foreign Affairs (no. 7310), and I translate complete Spanish visa files (digital nomad, non-lucrative, student, highly qualified and family reunification) from English into Spanish, or Spanish into English, at one closed price. A file of ${FILE_PER_PAGE_MIN} to ${FILE_PER_PAGE_MAX} pages costs €${FILE_PER_PAGE} per page, VAT included (30 pages, €${P30}), and a file of 11 to ${FILE_MID_MAX_PAGES} pages never more than €${FILE_MID_CAP}. You get the quote in under two hours and the signed PDFs within 24 hours.`,
+        `I'm Elena Peñaranda Ortega, sworn English translator appointed by Spain's Ministry of Foreign Affairs (no. 7310), and I translate complete Spanish visa files (digital nomad, non-lucrative, student, highly qualified and family reunification) from English into Spanish, or Spanish into English, at one closed price. A file of ${FILE_PER_PAGE_MIN} to ${FILE_PER_PAGE_MAX} pages costs €${FILE_PER_PAGE} per page, VAT included (30 pages, €${P30}), and a file of 11 to ${FILE_MID_MAX_PAGES} pages never more than €${FILE_MID_CAP}. You get the quote in under two hours and the signed PDFs within 24 hours for up to 30 pages; longer files, on the date I confirm in writing.`,
       ],
     },
     {
@@ -336,7 +336,7 @@ export const en = {
       ],
     },
   ],
-  howTitle: "How to send it, in three steps",
+  howTitle: "How to get your full visa file translated, in three steps",
   steps: [
     {
       t: "Send me the folder",
@@ -350,7 +350,7 @@ export const en = {
     {
       t: "Pay and get the PDFs",
       d: "One signed PDF per document, numbered like your folder.",
-      time: "Within 24 hours",
+      time: "Within 24 hours up to 30 pages",
     },
   ],
   faq: [

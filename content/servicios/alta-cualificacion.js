@@ -38,7 +38,7 @@ export const es = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Profesionales altamente cualificados",
   metaTitle: "Traducción jurada: profesional altamente cualificado (UGE)",
-  metaDescription: `Traductora jurada nº 7310 del MAEC. Título, cartas de experiencia y antecedentes traducidos para la autorización de alta cualificación de la UGE-CE. Expediente desde ${FILE_PER_PAGE} €/pág.`,
+  metaDescription: `Traductora jurada nº 7310. Título, experiencia y antecedentes traducidos para la autorización de alta cualificación (UGE-CE), desde ${FILE_PER_PAGE} €/pág.`,
   h1: "Traducción jurada para la autorización de profesional altamente cualificado (UGE-CE)",
   lead: "Para la autorización de residencia y trabajo de profesional altamente cualificado (Ley 14/2013) y su visado, los documentos extranjeros se presentan legalizados o apostillados y con traducción jurada al español: el título de educación superior o las cartas de experiencia, los antecedentes penales y los certificados de la familia. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y traduzco el expediente entero con un solo precio cerrado y entrega en 24 horas.",
   image: {
@@ -141,7 +141,7 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Highly qualified professionals",
   metaTitle: "Sworn translation: Spain highly qualified visa (UGE)",
-  metaDescription: `Sworn translator no. 7310 (Spain's Foreign Ministry). Degree, experience letters and criminal record translated for the UGE-CE highly qualified permit. Full file from €${FILE_PER_PAGE}/page.`,
+  metaDescription: `Sworn translator no. 7310. Degree, experience letters and criminal record translated for Spain's highly qualified permit (UGE-CE), from €${FILE_PER_PAGE}/page.`,
   h1: "Sworn translation for Spain's highly qualified professional permit (UGE-CE)",
   lead: "For Spain's residence and work permit for highly qualified professionals (Law 14/2013) and its visa, foreign documents are submitted legalised or apostilled and with a sworn translation into Spanish: your higher-education degree or experience letters, criminal record and family certificates. I'm Elena Peñaranda Ortega, sworn translator no. 7310, and I translate the whole file at one closed price, delivered within 24 hours.",
   image: {

@@ -36,7 +36,7 @@ export const es = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Visado de estudiante",
   metaTitle: "Traducción jurada para el visado de estudiante en España",
-  metaDescription: `Traductora jurada nº 7310 del MAEC. Qué documentos del visado de estudiante llevan traducción jurada y precio del expediente completo: ${FILE_PER_PAGE} €/pág. de 20 a 30 páginas.`,
+  metaDescription: `Traductora jurada nº 7310. Qué documentos del visado de estudiante llevan traducción jurada y precio del expediente: ${FILE_PER_PAGE} €/pág. de 20 a 30 páginas.`,
   h1: "Traducción jurada para el visado de estudiante en España",
   lead: `Para el visado de estudiante (estancia por estudios), todo documento extranjero que no esté en español se presenta con traducción jurada: antecedentes penales, certificado médico, medios económicos y la carta de quien te mantiene. Soy Elena Peñaranda Ortega, traductora jurada nº 7310, y traduzco tu expediente entero con un solo precio cerrado: un expediente típico de ${EX.pages} páginas cuesta ${EX.price} €, con entrega en 24 horas.`,
   image: {
@@ -152,7 +152,7 @@ export const en = {
   alternates: { es: PATH_ES, en: PATH_EN },
   crumb: "Student visa",
   metaTitle: "Sworn translation for a Spanish student visa",
-  metaDescription: `Sworn translator no. 7310 (Spain's Foreign Ministry). Which student visa documents need a sworn translation, and the full file price: €${FILE_PER_PAGE}/page for 20–30 pages.`,
+  metaDescription: `Sworn translator no. 7310. Which Spanish student visa documents need a sworn translation, and the full file price: €${FILE_PER_PAGE}/page for 20–30 pages.`,
   h1: "Sworn translation for a Spanish student visa",
   lead: `For a Spanish student visa (student stay), every foreign document not in Spanish is submitted with a sworn translation: criminal record, medical certificate, proof of means and your sponsor's letter. I'm Elena Peñaranda Ortega, sworn translator no. 7310, and I translate your whole file at one closed price: a typical ${EX.pages}-page file costs €${EX.price}, delivered within 24 hours.`,
   image: {

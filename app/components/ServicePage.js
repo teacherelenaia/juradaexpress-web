@@ -204,7 +204,12 @@ export function Block({ block, page }) {
         {title ? (
           <h3 className="mb-3 font-semibold text-slate-900">{title}</h3>
         ) : null}
-      <div className="overflow-x-auto rounded-xl ring-1 ring-stone-200">
+      <div
+        className="overflow-x-auto rounded-xl ring-1 ring-stone-200"
+        role="region"
+        tabIndex={0}
+        aria-label={caption || title}
+      >
         <table className="w-full min-w-[640px] text-left text-sm">
           {caption ? <caption className="sr-only">{caption}</caption> : null}
           <thead className="bg-stone-50 text-slate-600">
@@ -807,11 +812,21 @@ export default function ServicePage({ page }) {
                           "@type": "Offer",
                           name: o.name,
                           ...(o.description ? { description: o.description } : {}),
-                          price: o.price,
+                          ...(o.price != null ? { price: o.price } : {}),
                           priceCurrency: "EUR",
                           availability: "https://schema.org/InStock",
                           url: `${BASE}${page.path}`,
-                          ...(o.unitText
+                          // Tramo con tope («nunca más de 300 €»).
+                          ...(o.maxPrice != null
+                            ? {
+                                priceSpecification: {
+                                  "@type": "PriceSpecification",
+                                  maxPrice: o.maxPrice,
+                                  priceCurrency: "EUR",
+                                  valueAddedTaxIncluded: true,
+                                },
+                              }
+                            : o.unitText
                             ? {
                                 priceSpecification: {
                                   "@type": "UnitPriceSpecification",

@@ -65,7 +65,12 @@ export function FileTiersSection({ locale = "es", className = "" }) {
         {t.title}
       </SectionHeading>
       <p className="mt-3 max-w-[68ch] text-slate-600">{t.intro}</p>
-      <div className="mt-5 overflow-x-auto rounded-xl ring-1 ring-stone-200">
+      <div
+        className="mt-5 overflow-x-auto rounded-xl ring-1 ring-stone-200"
+        role="region"
+        tabIndex={0}
+        aria-label={tc.caption}
+      >
         <table className="w-full min-w-[640px] text-left text-sm">
           <caption className="sr-only">{tc.caption}</caption>
           <thead className="bg-stone-50 text-slate-600">

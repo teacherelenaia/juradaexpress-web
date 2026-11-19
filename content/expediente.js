@@ -222,7 +222,16 @@ export function fileTableRows(locale = "es") {
 // Offers del JSON-LD: solo los tramos con cifra publicada.
 export function fileOffers(locale = "es") {
   const en = locale === "en";
-  return FILE_TIERS.filter((t) => t.price != null).map((t) =>
+  return FILE_TIERS.filter((t) => t.price != null || t.maxPrice != null).map((t) =>
+    t.maxPrice != null
+      ? {
+          name: en
+            ? `Full visa file, ${FILE_MID_MIN_PAGES} to ${FILE_MID_MAX_PAGES} pages`
+            : `Expediente completo de ${FILE_MID_MIN_PAGES} a ${FILE_MID_MAX_PAGES} páginas`,
+          description: t.priceText[locale],
+          maxPrice: t.maxPrice,
+        }
+      :
     t.perPage
       ? {
           name: en
@@ -297,8 +306,15 @@ export function exampleLine(ex, locale = "es") {
 // ---------------------------------------------------------------------------
 export const PROCEDURES_CHECKED = { es: "19/11/2026", en: "19 November 2026" };
 
-const src = (href, label) =>
-  `<a href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+const NEW_TAB = { es: "se abre en una pestaña nueva", en: "opens in a new tab" };
+const src = (href, label) => ({ href, label });
+const renderSources = (list, locale) =>
+  (Array.isArray(list) ? list : [list])
+    .map(
+      (x) =>
+        `<a href="${x.href}" target="_blank" rel="noopener noreferrer">${x.label[locale]}<span class="sr-only"> (${NEW_TAB[locale]})</span></a>`
+    )
+    .join(" · ");
 
 export const FILE_PROCEDURES = [
   {
@@ -316,7 +332,7 @@ export const FILE_PROCEDURES = [
     pages: { es: "20–30", en: "20–30" },
     source: src(
       "https://www.exteriores.gob.es/Consulados/houston/en/ServiciosConsulares/Paginas/Consular/TELEWORK-Visa-(Digital-Nomad-Visa)-.aspx",
-      "Consulado de Houston / Houston consulate"
+      { es: "Consulado de España en Houston", en: "Spanish consulate in Houston" }
     ),
   },
   {
@@ -334,7 +350,7 @@ export const FILE_PROCEDURES = [
     pages: { es: "15–30", en: "15–30" },
     source: src(
       "https://www.exteriores.gob.es/Consulados/londres/en/ServiciosConsulares/Paginas/Consular/Visado-de-residencia-no-lucrativa.aspx",
-      "Consulado de Londres / London consulate"
+      { es: "Consulado de España en Londres", en: "Spanish consulate in London" }
     ),
   },
   {
@@ -350,10 +366,13 @@ export const FILE_PROCEDURES = [
       en: "Criminal record, medical certificate, sponsor letter and birth certificate; the rest, if not in Spanish",
     },
     pages: { es: "15–25", en: "15–25" },
-    source: `${src("https://www.inclusion.gob.es/web/migraciones/w/estancia-por-estudios", "Hoja 1")} · ${src(
-      "https://www.exteriores.gob.es/Consulados/londres/en/ServiciosConsulares/Paginas/Consular/Visado-de-estudios.aspx",
-      "Londres / London"
-    )}`,
+    source: [
+      src("https://www.inclusion.gob.es/web/migraciones/w/estancia-por-estudios", { es: "Hoja informativa 1 (Inclusión)", en: "Ministry of Inclusion information sheet 1" }),
+      src(
+        "https://www.exteriores.gob.es/Consulados/londres/en/ServiciosConsulares/Paginas/Consular/Visado-de-estudios.aspx",
+        { es: "Consulado en Londres", en: "London consulate" }
+      ),
+    ],
   },
   {
     id: "highly-qualified",
@@ -370,7 +389,7 @@ export const FILE_PROCEDURES = [
     pages: { es: "8–20", en: "8–20" },
     source: src(
       "https://www.inclusion.gob.es/web/migraciones/w/66.-autorizacion-inicial-de-residencia-y-trabajo-de-profesionales-altamente-cualificados",
-      "Hoja 66"
+      { es: "Hoja informativa 66 (Inclusión)", en: "Ministry of Inclusion information sheet 66" }
     ),
   },
   {
@@ -386,10 +405,13 @@ export const FILE_PROCEDURES = [
       en: "All family documents, criminal records and medical certificate, legalised or apostilled",
     },
     pages: { es: "6–16", en: "6–16" },
-    source: `${src("https://www.inclusion.gob.es/web/migraciones/w/autorizacion-de-residencia-temporal-por-reagrupacion-familiar", "Hoja 8")} · ${src(
-      "https://www.exteriores.gob.es/Consulados/washington/en/ServiciosConsulares/Paginas/Consular/Visado-de-reagrupacion-familiar-en-regimen-general.aspx",
-      "Washington"
-    )}`,
+    source: [
+      src("https://www.inclusion.gob.es/web/migraciones/w/autorizacion-de-residencia-temporal-por-reagrupacion-familiar", { es: "Hoja informativa 8 (Inclusión)", en: "Ministry of Inclusion information sheet 8" }),
+      src(
+        "https://www.exteriores.gob.es/Consulados/washington/en/ServiciosConsulares/Paginas/Consular/Visado-de-reagrupacion-familiar-en-regimen-general.aspx",
+        { es: "Consulado en Washington", en: "Washington consulate" }
+      ),
+    ],
   },
 ];
 
@@ -408,7 +430,7 @@ export function procedureTable(locale = "es") {
       p.docs[locale],
       p.sworn[locale],
       p.pages[locale],
-      p.source,
+      renderSources(p.source, locale),
     ]),
   };
 }
