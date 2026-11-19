@@ -419,15 +419,18 @@ export default function SiteShell({ locale = "es", children }) {
                   areaServed: "Worldwide",
                   hoursAvailable: {
                     "@type": "OpeningHoursSpecification",
+                    // Mismo horario que openingHoursSpecification (OPENING_HOURS).
                     dayOfWeek: [
                       "Monday",
                       "Tuesday",
                       "Wednesday",
                       "Thursday",
                       "Friday",
+                      "Saturday",
+                      "Sunday",
                     ],
-                    opens: "09:00",
-                    closes: "20:00",
+                    opens: OPENING_HOURS.opens,
+                    closes: OPENING_HOURS.closes,
                   },
                 },
                 hasOfferCatalog: {

@@ -260,7 +260,7 @@ function translatorSheet(locale) {
           "Service",
           "100% online from Murcia, Spain: you send a scan, you receive the PDF with a qualified electronic signature by email, and a paper copy by courier if you need one",
         ],
-        ["Office hours", "Monday to Friday, 9:00 to 20:00, mainland Spain time (CET/CEST)"],
+        ["Office hours", "Every day, weekends included, 9:00 to 23:00, mainland Spain time (CET/CEST)"],
         ["Contact", `WhatsApp and phone ${contactLine}`],
       ]
     : [
@@ -278,7 +278,7 @@ function translatorSheet(locale) {
           "Servicio",
           "100 % online desde Murcia (España): me envías el documento escaneado, recibes el PDF con firma electrónica cualificada por email y, si lo necesitas, papel por mensajería",
         ],
-        ["Horario", "lunes a viernes, de 9:00 a 20:00, hora peninsular española (CET/CEST)"],
+        ["Horario", "todos los días, sábados y domingos incluidos, de 9:00 a 23:00, hora peninsular española (CET/CEST)"],
         ["Contacto", `WhatsApp y teléfono ${contactLine}`],
       ];
   if (r) {
@@ -461,7 +461,7 @@ export const es = {
     {
       t: "Presupuesto",
       d: "Te respondo con precio cerrado, plazo y, si procede, aviso de apostilla o de documento plurilingüe.",
-      time: "En menos de 2 horas laborables (9:00 a 20:00, hora de Madrid).",
+      time: "En menos de 2 horas (de 9:00 a 23:00, hora de Madrid, todos los días).",
     },
     {
       t: "Traducción jurada",
@@ -708,7 +708,7 @@ export const en = {
     {
       t: "Quote",
       d: "You get a fixed price, a deadline and, where relevant, a note about apostilles or multilingual forms.",
-      time: "Within 2 working hours (9:00 to 20:00 Madrid time).",
+      time: "Within 2 hours (9:00 to 23:00 Madrid time, every day).",
     },
     {
       t: "Sworn translation",
