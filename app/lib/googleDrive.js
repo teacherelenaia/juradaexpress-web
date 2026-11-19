@@ -31,12 +31,16 @@ const FOLDER_MIME = "application/vnd.google-apps.folder";
 export const ROOT_FOLDER_NAME = "Documentos de clientes";
 export const NOTE_NAME = "Datos del envío.txt";
 
+// Valor de una variable sin espacios, saltos de línea ni comillas de más
+// (pasa al pegarla en Vercel y Google responde «invalid_client»).
+const env = (name) =>
+  String(process.env[name] || "")
+    .trim()
+    .replace(/^["']|["']$/g, "")
+    .trim();
+
 export function driveConfigured() {
-  return Boolean(
-    process.env.GOOGLE_CLIENT_ID &&
-      process.env.GOOGLE_CLIENT_SECRET &&
-      process.env.GOOGLE_REFRESH_TOKEN
-  );
+  return Boolean(env("GOOGLE_CLIENT_ID") && env("GOOGLE_CLIENT_SECRET") && env("GOOGLE_REFRESH_TOKEN"));
 }
 
 export const folderUrl = (id) => `https://drive.google.com/drive/folders/${id}`;
@@ -51,9 +55,9 @@ async function accessToken() {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
-      client_id: process.env.GOOGLE_CLIENT_ID || "",
-      client_secret: process.env.GOOGLE_CLIENT_SECRET || "",
-      refresh_token: process.env.GOOGLE_REFRESH_TOKEN || "",
+      client_id: env("GOOGLE_CLIENT_ID"),
+      client_secret: env("GOOGLE_CLIENT_SECRET"),
+      refresh_token: env("GOOGLE_REFRESH_TOKEN"),
       grant_type: "refresh_token",
     }),
     signal: AbortSignal.timeout(10_000),
@@ -61,7 +65,14 @@ async function accessToken() {
   const data = await res.json().catch(() => ({}));
   if (!res.ok || !data.access_token) {
     // invalid_grant = token caducado o revocado: hay que repetir el paso 4.
-    console.error("[drive] token", res.status, data.error || "");
+    // Sin valores: solo la forma, para saber qué variable está mal pegada.
+    const id = env("GOOGLE_CLIENT_ID");
+    console.error(
+      "[drive] token", res.status, data.error || "", data.error_description || "",
+      `| client_id: ${id.length} car., ${id.endsWith(".apps.googleusercontent.com") ? "termina bien" : "NO termina en .apps.googleusercontent.com"}`,
+      `| secret: ${env("GOOGLE_CLIENT_SECRET").length} car., ${env("GOOGLE_CLIENT_SECRET").startsWith("GOCSPX-") ? "empieza por GOCSPX-" : "NO empieza por GOCSPX-"}`,
+      `| refresh: ${env("GOOGLE_REFRESH_TOKEN").length} car., ${env("GOOGLE_REFRESH_TOKEN").startsWith("1//") ? "empieza por 1//" : "NO empieza por 1//"}`
+    );
     throw new Error(`drive-auth:${data.error || res.status}`);
   }
   cached = { token: data.access_token, exp: Date.now() + (data.expires_in || 3600) * 1000 };
@@ -141,7 +152,7 @@ async function createFolder(name, parentId, appProperties) {
 let rootCache = "";
 
 export async function rootFolderId() {
-  if (process.env.GOOGLE_DRIVE_PARENT_ID) return process.env.GOOGLE_DRIVE_PARENT_ID;
+  if (env("GOOGLE_DRIVE_PARENT_ID")) return env("GOOGLE_DRIVE_PARENT_ID");
   if (rootCache) return rootCache;
   const found = await findOne(
     `mimeType='${FOLDER_MIME}' and appProperties has { key='jxRoot' and value='1' }`
