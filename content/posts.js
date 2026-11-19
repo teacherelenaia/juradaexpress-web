@@ -71,7 +71,7 @@ export const posts = [
         <li><strong>Extensión del documento:</strong> un título universitario simple (una página) cuesta menos que un expediente académico completo con notas de varios cursos.</li>
         <li><strong>Complejidad del contenido:</strong> nombres de asignaturas, calificaciones y terminología académica específica pueden requerir más tiempo de traducción.</li>
         <li><strong>Idioma:</strong> en la combinación español-inglés, al haber muchos traductores jurados acreditados, los precios suelen ser más ajustados que en idiomas menos comunes.</li>
-        <li><strong>Plazo y urgencia:</strong> hasta 10 páginas, en el día y sin recargo; más de 10 páginas, en 24 horas. Si lo necesitas antes, según el volumen puede llevar un recargo de urgencia de hasta el 30 %, a consultar.</li>
+        <li><strong>Plazo y urgencia:</strong> hasta 10 páginas, en el día y sin recargo; de 11 a 30 páginas, en 24 horas; expedientes más largos, en la fecha que te confirmo por escrito. Si lo necesitas antes, según el volumen puede llevar un recargo de urgencia de hasta el 30 %, a consultar.</li>
       </ul>
       <h2>Precio orientativo</h2>
       <p>Para un título universitario estándar (una página), el precio habitual se sitúa entre <strong>45€ y 60€</strong>. Si necesitas también el expediente académico completo con todas las asignaturas, el precio depende del número de páginas y se calcula con presupuesto cerrado tras ver el documento.</p>
@@ -702,7 +702,7 @@ export const posts = [
       </ul>
 
       <h2>¿Y si lo necesito para ya?</h2>
-      <p>Un documento de hasta 10 páginas sale en el día sin recargo, y uno de más de 10 páginas, en 24 horas. Si lo necesitas antes, escríbeme: según el volumen puede llevar un recargo de urgencia de hasta el 30 %, y te confirmo el importe exacto por escrito antes de empezar. Lo que no hago es prometer plazos imposibles: si no llego, te lo diré claramente y buscaremos la alternativa real — entrega por fases, priorizar el documento que abre el trámite, o confirmar con el organismo si acepta la presentación parcial.</p>
+      <p>Un documento de hasta 10 páginas sale en el día sin recargo, uno de 11 a 30 páginas, en 24 horas, y los expedientes más largos, en la fecha que te confirmo por escrito. Si lo necesitas antes, escríbeme: según el volumen puede llevar un recargo de urgencia de hasta el 30 %, y te confirmo el importe exacto por escrito antes de empezar. Lo que no hago es prometer plazos imposibles: si no llego, te lo diré claramente y buscaremos la alternativa real — entrega por fases, priorizar el documento que abre el trámite, o confirmar con el organismo si acepta la presentación parcial.</p>
 
       <h2>La regla de oro</h2>
       <p>Traduce cuando tengas el documento definitivo (¡y apostillado, si toca!), pero pide presupuesto en cuanto sepas qué te van a pedir: así el hueco en calendario queda reservado y los plazos dejan de ser una incógnita.</p>
@@ -818,7 +818,7 @@ export const posts = [
         <li>Nombra los archivos con orden: <em>01-antecedentes-penales.pdf</em>, <em>02-contrato.pdf</em>… Te devuelvo las traducciones con la misma numeración y un índice.</li>
         <li>Dime en qué consulado presentas la solicitud (o si es ante la UGE) y la fecha de tu cita.</li>
       </ol>
-      <p>Con eso te contesto en menos de 2 horas laborables con la revisión de la lista, el precio cerrado del lote y un único plazo de entrega por escrito. Los documentos de hasta 10 páginas salen en el día; un expediente completo de más de 10 páginas, en 24 horas. Si vienes de <a href="/traduccion-jurada-estados-unidos">Estados Unidos</a> o de <a href="/traduccion-jurada-india">India</a>, tienes una guía propia con las particularidades de tu país.</p>
+      <p>Con eso te contesto en menos de 2 horas laborables con la revisión de la lista, el precio cerrado del lote y un único plazo de entrega por escrito. Los documentos de hasta 10 páginas salen en el día; un expediente completo de 11 a 30 páginas, en 24 horas, y los más largos, en la fecha que te confirmo por escrito. Si vienes de <a href="/traduccion-jurada-estados-unidos">Estados Unidos</a> o de <a href="/traduccion-jurada-india">India</a>, tienes una guía propia con las particularidades de tu país.</p>
 
       <h2>¿Vale la traducción en PDF para el consulado?</h2>
       <p>Para la presentación telemática, sí: cada traducción lleva mi firma electrónica, verificable con un clic, y mi sello de traductora jurada nº 7310, comprobable en el listado oficial del Ministerio de Asuntos Exteriores. Si tu consulado exige papel, te envío los originales sellados por mensajería a España o a tu país.</p>
@@ -941,7 +941,7 @@ export const posts = [
       <p>Si me envías un documento sin apostilla y el consulado la exige, te lo digo antes de empezar. Tienes más sobre la apostilla en general en <a href="/blog/que-es-la-apostilla-de-la-haya">qué es la apostilla de La Haya</a>.</p>
 
       <h2>¿Cuánto tarda y cómo se paga desde India?</h2>
-      <p>Un documento de hasta 10 páginas está traducido en el día; un expediente completo de visado de estudios (con transcripts largos) de más de 10 páginas, en 24 horas. Mi horario es de 9:00 a 20:00, hora peninsular española, entre 3 horas y media y 4 horas y media por detrás de India: si me escribes a media mañana, te contesto a primera hora de mi jornada. El pago es con tarjeta india (Visa, Mastercard o RuPay internacional) a través de Stripe, en euros; si tu tarjeta tiene bloqueados los pagos internacionales, actívalos en la app del banco antes de pagar. Recibes un PDF firmado digitalmente, válido para el consulado y para la plataforma de visados; si te exigen papel, lo envío por mensajería a India.</p>
+      <p>Un documento de hasta 10 páginas está traducido en el día; un expediente completo de visado de estudios (con transcripts largos) de 11 a 30 páginas, en 24 horas (con más, en la fecha que te confirmo por escrito). Atiendo todos los días, sábados y domingos incluidos, de 9:00 a 23:00, hora peninsular española, entre 3 horas y media y 4 horas y media por detrás de India: si me escribes a media mañana, te contesto a primera hora de mi jornada, y lo que llega de noche lo contesto antes de las 9:00. El pago es con tarjeta india (Visa, Mastercard o RuPay internacional) a través de Stripe, en euros; si tu tarjeta tiene bloqueados los pagos internacionales, actívalos en la app del banco antes de pagar. Recibes un PDF firmado digitalmente, válido para el consulado y para la plataforma de visados; si te exigen papel, lo envío por mensajería a India.</p>
 
       <h2>¿Y los documentos españoles para usarlos en India?</h2>
       <p>El camino inverso también existe: certificados españoles de nacimiento o matrimonio, títulos, antecedentes penales o documentos de empresa que hay que presentar ante una administración, universidad o empleador en India. Los traduzco al inglés con mi firma y sello, y cuando el organismo indio lo pide, el original se apostilla antes en España.</p>

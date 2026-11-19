@@ -176,6 +176,23 @@ export const PAPER_DELIVERY_SPAIN = {
 // Los textos de urgencia de toda la web salen de URGENCY_TEXT.
 export const SAME_DAY_MAX_PAGES = 10;
 export const OVER_LIMIT_HOURS = 24;
+// 19/11/2026 (Elena): las 24 horas valen hasta OVER_LIMIT_MAX_PAGES páginas;
+// los expedientes más largos, en la fecha que confirma por escrito.
+// OVER_LIMIT_TEXT es la única fuente de esa frase (promesa de plazo,
+// FAQ, calculadora, páginas de servicio, /llms.txt).
+export const OVER_LIMIT_MAX_PAGES = 30;
+export const OVER_LIMIT_TEXT = {
+  es: {
+    // Frase completa (promesa de plazo y FAQ).
+    sentence: `De ${SAME_DAY_MAX_PAGES + 1} a ${OVER_LIMIT_MAX_PAGES} páginas: en ${OVER_LIMIT_HOURS} horas. Expedientes más largos: en la fecha que te confirmo por escrito.`,
+    // En una línea, dentro de una frase o una celda.
+    short: `de ${SAME_DAY_MAX_PAGES + 1} a ${OVER_LIMIT_MAX_PAGES} páginas, en ${OVER_LIMIT_HOURS} h; más largos, en la fecha que te confirmo por escrito`,
+  },
+  en: {
+    sentence: `Over ${SAME_DAY_MAX_PAGES} pages and up to ${OVER_LIMIT_MAX_PAGES}: within ${OVER_LIMIT_HOURS} hours. Longer files: on the date I confirm in writing.`,
+    short: `over ${SAME_DAY_MAX_PAGES} pages and up to ${OVER_LIMIT_MAX_PAGES}, within ${OVER_LIMIT_HOURS} hours; longer files, on the date I confirm in writing`,
+  },
+};
 // URGENCY_SURCHARGE vive en content/pricing.js (se reexporta más abajo).
 const URGENCY_PCT = Math.round(URGENCY_SURCHARGE * 100);
 export const URGENCY_TEXT = {
@@ -185,12 +202,12 @@ export const URGENCY_TEXT = {
     // Para listas de tarifas y notas de precio.
     surcharge: `recargo de urgencia de hasta el ${URGENCY_PCT} %, a consultar, para entregar antes del plazo normal`,
     // Más de 10 páginas, en una línea.
-    overLimit: `más de ${SAME_DAY_MAX_PAGES} páginas, en ${OVER_LIMIT_HOURS} h`,
+    overLimit: OVER_LIMIT_TEXT.es.short,
   },
   en: {
     sooner: `Need it sooner? Message me: depending on volume, an urgency surcharge of up to ${URGENCY_PCT}% may apply.`,
     surcharge: `urgency surcharge of up to ${URGENCY_PCT}%, on request, for delivery faster than standard`,
-    overLimit: `over ${SAME_DAY_MAX_PAGES} pages, within ${OVER_LIMIT_HOURS} hours`,
+    overLimit: OVER_LIMIT_TEXT.en.short,
   },
 };
 
@@ -230,8 +247,8 @@ export const SAME_DAY_CUTOFF = { es: "18:00", en: "6 pm" };
 // (DELIVERY_PROMISE_SHORT) donde solo cabe una línea (celdas de tabla,
 // fichas de documento).
 export const DELIVERY_PROMISE = {
-  es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}. Si llega más tarde, lo tienes a primera hora del día siguiente. Más de ${SAME_DAY_MAX_PAGES} páginas: en ${OVER_LIMIT_HOURS} horas. ${URGENCY_TEXT.es.sooner}`,
-  en: `Same day up to ${SAME_DAY_MAX_PAGES} pages if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time. Later than that, first thing the next morning. Over ${SAME_DAY_MAX_PAGES} pages: within ${OVER_LIMIT_HOURS} hours. ${URGENCY_TEXT.en.sooner}`,
+  es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}. Si llega más tarde, lo tienes a primera hora del día siguiente. ${OVER_LIMIT_TEXT.es.sentence} ${URGENCY_TEXT.es.sooner}`,
+  en: `Same day up to ${SAME_DAY_MAX_PAGES} pages if it reaches me before ${SAME_DAY_CUTOFF.en} Madrid time. Later than that, first thing the next morning. ${OVER_LIMIT_TEXT.en.sentence} ${URGENCY_TEXT.en.sooner}`,
 };
 export const DELIVERY_PROMISE_SHORT = {
   es: `En el día hasta ${SAME_DAY_MAX_PAGES} páginas si lo recibo antes de las ${SAME_DAY_CUTOFF.es}`,
@@ -242,13 +259,13 @@ export const TURNAROUND = {
   es: {
     short: `en el día (hasta ${SAME_DAY_MAX_PAGES} páginas)`,
     long: DELIVERY_PROMISE.es,
-    over: `en ${OVER_LIMIT_HOURS} h (más de ${SAME_DAY_MAX_PAGES} páginas)`,
+    over: `en ${OVER_LIMIT_HOURS} h (de ${SAME_DAY_MAX_PAGES + 1} a ${OVER_LIMIT_MAX_PAGES} páginas; más largos, en la fecha que te confirmo por escrito)`,
     urgent: "antes del plazo normal",
   },
   en: {
     short: `the same day (up to ${SAME_DAY_MAX_PAGES} pages)`,
     long: DELIVERY_PROMISE.en,
-    over: `within ${OVER_LIMIT_HOURS} hours (over ${SAME_DAY_MAX_PAGES} pages)`,
+    over: `within ${OVER_LIMIT_HOURS} hours (over ${SAME_DAY_MAX_PAGES} pages and up to ${OVER_LIMIT_MAX_PAGES}; longer files, on the date I confirm in writing)`,
     urgent: "faster than standard",
   },
 };

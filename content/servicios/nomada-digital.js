@@ -11,6 +11,7 @@ import {
   DNV_PACK_NOTE,
   DNV_PACK_LIMITS,
   URGENCY_TEXT,
+  OVER_LIMIT_TEXT,
 } from "../site";
 import { FILE_ROUTE, filePrice } from "../expediente";
 
@@ -208,7 +209,7 @@ export const es = {
     },
     {
       q: "¿Cuánto tarda un expediente completo?",
-      a: `Hasta 10 páginas, en el día; más de 10 páginas, en 24 horas. ${URGENCY_TEXT.es.sooner}`,
+      a: `Hasta 10 páginas, en el día. ${OVER_LIMIT_TEXT.es.sentence} ${URGENCY_TEXT.es.sooner}`,
     },
     {
       q: "¿Vale el PDF firmado para la presentación en el consulado?",
@@ -411,7 +412,7 @@ export const en = {
     },
     {
       q: "How long does a complete file take?",
-      a: `Up to 10 pages, the same day; over 10 pages, within 24 hours. ${URGENCY_TEXT.en.sooner}`,
+      a: `Up to 10 pages, the same day. ${OVER_LIMIT_TEXT.en.sentence} ${URGENCY_TEXT.en.sooner}`,
     },
     {
       q: "Is the signed PDF accepted by the consulate?",

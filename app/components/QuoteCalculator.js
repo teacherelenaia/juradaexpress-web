@@ -43,6 +43,8 @@ import {
   URGENCY_SURCHARGE,
   SAME_DAY_MAX_PAGES,
   OVER_LIMIT_HOURS,
+  OVER_LIMIT_MAX_PAGES,
+  OVER_LIMIT_TEXT,
   TURNAROUND,
   PRICE_PER_PAGE,
   FIXED_PRICE_MAX_PAGES,
@@ -83,7 +85,7 @@ const COPY = {
     pages: "Número de páginas",
     pagesHint: "De 1 a 20. Si son más, elige 20 y te lo presupuesto al verlo.",
     urgency: "Urgencia",
-    urgencyNormal: `Normal · en el día hasta ${SAME_DAY_MAX_PAGES} páginas; más, en ${OVER_LIMIT_HOURS} h`,
+    urgencyNormal: `Normal · en el día hasta ${SAME_DAY_MAX_PAGES} páginas; hasta ${OVER_LIMIT_MAX_PAGES}, en ${OVER_LIMIT_HOURS} h`,
     urgencyUrgent: `Urgente · ${TURNAROUND.es.urgent} (hasta +${Math.round(URGENCY_SURCHARGE * 100)} %)`,
     delivery: "Entrega",
     deliveryPdf: "PDF firmado (incluido)",
@@ -94,7 +96,7 @@ const COPY = {
     surchargeNote: "Recargo máximo; te confirmo el importe exacto.",
     fixedNote: `Precio fijo hasta ${FIXED_PRICE_MAX_PAGES} páginas; cada página más, ${PRICE_PER_PAGE} €.`,
     perPageNote: `${PRICE_PER_PAGE} € por página, con un mínimo de ${MIN_DOC_PRICE} € por documento.`,
-    overLimitNote: `Más de ${SAME_DAY_MAX_PAGES} páginas: entrega en ${OVER_LIMIT_HOURS} h. Si lo necesitas antes, dímelo al enviar.`,
+    overLimitNote: `${OVER_LIMIT_TEXT.es.sentence} Si lo necesitas antes, dímelo al enviar.`,
     disclaimer: "Precio cerrado al ver el documento; nunca cobro sin confirmarlo antes.",
     paperNote: `+ mensajería: ${
       PAPER_DELIVERY_SPAIN.price != null
@@ -174,7 +176,7 @@ const COPY = {
     pages: "Number of pages",
     pagesHint: "From 1 to 20. If there are more, choose 20 and I will quote it once I see it.",
     urgency: "Urgency",
-    urgencyNormal: `Standard · same day up to ${SAME_DAY_MAX_PAGES} pages; more, within ${OVER_LIMIT_HOURS} hours`,
+    urgencyNormal: `Standard · same day up to ${SAME_DAY_MAX_PAGES} pages; up to ${OVER_LIMIT_MAX_PAGES}, within ${OVER_LIMIT_HOURS} hours`,
     urgencyUrgent: `Rush · ${TURNAROUND.en.urgent} (up to +${Math.round(URGENCY_SURCHARGE * 100)}%)`,
     delivery: "Delivery",
     deliveryPdf: "Signed PDF (included)",
@@ -185,7 +187,7 @@ const COPY = {
     surchargeNote: "Maximum surcharge; I’ll confirm the exact amount.",
     fixedNote: `Fixed price up to ${FIXED_PRICE_MAX_PAGES} pages; each extra page, €${PRICE_PER_PAGE}.`,
     perPageNote: `€${PRICE_PER_PAGE} per page, with a minimum of €${MIN_DOC_PRICE} per document.`,
-    overLimitNote: `Over ${SAME_DAY_MAX_PAGES} pages: delivered within ${OVER_LIMIT_HOURS} hours. If you need it sooner, tell me when you send it.`,
+    overLimitNote: `${OVER_LIMIT_TEXT.en.sentence} If you need it sooner, tell me when you send it.`,
     disclaimer: "Fixed price once I see the document; I never charge without confirming it first.",
     paperNote: `+ courier: ${
       PAPER_DELIVERY_SPAIN.price != null
@@ -301,7 +303,7 @@ function formatKb(bytes) {
 }
 
 // Urgencia (política del 14/11/2026): entregar antes del plazo normal (en
-// el día hasta SAME_DAY_MAX_PAGES páginas; más, en OVER_LIMIT_HOURS h)
+// el día hasta SAME_DAY_MAX_PAGES páginas; hasta OVER_LIMIT_MAX_PAGES, en OVER_LIMIT_HOURS h)
 // puede llevar un recargo de HASTA URGENCY_SURCHARGE, a consultar. La
 // calculadora muestra el máximo con la nota «Recargo máximo; te confirmo
 // el importe exacto». `pages` se mantiene en la firma por compatibilidad.
